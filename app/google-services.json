@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "654477563598-acl4te49rbela4lbs51pdu4jgun4sqep.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.schoolbattle",
+            "certificate_hash": "3992c03df91a0843881abb152af79f11a3a0bdd2"
+          }
+        },
+        {
           "client_id": "654477563598-1bk1502mvfq66es52jjnpnra9etuj16l.apps.googleusercontent.com",
           "client_type": 3
         }
