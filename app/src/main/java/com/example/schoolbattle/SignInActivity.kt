@@ -1,5 +1,6 @@
 package com.example.schoolbattle
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -45,9 +46,7 @@ class SignInActivity : AppCompatActivity() {
             }
 
             myRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onCancelled(p0: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
+                override fun onCancelled(p0: DatabaseError) {}
 
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.child("Users").hasChild(name)) {
@@ -57,7 +56,7 @@ class SignInActivity : AppCompatActivity() {
                             wrongPassword()
                         }
                     } else {
-                        wrongName();
+                        wrongName()
                     }
                 }
             })
