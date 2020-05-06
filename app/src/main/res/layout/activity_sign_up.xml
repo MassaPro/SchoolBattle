@@ -69,4 +69,15 @@
         app:layout_constraintTop_toBottomOf="@+id/repeatPassword"
         app:layout_constraintVertical_bias="0.073" />
 
+    <TextView
+        android:id="@+id/signUpRegistrationText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registration"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/nameTextInit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

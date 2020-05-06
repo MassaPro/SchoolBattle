@@ -28,12 +28,12 @@ class SignUpActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             if (password.length > 20 || password.length < 5) {
-                Toast.makeText(this,"Password length should be from 5 to  20", Toast.LENGTH_LONG).show()
+                Toast.makeText(this,"Password length should be from 5 to 20", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
             if (name.length > 10 || name.length < 3) {
-                Toast.makeText(this,"Password length should be from 3 to  10", Toast.LENGTH_LONG).show()
+                Toast.makeText(this,"Password length should be from 3 to 10", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 

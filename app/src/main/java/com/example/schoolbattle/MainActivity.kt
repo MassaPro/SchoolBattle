@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_game_item.view.*
 import kotlinx.android.synthetic.main.activity_game_list.*
 
@@ -21,6 +20,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_list)
+
+
+        newGameButton.setOnClickListener {
+            //val intent = Intent(this, SignInActivity::class.java)
+            //intent.putExtra("user", UserClass)
+            //startActivity(intent)
+        }
 
         setupRecyclerView(item_list)
         /*myRef.addValueEventListener(object: ValueEventListener {
