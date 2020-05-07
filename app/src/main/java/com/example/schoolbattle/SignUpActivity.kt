@@ -1,5 +1,6 @@
 package com.example.schoolbattle
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -68,6 +69,11 @@ class SignUpActivity : AppCompatActivity() {
             fun nextActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
+                val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                val editor = prefs.edit()
+                editor.putString("username", name)
+                SignIn.finish()
+                finish()
             }
 
             fun exists() {

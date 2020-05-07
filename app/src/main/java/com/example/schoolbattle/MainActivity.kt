@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_game_item.view.*
 import kotlinx.android.synthetic.main.activity_game_list.*
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_list)
+        setSupportActionBar(findViewById(R.id.my_toolbar))
 
 
         newGameButton.setOnClickListener {
