@@ -24,12 +24,12 @@ class StupidGameActivity : AppCompatActivity() {
         }
 
         button.setOnClickListener {
-            myRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            myRef.child("StupidGameUsers").addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
 
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.child("StupidGameUsers").hasChildren()) {
-                        for (i in snapshot.child("StupidGameUsers").children) {
+                    if (snapshot.hasChildren()) {
+                        for (i in snapshot.children) {
                             myRef.child("StupidGameUsers").child(i.key.toString()).removeValue()
                             goPlay()
                             break
