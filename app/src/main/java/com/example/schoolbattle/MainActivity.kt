@@ -1,50 +1,46 @@
 package com.example.schoolbattle
 
+import android.R.attr.data
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.*
+import android.widget.AdapterView.OnItemSelectedListener
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_game_item.view.*
 import kotlinx.android.synthetic.main.activity_game_list.*
 
 
-//var database = FirebaseDatabase.getInstance()
-//var myRef: DatabaseReference = database.getReference("message")
-
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_list)
         setSupportActionBar(findViewById(R.id.my_toolbar))
+        val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        val globalName = prefs.getString("username", "")
+        toolbarName.text = globalName
 
+        logOut.setOnClickListener() {
+            val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+            val editor = prefs.edit()
+            editor.putString("username", "")
+            editor.apply()
+            val intent = Intent(this, SignInActivity::class.java)
+            startActivity(intent)
+        }
 
-        newGameButton.setOnClickListener {
+        newGameButton.setOnClickListener() {
             val intent = Intent(this, NewGameActivity::class.java)
-            //intent.putExtra("user", UserClass)
             startActivity(intent)
         }
 
         setupRecyclerView(item_list)
-        /*myRef.addValueEventListener(object: ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // Get Post object and use the values to update the UI
-                //val post = dataSnapshot.getValue<Post>()
-                // ...
-                for (i in dataSnapshot.child("vector").children) {
-                    cur.add(i.child("content").value.toString())
-                }
-                item_list.adapter?.notifyDataSetChanged()
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {}
-        })*/
-
 
         item_list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -54,17 +50,13 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-        //window.navigationBarColor = Color.BLACK
-        //window.decorView.setBackgroundColor(Color.BLACK)
     }
-
-
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-        recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, cur)
+        recyclerView.adapter = SimpleItemRecyclerViewAdapter(cur)
     }
 
-    class SimpleItemRecyclerViewAdapter(private val parentActivity: MainActivity, val ITEMS: MutableList<String>):
+    class SimpleItemRecyclerViewAdapter(val ITEMS: MutableList<String>):
         RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
         private val onClickListener: View.OnClickListener

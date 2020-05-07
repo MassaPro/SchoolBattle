@@ -1,5 +1,6 @@
 package com.example.schoolbattle
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
@@ -36,7 +37,11 @@ class StupidGameActivity : AppCompatActivity() {
                         }
 
                     } else {
-                        myRef.child("StupidGameUsers").child(GlobalName).setValue(GlobalName)
+                        val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                        val globalName = prefs.getString("username", "")
+                        if (globalName != null) {
+                            myRef.child("StupidGameUsers").child(globalName).setValue(globalName)
+                        }
                     }
                 }
             })
