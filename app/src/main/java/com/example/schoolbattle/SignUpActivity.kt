@@ -2,7 +2,8 @@ package com.example.schoolbattle
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.*
@@ -14,19 +15,46 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
+        fun noSpace() {
+            Toast.makeText(this,"Name should not contain spaces", Toast.LENGTH_LONG).show();
+        }
+
+        nameTextInit.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {}
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (p0 != null) {
+                    if (p0.isNotEmpty() && p0.last() == ' ') {
+                        noSpace()
+                    }
+                }
+            }
+        })
+
+
         signUpButton.setOnClickListener {
             val name = nameTextInit.text.toString()
             val password = passwordTextInit.text.toString()
             val repeatPassword = repeatPassword.text.toString()
 
+
             if (name.isEmpty() || password.isEmpty())  {
                 Toast.makeText(this,"Please check your name and password", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
+
+            if (name.contains(' '))  {
+                noSpace()
+                return@setOnClickListener
+            }
+
             if (password != repeatPassword) {
                 Toast.makeText(this,"Password mismatch", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
+
             if (password.length > 20 || password.length < 5) {
                 Toast.makeText(this,"Password length should be from 5 to 20", Toast.LENGTH_LONG).show()
                 return@setOnClickListener

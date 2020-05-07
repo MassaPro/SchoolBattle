@@ -23,9 +23,9 @@ class MainActivity : AppCompatActivity() {
 
 
         newGameButton.setOnClickListener {
-            //val intent = Intent(this, SignInActivity::class.java)
+            val intent = Intent(this, NewGameActivity::class.java)
             //intent.putExtra("user", UserClass)
-            //startActivity(intent)
+            startActivity(intent)
         }
 
         setupRecyclerView(item_list)

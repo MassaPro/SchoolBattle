@@ -6,3 +6,4 @@ import com.google.firebase.database.FirebaseDatabase
 
 //var database = FirebaseDatabase.getInstance()
 //var myRef = database.getReference("message")
+var GlobalName = ""
