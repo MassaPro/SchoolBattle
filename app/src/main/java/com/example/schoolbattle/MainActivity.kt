@@ -10,6 +10,10 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_game_item.view.*
 import kotlinx.android.synthetic.main.activity_game_list.*
 
@@ -27,6 +31,31 @@ class MainActivity : AppCompatActivity() {
 
         setupRecyclerView(item_list)
         gamesRecycler = item_list
+
+        if (GAMES.isEmpty()) {
+            myRef.child("Users").child(globalName.toString()).child("Games").addListenerForSingleValueEvent(object : ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {}
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    for (to in p0.children) {
+                        GAMES.add(Game(to.key.toString()))
+                    }
+                    gamesRecycler.adapter?.notifyDataSetChanged()
+                }
+            })
+        }
+        myRef.child("Users").child(globalName.toString()).child("Games").addChildEventListener(object : ChildEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+
+            override fun onChildMoved(p0: DataSnapshot, p1: String?) {}
+            override fun onChildChanged(p0: DataSnapshot, p1: String?) {}
+
+            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+                GAMES.add(Game(p0.key.toString()))
+                gamesRecycler.adapter?.notifyDataSetChanged()
+            }
+            override fun onChildRemoved(p0: DataSnapshot) {}
+        })
 
         logOut.setOnClickListener() {
             val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)

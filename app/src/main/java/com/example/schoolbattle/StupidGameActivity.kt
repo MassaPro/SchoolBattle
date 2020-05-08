@@ -13,7 +13,7 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_game_list.*
 import kotlinx.android.synthetic.main.activity_stupid_game.*
 
-lateinit var StupidGame: Activity
+var StupidGame: Activity = Activity()
 
 class StupidGameActivity : AppCompatActivity() {
 
@@ -21,6 +21,8 @@ class StupidGameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_stupid_game)
         StupidGame = this
+        val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        val globalName = prefs.getString("username", "")
 
         fun goPlay() {
             val intent = Intent(this, StupidGameActivityTwoPlayers::class.java)
@@ -36,6 +38,15 @@ class StupidGameActivity : AppCompatActivity() {
                         for (i in snapshot.children) {
                             myRef.child("StupidGameUsers").child(i.key.toString()).removeValue()
                             GAMES.add(Game(i.key.toString()))
+                            for (to in GAMES) {
+                                if (to.name == i.key.toString() && to.type == "StupidGame") {
+                                    GAMES.removeAt(GAMES.size - 1)
+                                    break
+                                }
+                            }
+
+                            myRef.child("Users").child(i.key.toString()).child("Games").child(globalName.toString()).setValue("StupidGame")
+                            myRef.child("Users").child(globalName.toString()).child("Games").child(i.key.toString()).setValue("StupidGame")
                             gamesRecycler.adapter?.notifyDataSetChanged()
                             goPlay()
                             break

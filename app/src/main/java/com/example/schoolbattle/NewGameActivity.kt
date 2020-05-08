@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_game_list.*
 
-lateinit var NewGame: Activity
+var NewGame: Activity = Activity()
 
 class NewGameActivity : AppCompatActivity() {
 

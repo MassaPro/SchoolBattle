@@ -1,5 +1,6 @@
 package com.example.schoolbattle
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,7 +12,7 @@ class StupidGameActivityTwoPlayers : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_stupid_game_two_players)
 
-        StupidGame.finish()
-        NewGame.finish()
+        if (StupidGame != Activity()) StupidGame.finish()
+        if (NewGame != Activity()) NewGame.finish()
     }
 }
