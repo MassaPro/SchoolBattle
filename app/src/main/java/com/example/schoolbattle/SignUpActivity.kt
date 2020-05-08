@@ -62,7 +62,7 @@ class SignUpActivity : AppCompatActivity() {
             }
 
             if (name.length > 10 || name.length < 3) {
-                Toast.makeText(this,"Password length should be from 3 to 10", Toast.LENGTH_LONG).show()
+                Toast.makeText(this,"Name length should be from 3 to 10", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
@@ -72,6 +72,7 @@ class SignUpActivity : AppCompatActivity() {
                 val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
                 val editor = prefs.edit()
                 editor.putString("username", name)
+                editor.apply()
                 SignIn.finish()
                 finish()
             }

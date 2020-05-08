@@ -1,5 +1,5 @@
 package com.example.schoolbattle
 
-class Game {
+var GAMES: MutableList<Game> = mutableListOf()
 
-}
+class Game(val name: String = "", val type: String = "StupidGame: you VS") {}

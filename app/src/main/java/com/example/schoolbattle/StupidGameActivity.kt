@@ -1,5 +1,6 @@
 package com.example.schoolbattle
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -9,15 +10,17 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_game_list.*
 import kotlinx.android.synthetic.main.activity_stupid_game.*
 
+lateinit var StupidGame: Activity
 
 class StupidGameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_stupid_game)
-
+        StupidGame = this
 
         fun goPlay() {
             val intent = Intent(this, StupidGameActivityTwoPlayers::class.java)
@@ -32,6 +35,8 @@ class StupidGameActivity : AppCompatActivity() {
                     if (snapshot.hasChildren()) {
                         for (i in snapshot.children) {
                             myRef.child("StupidGameUsers").child(i.key.toString()).removeValue()
+                            GAMES.add(Game(i.key.toString()))
+                            gamesRecycler.adapter?.notifyDataSetChanged()
                             goPlay()
                             break
                         }
