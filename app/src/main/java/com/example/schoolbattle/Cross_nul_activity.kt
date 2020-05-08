@@ -13,11 +13,10 @@ class Cross_null_activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cross_nul_activity)
-        customCanvas = findViewById<View>(R.id.signature_canvas) as CanvasView
+        customCanvas = findViewById<View>(R.id.signature_canvas) as CanvasView  //TODO НЕ УМЕЮ ОТСЮДА ВЛИЯТЬ НА КЛАСС :(
 
-        if(signature_canvas.Exit == 1)
-        {
-            val intent = Intent(this, MainActivity::class.java)
+        button1.setOnClickListener {
+            val intent = Intent(this, Cross_null_activity::class.java)
             startActivity(intent)
         }
 

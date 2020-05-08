@@ -5,90 +5,50 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-fun touch_refinement_X (x : Float,width1: Float):Float        //уточняет касания по оси x
+fun touch_refinement_X (x : Float,width1: Float,size_field_x1:Int ):Float        //уточняет касания по оси x
 {
-    if(x<width1/3)
-    {
-        return 0f
-    }
-    if(x>width1/3 && x<width1*2/3f)
-    {
-        return width1/3f
-    }
-    return 2*width1/3f
+    return ((x.toInt()/(width1/size_field_x1).toInt()).toFloat()*width1/size_field_x1).toFloat()
 }
 
-fun touch_refinement_Y (y : Float,width1: Float,height1: Float):Float      //уточняет касания по оси Y
+fun touch_refinement_Y (y : Float,height1: Float,size_field_y1:Int,step: Float,advertising_line_1:Float):Float      //уточняет касания по оси Y
 {
-    if(y < height1 - width1)
+    if(y > height1 - advertising_line_1 ||  y < height1 - advertising_line_1 - step*size_field_y1)
     {
-        return -1f        //если не в область тыкнули
+        return -1f
     }
-    if(y > height1 - width1/3f)
+    var a: Float = height1 - advertising_line_1 - step*size_field_y1
+    while(y>a)
     {
-        return height1 - width1/3f
+        a+=step
     }
-    if(y > height1 - width1*2/3f && y < height1 - width1/3f)
-    {
-        return height1 - width1*2/3f
-    }
-    return height1 - width1
+    return a - step
 }
 
-fun touch_refinement_for_Array_X (x : Float,width1: Float):Int        //уточняет координаты в массиве 3*3 при касании
+fun touch_refinement_for_Array_X (x : Float,step:Float):Int        //уточняет координаты в массиве  при касании
 {
-    if(x < width1/3f)
-    {
-        return 0
-    }
-    if(x > width1/3f && x < width1*2/3f)
-    {
-        return 1
-    }
-    return 2
+    return (x/step).toInt()
 }
 
-fun touch_refinement_for_Array_Y (y : Float,width1: Float,height1: Float):Int      //уточняет координаты в массиве 3*3 при касании
+fun touch_refinement_for_Array_Y (y : Float,height1: Float,size_field_y1: Int,step: Float,advertising_line_1:Float):Int      //уточняет координаты в массиве  при касании
 {
-    if(y < height1 - width1)
+    var a: Float = height1 - advertising_line_1 - step*size_field_y1
+    var b :Int = 0
+    while(y>a)
     {
-        return 0      //если не в область тыкнули
+        a+=step
+        b+=1
     }
-    if(y > height1 - width1/3f)
-    {
-        return 2
-    }
-    if(y > height1 - width1*2/3f && y < height1 - width1/3f)
-    {
-        return 1
-    }
-    return 0
+    return b-1
 }
 
-fun translate_from_Array_to_Graphics_X(x:Int,width1: Float ):Float    //переводит массивные координаты в графически
+fun translate_from_Array_to_Graphics_X(x:Int,step: Float):Float    //переводит массивные координаты в графически
 {
-    if(x == 0)
-    {
-        return 0f
-    }
-    if(x==1)
-    {
-        return width1/3f
-    }
-    return width1*2/3f
+    return x*step
 }
 
-fun translate_from_Array_to_Graphics_Y(y:Int,width1: Float,height1: Float ):Float    //переводит массивные координаты в графически
+fun translate_from_Array_to_Graphics_Y(y:Int,height1: Float,size_field_y1: Int,step: Float,advertising_line_1: Float):Float    //переводит массивные координаты в графически
 {
-    if (y==0)
-    {
-        return height1 - width1
-    }
-    if (y==1)
-    {
-        return height1 - width1*2/3f
-    }
-    return height1 - width1/3f
+    return y*step + height1 - size_field_y1*step - advertising_line_1
 }
 
 class CanvasView( context: Context, attrs: AttributeSet?) : View(context, attrs) {
@@ -98,24 +58,20 @@ class CanvasView( context: Context, attrs: AttributeSet?) : View(context, attrs)
 
     var paint : Paint  = Paint()          //ресурсы для рисования
     var Line_paint: Paint = Paint()
-    var FIELD = Array(3){IntArray(3)}
-
-
+    var FIELD = Array(7){IntArray(6)}
+    var cross_or_nul: String
     init{
         Line_paint.setColor(Color.RED)          //ресур для линий (ширина и цвет)
         Line_paint.setStrokeWidth(10f)
 
         // TODO нужно взять из DataBase (статистика ходов)
-        for( i in 0..2) {
-            for(j in 0 ..2) {
+        for( i in 0..6) {
+            for(j in 0 ..5) {
                 FIELD[i][j] = 0  //не заполненный
             }
         }
-        FIELD[2][2] = 1
-        FIELD[2][0] = 2
-        FIELD[0][0] = 1
-        FIELD[0][2] = 2
-        var cross_or_nul : String = "Cross"
+
+        cross_or_nul  = "cross"
     }
 
 
@@ -132,51 +88,77 @@ class CanvasView( context: Context, attrs: AttributeSet?) : View(context, attrs)
         var width = getWidth().toFloat()
         var height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)
 
-        canvas?.drawLine(width/3,height,width/3,height - width,Line_paint)      //рисуем линии (поле)
-        canvas?.drawLine(width*2/3,height,width*2/3,height - width,Line_paint)
-        canvas?.drawLine(0f,height - 2*width/3,width,height - 2*width/3,Line_paint)
-        canvas?.drawLine(0f,height - 1*width/3,width,height - 1*width/3,Line_paint)
+        var advertising_line: Float = 300f
+        var size_field_x: Int = 7
+        var size_field_y: Int = 6
 
-        val right_icon_cross: Bitmap = Bitmap.createScaledBitmap(icon_cross,width.toInt()/3, width.toInt()/3, true); //подгоняем картинку под размеры экрана телефона
-        val right_icon_null: Bitmap = Bitmap.createScaledBitmap(icon_null,width.toInt()/3, width.toInt()/3, true);
 
-        for( i in 0..2) //начальная расстановка крестиков и ноликов
+        var step: Float = width/size_field_x
+        var k: Float = height-width-advertising_line + step
+        for(i in 0 until size_field_x)
         {
-            for(j in 0..2) {
+            canvas?.drawLine(0f,k,width,k,Line_paint)
+            k = k + step
+        }
+        k = 0f
+        for(i in 0 until size_field_y+2)
+        {
+            canvas?.drawLine(k,height-advertising_line-width+step,k,height-advertising_line,Line_paint)
+            k = k + step
+        }
+
+
+        val right_icon_cross: Bitmap = Bitmap.createScaledBitmap(icon_cross,width.toInt()/size_field_x, width.toInt()/size_field_x, true); //подгоняем картинку под размеры экрана телефона
+        val right_icon_null: Bitmap = Bitmap.createScaledBitmap(icon_null,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+
+        for( i in 0..6) //начальная расстановка крестиков и ноликов
+        {
+            for(j in 0..5) {
                 if (FIELD[i][j] == 1)  //крестик
                 {
-                    canvas?.drawBitmap(right_icon_cross, translate_from_Array_to_Graphics_X(i,width),
-                        translate_from_Array_to_Graphics_Y(j,width,height),paint)
+                    canvas?.drawBitmap(right_icon_cross, translate_from_Array_to_Graphics_X(i,step),
+                        translate_from_Array_to_Graphics_Y(j,height,size_field_y,step,advertising_line),paint)
                 }
                 if (FIELD[i][j] == 2)  //нолик
                 {
-                    canvas?.drawBitmap(right_icon_null, translate_from_Array_to_Graphics_X(i,width),
-                        translate_from_Array_to_Graphics_Y(j,width,height),paint)
+                    canvas?.drawBitmap(right_icon_null, translate_from_Array_to_Graphics_X(i,step),
+                        translate_from_Array_to_Graphics_Y(j,height,size_field_y,step,advertising_line),paint)
                 }
             }
         }
-        if (touch_refinement_Y(circley,width,height)!=-1f)     //постановка нового обЪекта
+        if (touch_refinement_Y(circley,height,size_field_y,step,advertising_line)>0)     //постановка нового обЪекта
         {
-            var X: Int = touch_refinement_for_Array_X(circlex,width)
-            var Y: Int = touch_refinement_for_Array_Y(circley,width,height)    //координаты нажимаего для массива
+            var X: Int = touch_refinement_for_Array_X(circlex,step)
+            var Y: Int = touch_refinement_for_Array_Y(circley,height,size_field_y,step,advertising_line)    //координаты нажимаего для массива
 
             if (FIELD[X][Y]==0)
             {
-                canvas?.drawBitmap(right_icon_cross,touch_refinement_X(circlex,width),touch_refinement_Y(circley,width,height),paint)
+                var a:Float = circlex
+                var b:Float = circley
+                if(cross_or_nul=="cross")
+                {
+                    canvas?.drawBitmap(right_icon_cross,touch_refinement_X(a,width,size_field_x),
+                        touch_refinement_Y(b,height,size_field_y,step,advertising_line),paint)
+                    FIELD[X][Y] = 1
+                    cross_or_nul = "null"
+                }
+                else
+                {
+                    canvas?.drawBitmap(right_icon_null,touch_refinement_X(a,width,size_field_x),
+                        touch_refinement_Y(b,height,size_field_y,step,advertising_line),paint)
+                    FIELD[X][Y] = 2
+                    cross_or_nul = "cross"
+                }
+
             }
         }
 
-        if(FIELD[0][0]==1 && FIELD[1][1]==1 && FIELD[2][2] ==1)
-        {
-            Exit = 1
-        }
 
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         circlex =  event!!.x
         circley =  event!!.y
-
         invalidate()
         return true
     }
