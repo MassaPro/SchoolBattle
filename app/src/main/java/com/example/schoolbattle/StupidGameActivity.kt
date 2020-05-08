@@ -25,8 +25,16 @@ class StupidGameActivity : AppCompatActivity() {
         val globalName = prefs.getString("username", "")
 
         fun goPlay() {
-            val intent = Intent(this, StupidGameActivityTwoPlayers::class.java)
-            startActivity(intent)
+            myRef.child("Users").child(globalName.toString()).child("Games").addListenerForSingleValueEvent(object: ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {}
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    if (p0.childrenCount == GAMES.size.toLong()) {
+                        val intent = Intent(applicationContext, StupidGameActivityTwoPlayers::class.java)
+                        startActivity(intent)
+                    }
+                }
+            })
         }
 
         button.setOnClickListener {
@@ -36,6 +44,9 @@ class StupidGameActivity : AppCompatActivity() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.hasChildren()) {
                         for (i in snapshot.children) {
+                            if (i.key.toString() == globalName || GAMES.contains(Game(i.key.toString(), "StupidGame"))) {
+                                continue
+                            }
                             myRef.child("StupidGameUsers").child(i.key.toString()).removeValue()
                             GAMES.add(Game(i.key.toString()))
                             for (to in GAMES) {

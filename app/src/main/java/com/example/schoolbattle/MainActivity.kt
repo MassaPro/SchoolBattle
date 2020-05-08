@@ -3,7 +3,6 @@ package com.example.schoolbattle
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,18 +31,6 @@ class MainActivity : AppCompatActivity() {
         setupRecyclerView(item_list)
         gamesRecycler = item_list
 
-        if (GAMES.isEmpty()) {
-            myRef.child("Users").child(globalName.toString()).child("Games").addListenerForSingleValueEvent(object : ValueEventListener{
-                override fun onCancelled(p0: DatabaseError) {}
-
-                override fun onDataChange(p0: DataSnapshot) {
-                    for (to in p0.children) {
-                        GAMES.add(Game(to.key.toString()))
-                    }
-                    gamesRecycler.adapter?.notifyDataSetChanged()
-                }
-            })
-        }
         myRef.child("Users").child(globalName.toString()).child("Games").addChildEventListener(object : ChildEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
@@ -67,8 +54,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         newGameButton.setOnClickListener() {
-            val intent = Intent(this, NewGameActivity::class.java)
-            startActivity(intent)
+            myRef.child("Users").child(globalName.toString()).child("Games").addListenerForSingleValueEvent(object: ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {}
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    if (p0.childrenCount == GAMES.size.toLong()) {
+                        val intent = Intent(applicationContext, NewGameActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
+            })
         }
     }
 
@@ -97,7 +92,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.idView.text = ITEMS[position].type
+            holder.idView.text = ITEMS[position].type + ": You vs"
             holder.contentView.text = ITEMS[position].name
             with(holder.itemView) {
                 tag = ITEMS[position]
