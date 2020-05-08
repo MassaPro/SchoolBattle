@@ -15,7 +15,7 @@ class MainActivity : Activity() {
         setContentView(R.layout.activity_main)
 
         Button_new_game.setOnClickListener {
-            val intent = Intent(this, Cross_null_activity::class.java)
+            val intent = Intent(this, Cross_nul_menu::class.java)
             startActivity(intent)
         }
     }
