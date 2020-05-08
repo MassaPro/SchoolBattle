@@ -49,6 +49,8 @@ class MainActivity : AppCompatActivity() {
             val editor = prefs.edit()
             editor.putString("username", "")
             editor.apply()
+            GAMES.clear()
+            gamesRecycler.adapter?.notifyDataSetChanged()
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
         }
