@@ -32,6 +32,17 @@ class RecyclerSet {
         }
     }
 
+    fun erase(el: Game) {
+        Log.w("KKK", el.toString())
+        for (i in GAMES) {
+            if (i.name == el.name && i.type == el.type) {
+                GAMES.remove(i)
+            }
+        }
+        s.remove(el.toString())
+        gamesRecycler.adapter?.notifyDataSetChanged()
+    }
+
     fun clear() {
         s.clear()
         GAMES.clear()
@@ -56,6 +67,7 @@ fun updateRecycler(username: String) {
                 recyclerSet.add(Game(p0.key.toString()))
             }
             override fun onChildRemoved(p0: DataSnapshot) {
+                Log.d("KKK", "WHY????")
                 gamesRecycler.adapter?.notifyDataSetChanged()
             }
         })
