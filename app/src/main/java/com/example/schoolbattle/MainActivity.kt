@@ -1,6 +1,6 @@
 package com.example.schoolbattle
 
-import android.app.Activity
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -10,10 +10,6 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_game_item.view.*
 import kotlinx.android.synthetic.main.activity_game_list.*
 
@@ -33,22 +29,19 @@ class MainActivity : AppCompatActivity() {
         setupRecyclerView(item_list)
         gamesRecycler = item_list
 
-        logOut.setOnClickListener() {
-            val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
-            val editor = prefs.edit()
+        logOut.setOnClickListener {
+            val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
             editor.putString("username", "")
             editor.apply()
             recyclerSet.clear()
             myRef.child("Users").child(globalName.toString()).child("Games").removeEventListener(
                 listener)
-            //myRef.child("Users").child(globalName.toString()).child("Games").removeEventListener(
-              //      opponentListener)
             val intent = Intent(this, NullActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        newGameButton.setOnClickListener() {
+        newGameButton.setOnClickListener {
             val intent = Intent(applicationContext, NewGameActivity::class.java)
             startActivity(intent)
         }
@@ -65,8 +58,9 @@ class MainActivity : AppCompatActivity() {
 
         init {
             onClickListener = View.OnClickListener { v ->
+                val item = v.tag as Game
                 val intent = Intent(v.context, StupidGameActivityTwoPlayers::class.java).apply {
-                    //putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id)
+                    putExtra("opponentName", item.name)
                 }
                 v.context.startActivity(intent)
             }
@@ -78,6 +72,7 @@ class MainActivity : AppCompatActivity() {
             return ViewHolder(view)
         }
 
+        @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.idView.text = ITEMS[position].type + ": You vs"
             holder.contentView.text = ITEMS[position].name
@@ -95,10 +90,5 @@ class MainActivity : AppCompatActivity() {
             val idView: TextView = view.id_text
             val contentView: TextView = view.content
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        
     }
 }

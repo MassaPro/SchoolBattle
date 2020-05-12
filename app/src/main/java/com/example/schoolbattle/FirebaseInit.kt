@@ -2,17 +2,12 @@ package com.example.schoolbattle
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.util.Log
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 
 
-//Здесь объявлена наша база данных
-
-//var database = FirebaseDatabase.getInstance()
-//var myRef = database.getReference("message")
 lateinit var listener: ChildEventListener
 var recyclerSet: RecyclerSet = RecyclerSet()
 
@@ -29,16 +24,11 @@ class RecyclerSet {
             val context: Context? = StupidGame
             Log.w("CCC", "HI")
 
-            context?.startActivity(Intent(context, StupidGameActivityTwoPlayers::class.java))
-            StupidGame.finish()
-            /*this.context = context
             val intent = Intent(context, StupidGameActivityTwoPlayers::class.java)
-                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            context?.startActivity(intent)*/
-
-            /*this.context = context
-            val intent = Intent(this.context, StupidGameActivityTwoPlayers::class.java)
-            startActivity(intent)*/
+            intent.putExtra("opponentName", el.name)
+            context?.startActivity(intent)
+            //myRef.child("StupidGames").child("")
+            StupidGame.finish()
         }
     }
 

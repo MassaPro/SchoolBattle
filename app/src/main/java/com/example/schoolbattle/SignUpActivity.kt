@@ -17,7 +17,7 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up)
 
         fun noSpace() {
-            Toast.makeText(this,"Name should not contain spaces", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Name should not contain spaces", Toast.LENGTH_LONG).show()
         }
 
         nameTextInit.addTextChangedListener(object : TextWatcher {
@@ -82,9 +82,7 @@ class SignUpActivity : AppCompatActivity() {
             }
 
             myRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onCancelled(p0: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
+                override fun onCancelled(p0: DatabaseError) {}
 
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.child("Users").hasChild(name)) {

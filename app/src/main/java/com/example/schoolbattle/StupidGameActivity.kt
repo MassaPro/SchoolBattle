@@ -2,31 +2,19 @@ package com.example.schoolbattle
 
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.activity_game_list.*
 import kotlinx.android.synthetic.main.activity_stupid_game.*
-import java.util.*
 
 var StupidGame: Activity = Activity()
 
-//var opponentListener: ChildEventListener = TODO()
 var is_pressed = false
 
 class StupidGameActivity : AppCompatActivity() {
-
-    fun goPlay() {
-        val intent = Intent(applicationContext, StupidGameActivityTwoPlayers::class.java)
-        startActivity(intent)
-        finish()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,21 +29,6 @@ class StupidGameActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             is_pressed = true
-            /*opponentListener = myRef.child("Users").child(globalName.toString()).child("Games").addChildEventListener(object: ChildEventListener {
-                override fun onCancelled(p0: DatabaseError) {}
-
-                override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                    if (!currentGamesSet.contains(p0.key)) {
-                        goPlay()
-                    }
-                }
-
-                override fun onChildChanged(p0: DataSnapshot, p1: String?) {}
-
-                override fun onChildRemoved(p0: DataSnapshot) {}
-
-                override fun onChildMoved(p0: DataSnapshot, p1: String?) {}
-            })*/
 
             myRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
@@ -67,20 +40,26 @@ class StupidGameActivity : AppCompatActivity() {
                             if (i.key.toString() == globalName.toString() || snapshot.child("Users").child(globalName.toString()).child("Games").hasChild(i.key.toString())) {
                                 continue
                             }
+                            //delete user from wait-list
                             myRef.child("StupidGameUsers").child(i.key.toString()).removeValue()
+
+                            //add current user to opponents games list
                             myRef.child("Users").child(i.key.toString()).child("Games")
                                 .child(globalName.toString()).setValue("StupidGame")
+
+                            //add opponent to current user games list
                             myRef.child("Users").child(globalName.toString()).child("Games")
                                 .child(i.key.toString()).setValue("StupidGame")
-                            Toast.makeText(applicationContext, "WWW1", Toast.LENGTH_LONG).show()
+
+                            //add game to games
+                            myRef.child("StupidGames").child(if (i.key.toString() < globalName.toString())
+                            i.key + globalName else globalName + '_' + i.key).child("Move").setValue("0")
+
                             flag = false
-                            //goPlay()
                             break
                         }
                     }
                     if (flag) {
-                        val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
-                        val globalName = prefs.getString("username", "")
                         myRef.child("StupidGameUsers").child(globalName.toString()).setValue(globalName)
                     }
                 }

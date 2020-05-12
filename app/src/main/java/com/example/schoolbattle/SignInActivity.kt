@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.*
@@ -52,8 +51,7 @@ class SignInActivity : AppCompatActivity() {
             fun startMainActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-                val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
-                val editor = prefs.edit()
+                val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
                 editor.putString("username", name)
                 editor.apply()
                 finish()

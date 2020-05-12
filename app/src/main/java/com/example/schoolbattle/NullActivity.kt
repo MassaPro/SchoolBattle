@@ -1,15 +1,9 @@
 package com.example.schoolbattle
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.database.*
-import java.util.*
-import java.util.Timer
-import kotlin.concurrent.schedule
 
 
 class NullActivity : AppCompatActivity() {
