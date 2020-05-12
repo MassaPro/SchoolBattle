@@ -2,6 +2,7 @@ package com.example.schoolbattle
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -17,7 +18,6 @@ var recyclerSet: RecyclerSet = RecyclerSet()
 
 class RecyclerSet {
     private var s: MutableSet<String> = mutableSetOf()
-    private var context: Context? = null
     fun add(el: Game) {
         if (!s.contains(el.toString())) {
             s.add(el.toString())
@@ -26,9 +26,11 @@ class RecyclerSet {
             gamesRecycler.adapter?.notifyDataSetChanged()
         }
         if (is_pressed) {
+            val context: Context? = StupidGame
             Log.w("CCC", "HI")
-            //this.context!!.startActivity(Intent(this.context, StupidGameActivityTwoPlayers::class.java))
 
+            context?.startActivity(Intent(context, StupidGameActivityTwoPlayers::class.java))
+            StupidGame.finish()
             /*this.context = context
             val intent = Intent(context, StupidGameActivityTwoPlayers::class.java)
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
