@@ -91,6 +91,8 @@ class StupidGameActivityTwoPlayers : AppCompatActivity() {
                         var isClicked = -1
                         if (isClicked == -1) kam.setOnClickListener {
                             isClicked = 3
+                            noz.isEnabled = false
+                            bum.isEnabled = false
                             gameData.child("Position").setValue(
                                 p0.child("Position").value.toString() + if (opponentsName < yourName)
                                     "_1-$isClicked" else "_2-$isClicked"
@@ -101,6 +103,8 @@ class StupidGameActivityTwoPlayers : AppCompatActivity() {
                         if (isClicked == -1) noz.setOnClickListener {
                             isClicked = 2
 
+                            kam.isEnabled = false
+                            bum.isEnabled = false
                             gameData.child("Position").setValue(
                                 p0.child("Position").value.toString() + if (opponentsName < yourName)
                                     "_1-$isClicked" else "_2-$isClicked"
@@ -111,12 +115,19 @@ class StupidGameActivityTwoPlayers : AppCompatActivity() {
                         if (isClicked == -1) bum.setOnClickListener {
                             isClicked = 1
 
+                            noz.isEnabled = false
+                            kam.isEnabled = false
+
                             gameData.child("Position").setValue(
                                 p0.child("Position").value.toString() + if (opponentsName < yourName)
                                     "_1-$isClicked" else "_2-$isClicked"
                             )
 
                         }
+                    } else {
+                        noz.isEnabled = false
+                        kam.isEnabled = false
+                        bum.isEnabled = false
                     }
                 }
             })

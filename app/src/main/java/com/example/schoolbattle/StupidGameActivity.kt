@@ -53,7 +53,7 @@ class StupidGameActivity : AppCompatActivity() {
 
                             //add game to games
                             myRef.child("StupidGames").child(if (i.key.toString() < globalName.toString())
-                            i.key + globalName else globalName + '_' + i.key).child("Move").setValue("0")
+                            i.key + '_' + globalName else globalName + '_' + i.key).child("Move").setValue("0")
 
                             flag = false
                             break
