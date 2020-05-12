@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_sign_in.*
 var database = FirebaseDatabase.getInstance()
 var myRef: DatabaseReference = database.getReference("SchoolBattle")
 
-lateinit var SignIn: Activity
+var SignIn: Activity = Activity()
 
 class SignInActivity : AppCompatActivity() {
 
@@ -69,7 +69,7 @@ class SignInActivity : AppCompatActivity() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.child("Users").hasChild(name)) {
                         if (password == snapshot.child("Users").child(name).child("password").value) {
-                            GlobalName = name
+                            //globalName = name
                             startMainActivity()
                         } else {
                             wrongPassword()

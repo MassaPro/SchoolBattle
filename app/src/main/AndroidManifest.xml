@@ -9,12 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name= ".SignInActivity"/>
         <activity android:name=".StupidGameActivityTwoPlayers" />
         <activity android:name=".StupidGameActivity" />
         <activity android:name=".NewGameActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".SignInActivity">
+        <activity android:name=".NullActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
