@@ -140,7 +140,7 @@ class CanvasView( context: Context, attrs: AttributeSet?) : View(context, attrs)
                     canvas?.drawBitmap(right_icon_cross,touch_refinement_X(a,width,size_field_x),
                         touch_refinement_Y(b,height,size_field_y,step,advertising_line),paint)
                     FIELD[X][Y] = 1
-                    //TODO setValue to datbase
+                    //TODO setValue to database
                     cross_or_nul = "null"
                 }
                 else
