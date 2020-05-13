@@ -70,7 +70,6 @@ class CanvasView( context: Context, attrs: AttributeSet?) : View(context, attrs)
                 FIELD[i][j] = 0  //не заполненный
             }
         }
-
         cross_or_nul  = "cross"
     }
 
@@ -81,9 +80,10 @@ class CanvasView( context: Context, attrs: AttributeSet?) : View(context, attrs)
     var icon_null: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.circle_null);
 
 
-    override fun draw(canvas: Canvas?) {
-        super.draw(canvas)
+     override fun draw(canvas: Canvas?) {
+         super.draw(canvas)
 
+         //TODO() take field from database
         canvas?.drawColor(Color.WHITE)
         var width = getWidth().toFloat()
         var height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)
@@ -140,6 +140,7 @@ class CanvasView( context: Context, attrs: AttributeSet?) : View(context, attrs)
                     canvas?.drawBitmap(right_icon_cross,touch_refinement_X(a,width,size_field_x),
                         touch_refinement_Y(b,height,size_field_y,step,advertising_line),paint)
                     FIELD[X][Y] = 1
+                    //TODO setValue to datbase
                     cross_or_nul = "null"
                 }
                 else
@@ -147,6 +148,7 @@ class CanvasView( context: Context, attrs: AttributeSet?) : View(context, attrs)
                     canvas?.drawBitmap(right_icon_null,touch_refinement_X(a,width,size_field_x),
                         touch_refinement_Y(b,height,size_field_y,step,advertising_line),paint)
                     FIELD[X][Y] = 2
+                    //TODO setValue to database
                     cross_or_nul = "cross"
                 }
 

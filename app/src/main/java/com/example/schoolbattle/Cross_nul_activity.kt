@@ -16,8 +16,10 @@ class Cross_null_activity : AppCompatActivity() {
         customCanvas = findViewById<View>(R.id.signature_canvas) as CanvasView  //TODO НЕ УМЕЮ ОТСЮДА ВЛИЯТЬ НА КЛАСС :(
 
         button1.setOnClickListener {
-            val intent = Intent(this, Cross_null_activity::class.java)
-            startActivity(intent)
+            //val intent = Intent(this, Cross_null_activity::class.java)
+            //startActivity(intent)
+            signature_canvas.FIELD[2][3] = 1
+            signature_canvas.invalidate()
         }
 
     }
