@@ -85,7 +85,7 @@ class SignInActivity : AppCompatActivity() {
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val username = prefs.getString("username", "")
 
-        if (username != ""      ) {
+        if (username != "") {
             finish()
         }
     }

@@ -21,8 +21,12 @@ class StupidGameActivityTwoPlayers : AppCompatActivity() {
         val yourName =
             getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "")
                 .toString()
-        val opponentsName: String = intent.getStringExtra("opponentName").toString()
-
+        var opponentsName_: String = intent.getStringExtra("opponentName").toString()
+        var opponentsName = ""
+        for (i in opponentsName_) {
+            if (i == ' ') break
+            opponentsName += i
+        }
         players.text = yourName + " VS " + opponentsName
         youName.text = yourName
         opponentName.text = opponentsName
@@ -78,8 +82,7 @@ class StupidGameActivityTwoPlayers : AppCompatActivity() {
                         myRef.child("StupidGames").child(if (opponentsName < yourName)
                             opponentsName + '_' + yourName else yourName + '_' + opponentsName
                         ).removeValue()
-                        myRef.child("Users").child(yourName).child("Games").child(opponentsName).removeValue()
-                        recyclerSet.erase(Game(opponentsName))
+                        myRef.child("Users").child(yourName).child("Games").child(opponentsName + " StupidGame").removeValue()
                         gameData.removeEventListener(this)
                     }
                     if (!p0.value.toString().contains(

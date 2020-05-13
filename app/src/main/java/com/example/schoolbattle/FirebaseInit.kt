@@ -61,14 +61,15 @@ fun updateRecycler(username: String) {
                 gamesRecycler.adapter?.notifyDataSetChanged()
             }
             override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+                Log.w("KKK", "???")
                 gamesRecycler.adapter?.notifyDataSetChanged()
             }
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
                 recyclerSet.add(Game(p0.key.toString()))
             }
             override fun onChildRemoved(p0: DataSnapshot) {
-                Log.d("KKK", "WHY????")
-                gamesRecycler.adapter?.notifyDataSetChanged()
+                Log.w("KKK", "WHY????")
+                recyclerSet.erase(Game(p0.key.toString()))
             }
         })
     }

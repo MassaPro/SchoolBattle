@@ -3,7 +3,6 @@ package com.example.schoolbattle
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -22,6 +21,7 @@ class StupidGameActivity : AppCompatActivity() {
         StupidGame = this
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val globalName = prefs.getString("username", "")
+        val gameName = intent?.getStringExtra("gameName").toString()
 
 
 
@@ -35,24 +35,24 @@ class StupidGameActivity : AppCompatActivity() {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
                     var flag = true
-                    if (snapshot.child("StupidGameUsers").hasChildren()) {
-                        for (i in snapshot.child("StupidGameUsers").children) {
+                    if (snapshot.child(gameName + "Users").hasChildren()) {
+                        for (i in snapshot.child(gameName + "Users").children) {
                             if (i.key.toString() == globalName.toString() || snapshot.child("Users").child(globalName.toString()).child("Games").hasChild(i.key.toString())) {
                                 continue
                             }
                             //delete user from wait-list
-                            myRef.child("StupidGameUsers").child(i.key.toString()).removeValue()
+                            myRef.child(gameName + "Users").child(i.key.toString()).removeValue()
 
                             //add current user to opponents games list
                             myRef.child("Users").child(i.key.toString()).child("Games")
-                                .child(globalName.toString()).setValue("StupidGame")
+                                .child(globalName.toString() + ' ' + gameName).setValue("StupidGame")
 
                             //add opponent to current user games list
                             myRef.child("Users").child(globalName.toString()).child("Games")
-                                .child(i.key.toString()).setValue("StupidGame")
+                                .child(i.key.toString() + ' ' + gameName).setValue("StupidGame")
 
                             //add game to games
-                            myRef.child("StupidGames").child(if (i.key.toString() < globalName.toString())
+                            myRef.child(gameName + "s").child(if (i.key.toString() < globalName.toString())
                             i.key + '_' + globalName else globalName + '_' + i.key).child("Move").setValue("0")
 
                             flag = false
@@ -60,7 +60,7 @@ class StupidGameActivity : AppCompatActivity() {
                         }
                     }
                     if (flag) {
-                        myRef.child("StupidGameUsers").child(globalName.toString()).setValue(globalName)
+                        myRef.child(gameName + "Users").child(globalName.toString()).setValue(globalName)
                     }
                 }
             })
@@ -73,6 +73,7 @@ class StupidGameActivity : AppCompatActivity() {
 
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val globalName = prefs.getString("username", "")
-        myRef.child("StupidGameUsers").child(globalName.toString()).removeValue()
+        val gameName = intent?.getStringExtra("gameName").toString()
+        myRef.child(gameName + "Users").child(globalName.toString()).removeValue()
     }
 }
