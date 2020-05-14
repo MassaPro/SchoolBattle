@@ -6,6 +6,7 @@ import android.util.Log
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 
 
 lateinit var listener: ChildEventListener
@@ -21,13 +22,14 @@ class RecyclerSet {
             gamesRecycler.adapter?.notifyDataSetChanged()
         }
         if (is_pressed) {
+            is_pressed = false
             val context: Context? = StupidGame
             Log.w("CCC", "HI")
 
             val intent = Intent(context, StupidGameActivityTwoPlayers::class.java)
             intent.putExtra("opponentName", el.name)
             context?.startActivity(intent)
-            //myRef.child("StupidGames").child("")
+            myRef.child("StupidGames").child("")
             StupidGame.finish()
         }
     }

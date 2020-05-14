@@ -11,12 +11,16 @@ import kotlinx.android.synthetic.main.activity_stupid_game_two_players.*
 
 class StupidGameActivityTwoPlayers : AppCompatActivity() {
 
+    private var isRun = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        isRun = true
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_stupid_game_two_players)
 
         if (StupidGame != Activity()) StupidGame.finish()
         if (NewGame != Activity()) NewGame.finish()
+
 
         val yourName =
             getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "")
@@ -72,17 +76,25 @@ class StupidGameActivityTwoPlayers : AppCompatActivity() {
                         if (mx2 == '1') opponent.text = "Бумага"
                         if (mx2 == '2') opponent.text = "Ножницы"
                         if (mx2 == '3') opponent.text = "Камень"
+
+                        var res = ""
                         if (mx1 == mx2) {
-                            result.text = "Ничья:|"
+                            res = "Ничья:|"
                         } else if (mx1 == '2' && mx2 == '1' || mx1 == '3' && mx2 == '2' || mx1 == '1' && mx2 == '3') {
-                            result.text = "Победа:)"
+                            res = "Победа:)"
                         } else {
-                            result.text = "Поражение:("
+                            res = "Поражение:("
                         }
                         myRef.child("StupidGames").child(if (opponentsName < yourName)
                             opponentsName + '_' + yourName else yourName + '_' + opponentsName
                         ).removeValue()
-                        myRef.child("Users").child(yourName).child("Games").child(opponentsName + " StupidGame").removeValue()
+
+                        myRef.child("Users").child(yourName).child("Games").child("$opponentsName StupidGame").removeValue()
+                        myRef.child("Users").child(opponentsName).child("Games").child("$yourName StupidGame").removeValue()
+
+                        if (isRun) {
+                            showResult(res, this@StupidGameActivityTwoPlayers, "StupidGame", yourName)
+                        }
                         gameData.removeEventListener(this)
                     }
                     if (!p0.value.toString().contains(
@@ -135,5 +147,11 @@ class StupidGameActivityTwoPlayers : AppCompatActivity() {
                 }
             })
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        isRun = false
+        finish()
     }
 }

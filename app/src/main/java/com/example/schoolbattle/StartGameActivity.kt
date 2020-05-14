@@ -29,8 +29,7 @@ class StupidGameActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             is_pressed = true
-
-            myRef.addListenerForSingleValueEvent(object : ValueEventListener {
+           myRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
 
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -62,6 +61,7 @@ class StupidGameActivity : AppCompatActivity() {
                     if (flag) {
                         myRef.child(gameName + "Users").child(globalName.toString()).setValue(globalName)
                     }
+                    //myRef.removeEventListener(this)
                 }
             })
         }
