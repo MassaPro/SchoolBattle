@@ -26,11 +26,19 @@ fun touch_refinement_Y (y : Float,height1: Float,size_field_y1:Int,step: Float,a
 
 fun touch_refinement_for_Array_X (x : Float,step:Float):Int        //уточняет координаты в массиве  при касании
 {
+    if(x<0)
+    {
+        return -1
+    }
     return (x/step).toInt()
 }
 
 fun touch_refinement_for_Array_Y (y : Float,height1: Float,size_field_y1: Int,step: Float,advertising_line_1:Float):Int      //уточняет координаты в массиве  при касании
 {
+    if(y<0)
+    {
+        return -1
+    }
     var a: Float = height1 - advertising_line_1 - step*size_field_y1
     var b :Int = 0
     while(y>a)
@@ -52,7 +60,7 @@ fun translate_from_Array_to_Graphics_Y(y:Int,height1: Float,size_field_y1: Int,s
 }
 
 class CanvasView( context: Context, attrs: AttributeSet?) : View(context, attrs) {
-    var Exit : Int = 0
+    var Exit : Int
     var circlex : Float = 0f   //координаты нажатия
     var circley : Float = 0f
 
@@ -61,6 +69,7 @@ class CanvasView( context: Context, attrs: AttributeSet?) : View(context, attrs)
     var FIELD = Array(7){IntArray(6)}
     var cross_or_nul: String
     init{
+        Exit = 0
         Line_paint.setColor(Color.RED)          //ресур для линий (ширина и цвет)
         Line_paint.setStrokeWidth(10f)
 
@@ -142,6 +151,7 @@ class CanvasView( context: Context, attrs: AttributeSet?) : View(context, attrs)
                     FIELD[X][Y] = 1
                     //TODO setValue to database
                     cross_or_nul = "null"
+                    Exit = 1
                 }
                 else
                 {

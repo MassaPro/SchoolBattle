@@ -3,9 +3,6 @@ package com.example.schoolbattle
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import com.example.schoolbattle.Cross_null_activity
-import com.example.schoolbattle.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : Activity() {
@@ -14,8 +11,12 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Button_new_game.setOnClickListener {
+        button_cross_null.setOnClickListener {
             val intent = Intent(this, Cross_nul_menu::class.java)
+            startActivity(intent)
+        }
+        button_jumping.setOnClickListener(){
+            val intent = Intent(this, Jumping_menu::class.java)
             startActivity(intent)
         }
     }

@@ -7,11 +7,24 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/Button_new_game"
+        android:id="@+id/button_cross_null"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="208dp"
+        android:text="Кресики нолики"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Button_cross_null"
+        app:layout_constraintVertical_bias="0.051" />
+
+    <Button
+        android:id="@+id/button_jumping"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="112dp"
-        android:text="Кресики нолики"
+        android:text="Прыгалки"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -20,6 +33,7 @@
         app:layout_constraintVertical_bias="0.051" />
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"

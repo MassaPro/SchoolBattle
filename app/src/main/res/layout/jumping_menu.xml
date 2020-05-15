@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/button_jumping_two_players"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="256dp"
+        android:text="Игра вдвоем"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <Button
+        android:id="@+id/button_jumping_internet_game"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="игра по сети"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="341dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
