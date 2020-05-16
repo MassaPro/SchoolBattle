@@ -15,10 +15,15 @@ var is_pressed = false
 
 class StupidGameActivity : AppCompatActivity() {
 
+    private var eventListener: ValueEventListener? = null
+    private var state = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_stupid_game)
+        state = true
         StupidGame = this
+        currentContext = this
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val globalName = prefs.getString("username", "")
         val gameName = intent?.getStringExtra("gameName").toString()
@@ -29,18 +34,19 @@ class StupidGameActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             is_pressed = true
-           myRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            eventListener = myRef.addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
 
                 override fun onDataChange(snapshot: DataSnapshot) {
                     var flag = true
                     if (snapshot.child(gameName + "Users").hasChildren()) {
                         for (i in snapshot.child(gameName + "Users").children) {
-                            if (i.key.toString() == globalName.toString() || snapshot.child("Users").child(globalName.toString()).child("Games").hasChild(i.key.toString())) {
+                            if (i.key.toString() == globalName.toString() || snapshot.child("Users").child(globalName.toString()).child("Games").hasChild(i.key.toString() + ' ' + gameName)) {
                                 continue
                             }
                             //delete user from wait-list
                             myRef.child(gameName + "Users").child(i.key.toString()).removeValue()
+                            myRef.child(gameName + "Users").child(globalName.toString()).removeValue()
 
                             //add current user to opponents games list
                             myRef.child("Users").child(i.key.toString()).child("Games")
@@ -54,14 +60,14 @@ class StupidGameActivity : AppCompatActivity() {
                             myRef.child(gameName + "s").child(if (i.key.toString() < globalName.toString())
                             i.key + '_' + globalName else globalName + '_' + i.key).child("Move").setValue("0")
 
+                            myRef.removeEventListener(this)
                             flag = false
                             break
                         }
                     }
-                    if (flag) {
+                    if (flag && state) {
                         myRef.child(gameName + "Users").child(globalName.toString()).setValue(globalName)
                     }
-                    //myRef.removeEventListener(this)
                 }
             })
         }
@@ -69,11 +75,13 @@ class StupidGameActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
+        currentContext = null
         is_pressed = false
-
+        state = false
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val globalName = prefs.getString("username", "")
         val gameName = intent?.getStringExtra("gameName").toString()
+        eventListener?.let { myRef.removeEventListener(it) }
         myRef.child(gameName + "Users").child(globalName.toString()).removeValue()
     }
 }
