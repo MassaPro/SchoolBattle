@@ -23,12 +23,11 @@ class RecyclerSet {
         }
         if (is_pressed) {
             is_pressed = false
-            val context: Context? = StupidGame
             Log.w("CCC", "HI")
 
-            val intent = Intent(context, StupidGameActivityTwoPlayers::class.java)
+            val intent = Intent(currentContext, StupidGameActivityTwoPlayers::class.java)
             intent.putExtra("opponentName", el.name)
-            context?.startActivity(intent)
+            currentContext?.startActivity(intent)
             myRef.child("StupidGames").child("")
             StupidGame.finish()
         }

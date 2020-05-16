@@ -2,6 +2,7 @@ package com.example.schoolbattle
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.content.DialogInterface
 import android.view.Window
 import android.widget.Button
@@ -13,6 +14,7 @@ import com.google.firebase.database.ValueEventListener
 
 var GAMES: MutableList<Game> = mutableListOf()
 var CHOOSE_GAMES: MutableList<String> = mutableListOf("StupidGame")
+var currentContext: Context? = null
 
 class Game(val name: String = "", val type: String = "StupidGame", val text: String = "you VS") {
     override fun toString(): String {
@@ -20,69 +22,90 @@ class Game(val name: String = "", val type: String = "StupidGame", val text: Str
     }
 }
 
-fun showResult(result: String, activity: Activity, gameType: String, globalName: String) {
-    val dialog = Dialog(activity)
-    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-    dialog.setCancelable(false)
-    dialog.setCanceledOnTouchOutside(true)
-    dialog.setContentView(R.layout.activity_game_over)
+class ShowResult(activity: Activity) {
 
-    val ng = dialog.findViewById(R.id.restart) as Button
+    private val dialog = Dialog(activity)
+    private var state = false
 
-    ng.setOnClickListener {
-        is_pressed = true
-        myRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {}
+    fun showResult(result: String, gameType: String, globalName: String) {
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.setContentView(R.layout.activity_game_over)
 
-            override fun onDataChange(snapshot: DataSnapshot) {
-                var flag = true
-                if (snapshot.child(gameType + "Users").hasChildren()) {
-                    for (i in snapshot.child(gameType + "Users").children) {
-                        if (i.key.toString() == globalName.toString() || snapshot.child("Users").child(globalName.toString()).child("Games").hasChild(i.key.toString())) {
-                            continue
+        val ng = dialog.findViewById(R.id.restart) as Button
+        var eventListener: ValueEventListener? = null
+        ng.setOnClickListener {
+            state = true
+            is_pressed = true
+            eventListener = myRef.addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {}
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    var flag = true
+                    if (snapshot.child(gameType + "Users").hasChildren()) {
+                        for (i in snapshot.child(gameType + "Users").children) {
+                            if (i.key.toString() == globalName.toString() || snapshot.child("Users")
+                                    .child(globalName.toString()).child("Games")
+                                    .hasChild(i.key.toString() + ' ' + gameType)
+                            ) {
+                                continue
+                            }
+                            //delete user from wait-list
+                            myRef.child(gameType + "Users").child(i.key.toString()).removeValue()
+                            myRef.child(gameType + "Users").child(globalName.toString())
+                                .removeValue()
+
+                            //add current user to opponents games list
+                            myRef.child("Users").child(i.key.toString()).child("Games")
+                                .child(globalName.toString() + ' ' + gameType)
+                                .setValue("StupidGame")
+
+                            //add opponent to current user games list
+                            myRef.child("Users").child(globalName.toString()).child("Games")
+                                .child(i.key.toString() + ' ' + gameType).setValue("StupidGame")
+
+                            //add game to games
+                            myRef.child(gameType + "s").child(
+                                if (i.key.toString() < globalName.toString())
+                                    i.key + '_' + globalName else globalName + '_' + i.key
+                            ).child("Move").setValue("0")
+
+                            myRef.removeEventListener(this)
+                            flag = false
+                            break
                         }
-                        //delete user from wait-list
-                        myRef.child(gameType + "Users").child(i.key.toString()).removeValue()
-
-                        //add current user to opponents games list
-                        myRef.child("Users").child(i.key.toString()).child("Games")
-                            .child(globalName.toString() + ' ' + gameType).setValue("StupidGame")
-
-                        //add opponent to current user games list
-                        myRef.child("Users").child(globalName.toString()).child("Games")
-                            .child(i.key.toString() + ' ' + gameType).setValue("StupidGame")
-
-                        //add game to games
-                        myRef.child(gameType + "s").child(if (i.key.toString() < globalName.toString())
-                            i.key + '_' + globalName else globalName + '_' + i.key).child("Move").setValue("0")
-
-                        flag = false
-                        break
+                    }
+                    if (flag && state) {
+                        myRef.child(gameType + "Users").child(globalName).setValue(globalName)
                     }
                 }
-                if (flag) {
-                    myRef.child(gameType + "Users").child(globalName.toString()).setValue(globalName)
-                }
-                //myRef.removeEventListener(this)
-            }
-        })
-        //myRef.child(gameType + "Users").child(globalName).setValue(globalName)
-        //myRef.addValueEventListener(NewGameListener)
+            })
+            //myRef.child(gameType + "Users").child(globalName).setValue(globalName)
+            //myRef.addValueEventListener(NewGameListener)
+        }
+
+        dialog.setOnDismissListener {
+            is_pressed = false
+            state = false
+            eventListener?.let { myRef.removeEventListener(it) }
+            myRef.child(gameType + "Users").child(globalName).removeValue()
+            //myRef.removeEventListener(NewGameListener)
+        }
+        val body = dialog.findViewById(R.id.resultText) as TextView
+        body.text = result
+        //val body = dialog .findViewById(R.id.body) as TextView
+        //body.text = title
+        //val yesBtn = dialog .findViewById(R.id.yesBtn) as Button
+        //val noBtn = dialog .findViewById(R.id.noBtn) as TextView
+        //yesBtn.setOnClickListener {
+        //  dialog .dismiss()
+        //}
+        //noBtn.setOnClickListener { dialog .dismiss() }
+        dialog.show()
     }
 
-    dialog.setOnDismissListener {
-        is_pressed = false
-        //myRef.removeEventListener(NewGameListener)
+    fun delete() {
+        dialog.dismiss()
     }
-    val body = dialog.findViewById(R.id.resultText) as TextView
-    body.text = result
-    //val body = dialog .findViewById(R.id.body) as TextView
-    //body.text = title
-    //val yesBtn = dialog .findViewById(R.id.yesBtn) as Button
-    //val noBtn = dialog .findViewById(R.id.noBtn) as TextView
-    //yesBtn.setOnClickListener {
-    //  dialog .dismiss()
-    //}
-    //noBtn.setOnClickListener { dialog .dismiss() }
-    dialog.show()
 }

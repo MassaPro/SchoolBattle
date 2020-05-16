@@ -1,6 +1,7 @@
 package com.example.schoolbattle
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,8 +13,11 @@ import kotlinx.android.synthetic.main.activity_stupid_game_two_players.*
 class StupidGameActivityTwoPlayers : AppCompatActivity() {
 
     private var isRun = false
+    private var dialog: ShowResult? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        dialog = ShowResult(this)
+        currentContext = this
         isRun = true
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_stupid_game_two_players)
@@ -92,8 +96,10 @@ class StupidGameActivityTwoPlayers : AppCompatActivity() {
                         myRef.child("Users").child(yourName).child("Games").child("$opponentsName StupidGame").removeValue()
                         myRef.child("Users").child(opponentsName).child("Games").child("$yourName StupidGame").removeValue()
 
+
+
                         if (isRun) {
-                            showResult(res, this@StupidGameActivityTwoPlayers, "StupidGame", yourName)
+                            dialog?.showResult(res, "StupidGame", yourName)
                         }
                         gameData.removeEventListener(this)
                     }
@@ -152,6 +158,8 @@ class StupidGameActivityTwoPlayers : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         isRun = false
+        currentContext = null
+        dialog?.delete()
         finish()
     }
 }
