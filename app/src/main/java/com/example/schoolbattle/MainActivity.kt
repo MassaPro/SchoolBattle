@@ -59,9 +59,16 @@ class MainActivity : AppCompatActivity() {
         init {
             onClickListener = View.OnClickListener { v ->
                 val item = v.tag as Game
-                val intent = Intent(v.context, StupidGameActivityTwoPlayers::class.java).apply {
-                    putExtra("opponentName", item.name)
+                val intent = if (item.name.contains("StupidGame")) {
+                    Intent(v.context, StupidGameActivityTwoPlayers::class.java).apply {
+                        putExtra("opponentName", item.name)
+                    }
+                } else {
+                    Intent(v.context, XOGameActivity::class.java).apply {
+                        putExtra("opponentName", item.name)
+                    }
                 }
+
                 v.context.startActivity(intent)
             }
         }

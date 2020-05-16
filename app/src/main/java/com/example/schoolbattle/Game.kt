@@ -13,7 +13,7 @@ import com.google.firebase.database.ValueEventListener
 
 
 var GAMES: MutableList<Game> = mutableListOf()
-var CHOOSE_GAMES: MutableList<String> = mutableListOf("StupidGame")
+var CHOOSE_GAMES: MutableList<String> = mutableListOf("StupidGame", "XOGame")
 var currentContext: Context? = null
 
 class Game(val name: String = "", val type: String = "StupidGame", val text: String = "you VS") {

@@ -51,6 +51,12 @@ class NewGameActivity : AppCompatActivity() {
                         putExtra("gameName", item)
                     }
                     v.context.startActivity(intent)
+                } else if (item == "XOGame") {
+                    val intent = Intent(v.context, StupidGameActivity::class.java).apply {
+
+                        putExtra("gameName", item)
+                    }
+                    v.context.startActivity(intent)
                 } else {
                     //TODO()
                 }

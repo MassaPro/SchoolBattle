@@ -1,5 +1,6 @@
 package com.example.schoolbattle
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -24,11 +25,15 @@ class RecyclerSet {
         if (is_pressed) {
             is_pressed = false
             Log.w("CCC", "HI")
+            val intent = if (el.name.contains(" StupidGame")) {
+                Intent(currentContext, StupidGameActivityTwoPlayers::class.java)
+            } else {
+                Intent(currentContext, XOGameActivity::class.java)
+            }
 
-            val intent = Intent(currentContext, StupidGameActivityTwoPlayers::class.java)
             intent.putExtra("opponentName", el.name)
             currentContext?.startActivity(intent)
-            myRef.child("StupidGames").child("")
+            //myRef.child("StupidGames").child("")
             StupidGame.finish()
         }
     }
@@ -36,8 +41,10 @@ class RecyclerSet {
     fun erase(el: Game) {
         Log.w("KKK", el.toString())
         for (i in GAMES) {
+            //TODO modify exception
             if (i.name == el.name && i.type == el.type) {
                 GAMES.remove(i)
+                break
             }
         }
         s.remove(el.toString())
@@ -62,14 +69,14 @@ fun updateRecycler(username: String) {
                 gamesRecycler.adapter?.notifyDataSetChanged()
             }
             override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-                Log.w("KKK", "???")
+                Log.w("KKK", p0.key)
                 gamesRecycler.adapter?.notifyDataSetChanged()
             }
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
                 recyclerSet.add(Game(p0.key.toString()))
             }
             override fun onChildRemoved(p0: DataSnapshot) {
-                Log.w("KKK", "WHY????")
+                Log.w("KKK", p0.key)
                 recyclerSet.erase(Game(p0.key.toString()))
             }
         })
