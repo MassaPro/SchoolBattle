@@ -3,19 +3,17 @@ package com.example.schoolbattle
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_cross_nul_activity.*
+import kotlinx.android.synthetic.main.boxs_menu.*
 
-class Cross_nul_menu : AppCompatActivity() {
+class Boxs_menu : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cross_nul_menu)
+        setContentView(R.layout.boxs_menu)
 
-        button1.setOnClickListener(){
-            val intent = Intent(this, Cross_null_activity::class.java)
+        button_boxs_for_two_players.setOnClickListener {
+            val intent = Intent(this, Box_activity::class.java)
             startActivity(intent)
         }
-
-
     }
 }

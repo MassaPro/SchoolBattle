@@ -69,6 +69,7 @@ class CanvasView( context: Context, attrs: AttributeSet?) : View(context, attrs)
     var FIELD = Array(7){IntArray(6)}
     var cross_or_nul: String
     init{
+        //TODO ЗДЕСЬ              ИНИЦИАЛИЗИРУЙ
         Exit = 0
         Line_paint.setColor(Color.RED)          //ресур для линий (ширина и цвет)
         Line_paint.setStrokeWidth(10f)

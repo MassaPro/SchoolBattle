@@ -19,5 +19,9 @@ class MainActivity : Activity() {
             val intent = Intent(this, Jumping_menu::class.java)
             startActivity(intent)
         }
+        button_boxs.setOnClickListener {
+            val intent = Intent(this, Boxs_menu::class.java)
+            startActivity(intent)
+        }
     }
 }
