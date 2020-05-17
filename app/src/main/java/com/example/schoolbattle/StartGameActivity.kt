@@ -1,8 +1,10 @@
 package com.example.schoolbattle
 
+import android.R.attr.delay
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -29,10 +31,8 @@ class StupidGameActivity : AppCompatActivity() {
         val gameName = intent?.getStringExtra("gameName").toString()
 
 
-
-
-
         button.setOnClickListener {
+            Toast.makeText(this, "onCreate", Toast.LENGTH_LONG).show()
             is_pressed = true
             eventListener = myRef.addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
@@ -78,10 +78,19 @@ class StupidGameActivity : AppCompatActivity() {
         currentContext = null
         is_pressed = false
         state = false
+
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val globalName = prefs.getString("username", "")
         val gameName = intent?.getStringExtra("gameName").toString()
         eventListener?.let { myRef.removeEventListener(it) }
         myRef.child(gameName + "Users").child(globalName.toString()).removeValue()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        state = true
+        StupidGame = this
+        currentContext = this
+        is_pressed = false
     }
 }

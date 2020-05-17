@@ -135,7 +135,7 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
         return b-1
     }
 
-    fun translate_from_Array_to_Graphics_X(x:Int,step: Float):Float    //переводит массивные координаты в графически
+    private fun translate_from_Array_to_Graphics_X(x:Int, step: Float):Float    //переводит массивные координаты в графически
     {
         return x*step
     }
@@ -181,26 +181,26 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
 
         //TODO() take field from database
         canvas?.drawColor(Color.WHITE)
-        var width = getWidth().toFloat()
-        var height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)
+        val width = getWidth().toFloat()
+        val height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)
 
-        var advertising_line: Float = 300f
-        var size_field_x: Int = 7
-        var size_field_y: Int = 6
+        val advertising_line: Float = 300f
+        val size_field_x: Int = 7
+        val size_field_y: Int = 6
 
 
-        var step: Float = width/size_field_x
+        val step: Float = width/size_field_x
         var k: Float = height-width-advertising_line + step
         for(i in 0 until size_field_x)
         {
             canvas?.drawLine(0f,k,width,k,Line_paint)
-            k = k + step
+            k += step
         }
         k = 0f
         for(i in 0 until size_field_y+2)
         {
             canvas?.drawLine(k,height-advertising_line-width+step,k,height-advertising_line,Line_paint)
-            k = k + step
+            k += step
         }
 
 
