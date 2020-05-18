@@ -10,6 +10,7 @@ import android.widget.TextView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import kotlin.random.Random
 
 
 var GAMES: MutableList<Game> = mutableListOf()
@@ -69,7 +70,7 @@ class ShowResult(activity: Activity) {
                             myRef.child(gameType + "s").child(
                                 if (i.key.toString() < globalName.toString())
                                     i.key + '_' + globalName else globalName + '_' + i.key
-                            ).child("Move").setValue("0")
+                            ).child("Move").setValue((0..1).random().toString())
 
                             myRef.removeEventListener(this)
                             flag = false

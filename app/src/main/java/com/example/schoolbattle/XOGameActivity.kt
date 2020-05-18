@@ -31,8 +31,8 @@ class XOGameActivity : AppCompatActivity() {
             if (i == ' ') break
             opponentsName += i
         }
-        val yu = if (opponentsName < yourName) '1' else '2'
-        val op = if (opponentsName < yourName) '2' else '1'
+        val yu = if (opponentsName < yourName) '1' else '0'
+        val op = if (opponentsName < yourName) '0' else '1'
 //        players.text = yourName + " VS " + opponentsName
   //      youName.text = yourName
     //    opponentName.text = opponentsName
@@ -43,8 +43,8 @@ class XOGameActivity : AppCompatActivity() {
                 opponentsName + '_' + yourName else yourName + '_' + opponentsName
         )
         setContentView(R.layout.activity_x_o_game)
+        signature_canvas.blocked = true
         signature_canvas.positionData = gameData
-        signature_canvas.invalidate()
 
         gameData.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
@@ -52,6 +52,7 @@ class XOGameActivity : AppCompatActivity() {
             override fun onDataChange(p0: DataSnapshot) {
                 var cnt = 0
 
+                signature_canvas.isFirstMove = (p0.child("Move").value.toString() == yu.toString())
                 for (i in 0..6) {
                     for (j in 0..5) {
                         val p = p0.child("$i").child("$j")
@@ -61,6 +62,7 @@ class XOGameActivity : AppCompatActivity() {
                         }
                     }
                 }
+                if (signature_canvas.isFirstMove == (cnt % 2 == 0)) signature_canvas.blocked = false
                 signature_canvas.invalidate()
                 if (cnt == 42) {
                     var res = "Тестовое состояние"
@@ -146,6 +148,8 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
     }
 
     lateinit var positionData: DatabaseReference
+    var isFirstMove = false
+    var blocked = true
     var Exit : Int
     var circlex : Float = 0f   //координаты нажатия
     var circley : Float = 0f
@@ -169,12 +173,21 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
         cross_or_nul  = "cross"
     }
 
+    private fun moveChecker(x: Int, y: Int, cnt: Int): Boolean {
+        if (cnt % 2 == 0 != isFirstMove) {
+            return false
+        }
+        if (x > 6 || x < 0 || y > 5 || y < 0 || (y + 1 <= 5 && FIELD[x][y + 1] == 0)) {
+            return false
+        }
+        return true
+    }
+
 
 
 
     var icon_cross : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cross)       //картинки крестиков и нулей
     var icon_null: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.circle_null)
-
 
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
@@ -225,18 +238,21 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
                 }
             }
         }
-        if (cnt == 0) {
-            cross_or_nul = "cross"
+
+        cross_or_nul = if (cnt == 0) {
+            "cross"
         } else {
-            cross_or_nul = "null"
+            "null"
         }
+
         if (touch_refinement_Y(circley,height,size_field_y,step,advertising_line)>0)     //постановка нового обЪекта
         {
-            var X: Int = touch_refinement_for_Array_X(circlex,step)
-            var Y: Int = touch_refinement_for_Array_Y(circley,height,size_field_y,step,advertising_line)    //координаты нажимаего для массива
+            val X: Int = touch_refinement_for_Array_X(circlex,step)
+            val Y: Int = touch_refinement_for_Array_Y(circley,height,size_field_y,step,advertising_line)    //координаты нажимаего для массива
 
-            if (FIELD[X][Y]==0)
+            if (moveChecker(X, Y, cnt) && FIELD[X][Y]==0)
             {
+                blocked = true
                 var a:Float = circlex
                 var b:Float = circley
                 if(cross_or_nul=="cross")
@@ -265,6 +281,10 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
+        if (blocked) {
+            return false
+        }
+        super.onTouchEvent(event)
         circlex =  event!!.x
         circley =  event!!.y
         invalidate()

@@ -1,6 +1,5 @@
 package com.example.schoolbattle
 
-import android.R.attr.delay
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
