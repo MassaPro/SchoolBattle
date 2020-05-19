@@ -115,17 +115,33 @@ class XOGameActivity : AppCompatActivity() {
                     if (checkList.size == 1) {
                         res = "Ничья"
                     } else {
-                        if (yu == '0') {
-                            if (whoWins == 1) {
-                                res = "Победа"
+                        if (p0.child("Move").value.toString() == "0") {
+                            if (yu == '0') {
+                                if (whoWins == 1) {
+                                    res = "Победа"
+                                } else {
+                                    res = "Поражение"
+                                }
                             } else {
-                                res = "Поражение"
+                                if (whoWins == 2) {
+                                    res = "Победа"
+                                } else {
+                                    res = "Поражение"
+                                }
                             }
                         } else {
-                            if (whoWins == 2) {
-                                res = "Победа"
+                            if (yu == '1') {
+                                if (whoWins == 1) {
+                                    res = "Победа"
+                                } else {
+                                    res = "Поражение"
+                                }
                             } else {
-                                res = "Поражение"
+                                if (whoWins == 2) {
+                                    res = "Победа"
+                                } else {
+                                    res = "Поражение"
+                                }
                             }
                         }
                     }
