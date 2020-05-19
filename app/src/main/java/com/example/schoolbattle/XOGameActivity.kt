@@ -6,8 +6,10 @@ import android.graphics.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_x_o_game.*
 
@@ -62,10 +64,62 @@ class XOGameActivity : AppCompatActivity() {
                         }
                     }
                 }
+                fun checkForWin(): MutableList<Int> {
+                    var field = signature_canvas.FIELD
+                    val list_x = mutableListOf(1, 1, 0, -1)
+                    val list_y = mutableListOf(0, 1, 1, 1)
+
+                    var ans = mutableListOf(0)
+                    for (i in 0..6) {
+                        for (j in 0..5) {
+                            if (field[i][j] != 0) {
+                                for (k in 0..3) {
+                                    var fl = 0
+                                    for (pos in 0..2) {
+                                        Log.w("TAG", "$i ${list_x[k]} $pos")
+                                        if (field[(i + list_x[k] * pos + 7) % 7][(j + list_y[k] * pos + 6) % 6] != field[(i + list_x[k] * (pos + 1) + 7) % 7][(j + list_y[k] * (pos + 1) + 6) % 6]) {
+                                            fl = 1
+
+                                        }
+                                    }
+                                    if (fl == 0) {
+                                        for (pos in 0..3) {
+                                            ans.add((i + list_x[k] * pos + 7) % 7)
+                                            ans.add((j + list_y[k] * pos + 6) % 6)
+                                        }
+                                        return ans
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    return ans
+                }
                 if (signature_canvas.isFirstMove == (cnt % 2 == 0)) signature_canvas.blocked = false
                 signature_canvas.invalidate()
-                if (cnt == 42) {
+                var checkList = checkForWin()
+                if (checkList.size > 1 || (checkList.size == 1 && cnt == 42)) {
+                    Toast.makeText(applicationContext,"${signature_canvas.FIELD[checkList.get(1)][checkList.get(2)]}", Toast.LENGTH_LONG).show()
+                    if (checkList.size > 1) {
+                        for (i2 in 0..8) {
+                            if (i2 % 2 == 1) {
+                                signature_canvas.FIELD[checkList.get(i2)][checkList.get(i2 + 1)] = 0 // add color change
+                                signature_canvas.invalidate()
+                            }
+                            //Log.w("TAG", "${checkList.get(i2)}")
+                        }
+                    }
                     var res = "Тестовое состояние"
+                    if (checkList.size == 1) {
+                        res = "Ничья"
+                    } else {
+                        if (signature_canvas.isFirstMove == (cnt % 2 == 0)) {
+                            res = "Поражение"
+                        } else {
+                            res = "Победа"
+                        }
+                    }
+
                     myRef.child("XOGames").child(if (opponentsName < yourName)
                         opponentsName + '_' + yourName else yourName + '_' + opponentsName
                     ).removeValue()
@@ -90,6 +144,10 @@ class XOGameActivity : AppCompatActivity() {
         finish()
     }
 }
+
+
+
+
 
 class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
 
