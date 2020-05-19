@@ -100,9 +100,11 @@ class XOGameActivity : AppCompatActivity() {
                 var checkList = checkForWin()
                 if (checkList.size > 1 || (checkList.size == 1 && cnt == 42)) {
                     Toast.makeText(applicationContext,"${signature_canvas.FIELD[checkList.get(1)][checkList.get(2)]}", Toast.LENGTH_LONG).show()
+                    var whoWins = 0
                     if (checkList.size > 1) {
                         for (i2 in 0..8) {
                             if (i2 % 2 == 1) {
+                                whoWins = signature_canvas.FIELD[checkList.get(i2)][checkList.get(i2 + 1)]
                                 signature_canvas.FIELD[checkList.get(i2)][checkList.get(i2 + 1)] = 0 // add color change
                                 signature_canvas.invalidate()
                             }
@@ -113,12 +115,22 @@ class XOGameActivity : AppCompatActivity() {
                     if (checkList.size == 1) {
                         res = "Ничья"
                     } else {
-                        if (signature_canvas.isFirstMove == (cnt % 2 == 0)) {
-                            res = "Поражение"
+                        if (yu == '0') {
+                            if (whoWins == 1) {
+                                res = "Победа"
+                            } else {
+                                res = "Поражение"
+                            }
                         } else {
-                            res = "Победа"
+                            if (whoWins == 2) {
+                                res = "Победа"
+                            } else {
+                                res = "Поражение"
+                            }
                         }
                     }
+
+
 
                     myRef.child("XOGames").child(if (opponentsName < yourName)
                         opponentsName + '_' + yourName else yourName + '_' + opponentsName
