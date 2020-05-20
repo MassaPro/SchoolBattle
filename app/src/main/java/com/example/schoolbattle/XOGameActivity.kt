@@ -22,6 +22,7 @@ class XOGameActivity : AppCompatActivity() {
         currentContext = this
         isRun = true
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_x_o_game)
         if (StupidGame != Activity()) StupidGame.finish()
         if (NewGame != Activity()) NewGame.finish()
         val yourName =
@@ -39,12 +40,10 @@ class XOGameActivity : AppCompatActivity() {
         //      youName.text = yourName
         //    opponentName.text = opponentsName
 
-
         val gameData = myRef.child("XOGames").child(
             if (opponentsName < yourName)
                 opponentsName + '_' + yourName else yourName + '_' + opponentsName
         )
-        setContentView(R.layout.activity_x_o_game)
         signature_canvas.blocked = true
         signature_canvas.positionData = gameData
 
@@ -53,8 +52,9 @@ class XOGameActivity : AppCompatActivity() {
 
             override fun onDataChange(p0: DataSnapshot) {
                 var cnt = 0
-
                 signature_canvas.isFirstMove = (p0.child("Move").value.toString() == yu.toString())
+                up_player.text = yourName + if (signature_canvas.isFirstMove) " X" else " O"
+                down_player.text = opponentsName + if (!signature_canvas.isFirstMove) " X" else " O"
                 for (i in 0..6) {
                     for (j in 0..5) {
                         val p = p0.child("$i").child("$j")
@@ -319,7 +319,7 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
         val width = getWidth().toFloat()
         val height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)
 
-        val advertising_line: Float = 300f
+        val advertising_line: Float = 600f
         val size_field_x: Int = 7
         val size_field_y: Int = 6
 
@@ -328,20 +328,20 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
         var k: Float = height-width-advertising_line + step
         for(i in 0 until size_field_x)
         {
-            if(i == 0 || i == size_field_x - 1)
-            {
-                canvas?.drawLine(0f,k,width,k,Line_paint_1)
-            }
-            else
-            {
-                canvas?.drawLine(0f,k,width,k,Line_paint)
-            }
+            canvas?.drawLine(0f,k,width,k,Line_paint)
             k += step
         }
         k = 0f
         for(i in 0 until size_field_y+2)
         {
-            canvas?.drawLine(k,height-advertising_line-width+step,k,height-advertising_line,Line_paint)
+            if(i == 0 || i == size_field_y+1)
+            {
+                canvas?.drawLine(k,height-advertising_line-width+step,k,height-advertising_line,Line_paint_1)
+            }
+            else
+            {
+                canvas?.drawLine(k,height-advertising_line-width+step,k,height-advertising_line,Line_paint)
+            }
             k += step
         }
 
