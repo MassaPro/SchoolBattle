@@ -14,23 +14,23 @@
         android:text="Коробки"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_cross_null"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.213"
         tools:layout_editor_absoluteX="0dp" />
 
     <Button
         android:id="@+id/button_jumping"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="136dp"
+        android:layout_marginTop="116dp"
         android:text="Прыгалки"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="16dp" />
+        tools:layout_editor_absoluteX="0dp" />
 
     <Button
         android:id="@+id/button_cross_null"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="132dp"
         android:text="Кресики нолики"
         app:layout_constraintTop_toBottomOf="@+id/button_jumping"
         tools:layout_editor_absoluteX="0dp" />
@@ -39,10 +39,22 @@
         android:id="@+id/button_point"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
         android:text="Точки"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_boxs2"
+        app:layout_constraintTop_toBottomOf="@+id/button_boxs"
         app:layout_constraintVertical_bias="0.372"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/button_snake"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="Змейка на двоих"
+        app:layout_constraintBottom_toTopOf="@+id/button_jumping"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         tools:layout_editor_absoluteX="0dp" />
 
     <TextView

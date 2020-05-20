@@ -27,5 +27,10 @@ class MainActivity : Activity() {
             val intent = Intent(this, points_menu::class.java)
             startActivity(intent)
         }
+
+        button_snake.setOnClickListener {
+            val intent = Intent(this, Snake_menu::class.java)
+            startActivity(intent)
+        }
     }
 }

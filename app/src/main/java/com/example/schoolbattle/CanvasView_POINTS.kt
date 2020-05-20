@@ -110,13 +110,13 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
         paint_rib_2.setColor(Color.BLUE)
         paint_rib_2.setStrokeWidth(5f)
 
-       for(i in 0 until FIELD.size)
-       {
-           for(j in 0 until FIELD[i].size)
-           {
-               FIELD[i][j] = 0
-           }
-       }
+        for(i in 0 until FIELD.size)
+        {
+            for(j in 0 until FIELD[i].size)
+            {
+                FIELD[i][j] = 0
+            }
+        }
 
         for(i in 0 until CELLS.size)
         {
@@ -274,7 +274,7 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
             for(i in 0 until TREE_OF_WAYS.size)
             {
 
-        //        Log.d("nok",TREE_OF_WAYS.size.toString())
+                //        Log.d("nok",TREE_OF_WAYS.size.toString())
                 var a: Int = TREE_OF_WAYS[i][TREE_OF_WAYS[i].size-1].first    //координаты последней вершины в цепочку
                 var b: Int = TREE_OF_WAYS[i][TREE_OF_WAYS[i].size-1].second
                 //Log.d("nok",a.toString()+b.toString())
