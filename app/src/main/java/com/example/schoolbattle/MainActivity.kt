@@ -23,5 +23,9 @@ class MainActivity : Activity() {
             val intent = Intent(this, Boxs_menu::class.java)
             startActivity(intent)
         }
+        button_point.setOnClickListener {
+            val intent = Intent(this, points_menu::class.java)
+            startActivity(intent)
+        }
     }
 }

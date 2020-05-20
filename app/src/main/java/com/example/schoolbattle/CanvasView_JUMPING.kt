@@ -144,7 +144,10 @@ class CanvasView_JUMPING(context: Context, attrs: AttributeSet?) : View(context,
 
         if(PHASE == false)
         {
-            canvas?.drawBitmap( right_illumination, touch_refinement_X(circlex, width, size_field_x), touch_refinement_Y(circley, height, size_field_y, step, advertising_line), paint)
+            if(circley> height - advertising_line - width && y < height - advertising_line){
+                canvas?.drawBitmap( right_illumination, touch_refinement_X(circlex, width, size_field_x), touch_refinement_Y(circley, height, size_field_y, step, advertising_line), paint)
+            }
+
         }
 
     }
@@ -252,10 +255,11 @@ class CanvasView_JUMPING(context: Context, attrs: AttributeSet?) : View(context,
                     }
                 }
             }
+            lastX = X
+            lastY = Y
         }
         Log.d("DOPO",PHASE.toString())
-        lastX = X
-        lastY = Y
+
         invalidate()
         return true
     }

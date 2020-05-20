@@ -7,6 +7,17 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/button_boxs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
+        android:text="Коробки"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_cross_null"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
         android:id="@+id/button_jumping"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,14 +36,13 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <Button
-        android:id="@+id/button_boxs"
+        android:id="@+id/button_point"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        android:text="Коробки"
+        android:text="Точки"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_cross_null"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/button_boxs2"
+        app:layout_constraintVertical_bias="0.372"
         tools:layout_editor_absoluteX="0dp" />
 
     <TextView

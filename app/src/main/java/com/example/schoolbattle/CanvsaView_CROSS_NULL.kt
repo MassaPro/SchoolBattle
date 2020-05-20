@@ -141,7 +141,7 @@ class CanvasView( context: Context, attrs: AttributeSet?) : View(context, attrs)
             var X: Int = touch_refinement_for_Array_X(circlex,step)
             var Y: Int = touch_refinement_for_Array_Y(circley,height,size_field_y,step,advertising_line)    //координаты нажимаего для массива
 
-            if (FIELD[X][Y]==0)
+            if (FIELD[X][Y]==0 && X>0 && Y>0)
             {
                 var a:Float = circlex
                 var b:Float = circley
