@@ -17,11 +17,12 @@ class XOGameActivity : AppCompatActivity() {
     private var isRun = false
     private var dialog: ShowResult? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        dialog = ShowResult(this)
+    override fun onCreate(savedInstance: Bundle?) {
+        super.onCreate(savedInstance)
+
         currentContext = this
         isRun = true
-        super.onCreate(savedInstanceState)
+        super.onResume()
         setContentView(R.layout.activity_x_o_game)
         if (StupidGame != Activity()) StupidGame.finish()
         if (NewGame != Activity()) NewGame.finish()
@@ -154,6 +155,7 @@ class XOGameActivity : AppCompatActivity() {
 
                     myRef.child("Users").child(yourName).child("Games").child("$opponentsName XOGame").removeValue()
                     myRef.child("Users").child(opponentsName).child("Games").child("$yourName XOGame").removeValue()
+                    dialog = ShowResult(this@XOGameActivity)
                     if (isRun) {
                         dialog?.showResult(res, "XOGame", yourName)
                     }
@@ -168,8 +170,12 @@ class XOGameActivity : AppCompatActivity() {
         super.onPause()
         isRun = false
         currentContext = null
-        dialog?.delete()
-        finish()
+        if (dialog != null) {
+            dialog?.delete()
+            finish()
+        } else {
+            Log.w("HHH", "NONULL")
+        }
     }
 }
 

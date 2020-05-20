@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_game_item.view.*
 import kotlinx.android.synthetic.main.activity_game_list.*
 
@@ -17,10 +18,41 @@ lateinit var gamesRecycler: RecyclerView
 
 class MainActivity : AppCompatActivity() {
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(0, 0)
+        finishAffinity()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        navView.selectedItemId = R.id.navigation_home
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_list)
         setSupportActionBar(findViewById(R.id.my_toolbar))
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+
+        navView.selectedItemId = R.id.navigation_home
+        navView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_home -> {
+                    // put your code here
+                    return@setOnNavigationItemSelectedListener true
+                }
+                R.id.navigation_dashboard -> {
+                    val intent = Intent(this, SettingsActivity::class.java)
+                    startActivity(intent)
+                    overridePendingTransition(0, 0)
+                    // put your code here
+                    return@setOnNavigationItemSelectedListener true
+                }
+            }
+            false
+        }
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val globalName = prefs.getString("username", "")
         toolbarName.text = globalName
