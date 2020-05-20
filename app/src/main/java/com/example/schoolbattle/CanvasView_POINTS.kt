@@ -21,7 +21,7 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
     }
     fun Is_suitable_for_the_chain(x :Int,y : Int): Boolean     //проверяет нужно ли включать вершину в цепочку
     {
-        if(x == 0)
+        if(x ==  0)
         {
             if(FIELD[x][y]==FIELD[x+1][y])
             {
