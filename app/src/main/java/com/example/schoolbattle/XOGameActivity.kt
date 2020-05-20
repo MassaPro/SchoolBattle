@@ -36,8 +36,8 @@ class XOGameActivity : AppCompatActivity() {
         val yu = if (opponentsName < yourName) '1' else '0'
         val op = if (opponentsName < yourName) '0' else '1'
 //        players.text = yourName + " VS " + opponentsName
-  //      youName.text = yourName
-    //    opponentName.text = opponentsName
+        //      youName.text = yourName
+        //    opponentName.text = opponentsName
 
 
         val gameData = myRef.child("XOGames").child(
@@ -105,7 +105,7 @@ class XOGameActivity : AppCompatActivity() {
                         for (i2 in 0..8) {
                             if (i2 % 2 == 1) {
                                 whoWins = signature_canvas.FIELD[checkList.get(i2)][checkList.get(i2 + 1)]
-                                signature_canvas.FIELD[checkList.get(i2)][checkList.get(i2 + 1)] = 0 // add color change
+                                //   signature_canvas.FIELD[checkList.get(i2)][checkList.get(i2 + 1)] = 0 // add color change
                                 signature_canvas.invalidate()
                             }
                             //Log.w("TAG", "${checkList.get(i2)}")
@@ -232,6 +232,36 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
     {
         return y*step + height1 - size_field_y1*step - advertising_line_1
     }
+    fun checkForWin_another_fun(): MutableList<Int> {
+        val list_x = mutableListOf(1, 1, 0, -1)
+        val list_y = mutableListOf(0, 1, 1, 1)
+
+        var ans = mutableListOf(0)
+        for (i in 0..6) {
+            for (j in 0..5) {
+                if (FIELD[i][j] != 0) {
+                    for (k in 0..3) {
+                        var fl = 0
+                        for (pos in 0..2) {
+                            Log.w("TAG", "$i ${list_x[k]} $pos")
+                            if (FIELD[(i + list_x[k] * pos + 7) % 7][(j + list_y[k] * pos + 6) % 6] != FIELD[(i + list_x[k] * (pos + 1) + 7) % 7][(j + list_y[k] * (pos + 1) + 6) % 6]) {
+                                fl = 1
+
+                            }
+                        }
+                        if (fl == 0) {
+                            for (pos in 0..3) {
+                                ans.add((i + list_x[k] * pos + 7) % 7)
+                                ans.add((j + list_y[k] * pos + 6) % 6)
+                            }
+                            return ans
+                        }
+                    }
+                }
+            }
+        }
+        return ans
+    }
 
     lateinit var positionData: DatabaseReference
     var isFirstMove = false
@@ -242,6 +272,7 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
 
     var paint : Paint = Paint()          //ресурсы для рисования
     var Line_paint: Paint = Paint()
+    var Line_paint_1: Paint = Paint()
     var FIELD = Array(7){IntArray(6)}
     var cross_or_nul: String
 
@@ -249,6 +280,9 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
         Exit = 0
         Line_paint.color = Color.RED          //ресур для линий (ширина и цвет)
         Line_paint.strokeWidth = 10f
+
+        Line_paint_1.color = Color.RED          //ресур для линий (ширина и цвет)
+        Line_paint_1.strokeWidth = 20f
 
         // TODO нужно взять из DataBase (статистика ходов)
         for( i in 0..6) {
@@ -275,6 +309,8 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
     var icon_cross : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cross)       //картинки крестиков и нулей
     var icon_null: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.circle_null)
 
+    var icon_green:  Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.green_icon)
+
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
 
@@ -292,7 +328,14 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
         var k: Float = height-width-advertising_line + step
         for(i in 0 until size_field_x)
         {
-            canvas?.drawLine(0f,k,width,k,Line_paint)
+            if(i == 0 || i == size_field_x - 1)
+            {
+                canvas?.drawLine(0f,k,width,k,Line_paint_1)
+            }
+            else
+            {
+                canvas?.drawLine(0f,k,width,k,Line_paint)
+            }
             k += step
         }
         k = 0f
@@ -305,6 +348,7 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
 
         val right_icon_cross: Bitmap = Bitmap.createScaledBitmap(icon_cross,width.toInt()/size_field_x, width.toInt()/size_field_x, true); //подгоняем картинку под размеры экрана телефона
         val right_icon_null: Bitmap = Bitmap.createScaledBitmap(icon_null,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+        val right_icon_green: Bitmap = Bitmap.createScaledBitmap(icon_green,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
 
         var cnt = 0
         for( i in 0..6) //начальная расстановка крестиков и ноликов
@@ -360,6 +404,20 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
                     cross_or_nul = "cross"
                 }
 
+            }
+        }
+
+        if(checkForWin_another_fun().size==9)
+        {
+            var counter: Int = 1
+            while(counter<9)
+            {
+                var a_1: Float =  translate_from_Array_to_Graphics_X(checkForWin_another_fun()[counter],step)
+
+
+                var a_2: Float = translate_from_Array_to_Graphics_Y(checkForWin_another_fun()[counter+1].toInt(), height,size_field_y, step, advertising_line)
+                canvas?.drawBitmap(right_icon_green,a_1,a_2,paint)
+                counter += 2
             }
         }
 
