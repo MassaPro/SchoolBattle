@@ -17,6 +17,12 @@ class XOGameActivity : AppCompatActivity() {
     private var isRun = false
     private var dialog: ShowResult? = null
 
+    override fun onResume() {
+        super.onResume()
+        currentContext = this
+        isRun = true
+    }
+
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
 
