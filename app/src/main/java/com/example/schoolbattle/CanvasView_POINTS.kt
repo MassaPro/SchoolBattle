@@ -587,21 +587,215 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
             }
         }
 
-        for(j in 0 until 14)
-        {
-            for( i in 0 until 9)
-            {
-                var X: Float = indent + step*i
-                var X1: Float = X + step
-                var X2: Float = X1 + step
-                var Y: Float = height - advertising_line - step*size_field_y + step*j
-                var Y1: Float = Y+step
-                var Y2: Float = Y1 + step
 
+        for(i in 0..9)    //горизонтальные ребра
+        {
+            for(j in 0..15)
+            {
+                if(j==0)
+                {
+                    if(a[j][i]==a[j][i+1] && (a[j][i] == a[j+1][i] || a[j][i] == a[j+1][i+1]) && a[j][i] !=0 )
+                    {
+                        var X: Float = indent + i*step
+                        var X1: Float = X+step
+                        var Y: Float = height - advertising_line - step*size_field_y + step*j
+                        var Y1 :Float =  Y + step
+                        if(a[j][i]  == 1)
+                        {
+                            canvas?.drawLine(X,Y,X1,Y,paint_rib_1)
+                        }
+                        else
+                        {
+                            canvas?.drawLine(X,Y,X1,Y,paint_rib_2)
+                        }
+                    }
+                }
+                else
+                {
+                    if(j==15)
+                    {
+                        if(a[j][i]==a[j][i+1] && (a[j][i] == a[j-1][i] || a[j][i] == a[j-1][i+1]) && a[j][i] !=0)
+                        {
+                            var X: Float = indent + i*step
+                            var X1: Float = X+step
+                            var Y: Float = height - advertising_line - step*size_field_y + step*j
+                            var Y1 :Float =  Y + step
+                            if(a[j][i]  == 1)
+                            {
+                                canvas?.drawLine(X,Y,X1,Y,paint_rib_1)
+                            }
+                            else
+                            {
+                                canvas?.drawLine(X,Y,X1,Y,paint_rib_2)
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var k: Int = 0
+                        if(a[j][i]==a[j][i+1] && (a[j][i] == a[j+1][i] || a[j][i] == a[j+1][i+1]) && a[j][i] !=0 )
+                        {
+                            k++
+                        }
+                        if(a[j][i]==a[j][i+1] && (a[j][i] == a[j-1][i] || a[j][i] == a[j-1][i+1])  && a[j][i] !=0)
+                        {
+                            k++
+                        }
+                        if(k==1)
+                        {
+                            var X: Float = indent + i*step
+                            var X1: Float = X+step
+                            var Y: Float = height - advertising_line - step*size_field_y + step*j
+                            var Y1 :Float =  Y + step
+                            if(a[j][i]  == 1)
+                            {
+                                canvas?.drawLine(X,Y,X1,Y,paint_rib_1)
+                            }
+                            else
+                            {
+                                canvas?.drawLine(X,Y,X1,Y,paint_rib_2)
+                            }
+                        }
+                    }
+                }
             }
         }
 
+        for(i in 0..10)     //вертикальные ребра
+        {
+            for(j in 0..14)
+            {
+                if(i == 0)
+                {
+                    if(a[j][i]==a[j+1][i] && (a[j][i+1]==a[j][i] || a[j+1][i+1]==a[j][i]) && a[j][i]!= 0 )
+                    {
+                        var X: Float = indent + i*step
+                        var X1: Float = X+step
+                        var Y: Float = height - advertising_line - step*size_field_y + step*j
+                        var Y1 :Float =  Y + step
+                        if(a[j][i]  == 1)
+                        {
+                            canvas?.drawLine(X,Y,X,Y1,paint_rib_1)
+                        }
+                        else
+                        {
+                            canvas?.drawLine(X,Y,X,Y1,paint_rib_2)
+                        }
+                    }
+                }
+                else
+                {
+                    if(i == 10)
+                    {
+                        if (a[j][i] == a[j + 1][i] && (a[j][i - 1] == a[j][i] || a[j + 1][i - 1] == a[j][i]) && a[j][i] != 0) {
+                            var X: Float = indent + i * step
+                            var X1: Float = X + step
+                            var Y: Float =
+                                height - advertising_line - step * size_field_y + step * j
+                            var Y1: Float = Y + step
+                            if (a[j][i]  == 1) {
+                                canvas?.drawLine(X, Y, X, Y1, paint_rib_1)
+                            } else {
+                                canvas?.drawLine(X, Y, X, Y1, paint_rib_2)
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var k : Int = 0
+                        if(a[j][i]==a[j+1][i] && (a[j][i+1]==a[j][i] || a[j+1][i+1]==a[j][i]) && a[j][i]!= 0 )
+                        {
+                            k++
+                        }
+                        if (a[j][i] == a[j + 1][i] && (a[j][i - 1] == a[j][i] || a[j + 1][i - 1] == a[j][i]) && a[j][i] != 0)
+                        {
+                            k++
+                        }
+                        if(k == 1)
+                        {
+                            var X: Float = indent + i * step
+                            var X1: Float = X + step
+                            var Y: Float =
+                                height - advertising_line - step * size_field_y + step * j
+                            var Y1: Float = Y + step
+                            if (a[j][i] == 1) {
+                                canvas?.drawLine(X, Y, X, Y1, paint_rib_1)
+                            } else {
+                                canvas?.drawLine(X, Y, X, Y1, paint_rib_2)
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
+        for(i in 0..9)
+        {
+            for(j in 0..14)
+            {
+                if(a[j][i]!=0 && a[j][i]!=a[j+1][i+1] && a[j][i] == a[j][i+1] && a[j][i]==a[j+1][i])
+                {
+                    var X: Float = indent + i*step
+                    var X1: Float = X+step
+                    var Y: Float = height - advertising_line - step*size_field_y + step*j
+                    var Y1 :Float =  Y + step
+                    if(a[j][i] == 1)
+                    {
+                        canvas?.drawLine(X,Y1,X1,Y,paint_rib_1)
+                    }
+                    else
+                    {
+                        canvas?.drawLine(X,Y1,X1,Y,paint_rib_2)
+                    }
+                }
+                if(a[j+1][i+1]!=0 && a[j][i]!=a[j+1][i+1] && a[j+1][i+1] == a[j][i+1] && a[j+1][i+1]==a[j+1][i])
+                {
+                    var X: Float = indent + i*step
+                    var X1: Float = X+step
+                    var Y: Float = height - advertising_line - step*size_field_y + step*j
+                    var Y1 :Float =  Y + step
+                    if(a[j+1][i+1] == 1)
+                    {
+                        canvas?.drawLine(X,Y1,X1,Y,paint_rib_1)
+                    }
+                    else
+                    {
+                        canvas?.drawLine(X,Y1,X1,Y,paint_rib_2)
+                    }
+                }
+
+                if(a[j+1][i]!=0 && a[j+1][i]!=a[j][i+1] && a[j][i] == a[j+1][i] && a[j+1][i+1] == a[j+1][i])
+                {
+                    var X: Float = indent + i*step
+                    var X1: Float = X+step
+                    var Y: Float = height - advertising_line - step*size_field_y + step*j
+                    var Y1 :Float =  Y + step
+                    if(a[j+1][i] == 1)
+                    {
+                        canvas?.drawLine(X,Y,X1,Y1,paint_rib_1)
+                    }
+                    else
+                    {
+                        canvas?.drawLine(X,Y,X1,Y1,paint_rib_2)
+                    }
+                }
+                if(a[j][i+1]!=0 && a[j+1][i]!=a[j][i+1] && a[j][i] == a[j][i+1] && a[j+1][i+1] == a[j][i+1])
+                {
+                    var X: Float = indent + i*step
+                    var X1: Float = X+step
+                    var Y: Float = height - advertising_line - step*size_field_y + step*j
+                    var Y1 :Float =  Y + step
+                    if(a[j][i+1] == 1)
+                    {
+                        canvas?.drawLine(X,Y,X1,Y1,paint_rib_1)
+                    }
+                    else
+                    {
+                        canvas?.drawLine(X,Y,X1,Y1,paint_rib_2)
+                    }
+                }
+            }
+        }
 
 
 
