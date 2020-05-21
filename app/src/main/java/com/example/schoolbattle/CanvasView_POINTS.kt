@@ -19,54 +19,65 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
         }
         return false
     }
-    fun Is_suitable_for_the_chain(x :Int,y : Int): Boolean     //проверяет нужно ли включать вершину в цепочку
-    {
-        if(x ==  0)
-        {
-            if(FIELD[x][y]==FIELD[x+1][y])
-            {
-                return false
+
+
+    fun find(playerId: Int, g: MutableList<MutableList<Int>>,N: Int, M: Int): MutableList<Pair<Int, Int>> {
+        val used: MutableList<MutableList<Boolean>> = mutableListOf()
+        val res: MutableList<Pair<Int, Int>> = mutableListOf()
+        for (i in 0 until N ){
+            used.add(mutableListOf())
+            for (j in 0 until M) {
+                used[i].add(false)
             }
-            return true
         }
-        if(x == 10)
-        {
-            if(FIELD[x][y] == FIELD[x-1][y])
-            {
-                return false
+
+        fun ch(i : Int, j: Int): Boolean {
+            return (i in 0 until N) && (j in 0 until M) && (g[i][j] != playerId)
+        }
+
+        fun dfs(i : Int, j : Int) {
+            used[i][j] = true
+            for (x in -1 .. 1) {
+                for (y in -1..1) {
+                    if (ch(i + x, j + y) && !used[i + x][j + y]) {
+                        if (x * y == 0 || g[i][j + y] != playerId || g[i + x][j] != playerId) {
+                            dfs(i + x, j + y)
+                        }
+                    }
+                }
             }
-            return true
         }
-        if(y == 0)
-        {
-            if(FIELD[x][y] == FIELD[x][y+1])
-            {
-                return false
+        for (i in 0 until N) {
+            if (ch(i, 0)) {
+                dfs(i, 0)
             }
-            return true
-        }
-        if(y == 15)
-        {
-            if(FIELD[x][y] == FIELD[x][y-1])
-            {
-                return false
+            if (ch(i, M - 1)) {
+                dfs(i, M - 1)
             }
-            return true
         }
-        var k :Int = 0
-        for(i in -1..1)
-            for(j in -1..1)
-                if(FIELD[x][y] == FIELD[x+i][y+j])
-                    k++ //узнаем количество соседей
-        if(k>6)
-        {
-            return false
+        for (j in 0 until M) {
+            if (ch(0, j)) {
+                dfs(0, j)
+            }
+            if (ch(N - 1, j)) {
+                dfs(N - 1, j)
+            }
         }
-        return true
+        for (i in 0 until N) {
+            for (j in 0 until M) {
+                if (!used[i][j]) {
+                    g[i][j] = playerId
+                    res.add(Pair(i, j))
+                }
+            }
+        }
+        return res
     }
-    var lastx: Int = 0
-    var lasty: Int = 0
-    var red_or_blue: String
+
+
+    var lastx: Int = -1
+    var lasty: Int = -1
+    var red_or_blue: Int
     var circlex : Float = 0f   //координаты нажатия
     var circley : Float = 0f
     var indent: Float = 0f      //оступ
@@ -76,10 +87,12 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
     var paint_rib_1: Paint = Paint()
     var paint_rib_2: Paint = Paint()
 
+    var shading_1 : Paint = Paint()
+    var shading_2 : Paint = Paint()
+
     var FIELD = Array(11){IntArray(16)}     //для фишеК
-    var A: MutableList<Pair<Int,Int>> = mutableListOf()
-    var TREE_OF_WAYS: MutableList<MutableList<Pair<Int,Int>>> = mutableListOf()
-    var CELLS = Array(10){Array(15){IntArray(6)} }            //массив клеток в которых мы будем проводить ребра
+    val a: MutableList<MutableList<Int>> = mutableListOf()     // для псевдо фишек
+    var p: MutableList<Pair<Int,Int>> = mutableListOf()
 
 
     var radius_of_point: Float = 0f
@@ -99,7 +112,15 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
     var Is_defined_TREE_OF_WAYS : Boolean = false
     init{
 
-        red_or_blue = "red"
+        for (i in 0 until 16) {
+            a.add(mutableListOf())
+        }
+        for (i in a.indices) {
+            for (j in 0 until 11) {
+                a[i].add(0)
+            }
+        }
+        red_or_blue = 0
         Line_paint.setColor(Color.rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
         Line_paint.setStrokeWidth(5f)
 
@@ -110,6 +131,11 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
         paint_rib_2.setColor(Color.BLUE)
         paint_rib_2.setStrokeWidth(5f)
 
+        shading_1.setColor(Color.RED)
+        shading_2.setColor(Color.BLUE)
+        shading_1.setStrokeWidth(2f)
+        shading_2.setStrokeWidth(2f)
+
         for(i in 0 until FIELD.size)
         {
             for(j in 0 until FIELD[i].size)
@@ -118,16 +144,6 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
             }
         }
 
-        for(i in 0 until CELLS.size)
-        {
-            for(j in 0 until CELLS[i].size)
-            {
-                for(z in 0 until CELLS[i][j].size)
-                {
-                    CELLS[i][j][z] = 0
-                }
-            }
-        }
     }
 
 
@@ -154,6 +170,7 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
         k = height-width*(size_field_y.toFloat()/size_field_x.toFloat())-advertising_line
 
         canvas?.drawColor(Color.WHITE)
+        Log.d("Para",p.toString())
 
         for(i in 0 until size_field_y+1)          //вырисовка горизонтальных линий
         {
@@ -199,20 +216,394 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
         }
 
 
-
-        Log.d("POP",TREE_OF_WAYS.size.toString())
-        for (i in 0 until TREE_OF_WAYS.size)
+        if(red_or_blue == 2 )
         {
-            if (TREE_OF_WAYS[i][TREE_OF_WAYS[i].size - 1] == TREE_OF_WAYS[i][0] && TREE_OF_WAYS[i].size > 4)  //если цепочка зациклилась
+            for(i in 0..size_field_x)
             {
-
-                for (j in 0 until TREE_OF_WAYS[i].size - 1)
+                for(j in 0..size_field_y)
                 {
+                    if(Pair(j,i) in p)
+                    {
+                        if(i-1>=0 && j-1>=0)
+                        {
+                            if(Pair(j,i-1) in p && Pair(j-1,i) in p)
+                            {
+                                var X: Float =  indent + step*i
+                                var Y: Float = height - advertising_line - step*size_field_y + step*j
+                                var X1: Float = indent + step*i - step/3*2
+                                var X2: Float = indent + step*i - step/3
+                                var Y1: Float = height - advertising_line - step*size_field_y + step*j - step*2/3
+                                var Y2: Float = height - advertising_line - step*size_field_y + step*j - step/3
+                                canvas?.drawLine(X1,Y,X,Y1,shading_1)
+                                canvas?.drawLine(X2,Y,X,Y2,shading_1)
+                            }
+                        }
+                        if(i+1<11 && j-1>=0)
+                        {
+                            if(Pair(j,i+1) in p && Pair(j-1,i) in p)
+                            {
+                                var X: Float =  indent + step*i
+                                var X1: Float = indent + step*i + step/6
+                                var X2: Float = indent + step*i + step/3
+                                var X3: Float = indent + step*i + step/2
+                                var X4: Float = indent + step*i + step*2/3
+                                var X5: Float = indent + step*i + step*5/6
 
+                                var Y: Float = height - advertising_line - step*size_field_y + step*j
+                                var Y1: Float = height - advertising_line - step*size_field_y + step*j - step/6
+                                var Y2: Float = height - advertising_line - step*size_field_y + step*j - step/3
+                                var Y3: Float = height - advertising_line - step*size_field_y + step*j - step/2
+                                var Y4: Float = height - advertising_line - step*size_field_y + step*j - step*2/3
+                                var Y5: Float = height - advertising_line - step*size_field_y + step*j - step*5/6
+
+                                canvas?.drawLine(X,Y4,X1,Y5,shading_1)
+                                canvas?.drawLine(X,Y2,X2,Y4,shading_1)
+                                canvas?.drawLine(X,Y,X3,Y3,shading_1)
+                                canvas?.drawLine(X2,Y,X4,Y2,shading_1)
+                                canvas?.drawLine(X4,Y,X5,Y1,shading_1)
+
+                            }
+                        }
+                        if(i-1>=0 && j+1<16)
+                        {
+                            if(Pair(j,i-1) in p && Pair(j+1,i) in p)
+                            {
+                                var X: Float =  indent + step*i
+                                var X1: Float = indent + step*i - step/6
+                                var X2: Float = indent + step*i - step/3
+                                var X3: Float = indent + step*i - step/2
+                                var X4: Float = indent + step*i - step*2/3
+                                var X5: Float = indent + step*i - step*5/6
+
+                                var Y: Float = height - advertising_line - step*size_field_y + step*j
+                                var Y1: Float = height - advertising_line - step*size_field_y + step*j + step/6
+                                var Y2: Float = height - advertising_line - step*size_field_y + step*j + step/3
+                                var Y3: Float = height - advertising_line - step*size_field_y + step*j + step/2
+                                var Y4: Float = height - advertising_line - step*size_field_y + step*j + step*2/3
+                                var Y5: Float = height - advertising_line - step*size_field_y + step*j + step*5/6
+
+                                canvas?.drawLine(X,Y4,X1,Y5,shading_1)
+                                canvas?.drawLine(X,Y2,X2,Y4,shading_1)
+                                canvas?.drawLine(X,Y,X3,Y3,shading_1)
+                                canvas?.drawLine(X2,Y,X4,Y2,shading_1)
+                                canvas?.drawLine(X4,Y,X5,Y1,shading_1)
+
+                            }
+                        }
+                        if(i+1<11 && j+1<16)
+                        {
+                            if(Pair(j,i+1) in p && Pair(j+1,i) in p)
+                            {
+                                var X: Float =  indent + step*i
+                                var Y: Float = height - advertising_line - step*size_field_y + step*j
+                                var X1: Float = indent + step*i + step/3*2
+                                var X2: Float = indent + step*i + step/3
+                                var Y1: Float = height - advertising_line - step*size_field_y + step*j + step*2/3
+                                var Y2: Float = height - advertising_line - step*size_field_y + step*j + step/3
+                                canvas?.drawLine(X1,Y,X,Y1,shading_1)
+                                canvas?.drawLine(X2,Y,X,Y2,shading_1)
+
+                            }
+                        }
+                    }
                 }
+            }
+            p = find(2,a,16,11)
+            for(i in 0..size_field_x)
+            {
+                for(j in 0..size_field_y)
+                {
+                    if(Pair(j,i) in p)
+                    {
+                        if(i-1>=0 && j-1>=0)
+                        {
+                            if(Pair(j,i-1) in p && Pair(j-1,i) in p)
+                            {
+                                var X: Float =  indent + step*i
+                                var Y: Float = height - advertising_line - step*size_field_y + step*j
+                                var X1: Float = indent + step*i - step/3*2
+                                var X2: Float = indent + step*i - step/3
+                                var Y1: Float = height - advertising_line - step*size_field_y + step*j - step*2/3
+                                var Y2: Float = height - advertising_line - step*size_field_y + step*j - step/3
+                                canvas?.drawLine(X1,Y,X,Y1,shading_2)
+                                canvas?.drawLine(X2,Y,X,Y2,shading_2)
+                            }
+                        }
+                        if(i+1<11 && j-1>=0)
+                        {
+                            if(Pair(j,i+1) in p && Pair(j-1,i) in p)
+                            {
+                                var X: Float =  indent + step*i
+                                var X1: Float = indent + step*i + step/6
+                                var X2: Float = indent + step*i + step/3
+                                var X3: Float = indent + step*i + step/2
+                                var X4: Float = indent + step*i + step*2/3
+                                var X5: Float = indent + step*i + step*5/6
+
+                                var Y: Float = height - advertising_line - step*size_field_y + step*j
+                                var Y1: Float = height - advertising_line - step*size_field_y + step*j - step/6
+                                var Y2: Float = height - advertising_line - step*size_field_y + step*j - step/3
+                                var Y3: Float = height - advertising_line - step*size_field_y + step*j - step/2
+                                var Y4: Float = height - advertising_line - step*size_field_y + step*j - step*2/3
+                                var Y5: Float = height - advertising_line - step*size_field_y + step*j - step*5/6
+
+                                canvas?.drawLine(X,Y4,X1,Y5,shading_2)
+                                canvas?.drawLine(X,Y2,X2,Y4,shading_2)
+                                canvas?.drawLine(X,Y,X3,Y3,shading_2)
+                                canvas?.drawLine(X2,Y,X4,Y2,shading_2)
+                                canvas?.drawLine(X4,Y,X5,Y1,shading_2)
+
+                            }
+                        }
+                        if(i-1>=0 && j+1<16)
+                        {
+                            if(Pair(j,i-1) in p && Pair(j+1,i) in p)
+                            {
+                                var X: Float =  indent + step*i
+                                var X1: Float = indent + step*i - step/6
+                                var X2: Float = indent + step*i - step/3
+                                var X3: Float = indent + step*i - step/2
+                                var X4: Float = indent + step*i - step*2/3
+                                var X5: Float = indent + step*i - step*5/6
+
+                                var Y: Float = height - advertising_line - step*size_field_y + step*j
+                                var Y1: Float = height - advertising_line - step*size_field_y + step*j + step/6
+                                var Y2: Float = height - advertising_line - step*size_field_y + step*j + step/3
+                                var Y3: Float = height - advertising_line - step*size_field_y + step*j + step/2
+                                var Y4: Float = height - advertising_line - step*size_field_y + step*j + step*2/3
+                                var Y5: Float = height - advertising_line - step*size_field_y + step*j + step*5/6
+
+                                canvas?.drawLine(X,Y4,X1,Y5,shading_2)
+                                canvas?.drawLine(X,Y2,X2,Y4,shading_2)
+                                canvas?.drawLine(X,Y,X3,Y3,shading_2)
+                                canvas?.drawLine(X2,Y,X4,Y2,shading_2)
+                                canvas?.drawLine(X4,Y,X5,Y1,shading_2)
+
+                            }
+                        }
+                        if(i+1<11 && j+1<16)
+                        {
+                            if(Pair(j,i+1) in p && Pair(j+1,i) in p)
+                            {
+                                var X: Float =  indent + step*i
+                                var Y: Float = height - advertising_line - step*size_field_y + step*j
+                                var X1: Float = indent + step*i + step/3*2
+                                var X2: Float = indent + step*i + step/3
+                                var Y1: Float = height - advertising_line - step*size_field_y + step*j + step*2/3
+                                var Y2: Float = height - advertising_line - step*size_field_y + step*j + step/3
+                                canvas?.drawLine(X1,Y,X,Y1,shading_2)
+                                canvas?.drawLine(X2,Y,X,Y2,shading_2)
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if(red_or_blue == 1 )
+        {
+            for(i in 0..size_field_x)
+            {
+                for(j in 0..size_field_y)
+                {
+                    if(Pair(j,i) in p)
+                    {
+                        if(i-1>=0 && j-1>=0)
+                        {
+                            if(Pair(j,i-1) in p && Pair(j-1,i) in p)
+                            {
+                                var X: Float =  indent + step*i
+                                var Y: Float = height - advertising_line - step*size_field_y + step*j
+                                var X1: Float = indent + step*i - step/3*2
+                                var X2: Float = indent + step*i - step/3
+                                var Y1: Float = height - advertising_line - step*size_field_y + step*j - step*2/3
+                                var Y2: Float = height - advertising_line - step*size_field_y + step*j - step/3
+                                canvas?.drawLine(X1,Y,X,Y1,shading_2)
+                                canvas?.drawLine(X2,Y,X,Y2,shading_2)
+
+                            }
+                        }
+                        if(i+1<11 && j-1>=0)
+                        {
+                            if(Pair(j,i+1) in p && Pair(j-1,i) in p)
+                            {
+                                var X: Float =  indent + step*i
+                                var X1: Float = indent + step*i + step/6
+                                var X2: Float = indent + step*i + step/3
+                                var X3: Float = indent + step*i + step/2
+                                var X4: Float = indent + step*i + step*2/3
+                                var X5: Float = indent + step*i + step*5/6
+
+                                var Y: Float = height - advertising_line - step*size_field_y + step*j
+                                var Y1: Float = height - advertising_line - step*size_field_y + step*j - step/6
+                                var Y2: Float = height - advertising_line - step*size_field_y + step*j - step/3
+                                var Y3: Float = height - advertising_line - step*size_field_y + step*j - step/2
+                                var Y4: Float = height - advertising_line - step*size_field_y + step*j - step*2/3
+                                var Y5: Float = height - advertising_line - step*size_field_y + step*j - step*5/6
+
+                                canvas?.drawLine(X,Y4,X1,Y5,shading_2)
+                                canvas?.drawLine(X,Y2,X2,Y4,shading_2)
+                                canvas?.drawLine(X,Y,X3,Y3,shading_2)
+                                canvas?.drawLine(X2,Y,X4,Y2,shading_2)
+                                canvas?.drawLine(X4,Y,X5,Y1,shading_2)
+
+                            }
+                        }
+                        if(i-1>=0 && j+1<16)
+                        {
+                            if(Pair(j,i-1) in p && Pair(j+1,i) in p)
+                            {
+                                var X: Float =  indent + step*i
+                                var X1: Float = indent + step*i - step/6
+                                var X2: Float = indent + step*i - step/3
+                                var X3: Float = indent + step*i - step/2
+                                var X4: Float = indent + step*i - step*2/3
+                                var X5: Float = indent + step*i - step*5/6
+
+                                var Y: Float = height - advertising_line - step*size_field_y + step*j
+                                var Y1: Float = height - advertising_line - step*size_field_y + step*j + step/6
+                                var Y2: Float = height - advertising_line - step*size_field_y + step*j + step/3
+                                var Y3: Float = height - advertising_line - step*size_field_y + step*j + step/2
+                                var Y4: Float = height - advertising_line - step*size_field_y + step*j + step*2/3
+                                var Y5: Float = height - advertising_line - step*size_field_y + step*j + step*5/6
+
+                                canvas?.drawLine(X,Y4,X1,Y5,shading_2)
+                                canvas?.drawLine(X,Y2,X2,Y4,shading_2)
+                                canvas?.drawLine(X,Y,X3,Y3,shading_2)
+                                canvas?.drawLine(X2,Y,X4,Y2,shading_2)
+                                canvas?.drawLine(X4,Y,X5,Y1,shading_2)
+
+                            }
+                        }
+                        if(i+1<11 && j+1<16)
+                        {
+                            if(Pair(j,i+1) in p && Pair(j+1,i) in p)
+                            {
+                                var X: Float =  indent + step*i
+                                var Y: Float = height - advertising_line - step*size_field_y + step*j
+                                var X1: Float = indent + step*i + step/3*2
+                                var X2: Float = indent + step*i + step/3
+                                var Y1: Float = height - advertising_line - step*size_field_y + step*j + step*2/3
+                                var Y2: Float = height - advertising_line - step*size_field_y + step*j + step/3
+                                canvas?.drawLine(X1,Y,X,Y1,shading_2)
+                                canvas?.drawLine(X2,Y,X,Y2,shading_2)
+
+                            }
+                        }
+                    }
+                }
+            }
+            p = find(1,a,16,11)
+            for(i in 0..size_field_x)
+            {
+                for(j in 0..size_field_y)
+                {
+                    if(Pair(j,i) in p)
+                    {
+                        if(i-1>=0 && j-1>=0)
+                        {
+                            if(Pair(j,i-1) in p && Pair(j-1,i) in p)
+                            {
+                                var X: Float =  indent + step*i
+                                var Y: Float = height - advertising_line - step*size_field_y + step*j
+                                var X1: Float = indent + step*i - step/3*2
+                                var X2: Float = indent + step*i - step/3
+                                var Y1: Float = height - advertising_line - step*size_field_y + step*j - step*2/3
+                                var Y2: Float = height - advertising_line - step*size_field_y + step*j - step/3
+                                canvas?.drawLine(X1,Y,X,Y1,shading_1)
+                                canvas?.drawLine(X2,Y,X,Y2,shading_1)
+
+                            }
+                        }
+                        if(i+1<11 && j-1>=0)
+                        {
+                            if(Pair(j,i+1) in p && Pair(j-1,i) in p)
+                            {
+                                var X: Float =  indent + step*i
+                                var X1: Float = indent + step*i + step/6
+                                var X2: Float = indent + step*i + step/3
+                                var X3: Float = indent + step*i + step/2
+                                var X4: Float = indent + step*i + step*2/3
+                                var X5: Float = indent + step*i + step*5/6
+
+                                var Y: Float = height - advertising_line - step*size_field_y + step*j
+                                var Y1: Float = height - advertising_line - step*size_field_y + step*j - step/6
+                                var Y2: Float = height - advertising_line - step*size_field_y + step*j - step/3
+                                var Y3: Float = height - advertising_line - step*size_field_y + step*j - step/2
+                                var Y4: Float = height - advertising_line - step*size_field_y + step*j - step*2/3
+                                var Y5: Float = height - advertising_line - step*size_field_y + step*j - step*5/6
+
+                                canvas?.drawLine(X,Y4,X1,Y5,shading_1)
+                                canvas?.drawLine(X,Y2,X2,Y4,shading_1)
+                                canvas?.drawLine(X,Y,X3,Y3,shading_1)
+                                canvas?.drawLine(X2,Y,X4,Y2,shading_1)
+                                canvas?.drawLine(X4,Y,X5,Y1,shading_1)
+
+                            }
+                        }
+                        if(i-1>=0 && j+1<16)
+                        {
+                            if(Pair(j,i-1) in p && Pair(j+1,i) in p)
+                            {
+                                var X: Float =  indent + step*i
+                                var X1: Float = indent + step*i - step/6
+                                var X2: Float = indent + step*i - step/3
+                                var X3: Float = indent + step*i - step/2
+                                var X4: Float = indent + step*i - step*2/3
+                                var X5: Float = indent + step*i - step*5/6
+
+                                var Y: Float = height - advertising_line - step*size_field_y + step*j
+                                var Y1: Float = height - advertising_line - step*size_field_y + step*j + step/6
+                                var Y2: Float = height - advertising_line - step*size_field_y + step*j + step/3
+                                var Y3: Float = height - advertising_line - step*size_field_y + step*j + step/2
+                                var Y4: Float = height - advertising_line - step*size_field_y + step*j + step*2/3
+                                var Y5: Float = height - advertising_line - step*size_field_y + step*j + step*5/6
+
+                                canvas?.drawLine(X,Y4,X1,Y5,shading_1)
+                                canvas?.drawLine(X,Y2,X2,Y4,shading_1)
+                                canvas?.drawLine(X,Y,X3,Y3,shading_1)
+                                canvas?.drawLine(X2,Y,X4,Y2,shading_1)
+                                canvas?.drawLine(X4,Y,X5,Y1,shading_1)
+
+                            }
+                        }
+                        if(i+1<11 && j+1<16)
+                        {
+                            if(Pair(j,i+1) in p && Pair(j+1,i) in p)
+                            {
+                                var X: Float =  indent + step*i
+                                var Y: Float = height - advertising_line - step*size_field_y + step*j
+                                var X1: Float = indent + step*i + step/3*2
+                                var X2: Float = indent + step*i + step/3
+                                var Y1: Float = height - advertising_line - step*size_field_y + step*j + step*2/3
+                                var Y2: Float = height - advertising_line - step*size_field_y + step*j + step/3
+                                canvas?.drawLine(X1,Y,X,Y1,shading_1)
+                                canvas?.drawLine(X2,Y,X,Y2,shading_1)
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        for(j in 0 until 14)
+        {
+            for( i in 0 until 9)
+            {
+                var X: Float = indent + step*i
+                var X1: Float = X + step
+                var X2: Float = X1 + step
+                var Y: Float = height - advertising_line - step*size_field_y + step*j
+                var Y1: Float = Y+step
+                var Y2: Float = Y1 + step
 
             }
         }
+
+
+
+
 
 
     }
@@ -224,350 +615,42 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
         circlex = event!!.x
         circley = event!!.y
 
-        x = indent
-        y = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())
+        var x1: Float = indent
+        var y1: Float = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())
         for(i in 0..size_field_x)                    //вырисовка точек
         {
             for(j in 0..size_field_y)
             {
-                if(correction_touch(x,y))
+                if(correction_touch(x1,y1))
                 {
-                    if(FIELD[i][j] == 0)
+                    if(FIELD[i][j] == 0 && a[j][i] == 0 )
                     {
-                        if(red_or_blue == "red")
+                        if(red_or_blue == 1)
                         {
-                            red_or_blue = "blue"
+                            red_or_blue = 2
                             FIELD[i][j] = 1
-                            lastx = i
-                            lasty = j
+                            a[j][i] = 1
+                            p = find(1,a,16,11)
                         }
                         else
                         {
-                            red_or_blue = "red"
+                            red_or_blue = 1
                             FIELD[i][j]  = 2
-                            lastx = i
-                            lasty = j
+                            a[j][i]  = 2
+                            p = find(2,a,16,11)
                         }
-                    }
-                }
-                y += step
-            }
-            x  += step
-            y = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())
-        }
-        x = 0f
-        y = 0f
 
-        var p : Int = lastx       //начинаем строить цепочки в
-        var q : Int = lasty
+                        invalidate()
 
-        A.clear()
-        TREE_OF_WAYS.clear()
-        A.add(Pair(p,q))
-        TREE_OF_WAYS.add(A)
-
-
-        Log.d("TODO", TREE_OF_WAYS[0][0].first.toString() + " " + TREE_OF_WAYS[0][0].second.toString() )
-        var counter: Int = 1
-        for(t in 0..20)
-        {
-            for(i in 0 until TREE_OF_WAYS.size)
-            {
-
-                //        Log.d("nok",TREE_OF_WAYS.size.toString())
-                var a: Int = TREE_OF_WAYS[i][TREE_OF_WAYS[i].size-1].first    //координаты последней вершины в цепочку
-                var b: Int = TREE_OF_WAYS[i][TREE_OF_WAYS[i].size-1].second
-                //Log.d("nok",a.toString()+b.toString())
-                if(TREE_OF_WAYS[i].size >= counter)
-                {
-                    if((a==lastx && b == lasty && counter == 1)||(a!=lastx || b!=lasty))
-                    {
-                        Log.d("counter",counter.toString())
-                        if (a - 1 >= 0) {
-
-                            if (FIELD[a - 1][b] == FIELD[lastx][lasty] && Is_suitable_for_the_chain(a-1,b))        //если вершина того же цвета, что и исходная
-                            {
-                                Log.d("hhhh","zero")
-                                var flag: Boolean = true
-                                for (j in 0 until TREE_OF_WAYS[i].size) {
-                                    if (TREE_OF_WAYS[i][j] == Pair(
-                                            a - 1,
-                                            b
-                                        )
-                                    )       //если  в цепочке была уже эта точка
-                                    {
-                                        flag = false
-                                    }
-                                }
-                                if (a - 1 == lastx && b == lasty && counter > 2) {
-                                    flag = true
-                                }
-                                if (flag) {
-                                    var NEW_CHAIN: MutableList<Pair<Int, Int>> = TREE_OF_WAYS[i].toMutableList()
-                                    NEW_CHAIN.add(
-                                        Pair(
-                                            a - 1,
-                                            b
-                                        )
-                                    )              //состовляем новую вариацию цепочки
-                                    TREE_OF_WAYS.add(NEW_CHAIN)           //добоваляем новую цепочку в список исходных
-                                }
-
-
-                            }
-                        }
-                        if (a + 1 < 11) {
-
-
-                            if (FIELD[a + 1][b] == FIELD[lastx][lasty]  && Is_suitable_for_the_chain(a+1,b))        //если вершина того же цвета, что и исходная
-                            {
-                                var flag: Boolean = true
-                                for (j in 0 until TREE_OF_WAYS[i].size) {
-                                    if (TREE_OF_WAYS[i][j] == Pair(
-                                            a + 1,
-                                            b
-                                        )
-                                    )       //если  в цепочке была уже эта точка
-                                    {
-                                        flag = false
-                                    }
-                                }
-                                if (a + 1 == lastx && b == lasty && counter > 2) {
-                                    flag = true
-                                }
-                                if (flag) {
-                                    var NEW_CHAIN: MutableList<Pair<Int, Int>> = TREE_OF_WAYS[i].toMutableList()
-                                    NEW_CHAIN.add(
-                                        Pair(
-                                            a + 1,
-                                            b
-                                        )
-                                    )              //состовляем новую вариацию цепочки
-                                    TREE_OF_WAYS.add(NEW_CHAIN)           //добоваляем новую цепочку в список исходных
-                                }
-                            }
-                        }
-                        if (b - 1 >= 0) {
-
-                            if (FIELD[a][b - 1] == FIELD[lastx][lasty]  && Is_suitable_for_the_chain(a,b-1))        //если вершина того же цвета, что и исходная
-                            {
-                                var flag: Boolean = true
-                                for (j in 0 until TREE_OF_WAYS[i].size) {
-                                    if (TREE_OF_WAYS[i][j] == Pair(
-                                            a,
-                                            b - 1
-                                        )
-                                    )       //если  в цепочке была уже эта точка
-                                    {
-                                        flag = false
-                                    }
-                                }
-                                if (a == lastx && b - 1 == lasty && counter > 2) {
-                                    flag = true
-                                }
-                                if (flag) {
-                                    var NEW_CHAIN: MutableList<Pair<Int, Int>> = TREE_OF_WAYS[i].toMutableList()
-                                    NEW_CHAIN.add(
-                                        Pair(
-                                            a,
-                                            b - 1
-                                        )
-                                    )              //состовляем новую вариацию цепочки
-                                    TREE_OF_WAYS.add(NEW_CHAIN)           //добоваляем новую цепочку в список исходных
-                                }
-                            }
-                        }
-                        if (b + 1 < 16) {
-
-                            if (FIELD[a][b + 1] == FIELD[lastx][lasty]  && Is_suitable_for_the_chain(a,b+1))        //если вершина того же цвета, что и исходная
-                            {
-                                var flag: Boolean = true
-                                for (j in 0 until TREE_OF_WAYS[i].size) {
-                                    if (TREE_OF_WAYS[i][j] == Pair(
-                                            a,
-                                            b + 1
-                                        )
-                                    )       //если  в цепочке была уже эта точка
-                                    {
-                                        flag = false
-                                    }
-                                }
-                                if (a == lastx && b + 1 == lasty && counter > 2) {
-                                    flag = true
-                                }
-                                if (flag) {
-                                    var NEW_CHAIN: MutableList<Pair<Int, Int>> = TREE_OF_WAYS[i].toMutableList()
-                                    NEW_CHAIN.add(Pair(a, b + 1))              //состовляем новую вариацию цепочки
-                                    TREE_OF_WAYS.add(NEW_CHAIN)           //добоваляем новую цепочку в список исходных
-                                }
-                            }
-                        }
-                        if (a - 1 >= 0 && b - 1>=0) {
-
-                            if (FIELD[a - 1][b-1] == FIELD[lastx][lasty]  && Is_suitable_for_the_chain(a-1,b-1))        //если вершина того же цвета, что и исходная
-                            {
-                                Log.d("hhhh","zero")
-                                var flag: Boolean = true
-                                for (j in 0 until TREE_OF_WAYS[i].size) {
-                                    if (TREE_OF_WAYS[i][j] == Pair(
-                                            a - 1,
-                                            b -1
-                                        )
-                                    )       //если  в цепочке была уже эта точка
-                                    {
-                                        flag = false
-                                    }
-                                }
-                                if (a - 1 == lastx && b-1 == lasty && counter > 2) {
-                                    flag = true
-                                }
-                                if (flag) {
-                                    var NEW_CHAIN: MutableList<Pair<Int, Int>> = TREE_OF_WAYS[i].toMutableList()
-                                    NEW_CHAIN.add(
-                                        Pair(
-                                            a - 1,
-                                            b -1
-                                        )
-                                    )              //состовляем новую вариацию цепочки
-                                    TREE_OF_WAYS.add(NEW_CHAIN)           //добоваляем новую цепочку в список исходных
-                                }
-
-
-                            }
-                        }
-                        if (a - 1 >= 0 && b + 1<16) {
-
-                            if (FIELD[a - 1][b+1] == FIELD[lastx][lasty]  && Is_suitable_for_the_chain(a-1,b+1))        //если вершина того же цвета, что и исходная
-                            {
-                                Log.d("hhhh","zero")
-                                var flag: Boolean = true
-                                for (j in 0 until TREE_OF_WAYS[i].size) {
-                                    if (TREE_OF_WAYS[i][j] == Pair(
-                                            a - 1,
-                                            b + 1
-                                        )
-                                    )       //если  в цепочке была уже эта точка
-                                    {
-                                        flag = false
-                                    }
-                                }
-                                if (a - 1 == lastx && b+1 == lasty && counter > 2) {
-                                    flag = true
-                                }
-                                if (flag) {
-                                    var NEW_CHAIN: MutableList<Pair<Int, Int>> = TREE_OF_WAYS[i].toMutableList()
-                                    NEW_CHAIN.add(
-                                        Pair(
-                                            a - 1,
-                                            b + 1
-                                        )
-                                    )              //состовляем новую вариацию цепочки
-                                    TREE_OF_WAYS.add(NEW_CHAIN)           //добоваляем новую цепочку в список исходных
-                                }
-
-
-                            }
-                        }
-                        if (a + 1 <11 && b -1>=0) {
-
-                            if (FIELD[a + 1][b-1] == FIELD[lastx][lasty] && Is_suitable_for_the_chain(a+1,b-1))        //если вершина того же цвета, что и исходная
-                            {
-                                Log.d("hhhh","zero")
-                                var flag: Boolean = true
-                                for (j in 0 until TREE_OF_WAYS[i].size) {
-                                    if (TREE_OF_WAYS[i][j] == Pair(
-                                            a + 1,
-                                            b -1
-                                        )
-                                    )       //если  в цепочке была уже эта точка
-                                    {
-                                        flag = false
-                                    }
-                                }
-                                if (a + 1 == lastx && b-1 == lasty && counter > 2) {
-                                    flag = true
-                                }
-                                if (flag) {
-                                    var NEW_CHAIN: MutableList<Pair<Int, Int>> = TREE_OF_WAYS[i].toMutableList()
-                                    NEW_CHAIN.add(
-                                        Pair(
-                                            a + 1,
-                                            b -1
-                                        )
-                                    )              //состовляем новую вариацию цепочки
-                                    TREE_OF_WAYS.add(NEW_CHAIN)           //добоваляем новую цепочку в список исходных
-                                }
-
-
-                            }
-                        }
-                        if (a + 1 < 11 && b + 1 < 16) {
-
-                            if (FIELD[a + 1][b+1] == FIELD[lastx][lasty]  && Is_suitable_for_the_chain(a+1,b+1))        //если вершина того же цвета, что и исходная
-                            {
-                                Log.d("hhhh","zero")
-                                var flag: Boolean = true
-                                for (j in 0 until TREE_OF_WAYS[i].size) {
-                                    if (TREE_OF_WAYS[i][j] == Pair(
-                                            a + 1,
-                                            b + 1
-                                        )
-                                    )       //если  в цепочке была уже эта точка
-                                    {
-                                        flag = false
-                                    }
-                                }
-                                if (a + 1 == lastx && b+1 == lasty && counter > 2) {
-                                    flag = true
-                                }
-                                if (flag) {
-                                    var NEW_CHAIN: MutableList<Pair<Int, Int>> = TREE_OF_WAYS[i].toMutableList()
-                                    NEW_CHAIN.add(
-                                        Pair(
-                                            a + 1,
-                                            b + 1
-                                        )
-                                    )              //состовляем новую вариацию цепочки
-                                    TREE_OF_WAYS.add(NEW_CHAIN)           //добоваляем новую цепочку в список исходных
-                                }
-
-
-                            }
-                        }
 
                     }
                 }
+                y1+= step
             }
-            counter++
-            for(i in 0 until TREE_OF_WAYS.size)
-            {
-                if(TREE_OF_WAYS[0].size==1)
-                {
-                    TREE_OF_WAYS.removeAt(0)
-                }
-                else
-                {
-                    if(TREE_OF_WAYS[0][0]!=TREE_OF_WAYS[0][TREE_OF_WAYS[0].size-1] && TREE_OF_WAYS[0].size<counter)
-                    {
-                        TREE_OF_WAYS.removeAt(0)
-                    }
-                }
-            }
+            x1  += step
+            y1 = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())
         }
 
-        var s: String = " "
-        for(i in 0 until TREE_OF_WAYS.size)
-        {
-            for(j in 0 until TREE_OF_WAYS[i].size)
-            {
-                s+= "(" +TREE_OF_WAYS[i][j].first.toString()+ ", " + TREE_OF_WAYS[i][j].second.toString() + ") "
-            }
-            Log.d("Str",s)
-            s = " "
-        }
-        Log.d("Str","jojojojojojojojojojojojojojojojojoj")
-        Log.d("T_R",TREE_OF_WAYS.size.toString())
-        invalidate()
         return true
     }
 
