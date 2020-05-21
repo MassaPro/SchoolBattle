@@ -45,22 +45,11 @@ class NewGameActivity : AppCompatActivity() {
         init {
             onClickListener = View.OnClickListener { v ->
                 val item = v.tag as String
-                if (item == "StupidGame") {
-                    val intent = Intent(v.context, StupidGameActivity::class.java).apply {
+                val intent = Intent(v.context, StupidGameActivity::class.java).apply {
 
-                        putExtra("gameName", item)
-                    }
-                    v.context.startActivity(intent)
-                } else if (item == "XOGame") {
-                    val intent = Intent(v.context, StupidGameActivity::class.java).apply {
-
-                        putExtra("gameName", item)
-                    }
-                    v.context.startActivity(intent)
-                } else {
-                    //TODO()
+                    putExtra("gameName", item)
                 }
-
+                v.context.startActivity(intent)
             }
         }
 

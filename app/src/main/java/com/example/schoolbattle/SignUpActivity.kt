@@ -67,7 +67,7 @@ class SignUpActivity : AppCompatActivity() {
             }
 
             fun nextActivity() {
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, NavigatorActivity::class.java)
                 startActivity(intent)
                 val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
                 val editor = prefs.edit()

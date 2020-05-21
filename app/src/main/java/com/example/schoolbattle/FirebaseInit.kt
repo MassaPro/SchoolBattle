@@ -27,8 +27,10 @@ class RecyclerSet {
             Log.w("CCC", "HI")
             val intent = if (el.name.contains(" StupidGame")) {
                 Intent(currentContext, StupidGameActivityTwoPlayers::class.java)
-            } else {
+            } else if (el.name.contains(" XOGame")) {
                 Intent(currentContext, XOGameActivity::class.java)
+            } else {
+                Intent(currentContext, DotGameActivity::class.java)
             }
 
             intent.putExtra("opponentName", el.name)

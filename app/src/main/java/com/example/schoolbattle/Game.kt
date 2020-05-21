@@ -14,7 +14,7 @@ import kotlin.random.Random
 
 
 var GAMES: MutableList<Game> = mutableListOf()
-var CHOOSE_GAMES: MutableList<String> = mutableListOf("StupidGame", "XOGame")
+var CHOOSE_GAMES: MutableList<String> = mutableListOf("StupidGame", "XOGame", "DotGame")
 var currentContext: Context? = null
 
 class Game(val name: String = "", val type: String = "StupidGame", val text: String = "you VS") {

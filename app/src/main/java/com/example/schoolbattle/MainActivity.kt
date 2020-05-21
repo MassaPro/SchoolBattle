@@ -110,8 +110,12 @@ class MainActivity : Fragment() {
                     Intent(v.context, StupidGameActivityTwoPlayers::class.java).apply {
                         putExtra("opponentName", item.name)
                     }
-                } else {
+                } else if (item.name.contains("XOGame")) {
                     Intent(v.context, XOGameActivity::class.java).apply {
+                        putExtra("opponentName", item.name)
+                    }
+                } else {
+                    Intent(v.context, DotGameActivity::class.java).apply {
                         putExtra("opponentName", item.name)
                     }
                 }

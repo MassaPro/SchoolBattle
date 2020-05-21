@@ -35,7 +35,7 @@ class XOGameActivity : AppCompatActivity() {
         val yourName =
             getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "")
                 .toString()
-        var opponentsName_: String = intent.getStringExtra("opponentName").toString()
+        var opponentsName_: String = intent?.getStringExtra("opponentName").toString()
         var opponentsName = ""
         for (i in opponentsName_) {
             if (i == ' ') break

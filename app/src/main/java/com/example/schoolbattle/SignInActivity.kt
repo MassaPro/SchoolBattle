@@ -27,7 +27,7 @@ class SignInActivity : AppCompatActivity() {
         val username = prefs.getString("username", "")
 
         if (username != "" ) {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, NavigatorActivity::class.java)
             startActivity(intent)
         }
 
@@ -49,7 +49,7 @@ class SignInActivity : AppCompatActivity() {
             val password = passwordText.text.toString()
 
             fun startMainActivity() {
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, NavigatorActivity::class.java)
                 startActivity(intent)
                 val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
                 editor.putString("username", name)
