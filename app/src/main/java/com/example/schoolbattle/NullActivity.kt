@@ -15,7 +15,7 @@ class NullActivity : AppCompatActivity() {
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val username = prefs.getString("username", "")
         if (username != "" ) {
-            val intent = Intent(applicationContext, MainActivity::class.java)
+            val intent = Intent(applicationContext, NavigatorActivity::class.java)
             startActivity(intent)
             finish()
         } else {
