@@ -325,7 +325,7 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
         val width = getWidth().toFloat()
         val height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)
 
-        val advertising_line: Float = 600f
+        val advertising_line: Float = 5f
         val size_field_x: Int = 7
         val size_field_y: Int = 6
 
