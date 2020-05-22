@@ -32,5 +32,9 @@ class MainActivity : Activity() {
             val intent = Intent(this, Snake_menu::class.java)
             startActivity(intent)
         }
+        button_virus.setOnClickListener {
+            val intent = Intent(this, Virus_menu::class.java)
+            startActivity(intent)
+        }
     }
 }
