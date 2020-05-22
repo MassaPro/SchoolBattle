@@ -329,14 +329,14 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
         //TODO() take field from database
         canvas?.drawColor(Color.WHITE)
         val width = getWidth().toFloat()
-        val height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)
+        val height = getHeight().toFloat()
+        //ширина и высота экрана (от ширины в основном все зависит)
 
-        val advertising_line: Float = 5f
         val size_field_x: Int = 7
         val size_field_y: Int = 6
-
-
         val step: Float = width/size_field_x
+        val advertising_line: Float = (height - step * 6) / 2
+
         var k: Float = height-width-advertising_line + step
         for(i in 0 until size_field_x)
         {

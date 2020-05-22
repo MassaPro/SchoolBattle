@@ -115,7 +115,9 @@ class MainActivity : Fragment() {
                         putExtra("opponentName", item.name)
                     }
                 } else {
-                    Intent(v.context, DotGameActivity::class.java).apply {
+                    Intent(v.context, DotGameActivity::class
+
+                        .java).apply {
                         putExtra("opponentName", item.name)
                     }
                 }
