@@ -106,6 +106,7 @@ class XOGameActivity : AppCompatActivity() {
                 signature_canvas.invalidate()
                 var checkList = checkForWin()
                 if (checkList.size > 1 || (checkList.size == 1 && cnt == 42)) {
+                    signature_canvas.blocked = true
                     Toast.makeText(applicationContext,"${signature_canvas.FIELD[checkList.get(1)][checkList.get(2)]}", Toast.LENGTH_LONG).show()
                     var whoWins = 0
                     if (checkList.size > 1) {

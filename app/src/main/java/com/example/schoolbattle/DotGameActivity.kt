@@ -92,6 +92,7 @@ class DotGameActivity: AppCompatActivity() {
                 if (signature_canvas3.isFirstMove == (cnt % 2 == 0)) signature_canvas3.blocked = false
                 signature_canvas3.invalidate()
                 if (cnt > 20) {
+                    signature_canvas3.blocked = true
                     val res = "Тестовое состояние, игра заканчивается на 21й точке"
                     myRef.child("DotGames").child(if (opponentsName < yourName)
                         opponentsName + '_' + yourName else yourName + '_' + opponentsName
