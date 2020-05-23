@@ -19,8 +19,8 @@ class StupidGameActivity : AppCompatActivity() {
     private var eventListener: ValueEventListener? = null
     private var state = false
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onResume() {
+        super.onResume()
         setContentView(R.layout.activity_stupid_game)
         state = true
         StupidGame = this
@@ -31,6 +31,7 @@ class StupidGameActivity : AppCompatActivity() {
 
 
         button.setOnClickListener {
+            button.isEnabled = false
             Toast.makeText(this, "onCreate", Toast.LENGTH_LONG).show()
             is_pressed = true
             eventListener = myRef.addValueEventListener(object : ValueEventListener {
@@ -85,11 +86,11 @@ class StupidGameActivity : AppCompatActivity() {
         myRef.child(gameName + "Users").child(globalName.toString()).removeValue()
     }
 
-    override fun onResume() {
+    /*override fun onResume() {
         super.onResume()
         state = true
         StupidGame = this
         currentContext = this
         is_pressed = false
-    }
+    }*/
 }
