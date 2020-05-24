@@ -29,11 +29,11 @@ class StupidGameActivity : AppCompatActivity() {
         val globalName = prefs.getString("username", "")
         val gameName = intent?.getStringExtra("gameName").toString()
 
-
+        is_pressed = true
         button.setOnClickListener {
             button.isEnabled = false
             Toast.makeText(this, "onCreate", Toast.LENGTH_LONG).show()
-            is_pressed = true
+
             eventListener = myRef.addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
 

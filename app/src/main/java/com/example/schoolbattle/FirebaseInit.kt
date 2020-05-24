@@ -24,7 +24,6 @@ class RecyclerSet {
         }
         if (is_pressed) {
             is_pressed = false
-            Log.w("CCC", "HI")
             val intent = if (el.name.contains(" StupidGame")) {
                 Intent(currentContext, StupidGameActivityTwoPlayers::class.java)
             } else if (el.name.contains(" XOGame")) {
@@ -71,14 +70,12 @@ fun updateRecycler(username: String) {
                 gamesRecycler.adapter?.notifyDataSetChanged()
             }
             override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-                Log.w("KKK", p0.key)
                 gamesRecycler.adapter?.notifyDataSetChanged()
             }
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
                 recyclerSet.add(Game(p0.key.toString()))
             }
             override fun onChildRemoved(p0: DataSnapshot) {
-                Log.w("KKK", p0.key)
                 recyclerSet.erase(Game(p0.key.toString()))
             }
         })

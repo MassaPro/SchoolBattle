@@ -36,9 +36,12 @@ class ShowResult(activity: Activity) {
 
         val ng = dialog.findViewById(R.id.restart) as Button
         var eventListener: ValueEventListener? = null
+        is_pressed = true
+
         ng.setOnClickListener {
+            ng.isEnabled = false
             state = true
-            is_pressed = true
+
             eventListener = myRef.addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
 
