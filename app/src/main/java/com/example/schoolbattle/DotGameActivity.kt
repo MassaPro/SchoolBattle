@@ -88,7 +88,7 @@ class DotGameActivity: AppCompatActivity() {
                         }
                     }
                 }
-                signature_canvas3.red_or_blue = cnt % 2 + 1
+                signature_canvas3.red_or_blue = 2 - cnt % 2
                 if (signature_canvas3.isFirstMove == (cnt % 2 == 0)) signature_canvas3.blocked = false
                 signature_canvas3.invalidate()
                 if (cnt > 20) {
@@ -336,97 +336,7 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
             y  = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())
         }
 
-        p = find(2,a,16,11)
-        for(i in 0..size_field_x)
-        {
-            for(j in 0..size_field_y)
-            {
-                if(Pair(j,i) in p)
-                {
-                    if(i-1>=0 && j-1>=0)
-                    {
-                        if(Pair(j,i-1) in p && Pair(j-1,i) in p)
-                        {
-                            var X: Float =  indent + step*i
-                            var Y: Float = height - advertising_line - step*size_field_y + step*j
-                            var X1: Float = indent + step*i - step/3*2
-                            var X2: Float = indent + step*i - step/3
-                            var Y1: Float = height - advertising_line - step*size_field_y + step*j - step*2/3
-                            var Y2: Float = height - advertising_line - step*size_field_y + step*j - step/3
-                            canvas?.drawLine(X1,Y,X,Y1,shading_2)
-                            canvas?.drawLine(X2,Y,X,Y2,shading_2)
-                        }
-                    }
-                    if(i+1<11 && j-1>=0)
-                    {
-                        if(Pair(j,i+1) in p && Pair(j-1,i) in p)
-                        {
-                            var X: Float =  indent + step*i
-                            var X1: Float = indent + step*i + step/6
-                            var X2: Float = indent + step*i + step/3
-                            var X3: Float = indent + step*i + step/2
-                            var X4: Float = indent + step*i + step*2/3
-                            var X5: Float = indent + step*i + step*5/6
-
-                            var Y: Float = height - advertising_line - step*size_field_y + step*j
-                            var Y1: Float = height - advertising_line - step*size_field_y + step*j - step/6
-                            var Y2: Float = height - advertising_line - step*size_field_y + step*j - step/3
-                            var Y3: Float = height - advertising_line - step*size_field_y + step*j - step/2
-                            var Y4: Float = height - advertising_line - step*size_field_y + step*j - step*2/3
-                            var Y5: Float = height - advertising_line - step*size_field_y + step*j - step*5/6
-
-                            canvas?.drawLine(X,Y4,X1,Y5,shading_2)
-                            canvas?.drawLine(X,Y2,X2,Y4,shading_2)
-                            canvas?.drawLine(X,Y,X3,Y3,shading_2)
-                            canvas?.drawLine(X2,Y,X4,Y2,shading_2)
-                            canvas?.drawLine(X4,Y,X5,Y1,shading_2)
-
-                        }
-                    }
-                    if(i-1>=0 && j+1<16)
-                    {
-                        if(Pair(j,i-1) in p && Pair(j+1,i) in p)
-                        {
-                            var X: Float =  indent + step*i
-                            var X1: Float = indent + step*i - step/6
-                            var X2: Float = indent + step*i - step/3
-                            var X3: Float = indent + step*i - step/2
-                            var X4: Float = indent + step*i - step*2/3
-                            var X5: Float = indent + step*i - step*5/6
-
-                            var Y: Float = height - advertising_line - step*size_field_y + step*j
-                            var Y1: Float = height - advertising_line - step*size_field_y + step*j + step/6
-                            var Y2: Float = height - advertising_line - step*size_field_y + step*j + step/3
-                            var Y3: Float = height - advertising_line - step*size_field_y + step*j + step/2
-                            var Y4: Float = height - advertising_line - step*size_field_y + step*j + step*2/3
-                            var Y5: Float = height - advertising_line - step*size_field_y + step*j + step*5/6
-
-                            canvas?.drawLine(X,Y4,X1,Y5,shading_2)
-                            canvas?.drawLine(X,Y2,X2,Y4,shading_2)
-                            canvas?.drawLine(X,Y,X3,Y3,shading_2)
-                            canvas?.drawLine(X2,Y,X4,Y2,shading_2)
-                            canvas?.drawLine(X4,Y,X5,Y1,shading_2)
-
-                        }
-                    }
-                    if(i+1<11 && j+1<16)
-                    {
-                        if(Pair(j,i+1) in p && Pair(j+1,i) in p)
-                        {
-                            var X: Float =  indent + step*i
-                            var Y: Float = height - advertising_line - step*size_field_y + step*j
-                            var X1: Float = indent + step*i + step/3*2
-                            var X2: Float = indent + step*i + step/3
-                            var Y1: Float = height - advertising_line - step*size_field_y + step*j + step*2/3
-                            var Y2: Float = height - advertising_line - step*size_field_y + step*j + step/3
-                            canvas?.drawLine(X1,Y,X,Y1,shading_2)
-                            canvas?.drawLine(X2,Y,X,Y2,shading_2)
-
-                        }
-                    }
-                }
-            }
-        }
+        Log.w("YYA", a.toString())
         p = find(1,a,16,11)
         for(i in 0..size_field_x)
         {
@@ -518,7 +428,101 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
                 }
             }
         }
+        Log.w("YYB", a.toString())
+        p = find(2,a,16,11)
+        for(i in 0..size_field_x)
+        {
+            for(j in 0..size_field_y)
+            {
+                if(Pair(j,i) in p)
+                {
+                    if(i-1>=0 && j-1>=0)
+                    {
+                        if(Pair(j,i-1) in p && Pair(j-1,i) in p)
+                        {
+                            var X: Float =  indent + step*i
+                            var Y: Float = height - advertising_line - step*size_field_y + step*j
+                            var X1: Float = indent + step*i - step/3*2
+                            var X2: Float = indent + step*i - step/3
+                            var Y1: Float = height - advertising_line - step*size_field_y + step*j - step*2/3
+                            var Y2: Float = height - advertising_line - step*size_field_y + step*j - step/3
+                            canvas?.drawLine(X1,Y,X,Y1,shading_2)
+                            canvas?.drawLine(X2,Y,X,Y2,shading_2)
+                        }
+                    }
+                    if(i+1<11 && j-1>=0)
+                    {
+                        if(Pair(j,i+1) in p && Pair(j-1,i) in p)
+                        {
+                            var X: Float =  indent + step*i
+                            var X1: Float = indent + step*i + step/6
+                            var X2: Float = indent + step*i + step/3
+                            var X3: Float = indent + step*i + step/2
+                            var X4: Float = indent + step*i + step*2/3
+                            var X5: Float = indent + step*i + step*5/6
 
+                            var Y: Float = height - advertising_line - step*size_field_y + step*j
+                            var Y1: Float = height - advertising_line - step*size_field_y + step*j - step/6
+                            var Y2: Float = height - advertising_line - step*size_field_y + step*j - step/3
+                            var Y3: Float = height - advertising_line - step*size_field_y + step*j - step/2
+                            var Y4: Float = height - advertising_line - step*size_field_y + step*j - step*2/3
+                            var Y5: Float = height - advertising_line - step*size_field_y + step*j - step*5/6
+
+                            canvas?.drawLine(X,Y4,X1,Y5,shading_2)
+                            canvas?.drawLine(X,Y2,X2,Y4,shading_2)
+                            canvas?.drawLine(X,Y,X3,Y3,shading_2)
+                            canvas?.drawLine(X2,Y,X4,Y2,shading_2)
+                            canvas?.drawLine(X4,Y,X5,Y1,shading_2)
+
+                        }
+                    }
+                    if(i-1>=0 && j+1<16)
+                    {
+                        if(Pair(j,i-1) in p && Pair(j+1,i) in p)
+                        {
+                            var X: Float =  indent + step*i
+                            var X1: Float = indent + step*i - step/6
+                            var X2: Float = indent + step*i - step/3
+                            var X3: Float = indent + step*i - step/2
+                            var X4: Float = indent + step*i - step*2/3
+                            var X5: Float = indent + step*i - step*5/6
+
+                            var Y: Float = height - advertising_line - step*size_field_y + step*j
+                            var Y1: Float = height - advertising_line - step*size_field_y + step*j + step/6
+                            var Y2: Float = height - advertising_line - step*size_field_y + step*j + step/3
+                            var Y3: Float = height - advertising_line - step*size_field_y + step*j + step/2
+                            var Y4: Float = height - advertising_line - step*size_field_y + step*j + step*2/3
+                            var Y5: Float = height - advertising_line - step*size_field_y + step*j + step*5/6
+
+                            canvas?.drawLine(X,Y4,X1,Y5,shading_2)
+                            canvas?.drawLine(X,Y2,X2,Y4,shading_2)
+                            canvas?.drawLine(X,Y,X3,Y3,shading_2)
+                            canvas?.drawLine(X2,Y,X4,Y2,shading_2)
+                            canvas?.drawLine(X4,Y,X5,Y1,shading_2)
+
+                        }
+                    }
+                    if(i+1<11 && j+1<16)
+                    {
+                        if(Pair(j,i+1) in p && Pair(j+1,i) in p)
+                        {
+                            var X: Float =  indent + step*i
+                            var Y: Float = height - advertising_line - step*size_field_y + step*j
+                            var X1: Float = indent + step*i + step/3*2
+                            var X2: Float = indent + step*i + step/3
+                            var Y1: Float = height - advertising_line - step*size_field_y + step*j + step*2/3
+                            var Y2: Float = height - advertising_line - step*size_field_y + step*j + step/3
+                            canvas?.drawLine(X1,Y,X,Y1,shading_2)
+                            canvas?.drawLine(X2,Y,X,Y2,shading_2)
+
+                        }
+                    }
+                }
+            }
+        }
+
+
+        Log.w("YYC", a.toString())
 
 
         for(i in 0..9)    //горизонтальные ребра

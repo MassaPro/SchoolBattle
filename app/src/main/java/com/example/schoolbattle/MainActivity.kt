@@ -50,31 +50,9 @@ class MainActivity : Fragment() {
        // (activity as AppCompatActivity).setSupportActionBar(findViewById(R.id.my_toolbar))
         //setSupportActionBar(findViewById(R.id.my_toolbar))
 
-        /*val navView: BottomNavigationView = findViewById(R.id.nav_view)
-        navView.selectedItemId = R.id.navigation_home
-        navView.setOnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.navigation_home -> {
-                    // put your code here
-                    return@setOnNavigationItemSelectedListener true
-                }
-                R.id.navigation_dashboard -> {
-                    val intent = Intent(activity, SettingsActivity::class.java)
-                    startActivity(intent)
-                    //overridePendingTransition(0, 0)
-                    // put your code here
-                    return@setOnNavigationItemSelectedListener true
-                }
-            }
-            false
-        }*/
         val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val globalName = prefs?.getString("username", "")
         toolbarName.text = globalName
-        updateRecycler(globalName.toString())
-
-        setupRecyclerView(item_list)
-        gamesRecycler = item_list
 
         logOut.setOnClickListener {
             val editor = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)?.edit()
@@ -87,67 +65,24 @@ class MainActivity : Fragment() {
             startActivity(intent)
             activity?.finish()
         }
-
         newGameButton.setOnClickListener {
             val intent = Intent(activity, NewGameActivity::class.java)
+            //activity?.overridePendingTransition(0, 0)
+            intent.putExtra("playType", 1)
+            startActivity(intent)
+
+        }
+        oneDevice.setOnClickListener {
+            val intent = Intent(activity, NewGameActivity::class.java)
+            //activity?.overridePendingTransition(0, 0)
+            intent.putExtra("playType", 2)
             startActivity(intent)
         }
-    }
-
-    private fun setupRecyclerView(recyclerView: RecyclerView) {
-        recyclerView.adapter = SimpleItemRecyclerViewAdapter(GAMES)
-    }
-
-    class SimpleItemRecyclerViewAdapter(private val ITEMS: MutableList<Game>):
-        RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
-
-        private val onClickListener: View.OnClickListener
-
-        init {
-            onClickListener = View.OnClickListener { v ->
-                val item = v.tag as Game
-                val intent = if (item.name.contains("StupidGame")) {
-                    Intent(v.context, StupidGameActivityTwoPlayers::class.java).apply {
-                        putExtra("opponentName", item.name)
-                    }
-                } else if (item.name.contains("XOGame")) {
-                    Intent(v.context, XOGameActivity::class.java).apply {
-                        putExtra("opponentName", item.name)
-                    }
-                } else {
-                    Intent(v.context, DotGameActivity::class
-
-                        .java).apply {
-                        putExtra("opponentName", item.name)
-                    }
-                }
-
-                v.context.startActivity(intent)
-            }
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.activity_game_item, parent, false)
-            return ViewHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.idView.text = ITEMS[position].type + ": You vs"
-            holder.contentView.text = ITEMS[position].name
-            with(holder.itemView) {
-                tag = ITEMS[position]
-                setOnClickListener(onClickListener)
-            }
-        }
-
-        override fun getItemCount(): Int {
-            return ITEMS.size
-        }
-
-        inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val idView: TextView = view.id_text
-            val contentView: TextView = view.content
+        playWithComp.setOnClickListener {
+            //activity?.overridePendingTransition(0, 0)
+            val intent = Intent(activity, NewGameActivity::class.java)
+            intent.putExtra("playType", 3)
+            startActivity(intent)
         }
     }
 }

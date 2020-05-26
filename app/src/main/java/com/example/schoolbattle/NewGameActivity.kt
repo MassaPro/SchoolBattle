@@ -2,6 +2,8 @@ package com.example.schoolbattle
 
 import android.app.Activity
 import android.content.Intent
+import android.content.Intent.getIntent
+import android.content.Intent.getIntentOld
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,7 +23,7 @@ class NewGameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_game)
         NewGame = this
-        setupRecyclerView(game_list)
+        setupRecyclerView(game_list, intent.getIntExtra("playType", -1))
 
 
 
@@ -33,11 +35,11 @@ class NewGameActivity : AppCompatActivity() {
         //finish()
     }
 
-    private fun setupRecyclerView(recyclerView: RecyclerView) {
-        recyclerView.adapter = NewGameActivity.SimpleItemRecyclerViewAdapter(CHOOSE_GAMES)
+    private fun setupRecyclerView(recyclerView: RecyclerView, type: Int) {
+        recyclerView.adapter = NewGameActivity.SimpleItemRecyclerViewAdapter(CHOOSE_GAMES, type)
     }
 
-    class SimpleItemRecyclerViewAdapter(private val ITEMS: MutableList<String>):
+    class SimpleItemRecyclerViewAdapter(private val ITEMS: MutableList<String>, type: Int):
         RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
         private val onClickListener: View.OnClickListener
@@ -45,11 +47,25 @@ class NewGameActivity : AppCompatActivity() {
         init {
             onClickListener = View.OnClickListener { v ->
                 val item = v.tag as String
-                val intent = Intent(v.context, StupidGameActivity::class.java).apply {
 
-                    putExtra("gameName", item)
+                if (type == 1) {
+                    val intent = Intent(v.context, StupidGameActivity::class.java).apply {
+                        putExtra("gameName", item)
+                    }
+                    v.context.startActivity(intent)
                 }
-                v.context.startActivity(intent)
+                if (type == 2) {
+                    val intent = Intent(v.context, OneDevicePlayActivity::class.java).apply {
+                        putExtra("gameName", item)
+                    }
+                    v.context.startActivity(intent)
+                }
+                if (type == 3) {
+                    val intent = Intent(v.context, PlayWithComputerActivity::class.java).apply {
+                        putExtra("gameName", item)
+                    }
+                    v.context.startActivity(intent)
+                }
             }
         }
 

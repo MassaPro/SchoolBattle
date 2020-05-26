@@ -40,40 +40,13 @@ android:background="@android:color/white">
         android:id="@+id/newGameButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_green_light"
-        android:text="PLAY"
+        android:text="Случайный игрок"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
-        app:layout_constraintVertical_bias="0" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/item_list"
-        android:name="ru.startandroid.develop.myapplication.ItemListFragment"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layoutManager="LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text"
-        tools:context=".MainActivity"
-        tools:listitem="@layout/activity_game_item" />
-
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
-        android:text="Games"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/item_list"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newGameButton"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/searchView"
+        app:layout_constraintVertical_bias="0.036" />
 
     <Button
         android:id="@+id/toolbarName"
@@ -104,6 +77,49 @@ android:background="@android:color/white">
         app:layout_constraintEnd_toEndOf="@+id/my_toolbar"
         app:layout_constraintStart_toEndOf="@+id/toolbarName"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/oneDevice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Игра на одном устройстве"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newGameButton"
+        app:layout_constraintVertical_bias="0.036" />
+
+    <Button
+        android:id="@+id/playWithComp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="игра с компьютером"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/oneDevice"
+        app:layout_constraintVertical_bias="0.036" />
+
+    <TextView
+        android:id="@+id/searchView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:alwaysDrawnWithCache="true"
+        android:clickable="false"
+        android:drawableLeft="@drawable/ic_search_black_24dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_horizontal"
+        android:hint="десь будет потом найти соперника"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
+        app:layout_constraintVertical_bias="0.024"
+        app:showAsAction="ifRoom|collapseActionView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
