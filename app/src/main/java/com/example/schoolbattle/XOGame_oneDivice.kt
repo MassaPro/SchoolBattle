@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
 
 
 class XOGame_oneDivice : AppCompatActivity() {
-    private var dialog: ShowResult? = null
+    private var dialog: Show_Result_one_Device? = null
 
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
@@ -22,14 +22,14 @@ class XOGame_oneDivice : AppCompatActivity() {
         signature_canvas_xog_one_device.setOnClickListener{
             if(signature_canvas_xog_one_device.EXODUS == 1)
             {
-                dialog = ShowResult(this@XOGame_oneDivice)
-                dialog?.showResult_one_device("КРЕСТИКИ ПОБЕДИЛИ","XOGame")
+                dialog = Show_Result_one_Device(this@XOGame_oneDivice)
+                dialog?.showResult_one_device("КРЕСТИКИ ПОБЕДИЛИ","XOGame",this)
 
             }
             if(signature_canvas_xog_one_device.EXODUS == 2)
             {
-                dialog = ShowResult(this@XOGame_oneDivice)
-                dialog?.showResult_one_device("НОЛИКИ ПОБЕДИЛИ","XOGame")
+                dialog = Show_Result_one_Device(this@XOGame_oneDivice)
+                dialog?.showResult_one_device("НОЛИКИ ПОБЕДИЛИ","XOGame",this)
             }
         }
     }
