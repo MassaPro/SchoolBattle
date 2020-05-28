@@ -4,9 +4,12 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -14,7 +17,7 @@ import kotlin.random.Random
 
 
 var GAMES: MutableList<Game> = mutableListOf()
-var CHOOSE_GAMES: MutableList<String> = mutableListOf("StupidGame", "XOGame", "DotGame")
+var CHOOSE_GAMES: MutableList<String> = mutableListOf("StupidGame", "XOGame", "DotGame","Corners")
 var currentContext: Context? = null
 
 class Game(val name: String = "", val type: String = "StupidGame", val text: String = "you VS") {
@@ -23,10 +26,14 @@ class Game(val name: String = "", val type: String = "StupidGame", val text: Str
     }
 }
 
-class ShowResult(activity: Activity) {
+class ShowResult(activity: Activity)  : AppCompatActivity(){
 
     private val dialog = Dialog(activity)
     private var state = false
+
+    private val dialog_one_device = Dialog(activity)
+
+    var exodus : String = "a"
 
     fun showResult(result: String, gameType: String, globalName: String) {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -109,7 +116,27 @@ class ShowResult(activity: Activity) {
         dialog.show()
     }
 
+    fun showResult_one_device(result: String,Game_Type: String) {
+        dialog_one_device.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog_one_device.setCancelable(false)
+        dialog_one_device.setCanceledOnTouchOutside(true)
+        dialog_one_device.setContentView(R.layout.activity_game_over_one_device)
+
+        val button_revanshe = dialog_one_device.findViewById(R.id.restart_one_device) as Button
+        button_revanshe.setOnClickListener{
+            if(Game_Type == "XOGame")
+            {
+                val intent = Intent(this, XOGame_oneDivice::class.java)
+                startActivity(intent)
+            }
+        }
+        val body = dialog_one_device.findViewById(R.id.resultText_one_device) as TextView
+        body.text = result
+        dialog_one_device.show()
+    }
     fun delete() {
         dialog.dismiss()
+        dialog_one_device.dismiss()
     }
 }
+

@@ -65,7 +65,8 @@ class GameListActivity : Fragment() {
                     Intent(v.context, XOGameActivity::class.java).apply {
                         putExtra("opponentName", item.name)
                     }
-                } else {
+                }
+                else {
                     Intent(v.context, DotGameActivity::class
 
                         .java).apply {
