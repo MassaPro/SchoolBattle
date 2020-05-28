@@ -65,9 +65,13 @@ class GameListActivity : Fragment() {
                     Intent(v.context, XOGameActivity::class.java).apply {
                         putExtra("opponentName", item.name)
                     }
-                } else {
+                } else if (item.name.contains("DotGame")){
                     Intent(v.context, DotGameActivity::class
-
+                        .java).apply {
+                        putExtra("opponentName", item.name)
+                    }
+                } else {
+                    Intent(v.context, StupidGameActivity::class
                         .java).apply {
                         putExtra("opponentName", item.name)
                     }

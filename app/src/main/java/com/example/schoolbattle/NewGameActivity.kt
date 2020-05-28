@@ -23,7 +23,7 @@ class NewGameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_game)
         NewGame = this
-        setupRecyclerView(game_list, intent.getIntExtra("playType", -1))
+        setupRecyclerView(game_list, intent.getIntExtra("playType", -1), this)
 
 
 
@@ -35,11 +35,11 @@ class NewGameActivity : AppCompatActivity() {
         //finish()
     }
 
-    private fun setupRecyclerView(recyclerView: RecyclerView, type: Int) {
-        recyclerView.adapter = NewGameActivity.SimpleItemRecyclerViewAdapter(CHOOSE_GAMES, type)
+    private fun setupRecyclerView(recyclerView: RecyclerView, type: Int, activity: Activity) {
+        recyclerView.adapter = NewGameActivity.SimpleItemRecyclerViewAdapter(CHOOSE_GAMES, type, activity)
     }
 
-    class SimpleItemRecyclerViewAdapter(private val ITEMS: MutableList<String>, type: Int):
+    class SimpleItemRecyclerViewAdapter(private val ITEMS: MutableList<String>, type: Int, activity: Activity):
         RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
         private val onClickListener: View.OnClickListener
@@ -53,18 +53,21 @@ class NewGameActivity : AppCompatActivity() {
                         putExtra("gameName", item)
                     }
                     v.context.startActivity(intent)
+                    activity.overridePendingTransition(0 , 0)
                 }
                 if (type == 2) {
                     val intent = Intent(v.context, OneDevicePlayActivity::class.java).apply {
                         putExtra("gameName", item)
                     }
                     v.context.startActivity(intent)
+                    activity.overridePendingTransition(0 , 0)
                 }
                 if (type == 3) {
                     val intent = Intent(v.context, PlayWithComputerActivity::class.java).apply {
                         putExtra("gameName", item)
                     }
                     v.context.startActivity(intent)
+                    activity.overridePendingTransition(0 , 0)
                 }
             }
         }
@@ -92,4 +95,5 @@ class NewGameActivity : AppCompatActivity() {
         }
     }
 }
+
 

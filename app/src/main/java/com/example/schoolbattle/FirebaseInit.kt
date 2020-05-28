@@ -28,8 +28,10 @@ class RecyclerSet {
                 Intent(currentContext, StupidGameActivityTwoPlayers::class.java)
             } else if (el.name.contains(" XOGame")) {
                 Intent(currentContext, XOGameActivity::class.java)
-            } else {
+            } else if (el.name.contains("DotGame")){
                 Intent(currentContext, DotGameActivity::class.java)
+            } else {
+                Intent(currentContext, StupidGameActivity::class.java)
             }
 
             intent.putExtra("opponentName", el.name)
