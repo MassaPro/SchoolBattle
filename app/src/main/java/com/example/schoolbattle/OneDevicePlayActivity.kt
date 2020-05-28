@@ -1,6 +1,7 @@
 package com.example.schoolbattle
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
@@ -14,5 +15,13 @@ class OneDevicePlayActivity : AppCompatActivity() {
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val yourName = prefs.getString("username", "") // имя пользователя
         val gameType = intent.getStringExtra("gameName") // тип игры
+
+        if(gameType == "XOGame")
+        {
+            val intent = Intent(this,XOGame_oneDivice::class.java)
+            startActivity(intent)
+        }
+
+
     }
 }
