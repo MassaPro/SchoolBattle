@@ -42,6 +42,12 @@ class OneDevicePlayActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+        if(gameType == "BoxGame")
+        {
+            val intent = Intent(this,BoxGameOneDivice::class.java)
+            startActivity(intent)
+            finish()
+        }
 
 
 
