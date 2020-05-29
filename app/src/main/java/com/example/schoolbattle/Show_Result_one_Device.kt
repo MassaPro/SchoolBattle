@@ -25,7 +25,23 @@ class Show_Result_one_Device(activity: Activity) {
                 val intent = Intent(type_activity, XOGame_oneDivice::class.java)
                 type_activity.startActivity(intent)
             }
+            if(Game_Type == "AngleGame")
+            {
+                val intent = Intent(type_activity,ConersOneDevice::class.java)
+                type_activity.startActivity(intent)
+            }
+            if(Game_Type == "DotGame")
+            {
+                val intent = Intent(type_activity,DotGameOneDivice::class.java)
+                type_activity.startActivity(intent)
+            }
+            if(Game_Type == "SnakeGame")
+            {
+                val intent = Intent(type_activity,SnakeGameOneDivice::class.java)
+                type_activity.startActivity(intent)
+            }
         }
+
         val body = dialog_one_device.findViewById(R.id.resultText_one_device) as TextView
         body.text = result
         dialog_one_device.show()

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
+
+    <com.example.schoolbattle.CanvasView_Dots_one_divice
+            android:id="@+id/signature_canvas_dots_one_divice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF" />
+    <Button
+        android:id="@+id/comback_dots_one_divice"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Вернуть ход назад" />
+</FrameLayout>

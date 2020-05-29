@@ -18,6 +18,7 @@
         app:layout_constraintVertical_bias="0.225">
 
 
+
         <TextView
             android:id="@+id/resultText_one_device"
             android:layout_width="wrap_content"
@@ -31,16 +32,15 @@
 
         <Button
             android:id="@+id/restart_one_device"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="87dp"
+            android:layout_height="37dp"
             android:background="#76FF03"
             android:text="Play Again"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.548"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.832" />
+            app:layout_constraintVertical_bias="0.869" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
