@@ -12,6 +12,7 @@ import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_coners_one_device.*
 import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
+import kotlin.math.E
 
 class ConersOneDevice : AppCompatActivity() {
     private var dialog: Show_Result_one_Device? = null
@@ -311,21 +312,30 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
 
     }
 
-
+    var blocked : Boolean = false
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        var dialog: Show_Result_one_Device? = null
-        EXODUS = chek_win()
-        if(EXODUS == 2)
+        if(chek_win()<=0)
         {
-            dialog = Show_Result_one_Device(activity)
-            dialog?.showResult_one_device("СЕРЫЕ ПОБЕДИЛИ","AngleGame",activity)
+            blocked = false
+        }
+        if(chek_win() >0 && event!!.getAction() == MotionEvent.ACTION_UP && blocked)
+        {
+            blocked=!blocked
             return true
         }
-        if(EXODUS == 1)
-        {
-            dialog = Show_Result_one_Device(activity)
-            dialog?.showResult_one_device("ЧЕРНЫЕ ПОБЕДИЛИ","AngleGame",activity)
-            return true
+        var dialog: Show_Result_one_Device? = null
+
+        if(chek_win()>0 && event!!.getAction()  == MotionEvent.ACTION_UP && !blocked) {
+            if (chek_win() == 2) {
+                dialog = Show_Result_one_Device(activity)
+                dialog?.showResult_one_device("СЕРЫЕ ПОБЕДИЛИ", "AngleGame", activity)
+                return true
+            }
+            if (chek_win() == 1) {
+                dialog = Show_Result_one_Device(activity)
+                dialog?.showResult_one_device("ЧЕРНЫЕ ПОБЕДИЛИ", "AngleGame", activity)
+                return true
+            }
         }
         circlex = event!!.x
         circley = event!!.y

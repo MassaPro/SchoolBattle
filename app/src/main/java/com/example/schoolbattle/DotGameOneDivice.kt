@@ -709,12 +709,21 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
     }
 
 
+    var blocked : Boolean = false
     override fun onTouchEvent(event: MotionEvent?): Boolean {
 
         Log.w("kolobok",check_win().toString())
-        if(check_win() >0)
+        if(check_win()<=0)
         {
-
+            blocked = false
+        }
+        if(check_win() >0 && event!!.getAction() == MotionEvent.ACTION_UP && blocked)
+        {
+            blocked=!blocked
+        }
+        if(check_win() >0 && event!!.getAction()  == MotionEvent.ACTION_UP && !blocked)
+        {
+            blocked = !blocked
             var dialog: Show_Result_one_Device? = null
             dialog = Show_Result_one_Device(activity)
             if(check_win()==1)
@@ -729,7 +738,9 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
             {
                 dialog?.showResult_one_device("НИЧЬЯ","DotGame",activity)
             }
+            return true
         }
+
 
 
         Is_defined_TREE_OF_WAYS = true

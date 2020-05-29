@@ -48,7 +48,12 @@ class OneDevicePlayActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
+        if(gameType == "VirusGame")
+        {
+            val intent = Intent(this,VirusOneDivice::class.java)
+            startActivity(intent)
+            finish()
+        }
 
 
     }
