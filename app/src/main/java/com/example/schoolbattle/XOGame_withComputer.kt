@@ -128,14 +128,14 @@ class CanvasView_xog_with_computer(context: Context, attrs: AttributeSet?) : Vie
         return y*step + height1 - size_field_y1*step - advertising_line_1
     }
     fun checkForWin_another_fun(): MutableList<Int> {
-        val list_x = mutableListOf(1, 1, 0, -1)
-        val list_y = mutableListOf(0, 1, 1, 1)
+        var list_x: MutableList<Int> = mutableListOf(1, 1, 1, 0, -1, -1, -1, 0)
+        var list_y: MutableList<Int> = mutableListOf(-1, 0, 1, 1, 1, 0, -1, -1)
 
         var ans = mutableListOf(0)
         for (i in 0..6) {
             for (j in 0..5) {
                 if (FIELD[i][j] != 0) {
-                    for (k in 0..3) {
+                    for (k in 0..7) {
                         var fl = 0
                         for (pos in 0..2) {
                             //Log.w("TAG", "$i ${list_x[k]} $pos")
@@ -319,20 +319,18 @@ class CanvasView_xog_with_computer(context: Context, attrs: AttributeSet?) : Vie
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         super.onTouchEvent(event)
-        if(checkForWin_another_fun().size==9)
+        /*if(checkForWin_another_fun().size==9)
         {
             var counter: Int = 1
             blocked = true
-            if(FIELD[checkForWin_another_fun()[counter]][checkForWin_another_fun()[counter+1]] == 1)
-            {
+            if(FIELD[checkForWin_another_fun()[counter]][checkForWin_another_fun()[counter+1]] == 1) {
                 EXODUS = 1
             }
-            else
-            {
+            else {
                 EXODUS = 2
             }
 
-        }
+        }*/
         if(blocked)
         {
             return true
@@ -377,53 +375,36 @@ class CanvasView_xog_with_computer(context: Context, attrs: AttributeSet?) : Vie
                     cross_or_nul = "cross"
                 }
 
-                var find_x = 0
-                var find_y = 0
-                var fla = 0
-                var list_x: MutableList<Int> = mutableListOf(1, 1, 1, 0, -1, -1, -1, 0)
-                var list_y: MutableList<Int> = mutableListOf(-1, 0, 1, 1, 1, 0, -1, -1)
+                invalidate()
+                if (checkForWin_another_fun().size != 9) {
 
-                fun if_fla_is_1() {
-                    FIELD[find_x][find_y] = 2
-                    val prefs =
-                        context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
-                    var data_from_memory = prefs.getString("xog_with_computer", "")
-                    data_from_memory += find_x.toString()
-                    data_from_memory += find_y.toString()
-                    val editor =
-                        context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
-                            .edit()
-                    editor.putString("xog_with_computer", data_from_memory)
-                    editor.apply()
-                    cross_or_nul = "cross"
-                }
+                    var find_x = 0
+                    var find_y = 0
+                    var fla = 0
+                    var list_x: MutableList<Int> = mutableListOf(1, 1, 1, 0, -1, -1, -1, 0)
+                    var list_y: MutableList<Int> = mutableListOf(-1, 0, 1, 1, 1, 0, -1, -1)
 
-
-                for (j in 5 downTo 0) {
-                    for (i in 0..6) {
-                        if (FIELD[i][j] == 0 && (j == 5 || FIELD[i][j + 1] != 0)) {
-                            FIELD[i][j] = 2
-                            if(checkForWin_another_fun().size==9) {
-                                FIELD[i][j] = 0
-                                find_x = i
-                                find_y = j
-                                fla = 1
-                                break
-                            }
-                            FIELD[i][j] = 0
-                        }
+                    fun if_fla_is_1() {
+                        FIELD[find_x][find_y] = 2
+                        val prefs =
+                            context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                        var data_from_memory = prefs.getString("xog_with_computer", "")
+                        data_from_memory += find_x.toString()
+                        data_from_memory += find_y.toString()
+                        val editor =
+                            context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                                .edit()
+                        editor.putString("xog_with_computer", data_from_memory)
+                        editor.apply()
+                        cross_or_nul = "cross"
                     }
-                    if (fla == 1)
-                        break
-                }
 
 
-                if (fla == 0) {
                     for (j in 5 downTo 0) {
                         for (i in 0..6) {
                             if (FIELD[i][j] == 0 && (j == 5 || FIELD[i][j + 1] != 0)) {
-                                FIELD[i][j] = 1
-                                if(checkForWin_another_fun().size==9) {
+                                FIELD[i][j] = 2
+                                if (checkForWin_another_fun().size == 9) {
                                     FIELD[i][j] = 0
                                     find_x = i
                                     find_y = j
@@ -436,7 +417,27 @@ class CanvasView_xog_with_computer(context: Context, attrs: AttributeSet?) : Vie
                         if (fla == 1)
                             break
                     }
-                    /*for (j in 5 downTo 0) {
+
+
+                    if (fla == 0) {
+                        for (j in 5 downTo 0) {
+                            for (i in 0..6) {
+                                if (FIELD[i][j] == 0 && (j == 5 || FIELD[i][j + 1] != 0)) {
+                                    FIELD[i][j] = 1
+                                    if (checkForWin_another_fun().size == 9) {
+                                        FIELD[i][j] = 0
+                                        find_x = i
+                                        find_y = j
+                                        fla = 1
+                                        break
+                                    }
+                                    FIELD[i][j] = 0
+                                }
+                            }
+                            if (fla == 1)
+                                break
+                        }
+                        /*for (j in 5 downTo 0) {
                         for (i in 0..6) {
                             if (FIELD[i][j] == 0 && (j == 5 || FIELD[i][j + 1] != 0)) {
                                 for (at in 0..7) {
@@ -462,61 +463,64 @@ class CanvasView_xog_with_computer(context: Context, attrs: AttributeSet?) : Vie
                         if (fla == 1)
                             break
                     }*/
-                    if (fla == 0) {
-                        for (j in 5 downTo 0) {
-                            for (i in 0..6) {
-                                if (FIELD[i][j] == 0 && (j == 5 || FIELD[i][j + 1] != 0)) {
-                                    for (at in 0..7) {
-                                        Log.w("TAG", "$j $i $at")
-                                        var fl = 0
-                                        for (k in 1..2) {
-                                            if (FIELD[(i + k * list_x[at] + 7) % 7][(j + k * list_y[at] + 6) % 6] != 2)
-                                                fl = 1
-                                        }
-                                        if (fl == 0) {
-                                            find_x = i
-                                            find_y = j
-                                            fla = 1
-                                            break
-                                        }
-                                    }
-                                    if (fla == 1) {
-                                        break
-                                    }
-                                }
-                            }
-                            if (fla == 1)
-                                break
-                        }
                         if (fla == 0) {
                             for (j in 5 downTo 0) {
                                 for (i in 0..6) {
-                                    if (FIELD[i][j] == 0) {
-                                        FIELD[i][j] = 2
-                                        val prefs =
-                                            context.getSharedPreferences(
-                                                "UserData",
-                                                Context.MODE_PRIVATE
-                                            )
-                                        var data_from_memory =
-                                            prefs.getString("xog_with_computer", "")
-                                        data_from_memory += i.toString()
-                                        data_from_memory += j.toString()
-                                        val editor =
-                                            context.getSharedPreferences(
-                                                "UserData",
-                                                Context.MODE_PRIVATE
-                                            )
-                                                .edit()
-                                        editor.putString("xog_with_computer", data_from_memory)
-                                        editor.apply()
-                                        fla = 1
-                                        cross_or_nul = "cross"
-                                        break
+                                    if (FIELD[i][j] == 0 && (j == 5 || FIELD[i][j + 1] != 0)) {
+                                        for (at in 0..7) {
+                                            Log.w("TAG", "$j $i $at")
+                                            var fl = 0
+                                            for (k in 1..2) {
+                                                if (FIELD[(i + k * list_x[at] + 7) % 7][(j + k * list_y[at] + 6) % 6] != 2)
+                                                    fl = 1
+                                            }
+                                            if (fl == 0) {
+                                                find_x = i
+                                                find_y = j
+                                                fla = 1
+                                                break
+                                            }
+                                        }
+                                        if (fla == 1) {
+                                            break
+                                        }
                                     }
                                 }
                                 if (fla == 1)
                                     break
+                            }
+                            if (fla == 0) {
+                                for (j in 5 downTo 0) {
+                                    for (i in 0..6) {
+                                        if (FIELD[i][j] == 0) {
+                                            FIELD[i][j] = 2
+                                            val prefs =
+                                                context.getSharedPreferences(
+                                                    "UserData",
+                                                    Context.MODE_PRIVATE
+                                                )
+                                            var data_from_memory =
+                                                prefs.getString("xog_with_computer", "")
+                                            data_from_memory += i.toString()
+                                            data_from_memory += j.toString()
+                                            val editor =
+                                                context.getSharedPreferences(
+                                                    "UserData",
+                                                    Context.MODE_PRIVATE
+                                                )
+                                                    .edit()
+                                            editor.putString("xog_with_computer", data_from_memory)
+                                            editor.apply()
+                                            fla = 1
+                                            cross_or_nul = "cross"
+                                            break
+                                        }
+                                    }
+                                    if (fla == 1)
+                                        break
+                                }
+                            } else {
+                                if_fla_is_1()
                             }
                         } else {
                             if_fla_is_1()
@@ -524,8 +528,6 @@ class CanvasView_xog_with_computer(context: Context, attrs: AttributeSet?) : Vie
                     } else {
                         if_fla_is_1()
                     }
-                } else {
-                    if_fla_is_1()
                 }
 
 
