@@ -297,6 +297,11 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
             }
 
         }
+        else
+        {
+            EXODUS = 0
+            blocked = false
+        }
         if(blocked)
         {
             return true

@@ -9,10 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".SnakeGameOneDivice"></activity>
+        <activity android:name=".VirusOneDivice"></activity>
+        <activity android:name=".BoxGameOneDivice" />
+        <activity android:name=".SnakeGameOneDivice" />
         <activity android:name=".DotGameOneDivice" />
         <activity android:name=".ConersOneDevice" />
-        <activity android:name=".Show_Result_with_Computer"></activity>
+        <activity android:name=".Show_Result_with_Computer" />
         <activity android:name=".XOGame_withComputer" />
         <activity android:name=".Corners_one_device_activity" />
         <activity android:name=".XOGame_oneDivice" />

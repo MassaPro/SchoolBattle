@@ -42,7 +42,18 @@ class OneDevicePlayActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
+        if(gameType == "BoxGame")
+        {
+            val intent = Intent(this,BoxGameOneDivice::class.java)
+            startActivity(intent)
+            finish()
+        }
+        if(gameType == "VirusGame")
+        {
+            val intent = Intent(this,VirusOneDivice::class.java)
+            startActivity(intent)
+            finish()
+        }
 
 
     }
