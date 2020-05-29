@@ -20,7 +20,29 @@ class OneDevicePlayActivity : AppCompatActivity() {
         {
             val intent = Intent(this,XOGame_oneDivice::class.java)
             startActivity(intent)
+            finish()
         }
+
+        if(gameType == "AngleGame")
+        {
+            val intent = Intent(this,ConersOneDevice::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        if(gameType == "DotGame")
+        {
+            val intent = Intent(this,DotGameOneDivice::class.java)
+            startActivity(intent)
+            finish()
+        }
+        if(gameType == "SnakeGame")
+        {
+            val intent = Intent(this,SnakeGameOneDivice::class.java)
+            startActivity(intent)
+            finish()
+        }
+
 
 
     }

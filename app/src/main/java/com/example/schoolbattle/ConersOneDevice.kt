@@ -1,5 +1,6 @@
 package com.example.schoolbattle
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.*
 import androidx.appcompat.app.AppCompatActivity
@@ -8,23 +9,92 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_coners_one_device.*
+import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
 
-class Corners_one_device_activity : AppCompatActivity() {
-
+class ConersOneDevice : AppCompatActivity() {
+    private var dialog: Show_Result_one_Device? = null
+    @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.corners_one_device_activity)
+        setContentView(R.layout.activity_coners_one_device)
+
+        signature_canvas_corners_one_device.isEnabled = true
+        signature_canvas_corners_one_device.isClickable = true
+
+        signature_canvas_corners_one_device.activity = this
+
+        comback_corner_one_divice.setOnClickListener {
+            Log.w("GOGOGO",signature_canvas_corners_one_device.History.toString())
+            if (signature_canvas_corners_one_device.History.size > 0)
+            {
+                signature_canvas_corners_one_device.History.removeLast()
+
+                for(i in 0 until signature_canvas_corners_one_device.FIELD.size)
+                {
+                    for(j in 0 until signature_canvas_corners_one_device.FIELD[0].size)
+                    {
+                        signature_canvas_corners_one_device.FIELD[i][j] = 0
+                    }
+                }
+                signature_canvas_corners_one_device.FIELD[0][5] = 1;signature_canvas_corners_one_device.FIELD[1][5] = 1;signature_canvas_corners_one_device.FIELD[2][5] = 1;
+                signature_canvas_corners_one_device.FIELD[0][6] = 1;signature_canvas_corners_one_device.FIELD[1][6] = 1;signature_canvas_corners_one_device.FIELD[2][6] = 1;
+                signature_canvas_corners_one_device.FIELD[0][7] = 1;signature_canvas_corners_one_device.FIELD[1][7] = 1;signature_canvas_corners_one_device.FIELD[2][7] = 1;
+
+
+                signature_canvas_corners_one_device.FIELD[5][0] = 2;signature_canvas_corners_one_device.FIELD[5][1] = 2;signature_canvas_corners_one_device.FIELD[5][2] = 2;
+                signature_canvas_corners_one_device.FIELD[6][0] = 2;signature_canvas_corners_one_device.FIELD[6][1] = 2;signature_canvas_corners_one_device.FIELD[6][2] = 2;
+                signature_canvas_corners_one_device.FIELD[7][0] = 2;signature_canvas_corners_one_device.FIELD[7][1] = 2;signature_canvas_corners_one_device.FIELD[7][2] = 2;
+
+                signature_canvas_corners_one_device.Black_or_grey_chip = "black"
+                for (i in signature_canvas_corners_one_device.History) {
+                    signature_canvas_corners_one_device.FIELD[i[2]][i[3]] = signature_canvas_corners_one_device.FIELD[i[0]][i[1]]
+                    signature_canvas_corners_one_device.FIELD[i[0]][i[1]] = 0
+                    if(signature_canvas_corners_one_device.Black_or_grey_chip == "black")
+                    {
+                        signature_canvas_corners_one_device.Black_or_grey_chip =  "grey"
+                    }
+                    else
+                    {
+                        signature_canvas_corners_one_device.Black_or_grey_chip =  "black"
+                    }
+                }
+                signature_canvas_corners_one_device.PHASE = true
+                for(i in  0 until signature_canvas_corners_one_device.Array_of_illumination.size)
+                {
+                    for(j in 0 until signature_canvas_corners_one_device.Array_of_illumination[0].size)
+                    {
+                        signature_canvas_corners_one_device.Array_of_illumination[i][j] =0
+                    }
+                }
+                signature_canvas_corners_one_device.invalidate()
+            }
+        }
     }
 }
 
-class CanvasView_corners_one_device(context: Context, attrs: AttributeSet?) : View(context, attrs) {
+class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : View(context, attrs) {
 
-    fun touch_refinement_X (x : Float,width1: Float,size_field_x1:Int ):Float        //уточняет касания по оси x
+    fun touch_refinement_X (indent: Float,x : Float,width1: Float,size_field_x1:Int ):Float        //уточняет касания по оси x
     {
-        return ((x.toInt()/(width1/size_field_x1).toInt()).toFloat()*width1/size_field_x1).toFloat()
+        if(x<indent)
+        {
+            return -1f
+        }
+        if(x>width1-indent)
+        {
+            return -1f
+        }
+        var a : Float = indent
+        while(x>a)
+        {
+            a+=step
+        }
+        return a - step
     }
 
-    fun touch_refinement_Y (y : Float,height1: Float,size_field_y1:Int,step: Float,advertising_line_1:Float):Float      //уточняет касания по оси Y
+    fun touch_refinement_Y (indent: Float,y : Float,height1: Float,size_field_y1:Int,step: Float,advertising_line_1:Float):Float      //уточняет касания по оси Y
     {
         if(y > height1 - advertising_line_1 ||  y < height1 - advertising_line_1 - step*size_field_y1)
         {
@@ -38,16 +108,16 @@ class CanvasView_corners_one_device(context: Context, attrs: AttributeSet?) : Vi
         return a - step
     }
 
-    fun touch_refinement_for_Array_X (x : Float,step:Float):Int        //уточняет координаты в массиве  при касании
+    fun touch_refinement_for_Array_X (indent: Float,x : Float,step:Float):Int        //уточняет координаты в массиве  при касании
     {
         if(x<0)
         {
             return -1
         }
-        return (x/step).toInt()
+        return ((x-indent)/step).toInt()
     }
 
-    fun touch_refinement_for_Array_Y (y : Float,height1: Float,size_field_y1: Int,step: Float,advertising_line_1:Float):Int      //уточняет координаты в массиве  при касании
+    fun touch_refinement_for_Array_Y (indent: Float,y : Float,height1: Float,size_field_y1: Int,step: Float,advertising_line_1:Float):Int      //уточняет координаты в массиве  при касании
     {
         if(y<0)
         {
@@ -63,19 +133,42 @@ class CanvasView_corners_one_device(context: Context, attrs: AttributeSet?) : Vi
         return b-1
     }
 
-    private fun translate_from_Array_to_Graphics_X(x:Int, step: Float):Float    //переводит массивные координаты в графически
+    private fun translate_from_Array_to_Graphics_X(indent: Float,x:Int, step: Float):Float    //переводит массивные координаты в графически
     {
-        return x*step
+        return x*step+indent
     }
 
-    fun translate_from_Array_to_Graphics_Y(y:Int,height1: Float,size_field_y1: Int,step: Float,advertising_line_1: Float):Float    //переводит массивные координаты в графически
+    fun translate_from_Array_to_Graphics_Y(indent: Float,y:Int,height1: Float,size_field_y1: Int,step: Float,advertising_line_1: Float):Float    //переводит массивные координаты в графически
     {
         return y*step + height1 - size_field_y1*step - advertising_line_1
     }
+
+    fun chek_win(): Int{
+        if(FIELD[0][5] == 2 && FIELD[1][5] == 2 && FIELD[2][5] == 2 &&
+            FIELD[0][6] == 2 && FIELD[1][6] == 2 && FIELD[2][6] == 2 &&
+            FIELD[0][7] == 2 && FIELD[1][7] == 2 && FIELD[2][7] == 2)
+        {
+            return 2
+        }
+        if(FIELD[5][0] == 1 && FIELD[5][1] ==1 && FIELD[5][2] ==1 &&
+            FIELD[6][0] ==1 && FIELD[6][1] ==1 && FIELD[6][2] ==1 &&
+            FIELD[7][0] ==1 && FIELD[7][1] ==1  && FIELD[7][2] ==1)
+        {
+            return 1
+        }
+        return 0
+
+    }
+
+    lateinit var activity: Activity
+
+    var History: MutableList<MutableList<Int>> = mutableListOf()
+    var EXODUS : Int = 0
+    var indent : Float = 0f
     var circlex : Float = 0f   //координаты нажатия
     var circley : Float = 0f
     var Black_or_grey_chip: String = "black"
-    var paint : Paint  = Paint()          //ресурсы для рисования
+    var paint : Paint = Paint()          //ресурсы для рисования
     var Line_paint: Paint = Paint()
     var FIELD = Array(8){IntArray(8)}     //для фишек
     var Array_of_illumination = Array(8) { IntArray(8) }  //для подсветки
@@ -140,13 +233,16 @@ class CanvasView_corners_one_device(context: Context, attrs: AttributeSet?) : Vi
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
 
+        indent = 20f
         width = getWidth().toFloat()
         height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)
         advertising_line = 150f           //полоска для рекламы
         size_field_x  = 8
         size_field_y  = 8
-        step = width/size_field_x
-        k = height-width-advertising_line
+        step = (width-2*indent)/size_field_x
+        k = height-(width-2*indent)-advertising_line
+
+
 
         //TODO() take field from database
         canvas?.drawColor(Color.WHITE)
@@ -154,34 +250,34 @@ class CanvasView_corners_one_device(context: Context, attrs: AttributeSet?) : Vi
 
         for(i in 0 until size_field_x+1)          //вырисовка горизонтальных линий
         {
-            canvas?.drawLine(0f,k,width,k,Line_paint)
+            canvas?.drawLine(indent,k,width-indent,k,Line_paint)
             k = k + step
         }
-        k = 0f
+        k = indent
         for(i in 0 until size_field_y+2)         //вырисовка вертикальных линий
         {
-            canvas?.drawLine(k,height-advertising_line-width,k,height-advertising_line,Line_paint)
+            canvas?.drawLine(k,height-advertising_line-width+2*indent,k,height-advertising_line,Line_paint)
             k = k + step
         }
 
 
-        val rigth_black_chip: Bitmap = Bitmap.createScaledBitmap(black_chip,width.toInt()/size_field_x, width.toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
-        val right_grey_chip: Bitmap = Bitmap.createScaledBitmap(grey_chip,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
-        val right_illumination:Bitmap = Bitmap.createScaledBitmap(illumination,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
-        val right_green:Bitmap = Bitmap.createScaledBitmap(green,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+        val rigth_black_chip: Bitmap = Bitmap.createScaledBitmap(black_chip,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+        val right_grey_chip: Bitmap = Bitmap.createScaledBitmap(grey_chip,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+        val right_illumination:Bitmap = Bitmap.createScaledBitmap(illumination,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+        val right_green:Bitmap = Bitmap.createScaledBitmap(green,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
 
         for( i in 0..7) // расстановка фишек
         {
             for(j in 0..7) {
                 if (FIELD[i][j] == 1)  //крестик
                 {
-                    canvas?.drawBitmap(rigth_black_chip, translate_from_Array_to_Graphics_X(i,step),
-                        translate_from_Array_to_Graphics_Y(j,height,size_field_y,step,advertising_line),paint)
+                    canvas?.drawBitmap(rigth_black_chip, translate_from_Array_to_Graphics_X(indent,i,step),
+                        translate_from_Array_to_Graphics_Y(indent,j,height,size_field_y,step,advertising_line),paint)
                 }
                 if (FIELD[i][j] == 2)  //нолик
                 {
-                    canvas?.drawBitmap(right_grey_chip, translate_from_Array_to_Graphics_X(i,step),
-                        translate_from_Array_to_Graphics_Y(j,height,size_field_y,step,advertising_line),paint)
+                    canvas?.drawBitmap(right_grey_chip, translate_from_Array_to_Graphics_X(indent,i,step),
+                        translate_from_Array_to_Graphics_Y(indent,j,height,size_field_y,step,advertising_line),paint)
                 }
             }
         }
@@ -189,8 +285,8 @@ class CanvasView_corners_one_device(context: Context, attrs: AttributeSet?) : Vi
             for (j in 0..7) {
                 if (Array_of_illumination[i][j] == 1 || Array_of_illumination[i][j] == 2) {
                     canvas?.drawBitmap(
-                        right_green, translate_from_Array_to_Graphics_X(i, step),
-                        translate_from_Array_to_Graphics_Y(
+                        right_green, translate_from_Array_to_Graphics_X(indent,i, step),
+                        translate_from_Array_to_Graphics_Y(indent,
                             j,
                             height,
                             size_field_y,
@@ -204,8 +300,11 @@ class CanvasView_corners_one_device(context: Context, attrs: AttributeSet?) : Vi
 
         if(PHASE == false)
         {
-            if(circley> height - advertising_line - width && y < height - advertising_line){
-                canvas?.drawBitmap( right_illumination, touch_refinement_X(circlex, width, size_field_x), touch_refinement_Y(circley, height, size_field_y, step, advertising_line), paint)
+            if(circley> height - advertising_line - width+2*indent && y < height - advertising_line){
+                if( touch_refinement_X (indent,circlex,width,size_field_x)>0)
+                {
+                    canvas?.drawBitmap( right_illumination, touch_refinement_X(indent,circlex, width, size_field_x), touch_refinement_Y(indent,circley, height, size_field_y, step, advertising_line), paint)
+                }
             }
 
         }
@@ -214,12 +313,25 @@ class CanvasView_corners_one_device(context: Context, attrs: AttributeSet?) : Vi
 
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-
+        var dialog: Show_Result_one_Device? = null
+        EXODUS = chek_win()
+        if(EXODUS == 2)
+        {
+            dialog = Show_Result_one_Device(activity)
+            dialog?.showResult_one_device("СЕРЫЕ ПОБЕДИЛИ","AngleGame",activity)
+            return true
+        }
+        if(EXODUS == 1)
+        {
+            dialog = Show_Result_one_Device(activity)
+            dialog?.showResult_one_device("ЧЕРНЫЕ ПОБЕДИЛИ","AngleGame",activity)
+            return true
+        }
         circlex = event!!.x
         circley = event!!.y
-        var X: Int = touch_refinement_for_Array_X(circlex, step)
-        var Y: Int = touch_refinement_for_Array_Y(circley, height, size_field_y, step, advertising_line)      //перевод последнего нажатия в координаты массива
-        if (touch_refinement_Y(circley, height, size_field_y, step, advertising_line) > 0)     //постановка нового обЪекта, проверка что на поле
+        var X: Int = touch_refinement_for_Array_X(indent,circlex, step)
+        var Y: Int = touch_refinement_for_Array_Y(indent,circley, height, size_field_y, step, advertising_line)      //перевод последнего нажатия в координаты массива
+        if (touch_refinement_Y(indent,circley, height, size_field_y, step, advertising_line) > 0 && touch_refinement_X(indent,circlex,width,size_field_x)>0)     //постановка нового обЪекта, проверка что на поле
         {
             if ((X != lastX || Y != lastY ) || (exception == true) )   //если касание в новую область
             {
@@ -233,6 +345,7 @@ class CanvasView_corners_one_device(context: Context, attrs: AttributeSet?) : Vi
                     if (Array_of_illumination[X][Y] == 1 || Array_of_illumination[X][Y] == 2)     //если подсвечена область
                     {
                         FIELD[X][Y] = FIELD[lastX][lastY]         //перемещение фишки
+                        History.add(mutableListOf(lastX,lastY,X,Y))
                         FIELD[lastX][lastY] = 0
                         if(Black_or_grey_chip == "black")          //смена игроков, чтобы нельзя было сделать ходы подряд одному игроку
                         {

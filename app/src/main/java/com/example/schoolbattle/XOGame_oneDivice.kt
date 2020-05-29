@@ -8,18 +8,22 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
+
 
 
 class XOGame_oneDivice : AppCompatActivity() {
     private var dialog: Show_Result_one_Device? = null
 
+    @ExperimentalStdlibApi
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_x_o_game_one_divice)
 
         signature_canvas_xog_one_device.setOnClickListener{
+            Toast.makeText(this,"xog", Toast.LENGTH_LONG).show()
             if(signature_canvas_xog_one_device.EXODUS == 1)
             {
                 dialog = Show_Result_one_Device(this@XOGame_oneDivice)
@@ -30,6 +34,28 @@ class XOGame_oneDivice : AppCompatActivity() {
             {
                 dialog = Show_Result_one_Device(this@XOGame_oneDivice)
                 dialog?.showResult_one_device("НОЛИКИ ПОБЕДИЛИ","XOGame",this)
+            }
+        }
+
+        comback_xog_one_divice.setOnClickListener {
+            if (signature_canvas_xog_one_device.History.size > 0)            //TODO дописать когда самый первый ход убираем
+            {
+                signature_canvas_xog_one_device.History.removeLast()
+                for (i in 0 until signature_canvas_xog_one_device.FIELD.size) {
+                    for (j in 0 until signature_canvas_xog_one_device.FIELD[0].size) {
+                        signature_canvas_xog_one_device.FIELD[i][j] = 0
+                    }
+                }
+                signature_canvas_xog_one_device.cross_or_nul = "cross"
+                for (i in signature_canvas_xog_one_device.History) {
+                    signature_canvas_xog_one_device.FIELD[i.first][i.second] = i.third
+                    if (i.third == 1) {
+                        signature_canvas_xog_one_device.cross_or_nul = "null"
+                    } else {
+                        signature_canvas_xog_one_device.cross_or_nul = "cross"
+                    }
+                }
+                signature_canvas_xog_one_device.invalidate()
             }
         }
     }
@@ -123,8 +149,7 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
         return ans
     }
 
-
-
+    var History: MutableList<Triple<Int,Int,Int>> = mutableListOf()
     var width : Float = 0f
     var height: Float = 0f
     //ширина и высота экрана (от ширины в основном все зависит)
@@ -289,9 +314,11 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
                 if(FIELD[X][Y] == 0 && Y == 5) {
                     if (cross_or_nul == "cross") {
                         FIELD[X][Y] = 1
+                        History.add(Triple(X,Y,1))
                         cross_or_nul = "null"
                     } else {
                         FIELD[X][Y] = 2
+                        History.add(Triple(X,Y,2))
                         cross_or_nul = "cross"
                     }
                     Log.w("ppppppp", FIELD[0][0].toString())
@@ -303,9 +330,11 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
                     {
                         if (cross_or_nul == "cross") {
                             FIELD[X][Y] = 1
+                            History.add(Triple(X,Y,1))
                             cross_or_nul = "null"
                         } else {
                             FIELD[X][Y] = 2
+                            History.add(Triple(X,Y,2))
                             cross_or_nul = "cross"
                         }
                         Log.w("ppppppp", FIELD[0][0].toString())
