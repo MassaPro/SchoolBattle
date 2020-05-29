@@ -40,6 +40,11 @@ class Show_Result_one_Device(activity: Activity) {
                 val intent = Intent(type_activity,SnakeGameOneDivice::class.java)
                 type_activity.startActivity(intent)
             }
+            if(Game_Type == "BoxGame")
+            {
+                val intent = Intent(type_activity,BoxGameOneDivice::class.java)
+                type_activity.startActivity(intent)
+            }
         }
 
         val body = dialog_one_device.findViewById(R.id.resultText_one_device) as TextView

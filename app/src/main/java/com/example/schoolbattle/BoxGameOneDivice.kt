@@ -114,6 +114,45 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
         return false
     }
 
+    fun check_win() : Int
+    {
+        var cnt1: Int = 0
+        var cnt2: Int = 0
+        for(i in FIELD)
+        {
+            for(j in i)
+            {
+                if(j == 0)
+                {
+                    return 0
+                }
+                if(j == 1)
+                {
+                    cnt1++
+                }
+                else
+                {
+                    cnt2++
+                }
+            }
+        }
+        if(cnt1>cnt2)
+        {
+            return 1
+        }
+        else
+        {
+            if(cnt2>cnt1)
+            {
+                return 2
+            }
+            else
+            {
+                return 3
+            }
+        }
+    }
+
     lateinit var activity: Activity
 
     var History: MutableList<MutableList<Int>> = mutableListOf()
@@ -304,6 +343,23 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
         circlex = event!!.x
         circley = event!!.y
 
+        if(check_win()>0)
+        {
+            var dialog: Show_Result_one_Device? = null
+            dialog = Show_Result_one_Device(activity)
+            if(check_win()==1)
+            {
+                dialog?.showResult_one_device("КРАСНЫЕ ПОБЕДИЛИ","BoxGame",activity)
+            }
+            if(check_win()==2)
+            {
+                dialog?.showResult_one_device("СИНИЕ ПОБЕДИЛИ","BoxGame",activity)
+            }
+            if(check_win()==3)
+            {
+                dialog?.showResult_one_device("НИЧЬЯ","BoxGame",activity)
+            }
+        }
         x = indent               //проверка по вертикальным линиям
         y = height - advertising_line - width
         for(i in 0..7)
