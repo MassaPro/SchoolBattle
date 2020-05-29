@@ -102,7 +102,7 @@ class DotGameActivity: AppCompatActivity() {
                     myRef.child("Users").child(opponentsName).child("Games").child("$yourName DotGame").removeValue()
                     dialog = ShowResult(this@DotGameActivity)
                     if (isRun) {
-                        dialog?.showResult(res, "DotGame", yourName)
+                        dialog?.showResult(res, "DotGame", yourName, opponentsName)
                     }
                     gameData.removeEventListener(this)
                 }

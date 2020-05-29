@@ -1,22 +1,20 @@
 package com.example.schoolbattle
 
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat.finishAffinity
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.internal.ContextUtils
-import com.google.android.material.internal.ContextUtils.getActivity
-import kotlinx.android.synthetic.main.activity_game_item.view.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_game_list.*
+
 
 lateinit var gamesRecycler: RecyclerView
 
@@ -39,14 +37,63 @@ class MainActivity : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.activity_game_list, container, false)
-        return root
+        return inflater.inflate(R.layout.activity_game_list, container, false)
     }
+
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        val prfs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        val username = prfs?.getString("username", "")
 
 
+        searchButton.setOnClickListener {
+            val dialog = Dialog(this.requireContext())
+
+
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setCancelable(false)
+            dialog.setCanceledOnTouchOutside(true)
+            dialog.setContentView(R.layout.activity_search_game_dialog)
+            val srch = dialog.findViewById(R.id.search) as SearchView
+            srch.queryHint = "Поиск соперника"
+            srch.setOnClickListener {
+                srch.isIconified = false
+            }
+            srch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+                override fun onQueryTextChange(newText: String): Boolean {
+                    dialog.findViewById<TextView>(R.id.res).text=""
+                    return false
+                }
+
+                override fun onQueryTextSubmit(query: String): Boolean {
+                    if (query == username) {
+                        dialog.findViewById<TextView>(R.id.res).text="ТЫ ДУБ?"
+                        dialog.findViewById<TextView>(R.id.res).setTextColor(Color.RED)
+                        return false
+                    }
+                    myRef.child("Users").child(query).addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onCancelled(p0: DatabaseError) {}
+                        override fun onDataChange(p0: DataSnapshot) {
+                            if (p0.hasChildren()) {
+                                dialog.findViewById<TextView>(R.id.res).text="ВЫЗОВ ОТПРАВЛЕН!"
+                                dialog.findViewById<TextView>(R.id.res).setTextColor(Color.GREEN)
+                                myRef.child("Users").child(query).child("Revanches").child(username!!).child("gameName").setValue("StupidGame")
+                            } else {
+                                dialog.findViewById<TextView>(R.id.res).text="НЕВЕРНОЕ ИМЯ"
+                                dialog.findViewById<TextView>(R.id.res).setTextColor(Color.RED)
+                            }
+                        }
+                    })
+                    return false
+                }
+
+            })
+            dialog.show()
+
+        }
        // (activity as AppCompatActivity).setSupportActionBar(findViewById(R.id.my_toolbar))
         //setSupportActionBar(findViewById(R.id.my_toolbar))
 

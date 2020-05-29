@@ -24,19 +24,25 @@ class Game(val name: String = "", val type: String = "StupidGame", val text: Str
 }
 
 class ShowResult(activity: Activity) {
-
     private val dialog = Dialog(activity)
     private var state = false
+    private var con = activity
 
-    fun showResult(result: String, gameType: String, globalName: String) {
+    fun showResult(result: String, gameType: String, globalName: String, oppName: String) {
+        now = con
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
         dialog.setCanceledOnTouchOutside(true)
         dialog.setContentView(R.layout.activity_game_over)
 
         val ng = dialog.findViewById(R.id.restart) as Button
+        val rv = dialog.findViewById(R.id.revanche) as Button
         var eventListener: ValueEventListener? = null
         is_pressed = true
+
+        rv.setOnClickListener {
+            myRef.child("Users").child(oppName).child("Revanches").child(globalName).child("gameName").setValue(gameType)
+        }
 
         ng.setOnClickListener {
             ng.isEnabled = false

@@ -164,7 +164,7 @@ class XOGameActivity : AppCompatActivity() {
                     myRef.child("Users").child(opponentsName).child("Games").child("$yourName XOGame").removeValue()
                     dialog = ShowResult(this@XOGameActivity)
                     if (isRun) {
-                        dialog?.showResult(res, "XOGame", yourName)
+                        dialog?.showResult(res, "XOGame", yourName, opponentsName)
                     }
                     cnt = 0
                     gameData.removeEventListener(this)
