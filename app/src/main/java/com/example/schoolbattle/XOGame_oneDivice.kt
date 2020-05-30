@@ -15,12 +15,101 @@ import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
 
 
 class XOGame_oneDivice : AppCompatActivity() {
+    fun encode(h: MutableList<Triple<Int,Int,Int>>):String
+    {
+        var answer: String = ""
+        for(i in 0 until h.size)
+        {
+            answer = answer + h[i].first.toString() + 'a' + h[i].second.toString() + 'a' + h[i].third.toString() + 'a'
+        }
+        return answer
+    }
+    fun string_to_int(s: String): Int
+    {
+        var i : Int = 0
+        var k: Int = 1
+        var answer: Int = 0
+        while(i<s.length)
+        {
+            answer += (s[s.length-i-1].toInt() - '0'.toInt())*k
+            k= k*10
+            i++
+        }
+        return answer
+    }
+    fun decode(s : String) : MutableList<Triple<Int,Int,Int>>
+    {
+        var answer: MutableList<Triple<Int,Int,Int>> = mutableListOf()
+        var i : Int = 0
+        var a: Int = 0
+        var b: Int = 0
+        var c: Int = 0
+        var s1: String = ""
+        while(i<s.length)
+        {
+            s1 = ""
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            a = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            b = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            c = string_to_int(s1)
+            answer.add(Triple(a,b,c))
+            i++
+        }
+        return answer
+    }
     private var dialog: Show_Result_one_Device? = null
 
     @ExperimentalStdlibApi
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
+
+
+
+        //var h : MutableList<Triple<Int,Int,Int>> =  mutableListOf(Triple(231,231,777),Triple(231,231,777),Triple(231,231,777))
+        //Log.w("momlol",decode(encode(h)).toString())
         setContentView(R.layout.activity_x_o_game_one_divice)
+
+        val usedToClear = intent.getStringExtra("usedToClear") // тип игры
+        if (usedToClear == "clear") {
+            val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+            editor.putString("xog_one_divice", "")
+            editor.apply()
+        }
+        val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        signature_canvas_xog_one_device.History = decode(prefs.getString("xog_one_divice", "").toString())
+        for (i in 0 until signature_canvas_xog_one_device.FIELD.size) {
+            for (j in 0 until signature_canvas_xog_one_device.FIELD[0].size) {
+                signature_canvas_xog_one_device.FIELD[i][j] = 0
+            }
+        }
+        signature_canvas_xog_one_device.cross_or_nul = "cross"
+        for (i in signature_canvas_xog_one_device.History) {
+            signature_canvas_xog_one_device.FIELD[i.first][i.second] = i.third
+            if (i.third == 1) {
+                signature_canvas_xog_one_device.cross_or_nul = "null"
+            } else {
+                signature_canvas_xog_one_device.cross_or_nul = "cross"
+            }
+        }
+        signature_canvas_xog_one_device.invalidate()
 
         signature_canvas_xog_one_device.setOnClickListener{
             Toast.makeText(this,"xog", Toast.LENGTH_LONG).show()
@@ -64,6 +153,66 @@ class XOGame_oneDivice : AppCompatActivity() {
 
 
 class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(context, attrs) {
+    fun encode(h: MutableList<Triple<Int,Int,Int>>):String
+    {
+        var answer: String = ""
+        for(i in 0 until h.size)
+        {
+            answer = answer + h[i].first.toString() + 'a' + h[i].second.toString() + 'a' + h[i].third.toString() + 'a'
+        }
+        return answer
+    }
+    fun string_to_int(s: String): Int
+    {
+        var i : Int = 0
+        var k: Int = 1
+        var answer: Int = 0
+        while(i<s.length)
+        {
+            answer += (s[s.length-i-1].toInt() - '0'.toInt())*k
+            k= k*10
+            i++
+        }
+        return answer
+    }
+    fun decode(s : String) : MutableList<Triple<Int,Int,Int>>
+    {
+        var answer: MutableList<Triple<Int,Int,Int>> = mutableListOf()
+        var i : Int = 0
+        var a: Int = 0
+        var b: Int = 0
+        var c: Int = 0
+        var s1: String = ""
+        while(i<s.length)
+        {
+            s1 = ""
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            a = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            b = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            c = string_to_int(s1)
+            answer.add(Triple(a,b,c))
+            i++
+        }
+        return answer
+    }
 
     fun touch_refinement_X (x : Float,width1: Float,size_field_x1:Int ):Float        //уточняет касания по оси x
     {
@@ -320,10 +469,18 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
                     if (cross_or_nul == "cross") {
                         FIELD[X][Y] = 1
                         History.add(Triple(X,Y,1))
+                        var data_from_memory = encode(History)
+                        val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                        editor.putString("xog_one_divice", data_from_memory)
+                        editor.apply()
                         cross_or_nul = "null"
                     } else {
                         FIELD[X][Y] = 2
                         History.add(Triple(X,Y,2))
+                        var data_from_memory = encode(History)
+                        val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                        editor.putString("xog_one_divice", data_from_memory)
+                        editor.apply()
                         cross_or_nul = "cross"
                     }
                     Log.w("ppppppp", FIELD[0][0].toString())
@@ -336,10 +493,18 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
                         if (cross_or_nul == "cross") {
                             FIELD[X][Y] = 1
                             History.add(Triple(X,Y,1))
+                            var data_from_memory = encode(History)
+                            val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                            editor.putString("xog_one_divice", data_from_memory)
+                            editor.apply()
                             cross_or_nul = "null"
                         } else {
                             FIELD[X][Y] = 2
                             History.add(Triple(X,Y,2))
+                            var data_from_memory = encode(History)
+                            val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                            editor.putString("xog_one_divice", data_from_memory)
+                            editor.apply()
                             cross_or_nul = "cross"
                         }
                         Log.w("ppppppp", FIELD[0][0].toString())

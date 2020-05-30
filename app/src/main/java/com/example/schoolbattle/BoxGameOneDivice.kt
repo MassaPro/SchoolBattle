@@ -10,12 +10,165 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import kotlinx.android.synthetic.main.activity_box_game_one_divice.*
+import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
 
 class BoxGameOneDivice : AppCompatActivity() {
-
+    fun encode(h: MutableList<MutableList<Int>>):String
+    {
+        var answer: String = ""
+        for(i in 0 until h.size)
+        {
+            answer = answer + h[i][0] + 'a' + h[i][1] + 'a' + h[i][2] + 'a' + h[i][3] + 'a'
+        }
+        return answer
+    }
+    fun string_to_int(s: String): Int
+    {
+        var i : Int = 0
+        var k: Int = 1
+        var answer: Int = 0
+        while(i<s.length)
+        {
+            answer += (s[s.length-i-1].toInt() - '0'.toInt())*k
+            k= k*10
+            i++
+        }
+        return answer
+    }
+    fun decode(s : String) : MutableList<MutableList<Int>>
+    {
+        var answer: MutableList<MutableList<Int>> = mutableListOf()
+        var i : Int = 0
+        var a: Int = 0
+        var b: Int = 0
+        var c: Int = 0
+        var d: Int = 0
+        var s1: String = ""
+        while(i<s.length)
+        {
+            s1 = ""
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            a = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            b = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            c = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            d = string_to_int(s1)
+            answer.add(mutableListOf(a,b,c,d))
+            i++
+        }
+        return answer
+    }
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val usedToClear = intent.getStringExtra("usedToClear") // тип игры
+        if (usedToClear == "clear") {
+            val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+            editor.putString("box_one_divice", "")
+            editor.apply()
+        }
+        val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        if(prefs.getString("box_one_divice", "").toString().length>0) {
+            signature_canvas_box_one_device.History = decode(prefs.getString("box_one_divice", "").toString())
+            signature_canvas_box_one_device.red_or_blue = "red"
+            for(i in 0 until signature_canvas_box_one_device.VERTICAL_RIB.size)
+            {
+                for(j in 0 until signature_canvas_box_one_device.VERTICAL_RIB[0].size)
+                {
+                    signature_canvas_box_one_device.VERTICAL_RIB[i][j] = 0
+                }
+            }
+            for(i in 0 until signature_canvas_box_one_device.HORIZONTAL_RIB.size)
+            {
+                for(j in 0 until signature_canvas_box_one_device.HORIZONTAL_RIB[0].size)
+                {
+                    signature_canvas_box_one_device.HORIZONTAL_RIB[i][j] = 0
+                }
+            }
+            for(i in 0 until signature_canvas_box_one_device.FIELD.size)
+            {
+                for(j in 0 until signature_canvas_box_one_device.FIELD[0].size)
+                {
+                    signature_canvas_box_one_device.FIELD[i][j] = 0
+                }
+            }
+
+            for(i in signature_canvas_box_one_device.History)
+            {
+                if(i[1] == 1)
+                {
+                    signature_canvas_box_one_device.VERTICAL_RIB[i[2]][i[3]] = i[0]
+                }
+                if(i[1] == 2)
+                {
+                    signature_canvas_box_one_device.HORIZONTAL_RIB[i[2]][i[3]] = i[0]
+                }
+
+                if(signature_canvas_box_one_device.red_or_blue == "red")
+                {
+                    signature_canvas_box_one_device.red_or_blue = "blue"
+                }
+                else
+                {
+                    signature_canvas_box_one_device.red_or_blue = "red"
+                }
+                var flag: Boolean = false
+                for(i in 0..6)
+                {
+                    for(j in 0..6)
+                    {
+                        if(signature_canvas_box_one_device.VERTICAL_RIB[i][j]>0 && signature_canvas_box_one_device.HORIZONTAL_RIB[i][j]>0 && signature_canvas_box_one_device.HORIZONTAL_RIB[i][j+1]>0 && signature_canvas_box_one_device.VERTICAL_RIB[i+1][j]>0 && signature_canvas_box_one_device.FIELD[i][j]==0) //если образовался квадратик
+                        {
+                            if(flag == false)
+                            {
+                                flag = true
+                                if(signature_canvas_box_one_device.red_or_blue == "red")            //снова ходит тот же игрок
+                                {
+                                    signature_canvas_box_one_device.red_or_blue = "blue"
+                                }
+                                else
+                                {
+                                    signature_canvas_box_one_device.red_or_blue = "red"
+                                }
+                            }
+                            if(signature_canvas_box_one_device.red_or_blue == "red")
+                            {
+                                signature_canvas_box_one_device.FIELD[i][j] = 1
+                            }
+                            else
+                            {
+                                signature_canvas_box_one_device.FIELD[i][j] = 2
+                            }
+                        }
+                    }
+                }
+            }
+            signature_canvas_box_one_device.invalidate()
+        }
         setContentView(R.layout.activity_box_game_one_divice)
 
         signature_canvas_box_one_device.activity = this
@@ -105,6 +258,75 @@ class BoxGameOneDivice : AppCompatActivity() {
 
 
 class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, attrs) {
+    fun encode(h: MutableList<MutableList<Int>>):String
+    {
+        var answer: String = ""
+        for(i in 0 until h.size)
+        {
+            answer = answer + h[i][0] + 'a' + h[i][1] + 'a' + h[i][2] + 'a' + h[i][3] + 'a'
+        }
+        return answer
+    }
+    fun string_to_int(s: String): Int
+    {
+        var i : Int = 0
+        var k: Int = 1
+        var answer: Int = 0
+        while(i<s.length)
+        {
+            answer += (s[s.length-i-1].toInt() - '0'.toInt())*k
+            k= k*10
+            i++
+        }
+        return answer
+    }
+    fun decode(s : String) : MutableList<MutableList<Int>>
+    {
+        var answer: MutableList<MutableList<Int>> = mutableListOf()
+        var i : Int = 0
+        var a: Int = 0
+        var b: Int = 0
+        var c: Int = 0
+        var d: Int = 0
+        var s1: String = ""
+        while(i<s.length)
+        {
+            s1 = ""
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            a = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            b = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            c = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            d = string_to_int(s1)
+            answer.add(mutableListOf(a,b,c,d))
+            i++
+        }
+        return answer
+    }
     fun correction_touch (x: Float,y : Float) :  Boolean // если нажали примерно туда
     {
         if( (circlex-x)*(circlex-x) + (circley - y)*(circley - y) < (width/2f/size_field_x.toFloat())*(width/2f/size_field_x.toFloat())/2f)
@@ -382,6 +604,10 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
                         {
                             VERTICAL_RIB[i][j] = 1
                             History.add(mutableListOf(1,1,i,j))
+                            var data_from_memory = encode(History)
+                            val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                            editor.putString("box_one_divice", data_from_memory)
+                            editor.apply()
                             red_or_blue = "blue"
                             Log.d("DOPO","ЛОЛ")
                         }
@@ -392,6 +618,10 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
                         {
                             VERTICAL_RIB[i][j] = 2
                             History.add(mutableListOf(2,1,i,j))
+                            var data_from_memory = encode(History)
+                            val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                            editor.putString("box_one_divice", data_from_memory)
+                            editor.apply()
                             red_or_blue = "red"
                             Log.d("DOPO","ЛОЛ")
                         }
@@ -419,6 +649,10 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
                         {
                             HORIZONTAL_RIB[i][j] = 1
                             History.add(mutableListOf(1,2,i,j))
+                            var data_from_memory = encode(History)
+                            val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                            editor.putString("box_one_divice", data_from_memory)
+                            editor.apply()
                             red_or_blue = "blue"
                             Log.d("DOPO","ЛОЛ")
                         }
@@ -429,6 +663,10 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
                         {
                             HORIZONTAL_RIB[i][j] = 2
                             History.add(mutableListOf(2,2,i,j))
+                            var data_from_memory = encode(History)
+                            val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                            editor.putString("box_one_divice", data_from_memory)
+                            editor.apply()
                             red_or_blue = "red"
                             Log.d("DOPO","ЛОЛ")
                         }

@@ -22,7 +22,8 @@ class Show_Result_one_Device(activity: Activity) {
         button_revanshe.setOnClickListener{
             if(Game_Type == "XOGame")
             {
-                val intent = Intent(type_activity, XOGame_oneDivice::class.java)
+                val intent = Intent(type_activity, XOGame_oneDivice::class.java).apply {
+                    putExtra("usedToClear", "clear")}
                 type_activity.startActivity(intent)
             }
             if(Game_Type == "AngleGame")
@@ -42,7 +43,8 @@ class Show_Result_one_Device(activity: Activity) {
             }
             if(Game_Type == "BoxGame")
             {
-                val intent = Intent(type_activity,BoxGameOneDivice::class.java)
+                val intent = Intent(type_activity,BoxGameOneDivice::class.java).apply {
+                    putExtra("usedToClear", "clear")}
                 type_activity.startActivity(intent)
             }
             if(Game_Type == "VirusGame")
