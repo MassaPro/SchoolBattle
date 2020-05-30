@@ -92,7 +92,6 @@ class DotGameOneDivice : AppCompatActivity() {
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         signature_canvas_dots_one_divice.History = decode(prefs.getString("dot_one_divice", "").toString())
         if (signature_canvas_dots_one_divice.History.size > 0) {
-            signature_canvas_dots_one_divice.History.removeLast()
             signature_canvas_dots_one_divice.red_or_blue = 2
             for (i in 0 until signature_canvas_dots_one_divice.FIELD.size) {
                 for (j in 0 until signature_canvas_dots_one_divice.FIELD[0].size) {
