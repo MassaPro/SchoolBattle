@@ -82,9 +82,13 @@ class BoxGameOneDivice : AppCompatActivity() {
         }
         return answer
     }
+
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_box_game_one_divice)
+        signature_canvas_box_one_device.activity = this
+
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
         if (usedToClear == "clear") {
             val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
@@ -92,8 +96,9 @@ class BoxGameOneDivice : AppCompatActivity() {
             editor.apply()
         }
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
-        if(prefs.getString("box_one_divice", "").toString().length>0) {
-            signature_canvas_box_one_device.History = decode(prefs.getString("box_one_divice", "").toString())
+        signature_canvas_box_one_device.History = decode(prefs.getString("box_one_divice", "").toString())
+        if(signature_canvas_box_one_device.History.size > 0)
+        {
             signature_canvas_box_one_device.red_or_blue = "red"
             for(i in 0 until signature_canvas_box_one_device.VERTICAL_RIB.size)
             {
@@ -169,14 +174,15 @@ class BoxGameOneDivice : AppCompatActivity() {
             }
             signature_canvas_box_one_device.invalidate()
         }
-        setContentView(R.layout.activity_box_game_one_divice)
-
-        signature_canvas_box_one_device.activity = this
 
         comback_box_one_divice.setOnClickListener {
             if(signature_canvas_box_one_device.History.size > 0)
             {
                 signature_canvas_box_one_device.History.removeLast()
+                var data_from_memory = encode(signature_canvas_box_one_device.History)
+                val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("box_one_divice", data_from_memory)
+                editor.apply()
                 signature_canvas_box_one_device.red_or_blue = "red"
                 for(i in 0 until signature_canvas_box_one_device.VERTICAL_RIB.size)
                 {

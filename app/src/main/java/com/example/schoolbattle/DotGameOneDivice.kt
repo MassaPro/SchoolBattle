@@ -16,14 +16,120 @@ import kotlin.math.sign
 
 class DotGameOneDivice : AppCompatActivity() {
 
+    fun encode(h: MutableList<Triple<Int,Int,Int>>):String
+    {
+        var answer: String = ""
+        for(i in 0 until h.size)
+        {
+            answer = answer + h[i].first.toString() + 'a' + h[i].second.toString() + 'a' + h[i].third.toString() + 'a'
+        }
+        return answer
+    }
+    fun string_to_int(s: String): Int
+    {
+        var i : Int = 0
+        var k: Int = 1
+        var answer: Int = 0
+        while(i<s.length)
+        {
+            answer += (s[s.length-i-1].toInt() - '0'.toInt())*k
+            k= k*10
+            i++
+        }
+        return answer
+    }
+    fun decode(s : String) : MutableList<Triple<Int,Int,Int>>
+    {
+        var answer: MutableList<Triple<Int,Int,Int>> = mutableListOf()
+        var i : Int = 0
+        var a: Int = 0
+        var b: Int = 0
+        var c: Int = 0
+        var s1: String = ""
+        while(i<s.length)
+        {
+            s1 = ""
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            a = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            b = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            c = string_to_int(s1)
+            answer.add(Triple(a,b,c))
+            i++
+        }
+        return answer
+    }
+
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dot_game_one_divice)
+        signature_canvas_dots_one_divice.activity = this
+
+        val usedToClear = intent.getStringExtra("usedToClear") // тип игры
+        if (usedToClear == "clear") {
+            val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+            editor.putString("dot_one_divice", "")
+            editor.apply()
+        }
+        val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        signature_canvas_dots_one_divice.History = decode(prefs.getString("dot_one_divice", "").toString())
+        if (signature_canvas_dots_one_divice.History.size > 0) {
+            signature_canvas_dots_one_divice.History.removeLast()
+            signature_canvas_dots_one_divice.red_or_blue = 2
+            for (i in 0 until signature_canvas_dots_one_divice.FIELD.size) {
+                for (j in 0 until signature_canvas_dots_one_divice.FIELD[0].size) {
+                    signature_canvas_dots_one_divice.FIELD[i][j] = 0
+                }
+            }
+            signature_canvas_dots_one_divice.a.clear()
+            for (i in 0 until 16) {
+                signature_canvas_dots_one_divice.a.add(mutableListOf())
+            }
+            for (i in signature_canvas_dots_one_divice.a.indices) {
+                for (j in 0 until 11) {
+                    signature_canvas_dots_one_divice.a[i].add(0)
+                }
+            }
+            for (i in signature_canvas_dots_one_divice.History) {
+                signature_canvas_dots_one_divice.FIELD[i.first][i.second] = i.third
+                signature_canvas_dots_one_divice.a[i.second][i.first] = i.third
+                signature_canvas_dots_one_divice.find(
+                    i.third,
+                    signature_canvas_dots_one_divice.a,
+                    16,
+                    11
+                )
+                signature_canvas_dots_one_divice.red_or_blue =
+                    2 - (signature_canvas_dots_one_divice.red_or_blue + 1) % 2
+            }
+            signature_canvas_dots_one_divice.invalidate()
+        }
 
         comback_dots_one_divice.setOnClickListener {
             if (signature_canvas_dots_one_divice.History.size > 0) {
                 signature_canvas_dots_one_divice.History.removeLast()
+                var data_from_memory = encode(signature_canvas_dots_one_divice.History)
+                val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("dot_one_divice", data_from_memory)
+                editor.apply()
                 signature_canvas_dots_one_divice.red_or_blue = 2
                 for (i in 0 until signature_canvas_dots_one_divice.FIELD.size) {
                     for (j in 0 until signature_canvas_dots_one_divice.FIELD[0].size) {
@@ -54,12 +160,72 @@ class DotGameOneDivice : AppCompatActivity() {
                 signature_canvas_dots_one_divice.invalidate()
             }
         }
-        signature_canvas_dots_one_divice.activity = this
+
     }
 }
 
 
 class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(context, attrs) {
+    fun encode(h: MutableList<Triple<Int,Int,Int>>):String
+    {
+        var answer: String = ""
+        for(i in 0 until h.size)
+        {
+            answer = answer + h[i].first.toString() + 'a' + h[i].second.toString() + 'a' + h[i].third.toString() + 'a'
+        }
+        return answer
+    }
+    fun string_to_int(s: String): Int
+    {
+        var i : Int = 0
+        var k: Int = 1
+        var answer: Int = 0
+        while(i<s.length)
+        {
+            answer += (s[s.length-i-1].toInt() - '0'.toInt())*k
+            k= k*10
+            i++
+        }
+        return answer
+    }
+    fun decode(s : String) : MutableList<Triple<Int,Int,Int>>
+    {
+        var answer: MutableList<Triple<Int,Int,Int>> = mutableListOf()
+        var i : Int = 0
+        var a: Int = 0
+        var b: Int = 0
+        var c: Int = 0
+        var s1: String = ""
+        while(i<s.length)
+        {
+            s1 = ""
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            a = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            b = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            c = string_to_int(s1)
+            answer.add(Triple(a,b,c))
+            i++
+        }
+        return answer
+    }
     fun correction_touch (x: Float,y : Float) :  Boolean // если нажали примерно туда
     {
         if( (circlex-x)*(circlex-x) + (circley - y)*(circley - y) < (step/2f)*(step/2f))
@@ -772,6 +938,10 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
                             p = find(2,a,16,11)
                         }
                         History.add(Triple(i,j,FIELD[i][j]))
+                        var data_from_memory = encode(History)
+                        val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                        editor.putString("dot_one_divice", data_from_memory)
+                        editor.apply()
                         invalidate()
 
 

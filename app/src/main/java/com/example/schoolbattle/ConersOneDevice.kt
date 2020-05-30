@@ -10,28 +10,148 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_box_game_one_divice.*
 import kotlinx.android.synthetic.main.activity_coners_one_device.*
 import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
 import kotlin.math.E
 
 class ConersOneDevice : AppCompatActivity() {
+    fun encode(h: MutableList<MutableList<Int>>):String
+    {
+        var answer: String = ""
+        for(i in 0 until h.size)
+        {
+            answer = answer + h[i][0] + 'a' + h[i][1] + 'a' + h[i][2] + 'a' + h[i][3] + 'a'
+        }
+        return answer
+    }
+    fun string_to_int(s: String): Int
+    {
+        var i : Int = 0
+        var k: Int = 1
+        var answer: Int = 0
+        while(i<s.length)
+        {
+            answer += (s[s.length-i-1].toInt() - '0'.toInt())*k
+            k= k*10
+            i++
+        }
+        return answer
+    }
+    fun decode(s : String) : MutableList<MutableList<Int>>
+    {
+        var answer: MutableList<MutableList<Int>> = mutableListOf()
+        var i : Int = 0
+        var a: Int = 0
+        var b: Int = 0
+        var c: Int = 0
+        var d: Int = 0
+        var s1: String = ""
+        while(i<s.length)
+        {
+            s1 = ""
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            a = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            b = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            c = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            d = string_to_int(s1)
+            answer.add(mutableListOf(a,b,c,d))
+            i++
+        }
+        return answer
+    }
     private var dialog: Show_Result_one_Device? = null
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coners_one_device)
-
-        signature_canvas_corners_one_device.isEnabled = true
-        signature_canvas_corners_one_device.isClickable = true
-
         signature_canvas_corners_one_device.activity = this
+
+        val usedToClear = intent.getStringExtra("usedToClear") // тип игры
+        if (usedToClear == "clear") {
+            val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+            editor.putString("corner_one_divice", "")
+            editor.apply()
+        }
+        val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        signature_canvas_corners_one_device.History = decode(prefs.getString("corner_one_divice", "").toString())
+        if (signature_canvas_corners_one_device.History.size > 0)
+        {
+
+            for(i in 0 until signature_canvas_corners_one_device.FIELD.size)
+            {
+                for(j in 0 until signature_canvas_corners_one_device.FIELD[0].size)
+                {
+                    signature_canvas_corners_one_device.FIELD[i][j] = 0
+                }
+            }
+            signature_canvas_corners_one_device.FIELD[0][5] = 1;signature_canvas_corners_one_device.FIELD[1][5] = 1;signature_canvas_corners_one_device.FIELD[2][5] = 1;
+            signature_canvas_corners_one_device.FIELD[0][6] = 1;signature_canvas_corners_one_device.FIELD[1][6] = 1;signature_canvas_corners_one_device.FIELD[2][6] = 1;
+            signature_canvas_corners_one_device.FIELD[0][7] = 1;signature_canvas_corners_one_device.FIELD[1][7] = 1;signature_canvas_corners_one_device.FIELD[2][7] = 1;
+
+
+            signature_canvas_corners_one_device.FIELD[5][0] = 2;signature_canvas_corners_one_device.FIELD[5][1] = 2;signature_canvas_corners_one_device.FIELD[5][2] = 2;
+            signature_canvas_corners_one_device.FIELD[6][0] = 2;signature_canvas_corners_one_device.FIELD[6][1] = 2;signature_canvas_corners_one_device.FIELD[6][2] = 2;
+            signature_canvas_corners_one_device.FIELD[7][0] = 2;signature_canvas_corners_one_device.FIELD[7][1] = 2;signature_canvas_corners_one_device.FIELD[7][2] = 2;
+
+            signature_canvas_corners_one_device.Black_or_grey_chip = "black"
+            for (i in signature_canvas_corners_one_device.History) {
+                signature_canvas_corners_one_device.FIELD[i[2]][i[3]] = signature_canvas_corners_one_device.FIELD[i[0]][i[1]]
+                signature_canvas_corners_one_device.FIELD[i[0]][i[1]] = 0
+                if(signature_canvas_corners_one_device.Black_or_grey_chip == "black")
+                {
+                    signature_canvas_corners_one_device.Black_or_grey_chip =  "grey"
+                }
+                else
+                {
+                    signature_canvas_corners_one_device.Black_or_grey_chip =  "black"
+                }
+            }
+            signature_canvas_corners_one_device.PHASE = true
+            for(i in  0 until signature_canvas_corners_one_device.Array_of_illumination.size)
+            {
+                for(j in 0 until signature_canvas_corners_one_device.Array_of_illumination[0].size)
+                {
+                    signature_canvas_corners_one_device.Array_of_illumination[i][j] =0
+                }
+            }
+            signature_canvas_corners_one_device.invalidate()
+        }
 
         comback_corner_one_divice.setOnClickListener {
             Log.w("GOGOGO",signature_canvas_corners_one_device.History.toString())
             if (signature_canvas_corners_one_device.History.size > 0)
             {
                 signature_canvas_corners_one_device.History.removeLast()
-
+                var data_from_memory = encode(signature_canvas_corners_one_device.History)
+                val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("corner_one_divice", data_from_memory)
+                editor.apply()
                 for(i in 0 until signature_canvas_corners_one_device.FIELD.size)
                 {
                     for(j in 0 until signature_canvas_corners_one_device.FIELD[0].size)
@@ -77,6 +197,75 @@ class ConersOneDevice : AppCompatActivity() {
 
 class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : View(context, attrs) {
 
+    fun encode(h: MutableList<MutableList<Int>>):String
+    {
+        var answer: String = ""
+        for(i in 0 until h.size)
+        {
+            answer = answer + h[i][0] + 'a' + h[i][1] + 'a' + h[i][2] + 'a' + h[i][3] + 'a'
+        }
+        return answer
+    }
+    fun string_to_int(s: String): Int
+    {
+        var i : Int = 0
+        var k: Int = 1
+        var answer: Int = 0
+        while(i<s.length)
+        {
+            answer += (s[s.length-i-1].toInt() - '0'.toInt())*k
+            k= k*10
+            i++
+        }
+        return answer
+    }
+    fun decode(s : String) : MutableList<MutableList<Int>>
+    {
+        var answer: MutableList<MutableList<Int>> = mutableListOf()
+        var i : Int = 0
+        var a: Int = 0
+        var b: Int = 0
+        var c: Int = 0
+        var d: Int = 0
+        var s1: String = ""
+        while(i<s.length)
+        {
+            s1 = ""
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            a = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            b = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            c = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            d = string_to_int(s1)
+            answer.add(mutableListOf(a,b,c,d))
+            i++
+        }
+        return answer
+    }
     fun touch_refinement_X (indent: Float,x : Float,width1: Float,size_field_x1:Int ):Float        //уточняет касания по оси x
     {
         if(x<indent)
@@ -326,7 +515,7 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
         var dialog: Show_Result_one_Device? = null
 
         if(chek_win()>0 && event!!.getAction()  == MotionEvent.ACTION_UP && !blocked) {
-            if (chek_win() == 2) {
+            if (chek_win() == 2) {3
                 dialog = Show_Result_one_Device(activity)
                 dialog?.showResult_one_device("СЕРЫЕ ПОБЕДИЛИ", "AngleGame", activity)
                 return true
@@ -356,6 +545,10 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
                     {
                         FIELD[X][Y] = FIELD[lastX][lastY]         //перемещение фишки
                         History.add(mutableListOf(lastX,lastY,X,Y))
+                        var data_from_memory = encode(History)
+                        val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                        editor.putString("corner_one_divice", data_from_memory)
+                        editor.apply()
                         FIELD[lastX][lastY] = 0
                         if(Black_or_grey_chip == "black")          //смена игроков, чтобы нельзя было сделать ходы подряд одному игроку
                         {

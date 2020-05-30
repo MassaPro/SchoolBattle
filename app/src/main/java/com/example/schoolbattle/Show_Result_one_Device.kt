@@ -28,17 +28,20 @@ class Show_Result_one_Device(activity: Activity) {
             }
             if(Game_Type == "AngleGame")
             {
-                val intent = Intent(type_activity,ConersOneDevice::class.java)
+                val intent = Intent(type_activity,ConersOneDevice::class.java).apply {
+                    putExtra("usedToClear", "clear")}
                 type_activity.startActivity(intent)
             }
             if(Game_Type == "DotGame")
             {
-                val intent = Intent(type_activity,DotGameOneDivice::class.java)
+                val intent = Intent(type_activity,DotGameOneDivice::class.java).apply {
+                    putExtra("usedToClear", "clear")}
                 type_activity.startActivity(intent)
             }
             if(Game_Type == "SnakeGame")
             {
-                val intent = Intent(type_activity,SnakeGameOneDivice::class.java)
+                val intent = Intent(type_activity,SnakeGameOneDivice::class.java).apply {
+                    putExtra("usedToClear", "clear")}
                 type_activity.startActivity(intent)
             }
             if(Game_Type == "BoxGame")
@@ -49,7 +52,8 @@ class Show_Result_one_Device(activity: Activity) {
             }
             if(Game_Type == "VirusGame")
             {
-                val intent = Intent(type_activity,VirusOneDivice::class.java)
+                val intent = Intent(type_activity,VirusOneDivice::class.java).apply {
+                    putExtra("usedToClear", "clear")}
                 type_activity.startActivity(intent)
             }
         }

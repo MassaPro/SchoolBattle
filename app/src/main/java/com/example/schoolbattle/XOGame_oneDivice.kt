@@ -130,6 +130,10 @@ class XOGame_oneDivice : AppCompatActivity() {
             if (signature_canvas_xog_one_device.History.size > 0)            //TODO дописать когда самый первый ход убираем
             {
                 signature_canvas_xog_one_device.History.removeLast()
+                var data_from_memory = encode(signature_canvas_xog_one_device.History)
+                val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("xog_one_divice", data_from_memory)
+                editor.apply()
                 for (i in 0 until signature_canvas_xog_one_device.FIELD.size) {
                     for (j in 0 until signature_canvas_xog_one_device.FIELD[0].size) {
                         signature_canvas_xog_one_device.FIELD[i][j] = 0

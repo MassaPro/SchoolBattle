@@ -9,9 +9,71 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import kotlinx.android.synthetic.main.activity_snake_game_one_divice.*
+import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
 import java.lang.Math.abs
 
 class SnakeGameOneDivice : AppCompatActivity() {
+
+    fun encode(h: MutableList<Triple<Int,Int,Int>>):String
+    {
+        var answer: String = ""
+        for(i in 0 until h.size)
+        {
+            answer = answer + h[i].first.toString() + 'a' + h[i].second.toString() + 'a' + h[i].third.toString() + 'a'
+        }
+        return answer
+    }
+    fun string_to_int(s: String): Int
+    {
+        var i : Int = 0
+        var k: Int = 1
+        var answer: Int = 0
+        while(i<s.length)
+        {
+            answer += (s[s.length-i-1].toInt() - '0'.toInt())*k
+            k= k*10
+            i++
+        }
+        return answer
+    }
+    fun decode(s : String) : MutableList<Triple<Int,Int,Int>>
+    {
+        var answer: MutableList<Triple<Int,Int,Int>> = mutableListOf()
+        var i : Int = 0
+        var a: Int = 0
+        var b: Int = 0
+        var c: Int = 0
+        var s1: String = ""
+        while(i<s.length)
+        {
+            s1 = ""
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            a = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            b = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            c = string_to_int(s1)
+            answer.add(Triple(a,b,c))
+            i++
+        }
+        return answer
+    }
 
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,9 +82,46 @@ class SnakeGameOneDivice : AppCompatActivity() {
 
         signature_canvas_snake_one_device.activity = this
 
+        val usedToClear = intent.getStringExtra("usedToClear") // тип игры
+        if (usedToClear == "clear") {
+            val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+            editor.putString("snake_one_divice", "")
+            editor.apply()
+        }
+        val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        signature_canvas_snake_one_device.History = decode(prefs.getString("snake_one_divice", "").toString())
+        if (signature_canvas_snake_one_device.History.size > 0) {
+            signature_canvas_snake_one_device.red_or_blue = "red"
+            signature_canvas_snake_one_device.Snake_1.clear()
+            signature_canvas_snake_one_device.Snake_2.clear()
+            if (signature_canvas_snake_one_device.History.size > 0) {
+                for (i in 0 until signature_canvas_snake_one_device.FIELD.size) {
+                    for (j in 0 until signature_canvas_snake_one_device.FIELD[0].size) {
+                        signature_canvas_snake_one_device.FIELD[i][j] = 0
+                    }
+                }
+                for (i in signature_canvas_snake_one_device.History) {
+                    signature_canvas_snake_one_device.FIELD[i.first][i.second] = i.third
+                    if (signature_canvas_snake_one_device.red_or_blue == "red") {
+                        signature_canvas_snake_one_device.Snake_1.add(Pair(i.first, i.second))
+                        signature_canvas_snake_one_device.red_or_blue = "blue"
+                    } else {
+                        signature_canvas_snake_one_device.Snake_2.add(Pair(i.first, i.second))
+                        signature_canvas_snake_one_device.red_or_blue = "red"
+                    }
+
+                }
+            }
+            signature_canvas_snake_one_device.invalidate()
+        }
+
         comback_snake_one_divice.setOnClickListener {
             if (signature_canvas_snake_one_device.History.size > 0) {
                 signature_canvas_snake_one_device.History.removeLast()
+                var data_from_memory = encode( signature_canvas_snake_one_device.History)
+                val editor =getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("snake_one_divice", data_from_memory)
+                editor.apply()
                 signature_canvas_snake_one_device.red_or_blue = "red"
                 signature_canvas_snake_one_device.Snake_1.clear()
                 signature_canvas_snake_one_device.Snake_2.clear()
@@ -51,6 +150,66 @@ class SnakeGameOneDivice : AppCompatActivity() {
 }
 
 class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, attrs) {
+    fun encode(h: MutableList<Triple<Int,Int,Int>>):String
+    {
+        var answer: String = ""
+        for(i in 0 until h.size)
+        {
+            answer = answer + h[i].first.toString() + 'a' + h[i].second.toString() + 'a' + h[i].third.toString() + 'a'
+        }
+        return answer
+    }
+    fun string_to_int(s: String): Int
+    {
+        var i : Int = 0
+        var k: Int = 1
+        var answer: Int = 0
+        while(i<s.length)
+        {
+            answer += (s[s.length-i-1].toInt() - '0'.toInt())*k
+            k= k*10
+            i++
+        }
+        return answer
+    }
+    fun decode(s : String) : MutableList<Triple<Int,Int,Int>>
+    {
+        var answer: MutableList<Triple<Int,Int,Int>> = mutableListOf()
+        var i : Int = 0
+        var a: Int = 0
+        var b: Int = 0
+        var c: Int = 0
+        var s1: String = ""
+        while(i<s.length)
+        {
+            s1 = ""
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            a = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            b = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            c = string_to_int(s1)
+            answer.add(Triple(a,b,c))
+            i++
+        }
+        return answer
+    }
     fun correction_touch (x: Float,y : Float) :  Boolean // если нажали примерно туда
     {
         if( (circlex-x)*(circlex-x) + (circley - y)*(circley - y) < (step/2f)*(step/2f))
@@ -396,6 +555,10 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
                                 FIELD[i][j] = 1
                                 red_or_blue = "blue"
                                 History.add(Triple(i,j,FIELD[i][j]))
+                                var data_from_memory = encode(History)
+                                val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                editor.putString("snake_one_divice", data_from_memory)
+                                editor.apply()
                             }
                             else
                             {
@@ -405,6 +568,10 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
                                     FIELD[i][j] = 1
                                     red_or_blue = "blue"
                                     History.add(Triple(i,j,FIELD[i][j]))
+                                    var data_from_memory = encode(History)
+                                    val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                    editor.putString("snake_one_divice", data_from_memory)
+                                    editor.apply()
                                 }
                             }
                         }
@@ -416,6 +583,10 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
                                 FIELD[i][j] = 2
                                 red_or_blue = "red"
                                 History.add(Triple(i,j,FIELD[i][j]))
+                                var data_from_memory = encode(History)
+                                val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                editor.putString("snake_one_divice", data_from_memory)
+                                editor.apply()
                             }
                             else
                             {
@@ -425,6 +596,10 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
                                     FIELD[i][j] = 2
                                     red_or_blue = "red"
                                     History.add(Triple(i,j,FIELD[i][j]))
+                                    var data_from_memory = encode(History)
+                                    val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                    editor.putString("snake_one_divice", data_from_memory)
+                                    editor.apply()
                                 }
                             }
                         }
