@@ -10,6 +10,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomnavigation.LabelVisibilityMode.LABEL_VISIBILITY_AUTO
 import com.google.android.material.bottomnavigation.LabelVisibilityMode.LABEL_VISIBILITY_SELECTED
 import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
@@ -78,7 +79,7 @@ class XOGame_oneDivice : AppCompatActivity() {
         return answer
     }
     private var dialog: Show_Result_one_Device? = null
-
+    private var dialog_parametrs: Show_parametr_one_divice_one_Device? = null
     @ExperimentalStdlibApi
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
@@ -114,7 +115,6 @@ class XOGame_oneDivice : AppCompatActivity() {
         signature_canvas_xog_one_device.invalidate()
 
         signature_canvas_xog_one_device.setOnClickListener{
-            Toast.makeText(this,"xog", Toast.LENGTH_LONG).show()
             if(signature_canvas_xog_one_device.EXODUS == 1)
             {
                 dialog = Show_Result_one_Device(this@XOGame_oneDivice)
@@ -127,35 +127,62 @@ class XOGame_oneDivice : AppCompatActivity() {
                 dialog?.showResult_one_device("НОЛИКИ ПОБЕДИЛИ","XOGame",this)
             }
         }
-
-      /*  comback_xog_one_divice.setOnClickListener {
-            if (signature_canvas_xog_one_device.History.size > 0)            //TODO дописать когда самый первый ход убираем
-            {
-                signature_canvas_xog_one_device.History.removeLast()
-                var data_from_memory = encode(signature_canvas_xog_one_device.History)
-                val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                editor.putString("xog_one_divice", data_from_memory)
-                editor.apply()
-                for (i in 0 until signature_canvas_xog_one_device.FIELD.size) {
-                    for (j in 0 until signature_canvas_xog_one_device.FIELD[0].size) {
-                        signature_canvas_xog_one_device.FIELD[i][j] = 0
-                    }
-                }
-                signature_canvas_xog_one_device.cross_or_nul = "cross"
-                for (i in signature_canvas_xog_one_device.History) {
-                    signature_canvas_xog_one_device.FIELD[i.first][i.second] = i.third
-                    if (i.third == 1) {
-                        signature_canvas_xog_one_device.cross_or_nul = "null"
-                    } else {
-                        signature_canvas_xog_one_device.cross_or_nul = "cross"
-                    }
-                }
-                signature_canvas_xog_one_device.invalidate()
-            }
+        to_back_xog_one_divice.setOnClickListener {
+            val intent = Intent(this, NewGameActivity::class.java)
+            intent.putExtra("playType", 2)
+            startActivity(intent)
         }
-        */
+
+        bottom_navigation_xog_one_divice.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.page_1 ->{
+
+                }
+                R.id.page_2 ->{
+                    dialog_parametrs = Show_parametr_one_divice_one_Device(this@XOGame_oneDivice)
+                    dialog_parametrs?.showResult_one_device()
+                }
+                R.id.page_3 ->{
+                    this.finish()
+                    val intent = Intent(this, XOGame_oneDivice::class.java).apply {
+                        putExtra("usedToClear", "clear")}
+                    startActivity(intent)
+                }
+                R.id.page_4 ->{
+
+                        if (signature_canvas_xog_one_device.History.size > 0)            //TODO дописать когда самый первый ход убираем
+                        {
+                            signature_canvas_xog_one_device.History.removeLast()
+                            var data_from_memory = encode(signature_canvas_xog_one_device.History)
+                            val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                            editor.putString("xog_one_divice", data_from_memory)
+                            editor.apply()
+                            for (i in 0 until signature_canvas_xog_one_device.FIELD.size) {
+                                for (j in 0 until signature_canvas_xog_one_device.FIELD[0].size) {
+                                    signature_canvas_xog_one_device.FIELD[i][j] = 0
+                                }
+                            }
+                            signature_canvas_xog_one_device.cross_or_nul = "cross"
+                            for (i in signature_canvas_xog_one_device.History) {
+                                signature_canvas_xog_one_device.FIELD[i.first][i.second] = i.third
+                                if (i.third == 1) {
+                                    signature_canvas_xog_one_device.cross_or_nul = "null"
+                                } else {
+                                    signature_canvas_xog_one_device.cross_or_nul = "cross"
+                                }
+                            }
+                            signature_canvas_xog_one_device.invalidate()
+                        }
+                    }
+
+            }
+            true
+        }
+
+
     }
 }
+
 
 
 

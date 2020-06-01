@@ -7,5 +7,14 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="BottomNavigationView_one_divice"
+        parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="BottomNavigationView.Active_one_divice"
+        parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">15sp</item>
+    </style>
 
 </resources>
