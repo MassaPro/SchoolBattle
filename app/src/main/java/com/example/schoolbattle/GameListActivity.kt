@@ -16,6 +16,10 @@ class GameListActivity : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        val globalName = prefs?.getString("username", "")
+        //toolbarName.text = globalName
+        updateRecycler(globalName.toString())
         //val navView: BottomNavigationView = findViewById(R.id.nav_view)
         //navView.selectedItemId = R.id.navigation_dashboard
     }
@@ -27,6 +31,8 @@ class GameListActivity : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.activity_settings, container, false)
     }
+
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

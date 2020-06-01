@@ -767,10 +767,7 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
                             a[j][i]  = 2
                             p = find(2,a,16,11)
                         }
-
-                        positionData.child("FIELD").child("$i").child("$j").setValue(FIELD[i][j].toString())
-                        positionData.child("a").child("$j").child("$i").setValue(a[j][i].toString())
-                        invalidate()
+                        //invalidate()
                     }
                 }
                 y1+= step
@@ -778,7 +775,16 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
             x1  += step
             y1 = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())
         }
-
+        for (i in 0..size_field_x) {
+            for (j in 0..size_field_y) {
+                if (a[j][i] != 0) {
+                    positionData.child("a").child("$j").child("$i").setValue(a[j][i].toString())
+                    positionData.child("FIELD").child("$i").child("$j")
+                        .setValue(FIELD[i][j].toString())
+                }
+            }
+        }
+        invalidate()
         return true
     }
 
