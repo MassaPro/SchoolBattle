@@ -8,16 +8,17 @@
     android:background="@android:color/white">
 
     <FrameLayout
+        android:id="@+id/frameLayout2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="70dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="70dp"
-        app:layout_constraintBottom_toTopOf="@+id/down_player_xog_one_device"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/up_player_xog_one_device">
+        app:layout_constraintTop_toBottomOf="@+id/to_back_xog_one_divice">
 
         <com.example.schoolbattle.CanvasView_xog_one_device
             android:id="@+id/signature_canvas_xog_one_device"
@@ -26,38 +27,25 @@
             android:textColor="#FFFFFF" />
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/up_player_xog_one_device"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.046"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.02" />
 
-    <TextView
-        android:id="@+id/down_player_xog_one_device"
-        android:layout_width="wrap_content"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="24sp"
+        app:backgroundTint = "#e6e6e6"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.979" />
+        app:menu="@menu/menu_for_game_one_divice" />
+
 
     <Button
-        android:id="@+id/comback_xog_one_divice"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Вернуть ход назад"
-        tools:layout_editor_absoluteX="177dp"
-        tools:layout_editor_absoluteY="652dp" />
+        android:id="@+id/to_back_xog_one_divice"
+        android:layout_width="100dp"
+        android:layout_height="56dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

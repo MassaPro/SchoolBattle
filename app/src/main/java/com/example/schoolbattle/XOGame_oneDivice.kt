@@ -10,6 +10,8 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.LabelVisibilityMode.LABEL_VISIBILITY_AUTO
+import com.google.android.material.bottomnavigation.LabelVisibilityMode.LABEL_VISIBILITY_SELECTED
 import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
 
 
@@ -82,10 +84,10 @@ class XOGame_oneDivice : AppCompatActivity() {
         super.onCreate(savedInstance)
 
 
-
         //var h : MutableList<Triple<Int,Int,Int>> =  mutableListOf(Triple(231,231,777),Triple(231,231,777),Triple(231,231,777))
         //Log.w("momlol",decode(encode(h)).toString())
         setContentView(R.layout.activity_x_o_game_one_divice)
+
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
         if (usedToClear == "clear") {
@@ -126,7 +128,7 @@ class XOGame_oneDivice : AppCompatActivity() {
             }
         }
 
-        comback_xog_one_divice.setOnClickListener {
+      /*  comback_xog_one_divice.setOnClickListener {
             if (signature_canvas_xog_one_device.History.size > 0)            //TODO дописать когда самый первый ход убираем
             {
                 signature_canvas_xog_one_device.History.removeLast()
@@ -151,6 +153,7 @@ class XOGame_oneDivice : AppCompatActivity() {
                 signature_canvas_xog_one_device.invalidate()
             }
         }
+        */
     }
 }
 

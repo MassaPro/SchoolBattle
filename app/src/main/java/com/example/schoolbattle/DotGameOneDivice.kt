@@ -121,7 +121,7 @@ class DotGameOneDivice : AppCompatActivity() {
             }
             signature_canvas_dots_one_divice.invalidate()
         }
-
+        //comback_dots_one_divice.setVisibility(View.GONE);
         comback_dots_one_divice.setOnClickListener {
             if (signature_canvas_dots_one_divice.History.size > 0) {
                 signature_canvas_dots_one_divice.History.removeLast()
