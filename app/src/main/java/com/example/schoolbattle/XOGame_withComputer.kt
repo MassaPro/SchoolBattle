@@ -1,5 +1,6 @@
 package com.example.schoolbattle
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.*
@@ -11,8 +12,11 @@ import android.view.MotionEvent
 import android.view.View
 import kotlinx.android.synthetic.main.activity_x_o_game_with_computer.*
 
+val XOGame_withComp: Activity = Activity()
+
 class XOGame_withComputer : AppCompatActivity() {
     private var dialog: Show_Result_with_Computer? = null
+    private var dialog_parametrs: Show_parametr_with_computer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +32,7 @@ class XOGame_withComputer : AppCompatActivity() {
 
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         var data_from_memory = prefs.getString("xog_with_computer", "").toString()
-        Log.w("TAG123", data_from_memory)
+        //Log.w("TAG123", data_from_memory)
         for (i in 0..data_from_memory.length - 1) {
             if (i % 2 == 0) {
                 if (i % 4 == 0) {
@@ -59,13 +63,61 @@ class XOGame_withComputer : AppCompatActivity() {
             }
         }
 
-        clearXOGameWithComputerButton.setOnClickListener {
-            val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-            editor.putString("xog_with_computer", "")
-            editor.apply()
-            finish()
-            val intent = Intent(this,XOGame_withComputer::class.java)
+        to_back_xog_with_computer.setOnClickListener {
+            val intent = Intent(this, NewGameActivity::class.java)
+            intent.putExtra("playType", 3)
+            this.finish()
             startActivity(intent)
+        }
+
+
+        bottom_navigation_xog_with_computer.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.page_1 ->{
+
+                }
+                R.id.page_2 ->{
+                    dialog_parametrs = Show_parametr_with_computer(this@XOGame_withComputer)
+                    dialog_parametrs?.showResult_with_computer(this)
+                }
+                R.id.page_3 ->{
+                    this.finish()
+                    val intent = Intent(this, XOGame_withComputer::class.java).apply {
+                        putExtra("usedToClear", "clear")
+                    }
+                    startActivity(intent)
+                }
+                R.id.page_4 ->{
+                    val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                    var data_from_memory = prefs.getString("xog_with_computer", "").toString()
+                    var sz_of_delete = 4
+                    if (signature_canvas_xog_with_computer.EXODUS == 1)
+                        sz_of_delete = 2
+                    if (data_from_memory.length >= 4) {
+                        var new_data = ""
+                        for (i in 0..data_from_memory.length - sz_of_delete - 1)
+                            new_data += data_from_memory[i]
+
+                        for (i in (data_from_memory.length - sz_of_delete - 1)..(data_from_memory.length - 1)) {
+                            if (i % 2 == 0) {
+                                signature_canvas_xog_with_computer.FIELD[data_from_memory[i] - '0'][data_from_memory[i + 1] - '0'] = 0
+                            }
+                        }
+
+                        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                        editor.putString("xog_with_computer", new_data)
+                        editor.apply()
+
+                        signature_canvas_xog_with_computer.invalidate()
+
+                        signature_canvas_xog_with_computer.blocked = false
+                        signature_canvas_xog_with_computer.EXODUS = 0
+                        signature_canvas_xog_with_computer.cross_or_nul = "cross"
+                    }
+                }
+
+            }
+            true
         }
 
     }
