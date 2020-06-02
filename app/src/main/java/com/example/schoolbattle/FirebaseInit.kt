@@ -30,6 +30,8 @@ class RecyclerSet {
                 Intent(currentContext, XOGameActivity::class.java)
             } else if (el.name.contains("DotGame")){
                 Intent(currentContext, DotGameActivity::class.java)
+            } else if (el.name.contains("BoxGame")){
+                Intent(currentContext, BoxGameActivity::class.java)
             } else {
                 Intent(currentContext, StupidGameActivity::class.java)
             }

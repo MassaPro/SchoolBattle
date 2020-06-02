@@ -76,6 +76,11 @@ class GameListActivity : Fragment() {
                         .java).apply {
                         putExtra("opponentName", item.name)
                     }
+                } else if (item.name.contains("BoxGame")){
+                    Intent(v.context, BoxGameActivity::class
+                        .java).apply {
+                        putExtra("opponentName", item.name)
+                    }
                 } else {
                     Intent(v.context, StupidGameActivity::class
                         .java).apply {

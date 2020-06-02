@@ -530,7 +530,7 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
         circley = event!!.y
         var X: Int = touch_refinement_for_Array_X(indent,circlex, step)
         var Y: Int = touch_refinement_for_Array_Y(indent,circley, height, size_field_y, step, advertising_line)      //перевод последнего нажатия в координаты массива
-        if (touch_refinement_Y(indent,circley, height, size_field_y, step, advertising_line) > 0 && touch_refinement_X(indent,circlex,width,size_field_x)>0)     //постановка нового обЪекта, проверка что на поле
+        if (X in 0..7 && Y in 0..7 && touch_refinement_Y(indent,circley, height, size_field_y, step, advertising_line) > 0 && touch_refinement_X(indent,circlex,width,size_field_x)>0)     //постановка нового обЪекта, проверка что на поле
         {
             if ((X != lastX || Y != lastY ) || (exception == true) )   //если касание в новую область
             {

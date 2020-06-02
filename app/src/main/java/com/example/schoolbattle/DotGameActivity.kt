@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_dot_game.*
+import kotlinx.android.synthetic.main.activity_stupid_game_two_players.*
 
 //TODO , рисовать ребра только один раз до этого узнав, также можно не включать в цепочки вершины которые окружены 6 такими же вершинами
 
@@ -91,9 +92,57 @@ class DotGameActivity: AppCompatActivity() {
                 signature_canvas3.red_or_blue = 2 - cnt % 2
                 if (signature_canvas3.isFirstMove == (cnt % 2 == 0)) signature_canvas3.blocked = false
                 signature_canvas3.invalidate()
-                if (cnt > 20) {
+                fun check_win() : Int
+                {
+                    var cnt1 : Int = 0
+                    var cnt2 : Int = 0
+                    for(i in 0 until signature_canvas3.FIELD.size)
+                    {
+                        for(j in 0 until signature_canvas3.FIELD[0].size)
+                        {
+                            if(signature_canvas3.a[j][i]==0)
+                            {
+                                return 0
+                            }
+                            if(signature_canvas3.a[j][i]!= signature_canvas3.FIELD[i][j])
+                            {
+                                if(signature_canvas3.a[j][i]==1)
+                                {
+                                    cnt1++
+                                }
+                                else
+                                {
+                                    cnt2++
+                                }
+                            }
+                        }
+                    }
+                    if(cnt1>cnt2)
+                    {
+                        return 1
+                    }
+                    else
+                    {
+                        if(cnt1 == cnt2 )
+                        {
+                            return 3
+                        }
+                        else
+                        {
+                            return 2
+                        }
+                    }
+                }
+                val ch = check_win()
+                if (ch != 0) {
                     signature_canvas3.blocked = true
-                    val res = "Тестовое состояние, игра заканчивается на 21й точке"
+                    val res = if (ch == 2 && yu == '0' || ch == 1 && yu == '1') {
+                        "Победа"
+                    } else if (ch == 2 && yu == '1' || ch == 1 && yu == '0') {
+                        "Поражение"
+                    } else {
+                        "Ничья"
+                    }
                     myRef.child("DotGames").child(if (opponentsName < yourName)
                         opponentsName + '_' + yourName else yourName + '_' + opponentsName
                     ).removeValue()
