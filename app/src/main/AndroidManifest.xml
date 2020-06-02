@@ -11,6 +11,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".SnakeGameActivity"></activity>
         <activity android:name=".BoxGameActivity" />
+        <activity android:name=".Show_parametr_with_computer"></activity>
         <activity android:name=".VirusOneDivice" />
         <activity android:name=".BoxGameOneDivice" />
         <activity android:name=".SnakeGameOneDivice" />

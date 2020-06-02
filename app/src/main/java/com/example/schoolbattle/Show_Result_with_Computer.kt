@@ -26,6 +26,7 @@ class Show_Result_with_Computer(activity: Activity) {
                 val intent = Intent(type_activity, XOGame_withComputer::class.java).apply {
                     putExtra("usedToClear", "clear")
                 }
+                type_activity.finish()
                 type_activity.startActivity(intent)
             }
         }
