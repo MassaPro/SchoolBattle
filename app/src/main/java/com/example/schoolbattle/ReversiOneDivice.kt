@@ -490,7 +490,7 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
                     if (j == y) {
                         if (i < x - 1) {
                             for (p in i + 1 until x) {
-                                if (FIELD[p][y] == 0 || FIELD[p][y] == FIELD[p][y]) {
+                                if (FIELD[p][y] == 0 || FIELD[p][y] == FIELD[x][y]) {
                                     flag = false
                                 }
                             }
@@ -501,6 +501,7 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
                             }
                         }
                         if (i > x + 1) {
+                            Log.w("kokol","kokol")
                             for (p in x + 1 until i) {
                                 if (FIELD[p][y] == 0 || FIELD[p][y] == FIELD[x][y]) {
                                     flag = false
@@ -543,25 +544,25 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
                     {
                         if (i > x + 1) {
                             for (p in 1 until i - x) {
-                                if (FIELD[x + p][j + p] == 0 || FIELD[x + p][j + p] == FIELD[x][y]) {
+                                if (FIELD[x + p][y - p] == 0 || FIELD[x + p][y - p] == FIELD[x][y]) {
                                     flag = false
                                 }
                             }
                             if (flag) {
                                 for (p in 1 until i - x) {
-                                    FIELD[x + p][j + p] = FIELD[x][y]
+                                    FIELD[x + p][y - p] = FIELD[x][y]
                                 }
                             }
                         }
                         if (i + 1 < x) {
                             for (p in 1 until x - i) {
-                                if (FIELD[i + p][y + p] == 0 || FIELD[i + p][y + p] == FIELD[x][y]) {
+                                if (FIELD[x - p][y + p] == 0 || FIELD[x - p][y + p] == FIELD[x][y]) {
                                     flag = false
                                 }
                             }
                             if (flag) {
                                 for (p in 1 until x - i) {
-                                    FIELD[i + p][y + p] = FIELD[x][y]
+                                    FIELD[x - p][y + p] = FIELD[x][y]
                                 }
                             }
                         }
