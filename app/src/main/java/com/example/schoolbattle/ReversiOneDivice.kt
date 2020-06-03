@@ -737,6 +737,30 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
                 {
                     illumination(2);
                 }
+                var flag: Boolean = true
+                for(i in 0 until Array_of_illumination.size)
+                {
+                    for(j in 0 until Array_of_illumination[0].size)
+                    {
+                        if(Array_of_illumination[i][j] ==1)
+                        {
+                            flag = false
+                        }
+                    }
+                }
+                if(flag)                                    //если игрок не может походить то ход переходит другому
+                {
+                    if(Black_or_grey_chip == "black")
+                    {
+                        Black_or_grey_chip = "grey"
+                        illumination(2);
+                    }
+                    else
+                    {
+                        Black_or_grey_chip = "black"
+                        illumination(1);
+                    }
+                }
                 invalidate()
             }
         }
