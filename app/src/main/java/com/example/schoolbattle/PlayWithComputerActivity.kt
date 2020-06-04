@@ -17,9 +17,48 @@ class PlayWithComputerActivity : AppCompatActivity() {
 
         if(gameType == "XOGame")
         {
-            finish()
             val intent = Intent(this,XOGame_withComputer::class.java)
             startActivity(intent)
+            finish()
+        }
+
+        if(gameType == "AngleGame")
+        {
+            val intent = Intent(this,ConersWithComputer::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        if(gameType == "DotGame")
+        {
+            val intent = Intent(this,DotGameWithComputer::class.java)
+            startActivity(intent)
+            finish()
+        }
+        if(gameType == "SnakeGame")
+        {
+            val intent = Intent(this,SnakeGameWithComputer::class.java)
+            startActivity(intent)
+            finish()
+        }
+        if(gameType == "BoxGame")
+        {
+            val intent = Intent(this,BoxGameWithComputer::class.java)
+            startActivity(intent)
+            finish()
+        }
+        /*if(gameType == "VirusGame")       // ADD
+        {
+            val intent = Intent(this,VirusWithComputer::class.java)
+            startActivity(intent)
+            finish()
+        }*/
+
+        if(gameType == "Reversi")
+        {
+            val intent = Intent(this,ReversiWithComputer::class.java)
+            startActivity(intent)
+            finish()
         }
 
     }
