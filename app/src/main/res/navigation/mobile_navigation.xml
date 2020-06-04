@@ -16,4 +16,15 @@
         android:name="com.example.schoolbattle.GameListActivity"
         android:label="@string/title_dashboard"
         tools:layout="@layout/activity_settings" />
+
+    <fragment
+        android:id="@+id/navigation_social"
+        android:name="com.example.schoolbattle.SocialActivity"
+        android:label="@string/title_activity_social"
+        tools:layout="@layout/activity_social" />
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.example.schoolbattle.SettingsFragmentActivity"
+        android:label="Настройки"
+        tools:layout="@layout/activity_settings_fragment" />
 </navigation>

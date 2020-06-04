@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -95,7 +96,7 @@ class MainActivity : Fragment() {
 
         }
        // (activity as AppCompatActivity).setSupportActionBar(findViewById(R.id.my_toolbar))
-        //setSupportActionBar(findViewById(R.id.my_toolbar))
+        (activity as AppCompatActivity?)!!.setSupportActionBar(my_toolbar)
 
         val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val globalName = prefs?.getString("username", "")

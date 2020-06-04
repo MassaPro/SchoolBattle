@@ -30,8 +30,8 @@ class StupidGameActivity : AppCompatActivity() {
         val gameName = intent?.getStringExtra("gameName").toString()
 
         is_pressed = true
-        button.setOnClickListener {
-            button.isEnabled = false
+        //button.setOnClickListener {
+          //  button.isEnabled = false
             Toast.makeText(this, "onCreate", Toast.LENGTH_LONG).show()
 
             eventListener = myRef.addValueEventListener(object : ValueEventListener {
@@ -70,7 +70,7 @@ class StupidGameActivity : AppCompatActivity() {
                     }
                 }
             })
-        }
+        //}
     }
 
     override fun onPause() {

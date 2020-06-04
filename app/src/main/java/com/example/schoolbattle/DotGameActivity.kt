@@ -824,6 +824,7 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
             x1  += step
             y1 = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())
         }
+        invalidate()
         for (i in 0..size_field_x) {
             for (j in 0..size_field_y) {
                 if (a[j][i] != 0) {
@@ -833,7 +834,6 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
                 }
             }
         }
-        invalidate()
         return true
     }
 
