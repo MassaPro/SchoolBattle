@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_game_list.*
 
+public var Design: String = "Egypt"
 
 lateinit var gamesRecycler: RecyclerView
 
