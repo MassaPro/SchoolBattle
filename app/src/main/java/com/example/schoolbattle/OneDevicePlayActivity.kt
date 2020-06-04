@@ -54,6 +54,12 @@ class OneDevicePlayActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+        if(gameType == "Reversi")
+        {
+            val intent = Intent(this,ReversiOneDivice::class.java)
+            startActivity(intent)
+            finish()
+        }
 
 
     }

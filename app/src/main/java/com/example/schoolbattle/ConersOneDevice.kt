@@ -197,6 +197,55 @@ class ConersOneDevice : AppCompatActivity() {
 
 class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : View(context, attrs) {
 
+    fun check_block_corners(X: Int,Y: Int) : Boolean
+    {
+        if(Black_or_grey_chip == "black")
+        {
+            if(FIELD[X][Y]==1)
+            {                                //ПРОВЕРЯЕМ ПРОТИВОПОЛОЖНЫЙ УГОЛ, ЕСЛИ ОН ПУСТ, ТО ЗАПРЕЩАЕМ ДВИГАТЬ ФИШКУ НЕ ИЗ СВОЕГО УГЛА
+                if(FIELD[5][0] !=2 && FIELD[5][1] !=2 && FIELD[5][2] !=2 &&
+                    FIELD[6][0] !=2&& FIELD[6][1] !=2&& FIELD[6][2] !=2 &&
+                    FIELD[7][0] !=2 && FIELD[7][1]!=2  && FIELD[7][2] !=2){
+                    if(X>2)
+                    {
+                        return false
+                    }
+                    if(Y<5)
+                    {
+                        return false
+                    }
+                }
+                return true
+            }
+            else
+            {
+                return false
+            }
+        }
+        else
+        {
+            if(FIELD[X][Y]==2)
+            {
+                if(FIELD[0][5] !=1 && FIELD[1][5] !=1 && FIELD[2][5] !=1 &&
+                    FIELD[0][6] !=1 && FIELD[1][6] !=1 && FIELD[2][6] !=1 &&
+                    FIELD[0][7] !=1 && FIELD[1][7]!=1 && FIELD[2][7] !=1){
+                    if(X<5)
+                    {
+                        return false
+                    }
+                    if(Y>2)
+                    {
+                        return false
+                    }
+                }
+                return true
+            }
+            else
+            {
+                return false
+            }
+        }
+    }
     fun encode(h: MutableList<MutableList<Int>>):String
     {
         var answer: String = ""
@@ -491,7 +540,7 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
         if(PHASE == false)
         {
             if(circley> height - advertising_line - width+2*indent && y < height - advertising_line){
-                if( touch_refinement_X (indent,circlex,width,size_field_x)>0)
+                if( touch_refinement_X (indent,circlex,width,size_field_x)>0 && touch_refinement_Y(indent,circley, height, size_field_y, step, advertising_line)>=0f)
                 {
                     canvas?.drawBitmap( right_illumination, touch_refinement_X(indent,circlex, width, size_field_x), touch_refinement_Y(indent,circley, height, size_field_y, step, advertising_line), paint)
                 }
@@ -574,7 +623,7 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
                 {
                     var s: Int = 0
                     //   Log.d("DOPO",X.toString()+" "+ Y.toString() + " " + lastX.toString() + " " + lastY.toString())
-                    if ((FIELD[X][Y] == 1 && Black_or_grey_chip == "black") || (FIELD[X][Y] == 2 && Black_or_grey_chip == "grey")   )       //если подсвечивается фишка
+                    if ( ((FIELD[X][Y] == 1 && Black_or_grey_chip == "black") || (FIELD[X][Y] == 2 && Black_or_grey_chip == "grey"))  &&   check_block_corners(X,Y))       //если подсвечивается фишка
                     {
 
                         Array_of_illumination[X][Y] = -1

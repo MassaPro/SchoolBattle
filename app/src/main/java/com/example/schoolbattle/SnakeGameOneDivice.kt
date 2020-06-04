@@ -315,7 +315,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
     var border_1: Paint = Paint()
     var border_2: Paint = Paint()
 
-    var FIELD = Array(10){IntArray(10)}     //для фишеК
+    var FIELD = Array(9){IntArray(9)}     //для фишеК
     var A: MutableList<Pair<Int,Int>> = mutableListOf()
     var TREE_OF_WAYS: MutableList<MutableList<Pair<Int,Int>>> = mutableListOf()
     var CELLS = Array(10){Array(15){IntArray(6)} }            //массив клеток в которых мы будем проводить ребра
@@ -377,8 +377,8 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
 
 
         radius_of_point = 8f
-        size_field_x  = 11
-        size_field_y  = 11
+        size_field_x  = 10
+        size_field_y  = 10
         indent = 0f //оступ, чтобы можно было тыкнуть в границу
         width = getWidth().toFloat() - 2*indent
         height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)

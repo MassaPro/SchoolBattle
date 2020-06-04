@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".ReversiOneDivice"></activity>
         <activity android:name=".SnakeGameActivity" />
         <activity android:name=".BoxGameActivity" />
         <activity android:name=".Show_parametr_with_computer" />
