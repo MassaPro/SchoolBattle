@@ -319,7 +319,7 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
 
 
 
-    var icon_cross : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cross)       //картинки крестиков и нулей
+    var icon_cross : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cross_egypt)       //картинки крестиков и нулей
     var icon_null: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.circle_null)
 
     var icon_green:  Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.green_icon)
