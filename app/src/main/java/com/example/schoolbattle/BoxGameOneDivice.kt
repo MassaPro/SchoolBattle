@@ -2,6 +2,7 @@ package com.example.schoolbattle
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -83,11 +84,27 @@ class BoxGameOneDivice : AppCompatActivity() {
         return answer
     }
 
+    private var dialog_parametrs: Show_parametr_one_divice_one_Device? = null
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_box_game_one_divice)
         signature_canvas_box_one_device.activity = this
+
+
+        if(Design == "Egypt" ) {
+            label_one_device_box.setBackgroundResource(R.drawable.back_ground_egypt);
+            bottom_navigation_box_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
+            to_back_box_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_box_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+        }
+
+        to_back_box_one_divice.setOnClickListener {
+            this.finish()
+            val intent = Intent(this, NewGameActivity::class.java)
+            intent.putExtra("playType", 2)
+            startActivity(intent)
+        }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
         if (usedToClear == "clear") {
@@ -175,89 +192,109 @@ class BoxGameOneDivice : AppCompatActivity() {
             signature_canvas_box_one_device.invalidate()
         }
 
-        comback_box_one_divice.setOnClickListener {
-            if(signature_canvas_box_one_device.History.size > 0)
-            {
-                signature_canvas_box_one_device.History.removeLast()
-                var data_from_memory = encode(signature_canvas_box_one_device.History)
-                val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                editor.putString("box_one_divice", data_from_memory)
-                editor.apply()
-                signature_canvas_box_one_device.red_or_blue = "red"
-                for(i in 0 until signature_canvas_box_one_device.VERTICAL_RIB.size)
-                {
-                    for(j in 0 until signature_canvas_box_one_device.VERTICAL_RIB[0].size)
-                    {
-                        signature_canvas_box_one_device.VERTICAL_RIB[i][j] = 0
-                    }
-                }
-                for(i in 0 until signature_canvas_box_one_device.HORIZONTAL_RIB.size)
-                {
-                    for(j in 0 until signature_canvas_box_one_device.HORIZONTAL_RIB[0].size)
-                    {
-                        signature_canvas_box_one_device.HORIZONTAL_RIB[i][j] = 0
-                    }
-                }
-                for(i in 0 until signature_canvas_box_one_device.FIELD.size)
-                {
-                    for(j in 0 until signature_canvas_box_one_device.FIELD[0].size)
-                    {
-                        signature_canvas_box_one_device.FIELD[i][j] = 0
-                    }
-                }
 
-                for(i in signature_canvas_box_one_device.History)
-                {
-                    if(i[1] == 1)
-                    {
-                        signature_canvas_box_one_device.VERTICAL_RIB[i[2]][i[3]] = i[0]
-                    }
-                    if(i[1] == 2)
-                    {
-                        signature_canvas_box_one_device.HORIZONTAL_RIB[i[2]][i[3]] = i[0]
-                    }
+        bottom_navigation_box_one_divice.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.page_1 ->{
 
-                    if(signature_canvas_box_one_device.red_or_blue == "red")
+                }
+                R.id.page_2 ->{
+                    dialog_parametrs = Show_parametr_one_divice_one_Device(this@BoxGameOneDivice)
+                    dialog_parametrs?.showResult_one_device()
+                }
+                R.id.page_3 ->{
+                    this.finish()
+                    val intent = Intent(this, BoxGameOneDivice::class.java).apply {
+                        putExtra("usedToClear", "clear")}
+                    startActivity(intent)
+                }
+                R.id.page_4 ->{
+                    if(signature_canvas_box_one_device.History.size > 0)
                     {
-                        signature_canvas_box_one_device.red_or_blue = "blue"
-                    }
-                    else
-                    {
+                        signature_canvas_box_one_device.History.removeLast()
+                        var data_from_memory = encode(signature_canvas_box_one_device.History)
+                        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                        editor.putString("box_one_divice", data_from_memory)
+                        editor.apply()
                         signature_canvas_box_one_device.red_or_blue = "red"
-                    }
-                    var flag: Boolean = false
-                    for(i in 0..6)
-                    {
-                        for(j in 0..6)
+                        for(i in 0 until signature_canvas_box_one_device.VERTICAL_RIB.size)
                         {
-                            if(signature_canvas_box_one_device.VERTICAL_RIB[i][j]>0 && signature_canvas_box_one_device.HORIZONTAL_RIB[i][j]>0 && signature_canvas_box_one_device.HORIZONTAL_RIB[i][j+1]>0 && signature_canvas_box_one_device.VERTICAL_RIB[i+1][j]>0 && signature_canvas_box_one_device.FIELD[i][j]==0) //если образовался квадратик
+                            for(j in 0 until signature_canvas_box_one_device.VERTICAL_RIB[0].size)
                             {
-                                if(flag == false)
+                                signature_canvas_box_one_device.VERTICAL_RIB[i][j] = 0
+                            }
+                        }
+                        for(i in 0 until signature_canvas_box_one_device.HORIZONTAL_RIB.size)
+                        {
+                            for(j in 0 until signature_canvas_box_one_device.HORIZONTAL_RIB[0].size)
+                            {
+                                signature_canvas_box_one_device.HORIZONTAL_RIB[i][j] = 0
+                            }
+                        }
+                        for(i in 0 until signature_canvas_box_one_device.FIELD.size)
+                        {
+                            for(j in 0 until signature_canvas_box_one_device.FIELD[0].size)
+                            {
+                                signature_canvas_box_one_device.FIELD[i][j] = 0
+                            }
+                        }
+
+                        for(i in signature_canvas_box_one_device.History)
+                        {
+                            if(i[1] == 1)
+                            {
+                                signature_canvas_box_one_device.VERTICAL_RIB[i[2]][i[3]] = i[0]
+                            }
+                            if(i[1] == 2)
+                            {
+                                signature_canvas_box_one_device.HORIZONTAL_RIB[i[2]][i[3]] = i[0]
+                            }
+
+                            if(signature_canvas_box_one_device.red_or_blue == "red")
+                            {
+                                signature_canvas_box_one_device.red_or_blue = "blue"
+                            }
+                            else
+                            {
+                                signature_canvas_box_one_device.red_or_blue = "red"
+                            }
+                            var flag: Boolean = false
+                            for(i in 0..6)
+                            {
+                                for(j in 0..6)
                                 {
-                                    flag = true
-                                    if(signature_canvas_box_one_device.red_or_blue == "red")            //снова ходит тот же игрок
+                                    if(signature_canvas_box_one_device.VERTICAL_RIB[i][j]>0 && signature_canvas_box_one_device.HORIZONTAL_RIB[i][j]>0 && signature_canvas_box_one_device.HORIZONTAL_RIB[i][j+1]>0 && signature_canvas_box_one_device.VERTICAL_RIB[i+1][j]>0 && signature_canvas_box_one_device.FIELD[i][j]==0) //если образовался квадратик
                                     {
-                                        signature_canvas_box_one_device.red_or_blue = "blue"
+                                        if(flag == false)
+                                        {
+                                            flag = true
+                                            if(signature_canvas_box_one_device.red_or_blue == "red")            //снова ходит тот же игрок
+                                            {
+                                                signature_canvas_box_one_device.red_or_blue = "blue"
+                                            }
+                                            else
+                                            {
+                                                signature_canvas_box_one_device.red_or_blue = "red"
+                                            }
+                                        }
+                                        if(signature_canvas_box_one_device.red_or_blue == "red")
+                                        {
+                                            signature_canvas_box_one_device.FIELD[i][j] = 1
+                                        }
+                                        else
+                                        {
+                                            signature_canvas_box_one_device.FIELD[i][j] = 2
+                                        }
                                     }
-                                    else
-                                    {
-                                        signature_canvas_box_one_device.red_or_blue = "red"
-                                    }
-                                }
-                                if(signature_canvas_box_one_device.red_or_blue == "red")
-                                {
-                                    signature_canvas_box_one_device.FIELD[i][j] = 1
-                                }
-                                else
-                                {
-                                    signature_canvas_box_one_device.FIELD[i][j] = 2
                                 }
                             }
                         }
+                        signature_canvas_box_one_device.invalidate()
                     }
                 }
-                signature_canvas_box_one_device.invalidate()
+
             }
+            true
         }
     }
 }
@@ -465,12 +502,13 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
         indent = (getWidth().toFloat()/(size_field_x.toFloat()+1f))/2f //оступ, чтобы можно было тыкнуть в границу
         width = getWidth().toFloat() - 2*indent
         height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)
-        advertising_line = 150f           //полоска для рекламы
+
 
         step = width/size_field_x
+        advertising_line = ( height - 7*step)/2         //полоска для рекламы
         k = height-width-advertising_line
 
-        canvas?.drawColor(Color.WHITE)
+
         val right_red: Bitmap = Bitmap.createScaledBitmap(red,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
         val right_blue: Bitmap = Bitmap.createScaledBitmap(blue,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
         for(i in 0 until size_field_x+1)          //вырисовка горизонтальных линий

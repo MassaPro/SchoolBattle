@@ -3,61 +3,69 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/label_one_device_snake"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
     <FrameLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:id="@+id/frameLayout_snake"
+        android:layout_width="362dp"
+        android:layout_height="634dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="70dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="70dp"
-        app:layout_constraintBottom_toTopOf="@+id/down_player_snake_one_device"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_snake_one_divice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/up_player_snake_one_device">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_snake_one_divice">
 
         <com.example.schoolbattle.CanvasView_SNAKE
             android:id="@+id/signature_canvas_snake_one_device"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textColor="#FFFFFF" />
+
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/up_player_snake_one_device"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.046"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.02" />
 
-    <TextView
-        android:id="@+id/down_player_snake_one_device"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="24sp"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation_snake_one_divice"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:backgroundTint = "#e6e6e6"
+        app:itemTextColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/menu_for_game_one_divice"
+        app:itemIconTint="@drawable/bottom_menu_selector"
+        app:labelVisibilityMode="labeled"
+        app:itemTextAppearanceActive="@style/BottomNavigationView.Active_one_divice"
+        app:itemTextAppearanceInactive="@style/BottomNavigationView_one_divice"/>
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_snake_one_divice"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_snake_one_divice"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.979" />
+        app:layout_constraintVertical_bias="0" />
 
     <Button
-        android:id="@+id/comback_snake_one_divice"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="вернуть ход назад"
-        tools:layout_editor_absoluteX="166dp"
-        tools:layout_editor_absoluteY="642dp" />
+        android:id="@+id/to_back_snake_one_divice"
+        android:layout_width="82dp"
+        android:layout_height="50dp"
+        android:background="@drawable/arrow_back"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_snake_one_divice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

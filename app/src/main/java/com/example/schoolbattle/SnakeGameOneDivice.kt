@@ -2,6 +2,7 @@ package com.example.schoolbattle
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -75,12 +76,21 @@ class SnakeGameOneDivice : AppCompatActivity() {
         return answer
     }
 
+    private var dialog_parametrs: Show_parametr_one_divice_one_Device? = null
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_snake_game_one_divice)
 
         signature_canvas_snake_one_device.activity = this
+
+
+        if(Design == "Egypt" ) {
+            label_one_device_snake.setBackgroundResource(R.drawable.back_ground_egypt);
+            bottom_navigation_snake_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
+            to_back_snake_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_snake_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+        }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
         if (usedToClear == "clear") {
@@ -115,37 +125,65 @@ class SnakeGameOneDivice : AppCompatActivity() {
             signature_canvas_snake_one_device.invalidate()
         }
 
-        comback_snake_one_divice.setOnClickListener {
-            if (signature_canvas_snake_one_device.History.size > 0) {
-                signature_canvas_snake_one_device.History.removeLast()
-                var data_from_memory = encode( signature_canvas_snake_one_device.History)
-                val editor =getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                editor.putString("snake_one_divice", data_from_memory)
-                editor.apply()
-                signature_canvas_snake_one_device.red_or_blue = "red"
-                signature_canvas_snake_one_device.Snake_1.clear()
-                signature_canvas_snake_one_device.Snake_2.clear()
-                if (signature_canvas_snake_one_device.History.size > 0) {
-                    for (i in 0 until signature_canvas_snake_one_device.FIELD.size) {
-                        for (j in 0 until signature_canvas_snake_one_device.FIELD[0].size) {
-                            signature_canvas_snake_one_device.FIELD[i][j] = 0
-                        }
-                    }
-                    for (i in signature_canvas_snake_one_device.History) {
-                        signature_canvas_snake_one_device.FIELD[i.first][i.second] = i.third
-                        if (signature_canvas_snake_one_device.red_or_blue == "red") {
-                            signature_canvas_snake_one_device.Snake_1.add(Pair(i.first, i.second))
-                            signature_canvas_snake_one_device.red_or_blue = "blue"
-                        } else {
-                            signature_canvas_snake_one_device.Snake_2.add(Pair(i.first, i.second))
-                            signature_canvas_snake_one_device.red_or_blue = "red"
-                        }
+        bottom_navigation_snake_one_divice.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.page_1 ->{
 
+                }
+                R.id.page_2 ->{
+                    dialog_parametrs = Show_parametr_one_divice_one_Device(this@SnakeGameOneDivice)
+                    dialog_parametrs?.showResult_one_device()
+                }
+                R.id.page_3 ->{
+                    this.finish()
+                    val intent = Intent(this, SnakeGameOneDivice::class.java).apply {
+                        putExtra("usedToClear", "clear")}
+                    startActivity(intent)
+                }
+                R.id.page_4 ->{
+                    if (signature_canvas_snake_one_device.History.size > 0) {
+                        signature_canvas_snake_one_device.History.removeLast()
+                        var data_from_memory = encode( signature_canvas_snake_one_device.History)
+                        val editor =getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                        editor.putString("snake_one_divice", data_from_memory)
+                        editor.apply()
+                        signature_canvas_snake_one_device.red_or_blue = "red"
+                        signature_canvas_snake_one_device.Snake_1.clear()
+                        signature_canvas_snake_one_device.Snake_2.clear()
+                        if (signature_canvas_snake_one_device.History.size > 0) {
+                            for (i in 0 until signature_canvas_snake_one_device.FIELD.size) {
+                                for (j in 0 until signature_canvas_snake_one_device.FIELD[0].size) {
+                                    signature_canvas_snake_one_device.FIELD[i][j] = 0
+                                }
+                            }
+                            for (i in signature_canvas_snake_one_device.History) {
+                                signature_canvas_snake_one_device.FIELD[i.first][i.second] = i.third
+                                if (signature_canvas_snake_one_device.red_or_blue == "red") {
+                                    signature_canvas_snake_one_device.Snake_1.add(Pair(i.first, i.second))
+                                    signature_canvas_snake_one_device.red_or_blue = "blue"
+                                } else {
+                                    signature_canvas_snake_one_device.Snake_2.add(Pair(i.first, i.second))
+                                    signature_canvas_snake_one_device.red_or_blue = "red"
+                                }
+
+                            }
+                        }
+                        signature_canvas_snake_one_device.invalidate()
                     }
                 }
-                signature_canvas_snake_one_device.invalidate()
+
             }
+            true
         }
+
+        to_back_snake_one_divice.setOnClickListener {
+            this.finish()
+            val intent = Intent(this, NewGameActivity::class.java)
+            intent.putExtra("playType", 2)
+            startActivity(intent)
+        }
+
+
     }
 }
 
@@ -234,7 +272,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
                 }
             }
 
-            if(X<9)
+            if(X<8)
             {
                 if(FIELD[X+1][Y] == 0)
                 {
@@ -248,7 +286,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
                     return 0
                 }
             }
-            if(Y<9)
+            if(Y<8)
             {
                 if(FIELD[X][Y+1] == 0)
                 {
@@ -270,7 +308,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
                 }
             }
 
-            if(X<9)
+            if(X<8)
             {
                 if(FIELD[X+1][Y] == 0)
                 {
@@ -284,7 +322,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
                     return 0
                 }
             }
-            if(Y<9)
+            if(Y<8)
             {
                 if(FIELD[X][Y+1] == 0)
                 {
@@ -379,15 +417,16 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
         radius_of_point = 8f
         size_field_x  = 10
         size_field_y  = 10
-        indent = 0f //оступ, чтобы можно было тыкнуть в границу
+        indent = 20f //оступ, чтобы можно было тыкнуть в границу
         width = getWidth().toFloat() - 2*indent
         height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)
-        advertising_line = 150f           //полоска для рекламы
-
         step = width/size_field_x
+        advertising_line =  (height - 10*step)/2          //полоска для рекламы
+
+
         k = height-width*(size_field_y.toFloat()/size_field_x.toFloat())-advertising_line
 
-        canvas?.drawColor(Color.WHITE)
+       // canvas?.drawColor(Color.WHITE)
 
         for(i in 0 until size_field_y+1)          //вырисовка горизонтальных линий
         {
@@ -407,7 +446,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
         {
             if(i == 0 ||  i == size_field_x)
             {
-                canvas?.drawLine(k, height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())+ 5f,k,height-advertising_line-5f,border_2)
+                canvas?.drawLine(k, height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())+ 5f,k,height-advertising_line-5f,border_1)
             }
             else
             {
@@ -511,6 +550,8 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
     var blocked : Boolean = false
     override fun onTouchEvent(event: MotionEvent?): Boolean {
 
+        indent = 20f //оступ, чтобы можно было тыкнуть в границу
+        advertising_line =  (height - 10*step)/2
         if(check_win()<=0)
         {
             blocked = false

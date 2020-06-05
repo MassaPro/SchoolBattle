@@ -10,21 +10,19 @@
 
     <FrameLayout
         android:id="@+id/frameLayout2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="362dp"
+        android:layout_height="634dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="70dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="70dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_xog_one_divice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/to_back_xog_one_divice">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_xog_one_divice">
 
         <com.example.schoolbattle.CanvasView_xog_one_device
             android:id="@+id/signature_canvas_xog_one_device"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textColor="#FFFFFF" />
 
     </FrameLayout>
@@ -33,7 +31,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_xog_one_divice"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         app:backgroundTint = "#e6e6e6"
         app:itemTextColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -44,15 +42,30 @@
         app:itemTextAppearanceInactive="@style/BottomNavigationView_one_divice"/>
 
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_xog_one_divice"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_xog_one_divice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
+
     <Button
         android:id="@+id/to_back_xog_one_divice"
-        android:layout_width="70dp"
-        android:layout_height="47dp"
+        android:layout_width="82dp"
+        android:layout_height="50dp"
         android:background="@drawable/arrow_back"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_xog_one_divice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

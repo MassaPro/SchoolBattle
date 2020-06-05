@@ -3,6 +3,7 @@ package com.example.schoolbattle
 import android.content.Context
 import android.content.Intent
 import android.graphics.*
+import android.graphics.Color.argb
 import android.graphics.Color.rgb
 import android.os.Bundle
 import android.text.style.BackgroundColorSpan
@@ -96,6 +97,7 @@ class XOGame_oneDivice : AppCompatActivity() {
             label_one_device.setBackgroundResource(R.drawable.back_ground_egypt);
             bottom_navigation_xog_one_divice.setBackgroundColor(rgb(224,164,103))
             to_back_xog_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_xog_one_divice.setBackgroundColor(argb(0,0,0,0))
         }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
@@ -136,6 +138,7 @@ class XOGame_oneDivice : AppCompatActivity() {
             }
         }
         to_back_xog_one_divice.setOnClickListener {
+            this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 2)
             startActivity(intent)
@@ -365,9 +368,6 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
     var size_field_x: Int = 7
     var size_field_y: Int = 6
     var step: Float = width/size_field_x
-    var advertising_line: Float = (height - step * 6) / 2
-
-    var k: Float = height-width-advertising_line + step
     var blocked = false
 
     var circlex : Float = 0f   //координаты нажатия
@@ -378,6 +378,7 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
     var Line_paint_1: Paint = Paint()
     var FIELD = Array(7){IntArray(6)}
     var cross_or_nul: String
+
 
     init {
 
@@ -426,11 +427,12 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
         indent = 20f
         width = getWidth().toFloat()
         height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)
-        advertising_line = 150f           //полоска для рекламы
+
         size_field_x  = 7
         size_field_y  = 6
         step = (width-2*indent)/size_field_x
-        k = height-(width-2*indent)-advertising_line
+        var advertising_line: Float = (height - step * 6) / 2
+        var k: Float = height-(width-2*indent)-advertising_line
 
 
         val right_icon_cross: Bitmap  //подгоняем картинку под размеры экрана телефона
@@ -459,7 +461,7 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
         }
 
 
-        var k: Float = height - (width-2*indent)*size_field_y/size_field_x - advertising_line
+        k = height - (width-2*indent)*size_field_y/size_field_x - advertising_line
         for(i in 0 until 7)          //вырисовка горизонтальных линий
         {
             canvas?.drawLine(indent,k,width-indent,k,Line_paint)
@@ -523,6 +525,7 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         super.onTouchEvent(event)
+        var advertising_line: Float = (height - step * 6) / 2
         if(checkForWin_another_fun().size==9)
         {
             var counter: Int = 1
