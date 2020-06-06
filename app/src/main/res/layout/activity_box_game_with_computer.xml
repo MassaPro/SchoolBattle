@@ -4,4 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BoxGameWithComputer"/>
+    tools:context=".BoxGameWithComputer">
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation_box_with_computer"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:backgroundTint="#e6e6e6"
+        app:itemIconTint="@drawable/bottom_menu_selector"
+        app:itemTextAppearanceActive="@style/BottomNavigationView.Active_one_divice"
+        app:itemTextAppearanceInactive="@style/BottomNavigationView_one_divice"
+        app:itemTextColor="#4b4d4b"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_for_game_one_divice" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

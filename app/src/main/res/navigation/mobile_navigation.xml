@@ -25,6 +25,6 @@
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.example.schoolbattle.SettingsFragmentActivity"
-        android:label="Настройки"
+        android:label="@string/title_notifications"
         tools:layout="@layout/activity_settings_fragment" />
 </navigation>
