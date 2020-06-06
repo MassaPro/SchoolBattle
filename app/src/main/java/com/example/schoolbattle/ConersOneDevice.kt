@@ -235,10 +235,12 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
         if(Black_or_grey_chip == "black")
         {
             if(FIELD[X][Y]==1)
-            {                                //ПРОВЕРЯЕМ ПРОТИВОПОЛОЖНЫЙ УГОЛ, ЕСЛИ ОН ПУСТ, ТО ЗАПРЕЩАЕМ ДВИГАТЬ ФИШКУ НЕ ИЗ СВОЕГО УГЛА
+            {                                //ПРОВЕРЯЕМ ПРОТИВОПОЛОЖНЫЙ УГОЛ, ЕСЛИ ОН ПУСТ а твой нет, ТО ЗАПРЕЩАЕМ ДВИГАТЬ ФИШКУ НЕ ИЗ СВОЕГО УГЛА
                 if(FIELD[5][0] !=2 && FIELD[5][1] !=2 && FIELD[5][2] !=2 &&
                     FIELD[6][0] !=2&& FIELD[6][1] !=2&& FIELD[6][2] !=2 &&
-                    FIELD[7][0] !=2 && FIELD[7][1]!=2  && FIELD[7][2] !=2){
+                    FIELD[7][0] !=2 && FIELD[7][1]!=2  && FIELD[7][2] !=2 && (FIELD[0][5] ==1 || FIELD[1][5] ==1 || FIELD[2][5] ==1 ||
+                            FIELD[0][6] ==1 || FIELD[1][6] ==1 || FIELD[2][6] ==1 ||
+                            FIELD[0][7] ==1 || FIELD[1][7]==1 || FIELD[2][7] ==1)){
                     if(X>2)
                     {
                         return false
@@ -261,7 +263,9 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
             {
                 if(FIELD[0][5] !=1 && FIELD[1][5] !=1 && FIELD[2][5] !=1 &&
                     FIELD[0][6] !=1 && FIELD[1][6] !=1 && FIELD[2][6] !=1 &&
-                    FIELD[0][7] !=1 && FIELD[1][7]!=1 && FIELD[2][7] !=1){
+                    FIELD[0][7] !=1 && FIELD[1][7]!=1 && FIELD[2][7] !=1 &&(FIELD[5][0] ==2 || FIELD[5][1] ==2 || FIELD[5][2] ==2 ||
+                            FIELD[6][0] ==2 || FIELD[6][1] ==2 || FIELD[6][2] ==2 ||
+                            FIELD[7][0] ==2 || FIELD[7][1]==2  || FIELD[7][2] ==2)){
                     if(X<5)
                     {
                         return false
