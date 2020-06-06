@@ -60,6 +60,12 @@ class OneDevicePlayActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+        if(gameType == "GoGame")
+        {
+            val intent = Intent(this,GoGameOneDivice::class.java)
+            startActivity(intent)
+            finish()
+        }
 
 
     }

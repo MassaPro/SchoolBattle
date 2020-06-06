@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_new_game.*
 import kotlinx.android.synthetic.main.activity_new_game_item.view.*
@@ -23,9 +24,8 @@ class NewGameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_game)
         NewGame = this
+        game_list.layoutManager = GridLayoutManager(this, 2)
         setupRecyclerView(game_list, intent.getIntExtra("playType", -1), this)
-
-
 
 
         //val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)

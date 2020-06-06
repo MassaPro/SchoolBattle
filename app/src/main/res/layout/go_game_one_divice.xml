@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/label_one_device_go"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+
+    <FrameLayout
+        android:id="@+id/frameLayout_go_one_divice"
+        android:layout_width="365dp"
+        android:layout_height="623dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_go_one_divice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_go_one_divice">
+
+        <com.example.schoolbattle.CanvasView_Go_one_divice
+            android:id="@+id/signature_canvas_go_one_divice"
+            android:layout_width="match_parent"
+            android:layout_height="627dp"
+            android:textColor="#FFFFFF" />
+    </FrameLayout>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_go_one_divice"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_go_one_divice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation_go_one_divice"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:backgroundTint = "#e6e6e6"
+        app:itemTextColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/menu_for_game_one_divice"
+        app:itemIconTint="@drawable/bottom_menu_selector"
+        app:labelVisibilityMode="labeled"
+        app:itemTextAppearanceActive="@style/BottomNavigationView.Active_one_divice"
+        app:itemTextAppearanceInactive="@style/BottomNavigationView_one_divice"/>
+
+    <Button
+        android:id="@+id/to_back_go_one_divice"
+        android:layout_width="82dp"
+        android:layout_height="50dp"
+        android:background="@drawable/arrow_back"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_go_one_divice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
