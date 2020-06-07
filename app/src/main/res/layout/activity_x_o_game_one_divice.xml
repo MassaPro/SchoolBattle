@@ -56,6 +56,30 @@
         app:layout_constraintVertical_bias="0" />
 
     <Button
+        android:id="@+id/button_player_2_xog_one_divice"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout2"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar_xog_one_divice"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar_xog_one_divice"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/button_player_1_xog_one_divice"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout2"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar_xog_one_divice"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/to_back_xog_one_divice"
+        app:layout_constraintTop_toTopOf="@+id/toolbar_xog_one_divice"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
         android:id="@+id/to_back_xog_one_divice"
         android:layout_width="82dp"
         android:layout_height="50dp"
@@ -66,6 +90,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/player_1_icon_xog_one_divice"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        app:layout_constraintBottom_toBottomOf="@+id/button_player_1_xog_one_divice"
+        app:layout_constraintEnd_toEndOf="@+id/button_player_1_xog_one_divice"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/button_player_1_xog_one_divice"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <ImageView
+        android:id="@+id/player_2_icon_xog_one_divice"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        app:layout_constraintBottom_toBottomOf="@+id/button_player_2_xog_one_divice"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar_xog_one_divice"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/button_player_2_xog_one_divice"
+        app:layout_constraintTop_toTopOf="@+id/button_player_2_xog_one_divice"
+        app:layout_constraintVertical_bias="0.259" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
