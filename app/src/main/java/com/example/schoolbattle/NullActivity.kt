@@ -18,6 +18,8 @@ class NullActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_null)
 
+        CONTEXT = this
+
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val username = prefs.getString("username", "")
         val inflatedView: View = layoutInflater.inflate(R.layout.activity_settings, null)
@@ -32,5 +34,10 @@ class NullActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        CONTEXT = this
     }
 }

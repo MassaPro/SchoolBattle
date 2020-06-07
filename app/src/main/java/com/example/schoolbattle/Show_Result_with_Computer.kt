@@ -2,14 +2,11 @@ package com.example.schoolbattle
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.Context
 import android.content.Intent
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
+import com.example.schoolbattle.gameswithcomp.XOGame_withComputer
 
 class Show_Result_with_Computer(activity: Activity) {
     private val dialog_with_computer = Dialog(activity)

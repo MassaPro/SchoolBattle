@@ -1,5 +1,6 @@
 package com.example.schoolbattle
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -8,7 +9,6 @@ import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.schoolbattle.ui.main.SectionsPagerAdapter
 
 class SocialActivity : Fragment() {
 
@@ -17,17 +17,13 @@ class SocialActivity : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        CONTEXT = requireActivity()
         return inflater.inflate(R.layout.activity_social, container, false)
     }
 
     override fun onResume() {
         super.onResume()
-        val sectionsPagerAdapter = activity?.let { SectionsPagerAdapter(it, requireActivity().supportFragmentManager) }
-        val viewPager: ViewPager = requireActivity().findViewById(R.id.view_pager)
-        viewPager.adapter = sectionsPagerAdapter
+        CONTEXT = requireActivity()
         val tabs: TabLayout = requireActivity().findViewById(R.id.tabs)
-        tabs.setupWithViewPager(viewPager)
-
-
     }
 }

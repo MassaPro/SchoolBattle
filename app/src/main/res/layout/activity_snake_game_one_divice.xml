@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_snake_one_divice">
 
-        <com.example.schoolbattle.CanvasView_SNAKE
+        <com.example.schoolbattle.gamesonedevice.CanvasView_SNAKE
             android:id="@+id/signature_canvas_snake_one_device"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

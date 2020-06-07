@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/up_player_reversi_one_device">
 
-        <com.example.schoolbattle.CanvasView_reversi_one_device
+        <com.example.schoolbattle.gamesonedevice.CanvasView_reversi_one_device
             android:id="@+id/signature_canvas_reversi_one_device"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

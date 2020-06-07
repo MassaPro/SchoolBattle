@@ -12,11 +12,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import kotlin.random.Random
 
-
-var GAMES: MutableList<Game> = mutableListOf()
-var CHOOSE_GAMES: MutableList<String> = mutableListOf("StupidGame", "XOGame", "DotGame", "GoGame", "SnakeGame", "BoxGame", "AngleGame","VirusGame","Reversi")
-var currentContext: Context? = null
-
 class Game(val name: String = "", val type: String = "StupidGame", val text: String = "you VS") {
     override fun toString(): String {
         return "$name $type"
@@ -91,8 +86,6 @@ class ShowResult(activity: Activity) {
                     }
                 }
             })
-            //myRef.child(gameType + "Users").child(globalName).setValue(globalName)
-            //myRef.addValueEventListener(NewGameListener)
         }
 
         dialog.setOnDismissListener {
@@ -100,18 +93,9 @@ class ShowResult(activity: Activity) {
             state = false
             eventListener?.let { myRef.removeEventListener(it) }
             myRef.child(gameType + "Users").child(globalName).removeValue()
-            //myRef.removeEventListener(NewGameListener)
         }
         val body = dialog.findViewById(R.id.resultText) as TextView
         body.text = result
-        //val body = dialog .findViewById(R.id.body) as TextView
-        //body.text = title
-        //val yesBtn = dialog .findViewById(R.id.yesBtn) as Button
-        //val noBtn = dialog .findViewById(R.id.noBtn) as TextView
-        //yesBtn.setOnClickListener {
-        //  dialog .dismiss()
-        //}
-        //noBtn.setOnClickListener { dialog .dismiss() }
         dialog.show()
     }
 

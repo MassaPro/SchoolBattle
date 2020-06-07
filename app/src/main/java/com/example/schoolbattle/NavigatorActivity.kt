@@ -23,12 +23,14 @@ class NavigatorActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        CONTEXT = this
         now = this
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigator)
+        CONTEXT = this
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         now = this
         val navController = findNavController(R.id.nav_host_fragment)
@@ -41,7 +43,9 @@ class NavigatorActivity : AppCompatActivity() {
 
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val username = prefs.getString("username", "")
-
+        if (username != null) {
+            updateRecycler(username)
+        }
         myRef.child("Users").child(username.toString()).child("Revanches").addValueEventListener(
             object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}

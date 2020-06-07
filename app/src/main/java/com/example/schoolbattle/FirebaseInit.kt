@@ -1,45 +1,50 @@
 package com.example.schoolbattle
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.util.Log
+import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
+import com.example.schoolbattle.gamesonline.BoxGameActivity
+import com.example.schoolbattle.gamesonline.DotGameActivity
+import com.example.schoolbattle.gamesonline.StupidGameActivityTwoPlayers
+import com.example.schoolbattle.gamesonline.XOGameActivity
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
 
-
-lateinit var listener: ChildEventListener
-var recyclerSet: RecyclerSet = RecyclerSet()
 
 class RecyclerSet {
     private var s: MutableSet<String> = mutableSetOf()
-    fun add(el: Game) {
+    fun add(el: Game, isOld: Boolean, username: String) {
         if (!s.contains(el.toString())) {
             s.add(el.toString())
             GAMES.add(el)
             Log.w("FFF", el.toString())
-            gamesRecycler.adapter?.notifyDataSetChanged()
-        }
-        if (is_pressed) {
-            is_pressed = false
-            val intent = if (el.name.contains(" StupidGame")) {
-                Intent(currentContext, StupidGameActivityTwoPlayers::class.java)
-            } else if (el.name.contains(" XOGame")) {
-                Intent(currentContext, XOGameActivity::class.java)
-            } else if (el.name.contains("DotGame")){
-                Intent(currentContext, DotGameActivity::class.java)
-            } else if (el.name.contains("BoxGame")){
-                Intent(currentContext, BoxGameActivity::class.java)
-            } else {
-                Intent(currentContext, StupidGameActivity::class.java)
+            //Toast.makeText(CONTEXT,  "od" + CONTEXT.toString(), Toast.LENGTH_LONG).show()
+            if (!isOld) {
+                myRef.child("Users").child(username).child("Games").child(el.name.toString()).child("old").setValue("old")
+                Toast.makeText(CONTEXT, StupidGameActivity::getApplicationContext.toString(), Toast.LENGTH_LONG).show()
+                Toast.makeText(CONTEXT, CONTEXT.applicationContext.toString(), Toast.LENGTH_LONG).show()
+                val intent = if (el.name.contains(" StupidGame")) {
+                    Intent(CONTEXT, StupidGameActivityTwoPlayers::class.java)
+                } else if (el.name.contains(" XOGame")) {
+                    Intent(CONTEXT, XOGameActivity::class.java)
+                } else if (el.name.contains("DotGame")) {
+                    Intent(CONTEXT, DotGameActivity::class.java)
+                } else if (el.name.contains("BoxGame")) {
+                    Intent(CONTEXT, BoxGameActivity::class.java)
+                } else {
+                    Intent(CONTEXT, StupidGameActivity::class.java)
+                }
+                intent.putExtra("opponentName", el.name)
+                CONTEXT.startActivity(intent)
+                //myRef.child("StupidGames").child("")
+                StupidGame.finish()
             }
+            gamesRecycler.adapter?.notifyDataSetChanged()
 
-            intent.putExtra("opponentName", el.name)
-            currentContext?.startActivity(intent)
-            //myRef.child("StupidGames").child("")
-            StupidGame.finish()
         }
     }
 
@@ -77,7 +82,11 @@ fun updateRecycler(username: String) {
                 gamesRecycler.adapter?.notifyDataSetChanged()
             }
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                recyclerSet.add(Game(p0.key.toString()))
+                var fl = false
+                if (p0.hasChild("old")) {
+                    fl = true
+                }
+                recyclerSet.add(Game(p0.key.toString()), fl, username)
             }
             override fun onChildRemoved(p0: DataSnapshot) {
                 recyclerSet.erase(Game(p0.key.toString()))

@@ -3,6 +3,7 @@ package com.example.schoolbattle
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DataSnapshot
@@ -19,8 +20,15 @@ class StupidGameActivity : AppCompatActivity() {
     private var eventListener: ValueEventListener? = null
     private var state = false
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        CONTEXT = this@StupidGameActivity
+    }
+
     override fun onResume() {
         super.onResume()
+        CONTEXT = this@StupidGameActivity
+
         setContentView(R.layout.activity_stupid_game)
         state = true
         StupidGame = this
@@ -85,12 +93,4 @@ class StupidGameActivity : AppCompatActivity() {
         eventListener?.let { myRef.removeEventListener(it) }
         myRef.child(gameName + "Users").child(globalName.toString()).removeValue()
     }
-
-    /*override fun onResume() {
-        super.onResume()
-        state = true
-        StupidGame = this
-        currentContext = this
-        is_pressed = false
-    }*/
 }
