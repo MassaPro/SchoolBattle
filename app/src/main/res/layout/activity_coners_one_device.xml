@@ -10,9 +10,9 @@
 
     <FrameLayout
         android:id="@+id/frameLayout"
-        android:layout_width="333dp"
-        android:layout_height="588dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_corner_one_divice"
+        android:layout_width="329dp"
+        android:layout_height="582dp"
+        app:layout_constraintBottom_toTopOf="@+id/toolbar2_corner_one_divice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_corner_one_divice">
@@ -60,6 +60,92 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2_corner_one_divice"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_corner_one_divice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+    <Button
+        android:id="@+id/button_player_2_corner_one_divice"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_corner_one_divice"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar_corner_one_divice"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar_corner_one_divice"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/player_2_icon_corner_one_divice"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/button_player_2_corner_one_divice"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar_corner_one_divice"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/button_player_2_corner_one_divice"
+        app:layout_constraintTop_toTopOf="@+id/button_player_2_corner_one_divice"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <TextView
+        android:id="@+id/name_player2_one_divice_corner"
+        android:layout_width="143dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="Игрок 2"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_corner_one_divice"
+        app:layout_constraintEnd_toStartOf="@+id/button_player_2_corner_one_divice"
+        app:layout_constraintHorizontal_bias="0.379"
+        app:layout_constraintStart_toEndOf="@+id/to_back_corner_one_divice"
+        app:layout_constraintTop_toTopOf="@+id/toolbar_corner_one_divice"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/button_player_1_corner_one_divice"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar2_corner_one_divice"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar2_corner_one_divice"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar2_corner_one_divice"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/name_player1_one_divice_corner"
+        android:layout_width="140dp"
+        android:layout_height="51dp"
+        android:gravity="center"
+        android:text="Игрок 1"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar2_corner_one_divice"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar2_corner_one_divice"
+        app:layout_constraintHorizontal_bias="0.403"
+        app:layout_constraintStart_toEndOf="@+id/button_player_1_corner_one_divice"
+        app:layout_constraintTop_toTopOf="@+id/toolbar2_corner_one_divice"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/player_1_icon_corner_one_divice"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        app:layout_constraintBottom_toBottomOf="@+id/button_player_1_corner_one_divice"
+        app:layout_constraintEnd_toEndOf="@+id/button_player_1_corner_one_divice"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button_player_1_corner_one_divice"
+        app:layout_constraintVertical_bias="0.285" />
 
 
 

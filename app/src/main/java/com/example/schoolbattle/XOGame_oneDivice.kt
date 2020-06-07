@@ -94,6 +94,10 @@ class XOGame_oneDivice : AppCompatActivity() {
         setContentView(R.layout.activity_x_o_game_one_divice)
 
         if(Design == "Egypt" ) {
+            name_player1_one_divice_xog.setTextColor(Color.BLACK)
+            name_player2_one_divice_xog.setTextColor(Color.BLACK)
+            name_player2_one_divice_xog.setTextSize(20f)
+            name_player1_one_divice_xog.setTextSize(20f)
             button_player_1_xog_one_divice.setBackgroundResource(R.drawable.player1_egypt);
             button_player_2_xog_one_divice.setBackgroundResource(R.drawable.player2_egypt);
             player_1_icon_xog_one_divice.setBackgroundResource(R.drawable.cross_egypt);
@@ -102,6 +106,7 @@ class XOGame_oneDivice : AppCompatActivity() {
             bottom_navigation_xog_one_divice.setBackgroundColor(rgb(224,164,103))
             to_back_xog_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_xog_one_divice.setBackgroundColor(argb(0,0,0,0))
+            toolbar2_xog_one_divice.setBackgroundColor(argb(0,0,0,0))
         }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры

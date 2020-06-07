@@ -86,6 +86,18 @@ class SnakeGameOneDivice : AppCompatActivity() {
 
 
         if(Design == "Egypt" ) {
+
+            name_player1_one_divice_snake.setTextColor(Color.BLACK)
+            name_player2_one_divice_snake.setTextColor(Color.BLACK)
+            name_player2_one_divice_snake.setTextSize(20f)
+            name_player1_one_divice_snake.setTextSize(20f)
+            button_player_1_snake_one_divice.setBackgroundResource(R.drawable.player1_egypt);
+            button_player_2_snake_one_divice.setBackgroundResource(R.drawable.player2_egypt);
+            player_1_icon_snake_one_divice.setBackgroundResource(R.drawable.cross_egypt);
+            player_2_icon_snake_one_divice.setBackgroundResource(R.drawable.circle_egypt)
+            toolbar_snake_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            toolbar2_snake_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+
             label_one_device_snake.setBackgroundResource(R.drawable.back_ground_egypt);
             bottom_navigation_snake_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
             to_back_snake_one_divice.setBackgroundResource(R.drawable.arrow_back)

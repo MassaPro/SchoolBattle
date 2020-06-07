@@ -95,6 +95,17 @@ class ConersOneDevice : AppCompatActivity() {
         signature_canvas_corners_one_device.activity = this
 
         if(Design == "Egypt" ) {
+            name_player1_one_divice_corner.setTextColor(Color.BLACK)
+            name_player2_one_divice_corner.setTextColor(Color.BLACK)
+            name_player2_one_divice_corner.setTextSize(20f)
+            name_player1_one_divice_corner.setTextSize(20f)
+            button_player_1_corner_one_divice.setBackgroundResource(R.drawable.player1_egypt);
+            button_player_2_corner_one_divice.setBackgroundResource(R.drawable.player2_egypt);
+            player_1_icon_corner_one_divice.setBackgroundResource(R.drawable.white_chip_egypt);
+            player_2_icon_corner_one_divice.setBackgroundResource(R.drawable.black_chip_egypt)
+            toolbar_corner_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            toolbar2_corner_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+
             label_one_device_corner.setBackgroundResource(R.drawable.back_ground_egypt);
             bottom_navigation_corner_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
             to_back_corner_one_divice.setBackgroundResource(R.drawable.arrow_back)
@@ -556,8 +567,8 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
 
         if(Design == "Egypt")
         {
-            rigth_black_chip  = Bitmap.createScaledBitmap(black_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
-            right_grey_chip  = Bitmap.createScaledBitmap(white_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            rigth_black_chip  = Bitmap.createScaledBitmap(white_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+            right_grey_chip  = Bitmap.createScaledBitmap(black_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
             right_illumination = Bitmap.createScaledBitmap(illumination,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
             right_green = Bitmap.createScaledBitmap(green,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
         }

@@ -10,12 +10,8 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import kotlinx.android.synthetic.main.activity_coners_one_device.*
-import kotlinx.android.synthetic.main.activity_dot_game_one_divice.*
-import kotlinx.android.synthetic.main.activity_dot_game_one_divice.label_one_device_dots
-import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
 import kotlinx.android.synthetic.main.go_game_one_divice.*
-import kotlin.math.sign
+
 
 class GoGameOneDivice : AppCompatActivity() {
 
@@ -90,6 +86,18 @@ class GoGameOneDivice : AppCompatActivity() {
 
         if(Design == "Egypt")
         {
+            name_player1_one_divice_go.setTextColor(Color.BLACK)
+            name_player2_one_divice_go.setTextColor(Color.BLACK)
+            name_player2_one_divice_go.setTextSize(20f)
+            name_player1_one_divice_go.setTextSize(20f)
+            button_player_1_go_one_divice.setBackgroundResource(R.drawable.player1_egypt);
+            button_player_2_go_one_divice.setBackgroundResource(R.drawable.player2_egypt);
+            player_1_icon_go_one_divice.setBackgroundResource(R.drawable.cross_egypt);
+            player_2_icon_go_one_divice.setBackgroundResource(R.drawable.circle_egypt)
+            toolbar_go_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            toolbar2_go_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+
+
             label_one_device_go.setBackgroundResource(R.drawable.back_ground_egypt);
             toolbar_go_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             bottom_navigation_go_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
@@ -144,7 +152,7 @@ class GoGameOneDivice : AppCompatActivity() {
             }
             signature_canvas_go_one_divice.invalidate()
         }
-        //comback_dots_one_divice.setVisibility(View.GONE);
+        //comback_gos_one_divice.setVisibility(View.GONE);
         bottom_navigation_go_one_divice.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
@@ -165,7 +173,7 @@ class GoGameOneDivice : AppCompatActivity() {
                         signature_canvas_go_one_divice.History.removeLast()
                         var data_from_memory = encode(signature_canvas_go_one_divice.History)
                         val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                        editor.putString("dot_one_divice", data_from_memory)
+                        editor.putString("go_one_divice", data_from_memory)
                         editor.apply()
                         signature_canvas_go_one_divice.red_or_blue = 2
                         for (i in 0 until signature_canvas_go_one_divice.FIELD.size) {
@@ -193,6 +201,16 @@ class GoGameOneDivice : AppCompatActivity() {
                             )
                             signature_canvas_go_one_divice.red_or_blue =
                                 2 - (signature_canvas_go_one_divice.red_or_blue + 1) % 2
+                        }
+                        for(i in 0 until  signature_canvas_go_one_divice.FIELD.size)
+                        {
+                            for(j in 0 until signature_canvas_go_one_divice.FIELD[0].size)
+                            {
+                                if(signature_canvas_go_one_divice.FIELD[i][j]!=0 && signature_canvas_go_one_divice.FIELD[i][j]!=signature_canvas_go_one_divice.a[j][i])
+                                {
+                                    signature_canvas_go_one_divice.FIELD[i][j] = 0
+                                }
+                            }
                         }
                         signature_canvas_go_one_divice.invalidate()
                     }
@@ -296,7 +314,7 @@ class CanvasView_Go_one_divice(context: Context, attrs: AttributeSet?) : View(co
                 {
                     return 0
                 }
-                if(a[i][j] == 1)
+                if(a[j][i] == 1)
                 {
                     cnt1++
                 }
@@ -569,15 +587,15 @@ class CanvasView_Go_one_divice(context: Context, attrs: AttributeSet?) : View(co
             dialog = Show_Result_one_Device(activity)
             if(check_win()==1)
             {
-                dialog?.showResult_one_device("КРАСНЫЕ ПОБЕДИЛИ","DotGame",activity)
+                dialog?.showResult_one_device("КРАСНЫЕ ПОБЕДИЛИ","GoGame",activity)
             }
             if(check_win()==2)
             {
-                dialog?.showResult_one_device("CИНИЕ ПОБЕДИЛИ","DotGame",activity)
+                dialog?.showResult_one_device("CИНИЕ ПОБЕДИЛИ","GoGame",activity)
             }
             if(check_win()==3)
             {
-                dialog?.showResult_one_device("НИЧЬЯ","DotGame",activity)
+                dialog?.showResult_one_device("НИЧЬЯ","GoGame",activity)
             }
             return true
         }

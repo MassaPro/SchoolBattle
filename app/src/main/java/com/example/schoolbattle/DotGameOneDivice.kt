@@ -88,10 +88,21 @@ class DotGameOneDivice : AppCompatActivity() {
 
         if(Design == "Egypt")
         {
+            name_player1_one_divice_dot.setTextColor(Color.BLACK)
+            name_player2_one_divice_dot.setTextColor(Color.BLACK)
+            name_player2_one_divice_dot.setTextSize(20f)
+            name_player1_one_divice_dot.setTextSize(20f)
+            button_player_1_dot_one_divice.setBackgroundResource(R.drawable.player1_egypt);
+            button_player_2_dot_one_divice.setBackgroundResource(R.drawable.player2_egypt);
+            player_1_icon_dot_one_divice.setBackgroundResource(R.drawable.cross_egypt);
+            player_2_icon_dot_one_divice.setBackgroundResource(R.drawable.circle_egypt);
             label_one_device_dots.setBackgroundResource(R.drawable.back_ground_egypt);
             toolbar_dot_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             bottom_navigation_dot_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
             to_back_dot_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            to_back_dot_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_dot_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            toolbar2_dot_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
         }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры

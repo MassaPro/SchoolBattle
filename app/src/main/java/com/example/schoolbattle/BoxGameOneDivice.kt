@@ -93,6 +93,17 @@ class BoxGameOneDivice : AppCompatActivity() {
 
 
         if(Design == "Egypt" ) {
+            name_player1_one_divice_box.setTextColor(Color.BLACK)
+            name_player2_one_divice_box.setTextColor(Color.BLACK)
+            name_player2_one_divice_box.setTextSize(20f)
+            name_player1_one_divice_box.setTextSize(20f)
+            button_player_1_box_one_divice.setBackgroundResource(R.drawable.player1_egypt);
+            button_player_2_box_one_divice.setBackgroundResource(R.drawable.player2_egypt);
+            player_1_icon_box_one_divice.setBackgroundResource(R.drawable.cross_egypt);
+            player_2_icon_box_one_divice.setBackgroundResource(R.drawable.circle_egypt)
+            toolbar_box_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            toolbar2_box_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+
             label_one_device_box.setBackgroundResource(R.drawable.back_ground_egypt);
             bottom_navigation_box_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
             to_back_box_one_divice.setBackgroundResource(R.drawable.arrow_back)
