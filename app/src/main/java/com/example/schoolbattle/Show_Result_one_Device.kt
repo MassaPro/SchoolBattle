@@ -61,6 +61,14 @@ class Show_Result_one_Device(activity: Activity) {
                 type_activity.finish()
                 type_activity.startActivity(intent)
             }
+            if(Game_Type == "Reversi")
+            {
+                val intent = Intent(type_activity,ReversiOneDivice::class.java).apply {
+                    putExtra("usedToClear", "clear")}
+                type_activity.finish()
+                type_activity.startActivity(intent)
+            }
+
         }
 
         val body = dialog_one_device.findViewById(R.id.resultText_one_device) as TextView

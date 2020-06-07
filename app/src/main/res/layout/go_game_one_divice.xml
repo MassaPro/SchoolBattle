@@ -40,14 +40,15 @@
         android:id="@+id/bottom_navigation_go_one_divice"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:backgroundTint = "#e6e6e6"
-        app:itemTextColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/menu_for_game_one_divice"
+        app:backgroundTint="#e6e6e6"
         app:itemIconTint="@drawable/bottom_menu_selector"
-        app:labelVisibilityMode="labeled"
         app:itemTextAppearanceActive="@style/BottomNavigationView.Active_one_divice"
-        app:itemTextAppearanceInactive="@style/BottomNavigationView_one_divice"/>
+        app:itemTextAppearanceInactive="@style/BottomNavigationView_one_divice"
+        app:itemTextColor="#000000"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_for_game_one_divice" />
 
     <Button
         android:id="@+id/to_back_go_one_divice"
