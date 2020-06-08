@@ -10,9 +10,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import com.example.schoolbattle.CONTEXT
-import com.example.schoolbattle.R
-import com.example.schoolbattle.Show_Result_one_Device
+import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_reversi_one_divice.*
 
 class ReversiOneDivice : AppCompatActivity() {

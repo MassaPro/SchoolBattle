@@ -1,4 +1,4 @@
-package com.example.schoolbattle
+package com.example.schoolbattle.gamesonedevice
 
 import android.app.Activity
 import android.content.Context
@@ -10,6 +10,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.go_game_one_divice.*
 
 
@@ -159,12 +160,16 @@ class GoGameOneDivice : AppCompatActivity() {
 
                 }
                 R.id.page_2 ->{
-                    dialog_parametrs = Show_parametr_one_divice_one_Device(this@GoGameOneDivice)
+                    dialog_parametrs =
+                        Show_parametr_one_divice_one_Device(
+                            this@GoGameOneDivice
+                        )
                     dialog_parametrs?.showResult_one_device()
                 }
                 R.id.page_3 ->{
                     this.finish()
-                    val intent = Intent(this,GoGameOneDivice::class.java).apply {
+                    val intent = Intent(this,
+                        GoGameOneDivice::class.java).apply {
                         putExtra("usedToClear", "clear")}
                     startActivity(intent)
                 }
@@ -488,8 +493,12 @@ class CanvasView_Go_one_divice(context: Context, attrs: AttributeSet?) : View(co
 
 
 
-    var red : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.red);       //картинки фишек и подсветки
-    var blue: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.blue);
+    var red : Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.red
+    );       //картинки фишек и подсветки
+    var blue: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.blue
+    );
 
 
 

@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".gamesonedevice.ReversiOneDivice"></activity>
-        <activity android:name=".GoGameOneDivice"></activity>
+        <activity android:name=".gamesonedevice.GoGameOneDivice"></activity>
         <activity android:name=".SnakeGameActivity" />
         <activity android:name=".gamesonline.BoxGameActivity" />
         <activity android:name=".Show_parametr_with_computer" />
