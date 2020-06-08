@@ -22,6 +22,8 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
 
+        CONTEXT = this
+
         SignIn = this
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val username = prefs.getString("username", "")
@@ -88,5 +90,10 @@ class SignInActivity : AppCompatActivity() {
         if (username != "") {
             finish()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        CONTEXT = this
     }
 }

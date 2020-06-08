@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_xog_one_divice">
 
-        <com.example.schoolbattle.CanvasView_xog_one_device
+        <com.example.schoolbattle.gamesonedevice.CanvasView_xog_one_device
             android:id="@+id/signature_canvas_xog_one_device"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -30,6 +30,7 @@ class MainActivity : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        CONTEXT = requireActivity()
         //val navView: BottomNavigationView = findViewById(R.id.nav_view)
         //navView.selectedItemId = R.id.navigation_home
     }
@@ -48,7 +49,7 @@ class MainActivity : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val prfs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val username = prfs?.getString("username", "")
-
+        CONTEXT = requireActivity()
 
         searchButton.setOnClickListener {
             val dialog = Dialog(this.requireContext())

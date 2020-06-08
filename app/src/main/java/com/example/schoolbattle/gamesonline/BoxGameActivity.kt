@@ -1,4 +1,4 @@
-package com.example.schoolbattle
+package com.example.schoolbattle.gamesonline
 
 import android.app.Activity
 import android.content.Context
@@ -9,6 +9,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import com.example.schoolbattle.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -22,6 +23,7 @@ class BoxGameActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        CONTEXT = this
         currentContext = this
         isRun = true
     }
@@ -29,6 +31,7 @@ class BoxGameActivity : AppCompatActivity() {
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
 
+        CONTEXT = this
         currentContext = this
         isRun = true
         super.onResume()
@@ -139,7 +142,8 @@ class BoxGameActivity : AppCompatActivity() {
 
                     myRef.child("Users").child(yourName).child("Games").child("$opponentsName BoxGame").removeValue()
                     myRef.child("Users").child(opponentsName).child("Games").child("$yourName BoxGame").removeValue()
-                    dialog = ShowResult(this@BoxGameActivity)
+                    dialog =
+                        ShowResult(this@BoxGameActivity)
                     if (isRun) {
                         dialog?.showResult(res, "BoxGame", yourName, opponentsName)
                     }
@@ -240,10 +244,18 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
 
 
 
-    var red : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.red);       //картинки фишек и подсветки
-    var blue: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.blue);
-    var illumination: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.illumination);
-    var green: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.green);
+    var red : Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.red
+    );       //картинки фишек и подсветки
+    var blue: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.blue
+    );
+    var illumination: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.illumination
+    );
+    var green: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.green
+    );
 
 
     override fun draw(canvas: Canvas?) {

@@ -1,4 +1,4 @@
-package com.example.schoolbattle
+package com.example.schoolbattle.gamesonline
 
 import android.app.Activity
 import android.content.Context
@@ -9,12 +9,12 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.schoolbattle.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_dot_game.*
-import kotlinx.android.synthetic.main.activity_stupid_game_two_players.*
 
 //TODO , рисовать ребра только один раз до этого узнав, также можно не включать в цепочки вершины которые окружены 6 такими же вершинами
 
@@ -25,12 +25,14 @@ class DotGameActivity: AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         currentContext = this
+        CONTEXT = this
         isRun = true
     }
 
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
 
+        CONTEXT = this
         currentContext = this
         isRun = true
         super.onResume()
@@ -149,7 +151,8 @@ class DotGameActivity: AppCompatActivity() {
 
                     myRef.child("Users").child(yourName).child("Games").child("$opponentsName DotGame").removeValue()
                     myRef.child("Users").child(opponentsName).child("Games").child("$yourName DotGame").removeValue()
-                    dialog = ShowResult(this@DotGameActivity)
+                    dialog =
+                        ShowResult(this@DotGameActivity)
                     if (isRun) {
                         dialog?.showResult(res, "DotGame", yourName, opponentsName)
                     }

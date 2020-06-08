@@ -15,6 +15,7 @@ class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
+        CONTEXT = this
 
         fun noSpace() {
             Toast.makeText(this,"Name should not contain spaces", Toast.LENGTH_LONG).show()
@@ -95,5 +96,10 @@ class SignUpActivity : AppCompatActivity() {
                 }
             })
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        CONTEXT = this
     }
 }

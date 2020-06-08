@@ -1,4 +1,4 @@
-package com.example.schoolbattle
+package com.example.schoolbattle.gamesonedevice
 
 import android.content.Context
 import android.content.Intent
@@ -6,17 +6,12 @@ import android.graphics.*
 import android.graphics.Color.argb
 import android.graphics.Color.rgb
 import android.os.Bundle
-import android.text.style.BackgroundColorSpan
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.bottomnavigation.LabelVisibilityMode.LABEL_VISIBILITY_AUTO
-import com.google.android.material.bottomnavigation.LabelVisibilityMode.LABEL_VISIBILITY_SELECTED
+import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
 
 
@@ -88,7 +83,7 @@ class XOGame_oneDivice : AppCompatActivity() {
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
 
-
+        CONTEXT = this
         //var h : MutableList<Triple<Int,Int,Int>> =  mutableListOf(Triple(231,231,777),Triple(231,231,777),Triple(231,231,777))
         //Log.w("momlol",decode(encode(h)).toString())
         setContentView(R.layout.activity_x_o_game_one_divice)
@@ -136,13 +131,15 @@ class XOGame_oneDivice : AppCompatActivity() {
         signature_canvas_xog_one_device.setOnClickListener{
             if(signature_canvas_xog_one_device.EXODUS == 1)
             {
-                dialog = Show_Result_one_Device(this@XOGame_oneDivice)
+                dialog =
+                    Show_Result_one_Device(this@XOGame_oneDivice)
                 dialog?.showResult_one_device("КРЕСТИКИ ПОБЕДИЛИ","XOGame",this)
 
             }
             if(signature_canvas_xog_one_device.EXODUS == 2)
             {
-                dialog = Show_Result_one_Device(this@XOGame_oneDivice)
+                dialog =
+                    Show_Result_one_Device(this@XOGame_oneDivice)
                 dialog?.showResult_one_device("НОЛИКИ ПОБЕДИЛИ","XOGame",this)
             }
         }
@@ -159,7 +156,10 @@ class XOGame_oneDivice : AppCompatActivity() {
 
                 }
                 R.id.page_2 ->{
-                    dialog_parametrs = Show_parametr_one_divice_one_Device(this@XOGame_oneDivice)
+                    dialog_parametrs =
+                        Show_parametr_one_divice_one_Device(
+                            this@XOGame_oneDivice
+                        )
                     dialog_parametrs?.showResult_one_device()
                 }
                 R.id.page_3 ->{
@@ -419,12 +419,20 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
     }
 
 
-    var icon_cross_egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cross_egypt)       //картинки крестиков и нулей
-    var icon_null_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.circle_egypt)
+    var icon_cross_egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.cross_egypt
+    )       //картинки крестиков и нулей
+    var icon_null_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.circle_egypt
+    )
 
    // var BackgroundColor_Egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.background_egypt)
-    var icon_green : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.illumination)
-    var icon_grenn_Egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ram_egypt_xog)
+    var icon_green : Bitmap = BitmapFactory.decodeResource(context.getResources(),
+       R.drawable.illumination
+   )
+    var icon_grenn_Egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.ram_egypt_xog
+    )
 
 
 

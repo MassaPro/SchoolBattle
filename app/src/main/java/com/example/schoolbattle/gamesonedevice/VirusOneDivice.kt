@@ -1,4 +1,4 @@
-package com.example.schoolbattle
+package com.example.schoolbattle.gamesonedevice
 
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
@@ -6,10 +6,11 @@ import android.os.Bundle
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
-import android.view.MotionEvent.ACTION_UP
 import android.view.View
+import com.example.schoolbattle.CONTEXT
+import com.example.schoolbattle.R
+import com.example.schoolbattle.Show_Result_one_Device
 import kotlinx.android.synthetic.main.activity_virus_one_divice.*
 
 class VirusOneDivice : AppCompatActivity() {
@@ -17,6 +18,8 @@ class VirusOneDivice : AppCompatActivity() {
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        CONTEXT = this
         setContentView(R.layout.activity_virus_one_divice)
         signature_canvas_virus_one_device.activity = this
         comback_virus_one_divice.setOnClickListener{
@@ -270,10 +273,18 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
     }
 
 
-    var virus_1: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.virus1);
-    var virus_2: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.virus2);
-    var tower_1: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower1);
-    var tower_2: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2)
+    var virus_1: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.virus1
+    );
+    var virus_2: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.virus2
+    );
+    var tower_1: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.tower1
+    );
+    var tower_2: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.tower2
+    )
 
 
     override fun draw(canvas: Canvas?) {

@@ -23,6 +23,7 @@ class NewGameActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_game)
+        CONTEXT = this
         NewGame = this
         game_list.layoutManager = GridLayoutManager(this, 2)
         setupRecyclerView(game_list, intent.getIntExtra("playType", -1), this)
@@ -93,6 +94,11 @@ class NewGameActivity : AppCompatActivity() {
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val idView: TextView = view.textView2
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        CONTEXT = this
     }
 }
 

@@ -1,4 +1,4 @@
-package com.example.schoolbattle
+package com.example.schoolbattle.gamesonedevice
 
 import android.app.Activity
 import android.content.Context
@@ -9,8 +9,8 @@ import android.os.Bundle
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_snake_game_one_divice.*
-import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
 import java.lang.Math.abs
 
 class SnakeGameOneDivice : AppCompatActivity() {
@@ -82,6 +82,7 @@ class SnakeGameOneDivice : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_snake_game_one_divice)
 
+        CONTEXT = this
         signature_canvas_snake_one_device.activity = this
 
 
@@ -143,7 +144,10 @@ class SnakeGameOneDivice : AppCompatActivity() {
 
                 }
                 R.id.page_2 ->{
-                    dialog_parametrs = Show_parametr_one_divice_one_Device(this@SnakeGameOneDivice)
+                    dialog_parametrs =
+                        Show_parametr_one_divice_one_Device(
+                            this@SnakeGameOneDivice
+                        )
                     dialog_parametrs?.showResult_one_device()
                 }
                 R.id.page_3 ->{
@@ -417,8 +421,12 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
 
 
 
-    var red : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.red);       //картинки фишек и подсветки
-    var blue: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.blue);
+    var red : Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.red
+    );       //картинки фишек и подсветки
+    var blue: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.blue
+    );
 
 
 

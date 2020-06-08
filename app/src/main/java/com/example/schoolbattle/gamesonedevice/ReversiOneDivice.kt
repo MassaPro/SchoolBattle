@@ -1,4 +1,4 @@
-package com.example.schoolbattle
+package com.example.schoolbattle.gamesonedevice
 
 import android.app.Activity
 import android.content.Context
@@ -10,12 +10,10 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_box_game_one_divice.*
-import kotlinx.android.synthetic.main.activity_coners_one_device.*
+import com.example.schoolbattle.CONTEXT
+import com.example.schoolbattle.R
+import com.example.schoolbattle.Show_Result_one_Device
 import kotlinx.android.synthetic.main.activity_reversi_one_divice.*
-import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
-import kotlin.math.E
 
 class ReversiOneDivice : AppCompatActivity() {
     fun encode(h: MutableList<Triple<Int,Int,Int>>):String
@@ -87,6 +85,7 @@ class ReversiOneDivice : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reversi_one_divice)
         signature_canvas_reversi_one_device.activity = this
+        CONTEXT = this
 
         if(Design == "Egypt" ) {
             name_player1_one_divice_reversi.setTextColor(Color.BLACK)
@@ -842,9 +841,15 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
 
 
 
-    var black_chip : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black);       //картинки фишек и подсветки
-    var grey_chip: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.grey);
-    var green: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.green);
+    var black_chip : Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.black
+    );       //картинки фишек и подсветки
+    var grey_chip: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.grey
+    );
+    var green: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.green
+    );
 
 
     override fun draw(canvas: Canvas?) {

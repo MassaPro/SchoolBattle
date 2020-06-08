@@ -1,4 +1,4 @@
-package com.example.schoolbattle
+package com.example.schoolbattle.gamesonedevice
 
 import android.app.Activity
 import android.content.Context
@@ -10,8 +10,8 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_box_game_one_divice.*
-import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
 
 class BoxGameOneDivice : AppCompatActivity() {
     fun encode(h: MutableList<MutableList<Int>>):String
@@ -91,6 +91,7 @@ class BoxGameOneDivice : AppCompatActivity() {
         setContentView(R.layout.activity_box_game_one_divice)
         signature_canvas_box_one_device.activity = this
 
+        CONTEXT = this
 
         if(Design == "Egypt" ) {
             name_player1_one_divice_box.setTextColor(Color.BLACK)
@@ -210,7 +211,10 @@ class BoxGameOneDivice : AppCompatActivity() {
 
                 }
                 R.id.page_2 ->{
-                    dialog_parametrs = Show_parametr_one_divice_one_Device(this@BoxGameOneDivice)
+                    dialog_parametrs =
+                        Show_parametr_one_divice_one_Device(
+                            this@BoxGameOneDivice
+                        )
                     dialog_parametrs?.showResult_one_device()
                 }
                 R.id.page_3 ->{
@@ -497,10 +501,18 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
 
 
 
-    var red : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.red);       //картинки фишек и подсветки
-    var blue: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.blue);
-    var illumination: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.illumination);
-    var green: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.green);
+    var red : Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.red
+    );       //картинки фишек и подсветки
+    var blue: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.blue
+    );
+    var illumination: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.illumination
+    );
+    var green: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.green
+    );
 
 
     override fun draw(canvas: Canvas?) {

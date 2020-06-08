@@ -6,9 +6,7 @@ import android.content.Intent
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
+import com.example.schoolbattle.gamesonedevice.*
 
 class Show_Result_one_Device(activity: Activity) {
     private val dialog_one_device = Dialog(activity)
@@ -29,34 +27,39 @@ class Show_Result_one_Device(activity: Activity) {
             }
             if(Game_Type == "AngleGame")
             {
-                val intent = Intent(type_activity,ConersOneDevice::class.java).apply {
+                val intent = Intent(type_activity,
+                    ConersOneDevice::class.java).apply {
                     putExtra("usedToClear", "clear")}
                 type_activity.finish()
                 type_activity.startActivity(intent)
             }
             if(Game_Type == "DotGame")
             {
-                val intent = Intent(type_activity,DotGameOneDivice::class.java).apply {
+                val intent = Intent(type_activity,
+                    DotGameOneDivice::class.java).apply {
                     putExtra("usedToClear", "clear")}
                 type_activity.finish()
                 type_activity.startActivity(intent)
             }
             if(Game_Type == "SnakeGame")
             {
-                val intent = Intent(type_activity,SnakeGameOneDivice::class.java).apply {
+                val intent = Intent(type_activity,
+                    SnakeGameOneDivice::class.java).apply {
                     putExtra("usedToClear", "clear")}
                 type_activity.startActivity(intent)
             }
             if(Game_Type == "BoxGame")
             {
-                val intent = Intent(type_activity,BoxGameOneDivice::class.java).apply {
+                val intent = Intent(type_activity,
+                    BoxGameOneDivice::class.java).apply {
                     putExtra("usedToClear", "clear")}
                 type_activity.finish()
                 type_activity.startActivity(intent)
             }
             if(Game_Type == "VirusGame")
             {
-                val intent = Intent(type_activity,VirusOneDivice::class.java).apply {
+                val intent = Intent(type_activity,
+                    VirusOneDivice::class.java).apply {
                     putExtra("usedToClear", "clear")}
                 type_activity.finish()
                 type_activity.startActivity(intent)

@@ -1,4 +1,4 @@
-package com.example.schoolbattle
+package com.example.schoolbattle.gamesonedevice
 
 import android.app.Activity
 import android.content.Context
@@ -10,11 +10,8 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_box_game_one_divice.*
+import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_coners_one_device.*
-import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
-import kotlin.math.E
 
 class ConersOneDevice : AppCompatActivity() {
     fun encode(h: MutableList<MutableList<Int>>):String
@@ -93,6 +90,7 @@ class ConersOneDevice : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coners_one_device)
         signature_canvas_corners_one_device.activity = this
+        CONTEXT = this
 
         if(Design == "Egypt" ) {
             name_player1_one_divice_corner.setTextColor(Color.BLACK)
@@ -169,7 +167,10 @@ class ConersOneDevice : AppCompatActivity() {
 
                 }
                 R.id.page_2 ->{
-                    dialog_parametrs = Show_parametr_one_divice_one_Device(this@ConersOneDevice)
+                    dialog_parametrs =
+                        Show_parametr_one_divice_one_Device(
+                            this@ConersOneDevice
+                        )
                     dialog_parametrs?.showResult_one_device()
                 }
                 R.id.page_3 ->{
@@ -520,12 +521,24 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
 
 
 
-    var black_chip : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black);       //картинки фишек и подсветки
-    var grey_chip: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.grey);
-    var black_chip_egypt:Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black_chip_egypt);
-    var white_chip_egypt:Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.white_chip_egypt);
-    var illumination: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.illumination);
-    var green: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.green);
+    var black_chip : Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.black
+    );       //картинки фишек и подсветки
+    var grey_chip: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.grey
+    );
+    var black_chip_egypt:Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.black_chip_egypt
+    );
+    var white_chip_egypt:Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.white_chip_egypt
+    );
+    var illumination: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.illumination
+    );
+    var green: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.green
+    );
 
 
     override fun draw(canvas: Canvas?) {
@@ -641,12 +654,14 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
 
         if(chek_win()>0 && event!!.getAction()  == MotionEvent.ACTION_UP && !blocked) {
             if (chek_win() == 2) {3
-                dialog = Show_Result_one_Device(activity)
+                dialog =
+                    Show_Result_one_Device(activity)
                 dialog?.showResult_one_device("СЕРЫЕ ПОБЕДИЛИ", "AngleGame", activity)
                 return true
             }
             if (chek_win() == 1) {
-                dialog = Show_Result_one_Device(activity)
+                dialog =
+                    Show_Result_one_Device(activity)
                 dialog?.showResult_one_device("ЧЕРНЫЕ ПОБЕДИЛИ", "AngleGame", activity)
                 return true
             }

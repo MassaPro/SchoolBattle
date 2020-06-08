@@ -1,9 +1,10 @@
-package com.example.schoolbattle
+package com.example.schoolbattle.gamesonline
 
 import android.app.Activity
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.schoolbattle.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -15,6 +16,7 @@ class StupidGameActivityTwoPlayers : AppCompatActivity() {
     private var dialog: ShowResult? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        CONTEXT = this
         dialog = ShowResult(this)
         currentContext = this
         isRun = true
