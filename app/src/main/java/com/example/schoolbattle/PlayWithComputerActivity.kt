@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.schoolbattle.gameswithcomp.XOGame_withComputer
+import com.example.schoolbattle.gameswithcomp.*
 
 class PlayWithComputerActivity : AppCompatActivity() {
 
@@ -26,26 +26,30 @@ class PlayWithComputerActivity : AppCompatActivity() {
 
         if(gameType == "AngleGame")
         {
-            val intent = Intent(this,ConersWithComputer::class.java)
+            val intent = Intent(this,
+                ConersWithComputer::class.java)
             startActivity(intent)
             finish()
         }
 
         if(gameType == "DotGame")
         {
-            val intent = Intent(this,DotGameWithComputer::class.java)
+            val intent = Intent(this,
+                DotGameWithComputer::class.java)
             startActivity(intent)
             finish()
         }
         if(gameType == "SnakeGame")
         {
-            val intent = Intent(this,SnakeGameWithComputer::class.java)
+            val intent = Intent(this,
+                SnakeGameWithComputer::class.java)
             startActivity(intent)
             finish()
         }
         if(gameType == "BoxGame")
         {
-            val intent = Intent(this,BoxGameWithComputer::class.java)
+            val intent = Intent(this,
+                BoxGameWithComputer::class.java)
             startActivity(intent)
             finish()
         }
@@ -58,7 +62,8 @@ class PlayWithComputerActivity : AppCompatActivity() {
 
         if(gameType == "Reversi")
         {
-            val intent = Intent(this,ReversiWithComputer::class.java)
+            val intent = Intent(this,
+                ReversiWithComputer::class.java)
             startActivity(intent)
             finish()
         }
