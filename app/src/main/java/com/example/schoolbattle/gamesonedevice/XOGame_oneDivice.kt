@@ -78,6 +78,7 @@ class XOGame_oneDivice : AppCompatActivity() {
         return answer
     }
     private var dialog: Show_Result_one_Device? = null
+    private var dialog_rules: Show_rules? = null
     private var dialog_parametrs: Show_parametr_one_divice_one_Device? = null
     @ExperimentalStdlibApi
     override fun onCreate(savedInstance: Bundle?) {
@@ -153,7 +154,11 @@ class XOGame_oneDivice : AppCompatActivity() {
         bottom_navigation_xog_one_divice.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
-
+                    dialog_rules =
+                        Show_rules(
+                            this@XOGame_oneDivice
+                        )
+                    dialog_rules?.show(1)
                 }
                 R.id.page_2 ->{
                     dialog_parametrs =
