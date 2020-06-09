@@ -5,6 +5,7 @@ import android.app.Application
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.Window
 import android.widget.Button
@@ -30,6 +31,8 @@ class NavigatorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigator)
+
+        Log.d("VISIT","121212121")
         CONTEXT = this
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         now = this

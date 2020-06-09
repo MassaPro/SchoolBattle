@@ -9,8 +9,8 @@
     android:background="@android:color/white">
 
     <FrameLayout
-        android:layout_width="348dp"
-        android:layout_height="580dp"
+        android:layout_width="fill_parent"
+        android:layout_height="577dp"
         app:layout_constraintBottom_toTopOf="@+id/toolbar2_reversi_one_divice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

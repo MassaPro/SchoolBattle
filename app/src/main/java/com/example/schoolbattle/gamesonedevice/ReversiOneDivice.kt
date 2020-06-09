@@ -796,6 +796,7 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
     var Black_or_grey_chip: String = "black"
     var paint : Paint = Paint()          //ресурсы для рисования
     var Line_paint: Paint = Paint()
+    var Line_paint1: Paint = Paint()
     var FIELD = Array(8){IntArray(8)}     //для фишек
     var Array_of_illumination = Array(8) { IntArray(8) }
 
@@ -815,9 +816,19 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
     var exception: Boolean = false
 
     init{
-        Line_paint.setColor(Color.RED)          //ресур для линий (ширина и цвет)
-        Line_paint.setStrokeWidth(10f)
-
+        if(Design == "Egypt")
+        {
+            Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
+            Line_paint.setStrokeWidth(7f)
+            Line_paint1.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
+            Line_paint1.setStrokeWidth(10f)
+        }
+        else {
+            Line_paint.setColor(Color.RED)          //ресур для линий (ширина и цвет)
+            Line_paint.setStrokeWidth(10f)
+            Line_paint1.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
+            Line_paint1.setStrokeWidth(10f)
+        }
         // TODO нужно взять из DataBase (статистика ходов)
         for( i in 0..7) {
             for(j in 0 ..7) {
@@ -853,7 +864,8 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
 
-        indent = 20f
+
+        indent = 40f
         width = getWidth().toFloat()
         height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)
         size_field_x  = 8
@@ -861,6 +873,17 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
         step = (width-2*indent)/size_field_x
         advertising_line =  (height - 8*step)/2           //полоска для рекламы
         k = height-(width-2*indent)-advertising_line
+
+
+
+        if(Black_or_grey_chip == "black")
+        {
+            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,Line_paint1)
+        }
+        else
+        {
+            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),Line_paint1)
+        }
 
 
 
