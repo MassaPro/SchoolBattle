@@ -97,7 +97,7 @@ class ReversiOneDivice : AppCompatActivity() {
             toolbar_reversi_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             toolbar2_reversi_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
 
-            label_one_device_reversi.setBackgroundResource(R.drawable.back_ground_egypt);
+            label_one_device_reversi.setBackgroundResource(R.drawable.background_egypt);
             bottom_navigation_reversi_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
             to_back_reversi_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_reversi_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))

@@ -6,7 +6,9 @@ import android.content.Intent
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.gamesonedevice.*
+import kotlinx.android.synthetic.main.activity_game_over_one_device.*
 
 class Show_Result_one_Device(activity: Activity) {
     private val dialog_one_device = Dialog(activity)
@@ -15,6 +17,11 @@ class Show_Result_one_Device(activity: Activity) {
         dialog_one_device.setCancelable(false)
         dialog_one_device.setCanceledOnTouchOutside(true)
         dialog_one_device.setContentView(R.layout.activity_game_over_one_device)
+
+        if (Design == "Egypt"){
+            dialog_one_device.linearLayout_one_device.setBackgroundResource(R.drawable.win_egypt);
+            dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+        }
 
         val button_revanshe = dialog_one_device.findViewById(R.id.restart_one_device) as Button
         button_revanshe.setOnClickListener{

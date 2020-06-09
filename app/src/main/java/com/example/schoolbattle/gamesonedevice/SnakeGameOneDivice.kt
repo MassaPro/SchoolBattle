@@ -99,7 +99,7 @@ class SnakeGameOneDivice : AppCompatActivity() {
             toolbar_snake_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             toolbar2_snake_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
 
-            label_one_device_snake.setBackgroundResource(R.drawable.back_ground_egypt);
+            label_one_device_snake.setBackgroundResource(R.drawable.background_egypt);
             bottom_navigation_snake_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
             to_back_snake_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_snake_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))

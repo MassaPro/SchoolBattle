@@ -3,9 +3,11 @@ package com.example.schoolbattle
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
@@ -23,6 +25,27 @@ class SignInActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_in)
 
         CONTEXT = this
+
+        if (Design == "Egypt"){
+            sign_in_menu.setBackgroundResource(R.drawable.sign_in_egypt);
+            signInButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            signInButton.setBackgroundColor(
+                Color.argb(0,
+                    0,
+                    0,
+                    0
+                )
+            )
+            signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            signUpButton.setBackgroundColor(
+                Color.argb(0,
+                    0,
+                    0,
+                    0
+                )
+            )
+
+        }
 
         SignIn = this
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
