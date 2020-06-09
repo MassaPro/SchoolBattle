@@ -80,6 +80,7 @@ class VirusOneDivice : AppCompatActivity() {
         return answer
     }
 
+
     private var dialog_parametrs: Show_parametr_one_divice_one_Device? = null
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,7 +99,7 @@ class VirusOneDivice : AppCompatActivity() {
             button_player_2_virus_one_divice.setBackgroundResource(R.drawable.player2_egypt);
             player_1_icon_virus_one_divice.setBackgroundResource(R.drawable.cross_egypt);
             player_2_icon_virus_one_divice.setBackgroundResource(R.drawable.circle_egypt);
-            label_one_device_virus.setBackgroundResource(R.drawable.back_ground_egypt);
+            label_one_device_virus.setBackgroundResource(R.drawable.background_egypt);
             bottom_navigation_virus_one_divice.setBackgroundColor(rgb(224,164,103))
             to_back_virus_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_virus_one_divice.setBackgroundColor(argb(0,0,0,0))
@@ -127,14 +128,15 @@ class VirusOneDivice : AppCompatActivity() {
             signature_canvas_virus_one_device.FIELD[i.first][i.second] = i.third
             if(i.third == 1)
             {
-                signature_canvas_virus_one_device.COUNTER_BLUE++
+                signature_canvas_virus_one_device.COUNTER_RED++
             }
             if(i.third == 2)
             {
-                signature_canvas_virus_one_device.COUNTER_RED++
+                signature_canvas_virus_one_device.COUNTER_BLUE++
             }
             signature_canvas_virus_one_device.red_or_blue = (signature_canvas_virus_one_device.red_or_blue+1)%6
         }
+        Toast.makeText(this,signature_canvas_virus_one_device.COUNTER_BLUE.toString(), Toast.LENGTH_LONG).show()
 
 
 
@@ -160,6 +162,10 @@ class VirusOneDivice : AppCompatActivity() {
                     if(signature_canvas_virus_one_device.History.size>0)
                     {
                         signature_canvas_virus_one_device.History.removeLast()
+                        var data_from_memory = encode(signature_canvas_virus_one_device.History)
+                        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                        editor.putString("virus_one_divice", data_from_memory)
+                        editor.apply()
                         signature_canvas_virus_one_device.red_or_blue =0
                         signature_canvas_virus_one_device.COUNTER_RED = 0
                         signature_canvas_virus_one_device.COUNTER_BLUE = 0
@@ -192,7 +198,7 @@ class VirusOneDivice : AppCompatActivity() {
         }
         to_back_virus_one_divice.setOnClickListener {
             this.finish()
-            val intent = Intent(this, VirusOneDivice::class.java)
+            val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 2)
             startActivity(intent)
         }
@@ -779,7 +785,6 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
 
                         if (FIELD[i][j] == 0) {
                             if (red_or_blue < 3) {
-                                var is1: Boolean = is_anround(i, j, 1)
                                 if (COUNTER_RED == 0) {
                                     if ((i == 0 && j == 0) || (i == 9 && j == 0) || (i == 9 && j == 9) || (i == 0 && j == 9)) {
                                         FIELD[i][j] = 1
@@ -793,7 +798,7 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
                                         invalidate()
                                     }
                                 } else {
-                                    if (is1) {
+                                    if (is_anround(i, j, 1)) {
                                         FIELD[i][j] = 1
                                         History.add(Triple(i,j,FIELD[i][j]))
                                         COUNTER_RED++
@@ -807,7 +812,6 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
                                 }
 
                             } else {
-                                var is2: Boolean = is_anround(i, j, 2)
                                 if (COUNTER_BLUE == 0) {
                                     if ((i == 0 && j == 0) || (i == 9 && j == 0) || (i == 9 && j == 9) || (i == 0 && j == 9)) {
                                         FIELD[i][j] = 2
@@ -821,7 +825,7 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
                                         invalidate()
                                     }
                                 } else {
-                                    if (is2) {
+                                    if (is_anround(i, j, 2)) {
                                         FIELD[i][j] = 2
                                         History.add(Triple(i,j,FIELD[i][j]))
                                         COUNTER_BLUE++
@@ -836,7 +840,7 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
                             }
                         } else {
                             if (FIELD[i][j] == 1 && red_or_blue > 2) {
-                                if (is_anround(i,j,1)) {
+                                if (is_anround(i,j,2)) {
                                     FIELD[i][j] = 4
                                     History.add(Triple(i,j,FIELD[i][j]))
                                     COUNTER_BLUE++
@@ -849,7 +853,7 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
                                 }
                             } else {
                                 if (FIELD[i][j] == 2 && red_or_blue < 3) {
-                                    if (is_anround(i,j,2)) {
+                                    if (is_anround(i,j,1)) {
                                         FIELD[i][j] = 3
                                         History.add(Triple(i,j,FIELD[i][j]))
                                         COUNTER_RED++
