@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Color.rgb
 import android.os.Bundle
 import android.view.Gravity
 import android.view.Window
@@ -15,6 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_navigator.*
 
 
 var now: Context? = null
@@ -31,6 +33,11 @@ class NavigatorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigator)
         CONTEXT = this
+
+        if (Design == "Egypt"){
+            nav_view.setBackgroundColor(rgb(224, 164, 103));
+        }
+
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         now = this
         val navController = findNavController(R.id.nav_host_fragment)

@@ -105,7 +105,7 @@ class BoxGameOneDivice : AppCompatActivity() {
             toolbar_box_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             toolbar2_box_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
 
-            label_one_device_box.setBackgroundResource(R.drawable.back_ground_egypt);
+            label_one_device_box.setBackgroundResource(R.drawable.background_egypt);
             bottom_navigation_box_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
             to_back_box_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_box_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))

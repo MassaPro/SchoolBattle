@@ -4,14 +4,17 @@ import android.app.Activity
 import android.content.Intent
 import android.content.Intent.getIntent
 import android.content.Intent.getIntentOld
+import android.graphics.Color.rgb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_game_item.*
 import kotlinx.android.synthetic.main.activity_new_game.*
 import kotlinx.android.synthetic.main.activity_new_game_item.view.*
 
@@ -24,6 +27,13 @@ class NewGameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_game)
         CONTEXT = this
+
+        if (Design == "Egypt"){
+            game_list_menu.setBackgroundResource(R.drawable.background_egypt);
+            my_toolbar2.setBackgroundColor(rgb(224,164,103))
+            text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+        }
+
         NewGame = this
         game_list.layoutManager = GridLayoutManager(this, 2)
         setupRecyclerView(game_list, intent.getIntExtra("playType", -1), this)

@@ -9,7 +9,7 @@
         android:id="@+id/navigation_home"
         android:name="com.example.schoolbattle.MainActivity"
         android:label="@string/title_home"
-        tools:layout="@layout/activity_game_list" />
+        tools:layout="@layout/activity_game_menu" />
 
     <fragment
         android:id="@+id/navigation_dashboard"

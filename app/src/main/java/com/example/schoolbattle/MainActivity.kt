@@ -4,17 +4,19 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Color.rgb
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.activity_game_list.*
+import kotlinx.android.synthetic.main.activity_game_menu.*
 
 public var Design: String = "Egypt"
 
@@ -40,7 +42,7 @@ class MainActivity : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.activity_game_list, container, false)
+        return inflater.inflate(R.layout.activity_game_menu, container, false)
     }
 
 
@@ -50,6 +52,44 @@ class MainActivity : Fragment() {
         val prfs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val username = prfs?.getString("username", "")
         CONTEXT = requireActivity()
+
+
+        if (Design == "Egypt"){
+            game_menu.setBackgroundResource(R.drawable.game_menu_egypt);
+            my_toolbar2.setBackgroundColor(rgb(224,164,103))
+            searchButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            searchButton.setBackgroundColor(
+                Color.argb(0,
+                    0,
+                    0,
+                    0
+                )
+            )
+            newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            newGameButton.setBackgroundColor(
+                Color.argb(0,
+                    0,
+                    0,
+                    0
+                )
+            )
+            oneDevice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            oneDevice.setBackgroundColor(
+                Color.argb(0,
+                    0,
+                    0,
+                    0
+                )
+            )
+            playWithComp.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            playWithComp.setBackgroundColor(
+                Color.argb(0,
+                    0,
+                    0,
+                    0
+                )
+            )
+        }
 
         searchButton.setOnClickListener {
             val dialog = Dialog(this.requireContext())
@@ -98,13 +138,13 @@ class MainActivity : Fragment() {
 
         }
        // (activity as AppCompatActivity).setSupportActionBar(findViewById(R.id.my_toolbar))
-        (activity as AppCompatActivity?)!!.setSupportActionBar(my_toolbar)
+        (activity as AppCompatActivity?)!!.setSupportActionBar(my_toolbar2)
 
         val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val globalName = prefs?.getString("username", "")
-        toolbarName.text = globalName
+        toolbarName2.text = globalName
 
-        logOut.setOnClickListener {
+        logOut2.setOnClickListener {
             val editor = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)?.edit()
             editor?.putString("username", "")
             editor?.apply()
