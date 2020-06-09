@@ -6,6 +6,7 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Color.rgb
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.Window
 import android.widget.Button
@@ -32,6 +33,8 @@ class NavigatorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigator)
+
+        Log.d("VISIT","121212121")
         CONTEXT = this
 
         if (Design == "Egypt"){
