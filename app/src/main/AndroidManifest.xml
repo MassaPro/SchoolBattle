@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".SnakeGameWithComputer"></activity>
+        <activity android:name=".Show_language_selection"></activity>
+        <activity android:name=".SnakeGameWithComputer" />
         <activity android:name=".ReversiWithComputer" />
         <activity android:name=".DotGameWithComputer" />
         <activity android:name=".ConersWithComputer" />

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_settings_fragment.*
@@ -47,6 +48,9 @@ class SettingsFragmentActivity : Fragment() {
             }
         })
 
+        languageChange.setOnClickListener {
+            Toast.makeText(activity,"Change text", Toast.LENGTH_LONG).show()
+        }
 
     }
     /*override fun onCreate(savedInstanceState: Bundle?) {
