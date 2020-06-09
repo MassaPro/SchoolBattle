@@ -1,18 +1,17 @@
-package com.example.schoolbattle
+package com.example.schoolbattle.gamesonedevice
 
 import android.content.Context
 import android.content.Intent
 import android.graphics.*
+import android.graphics.Color.argb
+import android.graphics.Color.rgb
 import android.os.Bundle
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.bottomnavigation.LabelVisibilityMode.LABEL_VISIBILITY_AUTO
-import com.google.android.material.bottomnavigation.LabelVisibilityMode.LABEL_VISIBILITY_SELECTED
+import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
 
 
@@ -84,11 +83,26 @@ class XOGame_oneDivice : AppCompatActivity() {
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
 
-
+        CONTEXT = this
         //var h : MutableList<Triple<Int,Int,Int>> =  mutableListOf(Triple(231,231,777),Triple(231,231,777),Triple(231,231,777))
         //Log.w("momlol",decode(encode(h)).toString())
         setContentView(R.layout.activity_x_o_game_one_divice)
 
+        if(Design == "Egypt" ) {
+            name_player1_one_divice_xog.setTextColor(Color.BLACK)
+            name_player2_one_divice_xog.setTextColor(Color.BLACK)
+            name_player2_one_divice_xog.setTextSize(20f)
+            name_player1_one_divice_xog.setTextSize(20f)
+            button_player_1_xog_one_divice.setBackgroundResource(R.drawable.player1_egypt);
+            button_player_2_xog_one_divice.setBackgroundResource(R.drawable.player2_egypt);
+            player_1_icon_xog_one_divice.setBackgroundResource(R.drawable.cross_egypt);
+            player_2_icon_xog_one_divice.setBackgroundResource(R.drawable.circle_egypt);
+            label_one_device.setBackgroundResource(R.drawable.back_ground_egypt);
+            bottom_navigation_xog_one_divice.setBackgroundColor(rgb(224,164,103))
+            to_back_xog_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_xog_one_divice.setBackgroundColor(argb(0,0,0,0))
+            toolbar2_xog_one_divice.setBackgroundColor(argb(0,0,0,0))
+        }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
         if (usedToClear == "clear") {
@@ -117,17 +131,20 @@ class XOGame_oneDivice : AppCompatActivity() {
         signature_canvas_xog_one_device.setOnClickListener{
             if(signature_canvas_xog_one_device.EXODUS == 1)
             {
-                dialog = Show_Result_one_Device(this@XOGame_oneDivice)
+                dialog =
+                    Show_Result_one_Device(this@XOGame_oneDivice)
                 dialog?.showResult_one_device("КРЕСТИКИ ПОБЕДИЛИ","XOGame",this)
 
             }
             if(signature_canvas_xog_one_device.EXODUS == 2)
             {
-                dialog = Show_Result_one_Device(this@XOGame_oneDivice)
+                dialog =
+                    Show_Result_one_Device(this@XOGame_oneDivice)
                 dialog?.showResult_one_device("НОЛИКИ ПОБЕДИЛИ","XOGame",this)
             }
         }
         to_back_xog_one_divice.setOnClickListener {
+            this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 2)
             startActivity(intent)
@@ -139,7 +156,10 @@ class XOGame_oneDivice : AppCompatActivity() {
 
                 }
                 R.id.page_2 ->{
-                    dialog_parametrs = Show_parametr_one_divice_one_Device(this@XOGame_oneDivice)
+                    dialog_parametrs =
+                        Show_parametr_one_divice_one_Device(
+                            this@XOGame_oneDivice
+                        )
                     dialog_parametrs?.showResult_one_device()
                 }
                 R.id.page_3 ->{
@@ -248,12 +268,25 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
         return answer
     }
 
-    fun touch_refinement_X (x : Float,width1: Float,size_field_x1:Int ):Float        //уточняет касания по оси x
+    fun touch_refinement_X (indent: Float,x : Float,width1: Float,size_field_x1:Int ):Float        //уточняет касания по оси x
     {
-        return ((x.toInt()/(width1/size_field_x1).toInt()).toFloat()*width1/size_field_x1).toFloat()
+        if(x<indent)
+        {
+            return -1f
+        }
+        if(x>width1-indent)
+        {
+            return -1f
+        }
+        var a : Float = indent
+        while(x>a)
+        {
+            a+=step
+        }
+        return a - step
     }
 
-    fun touch_refinement_Y (y : Float,height1: Float,size_field_y1:Int,step: Float,advertising_line_1:Float):Float      //уточняет касания по оси Y
+    fun touch_refinement_Y (indent: Float,y : Float,height1: Float,size_field_y1:Int,step: Float,advertising_line_1:Float):Float      //уточняет касания по оси Y
     {
         if(y > height1 - advertising_line_1 ||  y < height1 - advertising_line_1 - step*size_field_y1)
         {
@@ -267,16 +300,16 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
         return a - step
     }
 
-    fun touch_refinement_for_Array_X (x : Float,step:Float):Int        //уточняет координаты в массиве  при касании
+    fun touch_refinement_for_Array_X (indent: Float,x : Float,step:Float):Int        //уточняет координаты в массиве  при касании
     {
         if(x<0)
         {
             return -1
         }
-        return (x/step).toInt()
+        return ((x-indent)/step).toInt()
     }
 
-    fun touch_refinement_for_Array_Y (y : Float,height1: Float,size_field_y1: Int,step: Float,advertising_line_1:Float):Int      //уточняет координаты в массиве  при касании
+    fun touch_refinement_for_Array_Y (indent: Float,y : Float,height1: Float,size_field_y1: Int,step: Float,advertising_line_1:Float):Int      //уточняет координаты в массиве  при касании
     {
         if(y<0)
         {
@@ -292,12 +325,12 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
         return b-1
     }
 
-    private fun translate_from_Array_to_Graphics_X(x:Int, step: Float):Float    //переводит массивные координаты в графически
+    private fun translate_from_Array_to_Graphics_X(indent: Float,x:Int, step: Float):Float    //переводит массивные координаты в графически
     {
-        return x*step
+        return x*step+indent
     }
 
-    fun translate_from_Array_to_Graphics_Y(y:Int,height1: Float,size_field_y1: Int,step: Float,advertising_line_1: Float):Float    //переводит массивные координаты в графически
+    fun translate_from_Array_to_Graphics_Y(indent: Float,y:Int,height1: Float,size_field_y1: Int,step: Float,advertising_line_1: Float):Float    //переводит массивные координаты в графически
     {
         return y*step + height1 - size_field_y1*step - advertising_line_1
     }
@@ -332,18 +365,18 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
         return ans
     }
 
+
+
     var History: MutableList<Triple<Int,Int,Int>> = mutableListOf()
     var width : Float = 0f
     var height: Float = 0f
+    var indent : Float = 20f
     //ширина и высота экрана (от ширины в основном все зависит)
 
     var EXODUS : Int = 0
     var size_field_x: Int = 7
     var size_field_y: Int = 6
     var step: Float = width/size_field_x
-    var advertising_line: Float = (height - step * 6) / 2
-
-    var k: Float = height-width-advertising_line + step
     var blocked = false
 
     var circlex : Float = 0f   //координаты нажатия
@@ -355,13 +388,26 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
     var FIELD = Array(7){IntArray(6)}
     var cross_or_nul: String
 
+
     init {
 
-        Line_paint.color = Color.RED          //ресур для линий (ширина и цвет)
-        Line_paint.strokeWidth = 10f
+        if(Design == "Egypt")
+        {
+            Line_paint.color = Color.BLACK          //ресур для линий (ширина и цвет)
+            Line_paint.strokeWidth = 7f
 
-        Line_paint_1.color = Color.RED          //ресур для линий (ширина и цвет)
-        Line_paint_1.strokeWidth = 20f
+            Line_paint_1.color = Color.BLACK          //ресур для линий (ширина и цвет)
+            Line_paint_1.strokeWidth = 20f
+        }
+        else
+        {
+            Line_paint.color = Color.RED          //ресур для линий (ширина и цвет)
+            Line_paint.strokeWidth = 10f
+
+            Line_paint_1.color = Color.RED          //ресур для линий (ширина и цвет)
+            Line_paint_1.strokeWidth = 20f
+        }
+
 
         // TODO нужно взять из DataBase (статистика ходов)
         for( i in 0..6) {
@@ -373,49 +419,79 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
     }
 
 
-    var icon_cross : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cross)       //картинки крестиков и нулей
-    var icon_null: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.circle_null)
+    var icon_cross_egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.cross_egypt
+    )       //картинки крестиков и нулей
+    var icon_null_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.circle_egypt
+    )
 
-    var icon_green: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.green_icon)
+   // var BackgroundColor_Egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.background_egypt)
+    var icon_green : Bitmap = BitmapFactory.decodeResource(context.getResources(),
+       R.drawable.illumination
+   )
+    var icon_grenn_Egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.ram_egypt_xog
+    )
+
+
 
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
 
         //TODO() take field from database
-        canvas?.drawColor(Color.WHITE)
+
+        indent = 20f
         width = getWidth().toFloat()
-        height = getHeight().toFloat()
-        //ширина и высота экрана (от ширины в основном все зависит)
+        height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)
 
-        size_field_x = 7
-        size_field_y = 6
-        step = width/size_field_x
-        advertising_line = (height - step * 6) / 2
+        size_field_x  = 7
+        size_field_y  = 6
+        step = (width-2*indent)/size_field_x
+        var advertising_line: Float = (height - step * 6) / 2
+        var k: Float = height-(width-2*indent)-advertising_line
 
-        var k: Float = height-width-advertising_line + step
-        for(i in 0 until size_field_x)
+
+        val right_icon_cross: Bitmap  //подгоняем картинку под размеры экрана телефона
+        val right_icon_null: Bitmap
+        val right_icon_green: Bitmap
+        if(Design == "Egypt")
         {
-            canvas?.drawLine(0f,k,width,k,Line_paint)
-            k += step
+            right_icon_cross = Bitmap.createScaledBitmap(icon_cross_egypt,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+            right_icon_null = Bitmap.createScaledBitmap(icon_null_egypt,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+            right_icon_green = Bitmap.createScaledBitmap(
+                icon_grenn_Egypt,
+                (width.toInt() - 2 * indent.toInt()) / size_field_x,
+                (width.toInt() - 2 * indent.toInt()) / size_field_x,
+                true
+            )
         }
-        k = 0f
-        for(i in 0 until size_field_y+2)
+        else {
+            right_icon_cross = Bitmap.createScaledBitmap(icon_cross_egypt,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+            right_icon_null = Bitmap.createScaledBitmap(icon_null_egypt,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+             right_icon_green = Bitmap.createScaledBitmap(
+                icon_green,
+                (width.toInt() - 2 * indent.toInt()) / size_field_x,
+                (width.toInt() - 2 * indent.toInt()) / size_field_x,
+                true
+            )
+        }
+
+
+        k = height - (width-2*indent)*size_field_y/size_field_x - advertising_line
+        for(i in 0 until 7)          //вырисовка горизонтальных линий
         {
-            if(i == 0 || i == size_field_y+1)
-            {
-                canvas?.drawLine(k,height-advertising_line-width+step,k,height-advertising_line,Line_paint_1)
-            }
-            else
-            {
-                canvas?.drawLine(k,height-advertising_line-width+step,k,height-advertising_line,Line_paint)
-            }
-            k += step
+            canvas?.drawLine(indent,k,width-indent,k,Line_paint)
+            k = k + step
+        }
+        k  =  height-(width-2*indent)*size_field_y/size_field_x-advertising_line
+        var t = indent
+        for(i in 0 until 8)         //вырисовка вертикальных линий
+        {
+            canvas?.drawLine(t,k,t,height-advertising_line,Line_paint)
+            t = t + step
         }
 
-
-        val right_icon_cross: Bitmap = Bitmap.createScaledBitmap(icon_cross,width.toInt()/size_field_x, width.toInt()/size_field_x, true); //подгоняем картинку под размеры экрана телефона
-        val right_icon_null: Bitmap = Bitmap.createScaledBitmap(icon_null,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
-        val right_icon_green: Bitmap = Bitmap.createScaledBitmap(icon_green,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
 
 
         for( i in 0..6) //начальная расстановка крестиков и ноликов
@@ -423,13 +499,13 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
             for(j in 0..5) {
                 if (FIELD[i][j] == 1)  //крестик
                 {
-                    canvas?.drawBitmap(right_icon_cross, translate_from_Array_to_Graphics_X(i,step),
-                        translate_from_Array_to_Graphics_Y(j,height,size_field_y,step,advertising_line),paint)
+                    canvas?.drawBitmap(right_icon_cross, translate_from_Array_to_Graphics_X(indent,i,step),
+                        translate_from_Array_to_Graphics_Y(indent,j,height,size_field_y,step,advertising_line),paint)
                 }
                 if (FIELD[i][j] == 2)  //нолик
                 {
-                    canvas?.drawBitmap(right_icon_null, translate_from_Array_to_Graphics_X(i,step),
-                        translate_from_Array_to_Graphics_Y(j,height,size_field_y,step,advertising_line),paint)
+                    canvas?.drawBitmap(right_icon_null, translate_from_Array_to_Graphics_X(indent,i,step),
+                        translate_from_Array_to_Graphics_Y(indent,j,height,size_field_y,step,advertising_line),paint)
                 }
             }
         }
@@ -450,8 +526,8 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
 
             while(counter<9)
             {
-                var a_1: Float =  translate_from_Array_to_Graphics_X(checkForWin_another_fun()[counter],step)
-                var a_2: Float = translate_from_Array_to_Graphics_Y(checkForWin_another_fun()[counter+1].toInt(), height,size_field_y, step, advertising_line)
+                var a_1: Float =  translate_from_Array_to_Graphics_X(indent,checkForWin_another_fun()[counter],step)
+                var a_2: Float = translate_from_Array_to_Graphics_Y(indent,checkForWin_another_fun()[counter+1].toInt(), height,size_field_y, step, advertising_line)
                 canvas?.drawBitmap(right_icon_green,a_1,a_2,paint)
                 counter += 2
             }
@@ -466,6 +542,7 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         super.onTouchEvent(event)
+        var advertising_line: Float = (height - step * 6) / 2
         if(checkForWin_another_fun().size==9)
         {
             var counter: Int = 1
@@ -491,12 +568,12 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
         }
         circlex =  event!!.x
         circley =  event!!.y
-        Log.w("ppppppp",circlex.toString() +" "+ circley.toString() + width.toString() + " " + touch_refinement_Y(circley,height,size_field_y,step,advertising_line).toString())
-        if (touch_refinement_Y(circley,height,size_field_y,step,advertising_line)>0)     //постановка нового обЪекта
+        Log.w("ppppppp",circlex.toString() +" "+ circley.toString() + width.toString() + " " + touch_refinement_Y(indent,circley,height,size_field_y,step,advertising_line).toString())
+        if (touch_refinement_Y(indent,circley,height,size_field_y,step,advertising_line)>0)     //постановка нового обЪекта
         {
             Log.w("ppppppp","LOL")
-            var X: Int = touch_refinement_for_Array_X(circlex,step)
-            var Y: Int = touch_refinement_for_Array_Y(circley,height,size_field_y,step,advertising_line)    //координаты нажимаего для массива
+            var X: Int = touch_refinement_for_Array_X(indent,circlex,step)
+            var Y: Int = touch_refinement_for_Array_Y(indent,circley,height,size_field_y,step,advertising_line)    //координаты нажимаего для массива
             if(X >= 0 && Y >= 0 && X<7 && Y<6)
             {
                 if(FIELD[X][Y] == 0 && Y == 5) {

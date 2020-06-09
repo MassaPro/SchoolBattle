@@ -1,7 +1,8 @@
-package com.example.schoolbattle
+package com.example.schoolbattle.gamesonedevice
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,11 +10,8 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_box_game_one_divice.*
+import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_coners_one_device.*
-import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
-import kotlin.math.E
 
 class ConersOneDevice : AppCompatActivity() {
     fun encode(h: MutableList<MutableList<Int>>):String
@@ -86,11 +84,31 @@ class ConersOneDevice : AppCompatActivity() {
         return answer
     }
     private var dialog: Show_Result_one_Device? = null
+    private var dialog_parametrs: Show_parametr_one_divice_one_Device? = null
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coners_one_device)
         signature_canvas_corners_one_device.activity = this
+        CONTEXT = this
+
+        if(Design == "Egypt" ) {
+            name_player1_one_divice_corner.setTextColor(Color.BLACK)
+            name_player2_one_divice_corner.setTextColor(Color.BLACK)
+            name_player2_one_divice_corner.setTextSize(20f)
+            name_player1_one_divice_corner.setTextSize(20f)
+            button_player_1_corner_one_divice.setBackgroundResource(R.drawable.player1_egypt);
+            button_player_2_corner_one_divice.setBackgroundResource(R.drawable.player2_egypt);
+            player_1_icon_corner_one_divice.setBackgroundResource(R.drawable.white_chip_egypt);
+            player_2_icon_corner_one_divice.setBackgroundResource(R.drawable.black_chip_egypt)
+            toolbar_corner_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            toolbar2_corner_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+
+            label_one_device_corner.setBackgroundResource(R.drawable.back_ground_egypt);
+            bottom_navigation_corner_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
+            to_back_corner_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_corner_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+        }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
         if (usedToClear == "clear") {
@@ -143,54 +161,81 @@ class ConersOneDevice : AppCompatActivity() {
             signature_canvas_corners_one_device.invalidate()
         }
 
-        comback_corner_one_divice.setOnClickListener {
-            Log.w("GOGOGO",signature_canvas_corners_one_device.History.toString())
-            if (signature_canvas_corners_one_device.History.size > 0)
-            {
-                signature_canvas_corners_one_device.History.removeLast()
-                var data_from_memory = encode(signature_canvas_corners_one_device.History)
-                val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                editor.putString("corner_one_divice", data_from_memory)
-                editor.apply()
-                for(i in 0 until signature_canvas_corners_one_device.FIELD.size)
-                {
-                    for(j in 0 until signature_canvas_corners_one_device.FIELD[0].size)
-                    {
-                        signature_canvas_corners_one_device.FIELD[i][j] = 0
-                    }
+        bottom_navigation_corner_one_divice.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.page_1 ->{
+
                 }
-                signature_canvas_corners_one_device.FIELD[0][5] = 1;signature_canvas_corners_one_device.FIELD[1][5] = 1;signature_canvas_corners_one_device.FIELD[2][5] = 1;
-                signature_canvas_corners_one_device.FIELD[0][6] = 1;signature_canvas_corners_one_device.FIELD[1][6] = 1;signature_canvas_corners_one_device.FIELD[2][6] = 1;
-                signature_canvas_corners_one_device.FIELD[0][7] = 1;signature_canvas_corners_one_device.FIELD[1][7] = 1;signature_canvas_corners_one_device.FIELD[2][7] = 1;
+                R.id.page_2 ->{
+                    dialog_parametrs =
+                        Show_parametr_one_divice_one_Device(
+                            this@ConersOneDevice
+                        )
+                    dialog_parametrs?.showResult_one_device()
+                }
+                R.id.page_3 ->{
+                    this.finish()
+                    val intent = Intent(this, ConersOneDevice::class.java).apply {
+                        putExtra("usedToClear", "clear")}
+                    startActivity(intent)
+                }
+                R.id.page_4 ->{
+                    if (signature_canvas_corners_one_device.History.size > 0)
+                    {
+                        signature_canvas_corners_one_device.History.removeLast()
+                        var data_from_memory = encode(signature_canvas_corners_one_device.History)
+                        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                        editor.putString("corner_one_divice", data_from_memory)
+                        editor.apply()
+                        for(i in 0 until signature_canvas_corners_one_device.FIELD.size)
+                        {
+                            for(j in 0 until signature_canvas_corners_one_device.FIELD[0].size)
+                            {
+                                signature_canvas_corners_one_device.FIELD[i][j] = 0
+                            }
+                        }
+                        signature_canvas_corners_one_device.FIELD[0][5] = 1;signature_canvas_corners_one_device.FIELD[1][5] = 1;signature_canvas_corners_one_device.FIELD[2][5] = 1;
+                        signature_canvas_corners_one_device.FIELD[0][6] = 1;signature_canvas_corners_one_device.FIELD[1][6] = 1;signature_canvas_corners_one_device.FIELD[2][6] = 1;
+                        signature_canvas_corners_one_device.FIELD[0][7] = 1;signature_canvas_corners_one_device.FIELD[1][7] = 1;signature_canvas_corners_one_device.FIELD[2][7] = 1;
 
 
-                signature_canvas_corners_one_device.FIELD[5][0] = 2;signature_canvas_corners_one_device.FIELD[5][1] = 2;signature_canvas_corners_one_device.FIELD[5][2] = 2;
-                signature_canvas_corners_one_device.FIELD[6][0] = 2;signature_canvas_corners_one_device.FIELD[6][1] = 2;signature_canvas_corners_one_device.FIELD[6][2] = 2;
-                signature_canvas_corners_one_device.FIELD[7][0] = 2;signature_canvas_corners_one_device.FIELD[7][1] = 2;signature_canvas_corners_one_device.FIELD[7][2] = 2;
+                        signature_canvas_corners_one_device.FIELD[5][0] = 2;signature_canvas_corners_one_device.FIELD[5][1] = 2;signature_canvas_corners_one_device.FIELD[5][2] = 2;
+                        signature_canvas_corners_one_device.FIELD[6][0] = 2;signature_canvas_corners_one_device.FIELD[6][1] = 2;signature_canvas_corners_one_device.FIELD[6][2] = 2;
+                        signature_canvas_corners_one_device.FIELD[7][0] = 2;signature_canvas_corners_one_device.FIELD[7][1] = 2;signature_canvas_corners_one_device.FIELD[7][2] = 2;
 
-                signature_canvas_corners_one_device.Black_or_grey_chip = "black"
-                for (i in signature_canvas_corners_one_device.History) {
-                    signature_canvas_corners_one_device.FIELD[i[2]][i[3]] = signature_canvas_corners_one_device.FIELD[i[0]][i[1]]
-                    signature_canvas_corners_one_device.FIELD[i[0]][i[1]] = 0
-                    if(signature_canvas_corners_one_device.Black_or_grey_chip == "black")
-                    {
-                        signature_canvas_corners_one_device.Black_or_grey_chip =  "grey"
-                    }
-                    else
-                    {
-                        signature_canvas_corners_one_device.Black_or_grey_chip =  "black"
+                        signature_canvas_corners_one_device.Black_or_grey_chip = "black"
+                        for (i in signature_canvas_corners_one_device.History) {
+                            signature_canvas_corners_one_device.FIELD[i[2]][i[3]] = signature_canvas_corners_one_device.FIELD[i[0]][i[1]]
+                            signature_canvas_corners_one_device.FIELD[i[0]][i[1]] = 0
+                            if(signature_canvas_corners_one_device.Black_or_grey_chip == "black")
+                            {
+                                signature_canvas_corners_one_device.Black_or_grey_chip =  "grey"
+                            }
+                            else
+                            {
+                                signature_canvas_corners_one_device.Black_or_grey_chip =  "black"
+                            }
+                        }
+                        signature_canvas_corners_one_device.PHASE = true
+                        for(i in  0 until signature_canvas_corners_one_device.Array_of_illumination.size)
+                        {
+                            for(j in 0 until signature_canvas_corners_one_device.Array_of_illumination[0].size)
+                            {
+                                signature_canvas_corners_one_device.Array_of_illumination[i][j] =0
+                            }
+                        }
+                        signature_canvas_corners_one_device.invalidate()
                     }
                 }
-                signature_canvas_corners_one_device.PHASE = true
-                for(i in  0 until signature_canvas_corners_one_device.Array_of_illumination.size)
-                {
-                    for(j in 0 until signature_canvas_corners_one_device.Array_of_illumination[0].size)
-                    {
-                        signature_canvas_corners_one_device.Array_of_illumination[i][j] =0
-                    }
-                }
-                signature_canvas_corners_one_device.invalidate()
+
             }
+            true
+        }
+        to_back_corner_one_divice.setOnClickListener {
+            this.finish()
+            val intent = Intent(this, NewGameActivity::class.java)
+            intent.putExtra("playType", 2)
+            startActivity(intent)
         }
     }
 }
@@ -202,10 +247,12 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
         if(Black_or_grey_chip == "black")
         {
             if(FIELD[X][Y]==1)
-            {                                //ПРОВЕРЯЕМ ПРОТИВОПОЛОЖНЫЙ УГОЛ, ЕСЛИ ОН ПУСТ, ТО ЗАПРЕЩАЕМ ДВИГАТЬ ФИШКУ НЕ ИЗ СВОЕГО УГЛА
+            {                                //ПРОВЕРЯЕМ ПРОТИВОПОЛОЖНЫЙ УГОЛ, ЕСЛИ ОН ПУСТ а твой нет, ТО ЗАПРЕЩАЕМ ДВИГАТЬ ФИШКУ НЕ ИЗ СВОЕГО УГЛА
                 if(FIELD[5][0] !=2 && FIELD[5][1] !=2 && FIELD[5][2] !=2 &&
                     FIELD[6][0] !=2&& FIELD[6][1] !=2&& FIELD[6][2] !=2 &&
-                    FIELD[7][0] !=2 && FIELD[7][1]!=2  && FIELD[7][2] !=2){
+                    FIELD[7][0] !=2 && FIELD[7][1]!=2  && FIELD[7][2] !=2 && (FIELD[0][5] ==1 || FIELD[1][5] ==1 || FIELD[2][5] ==1 ||
+                            FIELD[0][6] ==1 || FIELD[1][6] ==1 || FIELD[2][6] ==1 ||
+                            FIELD[0][7] ==1 || FIELD[1][7]==1 || FIELD[2][7] ==1)){
                     if(X>2)
                     {
                         return false
@@ -228,7 +275,9 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
             {
                 if(FIELD[0][5] !=1 && FIELD[1][5] !=1 && FIELD[2][5] !=1 &&
                     FIELD[0][6] !=1 && FIELD[1][6] !=1 && FIELD[2][6] !=1 &&
-                    FIELD[0][7] !=1 && FIELD[1][7]!=1 && FIELD[2][7] !=1){
+                    FIELD[0][7] !=1 && FIELD[1][7]!=1 && FIELD[2][7] !=1 &&(FIELD[5][0] ==2 || FIELD[5][1] ==2 || FIELD[5][2] ==2 ||
+                            FIELD[6][0] ==2 || FIELD[6][1] ==2 || FIELD[6][2] ==2 ||
+                            FIELD[7][0] ==2 || FIELD[7][1]==2  || FIELD[7][2] ==2)){
                     if(X<5)
                     {
                         return false
@@ -434,8 +483,17 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
         PHASE = true
         motion_chip = false
 
-        Line_paint.setColor(Color.RED)          //ресур для линий (ширина и цвет)
-        Line_paint.setStrokeWidth(10f)
+        if(Design == "Egypt")
+        {
+            Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
+            Line_paint.setStrokeWidth(5f)
+        }
+        else
+        {
+            Line_paint.setColor(Color.RED)          //ресур для линий (ширина и цвет)
+            Line_paint.setStrokeWidth(5f)
+        }
+
 
         // TODO нужно взять из DataBase (статистика ходов)
         for( i in 0..7) {
@@ -463,10 +521,24 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
 
 
 
-    var black_chip : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black);       //картинки фишек и подсветки
-    var grey_chip: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.grey);
-    var illumination: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.illumination);
-    var green: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.green);
+    var black_chip : Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.black
+    );       //картинки фишек и подсветки
+    var grey_chip: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.grey
+    );
+    var black_chip_egypt:Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.black_chip_egypt
+    );
+    var white_chip_egypt:Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.white_chip_egypt
+    );
+    var illumination: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.illumination
+    );
+    var green: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.green
+    );
 
 
     override fun draw(canvas: Canvas?) {
@@ -475,16 +547,17 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
         indent = 20f
         width = getWidth().toFloat()
         height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)
-        advertising_line = 150f           //полоска для рекламы
         size_field_x  = 8
         size_field_y  = 8
         step = (width-2*indent)/size_field_x
+        advertising_line =  (height - 8*step)/2         //полоска для рекламы
         k = height-(width-2*indent)-advertising_line
 
 
 
+
         //TODO() take field from database
-        canvas?.drawColor(Color.WHITE)
+
 
 
         for(i in 0 until size_field_x+1)          //вырисовка горизонтальных линий
@@ -500,10 +573,25 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
         }
 
 
-        val rigth_black_chip: Bitmap = Bitmap.createScaledBitmap(black_chip,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
-        val right_grey_chip: Bitmap = Bitmap.createScaledBitmap(grey_chip,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-        val right_illumination:Bitmap = Bitmap.createScaledBitmap(illumination,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-        val right_green:Bitmap = Bitmap.createScaledBitmap(green,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+        val rigth_black_chip: Bitmap
+        val right_grey_chip: Bitmap
+        val right_illumination:Bitmap
+        val right_green:Bitmap
+
+        if(Design == "Egypt")
+        {
+            rigth_black_chip  = Bitmap.createScaledBitmap(white_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+            right_grey_chip  = Bitmap.createScaledBitmap(black_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            right_illumination = Bitmap.createScaledBitmap(illumination,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            right_green = Bitmap.createScaledBitmap(green,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+        }
+        else
+        {
+            rigth_black_chip  = Bitmap.createScaledBitmap(black_chip,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+            right_grey_chip  = Bitmap.createScaledBitmap(grey_chip,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            right_illumination = Bitmap.createScaledBitmap(illumination,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            right_green  = Bitmap.createScaledBitmap(green,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+        }
 
         for( i in 0..7) // расстановка фишек
         {
@@ -552,6 +640,7 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
 
     var blocked : Boolean = false
     override fun onTouchEvent(event: MotionEvent?): Boolean {
+        advertising_line = (height - 8*step)/2
         if(chek_win()<=0)
         {
             blocked = false
@@ -565,12 +654,14 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
 
         if(chek_win()>0 && event!!.getAction()  == MotionEvent.ACTION_UP && !blocked) {
             if (chek_win() == 2) {3
-                dialog = Show_Result_one_Device(activity)
+                dialog =
+                    Show_Result_one_Device(activity)
                 dialog?.showResult_one_device("СЕРЫЕ ПОБЕДИЛИ", "AngleGame", activity)
                 return true
             }
             if (chek_win() == 1) {
-                dialog = Show_Result_one_Device(activity)
+                dialog =
+                    Show_Result_one_Device(activity)
                 dialog?.showResult_one_device("ЧЕРНЫЕ ПОБЕДИЛИ", "AngleGame", activity)
                 return true
             }

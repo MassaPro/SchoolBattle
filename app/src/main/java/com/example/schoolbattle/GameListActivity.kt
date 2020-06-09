@@ -9,6 +9,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.schoolbattle.gamesonline.BoxGameActivity
+import com.example.schoolbattle.gamesonline.DotGameActivity
+import com.example.schoolbattle.gamesonline.StupidGameActivityTwoPlayers
+import com.example.schoolbattle.gamesonline.XOGameActivity
 import kotlinx.android.synthetic.main.activity_game_item.view.*
 import kotlinx.android.synthetic.main.activity_settings.*
 
@@ -16,6 +20,7 @@ class GameListActivity : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        CONTEXT = requireActivity()
         val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val globalName = prefs?.getString("username", "")
         //toolbarName.text = globalName
@@ -29,6 +34,7 @@ class GameListActivity : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        CONTEXT = requireActivity()
         return inflater.inflate(R.layout.activity_settings, container, false)
     }
 
@@ -36,6 +42,7 @@ class GameListActivity : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        CONTEXT = requireActivity()
 
 
         // (activity as AppCompatActivity).setSupportActionBar(findViewById(R.id.my_toolbar))

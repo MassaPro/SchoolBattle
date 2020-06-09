@@ -1,7 +1,8 @@
-package com.example.schoolbattle
+package com.example.schoolbattle.gamesonedevice
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,12 +10,11 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import kotlinx.android.synthetic.main.activity_coners_one_device.*
+import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_dot_game_one_divice.*
-import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
-import kotlin.math.sign
 
 class DotGameOneDivice : AppCompatActivity() {
+
 
     fun encode(h: MutableList<Triple<Int,Int,Int>>):String
     {
@@ -77,11 +77,31 @@ class DotGameOneDivice : AppCompatActivity() {
         return answer
     }
 
+    private var dialog_parametrs: Show_parametr_one_divice_one_Device? = null
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dot_game_one_divice)
         signature_canvas_dots_one_divice.activity = this
+        CONTEXT = this
+        if(Design == "Egypt")
+        {
+            name_player1_one_divice_dot.setTextColor(Color.BLACK)
+            name_player2_one_divice_dot.setTextColor(Color.BLACK)
+            name_player2_one_divice_dot.setTextSize(20f)
+            name_player1_one_divice_dot.setTextSize(20f)
+            button_player_1_dot_one_divice.setBackgroundResource(R.drawable.player1_egypt);
+            button_player_2_dot_one_divice.setBackgroundResource(R.drawable.player2_egypt);
+            player_1_icon_dot_one_divice.setBackgroundResource(R.drawable.cross_egypt);
+            player_2_icon_dot_one_divice.setBackgroundResource(R.drawable.circle_egypt);
+            label_one_device_dots.setBackgroundResource(R.drawable.back_ground_egypt);
+            toolbar_dot_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            bottom_navigation_dot_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
+            to_back_dot_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            to_back_dot_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_dot_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            toolbar2_dot_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+        }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
         if (usedToClear == "clear") {
@@ -122,42 +142,71 @@ class DotGameOneDivice : AppCompatActivity() {
             signature_canvas_dots_one_divice.invalidate()
         }
         //comback_dots_one_divice.setVisibility(View.GONE);
-        comback_dots_one_divice.setOnClickListener {
-            if (signature_canvas_dots_one_divice.History.size > 0) {
-                signature_canvas_dots_one_divice.History.removeLast()
-                var data_from_memory = encode(signature_canvas_dots_one_divice.History)
-                val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                editor.putString("dot_one_divice", data_from_memory)
-                editor.apply()
-                signature_canvas_dots_one_divice.red_or_blue = 2
-                for (i in 0 until signature_canvas_dots_one_divice.FIELD.size) {
-                    for (j in 0 until signature_canvas_dots_one_divice.FIELD[0].size) {
-                        signature_canvas_dots_one_divice.FIELD[i][j] = 0
+        bottom_navigation_dot_one_divice.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.page_1 ->{
+
+                }
+                R.id.page_2 ->{
+                    dialog_parametrs =
+                        Show_parametr_one_divice_one_Device(
+                            this@DotGameOneDivice
+                        )
+                    dialog_parametrs?.showResult_one_device()
+                }
+                R.id.page_3 ->{
+                    this.finish()
+                    val intent = Intent(this, DotGameOneDivice::class.java).apply {
+                        putExtra("usedToClear", "clear")}
+                    startActivity(intent)
+                }
+                R.id.page_4 ->{
+                    if (signature_canvas_dots_one_divice.History.size > 0) {
+                        signature_canvas_dots_one_divice.History.removeLast()
+                        var data_from_memory = encode(signature_canvas_dots_one_divice.History)
+                        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                        editor.putString("dot_one_divice", data_from_memory)
+                        editor.apply()
+                        signature_canvas_dots_one_divice.red_or_blue = 2
+                        for (i in 0 until signature_canvas_dots_one_divice.FIELD.size) {
+                            for (j in 0 until signature_canvas_dots_one_divice.FIELD[0].size) {
+                                signature_canvas_dots_one_divice.FIELD[i][j] = 0
+                            }
+                        }
+                        signature_canvas_dots_one_divice.a.clear()
+                        for (i in 0 until 16) {
+                            signature_canvas_dots_one_divice.a.add(mutableListOf())
+                        }
+                        for (i in signature_canvas_dots_one_divice.a.indices) {
+                            for (j in 0 until 11) {
+                                signature_canvas_dots_one_divice.a[i].add(0)
+                            }
+                        }
+                        for (i in signature_canvas_dots_one_divice.History) {
+                            signature_canvas_dots_one_divice.FIELD[i.first][i.second] = i.third
+                            signature_canvas_dots_one_divice.a[i.second][i.first] = i.third
+                            signature_canvas_dots_one_divice.find(
+                                i.third,
+                                signature_canvas_dots_one_divice.a,
+                                16,
+                                11
+                            )
+                            signature_canvas_dots_one_divice.red_or_blue =
+                                2 - (signature_canvas_dots_one_divice.red_or_blue + 1) % 2
+                        }
+                        signature_canvas_dots_one_divice.invalidate()
                     }
                 }
-                signature_canvas_dots_one_divice.a.clear()
-                for (i in 0 until 16) {
-                    signature_canvas_dots_one_divice.a.add(mutableListOf())
-                }
-                for (i in signature_canvas_dots_one_divice.a.indices) {
-                    for (j in 0 until 11) {
-                        signature_canvas_dots_one_divice.a[i].add(0)
-                    }
-                }
-                for (i in signature_canvas_dots_one_divice.History) {
-                    signature_canvas_dots_one_divice.FIELD[i.first][i.second] = i.third
-                    signature_canvas_dots_one_divice.a[i.second][i.first] = i.third
-                    signature_canvas_dots_one_divice.find(
-                        i.third,
-                        signature_canvas_dots_one_divice.a,
-                        16,
-                        11
-                    )
-                    signature_canvas_dots_one_divice.red_or_blue =
-                        2 - (signature_canvas_dots_one_divice.red_or_blue + 1) % 2
-                }
-                signature_canvas_dots_one_divice.invalidate()
+
             }
+            true
+        }
+
+        to_back_dot_one_divice.setOnClickListener {
+            this.finish()
+            val intent = Intent(this, NewGameActivity::class.java)
+            intent.putExtra("playType", 2)
+            startActivity(intent)
         }
 
     }
@@ -384,15 +433,28 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
 
         paint_circle.setColor(Color.rgb(217, 217, 217))     //цвета для точек
 
-        paint_rib_1.setColor(Color.RED)          //цвета для ребер  и их ширина
-        paint_rib_1.setStrokeWidth(5f)
-        paint_rib_2.setColor(Color.BLUE)
-        paint_rib_2.setStrokeWidth(5f)
+        if(Design == "Egypt") {
+            paint_rib_1.setColor(Color.BLACK) //цвета для ребер  и их ширина
+            paint_rib_1.setStrokeWidth(5f)
+            paint_rib_2.setColor(Color.WHITE)
+            paint_rib_2.setStrokeWidth(5f)
 
-        shading_1.setColor(Color.RED)
-        shading_2.setColor(Color.BLUE)
-        shading_1.setStrokeWidth(2f)
-        shading_2.setStrokeWidth(2f)
+            shading_1.setColor(Color.BLACK)
+            shading_2.setColor(Color.WHITE)
+            shading_1.setStrokeWidth(2f)
+            shading_2.setStrokeWidth(2f)
+        }
+        else {
+            paint_rib_1.setColor(Color.RED) //цвета для ребер  и их ширина
+            paint_rib_1.setStrokeWidth(5f)
+            paint_rib_2.setColor(Color.BLUE)
+            paint_rib_2.setStrokeWidth(5f)
+
+            shading_1.setColor(Color.RED)
+            shading_2.setColor(Color.BLUE)
+            shading_1.setStrokeWidth(2f)
+            shading_2.setStrokeWidth(2f)
+        }
 
         for(i in 0 until FIELD.size)
         {
@@ -407,8 +469,12 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
 
 
 
-    var red : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.red);       //картинки фишек и подсветки
-    var blue: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.blue);
+    var red : Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.red
+    );       //картинки фишек и подсветки
+    var blue: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.blue
+    );
 
 
 
@@ -422,12 +488,20 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
         indent = (getWidth().toFloat()/(size_field_x.toFloat()+1f))/2f //оступ, чтобы можно было тыкнуть в границу
         width = getWidth().toFloat() - 2*indent
         height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)
-        advertising_line = 150f           //полоска для рекламы
+        advertising_line =(height - width/size_field_x*size_field_y)/2         //полоска для рекламы
 
         step = width/size_field_x
         k = height-width*(size_field_y.toFloat()/size_field_x.toFloat())-advertising_line
 
-        canvas?.drawColor(Color.WHITE)
+        if(Design == "Egypt")
+        {
+
+        }
+        else
+        {
+            canvas?.drawColor(Color.WHITE)
+        }
+
         Log.d("Para",p.toString())
 
         for(i in 0 until size_field_y+1)          //вырисовка горизонтальных линий

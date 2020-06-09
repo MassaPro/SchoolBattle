@@ -20,6 +20,7 @@ class SettingsFragmentActivity : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        CONTEXT = requireActivity()
         return inflater.inflate(R.layout.activity_settings_fragment, container, false)
     }
 

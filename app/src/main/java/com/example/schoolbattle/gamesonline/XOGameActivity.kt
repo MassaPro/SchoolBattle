@@ -1,4 +1,4 @@
-package com.example.schoolbattle
+package com.example.schoolbattle.gamesonline
 
 import android.app.Activity
 import android.content.Context
@@ -10,6 +10,8 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
+import com.example.schoolbattle.*
+import com.example.schoolbattle.R
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_x_o_game.*
 
@@ -21,15 +23,17 @@ class XOGameActivity : AppCompatActivity() {
         super.onResume()
         currentContext = this
         isRun = true
+        CONTEXT = this
     }
 
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
+        setContentView(R.layout.activity_x_o_game)
 
         currentContext = this
+        CONTEXT = this
         isRun = true
-        super.onResume()
-        setContentView(R.layout.activity_x_o_game)
+
         if (StupidGame != Activity()) StupidGame.finish()
         if (NewGame != Activity()) NewGame.finish()
         val yourName =
@@ -162,7 +166,8 @@ class XOGameActivity : AppCompatActivity() {
 
                     myRef.child("Users").child(yourName).child("Games").child("$opponentsName XOGame").removeValue()
                     myRef.child("Users").child(opponentsName).child("Games").child("$yourName XOGame").removeValue()
-                    dialog = ShowResult(this@XOGameActivity)
+                    dialog =
+                        ShowResult(this@XOGameActivity)
                     if (isRun) {
                         dialog?.showResult(res, "XOGame", yourName, opponentsName)
                     }
@@ -319,10 +324,16 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
 
 
 
-    var icon_cross : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cross)       //картинки крестиков и нулей
-    var icon_null: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.circle_null)
+    var icon_cross : Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.cross_egypt
+    )       //картинки крестиков и нулей
+    var icon_null: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.circle_null
+    )
 
-    var icon_green:  Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.green_icon)
+    var icon_green:  Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.green_icon
+    )
 
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)

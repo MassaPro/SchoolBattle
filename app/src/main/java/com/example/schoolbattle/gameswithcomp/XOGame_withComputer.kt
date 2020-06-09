@@ -1,4 +1,4 @@
-package com.example.schoolbattle
+package com.example.schoolbattle.gameswithcomp
 
 import android.app.Activity
 import android.content.Context
@@ -10,6 +10,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_x_o_game_with_computer.*
 
 val XOGame_withComp: Activity = Activity()
@@ -18,10 +19,11 @@ class XOGame_withComputer : AppCompatActivity() {
     private var dialog: Show_Result_with_Computer? = null
     private var dialog_parametrs: Show_parametr_with_computer? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_x_o_game_with_computer)
-
+        CONTEXT = this
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
         if (usedToClear == "clear") {
@@ -47,18 +49,21 @@ class XOGame_withComputer : AppCompatActivity() {
         signature_canvas_xog_with_computer.setOnClickListener{
             if(signature_canvas_xog_with_computer.EXODUS == 1)
             {
-                dialog = Show_Result_with_Computer(this@XOGame_withComputer)
+                dialog =
+                    Show_Result_with_Computer(this@XOGame_withComputer)
                 dialog?.showResult_with_Computer("Победа","XOGame",this)
 
             }
             if(signature_canvas_xog_with_computer.EXODUS == 2)
             {
-                dialog = Show_Result_with_Computer(this@XOGame_withComputer)
+                dialog =
+                    Show_Result_with_Computer(this@XOGame_withComputer)
                 dialog?.showResult_with_Computer("Поражение","XOGame",this)
             }
             if(signature_canvas_xog_with_computer.EXODUS == 3)
             {
-                dialog = Show_Result_with_Computer(this@XOGame_withComputer)
+                dialog =
+                    Show_Result_with_Computer(this@XOGame_withComputer)
                 dialog?.showResult_with_Computer("Ничья","XOGame",this)
             }
         }
@@ -77,7 +82,8 @@ class XOGame_withComputer : AppCompatActivity() {
 
                 }
                 R.id.page_2 ->{
-                    dialog_parametrs = Show_parametr_with_computer(this@XOGame_withComputer)
+                    dialog_parametrs =
+                        Show_parametr_with_computer(this@XOGame_withComputer)
                     dialog_parametrs?.showResult_with_computer(this)
                 }
                 R.id.page_3 ->{
@@ -272,10 +278,16 @@ class CanvasView_xog_with_computer(context: Context, attrs: AttributeSet?) : Vie
     }
 
 
-    var icon_cross : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cross)       //картинки крестиков и нулей
-    var icon_null: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.circle_null)
+    var icon_cross : Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.cross_egypt
+    )       //картинки крестиков и нулей
+    var icon_null: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.circle_null
+    )
 
-    var icon_green: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.green_icon)
+    var icon_green: Bitmap = BitmapFactory.decodeResource(context.getResources(),
+        R.drawable.green_icon
+    )
 
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
