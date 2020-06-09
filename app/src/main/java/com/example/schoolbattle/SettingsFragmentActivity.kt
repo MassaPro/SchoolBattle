@@ -7,13 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_settings_fragment.*
 
 
 class SettingsFragmentActivity : Fragment() {
+    private var dialog_parametrs: Show_language_selection? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,11 +48,41 @@ class SettingsFragmentActivity : Fragment() {
             }
         })
 
+        val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        var data_from_memory = prefs?.getString("language", "").toString()
+        if (data_from_memory == "") {
+            val editor = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)?.edit()
+            editor?.putString("language", "EN")
+            editor?.apply()
+            data_from_memory = "EN"
+        }
+
+        languageSelected.text = data_from_memory
+
         languageChange.setOnClickListener {
-            Toast.makeText(activity,"Change text", Toast.LENGTH_LONG).show()
+            //Toast.makeText(activity,"Change text", Toast.LENGTH_LONG).show()
+            dialog_parametrs = activity?.let { it1 -> Show_language_selection(it1) }
+            activity?.let { it1 -> dialog_parametrs?.showResult_window(it1) }
+
+
+            /*val handler = android.os.Handler()
+            val delay = 1000 //milliseconds
+            handler.postDelayed(object : Runnable {
+                override fun run() {
+                    val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                    var data_from_memory = prefs?.getString("language", "").toString()
+                    languageSelected.text = data_from_memory
+                    handler.postDelayed(this, delay.toLong())
+                }
+            }, delay.toLong())*/
+
+
         }
 
     }
+
+
+
     /*override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //(activity as AppCompatActivity?)!!.setSupportActionBar(my_toolbar)

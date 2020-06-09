@@ -18,7 +18,36 @@
         app:layout_constraintVertical_bias="0.225">
 
 
+        <TextView
+            android:id="@+id/languageSelected_English"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="20dp"
+            android:paddingStart="20dp"
+            android:text="English"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/languageSelected_Russia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Русский"
+            android:paddingVertical="20dp"
+            android:paddingStart="20dp"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/languageSelected_English" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
