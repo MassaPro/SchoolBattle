@@ -136,7 +136,7 @@ class VirusOneDivice : AppCompatActivity() {
             }
             signature_canvas_virus_one_device.red_or_blue = (signature_canvas_virus_one_device.red_or_blue+1)%6
         }
-        Toast.makeText(this,signature_canvas_virus_one_device.COUNTER_BLUE.toString(), Toast.LENGTH_LONG).show()
+
 
 
 
@@ -619,9 +619,13 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
                 }
             }
         }
-        if(flag == true && COUNTER_RED>0 && COUNTER_BLUE>0)
+        if(flag == true && COUNTER_RED>0 && COUNTER_BLUE>0 && k == 1)
         {
-            return 3
+            return 2
+        }
+        if(flag == true && COUNTER_RED>0 && COUNTER_BLUE>0 && k == 2)
+        {
+            return 1
         }
         return 0
     }
