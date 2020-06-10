@@ -19,8 +19,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/up_player_snake">
 
-        <com.example.schoolbattle.gamesonedevice.CanvasView_SNAKE
-            android:id="@+id/signature_canvas_snake"
+        <com.example.schoolbattle.gamesonline.CanvasView_SNAKE_online
+            android:id="@+id/signature_canvas_snake_online"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#FFFFFF" />

@@ -24,7 +24,6 @@ class NullActivity : AppCompatActivity() {
         val username = prefs.getString("username", "")
         val inflatedView: View = layoutInflater.inflate(R.layout.activity_settings, null)
         gamesRecycler = inflatedView.findViewById(R.id.item_list) as RecyclerView
-        updateRecycler(username.toString())
         if (username != "" ) {
             val intent = Intent(applicationContext, NavigatorActivity::class.java)
             startActivity(intent)

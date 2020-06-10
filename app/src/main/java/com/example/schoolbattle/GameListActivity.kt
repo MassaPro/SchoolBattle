@@ -9,10 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.example.schoolbattle.gamesonline.BoxGameActivity
-import com.example.schoolbattle.gamesonline.DotGameActivity
-import com.example.schoolbattle.gamesonline.StupidGameActivityTwoPlayers
-import com.example.schoolbattle.gamesonline.XOGameActivity
+import com.example.schoolbattle.gamesonline.*
 import kotlinx.android.synthetic.main.activity_game_item.view.*
 import kotlinx.android.synthetic.main.activity_settings.*
 
@@ -85,6 +82,11 @@ class GameListActivity : Fragment() {
                     }
                 } else if (item.name.contains("BoxGame")){
                     Intent(v.context, BoxGameActivity::class
+                        .java).apply {
+                        putExtra("opponentName", item.name)
+                    }
+                } else if (item.name.contains("SnakeGame")){
+                    Intent(v.context, SnakeGameActivity::class
                         .java).apply {
                         putExtra("opponentName", item.name)
                     }

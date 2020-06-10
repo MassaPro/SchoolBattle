@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".gamesonedevice.ReversiOneDivice"></activity>
-        <activity android:name=".gamesonedevice.GoGameOneDivice"></activity>
-        <activity android:name=".SnakeGameActivity" />
+        <activity android:name=".gamesonline.SnakeGameActivity"></activity>
+        <activity android:name=".FriendsList" />
+        <activity android:name=".gamesonedevice.ReversiOneDivice" />
+        <activity android:name=".gamesonedevice.GoGameOneDivice" />
         <activity android:name=".gamesonline.BoxGameActivity" />
         <activity android:name=".Show_parametr_with_computer" />
         <activity android:name=".gamesonedevice.VirusOneDivice" />
@@ -21,7 +22,6 @@
         <activity android:name=".gamesonedevice.ConersOneDevice" />
         <activity android:name=".Show_Result_with_Computer" />
         <activity android:name=".gameswithcomp.XOGame_withComputer" />
-        <activity android:name=".Corners_one_device_activity" />
         <activity android:name=".gamesonedevice.XOGame_oneDivice" />
         <activity android:name=".PlayWithComputerActivity" />
         <activity android:name=".OneDevicePlayActivity" />

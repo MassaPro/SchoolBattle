@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="283dp"
+        android:layout_height="323dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.225">
+
+        <TextView
+            android:id="@+id/profileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="non-defined"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.476"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.085" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="63dp"
+            android:layout_height="70dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.063"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/profileName"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@android:drawable/ic_menu_camera" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            style="@android:style/Widget.ImageButton"
+            android:layout_width="47dp"
+            android:layout_height="41dp"
+            android:background="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.647"
+            app:layout_constraintStart_toEndOf="@+id/profileName"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.057"
+            app:srcCompat="@android:drawable/star_on" />
+
+        <Button
+            android:id="@+id/profile_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Вызов"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.071"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

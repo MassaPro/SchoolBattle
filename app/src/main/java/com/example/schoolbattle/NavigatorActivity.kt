@@ -15,6 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_friends_list.*
 
 
 var now: Context? = null
@@ -92,5 +93,55 @@ class NavigatorActivity : AppCompatActivity() {
                     }
                 }
             })
+
+        myRef.child("Users").child(username.toString()).child("Friends").addValueEventListener(
+            object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {}
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    for (i in p0.children) {
+                        FRIENDS.add(i.key.toString())
+                    }
+                    //friends_list.adapter?.notifyDataSetChanged()
+                }
+            })
+
+        myRef.child("Users").child(username.toString()).child("FriendsRequests").addValueEventListener(
+            object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {}
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    if (p0.hasChildren()) {
+                        for (i in p0.children) {
+                            val rev = now?.let { Dialog(it) }
+                            val window: Window? = rev?.window
+                            val wlp = window?.attributes
+                            wlp?.gravity = Gravity.TOP
+                            rev?.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                            rev?.setCancelable(false)
+                            rev?.setCanceledOnTouchOutside(true)
+                            rev?.setContentView(R.layout.friend_request_dialog)
+                            rev?.show()
+                            (rev?.findViewById(R.id.yesButtonF) as Button).setOnClickListener {
+                                myRef.child("Users").child(i.key.toString()).child("Friends")
+                                    .child(username.toString()).setValue("1")
+                                myRef.child("Users").child(username.toString()).child("Friends")
+                                    .child(i.key.toString()).setValue("1")
+                                myRef.child("Users").child(username.toString()).child("FriendsRequests").
+                                child(i.key.toString()).removeValue()
+                                rev.dismiss()
+                            }
+                            (rev.findViewById(R.id.noButtonF) as Button).setOnClickListener {
+                                myRef.child("Users").child(username.toString()).child("FriendsRequests").
+                                child(i.key.toString()).removeValue()
+                                rev.dismiss()
+                            }
+                            break
+                        }
+                    }
+                }
+            })
     }
+
+
 }

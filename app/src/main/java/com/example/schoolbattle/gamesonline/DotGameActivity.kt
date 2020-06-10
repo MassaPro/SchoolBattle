@@ -91,8 +91,8 @@ class DotGameActivity: AppCompatActivity() {
                         }
                     }
                 }
-                signature_canvas3.red_or_blue = 2 - cnt % 2
-                if (signature_canvas3.isFirstMove == (cnt % 2 == 0)) signature_canvas3.blocked = false
+                signature_canvas3.red_or_blue = if (p0.hasChild("red_or_blue")) p0.child("red_or_blue").value.toString().toInt() else 1
+                if ((signature_canvas3.red_or_blue == 1) == (p0.child("Move").toString().toBoolean() == (yu == '0'))) signature_canvas3.blocked = false
                 signature_canvas3.invalidate()
                 fun check_win() : Int
                 {
@@ -252,7 +252,7 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
 
     var lastx: Int = -1
     var lasty: Int = -1
-    var red_or_blue: Int
+    var red_or_blue = 1
     var circlex : Float = 0f   //координаты нажатия
     var circley : Float = 0f
     var indent: Float = 0f      //оступ
@@ -279,7 +279,6 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
     var step : Float = 0f
     var k : Float = 0f
 
-
     lateinit var positionData: DatabaseReference
 
     var Is_defined_TREE_OF_WAYS : Boolean = false
@@ -293,7 +292,6 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
                 a[i].add(0)
             }
         }
-        red_or_blue = 0
         Line_paint.setColor(Color.rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
         Line_paint.setStrokeWidth(5f)
 
@@ -789,6 +787,7 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
 
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
+
         if (blocked) {
             return true
         }
@@ -797,44 +796,47 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
         circlex = event!!.x
         circley = event!!.y
 
-        var x1: Float = indent
-        var y1: Float = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())
-        for(i in 0..size_field_x)                    //вырисовка точек
-        {
-            for(j in 0..size_field_y)
+        if(true || event!!.action == MotionEvent.ACTION_UP) {
+            var x1: Float = indent
+            var y1: Float =
+                height - advertising_line - width * (size_field_y.toFloat() / size_field_x.toFloat())
+            for (i in 0..size_field_x)                    //вырисовка точек
             {
-                if(correction_touch(x1,y1))
-                {
-                    if(FIELD[i][j] == 0 && a[j][i] == 0 )
-                    {
-                        if(red_or_blue == 1)
-                        {
-                            FIELD[i][j] = 1
-                            a[j][i] = 1
-                            p = find(1,a,16,11)
+                for (j in 0..size_field_y) {
+                    if (correction_touch(x1, y1)) {
+                        if (FIELD[i][j] == 0 && a[j][i] == 0) {
+                            red_or_blue = 3 - red_or_blue
+                            positionData.child("red_or_blue").setValue(red_or_blue)
+                            blocked = true
+                            if (red_or_blue == 1) {
+                                FIELD[i][j] = 1
+                                a[j][i] = 1
+                                p = find(1, a, 16, 11)
+                            } else {
+                                FIELD[i][j] = 2
+                                a[j][i] = 2
+                                p = find(2, a, 16, 11)
+                            }
+                            for (i in 0..size_field_x) {
+                                for (j in 0..size_field_y) {
+                                    if (a[j][i] != 0 && FIELD[i][j] != 0) {
+
+                                        positionData.child("a").child("$j").child("$i").setValue(a[j][i].toString())
+                                        positionData.child("FIELD").child("$i").child("$j")
+                                            .setValue(FIELD[i][j].toString())
+                                    }
+                                }
+                            }
+                            positionData.child("red_or_blue").setValue(red_or_blue)
+                            invalidate()
+                            break
                         }
-                        else
-                        {
-                            FIELD[i][j]  = 2
-                            a[j][i]  = 2
-                            p = find(2,a,16,11)
-                        }
-                        //invalidate()
                     }
+                    y1 += step
                 }
-                y1+= step
-            }
-            x1  += step
-            y1 = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())
-        }
-        invalidate()
-        for (i in 0..size_field_x) {
-            for (j in 0..size_field_y) {
-                if (a[j][i] != 0) {
-                    positionData.child("a").child("$j").child("$i").setValue(a[j][i].toString())
-                    positionData.child("FIELD").child("$i").child("$j")
-                        .setValue(FIELD[i][j].toString())
-                }
+                x1 += step
+                y1 =
+                    height - advertising_line - width * (size_field_y.toFloat() / size_field_x.toFloat())
             }
         }
         return true

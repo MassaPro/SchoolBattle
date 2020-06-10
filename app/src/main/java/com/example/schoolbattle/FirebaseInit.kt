@@ -6,10 +6,7 @@ import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getSystemService
-import com.example.schoolbattle.gamesonline.BoxGameActivity
-import com.example.schoolbattle.gamesonline.DotGameActivity
-import com.example.schoolbattle.gamesonline.StupidGameActivityTwoPlayers
-import com.example.schoolbattle.gamesonline.XOGameActivity
+import com.example.schoolbattle.gamesonline.*
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -22,9 +19,8 @@ class RecyclerSet {
             s.add(el.toString())
             GAMES.add(el)
             Log.w("FFF", el.toString())
-            //Toast.makeText(CONTEXT,  "od" + CONTEXT.toString(), Toast.LENGTH_LONG).show()
+            //Toast.makeText(CONTEXT,  "od" + CONTEXT.toSv bbtring(), Toast.LENGTH_LONG).show()
             if (!isOld) {
-                myRef.child("Users").child(username).child("Games").child(el.name.toString()).child("old").setValue("old")
                 Toast.makeText(CONTEXT, StupidGameActivity::getApplicationContext.toString(), Toast.LENGTH_LONG).show()
                 Toast.makeText(CONTEXT, CONTEXT.applicationContext.toString(), Toast.LENGTH_LONG).show()
                 val intent = if (el.name.contains(" StupidGame")) {
@@ -35,11 +31,15 @@ class RecyclerSet {
                     Intent(CONTEXT, DotGameActivity::class.java)
                 } else if (el.name.contains("BoxGame")) {
                     Intent(CONTEXT, BoxGameActivity::class.java)
+                } else if (el.name.contains("SnakeGame")) {
+                    Intent(CONTEXT, SnakeGameActivity::class.java)
                 } else {
                     Intent(CONTEXT, StupidGameActivity::class.java)
                 }
                 intent.putExtra("opponentName", el.name)
                 CONTEXT.startActivity(intent)
+                myRef.child("Users").child(username).child("Games").child(el.name.toString()).child("old").setValue("old")
+
                 //myRef.child("StupidGames").child("")
                 StupidGame.finish()
             }
