@@ -16,6 +16,7 @@
         <activity android:name=".gameswithcomp.ConersWithComputer" />
         <activity android:name=".gameswithcomp.BoxGameWithComputer" />
         <activity android:name=".gamesonedevice.ReversiOneDivice" />
+        <activity android:name=".gamesonedevice.GoGameOneDivice" />
         <activity android:name=".gamesonline.BoxGameActivity" />
         <activity android:name=".Show_parametr_with_computer" />
         <activity android:name=".gamesonedevice.VirusOneDivice" />

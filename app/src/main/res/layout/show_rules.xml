@@ -11,6 +11,7 @@
         android:layout_width="323dp"
         android:layout_height="553dp"
         android:orientation="vertical"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -23,7 +24,7 @@
             android:orientation="vertical" >
 
             <TextView
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/rules_xog_Russia"
                 android:textSize="15dp" />
@@ -32,11 +33,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/virus1" />
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/rules_xog_Russia"
-                android:textSize="15dp" />
+
 
         </LinearLayout>
 
