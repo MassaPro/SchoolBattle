@@ -2,8 +2,11 @@ package com.example.schoolbattle
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.KeyEvent
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import com.example.schoolbattle.gamesonedevice.*
 
 class OneDevicePlayActivity : AppCompatActivity() {
@@ -84,4 +87,17 @@ class OneDevicePlayActivity : AppCompatActivity() {
         super.onResume()
         CONTEXT = this
     }
+
+
+
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        return super.onKeyDown(keyCode, event)
+    }
+
 }

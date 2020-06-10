@@ -4,7 +4,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.schoolbattle.gameswithcomp.XOGame_withComputer
+import android.view.KeyEvent
+import com.example.schoolbattle.gameswithcomp.*
 
 class PlayWithComputerActivity : AppCompatActivity() {
 
@@ -19,10 +20,53 @@ class PlayWithComputerActivity : AppCompatActivity() {
 
         if(gameType == "XOGame")
         {
-            finish()
-            val intent = Intent(this,
-                XOGame_withComputer::class.java)
+            val intent = Intent(this,XOGame_withComputer::class.java)
             startActivity(intent)
+            finish()
+        }
+
+        if(gameType == "AngleGame")
+        {
+            val intent = Intent(this,
+                ConersWithComputer::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        if(gameType == "DotGame")
+        {
+            val intent = Intent(this,
+                DotGameWithComputer::class.java)
+            startActivity(intent)
+            finish()
+        }
+        if(gameType == "SnakeGame")
+        {
+            val intent = Intent(this,
+                SnakeGameWithComputer::class.java)
+            startActivity(intent)
+            finish()
+        }
+        if(gameType == "BoxGame")
+        {
+            val intent = Intent(this,
+                BoxGameWithComputer::class.java)
+            startActivity(intent)
+            finish()
+        }
+        /*if(gameType == "VirusGame")       // ADD
+        {
+            val intent = Intent(this,VirusWithComputer::class.java)
+            startActivity(intent)
+            finish()
+        }*/
+
+        if(gameType == "Reversi")
+        {
+            val intent = Intent(this,
+                ReversiWithComputer::class.java)
+            startActivity(intent)
+            finish()
         }
 
     }
@@ -30,5 +74,14 @@ class PlayWithComputerActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         CONTEXT = this
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        return super.onKeyDown(keyCode, event)
     }
 }

@@ -85,6 +85,7 @@ class ConersOneDevice : AppCompatActivity() {
     }
     private var dialog: Show_Result_one_Device? = null
     private var dialog_parametrs: Show_parametr_one_divice_one_Device? = null
+    private var dialog_rules: Show_rules? = null
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,7 +105,7 @@ class ConersOneDevice : AppCompatActivity() {
             toolbar_corner_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             toolbar2_corner_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
 
-            label_one_device_corner.setBackgroundResource(R.drawable.back_ground_egypt);
+            label_one_device_corner.setBackgroundResource(R.drawable.background_egypt);
             bottom_navigation_corner_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
             to_back_corner_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_corner_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
@@ -164,7 +165,11 @@ class ConersOneDevice : AppCompatActivity() {
         bottom_navigation_corner_one_divice.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
-
+                    dialog_rules =
+                        Show_rules(
+                            this@ConersOneDevice
+                        )
+                    dialog_rules?.show("AngleGame")
                 }
                 R.id.page_2 ->{
                     dialog_parametrs =

@@ -78,6 +78,7 @@ class XOGame_oneDivice : AppCompatActivity() {
         return answer
     }
     private var dialog: Show_Result_one_Device? = null
+    private var dialog_rules: Show_rules? = null
     private var dialog_parametrs: Show_parametr_one_divice_one_Device? = null
     @ExperimentalStdlibApi
     override fun onCreate(savedInstance: Bundle?) {
@@ -97,7 +98,7 @@ class XOGame_oneDivice : AppCompatActivity() {
             button_player_2_xog_one_divice.setBackgroundResource(R.drawable.player2_egypt);
             player_1_icon_xog_one_divice.setBackgroundResource(R.drawable.cross_egypt);
             player_2_icon_xog_one_divice.setBackgroundResource(R.drawable.circle_egypt);
-            label_one_device.setBackgroundResource(R.drawable.back_ground_egypt);
+            label_one_device.setBackgroundResource(R.drawable.background_egypt);
             bottom_navigation_xog_one_divice.setBackgroundColor(rgb(224,164,103))
             to_back_xog_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_xog_one_divice.setBackgroundColor(argb(0,0,0,0))
@@ -153,7 +154,11 @@ class XOGame_oneDivice : AppCompatActivity() {
         bottom_navigation_xog_one_divice.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
-
+                    dialog_rules =
+                        Show_rules(
+                            this@XOGame_oneDivice
+                        )
+                    dialog_rules?.show("XOGame")
                 }
                 R.id.page_2 ->{
                     dialog_parametrs =

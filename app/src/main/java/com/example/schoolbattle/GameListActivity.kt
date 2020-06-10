@@ -2,11 +2,13 @@ package com.example.schoolbattle
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color.rgb
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolbattle.gamesonline.*
@@ -33,6 +35,9 @@ class GameListActivity : Fragment() {
     ): View? {
         CONTEXT = requireActivity()
         return inflater.inflate(R.layout.activity_settings, container, false)
+
+
+
     }
 
 
@@ -41,6 +46,13 @@ class GameListActivity : Fragment() {
         super.onActivityCreated(savedInstanceState)
         CONTEXT = requireActivity()
 
+        if (Design == "Egypt"){
+            game_list_playing.setBackgroundResource(R.drawable.game_list_menu_egypt);
+            my_toolbar2.setBackgroundColor(rgb(224,164,103))
+            toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+
+        }
 
         // (activity as AppCompatActivity).setSupportActionBar(findViewById(R.id.my_toolbar))
         //setSupportActionBar(findViewById(R.id.my_toolbar))
@@ -53,6 +65,8 @@ class GameListActivity : Fragment() {
         setupRecyclerView(item_list)
         gamesRecycler = item_list
         item_list.adapter?.notifyDataSetChanged()
+
+
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {

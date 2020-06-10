@@ -3,9 +3,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
+android:id = "@+id/game_menu"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:background="@android:color/white">
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
@@ -22,7 +25,7 @@ android:background="@android:color/white">
         app:menu="@menu/bottom_nav_menu" />
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/my_toolbar"
+        android:id="@+id/my_toolbar2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -48,7 +51,7 @@ android:background="@android:color/white">
         app:layout_constraintVertical_bias="0.036" />
 
     <Button
-        android:id="@+id/toolbarName"
+        android:id="@+id/toolbarName2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
@@ -57,23 +60,23 @@ android:background="@android:color/white">
 
 
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/my_toolbar"
-        app:layout_constraintStart_toStartOf="@+id/my_toolbar"
-        app:layout_constraintTop_toTopOf="@+id/my_toolbar"
-        app:layout_constraintBottom_toBottomOf="@+id/my_toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/my_toolbar2"
+        app:layout_constraintStart_toStartOf="@+id/my_toolbar2"
+        app:layout_constraintTop_toTopOf="@+id/my_toolbar2"
+        app:layout_constraintBottom_toBottomOf="@+id/my_toolbar2"
         />
 
     <Button
-        android:id="@+id/logOut"
+        android:id="@+id/logOut2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:text="Log Out"
         android:textColor="@android:color/holo_red_light"
 
-        app:layout_constraintBottom_toBottomOf="@+id/my_toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/my_toolbar"
-        app:layout_constraintStart_toEndOf="@+id/toolbarName"
+        app:layout_constraintBottom_toBottomOf="@+id/my_toolbar2"
+        app:layout_constraintEnd_toEndOf="@+id/my_toolbar2"
+        app:layout_constraintStart_toEndOf="@+id/toolbarName2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -102,15 +105,15 @@ android:background="@android:color/white">
 
     <Button
         android:id="@+id/searchButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="394dp"
+        android:layout_height="50dp"
         android:text="Поиск Соперника"
 
         app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar2"
         app:layout_constraintVertical_bias="0.081" />
 
 

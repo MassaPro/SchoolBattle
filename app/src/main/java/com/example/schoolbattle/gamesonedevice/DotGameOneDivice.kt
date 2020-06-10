@@ -78,6 +78,7 @@ class DotGameOneDivice : AppCompatActivity() {
     }
 
     private var dialog_parametrs: Show_parametr_one_divice_one_Device? = null
+    private var dialog_rules: Show_rules? = null
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,7 +95,7 @@ class DotGameOneDivice : AppCompatActivity() {
             button_player_2_dot_one_divice.setBackgroundResource(R.drawable.player2_egypt);
             player_1_icon_dot_one_divice.setBackgroundResource(R.drawable.cross_egypt);
             player_2_icon_dot_one_divice.setBackgroundResource(R.drawable.circle_egypt);
-            label_one_device_dots.setBackgroundResource(R.drawable.back_ground_egypt);
+            label_one_device_dots.setBackgroundResource(R.drawable.background_egypt);
             toolbar_dot_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             bottom_navigation_dot_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
             to_back_dot_one_divice.setBackgroundResource(R.drawable.arrow_back)
@@ -145,7 +146,11 @@ class DotGameOneDivice : AppCompatActivity() {
         bottom_navigation_dot_one_divice.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
-
+                    dialog_rules =
+                        Show_rules(
+                            this@DotGameOneDivice
+                        )
+                    dialog_rules?.show("DotGame")
                 }
                 R.id.page_2 ->{
                     dialog_parametrs =

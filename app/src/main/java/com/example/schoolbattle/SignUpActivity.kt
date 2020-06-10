@@ -2,11 +2,13 @@ package com.example.schoolbattle
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
@@ -16,6 +18,19 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
         CONTEXT = this
+
+        if (Design == "Egypt"){
+            sign_up_menu.setBackgroundResource(R.drawable.sign_up_egypt);
+            signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            signUpButton.setBackgroundColor(
+                Color.argb(0,
+                    0,
+                    0,
+                    0
+                )
+            )
+
+        }
 
         fun noSpace() {
             Toast.makeText(this,"Name should not contain spaces", Toast.LENGTH_LONG).show()
@@ -101,5 +116,7 @@ class SignUpActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         CONTEXT = this
+
+
     }
 }

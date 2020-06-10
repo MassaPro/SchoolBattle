@@ -85,6 +85,7 @@ class BoxGameOneDivice : AppCompatActivity() {
     }
 
     private var dialog_parametrs: Show_parametr_one_divice_one_Device? = null
+    private var dialog_rules: Show_rules? = null
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,7 +106,7 @@ class BoxGameOneDivice : AppCompatActivity() {
             toolbar_box_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             toolbar2_box_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
 
-            label_one_device_box.setBackgroundResource(R.drawable.back_ground_egypt);
+            label_one_device_box.setBackgroundResource(R.drawable.background_egypt);
             bottom_navigation_box_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
             to_back_box_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_box_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
@@ -208,7 +209,11 @@ class BoxGameOneDivice : AppCompatActivity() {
         bottom_navigation_box_one_divice.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
-
+                    dialog_rules =
+                        Show_rules(
+                            this@BoxGameOneDivice
+                        )
+                    dialog_rules?.show("BoxGame")
                 }
                 R.id.page_2 ->{
                     dialog_parametrs =

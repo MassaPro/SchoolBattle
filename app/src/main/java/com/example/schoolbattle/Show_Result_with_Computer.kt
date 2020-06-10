@@ -6,7 +6,9 @@ import android.content.Intent
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.gameswithcomp.XOGame_withComputer
+import kotlinx.android.synthetic.main.activity_game_over_with_computer.*
 
 class Show_Result_with_Computer(activity: Activity) {
     private val dialog_with_computer = Dialog(activity)
@@ -15,6 +17,11 @@ class Show_Result_with_Computer(activity: Activity) {
         dialog_with_computer.setCancelable(false)
         dialog_with_computer.setCanceledOnTouchOutside(true)
         dialog_with_computer.setContentView(R.layout.activity_game_over_with_computer)
+
+        if (Design == "Egypt"){
+            dialog_with_computer.linearLayout_with_computer.setBackgroundResource(R.drawable.win_egypt);
+            dialog_with_computer.resultText_with_computer.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+        }
 
         val button_revanshe = dialog_with_computer.findViewById(R.id.restart_with_computer) as Button
         button_revanshe.setOnClickListener{

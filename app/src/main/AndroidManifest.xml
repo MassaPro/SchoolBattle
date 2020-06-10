@@ -9,6 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".Show_language_selection"></activity>
+        <activity android:name=".gameswithcomp.SnakeGameWithComputer" />
+        <activity android:name=".gameswithcomp.ReversiWithComputer" />
+        <activity android:name=".gameswithcomp.DotGameWithComputer" />
+        <activity android:name=".gameswithcomp.ConersWithComputer" />
+        <activity android:name=".gameswithcomp.BoxGameWithComputer" />
         <activity android:name=".gamesonline.SnakeGameActivity"></activity>
         <activity android:name=".FriendsList" />
         <activity android:name=".gamesonedevice.ReversiOneDivice" />
