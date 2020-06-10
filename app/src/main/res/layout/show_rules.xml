@@ -23,11 +23,21 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/rules_xog_Russia"
-                android:textSize="15dp" />
+                android:textSize="40dp"
+                android:layout_gravity="center"
+                android:id="@+id/header_rules"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rules_xog_Russia"
+                android:textSize="15dp"
+                android:id="@+id/text_rules"/>
 
             <ImageView
                 android:layout_width="fill_parent"

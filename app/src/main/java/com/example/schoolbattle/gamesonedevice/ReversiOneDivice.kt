@@ -78,6 +78,7 @@ class ReversiOneDivice : AppCompatActivity() {
 
     private var dialog: Show_Result_one_Device? = null
     private var dialog_parametrs: Show_parametr_one_divice_one_Device? = null
+    private var dialog_rules: Show_rules? = null
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -178,7 +179,11 @@ class ReversiOneDivice : AppCompatActivity() {
         bottom_navigation_reversi_one_divice.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
-
+                    dialog_rules =
+                        Show_rules(
+                            this@ReversiOneDivice
+                        )
+                    dialog_rules?.show("ReversiGame")
                 }
                 R.id.page_2 ->{
                     dialog_parametrs = Show_parametr_one_divice_one_Device(this@ReversiOneDivice)

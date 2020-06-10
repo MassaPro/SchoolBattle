@@ -85,6 +85,7 @@ class ConersOneDevice : AppCompatActivity() {
     }
     private var dialog: Show_Result_one_Device? = null
     private var dialog_parametrs: Show_parametr_one_divice_one_Device? = null
+    private var dialog_rules: Show_rules? = null
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -164,7 +165,11 @@ class ConersOneDevice : AppCompatActivity() {
         bottom_navigation_corner_one_divice.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
-
+                    dialog_rules =
+                        Show_rules(
+                            this@ConersOneDevice
+                        )
+                    dialog_rules?.show("AngleGame")
                 }
                 R.id.page_2 ->{
                     dialog_parametrs =

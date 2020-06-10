@@ -79,6 +79,7 @@ class GoGameOneDivice : AppCompatActivity() {
     }
 
     private var dialog_parametrs: Show_parametr_one_divice_one_Device? = null
+    private var dialog_rules: Show_rules? = null
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -157,7 +158,11 @@ class GoGameOneDivice : AppCompatActivity() {
         bottom_navigation_go_one_divice.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
-
+                    dialog_rules =
+                        Show_rules(
+                            this@GoGameOneDivice
+                        )
+                    dialog_rules?.show("GoGame")
                 }
                 R.id.page_2 ->{
                     dialog_parametrs =

@@ -158,7 +158,7 @@ class XOGame_oneDivice : AppCompatActivity() {
                         Show_rules(
                             this@XOGame_oneDivice
                         )
-                    dialog_rules?.show(1)
+                    dialog_rules?.show("XOGame")
                 }
                 R.id.page_2 ->{
                     dialog_parametrs =

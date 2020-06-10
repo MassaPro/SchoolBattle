@@ -7,12 +7,13 @@ import android.view.Window
 import android.widget.Button
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.content.res.TypedArrayUtils.getText
 import com.example.schoolbattle.gamesonedevice.*
 import kotlinx.android.synthetic.main.show_rules.*
 
 class Show_rules(activity: Activity) {
     private val dialog_one_device = Dialog(activity)
-    fun show(Gametype:Int) {
+    fun show(Gametype:String) {
         dialog_one_device.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog_one_device.setCancelable(false)
         dialog_one_device.setCanceledOnTouchOutside(true)
@@ -22,7 +23,51 @@ class Show_rules(activity: Activity) {
             dialog_one_device.rules.setBackgroundResource(R.drawable.background_egypt);
 
         }
-
+        if(Gametype == "XOGame")
+        {
+            dialog_one_device.header_rules.setText("Крестики-Нолики на торе")
+            dialog_one_device.text_rules.setText(R.string.rules_xog_Russia)
+        }
+        if(Gametype == "AngleGame")
+        {
+            dialog_one_device.header_rules.setText("Уголки")
+            dialog_one_device.text_rules.setText(R.string.rules_corner_Russia)
+        }
+        if(Gametype == "SnakeGame")
+        {
+            dialog_one_device.header_rules.setText("Змейка")
+            dialog_one_device.text_rules.setText(R.string.rules_snake_Russia)
+        }
+        if(Gametype == "GoGame")
+        {
+            dialog_one_device.header_rules.setText("ГО")
+            dialog_one_device.text_rules.setText(R.string.rules_go_Russia)
+        }
+        if(Gametype == "BoxGame")
+        {
+            dialog_one_device.header_rules.setText("КОРОБКИ")
+            dialog_one_device.text_rules.setText(R.string.rules_box_Russia)
+        }
+        if(Gametype == "VirusGame")
+        {
+            dialog_one_device.header_rules.setText("ВОЙНА ВИРУСОВ")
+            dialog_one_device.text_rules.setText(R.string.rules_virus_Russia)
+        }
+        if(Gametype == "StupidGame")
+        {
+            dialog_one_device.header_rules.setText("КАМЕНЬ-НОЖНИЦЫ-БУМАГА")
+            dialog_one_device.text_rules.setText(R.string.rules_stupid_Russia)
+        }
+        if(Gametype == "ReversiGame")
+        {
+            dialog_one_device.header_rules.setText("РЕВЕРСИ")
+            dialog_one_device.text_rules.setText(R.string.rules_reversi_Russia)
+        }
+        if(Gametype == "DotGame")
+        {
+            dialog_one_device.header_rules.setText("ТОЧКИ")
+            dialog_one_device.text_rules.setText(R.string.rules_dot_Russia)
+        }
         dialog_one_device.show()
     }
     fun delete() {

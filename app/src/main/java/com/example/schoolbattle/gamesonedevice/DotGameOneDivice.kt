@@ -78,6 +78,7 @@ class DotGameOneDivice : AppCompatActivity() {
     }
 
     private var dialog_parametrs: Show_parametr_one_divice_one_Device? = null
+    private var dialog_rules: Show_rules? = null
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -145,7 +146,11 @@ class DotGameOneDivice : AppCompatActivity() {
         bottom_navigation_dot_one_divice.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
-
+                    dialog_rules =
+                        Show_rules(
+                            this@DotGameOneDivice
+                        )
+                    dialog_rules?.show("DotGame")
                 }
                 R.id.page_2 ->{
                     dialog_parametrs =
