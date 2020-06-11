@@ -19,8 +19,8 @@
 
         <com.example.schoolbattle.gamesonedevice.CanvasView_corners_one_device
             android:id="@+id/signature_canvas_corners_one_device"
-            android:layout_width="338dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="585dp"
             android:textColor="#FFFFFF" />
     </FrameLayout>
 
@@ -38,8 +38,8 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_corner_one_divice"
-        android:layout_width="398dp"
-        android:layout_height="49dp"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
         app:backgroundTint="#e6e6e6"
         app:itemIconTint="@drawable/bottom_menu_selector"
         app:itemTextAppearanceActive="@style/BottomNavigationView.Active_one_divice"
@@ -47,8 +47,9 @@
         app:itemTextColor="#000000"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/menu_for_game_one_divice"
-        tools:layout_editor_absoluteX="13dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_for_game_one_divice" />
 
     <Button
         android:id="@+id/to_back_corner_one_divice"

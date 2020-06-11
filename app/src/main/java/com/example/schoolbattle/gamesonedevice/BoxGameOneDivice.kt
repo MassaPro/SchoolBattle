@@ -512,6 +512,9 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
     var blue: Bitmap = BitmapFactory.decodeResource(context.getResources(),
         R.drawable.blue
     );
+
+    var box1_egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_egypt);
+    var box2_egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_egypt);
     var illumination: Bitmap = BitmapFactory.decodeResource(context.getResources(),
         R.drawable.illumination
     );
@@ -537,8 +540,19 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
         k = height-width-advertising_line
 
 
-        val right_red: Bitmap = Bitmap.createScaledBitmap(red,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
-        val right_blue: Bitmap = Bitmap.createScaledBitmap(blue,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+        var right_red: Bitmap
+        var right_blue: Bitmap
+
+        if(Design == "Egypt")
+        {
+            right_red = Bitmap.createScaledBitmap(box1_egypt,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+            right_blue = Bitmap.createScaledBitmap(box2_egypt,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+        }
+        else
+        {
+            right_red = Bitmap.createScaledBitmap(red,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+            right_blue = Bitmap.createScaledBitmap(blue,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+        }
         for(i in 0 until size_field_x+1)          //вырисовка горизонтальных линий
         {
             canvas?.drawLine(indent,k,width+indent,k,Line_paint)

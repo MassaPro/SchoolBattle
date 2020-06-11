@@ -24,6 +24,7 @@
             android:textColor="#FFFFFF" />
     </FrameLayout>
 
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_xog_online"
         android:layout_width="match_parent"
@@ -31,13 +32,10 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_xog_online"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_xog_online"
@@ -47,11 +45,14 @@
         app:itemIconTint="@drawable/bottom_menu_selector"
         app:itemTextColor="#000000"
         app:labelVisibilityMode="labeled"
+        app:itemTextAppearanceActive="@style/BottomNavigationView.Active_online"
+        app:itemTextAppearanceInactive="@style/BottomNavigationView_online"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:menu="@menu/menu_for_game_online"
-        tools:layout_editor_absoluteX="-40dp">
+        app:menu="@menu/menu_for_game_online">
 
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
@@ -135,7 +136,6 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginStart="72dp"
-        android:gravity="center"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar_xog_online"
         app:layout_constraintEnd_toStartOf="@+id/icon_player_2_xog_online"

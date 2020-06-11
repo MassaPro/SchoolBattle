@@ -49,4 +49,15 @@
 
     </ScrollView>
 
+    <Button
+        android:id="@+id/button_close_rules_one_device"
+        android:layout_width="37dp"
+        android:layout_height="33dp"
+        app:layout_constraintBottom_toBottomOf="@+id/rules"
+        app:layout_constraintEnd_toEndOf="@+id/rules"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/rules"
+        app:layout_constraintTop_toTopOf="@+id/rules"
+        app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

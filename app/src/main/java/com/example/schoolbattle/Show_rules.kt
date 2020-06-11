@@ -19,10 +19,7 @@ class Show_rules(activity: Activity) {
         dialog_one_device.setCanceledOnTouchOutside(true)
         dialog_one_device.setContentView(R.layout.show_rules)
 
-        if (Design == "Egypt"){
-            dialog_one_device.rules.setBackgroundResource(R.drawable.background_egypt);
 
-        }
         if(Gametype == "XOGame")
         {
             dialog_one_device.header_rules.setText("Крестики-Нолики на торе")
@@ -67,6 +64,17 @@ class Show_rules(activity: Activity) {
         {
             dialog_one_device.header_rules.setText("ТОЧКИ")
             dialog_one_device.text_rules.setText(R.string.rules_dot_Russia)
+        }
+
+
+        val button_close =  dialog_one_device.findViewById(R.id.button_close_rules_one_device) as Button
+        if (Design == "Egypt"){
+            dialog_one_device.rules.setBackgroundResource(R.drawable.background_egypt);
+            button_close.setBackgroundResource(R.drawable.close_cross)
+        }
+
+        button_close.setOnClickListener {
+            dialog_one_device.dismiss()
         }
         dialog_one_device.show()
     }

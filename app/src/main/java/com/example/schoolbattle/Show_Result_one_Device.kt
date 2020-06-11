@@ -18,10 +18,7 @@ class Show_Result_one_Device(activity: Activity) {
         dialog_one_device.setCanceledOnTouchOutside(true)
         dialog_one_device.setContentView(R.layout.activity_game_over_one_device)
 
-        if (Design == "Egypt"){
-            dialog_one_device.linearLayout_one_device.setBackgroundResource(R.drawable.win_egypt);
-            dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-        }
+
 
         val button_revanshe = dialog_one_device.findViewById(R.id.restart_one_device) as Button
         button_revanshe.setOnClickListener{
@@ -81,6 +78,18 @@ class Show_Result_one_Device(activity: Activity) {
 
         }
 
+        val button_close =  dialog_one_device.findViewById(R.id.button_close_game_over_one_device) as Button
+
+
+        if (Design == "Egypt"){
+            dialog_one_device.linearLayout_one_device.setBackgroundResource(R.drawable.win_egypt);
+            dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            button_close.setBackgroundResource(R.drawable.close_cross)
+        }
+        
+        button_close.setOnClickListener {
+            dialog_one_device.dismiss()
+        }
         val body = dialog_one_device.findViewById(R.id.resultText_one_device) as TextView
         body.text = result
         dialog_one_device.show()
