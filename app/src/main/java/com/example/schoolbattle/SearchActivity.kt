@@ -68,6 +68,7 @@ class SearchActivity : AppCompatActivity() {
                                 rec?.adapter?.notifyDataSetChanged()
                             }
                         }
+                        rec?.adapter?.notifyDataSetChanged()
                     }
                 })
                 return false
