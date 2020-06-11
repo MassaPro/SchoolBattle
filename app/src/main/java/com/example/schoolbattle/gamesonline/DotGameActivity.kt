@@ -54,7 +54,13 @@ class DotGameActivity: AppCompatActivity() {
         //      youName.text = yourName
         //    opponentName.text = opponentsName
 
-        val gameData = myRef.child("DotGames").child(
+
+        val type = intent.getStringExtra("type")
+        if (type != "") {
+            TODO()
+            //ALF CODE HERE
+        }
+        val gameData = myRef.child(type + "DotGames").child(
             if (opponentsName < yourName)
                 opponentsName + '_' + yourName else yourName + '_' + opponentsName
         )
@@ -145,12 +151,12 @@ class DotGameActivity: AppCompatActivity() {
                     } else {
                         "Ничья"
                     }
-                    myRef.child("DotGames").child(if (opponentsName < yourName)
+                    myRef.child(type + "DotGames").child(if (opponentsName < yourName)
                         opponentsName + '_' + yourName else yourName + '_' + opponentsName
                     ).removeValue()
 
-                    myRef.child("Users").child(yourName).child("Games").child("$opponentsName DotGame").removeValue()
-                    myRef.child("Users").child(opponentsName).child("Games").child("$yourName DotGame").removeValue()
+                    myRef.child("Users").child(yourName).child(type + "Games").child("$opponentsName DotGame").removeValue()
+                    myRef.child("Users").child(opponentsName).child(type + "Games").child("$yourName DotGame").removeValue()
                     dialog =
                         ShowResult(this@DotGameActivity)
                     if (isRun) {

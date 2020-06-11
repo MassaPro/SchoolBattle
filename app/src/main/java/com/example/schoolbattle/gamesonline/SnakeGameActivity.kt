@@ -42,6 +42,11 @@ class SnakeGameActivity : AppCompatActivity() {
             getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "")
                 .toString()
         var opponentsName_: String = intent?.getStringExtra("opponentName").toString()
+        val type = intent.getStringExtra("type")
+        if (type != "") {
+            TODO()
+            //ALF CODE HERE
+        }
         var opponentsName = ""
         for (i in opponentsName_) {
             if (i == ' ') break
@@ -53,7 +58,7 @@ class SnakeGameActivity : AppCompatActivity() {
         //      youName.text = yourName
         //    opponentName.text = opponentsName
 
-        val gameData = myRef.child("SnakeGames").child(
+        val gameData = myRef.child(type + "SnakeGames").child(
             if (opponentsName < yourName)
                 opponentsName + '_' + yourName else yourName + '_' + opponentsName
         )
@@ -110,12 +115,12 @@ class SnakeGameActivity : AppCompatActivity() {
                     }
 
 
-                    myRef.child("SnakeGames").child(if (opponentsName < yourName)
+                    myRef.child(type + "SnakeGames").child(if (opponentsName < yourName)
                         opponentsName + '_' + yourName else yourName + '_' + opponentsName
                     ).removeValue()
 
-                    myRef.child("Users").child(yourName).child("Games").child("$opponentsName SnakeGame").removeValue()
-                    myRef.child("Users").child(opponentsName).child("Games").child("$yourName SnakeGame").removeValue()
+                    myRef.child("Users").child(yourName).child(type + "Games").child("$opponentsName SnakeGame").removeValue()
+                    myRef.child("Users").child(opponentsName).child(type + "Games").child("$yourName SnakeGame").removeValue()
                     dialog =
                         ShowResult(this@SnakeGameActivity)
                     if (isRun) {

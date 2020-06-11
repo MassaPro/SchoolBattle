@@ -97,13 +97,13 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name ="rules_xog_Russia">
+    <string name="rules_xog_Russia">
         Игра идёт по правилам, отличным от стандартной 3х3 версии.\n
         1.Для победы нужно составить 4 своих фигуры в линию(по горизонтали, вертикали или диагонали).\n
         2.Линии фигур могут быть составлены с переходом через границу(а может быть и несколько границ).\n
         3.Можно ставить фигуры только на нижнюю границу/другие фигуры.\n
     </string>
-    <string name ="rules_corner_Russia">
+    <string name="rules_corner_Russia">
         "Уголки.\n\n"
 
         "  A material metaphor is the unifying theory of a rationalized space and a system of motion."
@@ -192,7 +192,7 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name ="rules_snake_Russia">
+    <string name="rules_snake_Russia">
         "Змейка.\n\n"
 
         "  A material metaphor is the unifying theory of a rationalized space and a system of motion."
@@ -281,14 +281,14 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name ="rules_dot_Russia">
+    <string name="rules_dot_Russia">
         1. Игроки ходят по очереди (1 ход - одна точка). Ходы могут быть в любой пункт(пересечение линий поля), если только он не в окруженной области. Возможности пасовать (пропускать ход) нет. Факт окружения не даёт право на дополнительный ход.\n
         2. При создании непрерывной замкнутой линии образуется область, считаемая окружённой. В эту область далее запрещено ставить точку любому из игроков.\n
         3. Точки, поставленные на краю поля, не могут быть окружены.\n
         4. Партия заканчивается при окончании свободных пунктов или при сдаче одного из игроков.\n
         5. Победа определяется при подсчете окружённых точек. Побеждает игрок, который окружил большее число точек соперника.\n
     </string>
-    <string name ="rules_go_Russia">
+    <string name="rules_go_Russia">
         "Го.\n\n"
 
         "  A material metaphor is the unifying theory of a rationalized space and a system of motion."
@@ -377,7 +377,7 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name ="rules_reversi_Russia">
+    <string name="rules_reversi_Russia">
         "Реверси.\n\n"
 
         "  A material metaphor is the unifying theory of a rationalized space and a system of motion."
@@ -466,7 +466,7 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name ="rules_box_Russia">
+    <string name="rules_box_Russia">
         "Коробки.\n\n"
 
         "  A material metaphor is the unifying theory of a rationalized space and a system of motion."
@@ -555,7 +555,7 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name ="rules_stupid_Russia">
+    <string name="rules_stupid_Russia">
         "Камень ножницы бумага.\n\n"
 
         "  A material metaphor is the unifying theory of a rationalized space and a system of motion."
@@ -644,7 +644,7 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name ="rules_virus_Russia">
+    <string name="rules_virus_Russia">
         "Вирусы.\n\n"
 
         "  A material metaphor is the unifying theory of a rationalized space and a system of motion."

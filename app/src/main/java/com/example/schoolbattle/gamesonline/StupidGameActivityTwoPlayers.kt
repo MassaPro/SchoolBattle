@@ -28,6 +28,13 @@ class StupidGameActivityTwoPlayers : AppCompatActivity() {
             getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "")
                 .toString()
         var opponentsName_: String = intent.getStringExtra("opponentName").toString()
+        val type = intent.getStringExtra("type")
+
+        if (type != "") {
+            TODO()
+            //ALF CODE HERE
+        }
+
         var opponentsName = ""
         for (i in opponentsName_) {
             if (i == ' ') break
@@ -37,7 +44,7 @@ class StupidGameActivityTwoPlayers : AppCompatActivity() {
         youName.text = yourName
         opponentName.text = opponentsName
 
-        val gameData = myRef.child("StupidGames").child(
+        val gameData = myRef.child(type + "StupidGames").child(
             if (opponentsName < yourName)
                 opponentsName + '_' + yourName else yourName + '_' + opponentsName
         )
@@ -74,12 +81,12 @@ class StupidGameActivityTwoPlayers : AppCompatActivity() {
                     } else {
                         res = "Поражение:("
                     }
-                    myRef.child("StupidGames").child(if (opponentsName < yourName)
+                    myRef.child(type + "StupidGames").child(if (opponentsName < yourName)
                         opponentsName + '_' + yourName else yourName + '_' + opponentsName
                     ).removeValue()
 
-                    myRef.child("Users").child(yourName).child("Games").child("$opponentsName StupidGame").removeValue()
-                    myRef.child("Users").child(opponentsName).child("Games").child("$yourName StupidGame").removeValue()
+                    myRef.child("Users").child(yourName).child(type + "Games").child("$opponentsName StupidGame").removeValue()
+                    myRef.child("Users").child(opponentsName).child(type + "Games").child("$yourName StupidGame").removeValue()
 
 
 

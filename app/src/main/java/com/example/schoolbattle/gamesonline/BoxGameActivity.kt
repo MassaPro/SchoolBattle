@@ -2,6 +2,7 @@ package com.example.schoolbattle.gamesonline
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -53,7 +54,12 @@ class BoxGameActivity : AppCompatActivity() {
         //      youName.text = yourName
         //    opponentName.text = opponentsName
 
-        val gameData = myRef.child("BoxGames").child(
+        val type = intent.getStringExtra("type")
+        if (type != "") {
+            TODO()
+            //ALF CODE HERE
+        }
+        val gameData = myRef.child(type + "BoxGames").child(
             if (opponentsName < yourName)
                 opponentsName + '_' + yourName else yourName + '_' + opponentsName
         )
@@ -136,12 +142,12 @@ class BoxGameActivity : AppCompatActivity() {
                         } else {
                             "Ничья"
                         }
-                    myRef.child("BoxGames").child(if (opponentsName < yourName)
+                    myRef.child(type + "BoxGames").child(if (opponentsName < yourName)
                         opponentsName + '_' + yourName else yourName + '_' + opponentsName
                     ).removeValue()
 
-                    myRef.child("Users").child(yourName).child("Games").child("$opponentsName BoxGame").removeValue()
-                    myRef.child("Users").child(opponentsName).child("Games").child("$yourName BoxGame").removeValue()
+                    myRef.child("Users").child(yourName).child(type + "Games").child("$opponentsName BoxGame").removeValue()
+                    myRef.child("Users").child(opponentsName).child(type + "Games").child("$yourName BoxGame").removeValue()
                     dialog =
                         ShowResult(this@BoxGameActivity)
                     if (isRun) {

@@ -59,6 +59,14 @@ class XOGameActivity : AppCompatActivity() {
         val yourName =
             getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "")
                 .toString()
+
+        val type = intent.getStringExtra("type")
+
+        if (type != "") {
+            TODO()
+            //ALF CODE HERE
+        }
+
         var opponentsName_: String = intent?.getStringExtra("opponentName").toString()
         var opponentsName = ""
         for (i in opponentsName_) {
@@ -71,7 +79,7 @@ class XOGameActivity : AppCompatActivity() {
         //      youName.text = yourName
         //    opponentName.text = opponentsName
 
-        val gameData = myRef.child("XOGames").child(
+        val gameData = myRef.child(type + "XOGames").child(
             if (opponentsName < yourName)
                 opponentsName + '_' + yourName else yourName + '_' + opponentsName
         )
@@ -182,12 +190,12 @@ class XOGameActivity : AppCompatActivity() {
 
 
 
-                    myRef.child("XOGames").child(if (opponentsName < yourName)
+                    myRef.child(type + "XOGames").child(if (opponentsName < yourName)
                         opponentsName + '_' + yourName else yourName + '_' + opponentsName
                     ).removeValue()
 
-                    myRef.child("Users").child(yourName).child("Games").child("$opponentsName XOGame").removeValue()
-                    myRef.child("Users").child(opponentsName).child("Games").child("$yourName XOGame").removeValue()
+                    myRef.child("Users").child(yourName).child(type + "Games").child("$opponentsName XOGame").removeValue()
+                    myRef.child("Users").child(opponentsName).child(type + "Games").child("$yourName XOGame").removeValue()
                     dialog =
                         ShowResult(this@XOGameActivity)
                     if (isRun) {

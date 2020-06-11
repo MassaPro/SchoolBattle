@@ -92,14 +92,17 @@ class MainActivity : Fragment() {
         }
 
         searchButton.setOnClickListener {
-            val dialog = Dialog(this.requireContext())
+            val intent = Intent(this.activity, SearchActivity::class.java)
+            activity?.startActivity(intent)
+            activity?.overridePendingTransition(0, 0)
+            /*val dialog = Dialog(this.requireContext())
 
 
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setCancelable(false)
             dialog.setCanceledOnTouchOutside(true)
             dialog.setContentView(R.layout.activity_search_game_dialog)
-            val srch = dialog.findViewById(R.id.search) as SearchView
+            val srch = dialog.findViewById(R.id.search_field) as SearchView
             srch.queryHint = "Поиск соперника"
             srch.setOnClickListener {
                 srch.isIconified = false
@@ -134,7 +137,7 @@ class MainActivity : Fragment() {
                 }
 
             })
-            dialog.show()
+            dialog.show()*/
 
         }
        // (activity as AppCompatActivity).setSupportActionBar(findViewById(R.id.my_toolbar))
@@ -159,6 +162,13 @@ class MainActivity : Fragment() {
             val intent = Intent(activity, NewGameActivity::class.java)
             //activity?.overridePendingTransition(0, 0)
             intent.putExtra("playType", 1)
+            startActivity(intent)
+
+        }
+        blitz.setOnClickListener {
+            val intent = Intent(activity, NewGameActivity::class.java)
+            //activity?.overridePendingTransition(0, 0)
+            intent.putExtra("playType", 0)
             startActivity(intent)
 
         }

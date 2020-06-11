@@ -56,6 +56,7 @@ class NavigatorActivity : AppCompatActivity() {
         val username = prefs.getString("username", "")
         if (username != null) {
             updateRecycler(username)
+            updateRecyclerBlitz(username)
         }
         myRef.child("Users").child(username.toString()).child("Revanches").addValueEventListener(
             object : ValueEventListener {
@@ -109,6 +110,7 @@ class NavigatorActivity : AppCompatActivity() {
                 override fun onCancelled(p0: DatabaseError) {}
 
                 override fun onDataChange(p0: DataSnapshot) {
+                    FRIENDS.clear()
                     for (i in p0.children) {
                         FRIENDS.add(i.key.toString())
                     }

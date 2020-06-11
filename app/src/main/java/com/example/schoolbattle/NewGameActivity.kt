@@ -80,6 +80,13 @@ class NewGameActivity : AppCompatActivity() {
                     v.context.startActivity(intent)
                     activity.overridePendingTransition(0 , 0)
                 }
+                if (type == 0) {
+                    val intent = Intent(v.context, BlitzActivity::class.java).apply {
+                        putExtra("gameName", item)
+                    }
+                    v.context.startActivity(intent)
+                    activity.overridePendingTransition(0 , 0)
+                }
             }
         }
 
