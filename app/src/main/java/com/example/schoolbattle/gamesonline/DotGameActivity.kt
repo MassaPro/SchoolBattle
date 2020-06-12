@@ -3,6 +3,8 @@ package com.example.schoolbattle.gamesonline
 import android.app.Activity
 import android.content.Context
 import android.graphics.*
+import android.graphics.Color.argb
+import android.graphics.Color.rgb
 import android.os.Bundle
 import android.util.AttributeSet
 import android.util.Log
@@ -61,6 +63,30 @@ class DotGameActivity: AppCompatActivity() {
         //signature_canvas3.blocked = true
         signature_canvas3.positionData = gameData
         signature_canvas3.blocked = true
+
+        button_player_1_online_dot.text = yourName
+        button_player_2_online_dot.text = opponentsName
+
+        if(Design == "Egypt" ) {
+            button_player_1_online_dot.setTextColor(Color.BLACK)
+            button_player_2_online_dot.setTextColor(Color.BLACK)
+            button_player_1_online_dot.setTextSize(20f)
+            button_player_2_online_dot.setTextSize(20f)
+            timer_dot_online.setTextSize(15f)
+            timer_dot_online.setTextColor(Color.GREEN)
+            timer2_dot_online.setTextSize(15f)
+            timer2_dot_online.setTextColor(Color.GREEN)
+
+            icon_player_1_dot_online.setBackgroundResource(R.drawable.player1_egypt);
+            icon_player_2_dot_online.setBackgroundResource(R.drawable.player2_egypt);
+            player_1_icon_dot_online.setBackgroundResource(R.drawable.cross_egypt);
+            player_2_icon_dot_online.setBackgroundResource(R.drawable.circle_egypt);
+            label_online_dot.setBackgroundResource(R.drawable.background_egypt);
+            bottom_navigation_dot_online.setBackgroundColor(rgb(224,164,103))
+            to_back_dot_online.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_dot_online.setBackgroundColor(argb(0,0,0,0))
+            toolbar2_dot_online.setBackgroundColor(argb(0,0,0,0))
+        }
 
         gameData.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
@@ -297,15 +323,28 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
 
         paint_circle.setColor(Color.rgb(217, 217, 217))     //цвета для точек
 
-        paint_rib_1.setColor(Color.RED)          //цвета для ребер  и их ширина
-        paint_rib_1.setStrokeWidth(5f)
-        paint_rib_2.setColor(Color.BLUE)
-        paint_rib_2.setStrokeWidth(5f)
+        if(Design == "Egypt") {
+            paint_rib_1.setColor(Color.BLACK) //цвета для ребер  и их ширина
+            paint_rib_1.setStrokeWidth(5f)
+            paint_rib_2.setColor(Color.WHITE)
+            paint_rib_2.setStrokeWidth(5f)
 
-        shading_1.setColor(Color.RED)
-        shading_2.setColor(Color.BLUE)
-        shading_1.setStrokeWidth(2f)
-        shading_2.setStrokeWidth(2f)
+            shading_1.setColor(Color.BLACK)
+            shading_2.setColor(Color.WHITE)
+            shading_1.setStrokeWidth(2f)
+            shading_2.setStrokeWidth(2f)
+        }
+        else {
+            paint_rib_1.setColor(Color.RED) //цвета для ребер  и их ширина
+            paint_rib_1.setStrokeWidth(5f)
+            paint_rib_2.setColor(Color.BLUE)
+            paint_rib_2.setStrokeWidth(5f)
+
+            shading_1.setColor(Color.RED)
+            shading_2.setColor(Color.BLUE)
+            shading_1.setStrokeWidth(2f)
+            shading_2.setStrokeWidth(2f)
+        }
 
         for(i in 0 until FIELD.size)
         {
@@ -335,12 +374,12 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
         indent = (getWidth().toFloat()/(size_field_x.toFloat()+1f))/2f //оступ, чтобы можно было тыкнуть в границу
         width = getWidth().toFloat() - 2*indent
         height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)
-        advertising_line = 150f           //полоска для рекламы
+        advertising_line =(height - width/size_field_x*size_field_y)/2           //полоска для рекламы
 
         step = width/size_field_x
         k = height-width*(size_field_y.toFloat()/size_field_x.toFloat())-advertising_line
 
-        canvas?.drawColor(Color.WHITE)
+
         Log.d("Para",p.toString())
 
         for(i in 0 until size_field_y+1)          //вырисовка горизонтальных линий

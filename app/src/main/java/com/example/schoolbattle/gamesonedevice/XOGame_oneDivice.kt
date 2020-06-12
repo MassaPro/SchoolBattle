@@ -10,6 +10,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
@@ -88,7 +89,10 @@ class XOGame_oneDivice : AppCompatActivity() {
         //var h : MutableList<Triple<Int,Int,Int>> =  mutableListOf(Triple(231,231,777),Triple(231,231,777),Triple(231,231,777))
         //Log.w("momlol",decode(encode(h)).toString())
         setContentView(R.layout.activity_x_o_game_one_divice)
-
+        signature_canvas_xog_one_device.t1 = findViewById(R.id.name_player1_one_divice_xog) as TextView
+        signature_canvas_xog_one_device.t2 = findViewById(R.id.name_player2_one_divice_xog) as TextView
+        signature_canvas_xog_one_device.t1.text = "Игрок 1"
+        signature_canvas_xog_one_device.t2.text = "Игрок 2"
         if(Design == "Egypt" ) {
             name_player1_one_divice_xog.setTextColor(Color.BLACK)
             name_player2_one_divice_xog.setTextColor(Color.BLACK)
@@ -372,6 +376,8 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
 
 
 
+    lateinit var t1: TextView
+    lateinit var t2: TextView
     var History: MutableList<Triple<Int,Int,Int>> = mutableListOf()
     var width : Float = 0f
     var height: Float = 0f
@@ -446,6 +452,16 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
 
         //TODO() take field from database
 
+        if(cross_or_nul == "cross")
+        {
+            t1.text ="игрок 1 думает..."
+            t2.text  = "игрок 2"
+        }
+        else
+        {
+            t1.text ="игрок 1"
+            t2.text  = "игрок 2 думает..."
+        }
         indent = 20f
         width = getWidth().toFloat()
         height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)

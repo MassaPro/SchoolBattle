@@ -1,17 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id= "@+id/label_online_dot"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:orientation="vertical" >
+    android:background="@android:color/white">
 
-    <com.example.schoolbattle.gamesonline.CanvasView_POINTS
-        android:id="@+id/signature_canvas3"
+    <FrameLayout
+        android:id="@+id/frameLayout4"
+        android:layout_width="364dp"
+        android:layout_height="579dp"
+        app:layout_constraintBottom_toTopOf="@+id/toolbar2_dot_online"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_dot_online">
+
+        <com.example.schoolbattle.gamesonline.CanvasView_POINTS
+            android:id="@+id/signature_canvas3"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:textColor="#FFFFFF" />
+    </FrameLayout>
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_dot_online"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textColor="#FFFFFF" />
-</FrameLayout>
+        android:layout_height="50dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation_dot_online"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:backgroundTint="#e6e6e6"
+        app:itemIconTint="@drawable/bottom_menu_selector"
+        app:itemTextColor="#000000"
+        app:labelVisibilityMode="labeled"
+        app:itemTextAppearanceActive="@style/BottomNavigationView.Active_online"
+        app:itemTextAppearanceInactive="@style/BottomNavigationView_online"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:menu="@menu/menu_for_game_online">
+
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2_dot_online"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_dot_online"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/button_player_1_online_dot"
+        android:layout_width="97dp"
+        android:layout_height="24dp"
+        android:gravity="center"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/timer2_dot_online"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.405"
+        app:layout_constraintStart_toEndOf="@+id/icon_player_1_dot_online"
+        app:layout_constraintTop_toTopOf="@+id/toolbar2_dot_online"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/icon_player_2_dot_online"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_dot_online"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar_dot_online"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar_dot_online"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/player_2_icon_dot_online"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/icon_player_2_dot_online"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar_dot_online"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/icon_player_2_dot_online"
+        app:layout_constraintTop_toTopOf="@+id/icon_player_2_dot_online"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <Button
+        android:id="@+id/icon_player_1_dot_online"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar2_dot_online"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar2_dot_online"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar2_dot_online"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/player_1_icon_dot_online"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        app:layout_constraintBottom_toBottomOf="@+id/icon_player_1_dot_online"
+        app:layout_constraintEnd_toEndOf="@+id/icon_player_1_dot_online"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/icon_player_1_dot_online"
+        app:layout_constraintVertical_bias="0.285" />
+
+    <Button
+        android:id="@+id/to_back_dot_online"
+        android:layout_width="89dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/arrow_back"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_dot_online"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar_dot_online"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/toolbar_dot_online"
+        app:layout_constraintTop_toTopOf="@+id/toolbar_dot_online"></Button>
+
+
+    <TextView
+        android:id="@+id/timer_dot_online"
+        android:layout_width="93dp"
+        android:layout_height="25dp"
+        android:gravity="center"
+        android:text="10:05"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_dot_online"
+        app:layout_constraintEnd_toStartOf="@+id/icon_player_2_dot_online"
+        app:layout_constraintHorizontal_bias="0.388"
+        app:layout_constraintStart_toEndOf="@+id/to_back_dot_online"
+        app:layout_constraintTop_toBottomOf="@+id/button_player_2_online_dot"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/timer2_dot_online"
+        android:layout_width="93dp"
+        android:layout_height="25dp"
+        android:gravity="center"
+        android:text="10:05"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_dot_online"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.406"
+        app:layout_constraintStart_toEndOf="@+id/icon_player_1_dot_online" />
+
+    <TextView
+        android:id="@+id/button_player_2_online_dot"
+        android:layout_width="96dp"
+        android:layout_height="25dp"
+        android:gravity="center"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/timer_dot_online"
+        app:layout_constraintEnd_toStartOf="@+id/icon_player_2_dot_online"
+        app:layout_constraintHorizontal_bias="0.384"
+        app:layout_constraintStart_toEndOf="@+id/to_back_dot_online"
+        app:layout_constraintTop_toTopOf="@+id/toolbar_dot_online"
+        app:layout_constraintVertical_bias="1.0" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

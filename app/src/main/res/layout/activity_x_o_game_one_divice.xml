@@ -10,8 +10,8 @@
 
     <FrameLayout
         android:id="@+id/frameLayout2"
-        android:layout_width="354dp"
-        android:layout_height="576dp"
+        android:layout_width="346dp"
+        android:layout_height="579dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
 
@@ -63,7 +63,6 @@
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2_xog_one_divice"
         android:layout_width="fill_parent"
@@ -77,6 +76,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
     <Button
         android:id="@+id/button_player_2_xog_one_divice"
         android:layout_width="50dp"
@@ -103,13 +103,13 @@
 
     <TextView
         android:id="@+id/name_player2_one_divice_xog"
-        android:layout_width="143dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:gravity="center"
         android:text="Игрок 2"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar_xog_one_divice"
         app:layout_constraintEnd_toStartOf="@+id/button_player_2_xog_one_divice"
-        app:layout_constraintHorizontal_bias="0.379"
+        app:layout_constraintHorizontal_bias="0.427"
         app:layout_constraintStart_toEndOf="@+id/to_back_xog_one_divice"
         app:layout_constraintTop_toTopOf="@+id/toolbar_xog_one_divice"
         app:layout_constraintVertical_bias="0.0" />
@@ -128,13 +128,13 @@
 
     <TextView
         android:id="@+id/name_player1_one_divice_xog"
-        android:layout_width="140dp"
+        android:layout_width="wrap_content"
         android:layout_height="51dp"
         android:gravity="center"
         android:text="Игрок 1"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar2_xog_one_divice"
         app:layout_constraintEnd_toEndOf="@+id/toolbar2_xog_one_divice"
-        app:layout_constraintHorizontal_bias="0.403"
+        app:layout_constraintHorizontal_bias="0.419"
         app:layout_constraintStart_toEndOf="@+id/button_player_1_xog_one_divice"
         app:layout_constraintTop_toTopOf="@+id/toolbar2_xog_one_divice"
         app:layout_constraintVertical_bias="0.0" />

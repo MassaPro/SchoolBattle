@@ -4,6 +4,8 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.graphics.*
+import android.graphics.Color.argb
+import android.graphics.Color.rgb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.AttributeSet
@@ -59,7 +61,29 @@ class SnakeGameActivity : AppCompatActivity() {
         )
         signature_canvas_snake_online.blocked = true
         signature_canvas_snake_online.positionData = gameData
+        
+        button_player_1_online_snake.text = yourName
+        button_player_2_online_snake.text = opponentsName
+        if(Design == "Egypt" ) {
+            button_player_1_online_snake.setTextColor(Color.BLACK)
+            button_player_2_online_snake.setTextColor(Color.BLACK)
+            button_player_1_online_snake.setTextSize(20f)
+            button_player_2_online_snake.setTextSize(20f)
+            timer_snake_online.setTextSize(15f)
+            timer_snake_online.setTextColor(Color.GREEN)
+            timer2_snake_online.setTextSize(15f)
+            timer2_snake_online.setTextColor(Color.GREEN)
 
+            icon_player_1_snake_online.setBackgroundResource(R.drawable.player1_egypt);
+            icon_player_2_snake_online.setBackgroundResource(R.drawable.player2_egypt);
+            player_1_icon_snake_online.setBackgroundResource(R.drawable.cross_egypt);
+            player_2_icon_snake_online.setBackgroundResource(R.drawable.circle_egypt);
+            label_online_snake.setBackgroundResource(R.drawable.background_egypt);
+            bottom_navigation_snake_online.setBackgroundColor(rgb(224,164,103))
+            to_back_snake_online.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_snake_online.setBackgroundColor(argb(0,0,0,0))
+            toolbar2_snake_online.setBackgroundColor(argb(0,0,0,0))
+        }
         gameData.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 

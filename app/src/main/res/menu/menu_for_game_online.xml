@@ -20,10 +20,12 @@
         android:id="@+id/page_online_4"
         android:enabled="true"
         android:icon="@drawable/ic_launcher_foreground"
-        app:labelVisibilityMode = "labeled"/>
+        app:labelVisibilityMode = "labeled"
+        android:title="назад"/>
     <item
         android:id="@+id/page_online_5"
         android:enabled="true"
         android:icon="@drawable/right_arrow"
-        app:labelVisibilityMode = "labeled"/>
+        app:labelVisibilityMode = "labeled"
+        android:title="вперед"/>
 </menu>
