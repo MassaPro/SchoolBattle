@@ -42,15 +42,13 @@ android:background="@android:color/white">
 
     <Button
         android:id="@+id/newGameButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="186dp"
+        android:layout_height="54dp"
         android:text="Случайный игрок"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchButton"
-        app:layout_constraintVertical_bias="0.036" />
+        app:layout_constraintVertical_bias="0.035" />
 
     <Button
         android:id="@+id/toolbarName2"
@@ -107,16 +105,27 @@ android:background="@android:color/white">
 
     <Button
         android:id="@+id/searchButton"
-        android:layout_width="394dp"
-        android:layout_height="50dp"
+        android:layout_width="414dp"
+        android:layout_height="58dp"
         android:text="Поиск Соперника"
 
         app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar2"
-        app:layout_constraintVertical_bias="0.081" />
+        app:layout_constraintVertical_bias="0.093" />
+
+    <Button
+        android:id="@+id/fast_game_button"
+        android:layout_width="176dp"
+        android:layout_height="63dp"
+        android:text="Быстрая игра"
+        app:layout_constraintBottom_toTopOf="@+id/oneDevice"
+        app:layout_constraintEnd_toStartOf="@+id/newGameButton"
+        app:layout_constraintHorizontal_bias="0.536"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

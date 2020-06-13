@@ -33,6 +33,8 @@ class XOGameActivity : AppCompatActivity() {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_x_o_game)
 
+
+
         if(Design == "Egypt" ) {
             button_player_1_online_xog.setTextColor(Color.BLACK)
             button_player_2_online_xog.setTextColor(Color.BLACK)

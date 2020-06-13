@@ -1,5 +1,6 @@
 package com.example.schoolbattle
 
+
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
@@ -94,6 +95,10 @@ class MainActivity : Fragment() {
             )
         }
 
+        fast_game_button.setOnClickListener {
+            val intent = Intent(activity, FastGameActivity::class.java)
+            startActivity(intent)
+        }
         searchButton.setOnClickListener {
             val dialog = Dialog(this.requireContext())
 
