@@ -3,6 +3,7 @@ package com.example.schoolbattle
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.Color.rgb
 import android.os.Bundle
@@ -53,6 +54,8 @@ class MainActivity : Fragment() {
         val username = prfs?.getString("username", "")
         CONTEXT = requireActivity()
 
+
+        Design = prfs?.getString("design", "Normal").toString()
 
         if (Design == "Egypt"){
             game_menu.setBackgroundResource(R.drawable.game_menu_egypt);
