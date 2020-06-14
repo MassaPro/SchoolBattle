@@ -1,8 +1,10 @@
 package com.example.schoolbattle
 
+
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.Color.rgb
 import android.os.Bundle
@@ -54,6 +56,8 @@ class MainActivity : Fragment() {
         CONTEXT = requireActivity()
 
 
+        Design = prfs?.getString("design", "Normal").toString()
+
         if (Design == "Egypt"){
             game_menu.setBackgroundResource(R.drawable.game_menu_egypt);
             my_toolbar2.setBackgroundColor(rgb(224,164,103))
@@ -91,6 +95,10 @@ class MainActivity : Fragment() {
             )
         }
 
+        fast_game_button.setOnClickListener {
+            val intent = Intent(activity, FastGameActivity::class.java)
+            startActivity(intent)
+        }
         searchButton.setOnClickListener {
             val intent = Intent(this.activity, SearchActivity::class.java)
             activity?.startActivity(intent)

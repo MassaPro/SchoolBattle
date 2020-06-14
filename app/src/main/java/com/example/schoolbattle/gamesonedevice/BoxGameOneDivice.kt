@@ -515,6 +515,9 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
 
     var box1_egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_egypt);
     var box2_egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_egypt);
+
+
+
     var illumination: Bitmap = BitmapFactory.decodeResource(context.getResources(),
         R.drawable.illumination
     );
@@ -553,6 +556,7 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
             right_red = Bitmap.createScaledBitmap(red,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
             right_blue = Bitmap.createScaledBitmap(blue,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
         }
+
         for(i in 0 until size_field_x+1)          //вырисовка горизонтальных линий
         {
             canvas?.drawLine(indent,k,width+indent,k,Line_paint)

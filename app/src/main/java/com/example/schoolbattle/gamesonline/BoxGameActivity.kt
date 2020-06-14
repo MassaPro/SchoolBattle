@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.*
+import android.graphics.Color.argb
+import android.graphics.Color.rgb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.AttributeSet
@@ -37,6 +39,8 @@ class BoxGameActivity : AppCompatActivity() {
         isRun = true
         super.onResume()
         setContentView(R.layout.activity_box_game)
+
+
         if (StupidGame != Activity()) StupidGame.finish()
         if (NewGame != Activity()) NewGame.finish()
         val yourName =
@@ -65,12 +69,38 @@ class BoxGameActivity : AppCompatActivity() {
         )
         signature_canvas_box.positionData = gameData
         signature_canvas_box.blocked = true
+
+        button_player_1_online_box.text = yourName
+        button_player_2_online_box.text = opponentsName
+
+        if(Design == "Egypt" ) {
+            button_player_1_online_box.setTextColor(Color.BLACK)
+            button_player_2_online_box.setTextColor(Color.BLACK)
+            button_player_1_online_box.setTextSize(20f)
+            button_player_2_online_box.setTextSize(20f)
+            timer_box_online.setTextSize(15f)
+            timer_box_online.setTextColor(Color.GREEN)
+            timer2_box_online.setTextSize(15f)
+            timer2_box_online.setTextColor(Color.GREEN)
+
+            icon_player_1_box_online.setBackgroundResource(R.drawable.player1_egypt);
+            icon_player_2_box_online.setBackgroundResource(R.drawable.player2_egypt);
+            player_1_icon_box_online.setBackgroundResource(R.drawable.cross_egypt);
+            player_2_icon_box_online.setBackgroundResource(R.drawable.circle_egypt);
+            label_online_box.setBackgroundResource(R.drawable.background_egypt);
+            bottom_navigation_box_online.setBackgroundColor(rgb(224,164,103))
+            to_back_box_online.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_box_online.setBackgroundColor(argb(0,0,0,0))
+            toolbar2_box_online.setBackgroundColor(argb(0,0,0,0))
+        }
+
         gameData.addValueEventListener(object : ValueEventListener {
 
             override fun onCancelled(p0: DatabaseError) {}
 
             override fun onDataChange(p0: DataSnapshot) {
                 signature_canvas_box.blocked = true
+
 
                 signature_canvas_box.red_or_blue = if (p0.hasChild("red_or_blue")) p0.child("red_or_blue").value.toString() else "red"
                 if ((signature_canvas_box.red_or_blue == "red") == (p0.child("Move").toString().toBoolean() == (yu == '0'))) signature_canvas_box.blocked = false
@@ -256,6 +286,9 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
     var blue: Bitmap = BitmapFactory.decodeResource(context.getResources(),
         R.drawable.blue
     );
+    var box1_egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_egypt);
+    var box2_egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_egypt);
+
     var illumination: Bitmap = BitmapFactory.decodeResource(context.getResources(),
         R.drawable.illumination
     );
@@ -279,9 +312,21 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
         step = width/size_field_x
         k = height-width-advertising_line
 
-        canvas?.drawColor(Color.WHITE)
-        val right_red: Bitmap = Bitmap.createScaledBitmap(red,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
-        val right_blue: Bitmap = Bitmap.createScaledBitmap(blue,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+
+        val right_red: Bitmap 
+        val right_blue: Bitmap
+
+        if(Design == "Egypt")
+        {
+            right_red = Bitmap.createScaledBitmap(box1_egypt,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+            right_blue = Bitmap.createScaledBitmap(box2_egypt,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+        }
+        else
+        {
+            right_red = Bitmap.createScaledBitmap(red,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+            right_blue = Bitmap.createScaledBitmap(blue,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+        }
+        
         for(i in 0 until size_field_x+1)          //вырисовка горизонтальных линий
         {
             canvas?.drawLine(indent,k,width+indent,k,Line_paint)

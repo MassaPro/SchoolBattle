@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id ="@+id/game_list_menu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_chouse_design"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <TextView
+        android:id="@+id/chouse_design_text"
+        android:layout_width="253dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="15dp"
+        android:text="Выбор дизайна"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_chouse_design"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar_chouse_design"
+        app:layout_constraintStart_toStartOf="@+id/toolbar_chouse_design"
+        app:layout_constraintTop_toTopOf="@+id/toolbar_chouse_design"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="344dp"
+        android:layout_height="576dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_chouse_design"
+        app:layout_constraintVertical_bias="0.212">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_design_1"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginTop="30dp"
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar_design_0" />
+
+            <Button
+                android:id="@+id/design_button_"
+                android:layout_width="109dp"
+                android:layout_height="56dp"
+                android:text="применить"
+                app:layout_constraintBottom_toBottomOf="@+id/toolbar_design_1"
+                app:layout_constraintEnd_toEndOf="@+id/toolbar_design_1"
+                app:layout_constraintStart_toEndOf="@+id/design_big_button_0"
+                app:layout_constraintTop_toTopOf="@+id/toolbar_design_1" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_design_0"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginTop="16dp"
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/design_big_button_1"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                app:layout_constraintBottom_toBottomOf="@+id/toolbar_design_1"
+                app:layout_constraintEnd_toEndOf="@+id/toolbar_design_1"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/toolbar_design_1"
+                app:layout_constraintTop_toTopOf="@+id/toolbar_design_1"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Button
+                android:id="@+id/design_big_button_0"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                app:layout_constraintBottom_toBottomOf="@+id/toolbar_design_0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/toolbar_design_0"
+                app:layout_constraintTop_toTopOf="@+id/toolbar_design_0"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <Button
+                android:id="@+id/design_button_0"
+                android:layout_width="109dp"
+                android:layout_height="56dp"
+                android:text="применить"
+                app:layout_constraintBottom_toBottomOf="@+id/toolbar_design_0"
+                app:layout_constraintEnd_toEndOf="@+id/toolbar_design_0"
+                app:layout_constraintStart_toEndOf="@+id/design_big_button_0"
+                app:layout_constraintTop_toTopOf="@+id/toolbar_design_0" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_design_2"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginTop="30dp"
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar_design_1" />
+
+            <Button
+                android:id="@+id/design_button_2"
+                android:layout_width="109dp"
+                android:layout_height="56dp"
+                android:text="применить"
+                app:layout_constraintBottom_toBottomOf="@+id/toolbar_design_2"
+                app:layout_constraintEnd_toEndOf="@+id/toolbar_design_2"
+                app:layout_constraintStart_toEndOf="@+id/design_big_button_2"
+                app:layout_constraintTop_toTopOf="@+id/toolbar_design_2" />
+
+            <Button
+                android:id="@+id/design_big_button_2"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:layout_marginEnd="32dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/toolbar_design_2"
+                app:layout_constraintTop_toTopOf="@+id/toolbar_design_2"
+                app:layout_constraintVertical_bias="0.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

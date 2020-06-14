@@ -33,11 +33,17 @@ class XOGameActivity : AppCompatActivity() {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_x_o_game)
 
+
+
         if(Design == "Egypt" ) {
             button_player_1_online_xog.setTextColor(Color.BLACK)
             button_player_2_online_xog.setTextColor(Color.BLACK)
-            button_player_1_online_xog.setTextSize(10f)
-            button_player_2_online_xog.setTextSize(10f)
+            button_player_1_online_xog.setTextSize(20f)
+            button_player_2_online_xog.setTextSize(20f)
+            timer_xog_online.setTextSize(15f)
+            timer_xog_online.setTextColor(Color.GREEN)
+            timer2_xog_online.setTextSize(15f)
+            timer2_xog_online.setTextColor(Color.GREEN)
 
             icon_player_1_xog_online.setBackgroundResource(R.drawable.player1_egypt);
             icon_player_2_xog_online.setBackgroundResource(R.drawable.player2_egypt);
@@ -86,15 +92,36 @@ class XOGameActivity : AppCompatActivity() {
         signature_canvas.blocked = true
         signature_canvas.positionData = gameData
 
+        button_player_1_online_xog.text = yourName
+        button_player_2_online_xog.text = opponentsName
+        if(Design == "Egypt" ) {
+            button_player_1_online_xog.setTextColor(Color.BLACK)
+            button_player_2_online_xog.setTextColor(Color.BLACK)
+            button_player_1_online_xog.setTextSize(20f)
+            button_player_2_online_xog.setTextSize(20f)
+            timer_xog_online.setTextSize(15f)
+            timer_xog_online.setTextColor(Color.GREEN)
+            timer2_xog_online.setTextSize(15f)
+            timer2_xog_online.setTextColor(Color.GREEN)
+
+            icon_player_1_xog_online.setBackgroundResource(R.drawable.player1_egypt);
+            icon_player_2_xog_online.setBackgroundResource(R.drawable.player2_egypt);
+            player_1_icon_xog_online.setBackgroundResource(R.drawable.cross_egypt);
+            player_2_icon_xog_online.setBackgroundResource(R.drawable.circle_egypt);
+            label_online_xog.setBackgroundResource(R.drawable.background_egypt);
+            bottom_navigation_xog_online.setBackgroundColor(rgb(224,164,103))
+            to_back_xog_online.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
+            toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+        }
+
         gameData.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
             override fun onDataChange(p0: DataSnapshot) {
                 var cnt = 0
                 signature_canvas.isFirstMove = (p0.child("Move").value.toString() == yu.toString())
-                button_player_1_online_xog.text = yourName
-                        //if (signature_canvas.isFirstMove) " X" else " O"
-                button_player_2_online_xog.text = opponentsName
+
                         //if (!signature_canvas.isFirstMove) " X" else " O"
                 for (i in 0..6) {
                     for (j in 0..5) {

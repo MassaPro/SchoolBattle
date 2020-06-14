@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.Gravity
 import android.view.Window
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -40,6 +41,9 @@ class NavigatorActivity : AppCompatActivity() {
 
         if (Design == "Egypt"){
             nav_view.setBackgroundColor(rgb(224, 164, 103));
+        }
+        else {
+                Toast.makeText(this, "Гавно", Toast.LENGTH_LONG).show()
         }
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)

@@ -80,6 +80,11 @@ class SettingsFragmentActivity : Fragment() {
 
         }
 
+        chouse_design.setOnClickListener {
+            val intent = Intent(context, Chouse_design_Activity::class.java)
+            startActivity(intent)
+        }
+
     }
 
 
