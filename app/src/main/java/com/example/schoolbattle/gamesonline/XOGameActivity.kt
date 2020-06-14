@@ -5,8 +5,11 @@ import android.content.Context
 import android.graphics.*
 import android.graphics.Color.argb
 import android.graphics.Color.rgb
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.provider.ContactsContract
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
@@ -15,12 +18,33 @@ import android.widget.Toast
 import com.example.schoolbattle.*
 import com.example.schoolbattle.R
 import com.google.firebase.database.*
+import com.instacart.library.truetime.TrueTime
+import kotlinx.android.synthetic.main.activity_fast_game.*
 import kotlinx.android.synthetic.main.activity_x_o_game.*
 import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
+import java.util.*
+import java.text.DateFormat
+import android.content.Intent
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class XOGameActivity : AppCompatActivity() {
     private var isRun = false
     private var dialog: ShowResult? = null
+
+    var Finish_minute: Int  = 0
+    var Finish_second: Int  = 0
+    var Time_End = Date()
+    var Flag_first_second_of_move: Boolean = false
+    var Flag_last_second_of_move: Boolean = false
+
+    var Finish_minute_1: Int  = 0
+    var Finish_second_1: Int  = 0
+    var Time_End_1 = Date()
+    var Flag_first_second_of_move_1: Boolean = false
+    var Flag_last_second_of_move_1: Boolean = false
+
 
     override fun onResume() {
         super.onResume()
@@ -32,6 +56,7 @@ class XOGameActivity : AppCompatActivity() {
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_x_o_game)
+
 
 
 
@@ -69,8 +94,17 @@ class XOGameActivity : AppCompatActivity() {
         val type = intent.getStringExtra("type")
 
         if (type != "") {
-            TODO()
-            //ALF CODE HERE
+            FastGameActivity.initTrueTime(this)
+            val timeFormat: DateFormat = SimpleDateFormat("mm:ss", Locale.getDefault())
+            var textTime : String = timeFormat.format(FastGameActivity.trueTime).toString()
+            Finish_minute = (textTime.toString()[0].toInt()  - '0'.toInt())*10  + textTime.toString()[1].toInt()  - '0'.toInt() + 10
+            Finish_second = (textTime.toString()[3].toInt()  - '0'.toInt())*10  + textTime.toString()[4].toInt()  - '0'.toInt()
+            Time_End = trueTime
+
+            Finish_minute_1 = (textTime.toString()[0].toInt()  - '0'.toInt())*10  + textTime.toString()[1].toInt()  - '0'.toInt() + 10
+            Finish_second_1 = (textTime.toString()[3].toInt()  - '0'.toInt())*10  + textTime.toString()[4].toInt()  - '0'.toInt()
+            Time_End_1 = trueTime
+            runTimer()
         }
 
         var opponentsName_: String = intent?.getStringExtra("opponentName").toString()
@@ -244,6 +278,175 @@ class XOGameActivity : AppCompatActivity() {
             finish()
         } else {
             Log.w("HHH", "NONULL")
+        }
+    }
+
+    private fun runTimer() {
+        val handler: Handler = Handler()
+        handler.post(
+            object: Runnable {
+                override fun run() {
+                    initTrueTime(applicationContext)            //если будут проблемы с скоротью перенести в onCreate
+
+                    var cnt: Int = 0
+                    for(i in 0 until signature_canvas.FIELD.size)
+                    {
+                        for(j in 0 until  signature_canvas.FIELD[0].size)
+                        {
+                            if(signature_canvas.FIELD[i][j] != 0)
+                            {
+                                cnt++
+                            }
+                        }
+                    }
+                    if((cnt%2 != 1) == signature_canvas.isFirstMove) {
+                        Flag_last_second_of_move = false
+                        initTrueTime(applicationContext)
+                        if(Flag_first_second_of_move == false)
+                        {
+                            val timeFormat: DateFormat = SimpleDateFormat("mm:ss", Locale.getDefault())
+                            var textTime_1: String = timeFormat.format(Time_End).toString()
+                            var textTime_2: String = timeFormat.format(trueTime).toString()
+                            var minute2: Int = (textTime_2[0].toInt() - '0'.toInt())*10 + textTime_2[1].toInt() - '0'.toInt()
+                            var minute1: Int = ((textTime_1[0].toInt() - '0'.toInt())*10 + textTime_1[1].toInt() - '0'.toInt())
+                            var second2: Int = (textTime_2[3].toInt() - '0'.toInt())*10 + textTime_2[4].toInt() - '0'.toInt()
+                            var second1: Int = (textTime_1[3].toInt() - '0'.toInt())*10 + textTime_1[4].toInt() - '0'.toInt()
+                            if(second2 >= second1)
+                            {
+                                Finish_minute += minute2 - minute1
+                                Finish_second += second2- second1
+                            }
+                            else
+                            {
+                                Finish_minute += minute2 - minute1 - 1
+                                Finish_second += second2- second1 + 60
+                            }
+                            Flag_first_second_of_move = true
+                        }
+                        val timeFormat: DateFormat = SimpleDateFormat("mm:ss", Locale.getDefault())
+                        var textTime: String =
+                            timeFormat.format(trueTime).toString()
+                        var minute: Int =
+                            (textTime.toString()[0].toInt() - '0'.toInt()) * 10 + textTime.toString()[1].toInt() - '0'.toInt()
+                        var second: Int =
+                            (textTime.toString()[3].toInt() - '0'.toInt()) * 10 + textTime.toString()[4].toInt() - '0'.toInt()
+
+                        if (Finish_minute - minute > 0) {
+                            if (Finish_second - second >= 0) {
+                                timer2_xog_online.text = add_null((Finish_minute - minute).toString()) + ":" + add_null((Finish_second - second).toString())
+                            } else {
+                                timer2_xog_online.text =
+                                    add_null((Finish_minute - minute - 1).toString()) + ":" + add_null((Finish_second + 60 - second).toString())
+                            }
+
+                        } else if (minute == Finish_minute && second < Finish_second) {
+                            timer2_xog_online.text =
+                                "00:" + add_null((Finish_second - second).toString())
+                        } else {
+                            timer2_xog_online.text = "time's up"
+                        }
+
+                        Flag_first_second_of_move_1 = false
+                        if(Flag_last_second_of_move_1 == false)
+                        {
+
+                            Time_End_1 = trueTime
+                            Flag_last_second_of_move_1  = true
+                        }
+
+                    }
+                    else
+                    {
+                        initTrueTime(applicationContext)
+                        Flag_first_second_of_move = false
+                        if(Flag_last_second_of_move == false)
+                        {
+
+                            Time_End = trueTime
+                            Flag_last_second_of_move  = true
+                        }
+
+                        Flag_last_second_of_move_1 = false
+                        if(Flag_first_second_of_move_1 == false)
+                        {
+                            val timeFormat: DateFormat = SimpleDateFormat("mm:ss", Locale.getDefault())
+                            var textTime_1: String = timeFormat.format(Time_End_1).toString()
+                            var textTime_2: String = timeFormat.format(trueTime).toString()
+                            var minute2: Int = (textTime_2[0].toInt() - '0'.toInt())*10 + textTime_2[1].toInt() - '0'.toInt()
+                            var minute1: Int = ((textTime_1[0].toInt() - '0'.toInt())*10 + textTime_1[1].toInt() - '0'.toInt())
+                            var second2: Int = (textTime_2[3].toInt() - '0'.toInt())*10 + textTime_2[4].toInt() - '0'.toInt()
+                            var second1: Int = (textTime_1[3].toInt() - '0'.toInt())*10 + textTime_1[4].toInt() - '0'.toInt()
+                            if(second2 >= second1)
+                            {
+                                Finish_minute_1 += minute2 - minute1
+                                Finish_second_1 += second2- second1
+                            }
+                            else
+                            {
+                                Finish_minute_1 += minute2 - minute1 - 1
+                                Finish_second_1 += second2- second1 + 60
+                            }
+                            Flag_first_second_of_move_1 = true
+                        }
+                        val timeFormat: DateFormat = SimpleDateFormat("mm:ss", Locale.getDefault())
+                        var textTime: String =
+                            timeFormat.format(trueTime).toString()
+                        var minute: Int =
+                            (textTime.toString()[0].toInt() - '0'.toInt()) * 10 + textTime.toString()[1].toInt() - '0'.toInt()
+                        var second: Int =
+                            (textTime.toString()[3].toInt() - '0'.toInt()) * 10 + textTime.toString()[4].toInt() - '0'.toInt()
+
+                        if (Finish_minute_1 - minute > 0) {
+                            if (Finish_second_1 - second >= 0) {
+                                timer_xog_online.text = add_null((Finish_minute_1 - minute).toString()) + ":" + add_null((Finish_second_1 - second).toString())
+                            } else {
+                                timer_xog_online.text =
+                                    add_null((Finish_minute_1 - minute - 1).toString()) + ":" + add_null((Finish_second_1 + 60 - second).toString())
+                            }
+
+                        } else if (minute == Finish_minute_1 && second < Finish_second_1) {
+                            timer_xog_online.text =
+                                "00:" + add_null((Finish_second_1 - second).toString())
+                        } else {
+                            timer_xog_online.text = "time's up"
+                        }
+                    }
+                    handler.postDelayed(this, 1000)
+                }
+            }
+        )
+
+    }
+    companion object {
+        val trueTime: Date
+            get() = if (TrueTime.isInitialized()) TrueTime.now() else Date()
+
+        fun initTrueTime(ctx: Context) {
+            if (isNetworkConnected(ctx)) {
+                if (!TrueTime.isInitialized()) {
+                    val trueTime = InitTrueTimeAsyncTask(ctx)
+                    trueTime.execute()
+                }
+            }
+        }
+
+        fun isNetworkConnected(ctx: Context): Boolean {
+            val cm = ctx
+                .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val ni = cm.activeNetworkInfo
+            return ni != null && ni.isConnectedOrConnecting
+        }
+
+        fun add_null(s: String):String
+        {
+            if(s.length == 1)
+            {
+                return "0" + s
+            }
+            else
+            {
+                return s
+            }
         }
     }
 }
@@ -552,4 +755,6 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
         invalidate()
         return true
     }
+
+
 }
