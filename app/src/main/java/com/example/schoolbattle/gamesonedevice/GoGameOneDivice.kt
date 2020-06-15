@@ -4,12 +4,14 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.*
+import android.graphics.Color.argb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.go_game_one_divice.*
 
@@ -90,6 +92,8 @@ class GoGameOneDivice : AppCompatActivity() {
         {
             name_player1_one_divice_go.setTextColor(Color.BLACK)
             name_player2_one_divice_go.setTextColor(Color.BLACK)
+            name_player1_one_divice_go.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            name_player2_one_divice_go.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
             name_player2_one_divice_go.setTextSize(20f)
             name_player1_one_divice_go.setTextSize(20f)
             button_player_1_go_one_divice.setBackgroundResource(R.drawable.player1_egypt);
@@ -98,12 +102,26 @@ class GoGameOneDivice : AppCompatActivity() {
             player_2_icon_go_one_divice.setBackgroundResource(R.drawable.circle_egypt)
             toolbar_go_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             toolbar2_go_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-
-
             label_one_device_go.setBackgroundResource(R.drawable.background_egypt);
             toolbar_go_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             bottom_navigation_go_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
             to_back_go_one_divice.setBackgroundResource(R.drawable.arrow_back)
+        }
+        else if(Design == "Casino" ) {
+            name_player1_one_divice_go.setTextColor(Color.YELLOW)
+            name_player2_one_divice_go.setTextColor(Color.YELLOW)
+            name_player1_one_divice_go.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_one_divice_go.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_one_divice_go.setTextSize(20f)
+            name_player1_one_divice_go.setTextSize(20f)
+            button_player_1_go_one_divice.setBackgroundResource(R.drawable.tower1_casino);
+            button_player_2_go_one_divice.setBackgroundResource(R.drawable.tower2_casino);
+            toolbar_go_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_go_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            label_one_device_go.setBackgroundResource(R.drawable.background_casino);
+            bottom_navigation_go_one_divice.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_go_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_go_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
         }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
@@ -459,9 +477,19 @@ class CanvasView_Go_one_divice(context: Context, attrs: AttributeSet?) : View(co
 
         paint_circle.setColor(Color.rgb(217, 217, 217))     //цвета для точек
 
-        if(Design == "Egypt") {
+        paint_rib_1.setColor(Color.RED) //цвета для ребер  и их ширина
+        paint_rib_1.setStrokeWidth(5f)
+        paint_rib_2.setColor(Color.BLUE)
+        paint_rib_2.setStrokeWidth(5f)
 
-            paint_circle.setColor(Color.rgb(0, 0, 0))
+        shading_1.setColor(Color.RED)
+        shading_2.setColor(Color.BLUE)
+        shading_1.setStrokeWidth(2f)
+        shading_2.setStrokeWidth(2f)
+
+
+        if(Design == "Egypt") {
+            Line_paint.setColor(Color.rgb(100, 100, 100))      //ресур для линий (ширина и цвет)
 
             paint_rib_1.setColor(Color.BLACK) //цвета для ребер  и их ширина
             paint_rib_1.setStrokeWidth(5f)
@@ -473,14 +501,14 @@ class CanvasView_Go_one_divice(context: Context, attrs: AttributeSet?) : View(co
             shading_1.setStrokeWidth(2f)
             shading_2.setStrokeWidth(2f)
         }
-        else {
-            paint_rib_1.setColor(Color.RED) //цвета для ребер  и их ширина
+        else if(Design == "Casino") {
+            paint_rib_1.setColor(Color.BLACK) //цвета для ребер  и их ширина
             paint_rib_1.setStrokeWidth(5f)
-            paint_rib_2.setColor(Color.BLUE)
+            paint_rib_2.setColor(Color.RED)
             paint_rib_2.setStrokeWidth(5f)
 
-            shading_1.setColor(Color.RED)
-            shading_2.setColor(Color.BLUE)
+            shading_1.setColor(Color.BLACK)
+            shading_2.setColor(Color.RED)
             shading_1.setStrokeWidth(2f)
             shading_2.setStrokeWidth(2f)
         }
@@ -522,13 +550,13 @@ class CanvasView_Go_one_divice(context: Context, attrs: AttributeSet?) : View(co
         step = width/size_field_x
         k = height-width*(size_field_y.toFloat()/size_field_x.toFloat())-advertising_line
 
-        if(Design == "Egypt")
+        if(Design == "Normal")
         {
-
+            canvas?.drawColor(Color.WHITE)
         }
         else
         {
-            canvas?.drawColor(Color.WHITE)
+
         }
 
         Log.d("Para",p.toString())

@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.graphics.Color.argb
 import android.graphics.Color.rgb
 import android.os.Bundle
 import android.view.*
@@ -20,6 +21,7 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_game_menu.*
 
 public var Design: String = "Egypt"
+
 
 lateinit var gamesRecycler: RecyclerView
 
@@ -58,40 +60,46 @@ class MainActivity : Fragment() {
         Design = prfs?.getString("design", "Normal").toString()
 
         if (Design == "Egypt"){
-            game_menu.setBackgroundResource(R.drawable.game_menu_egypt);
+            game_menu.setBackgroundResource(R.drawable.game_menu_egypt)
+            //nav_view.setBackgroundColor(rgb(224, 164, 103));
             my_toolbar2.setBackgroundColor(rgb(224,164,103))
             searchButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            searchButton.setBackgroundColor(
-                Color.argb(0,
-                    0,
-                    0,
-                    0
-                )
-            )
+            searchButton.setBackgroundColor(argb(0,0,0,0))
             newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            newGameButton.setBackgroundColor(
-                Color.argb(0,
-                    0,
-                    0,
-                    0
-                )
-            )
+            newGameButton.setBackgroundColor(argb(0,0,0,0))
             oneDevice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            oneDevice.setBackgroundColor(
-                Color.argb(0,
-                    0,
-                    0,
-                    0
-                )
-            )
+            oneDevice.setBackgroundColor(argb(0,0,0,0))
             playWithComp.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            playWithComp.setBackgroundColor(
-                Color.argb(0,
-                    0,
-                    0,
-                    0
-                )
-            )
+            playWithComp.setBackgroundColor(argb(0,0,0,0))
+        }
+        else if (Design == "Casino"){
+            game_menu.setBackgroundResource(R.drawable.game_menu_casino)
+            //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
+            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
+
+            toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            toolbarName2.setTextColor(Color.YELLOW)
+            toolbarName2.setTextSize(20f)
+
+            searchButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            searchButton.setTextColor(Color.YELLOW)
+            searchButton.setTextSize(20f)
+            searchButton.setBackgroundColor(argb(0,0,0,0))
+
+            newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            newGameButton.setTextColor(Color.YELLOW)
+            newGameButton.setTextSize(20f)
+            newGameButton.setBackgroundColor(argb(0,0,0,0))
+
+            oneDevice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            oneDevice.setTextColor(Color.YELLOW)
+            oneDevice.setTextSize(20f)
+            oneDevice.setBackgroundColor(argb(0,0,0,0))
+
+            playWithComp.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            playWithComp.setTextColor(Color.YELLOW)
+            playWithComp.setTextSize(20f)
+            playWithComp.setBackgroundColor(argb(0,0,0,0))
         }
 
         searchButton.setOnClickListener {

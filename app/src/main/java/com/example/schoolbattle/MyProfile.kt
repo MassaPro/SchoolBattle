@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_my_profile.*
 
@@ -25,6 +26,15 @@ class MyProfile : Fragment() {
         val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val username = prefs?.getString("username", "")
         profileName.text = username
+
+        if (Design == "Egypt"){
+            my_profile.setBackgroundResource(R.drawable.background_egypt)
+            profileName.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+        }
+        if (Design == "Casino"){
+            my_profile.setBackgroundResource(R.drawable.background2_casino)
+            profileName.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+        }
     }
 
 }

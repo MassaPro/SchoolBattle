@@ -2,6 +2,8 @@ package com.example.schoolbattle
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Color.argb
 import android.graphics.Color.rgb
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -26,6 +28,7 @@ class GameListActivity : Fragment() {
         updateRecycler(globalName.toString())
         //val navView: BottomNavigationView = findViewById(R.id.nav_view)
         //navView.selectedItemId = R.id.navigation_dashboard
+
     }
 
     override fun onCreateView(
@@ -51,7 +54,15 @@ class GameListActivity : Fragment() {
             my_toolbar2.setBackgroundColor(rgb(224,164,103))
             toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
             //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+        }
 
+        if (Design == "Casino"){
+            game_list_playing.setBackgroundResource(R.drawable.background2_casino);
+            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
+            toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            toolbarName2.setTextColor(Color.YELLOW)
+            toolbarName2.setTextSize(20f)
+            //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
         }
 
         // (activity as AppCompatActivity).setSupportActionBar(findViewById(R.id.my_toolbar))

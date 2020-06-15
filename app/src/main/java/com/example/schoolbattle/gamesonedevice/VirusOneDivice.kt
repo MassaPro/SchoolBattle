@@ -12,10 +12,9 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_virus_one_divice.*
-import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
 
 class VirusOneDivice : AppCompatActivity() {
 
@@ -94,17 +93,35 @@ class VirusOneDivice : AppCompatActivity() {
         if(Design == "Egypt" ) {
             name_player1_one_divice_virus.setTextColor(Color.BLACK)
             name_player2_one_divice_virus.setTextColor(Color.BLACK)
+            name_player1_one_divice_virus.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            name_player2_one_divice_virus.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
             name_player2_one_divice_virus.setTextSize(20f)
             name_player1_one_divice_virus.setTextSize(20f)
             button_player_1_virus_one_divice.setBackgroundResource(R.drawable.player1_egypt);
             button_player_2_virus_one_divice.setBackgroundResource(R.drawable.player2_egypt);
-            player_1_icon_virus_one_divice.setBackgroundResource(R.drawable.cross_egypt);
-            player_2_icon_virus_one_divice.setBackgroundResource(R.drawable.circle_egypt);
+            player_1_icon_virus_one_divice.setBackgroundResource(R.drawable.virus1_egypt);
+            player_2_icon_virus_one_divice.setBackgroundResource(R.drawable.virus2_egypt);
             label_one_device_virus.setBackgroundResource(R.drawable.background_egypt);
             bottom_navigation_virus_one_divice.setBackgroundColor(rgb(224,164,103))
             to_back_virus_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_virus_one_divice.setBackgroundColor(argb(0,0,0,0))
             toolbar2_virus_one_divice.setBackgroundColor(argb(0,0,0,0))
+        }
+        else if(Design == "Casino" ) {
+            name_player1_one_divice_virus.setTextColor(Color.YELLOW)
+            name_player2_one_divice_virus.setTextColor(Color.YELLOW)
+            name_player1_one_divice_virus.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_one_divice_virus.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_one_divice_virus.setTextSize(20f)
+            name_player1_one_divice_virus.setTextSize(20f)
+            button_player_1_virus_one_divice.setBackgroundResource(R.drawable.tower1_casino);
+            button_player_2_virus_one_divice.setBackgroundResource(R.drawable.tower2_casino);
+            toolbar_virus_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_virus_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            label_one_device_virus.setBackgroundResource(R.drawable.background_casino);
+            bottom_navigation_virus_one_divice.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_virus_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_virus_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
         }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
@@ -680,6 +697,15 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
         paint_rib_2.setColor(Color.BLUE)
         paint_rib_2.setStrokeWidth(5f)
 
+        if (Design == "Casino"){
+            Line_paint.setColor(Color.WHITE)          //ресур для линий (ширина и цвет)
+
+        }
+        if (Design == "Egypt"){
+            Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
+
+        }
+
 
         for (i in 0 until FIELD.size) {
             for (j in 0 until FIELD[i].size) {
@@ -689,19 +715,20 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
 
     }
 
+    var virus1_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.virus1_normal);
+    var virus2_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.virus2_normal);
+    var tower1_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower1_normal);
+    var tower2_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_normal)
 
-    var virus_1: Bitmap = BitmapFactory.decodeResource(context.getResources(),
-        R.drawable.virus1
-    );
-    var virus_2: Bitmap = BitmapFactory.decodeResource(context.getResources(),
-        R.drawable.virus2
-    );
-    var tower_1: Bitmap = BitmapFactory.decodeResource(context.getResources(),
-        R.drawable.tower1
-    );
-    var tower_2: Bitmap = BitmapFactory.decodeResource(context.getResources(),
-        R.drawable.tower2
-    )
+    var virus1_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.virus1_egypt);
+    var virus2_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.virus2_egypt);
+    var tower1_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower1_egypt);
+    var tower2_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_egypt)
+
+    var virus1_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.virus1_casino);
+    var virus2_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.virus2_casino);
+    var tower1_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower1_casino);
+    var tower2_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_casino)
 
 
     override fun draw(canvas: Canvas?) {
@@ -716,10 +743,30 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
         advertising_line = (height - width)/2           //полоска для рекламы
         step = width / size_field_x
 
-        val rigth_virus_1: Bitmap = Bitmap.createScaledBitmap(virus_1,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-        val rigth_virus_2: Bitmap = Bitmap.createScaledBitmap(virus_2,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-        val rigth_tower_1: Bitmap = Bitmap.createScaledBitmap(tower_1,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-        val rigth_tower_2: Bitmap = Bitmap.createScaledBitmap(tower_2,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+        var right_virus1: Bitmap
+        var right_virus2: Bitmap
+        var right_tower1: Bitmap
+        var right_tower2: Bitmap
+
+        right_virus1 = Bitmap.createScaledBitmap(virus1_normal,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+        right_virus2 = Bitmap.createScaledBitmap(virus2_normal,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+        right_tower1 = Bitmap.createScaledBitmap(tower1_normal,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+        right_tower2 = Bitmap.createScaledBitmap(tower2_normal,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+
+        if(Design == "Egypt")
+        {
+            right_virus1 = Bitmap.createScaledBitmap(virus1_egypt,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            right_virus2 = Bitmap.createScaledBitmap(virus2_egypt,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            right_tower1 = Bitmap.createScaledBitmap(tower1_egypt,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            right_tower2 = Bitmap.createScaledBitmap(tower2_egypt,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+        }
+        else if (Design == "Casino")
+        {
+            right_virus1 = Bitmap.createScaledBitmap(virus1_casino,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            right_virus2 = Bitmap.createScaledBitmap(virus2_casino,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            right_tower1 = Bitmap.createScaledBitmap(tower1_casino,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            right_tower2 = Bitmap.createScaledBitmap(tower2_casino,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+        }
 
         var k: Float = height - width  - advertising_line
 
@@ -750,19 +797,19 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
             {
                 if(FIELD[i][j] == 1)
                 {
-                    canvas?.drawBitmap(rigth_virus_1,X1,Y1,paint)
+                    canvas?.drawBitmap(right_virus1,X1,Y1,paint)
                 }
                 if(FIELD[i][j] == 2)
                 {
-                    canvas?.drawBitmap(rigth_virus_2,X1,Y1,paint)
+                    canvas?.drawBitmap(right_virus2,X1,Y1,paint)
                 }
                 if(FIELD[i][j] == 3)
                 {
-                    canvas?.drawBitmap(rigth_tower_1,X1,Y1,paint)
+                    canvas?.drawBitmap(right_tower1,X1,Y1,paint)
                 }
                 if(FIELD[i][j] == 4)
                 {
-                    canvas?.drawBitmap(rigth_tower_2,X1,Y1,paint)
+                    canvas?.drawBitmap(right_tower2,X1,Y1,paint)
                 }
 
                 Y1 += step

@@ -3,14 +3,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id ="@+id/game_list_menu"
+    android:id ="@+id/design_list_menu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_chouse_design"
+        android:id="@+id/toolbar_choose_design"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -25,16 +25,16 @@
 
 
     <TextView
-        android:id="@+id/chouse_design_text"
+        android:id="@+id/choose_design_text"
         android:layout_width="253dp"
         android:layout_height="56dp"
         android:layout_marginBottom="15dp"
         android:text="Выбор дизайна"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar_chouse_design"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar_chouse_design"
-        app:layout_constraintStart_toStartOf="@+id/toolbar_chouse_design"
-        app:layout_constraintTop_toTopOf="@+id/toolbar_chouse_design"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_choose_design"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar_choose_design"
+        app:layout_constraintStart_toStartOf="@+id/toolbar_choose_design"
+        app:layout_constraintTop_toTopOf="@+id/toolbar_choose_design"
         app:layout_constraintVertical_bias="0.0" />
 
     <ScrollView
@@ -46,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_chouse_design"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_choose_design"
         app:layout_constraintVertical_bias="0.212">
 
         <androidx.constraintlayout.widget.ConstraintLayout
