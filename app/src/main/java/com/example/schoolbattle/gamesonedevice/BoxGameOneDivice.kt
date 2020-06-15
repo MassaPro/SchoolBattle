@@ -4,12 +4,14 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.*
+import android.graphics.Color.argb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_box_game_one_divice.*
 
@@ -97,19 +99,36 @@ class BoxGameOneDivice : AppCompatActivity() {
         if(Design == "Egypt" ) {
             name_player1_one_divice_box.setTextColor(Color.BLACK)
             name_player2_one_divice_box.setTextColor(Color.BLACK)
+            name_player1_one_divice_box.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            name_player2_one_divice_box.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
             name_player2_one_divice_box.setTextSize(20f)
             name_player1_one_divice_box.setTextSize(20f)
             button_player_1_box_one_divice.setBackgroundResource(R.drawable.player1_egypt);
             button_player_2_box_one_divice.setBackgroundResource(R.drawable.player2_egypt);
-            player_1_icon_box_one_divice.setBackgroundResource(R.drawable.cross_egypt);
-            player_2_icon_box_one_divice.setBackgroundResource(R.drawable.circle_egypt)
-            toolbar_box_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_box_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-
+            player_1_icon_box_one_divice.setBackgroundResource(R.drawable.box2_egypt);
+            player_2_icon_box_one_divice.setBackgroundResource(R.drawable.box1_egypt)
+            toolbar_box_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_box_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             label_one_device_box.setBackgroundResource(R.drawable.background_egypt);
             bottom_navigation_box_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
             to_back_box_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_box_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            toolbar_box_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+        }
+        else if(Design == "Casino" ) {
+            name_player1_one_divice_box.setTextColor(Color.YELLOW)
+            name_player2_one_divice_box.setTextColor(Color.YELLOW)
+            name_player1_one_divice_box.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_one_divice_box.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_one_divice_box.setTextSize(20f)
+            name_player1_one_divice_box.setTextSize(20f)
+            button_player_1_box_one_divice.setBackgroundResource(R.drawable.tower1_casino);
+            button_player_2_box_one_divice.setBackgroundResource(R.drawable.tower2_casino);
+            toolbar_box_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_box_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            label_one_device_box.setBackgroundResource(R.drawable.background_casino);
+            bottom_navigation_box_one_divice.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_box_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_box_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
         }
 
         to_back_box_one_divice.setOnClickListener {
@@ -483,6 +502,19 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
         paint_rib_2.setColor(Color.BLUE)
         paint_rib_2.setStrokeWidth(5f)
 
+        if (Design == "Casino"){
+            Line_paint.setColor(Color.argb(0, 217, 217,217))          //ресур для линий (ширина и цвет)
+
+            paint_circle.setColor(Color.WHITE)     //цвета для точек
+
+            paint_rib_1.setColor(Color.RED)          //цвета для ребер  и их ширина
+            paint_rib_2.setColor(Color.BLACK)
+        }
+        if (Design == "Egypt"){
+            Line_paint.setColor(Color.argb(0, 217, 217,217))          //ресур для линий (ширина и цвет)
+
+        }
+
         // TODO нужно взять из DataBase (статистика ходов)
         for( i in 0..6) {
             for(j in 0 ..6) {
@@ -506,24 +538,19 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
 
 
 
-    var red : Bitmap = BitmapFactory.decodeResource(context.getResources(),
-        R.drawable.red
-    );       //картинки фишек и подсветки
-    var blue: Bitmap = BitmapFactory.decodeResource(context.getResources(),
-        R.drawable.blue
-    );
+    var red : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.red);       //картинки фишек и подсветки
+    var blue: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.blue);
 
-    var box1_egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_egypt);
-    var box2_egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_egypt);
+    var box1_egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_egypt);
+    var box2_egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_egypt);
 
+    var box1_casino : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_casino);
+    var box2_casino : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_casino);
 
 
-    var illumination: Bitmap = BitmapFactory.decodeResource(context.getResources(),
-        R.drawable.illumination
-    );
-    var green: Bitmap = BitmapFactory.decodeResource(context.getResources(),
-        R.drawable.green
-    );
+
+    var illumination: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.illumination);
+    var green: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.green);
 
 
     override fun draw(canvas: Canvas?) {
@@ -546,15 +573,19 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
         var right_red: Bitmap
         var right_blue: Bitmap
 
+
+        right_red = Bitmap.createScaledBitmap(red,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+        right_blue = Bitmap.createScaledBitmap(blue,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+
         if(Design == "Egypt")
         {
             right_red = Bitmap.createScaledBitmap(box1_egypt,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
             right_blue = Bitmap.createScaledBitmap(box2_egypt,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
         }
-        else
+        else if (Design == "Casino")
         {
-            right_red = Bitmap.createScaledBitmap(red,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
-            right_blue = Bitmap.createScaledBitmap(blue,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+            right_red = Bitmap.createScaledBitmap(box1_casino,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+            right_blue = Bitmap.createScaledBitmap(box2_casino,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
         }
 
         for(i in 0 until size_field_x+1)          //вырисовка горизонтальных линий

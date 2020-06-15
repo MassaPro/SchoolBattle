@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.Intent.getIntent
 import android.content.Intent.getIntentOld
+import android.graphics.Color.argb
 import android.graphics.Color.rgb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -32,6 +33,11 @@ class NewGameActivity : AppCompatActivity() {
             game_list_menu.setBackgroundResource(R.drawable.background_egypt);
             my_toolbar2.setBackgroundColor(rgb(224,164,103))
             text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+        }
+        if (Design == "Casino"){
+            game_list_menu.setBackgroundResource(R.drawable.background2_casino);
+            my_toolbar2.setBackgroundColor(argb(0,224,164,103))
+            text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
         }
 
         NewGame = this

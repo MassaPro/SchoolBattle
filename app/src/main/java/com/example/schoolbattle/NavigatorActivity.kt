@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Color.rgb
 import android.os.Bundle
 import android.util.Log
@@ -30,6 +31,16 @@ class NavigatorActivity : AppCompatActivity() {
         super.onResume()
         CONTEXT = this
         now = this
+        if (Design == "Normal"){
+            nav_view.setBackgroundColor(Color.WHITE);
+        }
+        if (Design == "Egypt"){
+            nav_view.setBackgroundColor(rgb(224, 164, 103));
+        }
+        if (Design == "Casino"){
+            nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
+            //navigation_dashboard.setBackground
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,12 +50,7 @@ class NavigatorActivity : AppCompatActivity() {
         Log.d("VISIT","121212121")
         CONTEXT = this
 
-        if (Design == "Egypt"){
-            nav_view.setBackgroundColor(rgb(224, 164, 103));
-        }
-        else {
-                Toast.makeText(this, "Гавно", Toast.LENGTH_LONG).show()
-        }
+
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         now = this

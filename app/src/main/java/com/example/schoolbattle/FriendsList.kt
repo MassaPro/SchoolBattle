@@ -2,12 +2,16 @@ package com.example.schoolbattle
 
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.Color.argb
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_friends_item.*
 import kotlinx.android.synthetic.main.activity_friends_item.view.*
 import kotlinx.android.synthetic.main.activity_friends_item.view.content
 import kotlinx.android.synthetic.main.activity_friends_item.view.id_text
@@ -24,6 +28,17 @@ class FriendsList : Fragment() {
         super.onCreate(savedInstanceState)
         setupRecyclerView(activity?.findViewById(R.id.friends_list) as RecyclerView)
         friends_list.adapter?.notifyDataSetChanged()
+        if (Design == "Egypt"){
+            friends_list.setBackgroundResource(R.drawable.background_egypt)
+            //nav_view.setBackgroundColor(rgb(224, 164, 103));
+            //my_toolbar2.setBackgroundColor(rgb(224,164,103))
+            //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            //content.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            //id_text.setTextColor(Color.WHITE)
+        }
+        if (Design == "Casino"){
+            friends_list.setBackgroundResource(R.drawable.background2_casino)
+        }
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {

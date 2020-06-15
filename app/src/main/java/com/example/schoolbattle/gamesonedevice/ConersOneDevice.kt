@@ -4,12 +4,14 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.*
+import android.graphics.Color.argb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_coners_one_device.*
 
@@ -96,6 +98,8 @@ class ConersOneDevice : AppCompatActivity() {
         if(Design == "Egypt" ) {
             name_player1_one_divice_corner.setTextColor(Color.BLACK)
             name_player2_one_divice_corner.setTextColor(Color.BLACK)
+            name_player1_one_divice_corner.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            name_player2_one_divice_corner.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
             name_player2_one_divice_corner.setTextSize(20f)
             name_player1_one_divice_corner.setTextSize(20f)
             button_player_1_corner_one_divice.setBackgroundResource(R.drawable.player1_egypt);
@@ -109,6 +113,22 @@ class ConersOneDevice : AppCompatActivity() {
             bottom_navigation_corner_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
             to_back_corner_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_corner_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+        }
+        else if(Design == "Casino" ) {
+            name_player1_one_divice_corner.setTextColor(Color.YELLOW)
+            name_player2_one_divice_corner.setTextColor(Color.YELLOW)
+            name_player1_one_divice_corner.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_one_divice_corner.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_one_divice_corner.setTextSize(20f)
+            name_player1_one_divice_corner.setTextSize(20f)
+            button_player_1_corner_one_divice.setBackgroundResource(R.drawable.tower1_casino);
+            button_player_2_corner_one_divice.setBackgroundResource(R.drawable.tower2_casino);
+            toolbar_corner_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_corner_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            label_one_device_corner.setBackgroundResource(R.drawable.background_casino);
+            bottom_navigation_corner_one_divice.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_corner_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_corner_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
         }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
@@ -488,14 +508,17 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
         PHASE = true
         motion_chip = false
 
+        Line_paint.setColor(Color.RED)          //ресур для линий (ширина и цвет)
+        Line_paint.setStrokeWidth(5f)
+
         if(Design == "Egypt")
         {
             Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
             Line_paint.setStrokeWidth(5f)
         }
-        else
+        else if(Design == "Casino")
         {
-            Line_paint.setColor(Color.RED)          //ресур для линий (ширина и цвет)
+            Line_paint.setColor(Color.WHITE)          //ресур для линий (ширина и цвет)
             Line_paint.setStrokeWidth(5f)
         }
 
@@ -526,23 +549,17 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
 
 
 
-    var black_chip : Bitmap = BitmapFactory.decodeResource(context.getResources(),
-        R.drawable.black
-    );       //картинки фишек и подсветки
-    var grey_chip: Bitmap = BitmapFactory.decodeResource(context.getResources(),
-        R.drawable.grey
-    );
-    var black_chip_egypt:Bitmap = BitmapFactory.decodeResource(context.getResources(),
-        R.drawable.black_chip_egypt
-    );
-    var white_chip_egypt:Bitmap = BitmapFactory.decodeResource(context.getResources(),
-        R.drawable.white_chip_egypt
-    );
-    var illumination: Bitmap = BitmapFactory.decodeResource(context.getResources(),
-        R.drawable.illumination
-    );
-    var green: Bitmap = BitmapFactory.decodeResource(context.getResources(),
-        R.drawable.green
+    var black_chip_normal : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black);       //картинки фишек и подсветки
+    var grey_chip_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.grey);
+
+    var black_chip_egypt:Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black_chip_egypt);
+    var grey_chip_egypt:Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.white_chip_egypt);
+
+    var black_chip_casino:Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.red_chip_casino);
+    var grey_chip_casino:Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black_chip_casino);
+
+    var illumination: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.illumination);
+    var green: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.green
     );
 
 
@@ -578,32 +595,38 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
         }
 
 
-        val rigth_black_chip: Bitmap
-        val right_grey_chip: Bitmap
-        val right_illumination:Bitmap
-        val right_green:Bitmap
+        var right_black_chip: Bitmap
+        var right_grey_chip: Bitmap
+        var right_illumination:Bitmap
+        var right_green:Bitmap
+
+        right_black_chip  = Bitmap.createScaledBitmap(black_chip_normal,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+        right_grey_chip  = Bitmap.createScaledBitmap(grey_chip_normal,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+        right_illumination = Bitmap.createScaledBitmap(illumination,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+        right_green  = Bitmap.createScaledBitmap(green,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
 
         if(Design == "Egypt")
         {
-            rigth_black_chip  = Bitmap.createScaledBitmap(white_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
-            right_grey_chip  = Bitmap.createScaledBitmap(black_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            right_black_chip  = Bitmap.createScaledBitmap(black_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+            right_grey_chip  = Bitmap.createScaledBitmap(grey_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
             right_illumination = Bitmap.createScaledBitmap(illumination,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
             right_green = Bitmap.createScaledBitmap(green,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
         }
-        else
+        else if(Design == "Casino")
         {
-            rigth_black_chip  = Bitmap.createScaledBitmap(black_chip,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
-            right_grey_chip  = Bitmap.createScaledBitmap(grey_chip,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            right_black_chip  = Bitmap.createScaledBitmap(black_chip_casino,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+            right_grey_chip  = Bitmap.createScaledBitmap(grey_chip_casino,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
             right_illumination = Bitmap.createScaledBitmap(illumination,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
             right_green  = Bitmap.createScaledBitmap(green,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
         }
+
 
         for( i in 0..7) // расстановка фишек
         {
             for(j in 0..7) {
                 if (FIELD[i][j] == 1)  //крестик
                 {
-                    canvas?.drawBitmap(rigth_black_chip, translate_from_Array_to_Graphics_X(indent,i,step),
+                    canvas?.drawBitmap(right_black_chip, translate_from_Array_to_Graphics_X(indent,i,step),
                         translate_from_Array_to_Graphics_Y(indent,j,height,size_field_y,step,advertising_line),paint)
                 }
                 if (FIELD[i][j] == 2)  //нолик
