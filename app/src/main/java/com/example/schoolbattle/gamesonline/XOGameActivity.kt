@@ -27,20 +27,19 @@ import java.text.DateFormat
 import android.content.Intent
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.min
 
 
 class XOGameActivity : AppCompatActivity() {
     private var isRun = false
     private var dialog: ShowResult? = null
 
-    var Finish_minute: Int  = 0
-    var Finish_second: Int  = 0
+    var Finish_time: Long  = 0
     var Time_End = Date()
     var Flag_first_second_of_move: Boolean = false
     var Flag_last_second_of_move: Boolean = false
 
-    var Finish_minute_1: Int  = 0
-    var Finish_second_1: Int  = 0
+    var Finish_time_1: Long  = 0
     var Time_End_1 = Date()
     var Flag_first_second_of_move_1: Boolean = false
     var Flag_last_second_of_move_1: Boolean = false
@@ -94,15 +93,11 @@ class XOGameActivity : AppCompatActivity() {
         val type = intent.getStringExtra("type")
 
         if (type != "") {
-            FastGameActivity.initTrueTime(this)
-            val timeFormat: DateFormat = SimpleDateFormat("mm:ss", Locale.getDefault())
-            var textTime : String = timeFormat.format(FastGameActivity.trueTime).toString()
-            Finish_minute = (textTime.toString()[0].toInt()  - '0'.toInt())*10  + textTime.toString()[1].toInt()  - '0'.toInt() + 10
-            Finish_second = (textTime.toString()[3].toInt()  - '0'.toInt())*10  + textTime.toString()[4].toInt()  - '0'.toInt()
+            initTrueTime(this)
+            Finish_time = trueTime.time + 1000*60*10
             Time_End = trueTime
 
-            Finish_minute_1 = (textTime.toString()[0].toInt()  - '0'.toInt())*10  + textTime.toString()[1].toInt()  - '0'.toInt() + 10
-            Finish_second_1 = (textTime.toString()[3].toInt()  - '0'.toInt())*10  + textTime.toString()[4].toInt()  - '0'.toInt()
+            Finish_time_1 = trueTime.time + 1000*60*10
             Time_End_1 = trueTime
             runTimer()
         }
@@ -304,45 +299,29 @@ class XOGameActivity : AppCompatActivity() {
                         initTrueTime(applicationContext)
                         if(Flag_first_second_of_move == false)
                         {
-                            val timeFormat: DateFormat = SimpleDateFormat("mm:ss", Locale.getDefault())
-                            var textTime_1: String = timeFormat.format(Time_End).toString()
-                            var textTime_2: String = timeFormat.format(trueTime).toString()
-                            var minute2: Int = (textTime_2[0].toInt() - '0'.toInt())*10 + textTime_2[1].toInt() - '0'.toInt()
-                            var minute1: Int = ((textTime_1[0].toInt() - '0'.toInt())*10 + textTime_1[1].toInt() - '0'.toInt())
-                            var second2: Int = (textTime_2[3].toInt() - '0'.toInt())*10 + textTime_2[4].toInt() - '0'.toInt()
-                            var second1: Int = (textTime_1[3].toInt() - '0'.toInt())*10 + textTime_1[4].toInt() - '0'.toInt()
-                            if(second2 >= second1)
+                            Finish_time += trueTime.time - Time_End.time
+                            Flag_first_second_of_move = true
+                        }
+
+                        if(trueTime.time<Finish_time)
+                        {
+                            var min_finish : Long = Finish_time/1000/60
+                            var second_finish: Long = (Finish_time - min_finish*60*1000)/1000
+
+                            var min_now: Long  = trueTime.time/1000/60
+                            var second_now : Long  = (trueTime.time - min_now*60*1000)/1000
+
+                            if(second_now>second_finish)
                             {
-                                Finish_minute += minute2 - minute1
-                                Finish_second += second2- second1
+                                timer2_xog_online.text = add_null( (min_finish - min_now - 1).toString()) + ":" + add_null( (second_finish - second_now + 60).toString())
                             }
                             else
                             {
-                                Finish_minute += minute2 - minute1 - 1
-                                Finish_second += second2- second1 + 60
+                                timer2_xog_online.text = add_null( (min_finish - min_now).toString()) + ":" + add_null( (second_finish - second_now).toString())
                             }
-                            Flag_first_second_of_move = true
                         }
-                        val timeFormat: DateFormat = SimpleDateFormat("mm:ss", Locale.getDefault())
-                        var textTime: String =
-                            timeFormat.format(trueTime).toString()
-                        var minute: Int =
-                            (textTime.toString()[0].toInt() - '0'.toInt()) * 10 + textTime.toString()[1].toInt() - '0'.toInt()
-                        var second: Int =
-                            (textTime.toString()[3].toInt() - '0'.toInt()) * 10 + textTime.toString()[4].toInt() - '0'.toInt()
-
-                        if (Finish_minute - minute > 0) {
-                            if (Finish_second - second >= 0) {
-                                timer2_xog_online.text = add_null((Finish_minute - minute).toString()) + ":" + add_null((Finish_second - second).toString())
-                            } else {
-                                timer2_xog_online.text =
-                                    add_null((Finish_minute - minute - 1).toString()) + ":" + add_null((Finish_second + 60 - second).toString())
-                            }
-
-                        } else if (minute == Finish_minute && second < Finish_second) {
-                            timer2_xog_online.text =
-                                "00:" + add_null((Finish_second - second).toString())
-                        } else {
+                        else
+                        {
                             timer2_xog_online.text = "time's up"
                         }
 
@@ -367,49 +346,36 @@ class XOGameActivity : AppCompatActivity() {
                         }
 
                         Flag_last_second_of_move_1 = false
+
+
                         if(Flag_first_second_of_move_1 == false)
                         {
-                            val timeFormat: DateFormat = SimpleDateFormat("mm:ss", Locale.getDefault())
-                            var textTime_1: String = timeFormat.format(Time_End_1).toString()
-                            var textTime_2: String = timeFormat.format(trueTime).toString()
-                            var minute2: Int = (textTime_2[0].toInt() - '0'.toInt())*10 + textTime_2[1].toInt() - '0'.toInt()
-                            var minute1: Int = ((textTime_1[0].toInt() - '0'.toInt())*10 + textTime_1[1].toInt() - '0'.toInt())
-                            var second2: Int = (textTime_2[3].toInt() - '0'.toInt())*10 + textTime_2[4].toInt() - '0'.toInt()
-                            var second1: Int = (textTime_1[3].toInt() - '0'.toInt())*10 + textTime_1[4].toInt() - '0'.toInt()
-                            if(second2 >= second1)
+                            Finish_time_1 += trueTime.time - Time_End_1.time
+                            Flag_first_second_of_move_1 = true
+                        }
+
+                        if(trueTime.time<Finish_time_1)
+                        {
+                            var min_finish : Long = Finish_time_1/1000/60
+                            var second_finish: Long = (Finish_time_1 - min_finish*60*1000)/1000
+
+                            var min_now: Long  = trueTime.time/1000/60
+                            var second_now : Long  = (trueTime.time - min_now*60*1000)/1000
+
+                            if(second_now>second_finish)
                             {
-                                Finish_minute_1 += minute2 - minute1
-                                Finish_second_1 += second2- second1
+                                timer_xog_online.text = add_null( (min_finish - min_now - 1).toString()) + ":" + add_null( (second_finish - second_now + 60).toString())
                             }
                             else
                             {
-                                Finish_minute_1 += minute2 - minute1 - 1
-                                Finish_second_1 += second2- second1 + 60
+                                timer_xog_online.text = add_null( (min_finish - min_now).toString()) + ":" + add_null( (second_finish - second_now).toString())
                             }
-                            Flag_first_second_of_move_1 = true
                         }
-                        val timeFormat: DateFormat = SimpleDateFormat("mm:ss", Locale.getDefault())
-                        var textTime: String =
-                            timeFormat.format(trueTime).toString()
-                        var minute: Int =
-                            (textTime.toString()[0].toInt() - '0'.toInt()) * 10 + textTime.toString()[1].toInt() - '0'.toInt()
-                        var second: Int =
-                            (textTime.toString()[3].toInt() - '0'.toInt()) * 10 + textTime.toString()[4].toInt() - '0'.toInt()
-
-                        if (Finish_minute_1 - minute > 0) {
-                            if (Finish_second_1 - second >= 0) {
-                                timer_xog_online.text = add_null((Finish_minute_1 - minute).toString()) + ":" + add_null((Finish_second_1 - second).toString())
-                            } else {
-                                timer_xog_online.text =
-                                    add_null((Finish_minute_1 - minute - 1).toString()) + ":" + add_null((Finish_second_1 + 60 - second).toString())
-                            }
-
-                        } else if (minute == Finish_minute_1 && second < Finish_second_1) {
-                            timer_xog_online.text =
-                                "00:" + add_null((Finish_second_1 - second).toString())
-                        } else {
+                        else
+                        {
                             timer_xog_online.text = "time's up"
                         }
+
                     }
                     handler.postDelayed(this, 1000)
                 }
