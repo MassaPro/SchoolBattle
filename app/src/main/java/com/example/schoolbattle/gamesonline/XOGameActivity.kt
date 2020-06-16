@@ -35,12 +35,12 @@ class XOGameActivity : AppCompatActivity() {
     private var dialog: ShowResult? = null
 
     var Finish_time: Long  = 0
-    var Time_End = Date()
+    var Time_End: Long = 0
     var Flag_first_second_of_move: Boolean = false
     var Flag_last_second_of_move: Boolean = false
 
     var Finish_time_1: Long  = 0
-    var Time_End_1 = Date()
+    var Time_End_1: Long =0
     var Flag_first_second_of_move_1: Boolean = false
     var Flag_last_second_of_move_1: Boolean = false
 
@@ -92,16 +92,6 @@ class XOGameActivity : AppCompatActivity() {
 
         val type = intent.getStringExtra("type")
 
-        if (type != "") {
-            initTrueTime(this)
-            Finish_time = trueTime.time + 1000*60*10
-            Time_End = trueTime
-
-            Finish_time_1 = trueTime.time + 1000*60*10
-            Time_End_1 = trueTime
-            runTimer()
-        }
-
         var opponentsName_: String = intent?.getStringExtra("opponentName").toString()
         var opponentsName = ""
         for (i in opponentsName_) {
@@ -118,6 +108,19 @@ class XOGameActivity : AppCompatActivity() {
             if (opponentsName < yourName)
                 opponentsName + '_' + yourName else yourName + '_' + opponentsName
         )
+
+        if (type != "") {
+            initTrueTime(this)
+            Finish_time = trueTime.time + 1000*60*10
+            Time_End = trueTime.time
+
+            Finish_time_1 = trueTime.time + 1000*60*10
+            Time_End_1 = trueTime.time
+
+
+            runTimer(gameData)
+        }
+
         signature_canvas.blocked = true
         signature_canvas.positionData = gameData
 
@@ -143,7 +146,6 @@ class XOGameActivity : AppCompatActivity() {
             toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
             toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
         }
-
         gameData.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
@@ -276,7 +278,7 @@ class XOGameActivity : AppCompatActivity() {
         }
     }
 
-    private fun runTimer() {
+    private fun runTimer(positionData: DatabaseReference) {
         val handler: Handler = Handler()
         handler.post(
             object: Runnable {
@@ -299,8 +301,15 @@ class XOGameActivity : AppCompatActivity() {
                         initTrueTime(applicationContext)
                         if(Flag_first_second_of_move == false)
                         {
-                            Finish_time += trueTime.time - Time_End.time
+                            Finish_time += trueTime.time - Time_End
                             Flag_first_second_of_move = true
+                            var timeList = listOf(
+                                Finish_time.toString(),
+                                Finish_time_1.toString(),
+                                Time_End.toString(),
+                                Time_End_1.toString()
+                            )
+                            positionData.child("Time").setValue(timeList)
                         }
 
                         if(trueTime.time<Finish_time)
@@ -329,7 +338,7 @@ class XOGameActivity : AppCompatActivity() {
                         if(Flag_last_second_of_move_1 == false)
                         {
 
-                            Time_End_1 = trueTime
+                            Time_End_1 = trueTime.time
                             Flag_last_second_of_move_1  = true
                         }
 
@@ -340,8 +349,7 @@ class XOGameActivity : AppCompatActivity() {
                         Flag_first_second_of_move = false
                         if(Flag_last_second_of_move == false)
                         {
-
-                            Time_End = trueTime
+                            Time_End = trueTime.time
                             Flag_last_second_of_move  = true
                         }
 
@@ -350,8 +358,20 @@ class XOGameActivity : AppCompatActivity() {
 
                         if(Flag_first_second_of_move_1 == false)
                         {
-                            Finish_time_1 += trueTime.time - Time_End_1.time
+                            Finish_time_1 += trueTime.time - Time_End_1
                             Flag_first_second_of_move_1 = true
+                            positionData.addValueEventListener(object: ValueEventListener {
+                                override fun onCancelled(p0: DatabaseError) {}
+                                override fun onDataChange(p0: DataSnapshot) {
+                                    if (p0.hasChild("Time")) {
+                                        val lst = p0.child("Time") as List
+                                        Finish_time_1 = lst[1].toLong()
+                                        Finish_time = lst[0].toLong()
+                                        Time_End = lst[2].toLong()
+                                        Time_End_1 = lst[3].toLong()
+                                    }
+                                }
+                            })
                         }
 
                         if(trueTime.time<Finish_time_1)
@@ -377,7 +397,7 @@ class XOGameActivity : AppCompatActivity() {
                         }
 
                     }
-                    handler.postDelayed(this, 1000)
+                    handler.postDelayed(this, 100)
                 }
             }
         )

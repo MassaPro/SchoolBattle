@@ -11,7 +11,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".ProfileUserActivity"></activity>
         <activity android:name=".FastGameActivity" />
-        <activity android:name=".Chouse_design_Activity" />
+        <activity android:name=".Choose_design_Activity" />
         <activity android:name=".BlitzActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".Show_language_selection" />
