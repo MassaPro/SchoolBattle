@@ -1,18 +1,17 @@
 package com.example.schoolbattle
 
-import android.app.Dialog
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.view.*
-import android.widget.Button
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_friends_item.view.*
-import kotlinx.android.synthetic.main.activity_friends_item.view.content
-import kotlinx.android.synthetic.main.activity_friends_item.view.id_text
 import kotlinx.android.synthetic.main.activity_friends_list.*
-import kotlinx.android.synthetic.main.activity_game_item.view.*
+
 
 class FriendsList : Fragment() {
 
@@ -38,7 +37,9 @@ class FriendsList : Fragment() {
         init {
             onClickListener = View.OnClickListener { v ->
                 val item = v.tag as String
-                val rev = v.context?.let { Dialog(it) }
+                val intent = Intent(v.context, ProfileUserActivity::class.java)
+                v.context.startActivity(intent)
+                /*val rev = v.context?.let { Dialog(it) }
                 val window: Window? = rev?.window
                 val wlp = window?.attributes
                 wlp?.gravity = Gravity.TOP
@@ -52,7 +53,7 @@ class FriendsList : Fragment() {
                     val prfs = v.context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
                     val username = prfs?.getString("username", "")
                     myRef.child("Users").child(item).child("Revanches").child(username!!).child("gameName").setValue("StupidGame")
-                }
+                }*/
                 //v.context.startActivity(intent)
             }
         }
