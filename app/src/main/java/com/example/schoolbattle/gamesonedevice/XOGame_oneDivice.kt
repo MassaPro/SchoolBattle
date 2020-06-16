@@ -12,6 +12,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
 
@@ -93,9 +94,13 @@ class XOGame_oneDivice : AppCompatActivity() {
         signature_canvas_xog_one_device.t2 = findViewById(R.id.name_player2_one_divice_xog) as TextView
         signature_canvas_xog_one_device.t1.text = "Игрок 1"
         signature_canvas_xog_one_device.t2.text = "Игрок 2"
+        //signature_canvas_xog_one_device.t1.set
+
         if(Design == "Egypt" ) {
             name_player1_one_divice_xog.setTextColor(Color.BLACK)
             name_player2_one_divice_xog.setTextColor(Color.BLACK)
+            name_player1_one_divice_xog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            name_player2_one_divice_xog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
             name_player2_one_divice_xog.setTextSize(20f)
             name_player1_one_divice_xog.setTextSize(20f)
             button_player_1_xog_one_divice.setBackgroundResource(R.drawable.player1_egypt);
@@ -107,6 +112,22 @@ class XOGame_oneDivice : AppCompatActivity() {
             to_back_xog_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_xog_one_divice.setBackgroundColor(argb(0,0,0,0))
             toolbar2_xog_one_divice.setBackgroundColor(argb(0,0,0,0))
+        }
+        else if(Design == "Casino" ) {
+            name_player1_one_divice_xog.setTextColor(Color.YELLOW)
+            name_player2_one_divice_xog.setTextColor(Color.YELLOW)
+            name_player1_one_divice_xog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_one_divice_xog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_one_divice_xog.setTextSize(20f)
+            name_player1_one_divice_xog.setTextSize(20f)
+            button_player_1_xog_one_divice.setBackgroundResource(R.drawable.tower1_casino);
+            button_player_2_xog_one_divice.setBackgroundResource(R.drawable.tower2_casino);
+            toolbar_xog_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_xog_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            label_one_device.setBackgroundResource(R.drawable.background_casino);
+            bottom_navigation_xog_one_divice.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_xog_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_xog_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
         }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
@@ -401,6 +422,11 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
 
 
     init {
+        Line_paint.color = Color.RED          //ресур для линий (ширина и цвет)
+        Line_paint.strokeWidth = 10f
+
+        Line_paint_1.color = Color.RED          //ресур для линий (ширина и цвет)
+        Line_paint_1.strokeWidth = 20f
 
         if(Design == "Egypt")
         {
@@ -410,10 +436,10 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
             Line_paint_1.color = Color.BLACK          //ресур для линий (ширина и цвет)
             Line_paint_1.strokeWidth = 20f
         }
-        else
+        else if (Design == "Casino")
         {
-            Line_paint.color = Color.RED          //ресур для линий (ширина и цвет)
-            Line_paint.strokeWidth = 10f
+            Line_paint.color = Color.WHITE          //ресур для линий (ширина и цвет)
+            Line_paint.strokeWidth = 7f
 
             Line_paint_1.color = Color.RED          //ресур для линий (ширина и цвет)
             Line_paint_1.strokeWidth = 20f
@@ -429,21 +455,18 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
         cross_or_nul  = "cross"
     }
 
+    var cross_normal : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cross_normal)       //картинки крестиков и нулей
+    var null_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.null_normal)
 
-    var icon_cross_egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(),
-        R.drawable.cross_egypt
-    )       //картинки крестиков и нулей
-    var icon_null_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(),
-        R.drawable.circle_egypt
-    )
+    var cross_egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cross_egypt)       //картинки крестиков и нулей
+    var null_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.circle_egypt)
+
+    var cross_casino : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cross_casino)       //картинки крестиков и нулей
+    var null_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.null_casino)
 
    // var BackgroundColor_Egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.background_egypt)
-    var icon_green : Bitmap = BitmapFactory.decodeResource(context.getResources(),
-       R.drawable.illumination
-   )
-    var icon_grenn_Egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(),
-        R.drawable.ram_egypt_xog
-    )
+    var icon_green : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.illumination)
+    var icon_grenn_Egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ram_egypt_xog)
 
 
 
@@ -473,29 +496,22 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
         var k: Float = height-(width-2*indent)-advertising_line
 
 
-        val right_icon_cross: Bitmap  //подгоняем картинку под размеры экрана телефона
-        val right_icon_null: Bitmap
-        val right_icon_green: Bitmap
+        var right_cross: Bitmap  //подгоняем картинку под размеры экрана телефона
+        var right_null: Bitmap
+        var right_green: Bitmap
+
+        right_cross = Bitmap.createScaledBitmap(cross_normal,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+        right_null = Bitmap.createScaledBitmap(null_normal,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+        right_green = Bitmap.createScaledBitmap(icon_green, (width.toInt() - 2 * indent.toInt()) / size_field_x, (width.toInt() - 2 * indent.toInt()) / size_field_x, true)
         if(Design == "Egypt")
         {
-            right_icon_cross = Bitmap.createScaledBitmap(icon_cross_egypt,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
-            right_icon_null = Bitmap.createScaledBitmap(icon_null_egypt,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
-            right_icon_green = Bitmap.createScaledBitmap(
-                icon_grenn_Egypt,
-                (width.toInt() - 2 * indent.toInt()) / size_field_x,
-                (width.toInt() - 2 * indent.toInt()) / size_field_x,
-                true
-            )
+            right_cross = Bitmap.createScaledBitmap(cross_egypt,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+            right_null = Bitmap.createScaledBitmap(null_egypt,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+            right_green = Bitmap.createScaledBitmap(icon_grenn_Egypt, (width.toInt() - 2 * indent.toInt()) / size_field_x, (width.toInt() - 2 * indent.toInt()) / size_field_x, true)
         }
-        else {
-            right_icon_cross = Bitmap.createScaledBitmap(icon_cross_egypt,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
-            right_icon_null = Bitmap.createScaledBitmap(icon_null_egypt,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
-             right_icon_green = Bitmap.createScaledBitmap(
-                icon_green,
-                (width.toInt() - 2 * indent.toInt()) / size_field_x,
-                (width.toInt() - 2 * indent.toInt()) / size_field_x,
-                true
-            )
+        else if(Design == "Casino") {
+            right_cross = Bitmap.createScaledBitmap(cross_casino,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+            right_null = Bitmap.createScaledBitmap(null_casino,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
         }
 
 
@@ -520,12 +536,12 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
             for(j in 0..5) {
                 if (FIELD[i][j] == 1)  //крестик
                 {
-                    canvas?.drawBitmap(right_icon_cross, translate_from_Array_to_Graphics_X(indent,i,step),
+                    canvas?.drawBitmap(right_cross, translate_from_Array_to_Graphics_X(indent,i,step),
                         translate_from_Array_to_Graphics_Y(indent,j,height,size_field_y,step,advertising_line),paint)
                 }
                 if (FIELD[i][j] == 2)  //нолик
                 {
-                    canvas?.drawBitmap(right_icon_null, translate_from_Array_to_Graphics_X(indent,i,step),
+                    canvas?.drawBitmap(right_null, translate_from_Array_to_Graphics_X(indent,i,step),
                         translate_from_Array_to_Graphics_Y(indent,j,height,size_field_y,step,advertising_line),paint)
                 }
             }
@@ -549,7 +565,7 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
             {
                 var a_1: Float =  translate_from_Array_to_Graphics_X(indent,checkForWin_another_fun()[counter],step)
                 var a_2: Float = translate_from_Array_to_Graphics_Y(indent,checkForWin_another_fun()[counter+1].toInt(), height,size_field_y, step, advertising_line)
-                canvas?.drawBitmap(right_icon_green,a_1,a_2,paint)
+                canvas?.drawBitmap(right_green,a_1,a_2,paint)
                 counter += 2
             }
 
