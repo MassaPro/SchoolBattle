@@ -141,11 +141,13 @@ class XOGameActivity : AppCompatActivity() {
             player_1_icon_xog_online.setBackgroundResource(R.drawable.cross_egypt);
             player_2_icon_xog_online.setBackgroundResource(R.drawable.circle_egypt);
             label_online_xog.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_xog_online.setBackgroundColor(rgb(224,164,103))
+            bottom_navigation_xog_online.setBackgroundColor(rgb(224, 164, 103))
             to_back_xog_online.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
-            toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+            toolbar_xog_online.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_xog_online.setBackgroundColor(argb(0, 0, 0, 0))
         }
+
+
         gameData.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
@@ -156,7 +158,7 @@ class XOGameActivity : AppCompatActivity() {
                         //if (!signature_canvas.isFirstMove) " X" else " O"
                 for (i in 0..6) {
                     for (j in 0..5) {
-                        val p = p0.child("$i").child("$j")
+                        val p = p0.child("FIELD").child("$i").child("$j")
                         if (p.exists()) {
                             cnt++
                             signature_canvas.FIELD[i][j] = p.value.toString().toInt()
@@ -264,6 +266,51 @@ class XOGameActivity : AppCompatActivity() {
                 }
             }
         })
+
+        gameData.child("FIELD").addValueEventListener(object: ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+
+            override fun onDataChange(p0: DataSnapshot) {
+                var cnt = 0
+                for (i in 0..6) {
+                    for (j in 0..5) {
+                        if (p0.child("$i").hasChild("$j")) {
+                            cnt++
+                            //signature_canvas.FIELD[i][j] = p0.child("FIELD").child("$i").child("$j").value.toString().toInt()
+                        }
+                    }
+                }
+                Toast.makeText(this@XOGameActivity, "dlkl" + cnt.toString(), Toast.LENGTH_LONG).show()
+                if ((cnt%2 != 1) == signature_canvas.isFirstMove) {
+                    //your movwe
+                    initTrueTime(applicationContext)
+                    var timeList = listOf(
+                                Finish_time.toString(),
+                                Finish_time_1.toString(),
+                                Time_End.toString(),
+                                Time_End_1.toString(),
+                                cnt.toString()
+                    )
+                        gameData.child("Time").setValue(timeList)
+                } else {
+                    gameData.child("Time").addValueEventListener(object: ValueEventListener {
+                             override fun onCancelled(p0: DatabaseError) {}
+                             override fun onDataChange(p0: DataSnapshot) {
+                                 if (p0.exists()) {
+                                     val lst = p0.value as List<String>
+                                     if (cnt - 1 == lst[4].toInt()) {
+                                         Finish_time_1 = lst[0].toLong()
+                                         Finish_time = lst[1].toLong()
+                                         Time_End = lst[3].toLong()
+                                         Time_End_1 = lst[2].toLong()
+                                     }
+                                 }
+                             }
+                    })
+                }
+                //if (cnt % 2 == )
+            }
+        })
     }
 
     override fun onPause() {
@@ -283,7 +330,7 @@ class XOGameActivity : AppCompatActivity() {
         handler.post(
             object: Runnable {
                 override fun run() {
-                    initTrueTime(applicationContext)            //если будут проблемы с скоротью перенести в onCreate
+                            //если будут проблемы с скоротью перенести в onCreate
 
                     var cnt: Int = 0
                     for(i in 0 until signature_canvas.FIELD.size)
@@ -303,13 +350,6 @@ class XOGameActivity : AppCompatActivity() {
                         {
                             Finish_time += trueTime.time - Time_End
                             Flag_first_second_of_move = true
-                            var timeList = listOf(
-                                Finish_time.toString(),
-                                Finish_time_1.toString(),
-                                Time_End.toString(),
-                                Time_End_1.toString()
-                            )
-                            positionData.child("Time").setValue(timeList)
                         }
 
                         if(trueTime.time<Finish_time)
@@ -358,20 +398,20 @@ class XOGameActivity : AppCompatActivity() {
 
                         if(Flag_first_second_of_move_1 == false)
                         {
-                            Finish_time_1 += trueTime.time - Time_End_1
+                           // Finish_time_1 += trueTime.time - Time_End_1
                             Flag_first_second_of_move_1 = true
-                            positionData.addValueEventListener(object: ValueEventListener {
+                            /*positionData.addListenerForSingleValueEvent(object: ValueEventListener {
                                 override fun onCancelled(p0: DatabaseError) {}
                                 override fun onDataChange(p0: DataSnapshot) {
                                     if (p0.hasChild("Time")) {
-                                        val lst = p0.child("Time") as List
-                                        Finish_time_1 = lst[1].toLong()
-                                        Finish_time = lst[0].toLong()
-                                        Time_End = lst[2].toLong()
-                                        Time_End_1 = lst[3].toLong()
+                                        val lst = p0.child("Time").value as List<String>
+                                        Finish_time_1 = lst[0].toLong()
+                                        Finish_time = lst[1].toLong()
+                                        Time_End = lst[3].toLong()
+                                        Time_End_1 = lst[2].toLong()
                                     }
                                 }
-                            })
+                            })*/
                         }
 
                         if(trueTime.time<Finish_time_1)
@@ -397,7 +437,7 @@ class XOGameActivity : AppCompatActivity() {
                         }
 
                     }
-                    handler.postDelayed(this, 100)
+                    handler.postDelayed(this, 1000)
                 }
             }
         )
@@ -697,7 +737,7 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
                     canvas?.drawBitmap(right_icon_cross,touch_refinement_X(indent,a,width,size_field_x),
                         touch_refinement_Y(indent,b,height,size_field_y,step,advertising_line),paint)
                     FIELD[X][Y] = 1
-                    positionData.child("$X").child("$Y").setValue(1)
+                    positionData.child("FIELD").child("$X").child("$Y").setValue(1)
                     cross_or_nul = "null"
                     Exit = 1
                 }
@@ -706,7 +746,7 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
                     canvas?.drawBitmap(right_icon_null,touch_refinement_X(indent,a,width,size_field_x),
                         touch_refinement_Y(indent,b,height,size_field_y,step,advertising_line),paint)
                     FIELD[X][Y] = 2
-                    positionData.child("$X").child("$Y").setValue(2)
+                    positionData.child("FIELD").child("$X").child("$Y").setValue(2)
                     //TODO setValue to database
                     cross_or_nul = "cross"
                 }
