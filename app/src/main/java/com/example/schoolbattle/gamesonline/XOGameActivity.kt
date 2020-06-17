@@ -35,14 +35,11 @@ class XOGameActivity : AppCompatActivity() {
     private var dialog: ShowResult? = null
 
     var Finish_time: Long  = 0
-    var Time_End: Long = 0
-    var Flag_first_second_of_move: Boolean = false
-    var Flag_last_second_of_move: Boolean = false
+    var timeBegin: Long = 0
 
     var Finish_time_1: Long  = 0
-    var Time_End_1: Long =0
-    var Flag_first_second_of_move_1: Boolean = false
-    var Flag_last_second_of_move_1: Boolean = false
+    var timeBegin_1: Long =0
+    var fl = false
 
 
     override fun onResume() {
@@ -112,10 +109,10 @@ class XOGameActivity : AppCompatActivity() {
         if (type != "") {
             initTrueTime(this)
             Finish_time = trueTime.time + 1000*60*10
-            Time_End = trueTime.time
+            timeBegin = trueTime.time
 
             Finish_time_1 = trueTime.time + 1000*60*10
-            Time_End_1 = trueTime.time
+            timeBegin_1 = trueTime.time
 
 
             runTimer(gameData)
@@ -155,7 +152,7 @@ class XOGameActivity : AppCompatActivity() {
                 var cnt = 0
                 signature_canvas.isFirstMove = (p0.child("Move").value.toString() == yu.toString())
 
-                        //if (!signature_canvas.isFirstMove) " X" else " O"
+                //if (!signature_canvas.isFirstMove) " X" else " O"
                 for (i in 0..6) {
                     for (j in 0..5) {
                         val p = p0.child("FIELD").child("$i").child("$j")
@@ -280,32 +277,40 @@ class XOGameActivity : AppCompatActivity() {
                         }
                     }
                 }
-                Toast.makeText(this@XOGameActivity, "dlkl" + cnt.toString(), Toast.LENGTH_LONG).show()
-                if ((cnt%2 != 1) == signature_canvas.isFirstMove) {
+                initTrueTime(applicationContext)
+                if ((cnt%2 != 1) != signature_canvas.isFirstMove) {//TODO predpolagaem xod protivnika tok chto nachilsa
                     //your movwe
-                    initTrueTime(applicationContext)
-                    var timeList = listOf(
-                                Finish_time.toString(),
-                                Finish_time_1.toString(),
-                                Time_End.toString(),
-                                Time_End_1.toString(),
-                                cnt.toString()
+                    Finish_time_1 += trueTime.time - timeBegin
+                    timeBegin_1 = trueTime.time
+                    val timeList = listOf(
+                        Finish_time.toString(),
+                        Finish_time_1.toString(),
+                        timeBegin.toString(),
+                        timeBegin_1.toString(),
+                        cnt.toString()
                     )
-                        gameData.child("Time").setValue(timeList)
+                    gameData.child("Time").setValue(timeList)
                 } else {
+                    Finish_time += trueTime.time - timeBegin_1
                     gameData.child("Time").addValueEventListener(object: ValueEventListener {
-                             override fun onCancelled(p0: DatabaseError) {}
-                             override fun onDataChange(p0: DataSnapshot) {
-                                 if (p0.exists()) {
-                                     val lst = p0.value as List<String>
-                                     if (cnt - 1 == lst[4].toInt()) {
-                                         Finish_time_1 = lst[0].toLong()
-                                         Finish_time = lst[1].toLong()
-                                         Time_End = lst[3].toLong()
-                                         Time_End_1 = lst[2].toLong()
-                                     }
-                                 }
-                             }
+                        override fun onCancelled(p0: DatabaseError) {}
+                        override fun onDataChange(p0: DataSnapshot) {
+                            if (p0.exists()) {
+                                val lst = p0.value as List<String>
+                                initTrueTime(applicationContext)
+                                if (cnt == lst[4].toInt()) {
+                                    var Finish_time_sync = lst[0].toLong()
+                                    var Finish_time_1_sync = lst[1].toLong()
+                                    var timeBegin_1_sync = lst[2].toLong()
+                                    var timeBegin_sync =  lst[3].toLong()
+
+                                    Finish_time = Finish_time_1_sync
+                                    timeBegin = trueTime.time
+                                    Toast.makeText(this@XOGameActivity, "dlkl" + cnt.toString(), Toast.LENGTH_LONG).show()
+                                }
+
+                            }
+                        }
                     })
                 }
                 //if (cnt % 2 == )
@@ -330,7 +335,7 @@ class XOGameActivity : AppCompatActivity() {
         handler.post(
             object: Runnable {
                 override fun run() {
-                            //если будут проблемы с скоротью перенести в onCreate
+                    //если будут проблемы с скоротью перенести в onCreate
 
                     var cnt: Int = 0
                     for(i in 0 until signature_canvas.FIELD.size)
@@ -343,15 +348,9 @@ class XOGameActivity : AppCompatActivity() {
                             }
                         }
                     }
-                    if((cnt%2 != 1) == signature_canvas.isFirstMove) {
-                        Flag_last_second_of_move = false
-                        initTrueTime(applicationContext)
-                        if(Flag_first_second_of_move == false)
-                        {
-                            Finish_time += trueTime.time - Time_End
-                            Flag_first_second_of_move = true
-                        }
+                    initTrueTime(applicationContext)
 
+                    if((cnt%2 != 1) == signature_canvas.isFirstMove) {
                         if(trueTime.time<Finish_time)
                         {
                             var min_finish : Long = Finish_time/1000/60
@@ -362,10 +361,16 @@ class XOGameActivity : AppCompatActivity() {
 
                             if(second_now>second_finish)
                             {
+                                if (min_finish - min_now - 1 == 10.toLong() && second_finish - second_now + 60 > 0) {
+                                    second_finish = second_now
+                                }
                                 timer2_xog_online.text = add_null( (min_finish - min_now - 1).toString()) + ":" + add_null( (second_finish - second_now + 60).toString())
                             }
                             else
                             {
+                                if (min_finish - min_now == 10.toLong() && second_finish - second_now > 0) {
+                                    second_finish = second_now
+                                }
                                 timer2_xog_online.text = add_null( (min_finish - min_now).toString()) + ":" + add_null( (second_finish - second_now).toString())
                             }
                         }
@@ -374,45 +379,9 @@ class XOGameActivity : AppCompatActivity() {
                             timer2_xog_online.text = "time's up"
                         }
 
-                        Flag_first_second_of_move_1 = false
-                        if(Flag_last_second_of_move_1 == false)
-                        {
-
-                            Time_End_1 = trueTime.time
-                            Flag_last_second_of_move_1  = true
-                        }
-
                     }
                     else
                     {
-                        initTrueTime(applicationContext)
-                        Flag_first_second_of_move = false
-                        if(Flag_last_second_of_move == false)
-                        {
-                            Time_End = trueTime.time
-                            Flag_last_second_of_move  = true
-                        }
-
-                        Flag_last_second_of_move_1 = false
-
-
-                        if(Flag_first_second_of_move_1 == false)
-                        {
-                           // Finish_time_1 += trueTime.time - Time_End_1
-                            Flag_first_second_of_move_1 = true
-                            /*positionData.addListenerForSingleValueEvent(object: ValueEventListener {
-                                override fun onCancelled(p0: DatabaseError) {}
-                                override fun onDataChange(p0: DataSnapshot) {
-                                    if (p0.hasChild("Time")) {
-                                        val lst = p0.child("Time").value as List<String>
-                                        Finish_time_1 = lst[0].toLong()
-                                        Finish_time = lst[1].toLong()
-                                        Time_End = lst[3].toLong()
-                                        Time_End_1 = lst[2].toLong()
-                                    }
-                                }
-                            })*/
-                        }
 
                         if(trueTime.time<Finish_time_1)
                         {
@@ -437,7 +406,7 @@ class XOGameActivity : AppCompatActivity() {
                         }
 
                     }
-                    handler.postDelayed(this, 1000)
+                    handler.postDelayed(this, 100)
                 }
             }
         )
