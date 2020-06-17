@@ -13,7 +13,7 @@ android:background="@android:color/white">
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
         app:itemIconTint="@drawable/nav_selector"
@@ -29,7 +29,7 @@ android:background="@android:color/white">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar2"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -42,15 +42,14 @@ android:background="@android:color/white">
 
     <Button
         android:id="@+id/newGameButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Долгая"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchButton"
-        app:layout_constraintVertical_bias="0" />
+        android:layout_width="160dp"
+        android:layout_height="78dp"
+        android:layout_marginBottom="16dp"
+        android:text="долгая-онлайн"
+        app:layout_constraintBottom_toTopOf="@+id/oneDevice"
+        app:layout_constraintEnd_toEndOf="@+id/oneDevice"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarName2"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/toolbarName2"
@@ -73,7 +72,7 @@ android:background="@android:color/white">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:text="Log Out"
+        android:text="бабки"
         android:textColor="@android:color/holo_red_light"
 
         app:layout_constraintBottom_toBottomOf="@+id/my_toolbar2"
@@ -83,63 +82,49 @@ android:background="@android:color/white">
 
     <Button
         android:id="@+id/oneDevice"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="330dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="120dp"
         android:text="Игра на одном устройстве"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/playWithComp"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newGameButton"
-        app:layout_constraintVertical_bias="0.151" />
+        app:layout_constraintStart_toStartOf="@+id/playWithComp"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarName2" />
 
     <Button
         android:id="@+id/playWithComp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="330dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
         android:text="игра с компьютером"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/searchButton"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/oneDevice"
-        app:layout_constraintVertical_bias="0.116" />
+        app:layout_constraintStart_toStartOf="@+id/searchButton"
+        app:layout_constraintTop_toBottomOf="@+id/oneDevice" />
 
     <Button
         android:id="@+id/searchButton"
-        android:layout_width="414dp"
-        android:layout_height="58dp"
+        android:layout_width="330dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
         android:text="Поиск Соперника"
-
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_toolbar2"
-        app:layout_constraintVertical_bias="0.093" />
-
-    <Button
-        android:id="@+id/fast_game_button"
-        android:layout_width="176dp"
-        android:layout_height="63dp"
-        android:text="Быстрая игра"
-        app:layout_constraintBottom_toTopOf="@+id/oneDevice"
-        app:layout_constraintEnd_toStartOf="@+id/newGameButton"
-        app:layout_constraintHorizontal_bias="0.536"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchButton" />
+        app:layout_constraintTop_toBottomOf="@+id/playWithComp" />
 
     <Button
         android:id="@+id/blitz"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Блиц"
+        android:layout_width="160dp"
+        android:layout_height="78dp"
+        android:gravity="center"
+        android:text="блиц-онлайн"
         app:layout_constraintBottom_toTopOf="@+id/oneDevice"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/newGameButton"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/newGameButton"
-        app:layout_constraintTop_toBottomOf="@+id/searchButton"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="@+id/oneDevice"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar2"
+        app:layout_constraintVertical_bias="0.609" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

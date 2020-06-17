@@ -106,7 +106,7 @@
 
     <TextView
         android:id="@+id/name_player2_one_divice_snake"
-        android:layout_width="143dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:gravity="center"
         android:text="Игрок 2"
@@ -131,7 +131,7 @@
 
     <TextView
         android:id="@+id/name_player1_one_divice_snake"
-        android:layout_width="140dp"
+        android:layout_width="wrap_content"
         android:layout_height="51dp"
         android:gravity="center"
         android:text="Игрок 1"

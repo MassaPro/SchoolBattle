@@ -72,6 +72,8 @@ class MainActivity : Fragment() {
             oneDevice.setBackgroundColor(argb(0,0,0,0))
             playWithComp.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
             playWithComp.setBackgroundColor(argb(0,0,0,0))
+            blitz.setBackgroundColor(argb(0,0,0,0))
+            blitz.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
         }
         else if (Design == "Casino"){
             game_menu.setBackgroundResource(R.drawable.game_menu_casino)
@@ -101,12 +103,14 @@ class MainActivity : Fragment() {
             playWithComp.setTextColor(Color.YELLOW)
             playWithComp.setTextSize(20f)
             playWithComp.setBackgroundColor(argb(0,0,0,0))
+
+            blitz.setBackgroundColor(argb(0,0,0,0))
+            blitz.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            blitz.setTextColor(Color.YELLOW)
+            blitz.setTextSize(20f)
         }
 
-        fast_game_button.setOnClickListener {
-            val intent = Intent(activity, FastGameActivity::class.java)
-            startActivity(intent)
-        }
+
         searchButton.setOnClickListener {
             val intent = Intent(this.activity, SearchActivity::class.java)
             activity?.startActivity(intent)

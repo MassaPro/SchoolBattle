@@ -19,7 +19,6 @@ import com.example.schoolbattle.*
 import com.example.schoolbattle.R
 import com.google.firebase.database.*
 import com.instacart.library.truetime.TrueTime
-import kotlinx.android.synthetic.main.activity_fast_game.*
 import kotlinx.android.synthetic.main.activity_x_o_game.*
 import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
 import java.util.*
@@ -108,6 +107,7 @@ class XOGameActivity : AppCompatActivity() {
 
         if (type != "") {
             initTrueTime(this)
+            Toast.makeText(this, trueTime.toString(), Toast.LENGTH_LONG).show()
             Finish_time = trueTime.time + 1000*60*10
             timeBegin = trueTime.time
 

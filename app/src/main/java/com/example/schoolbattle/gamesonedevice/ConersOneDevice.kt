@@ -11,6 +11,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_coners_one_device.*
@@ -95,6 +96,9 @@ class ConersOneDevice : AppCompatActivity() {
         signature_canvas_corners_one_device.activity = this
         CONTEXT = this
 
+        signature_canvas_corners_one_device.t1 = findViewById(R.id.name_player1_one_divice_corner) as TextView
+        signature_canvas_corners_one_device.t2 = findViewById(R.id.name_player2_one_divice_corner) as TextView
+        
         if(Design == "Egypt" ) {
             name_player1_one_divice_corner.setTextColor(Color.BLACK)
             name_player2_one_divice_corner.setTextColor(Color.BLACK)
@@ -475,6 +479,10 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
 
     lateinit var activity: Activity
 
+    lateinit var t1: TextView
+    lateinit var t2: TextView
+
+    
     var History: MutableList<MutableList<Int>> = mutableListOf()
     var EXODUS : Int = 0
     var indent : Float = 0f
@@ -577,7 +585,16 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
 
 
 
-
+        if(Black_or_grey_chip == "black")
+        {
+            t1.text ="игрок 1 думает..."
+            t2.text  = "игрок 2"
+        }
+        else
+        {
+            t1.text ="игрок 1"
+            t2.text  = "игрок 2 думает..."
+        }
         //TODO() take field from database
 
 
@@ -830,13 +847,14 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
                         PHASE = true
                     }
                 }
+                invalidate()
             }
             lastX = X
             lastY = Y
         }
         Log.w("DOPO",Black_or_grey_chip)
 
-        invalidate()
+
         return true
     }
 

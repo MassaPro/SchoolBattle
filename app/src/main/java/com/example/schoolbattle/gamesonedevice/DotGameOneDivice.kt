@@ -11,9 +11,11 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_dot_game_one_divice.*
+import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
 
 class DotGameOneDivice : AppCompatActivity() {
 
@@ -87,6 +89,10 @@ class DotGameOneDivice : AppCompatActivity() {
         setContentView(R.layout.activity_dot_game_one_divice)
         signature_canvas_dots_one_divice.activity = this
         CONTEXT = this
+
+        signature_canvas_dots_one_divice.t1 = findViewById(R.id.name_player1_one_divice_dot) as TextView
+        signature_canvas_dots_one_divice.t2 = findViewById(R.id.name_player2_one_divice_dot) as TextView
+
         if(Design == "Egypt")
         {
             name_player1_one_divice_dot.setTextColor(Color.BLACK)
@@ -404,6 +410,10 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
         return res
     }
 
+
+    lateinit var t1: TextView
+    lateinit var t2: TextView
+
     lateinit var activity: Activity
 
     var History: MutableList<Triple<Int,Int,Int>> = mutableListOf()
@@ -519,6 +529,17 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
 
+
+        if(red_or_blue%2 == 0)
+        {
+            t1.text ="игрок 1 думает..."
+            t2.text  = "игрок 2"
+        }
+        else
+        {
+            t1.text ="игрок 1"
+            t2.text  = "игрок 2 думает..."
+        }
 
         radius_of_point = 8f
         size_field_x  = 10
