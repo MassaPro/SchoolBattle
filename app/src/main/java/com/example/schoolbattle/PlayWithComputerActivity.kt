@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.KeyEvent
 import com.example.schoolbattle.gameswithcomp.*
 
+var delayTime : Long = 500
+
 class PlayWithComputerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
