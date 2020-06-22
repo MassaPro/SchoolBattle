@@ -6,11 +6,11 @@ import android.content.Context
 import android.content.Intent
 import android.view.Window
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import android.graphics.Color
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.gameswithcomp.ReversiWithComputer
+import com.example.schoolbattle.gameswithcomp.XOGame_withComputer
 import kotlinx.android.synthetic.main.parametrs_with_computer.*
 
 class Show_parametr_with_computer(activity: Activity) {
@@ -54,7 +54,7 @@ class Show_parametr_with_computer(activity: Activity) {
 
 
         if (gameType == "Reversi") {
-            val changeModeButton = dialog_with_computer.findViewById(R.id.changeModeReversi) as Button
+            val changeModeButton = dialog_with_computer.findViewById(R.id.changeModeWithComputer) as Button
             changeModeButton.setOnClickListener{
                 val prefs2 = type_activity.getSharedPreferences("UserData", Context.MODE_PRIVATE)
                 var ReversiMode = prefs2.getInt("ReversiMode", 0)
@@ -63,6 +63,22 @@ class Show_parametr_with_computer(activity: Activity) {
                 editor.apply()
 
                 val intent = Intent(type_activity, ReversiWithComputer::class.java).apply {
+                    putExtra("usedToClear", "clear")
+                }
+                type_activity.finish()
+                type_activity.startActivity(intent)
+            }
+        }
+        if (gameType == "XOGame") {
+            val changeModeButton = dialog_with_computer.findViewById(R.id.changeModeWithComputer) as Button
+            changeModeButton.setOnClickListener{
+                val prefs2 = type_activity.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                var XOGameMode = prefs2.getInt("XOGameMode", 0)
+                val editor = type_activity.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putInt("XOGameMode", 3 - XOGameMode)
+                editor.apply()
+
+                val intent = Intent(type_activity, XOGame_withComputer::class.java).apply {
                     putExtra("usedToClear", "clear")
                 }
                 type_activity.finish()

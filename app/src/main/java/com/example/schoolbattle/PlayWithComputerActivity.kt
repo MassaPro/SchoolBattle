@@ -9,6 +9,7 @@ import com.example.schoolbattle.gameswithcomp.*
 
 var delayTime : Long = 500
 
+
 class PlayWithComputerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +23,7 @@ class PlayWithComputerActivity : AppCompatActivity() {
 
         if(gameType == "XOGame")
         {
-            val intent = Intent(this,XOGame_withComputer::class.java)
+            val intent = Intent(this, XOGame_withComputer::class.java)
             startActivity(intent)
             finish()
         }
