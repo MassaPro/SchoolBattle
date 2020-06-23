@@ -7,7 +7,7 @@ import android.view.Window
 import android.widget.Button
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
-import com.example.schoolbattle.gameswithcomp.XOGame_withComputer
+import com.example.schoolbattle.gameswithcomp.*
 import kotlinx.android.synthetic.main.activity_game_over_with_computer.*
 
 class Show_Result_with_Computer(activity: Activity) {
@@ -28,6 +28,37 @@ class Show_Result_with_Computer(activity: Activity) {
             if(Game_Type == "XOGame")
             {
                 val intent = Intent(type_activity, XOGame_withComputer::class.java).apply {
+                    putExtra("usedToClear", "clear")
+                }
+                type_activity.finish()
+                type_activity.startActivity(intent)
+            }
+
+            if(Game_Type == "AngleGame")
+            {
+
+            }
+
+            if(Game_Type == "DotGame")
+            {
+
+            }
+            if(Game_Type == "SnakeGame")
+            {
+
+            }
+            if(Game_Type == "BoxGame")
+            {
+
+            }
+            /*if(Game_Type == "VirusGame")       // ADD
+            {
+
+            }*/
+
+            if(Game_Type == "Reversi")
+            {
+                val intent = Intent(type_activity, ReversiWithComputer::class.java).apply {
                     putExtra("usedToClear", "clear")
                 }
                 type_activity.finish()
