@@ -1,20 +1,16 @@
-package com.example.schoolbattle
+package com.example.schoolbattle.social
 
-import android.app.Dialog
-import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.Color.argb
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_friends_item.*
+import com.example.schoolbattle.Design
+import com.example.schoolbattle.FRIENDS
+import com.example.schoolbattle.R
 import kotlinx.android.synthetic.main.activity_friends_item.view.*
 import kotlinx.android.synthetic.main.activity_friends_list.*
 
@@ -43,7 +39,10 @@ class FriendsList : Fragment() {
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-        recyclerView.adapter = SimpleItemRecyclerViewAdapter(FRIENDS)
+        recyclerView.adapter =
+            SimpleItemRecyclerViewAdapter(
+                FRIENDS
+            )
     }
 
     class SimpleItemRecyclerViewAdapter(private val ITEMS: MutableList<String>):

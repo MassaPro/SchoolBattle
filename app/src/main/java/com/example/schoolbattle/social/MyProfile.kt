@@ -1,13 +1,14 @@
-package com.example.schoolbattle
+package com.example.schoolbattle.social
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import com.example.schoolbattle.CONTEXT
+import com.example.schoolbattle.R
 import kotlinx.android.synthetic.main.activity_my_profile.*
 
 class MyProfile : Fragment() {
@@ -25,16 +26,16 @@ class MyProfile : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val username = prefs?.getString("username", "")
-        profileName.text = username
-
-        if (Design == "Egypt"){
-            my_profile.setBackgroundResource(R.drawable.background_egypt)
-            profileName.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+        profileMyName.text = username
+        profileMyFriendsIn.setOnClickListener {
+            val intent = Intent(context, FriendsAndFollowers::class.java)
+            intent.putExtra("friendsType", "in")
+            startActivity(intent)
         }
-        if (Design == "Casino"){
-            my_profile.setBackgroundResource(R.drawable.background2_casino)
-            profileName.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+        profileMyFriendsOut.setOnClickListener {
+            val intent = Intent(context, FriendsAndFollowers::class.java)
+            intent.putExtra("friendsType", "out")
+            startActivity(intent)
         }
     }
-
 }

@@ -1,15 +1,16 @@
-package com.example.schoolbattle
+package com.example.schoolbattle.social
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.example.schoolbattle.CONTEXT
+import com.example.schoolbattle.R
 import com.google.android.material.tabs.TabLayout
 
 class SocialActivity : Fragment() {
@@ -29,7 +30,9 @@ class SocialActivity : Fragment() {
          * Inflate tab_layout and setup Views.
          */
         val v: View = inflater.inflate(R.layout.activity_social, container, false)
-        tabLayout = v.findViewById<View>(R.id.tabs) as TabLayout
+        tabLayout = v.findViewById<View>(
+            R.id.tabs
+        ) as TabLayout
         viewPager =
             v.findViewById<View>(R.id.viewpager) as ViewPager
         /**
@@ -41,7 +44,9 @@ class SocialActivity : Fragment() {
          * The setupWithViewPager dose't works without the runnable .
          * Maybe a Support Library Bug .
          */
-        tabLayout!!.post { tabLayout!!.setupWithViewPager(viewPager) }
+        tabLayout!!.post { tabLayout!!.setupWithViewPager(
+            viewPager
+        ) }
         return v
     }
 

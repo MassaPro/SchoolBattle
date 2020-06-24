@@ -50,7 +50,8 @@ class XOGameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
-        setContentView(R.layout.activity_x_o_game)
+        setContentView(R.layout.activity_online_games_temlate)
+        signature_canvas.visibility = (View.VISIBLE)
 
 
 
@@ -86,7 +87,10 @@ class XOGameActivity : AppCompatActivity() {
             getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "")
                 .toString()
 
-        val type = intent.getStringExtra("type")
+        var type = intent.getStringExtra("type")
+        if (type != "Blitz") {
+            type = "";
+        }
 
         var opponentsName_: String = intent?.getStringExtra("opponentName").toString()
         var opponentsName = ""
@@ -105,7 +109,7 @@ class XOGameActivity : AppCompatActivity() {
                 opponentsName + '_' + yourName else yourName + '_' + opponentsName
         )
 
-        if (type != "") {
+        if (type == "Blitz") {
             initTrueTime(this)
             Toast.makeText(this, trueTime.toString(), Toast.LENGTH_LONG).show()
             Finish_time = trueTime.time + 1000*60*10
@@ -116,6 +120,8 @@ class XOGameActivity : AppCompatActivity() {
 
 
             runTimer(gameData)
+        } else {
+            type = ""
         }
 
         signature_canvas.blocked = true
@@ -198,7 +204,6 @@ class XOGameActivity : AppCompatActivity() {
                 var checkList = checkForWin()
                 if (checkList.size > 1 || (checkList.size == 1 && cnt == 42)) {
                     signature_canvas.blocked = true
-                    Toast.makeText(applicationContext,"${signature_canvas.FIELD[checkList.get(1)][checkList.get(2)]}", Toast.LENGTH_LONG).show()
                     var whoWins = 0
                     if (checkList.size > 1) {
                         for (i2 in 0..8) {
@@ -306,7 +311,6 @@ class XOGameActivity : AppCompatActivity() {
 
                                     Finish_time = Finish_time_1_sync
                                     timeBegin = trueTime.time
-                                    Toast.makeText(this@XOGameActivity, "dlkl" + cnt.toString(), Toast.LENGTH_LONG).show()
                                 }
 
                             }
@@ -444,12 +448,9 @@ class XOGameActivity : AppCompatActivity() {
             }
         }
     }
+
+
 }
-
-
-
-
-
 class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
 
     fun touch_refinement_X (indent: Float,x : Float,width1: Float,size_field_x1:Int ):Float        //уточняет касания по оси x
@@ -617,6 +618,7 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
         //TODO() take field from database
 
         indent = 20f
+
         val width = getWidth().toFloat()
         val height = getHeight().toFloat()
         //ширина и высота экрана (от ширины в основном все зависит)
@@ -753,3 +755,8 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
 
 
 }
+
+
+
+
+

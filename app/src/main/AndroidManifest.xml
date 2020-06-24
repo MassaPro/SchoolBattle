@@ -6,10 +6,13 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ProfileUserActivity"></activity>
+        <activity android:name=".gamesonline.TEST"></activity>
+        <activity android:name=".social.FriendsAndFollowers" />
+        <activity android:name=".social.ProfileUserActivity" />
         <activity android:name=".Choose_design_Activity" />
         <activity android:name=".BlitzActivity" />
         <activity android:name=".SearchActivity" />
@@ -20,7 +23,7 @@
         <activity android:name=".gameswithcomp.ConersWithComputer" />
         <activity android:name=".gameswithcomp.BoxGameWithComputer" />
         <activity android:name=".gamesonline.SnakeGameActivity" />
-        <activity android:name=".FriendsList" />
+        <activity android:name=".social.FriendsList" />
         <activity android:name=".gamesonedevice.ReversiOneDivice" />
         <activity android:name=".gamesonedevice.GoGameOneDivice" />
         <activity android:name=".gamesonline.BoxGameActivity" />

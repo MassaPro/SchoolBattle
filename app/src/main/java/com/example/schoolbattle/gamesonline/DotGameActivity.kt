@@ -2,11 +2,13 @@ package com.example.schoolbattle.gamesonline
 
 import android.app.Activity
 import android.content.Context
-import android.graphics.*
-import android.graphics.Color.argb
-import android.graphics.Color.rgb
+import android.content.res.Resources
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
 import android.os.Bundle
 import android.util.AttributeSet
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -16,7 +18,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.activity_dot_game.*
+import kotlinx.android.synthetic.main.activity_online_games_temlate.*
+
 
 //TODO , рисовать ребра только один раз до этого узнав, также можно не включать в цепочки вершины которые окружены 6 такими же вершинами
 
@@ -33,12 +36,12 @@ class DotGameActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
-
+        setContentView(R.layout.activity_online_games_temlate)
+        signature_canvas3.visibility = (View.VISIBLE)
         CONTEXT = this
         currentContext = this
         isRun = true
-        super.onResume()
-        setContentView(R.layout.activity_dot_game)
+       
         if (StupidGame != Activity()) StupidGame.finish()
         if (NewGame != Activity()) NewGame.finish()
         val yourName =
@@ -59,7 +62,7 @@ class DotGameActivity: AppCompatActivity() {
 
         val type = intent.getStringExtra("type")
         if (type != "") {
-            TODO()
+            //TODO()
             //ALF CODE HERE
         }
         val gameData = myRef.child(type + "DotGames").child(
@@ -70,10 +73,11 @@ class DotGameActivity: AppCompatActivity() {
         signature_canvas3.positionData = gameData
         signature_canvas3.blocked = true
 
-        button_player_1_online_dot.text = yourName
-        button_player_2_online_dot.text = opponentsName
+        //button_player_1_online_dot.text = yourName
+        //button_player_2_online_dot.text = opponentsName
 
         if(Design == "Egypt" ) {
+            /*
             button_player_1_online_dot.setTextColor(Color.BLACK)
             button_player_2_online_dot.setTextColor(Color.BLACK)
             button_player_1_online_dot.setTextSize(20f)
@@ -92,6 +96,8 @@ class DotGameActivity: AppCompatActivity() {
             to_back_dot_online.setBackgroundResource(R.drawable.arrow_back)
             toolbar_dot_online.setBackgroundColor(argb(0,0,0,0))
             toolbar2_dot_online.setBackgroundColor(argb(0,0,0,0))
+
+             */
         }
 
         gameData.addValueEventListener(object : ValueEventListener {
@@ -102,8 +108,8 @@ class DotGameActivity: AppCompatActivity() {
                 signature_canvas3.blocked = true
 
                 //signature_canvas3.isFirstMove = (p0.child("Move").value.toString() == yu.toString())
-                //if (signature_canvas.isFirstMove == (cnt % 2 == 0)) signature_canvas.blocked = false
-                //signature_canvas.invalidate()
+                //if (signature_canvas3.isFirstMove == (cnt % 2 == 0)) signature_canvas3.blocked = false
+                //signature_canvas3.invalidate()
                 signature_canvas3.isFirstMove = (p0.child("Move").value.toString() == yu.toString())
                 for (i in 0..signature_canvas3.FIELD.size - 1) {
                     for (j in 0..signature_canvas3.FIELD[i].size - 1) {
@@ -207,15 +213,7 @@ class DotGameActivity: AppCompatActivity() {
     }
 }
 
-
-
-
-
-
-
-
-
-class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, attrs) {
+class CanvasViewDot(context: Context, attrs: AttributeSet?) : View(context, attrs) {
     fun correction_touch (x: Float,y : Float) :  Boolean // если нажали примерно туда
     {
         if( (circlex-x)*(circlex-x) + (circley - y)*(circley - y) < (step/2f)*(step/2f))
@@ -373,14 +371,29 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
 
+        fun dpToPx(dp: Int): Float {
+            return (dp * Resources.getSystem().displayMetrics.density)
+        }
 
         radius_of_point = 8f
         size_field_x  = 10
         size_field_y  = 15
-        indent = (getWidth().toFloat()/(size_field_x.toFloat()+1f))/2f //оступ, чтобы можно было тыкнуть в границу
+
+
+        indent = 0f//(getWidth().toFloat()/(size_field_x.toFloat()+1f))/2f //оступ, чтобы можно было тыкнуть в границу
         width = getWidth().toFloat() - 2*indent
-        height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)
-        advertising_line =(height - width/size_field_x*size_field_y)/2           //полоска для рекламы
+        height = getHeight().toFloat() - 2 * indent //ширина и высота экрана (от ширины в основном все зависит)
+
+        Log.w("WH", "$width  $height")
+        Log.w("WH2", "${getWidth()}  ${getHeight()}")
+        if (height / width < size_field_y.toFloat() / size_field_x.toFloat()) {
+            width = height * size_field_x.toFloat() / size_field_y.toFloat()
+        }
+        indent = (width.toFloat()/(size_field_x.toFloat()+1f))/2f
+        width -= 2f * indent
+        height -= 2f * indent
+
+        advertising_line = (height - width/size_field_x*size_field_y)/2 //полоска для рекламы
 
         step = width/size_field_x
         k = height-width*(size_field_y.toFloat()/size_field_x.toFloat())-advertising_line
@@ -888,3 +901,11 @@ class CanvasView_POINTS(context: Context, attrs: AttributeSet?) : View(context, 
     }
 
 }
+
+
+
+
+
+
+
+

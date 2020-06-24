@@ -1,5 +1,6 @@
 package com.example.schoolbattle;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -11,6 +12,7 @@ import com.instacart.library.truetime.TrueTime;
 import java.io.IOException;
 
 public class InitTrueTimeAsyncTask extends AsyncTask<Void, Void, Void> {
+    @SuppressLint("StaticFieldLeak")
     private Context ctx;
 
     public InitTrueTimeAsyncTask (Context context){

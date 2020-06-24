@@ -1,14 +1,13 @@
 package com.example.schoolbattle
 
-import android.annotation.SuppressLint
-import android.app.Dialog
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.schoolbattle.social.ProfileUserActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -88,41 +87,9 @@ class SearchActivity : AppCompatActivity() {
 
       init {
             onClickListener = View.OnClickListener { v ->
-                val item = v.tag as String
-                val rev = v.context?.let { Dialog(it) }
-                val window: Window? = rev?.window
-                val wlp = window?.attributes
-                wlp?.gravity = Gravity.TOP
-                rev?.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                rev?.setCancelable(false)
-                rev?.setCanceledOnTouchOutside(true)
-                rev?.setContentView(R.layout.profile_dialog)
-                (rev?.findViewById(R.id.profileName) as TextView).text = item
-
-                val prfs = v.context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
-                val username = prfs?.getString("username", "")
-                //(rev?.findViewById(R.id.profile_play) as Button)
-                val satView: CheckBox = rev.findViewById(R.id.checkBox) as CheckBox
-
-                myRef.child("Users").child(username!!).child("Friends").addListenerForSingleValueEvent(object : ValueEventListener{
-                    override fun onCancelled(p0: DatabaseError) {
-                        TODO("Not yet implemented")
-                    }
-
-                    override fun onDataChange(p0: DataSnapshot) {
-                        satView.isChecked = p0.hasChild(item)
-                        rev?.show()
-                        satView.setOnCheckedChangeListener { buttonView, isChecked ->
-                            if (isChecked) {
-                                myRef.child("Users").child(username!!).child("Friends").child(item).setValue(item)
-                            } else {
-                                myRef.child("Users").child(username!!).child("Friends").child(item).removeValue()
-                            }
-                        }
-                    }
-                })
-
-                //v.context.startActivity(intent)
+                val intent = Intent(v.context, ProfileUserActivity::class.java)
+                intent.putExtra("name", v.tag as String)
+                v.context.startActivity(intent)
             }
         }
 

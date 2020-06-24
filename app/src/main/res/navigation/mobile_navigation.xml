@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_social"
-        android:name="com.example.schoolbattle.SocialActivity"
+        android:name="com.example.schoolbattle.social.SocialActivity"
         android:label="@string/title_activity_social"
         tools:layout="@layout/activity_social" />
     <fragment
