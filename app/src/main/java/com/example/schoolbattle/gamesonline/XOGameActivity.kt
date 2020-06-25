@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
 import java.util.*
 import java.text.DateFormat
 import android.content.Intent
+import java.lang.Math.abs
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.min
@@ -110,16 +111,66 @@ class XOGameActivity : AppCompatActivity() {
         )
 
         if (type == "Blitz") {
-            initTrueTime(this)
-            Toast.makeText(this, trueTime.toString(), Toast.LENGTH_LONG).show()
-            Finish_time = trueTime.time + 1000*60*10
-            timeBegin = trueTime.time
 
-            Finish_time_1 = trueTime.time + 1000*60*10
-            timeBegin_1 = trueTime.time
-
-
-            runTimer(gameData)
+            val timer = Timer(true)
+            var cntMy = 0
+            var cntOp = 0
+            var cnt = 0
+            gameData.child("Time").addValueEventListener(object: ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {}
+                override fun onDataChange(p0: DataSnapshot) {
+                    val offset = p0.getValue(Double::class.java) ?: 0.0
+                    if (p0.child((cnt - 1).toString()).hasChild(yourName) && p0.child((cnt - 1).toString()).hasChild(opponentsName)) {
+                        val x0: Int = p0.child((cnt - 1).toString()).child(yourName).value.toString().toInt()
+                        val x1: Int = p0.child((cnt - 1).toString()).child(opponentsName).value.toString().toInt()
+                        if (x0 > x1) {
+                            if (cntMy > cntOp) {
+                                cntMy -= abs(x1 - x0) / 2
+                                cntOp += abs(x1 - x0) / 2
+                            } else {
+                                cntMy += abs(x1 - x0) / 2
+                                cntOp -= abs(x1 - x0) / 2
+                            }
+                        } else {
+                            if (cntMy > cntOp) {
+                                cntMy += abs(x1 - x0) / 2
+                                cntOp -= abs(x1 - x0) / 2
+                            } else {
+                                cntMy -= abs(x1 - x0) / 2
+                                cntOp += abs(x1 - x0) / 2
+                            }
+                        }
+                    }
+                }
+            })
+            timer.scheduleAtFixedRate(object : TimerTask() {
+                override fun run() {
+                    runOnUiThread {
+                        var cnt = 0
+                        for (i in 0..6) {
+                            for (j in 0..5) {
+                                if (signature_canvas.FIELD[i][j] != 0) {
+                                    cnt++
+                                }
+                            }
+                        }
+                        if ((cnt%2 != 1) == signature_canvas.isFirstMove) {
+                            timer_xog_online.text = cntMy.toString()
+                            cntMy++
+                        } else {
+                            timer2_xog_online.text = cntOp.toString()
+                            cntOp++
+                        }
+                    }
+                }
+            }, 0, 1000L)
+           gameData.child("FIELD").addValueEventListener(object : ValueEventListener {
+               override fun onCancelled(p0: DatabaseError) {}
+               override fun onDataChange(p0: DataSnapshot) {
+                   gameData.child("Time").child(cnt.toString()).child(yourName).setValue(kotlin.math.abs(cntMy - cntOp))
+                   cnt++
+               }
+           })
         } else {
             type = ""
         }
@@ -255,7 +306,6 @@ class XOGameActivity : AppCompatActivity() {
                     myRef.child(type + "XOGames").child(if (opponentsName < yourName)
                         opponentsName + '_' + yourName else yourName + '_' + opponentsName
                     ).removeValue()
-
                     myRef.child("Users").child(yourName).child(type + "Games").child("$opponentsName XOGame").removeValue()
                     myRef.child("Users").child(opponentsName).child(type + "Games").child("$yourName XOGame").removeValue()
                     dialog =
@@ -269,7 +319,7 @@ class XOGameActivity : AppCompatActivity() {
             }
         })
 
-        gameData.child("FIELD").addValueEventListener(object: ValueEventListener {
+            /* gameData.child("FIELD").addValueEventListener(object: ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
             override fun onDataChange(p0: DataSnapshot) {
@@ -319,7 +369,7 @@ class XOGameActivity : AppCompatActivity() {
                 }
                 //if (cnt % 2 == )
             }
-        })
+        })*/
     }
 
     override fun onPause() {
