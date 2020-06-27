@@ -20,11 +20,9 @@ import com.example.schoolbattle.R
 import com.google.firebase.database.*
 import com.instacart.library.truetime.TrueTime
 import kotlinx.android.synthetic.main.activity_x_o_game.*
-import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
 import java.util.*
 import java.text.DateFormat
 import android.content.Intent
-import java.lang.Math.abs
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.min
@@ -52,8 +50,7 @@ class XOGameActivity : AppCompatActivity() {
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_online_games_temlate)
-        signature_canvas.visibility = (View.VISIBLE)
-
+        signature_canvas.visibility = View.VISIBLE
 
 
 
@@ -88,10 +85,7 @@ class XOGameActivity : AppCompatActivity() {
             getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "")
                 .toString()
 
-        var type = intent.getStringExtra("type")
-        if (type != "Blitz") {
-            type = "";
-        }
+        val type = intent.getStringExtra("type")
 
         var opponentsName_: String = intent?.getStringExtra("opponentName").toString()
         var opponentsName = ""
@@ -110,69 +104,16 @@ class XOGameActivity : AppCompatActivity() {
                 opponentsName + '_' + yourName else yourName + '_' + opponentsName
         )
 
-        if (type == "Blitz") {
+        if (type != "") {
+            initTrueTime(this)
+            Finish_time = trueTime.time + 1000*60*10
+            timeBegin = trueTime.time
 
-            val timer = Timer(true)
-            var cntMy = 0
-            var cntOp = 0
-            var cnt = 0
-            gameData.child("Time").addValueEventListener(object: ValueEventListener {
-                override fun onCancelled(p0: DatabaseError) {}
-                override fun onDataChange(p0: DataSnapshot) {
-                    val offset = p0.getValue(Double::class.java) ?: 0.0
-                    if (p0.child((cnt - 1).toString()).hasChild(yourName) && p0.child((cnt - 1).toString()).hasChild(opponentsName)) {
-                        val x0: Int = p0.child((cnt - 1).toString()).child(yourName).value.toString().toInt()
-                        val x1: Int = p0.child((cnt - 1).toString()).child(opponentsName).value.toString().toInt()
-                        if (x0 > x1) {
-                            if (cntMy > cntOp) {
-                                cntMy -= abs(x1 - x0) / 2
-                                cntOp += abs(x1 - x0) / 2
-                            } else {
-                                cntMy += abs(x1 - x0) / 2
-                                cntOp -= abs(x1 - x0) / 2
-                            }
-                        } else {
-                            if (cntMy > cntOp) {
-                                cntMy += abs(x1 - x0) / 2
-                                cntOp -= abs(x1 - x0) / 2
-                            } else {
-                                cntMy -= abs(x1 - x0) / 2
-                                cntOp += abs(x1 - x0) / 2
-                            }
-                        }
-                    }
-                }
-            })
-            timer.scheduleAtFixedRate(object : TimerTask() {
-                override fun run() {
-                    runOnUiThread {
-                        var cnt = 0
-                        for (i in 0..6) {
-                            for (j in 0..5) {
-                                if (signature_canvas.FIELD[i][j] != 0) {
-                                    cnt++
-                                }
-                            }
-                        }
-                        if ((cnt%2 != 1) == signature_canvas.isFirstMove) {
-                            timer_xog_online.text = cntMy.toString()
-                            cntMy++
-                        } else {
-                            timer2_xog_online.text = cntOp.toString()
-                            cntOp++
-                        }
-                    }
-                }
-            }, 0, 1000L)
-           gameData.child("FIELD").addValueEventListener(object : ValueEventListener {
-               override fun onCancelled(p0: DatabaseError) {}
-               override fun onDataChange(p0: DataSnapshot) {
-                   gameData.child("Time").child(cnt.toString()).child(yourName).setValue(kotlin.math.abs(cntMy - cntOp))
-                   cnt++
-               }
-           })
-        } else {
-            type = ""
+            Finish_time_1 = trueTime.time + 1000*60*10
+            timeBegin_1 = trueTime.time
+
+
+            runTimer(gameData)
         }
 
         signature_canvas.blocked = true
@@ -255,6 +196,7 @@ class XOGameActivity : AppCompatActivity() {
                 var checkList = checkForWin()
                 if (checkList.size > 1 || (checkList.size == 1 && cnt == 42)) {
                     signature_canvas.blocked = true
+                    Toast.makeText(applicationContext,"${signature_canvas.FIELD[checkList.get(1)][checkList.get(2)]}", Toast.LENGTH_LONG).show()
                     var whoWins = 0
                     if (checkList.size > 1) {
                         for (i2 in 0..8) {
@@ -306,6 +248,7 @@ class XOGameActivity : AppCompatActivity() {
                     myRef.child(type + "XOGames").child(if (opponentsName < yourName)
                         opponentsName + '_' + yourName else yourName + '_' + opponentsName
                     ).removeValue()
+
                     myRef.child("Users").child(yourName).child(type + "Games").child("$opponentsName XOGame").removeValue()
                     myRef.child("Users").child(opponentsName).child(type + "Games").child("$yourName XOGame").removeValue()
                     dialog =
@@ -319,7 +262,7 @@ class XOGameActivity : AppCompatActivity() {
             }
         })
 
-            /* gameData.child("FIELD").addValueEventListener(object: ValueEventListener {
+        gameData.child("FIELD").addValueEventListener(object: ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
             override fun onDataChange(p0: DataSnapshot) {
@@ -361,6 +304,7 @@ class XOGameActivity : AppCompatActivity() {
 
                                     Finish_time = Finish_time_1_sync
                                     timeBegin = trueTime.time
+                                    Toast.makeText(this@XOGameActivity, "dlkl" + cnt.toString(), Toast.LENGTH_LONG).show()
                                 }
 
                             }
@@ -369,7 +313,7 @@ class XOGameActivity : AppCompatActivity() {
                 }
                 //if (cnt % 2 == )
             }
-        })*/
+        })
     }
 
     override fun onPause() {
@@ -498,9 +442,12 @@ class XOGameActivity : AppCompatActivity() {
             }
         }
     }
-
-
 }
+
+
+
+
+
 class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
 
     fun touch_refinement_X (indent: Float,x : Float,width1: Float,size_field_x1:Int ):Float        //уточняет касания по оси x
@@ -668,7 +615,6 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
         //TODO() take field from database
 
         indent = 20f
-
         val width = getWidth().toFloat()
         val height = getHeight().toFloat()
         //ширина и высота экрана (от ширины в основном все зависит)
@@ -805,8 +751,3 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
 
 
 }
-
-
-
-
-
