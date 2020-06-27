@@ -3,8 +3,6 @@ package com.example.schoolbattle.gamesonline
 import android.app.Activity
 import android.content.Context
 import android.graphics.*
-import android.graphics.Color.argb
-import android.graphics.Color.rgb
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_x_o_game.*
 import java.util.*
 import java.text.DateFormat
 import android.content.Intent
+import android.graphics.Color.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.min
@@ -362,20 +361,33 @@ class XOGameActivity : AppCompatActivity() {
                                 if (min_finish - min_now - 1 == 10.toLong() && second_finish - second_now + 60 > 0) {
                                     second_finish = second_now
                                 }
-                                timer2_xog_online.text = add_null( (min_finish - min_now - 1).toString()) + ":" + add_null( (second_finish - second_now + 60).toString())
+                                if( (timer2_xog_online.text[0].toInt() - '0'.toInt())*60*10+(timer2_xog_online.text[1].toInt() - '0'.toInt())*60 +(timer2_xog_online.text[3].toInt() - '0'.toInt())*10 + (timer2_xog_online.text[4].toInt() - '0'.toInt()) >(min_finish - min_now - 1) *60 + second_finish - second_now + 60)
+                                {
+                                    timer2_xog_online.text = add_null( (min_finish - min_now - 1).toString()) + ":" + add_null( (second_finish - second_now + 60).toString())
+                                }
                             }
                             else
                             {
                                 if (min_finish - min_now == 10.toLong() && second_finish - second_now > 0) {
                                     second_finish = second_now
                                 }
-                                timer2_xog_online.text = add_null( (min_finish - min_now).toString()) + ":" + add_null( (second_finish - second_now).toString())
+                                if( (timer2_xog_online.text[0].toInt() - '0'.toInt())*60*10+(timer2_xog_online.text[1].toInt() - '0'.toInt())*60 +(timer2_xog_online.text[3].toInt() - '0'.toInt())*10 + (timer2_xog_online.text[4].toInt() - '0'.toInt()) >(min_finish - min_now ) *60 + second_finish - second_now )
+                                {
+                                    timer2_xog_online.text = add_null( (min_finish - min_now).toString()) + ":" + add_null( (second_finish - second_now).toString())
+                                }
+                                if((timer2_xog_online.text[0].toInt() - '0'.toInt())*60*10+(timer2_xog_online.text[1].toInt() - '0'.toInt())*60 +(timer2_xog_online.text[3].toInt() - '0'.toInt())*10 + (timer2_xog_online.text[4].toInt() - '0'.toInt())<=5)
+                                {
+                                    timer2_xog_online.setTextColor(Color.RED)
+                                }
                             }
+
                         }
                         else
                         {
+                            timer2_xog_online.setTextColor(Color.RED)
                             timer2_xog_online.text = "time's up"
                         }
+
 
                     }
                     else
@@ -391,15 +403,26 @@ class XOGameActivity : AppCompatActivity() {
 
                             if(second_now>second_finish)
                             {
-                                timer_xog_online.text = add_null( (min_finish - min_now - 1).toString()) + ":" + add_null( (second_finish - second_now + 60).toString())
+                                if( (timer_xog_online.text[0].toInt() - '0'.toInt())*60*10+(timer_xog_online.text[1].toInt() - '0'.toInt())*60 +(timer_xog_online.text[3].toInt() - '0'.toInt())*10 + (timer_xog_online.text[4].toInt() - '0'.toInt()) >(min_finish - min_now - 1) *60 + second_finish - second_now + 60)
+                                {
+                                    timer_xog_online.text = add_null( (min_finish - min_now - 1).toString()) + ":" + add_null( (second_finish - second_now + 60).toString())
+                                }
                             }
                             else
                             {
-                                timer_xog_online.text = add_null( (min_finish - min_now).toString()) + ":" + add_null( (second_finish - second_now).toString())
+                                if( (timer_xog_online.text[0].toInt() - '0'.toInt())*60*10+(timer_xog_online.text[1].toInt() - '0'.toInt())*60 +(timer_xog_online.text[3].toInt() - '0'.toInt())*10 + (timer_xog_online.text[4].toInt() - '0'.toInt()) >(min_finish - min_now ) *60 + second_finish - second_now )
+                                {
+                                    timer_xog_online.text = add_null( (min_finish - min_now).toString()) + ":" + add_null( (second_finish - second_now).toString())
+                                }
+                            }
+                            if((timer_xog_online.text[0].toInt() - '0'.toInt())*60*10+(timer_xog_online.text[1].toInt() - '0'.toInt())*60 +(timer_xog_online.text[3].toInt() - '0'.toInt())*10 + (timer_xog_online.text[4].toInt() - '0'.toInt())<=5)
+                            {
+                                timer_xog_online.setTextColor(Color.RED)
                             }
                         }
                         else
                         {
+                            timer_xog_online.setTextColor(Color.RED)
                             timer_xog_online.text = "time's up"
                         }
 

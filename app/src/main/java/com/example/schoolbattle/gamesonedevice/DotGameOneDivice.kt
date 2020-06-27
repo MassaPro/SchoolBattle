@@ -15,7 +15,7 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_dot_game_one_divice.*
-import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
+import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
 class DotGameOneDivice : AppCompatActivity() {
 

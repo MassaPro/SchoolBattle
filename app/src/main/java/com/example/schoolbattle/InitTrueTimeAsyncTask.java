@@ -4,9 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.google.android.gms.common.internal.Constants;
 import com.instacart.library.truetime.TrueTime;
 
 import java.io.IOException;

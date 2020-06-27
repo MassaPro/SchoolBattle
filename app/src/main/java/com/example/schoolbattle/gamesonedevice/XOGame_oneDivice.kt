@@ -14,8 +14,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
-import kotlinx.android.synthetic.main.activity_x_o_game_one_divice.*
-
+import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
 
 class XOGame_oneDivice : AppCompatActivity() {
@@ -89,45 +88,46 @@ class XOGame_oneDivice : AppCompatActivity() {
         CONTEXT = this
         //var h : MutableList<Triple<Int,Int,Int>> =  mutableListOf(Triple(231,231,777),Triple(231,231,777),Triple(231,231,777))
         //Log.w("momlol",decode(encode(h)).toString())
-        setContentView(R.layout.activity_x_o_game_one_divice)
-        signature_canvas_xog_one_device.t1 = findViewById(R.id.name_player1_one_divice_xog) as TextView
-        signature_canvas_xog_one_device.t2 = findViewById(R.id.name_player2_one_divice_xog) as TextView
+        setContentView(R.layout.activity_one_device_games_template)
+        signature_canvas_xog_one_device.visibility = View.VISIBLE
+        signature_canvas_xog_one_device.t1 = findViewById(R.id.name_player1_one_divice) as TextView
+        signature_canvas_xog_one_device.t2 = findViewById(R.id.name_player2_one_divice) as TextView
         signature_canvas_xog_one_device.t1.text = "Игрок 1"
         signature_canvas_xog_one_device.t2.text = "Игрок 2"
         //signature_canvas_xog_one_device.t1.set
 
         if(Design == "Egypt" ) {
-            name_player1_one_divice_xog.setTextColor(Color.BLACK)
-            name_player2_one_divice_xog.setTextColor(Color.BLACK)
-            name_player1_one_divice_xog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            name_player2_one_divice_xog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            name_player2_one_divice_xog.setTextSize(20f)
-            name_player1_one_divice_xog.setTextSize(20f)
-            button_player_1_xog_one_divice.setBackgroundResource(R.drawable.player1_egypt);
-            button_player_2_xog_one_divice.setBackgroundResource(R.drawable.player2_egypt);
-            player_1_icon_xog_one_divice.setBackgroundResource(R.drawable.cross_egypt);
-            player_2_icon_xog_one_divice.setBackgroundResource(R.drawable.circle_egypt);
+            name_player1_one_divice.setTextColor(Color.BLACK)
+            name_player2_one_divice.setTextColor(Color.BLACK)
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            button_player_1_one_divice.setBackgroundResource(R.drawable.player1_egypt);
+            button_player_2_one_divice.setBackgroundResource(R.drawable.player2_egypt);
+            player_1_icon_one_divice.setBackgroundResource(R.drawable.cross_egypt);
+            player_2_icon_one_divice.setBackgroundResource(R.drawable.circle_egypt);
             label_one_device.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_xog_one_divice.setBackgroundColor(rgb(224,164,103))
-            to_back_xog_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_xog_one_divice.setBackgroundColor(argb(0,0,0,0))
-            toolbar2_xog_one_divice.setBackgroundColor(argb(0,0,0,0))
+            bottom_navigation_one_divice.setBackgroundColor(rgb(224,164,103))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_one_divice.setBackgroundColor(argb(0,0,0,0))
+            toolbar2_one_divice.setBackgroundColor(argb(0,0,0,0))
         }
         else if(Design == "Casino" ) {
-            name_player1_one_divice_xog.setTextColor(Color.YELLOW)
-            name_player2_one_divice_xog.setTextColor(Color.YELLOW)
-            name_player1_one_divice_xog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_one_divice_xog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_one_divice_xog.setTextSize(20f)
-            name_player1_one_divice_xog.setTextSize(20f)
-            button_player_1_xog_one_divice.setBackgroundResource(R.drawable.tower1_casino);
-            button_player_2_xog_one_divice.setBackgroundResource(R.drawable.tower2_casino);
-            toolbar_xog_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_xog_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            name_player1_one_divice.setTextColor(Color.YELLOW)
+            name_player2_one_divice.setTextColor(Color.YELLOW)
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            button_player_1_one_divice.setBackgroundResource(R.drawable.tower1_casino);
+            button_player_2_one_divice.setBackgroundResource(R.drawable.tower2_casino);
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             label_one_device.setBackgroundResource(R.drawable.background_casino);
-            bottom_navigation_xog_one_divice.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_xog_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_xog_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
         }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
@@ -169,14 +169,14 @@ class XOGame_oneDivice : AppCompatActivity() {
                 dialog?.showResult_one_device("НОЛИКИ ПОБЕДИЛИ","XOGame",this)
             }
         }
-        to_back_xog_one_divice.setOnClickListener {
+        to_back_one_divice.setOnClickListener {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 2)
             startActivity(intent)
         }
 
-        bottom_navigation_xog_one_divice.setOnNavigationItemSelectedListener { item ->
+        bottom_navigation_one_divice.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
                     dialog_rules =
