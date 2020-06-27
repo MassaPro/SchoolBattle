@@ -10,7 +10,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import com.example.schoolbattle.*
-import kotlinx.android.synthetic.main.activity_snake_game_one_divice.*
+import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 import java.lang.Math.abs
 
 class SnakeGameOneDivice : AppCompatActivity() {
@@ -81,29 +81,29 @@ class SnakeGameOneDivice : AppCompatActivity() {
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_snake_game_one_divice)
-
+        setContentView(R.layout.activity_one_device_games_template)
+        signature_canvas_snake_one_device.visibility = View.VISIBLE
         CONTEXT = this
         signature_canvas_snake_one_device.activity = this
 
 
         if(Design == "Egypt" ) {
 
-            name_player1_one_divice_snake.setTextColor(Color.BLACK)
-            name_player2_one_divice_snake.setTextColor(Color.BLACK)
-            name_player2_one_divice_snake.setTextSize(20f)
-            name_player1_one_divice_snake.setTextSize(20f)
-            button_player_1_snake_one_divice.setBackgroundResource(R.drawable.player1_egypt);
-            button_player_2_snake_one_divice.setBackgroundResource(R.drawable.player2_egypt);
-            player_1_icon_snake_one_divice.setBackgroundResource(R.drawable.cross_egypt);
-            player_2_icon_snake_one_divice.setBackgroundResource(R.drawable.circle_egypt)
-            toolbar_snake_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_snake_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            name_player1_one_divice.setTextColor(Color.BLACK)
+            name_player2_one_divice.setTextColor(Color.BLACK)
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            button_player_1_one_divice.setBackgroundResource(R.drawable.player1_egypt);
+            button_player_2_one_divice.setBackgroundResource(R.drawable.player2_egypt);
+            player_1_icon_one_divice.setBackgroundResource(R.drawable.cross_egypt);
+            player_2_icon_one_divice.setBackgroundResource(R.drawable.circle_egypt)
+            toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
 
-            label_one_device_snake.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_snake_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
-            to_back_snake_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_snake_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            label_one_device.setBackgroundResource(R.drawable.background_egypt);
+            bottom_navigation_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
         }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
@@ -139,7 +139,7 @@ class SnakeGameOneDivice : AppCompatActivity() {
             signature_canvas_snake_one_device.invalidate()
         }
 
-        bottom_navigation_snake_one_divice.setOnNavigationItemSelectedListener { item ->
+        bottom_navigation_one_divice.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
                     dialog_rules =
@@ -197,7 +197,7 @@ class SnakeGameOneDivice : AppCompatActivity() {
             true
         }
 
-        to_back_snake_one_divice.setOnClickListener {
+        to_back_one_divice.setOnClickListener {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 2)

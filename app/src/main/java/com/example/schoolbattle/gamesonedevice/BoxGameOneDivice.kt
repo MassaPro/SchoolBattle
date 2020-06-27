@@ -845,13 +845,13 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
                     {
                         FIELD[i][j] = 2
                     }
-                    invalidate()
+
                 }
             }
         }
         x = 0f
         y = 0f
-
+        invalidate()
         return true
     }
 

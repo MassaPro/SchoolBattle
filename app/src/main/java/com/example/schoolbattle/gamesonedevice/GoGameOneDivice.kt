@@ -13,7 +13,8 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
-import kotlinx.android.synthetic.main.go_game_one_divice.*
+import kotlinx.android.synthetic.main.activity_one_device_games_template.*
+
 
 
 class GoGameOneDivice : AppCompatActivity() {
@@ -85,43 +86,44 @@ class GoGameOneDivice : AppCompatActivity() {
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.go_game_one_divice)
+        setContentView(R.layout.activity_one_device_games_template)
+        signature_canvas_go_one_divice.visibility = View.VISIBLE
         signature_canvas_go_one_divice.activity = this
 
         if(Design == "Egypt")
         {
-            name_player1_one_divice_go.setTextColor(Color.BLACK)
-            name_player2_one_divice_go.setTextColor(Color.BLACK)
-            name_player1_one_divice_go.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            name_player2_one_divice_go.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            name_player2_one_divice_go.setTextSize(20f)
-            name_player1_one_divice_go.setTextSize(20f)
-            button_player_1_go_one_divice.setBackgroundResource(R.drawable.player1_egypt);
-            button_player_2_go_one_divice.setBackgroundResource(R.drawable.player2_egypt);
-            player_1_icon_go_one_divice.setBackgroundResource(R.drawable.cross_egypt);
-            player_2_icon_go_one_divice.setBackgroundResource(R.drawable.circle_egypt)
-            toolbar_go_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_go_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            label_one_device_go.setBackgroundResource(R.drawable.background_egypt);
-            toolbar_go_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            bottom_navigation_go_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
-            to_back_go_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            name_player1_one_divice.setTextColor(Color.BLACK)
+            name_player2_one_divice.setTextColor(Color.BLACK)
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            button_player_1_one_divice.setBackgroundResource(R.drawable.player1_egypt);
+            button_player_2_one_divice.setBackgroundResource(R.drawable.player2_egypt);
+            player_1_icon_one_divice.setBackgroundResource(R.drawable.cross_egypt);
+            player_2_icon_one_divice.setBackgroundResource(R.drawable.circle_egypt)
+            toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            label_one_device.setBackgroundResource(R.drawable.background_egypt);
+            toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            bottom_navigation_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
         }
         else if(Design == "Casino" ) {
-            name_player1_one_divice_go.setTextColor(Color.YELLOW)
-            name_player2_one_divice_go.setTextColor(Color.YELLOW)
-            name_player1_one_divice_go.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_one_divice_go.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_one_divice_go.setTextSize(20f)
-            name_player1_one_divice_go.setTextSize(20f)
-            button_player_1_go_one_divice.setBackgroundResource(R.drawable.tower1_casino);
-            button_player_2_go_one_divice.setBackgroundResource(R.drawable.tower2_casino);
-            toolbar_go_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_go_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device_go.setBackgroundResource(R.drawable.background_casino);
-            bottom_navigation_go_one_divice.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_go_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_go_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            name_player1_one_divice.setTextColor(Color.YELLOW)
+            name_player2_one_divice.setTextColor(Color.YELLOW)
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            button_player_1_one_divice.setBackgroundResource(R.drawable.tower1_casino);
+            button_player_2_one_divice.setBackgroundResource(R.drawable.tower2_casino);
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            label_one_device.setBackgroundResource(R.drawable.background_casino);
+            bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
         }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
@@ -172,8 +174,8 @@ class GoGameOneDivice : AppCompatActivity() {
             }
             signature_canvas_go_one_divice.invalidate()
         }
-        //comback_gos_one_divice.setVisibility(View.GONE);
-        bottom_navigation_go_one_divice.setOnNavigationItemSelectedListener { item ->
+        //combacks_one_divice.setVisibility(View.GONE);
+        bottom_navigation_one_divice.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
                     dialog_rules =
@@ -248,7 +250,7 @@ class GoGameOneDivice : AppCompatActivity() {
             true
         }
 
-        to_back_go_one_divice.setOnClickListener {
+        to_back_one_divice.setOnClickListener {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 2)

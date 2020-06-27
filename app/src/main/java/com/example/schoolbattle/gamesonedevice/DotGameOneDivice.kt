@@ -14,7 +14,6 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
-import kotlinx.android.synthetic.main.activity_dot_game_one_divice.*
 import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
 class DotGameOneDivice : AppCompatActivity() {
@@ -86,48 +85,46 @@ class DotGameOneDivice : AppCompatActivity() {
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dot_game_one_divice)
+        setContentView(R.layout.activity_one_device_games_template)
+        signature_canvas_dots_one_divice.visibility = View.VISIBLE
         signature_canvas_dots_one_divice.activity = this
         CONTEXT = this
 
-        signature_canvas_dots_one_divice.t1 = findViewById(R.id.name_player1_one_divice_dot) as TextView
-        signature_canvas_dots_one_divice.t2 = findViewById(R.id.name_player2_one_divice_dot) as TextView
+        signature_canvas_dots_one_divice.t1 = findViewById(R.id.name_player1_one_divice) as TextView
+        signature_canvas_dots_one_divice.t2 = findViewById(R.id.name_player2_one_divice) as TextView
 
-        if(Design == "Egypt")
-        {
-            name_player1_one_divice_dot.setTextColor(Color.BLACK)
-            name_player2_one_divice_dot.setTextColor(Color.BLACK)
-            name_player1_one_divice_dot.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            name_player2_one_divice_dot.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            name_player2_one_divice_dot.setTextSize(20f)
-            name_player1_one_divice_dot.setTextSize(20f)
-            button_player_1_dot_one_divice.setBackgroundResource(R.drawable.player1_egypt);
-            button_player_2_dot_one_divice.setBackgroundResource(R.drawable.player2_egypt);
-            player_1_icon_dot_one_divice.setBackgroundResource(R.drawable.cross_egypt);
-            player_2_icon_dot_one_divice.setBackgroundResource(R.drawable.circle_egypt);
-            label_one_device_dots.setBackgroundResource(R.drawable.background_egypt);
-            toolbar_dot_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            bottom_navigation_dot_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
-            to_back_dot_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            to_back_dot_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_dot_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_dot_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+        if(Design == "Egypt" ) {
+            name_player1_one_divice.setTextColor(Color.BLACK)
+            name_player2_one_divice.setTextColor(Color.BLACK)
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            button_player_1_one_divice.setBackgroundResource(R.drawable.player1_egypt);
+            button_player_2_one_divice.setBackgroundResource(R.drawable.player2_egypt);
+            player_1_icon_one_divice.setBackgroundResource(R.drawable.cross_egypt);
+            player_2_icon_one_divice.setBackgroundResource(R.drawable.circle_egypt);
+            label_one_device.setBackgroundResource(R.drawable.background_egypt);
+            bottom_navigation_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_one_divice.setBackgroundColor(argb(0,0,0,0))
+            toolbar2_one_divice.setBackgroundColor(argb(0,0,0,0))
         }
         else if(Design == "Casino" ) {
-            name_player1_one_divice_dot.setTextColor(Color.YELLOW)
-            name_player2_one_divice_dot.setTextColor(Color.YELLOW)
-            name_player1_one_divice_dot.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_one_divice_dot.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_one_divice_dot.setTextSize(20f)
-            name_player1_one_divice_dot.setTextSize(20f)
-            button_player_1_dot_one_divice.setBackgroundResource(R.drawable.tower1_casino);
-            button_player_2_dot_one_divice.setBackgroundResource(R.drawable.tower2_casino);
-            toolbar_dot_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_dot_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device_dots.setBackgroundResource(R.drawable.background_casino);
-            bottom_navigation_dot_one_divice.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_dot_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_dot_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            name_player1_one_divice.setTextColor(Color.YELLOW)
+            name_player2_one_divice.setTextColor(Color.YELLOW)
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            button_player_1_one_divice.setBackgroundResource(R.drawable.tower1_casino);
+            button_player_2_one_divice.setBackgroundResource(R.drawable.tower2_casino);
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            label_one_device.setBackgroundResource(R.drawable.background_casino);
+            bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
         }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
@@ -169,7 +166,7 @@ class DotGameOneDivice : AppCompatActivity() {
             signature_canvas_dots_one_divice.invalidate()
         }
         //comback_dots_one_divice.setVisibility(View.GONE);
-        bottom_navigation_dot_one_divice.setOnNavigationItemSelectedListener { item ->
+        bottom_navigation_one_divice.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
                     dialog_rules =
@@ -233,7 +230,7 @@ class DotGameOneDivice : AppCompatActivity() {
             true
         }
 
-        to_back_dot_one_divice.setOnClickListener {
+        to_back_one_divice.setOnClickListener {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 2)

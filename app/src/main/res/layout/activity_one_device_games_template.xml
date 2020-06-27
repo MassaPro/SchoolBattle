@@ -29,8 +29,42 @@
             android:layout_height="match_parent"
             android:textColor="#FFFFFF"
             android:visibility="gone" />
-
-
+        <com.example.schoolbattle.gamesonedevice.CanvasView_Dots_one_divice
+            android:id="@+id/signature_canvas_dots_one_divice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF"
+            android:visibility="gone"/>
+        <com.example.schoolbattle.gamesonedevice.CanvasView_corners_one_device
+            android:id="@+id/signature_canvas_corners_one_device"
+            android:layout_width="match_parent"
+            android:layout_height="585dp"
+            android:textColor="#FFFFFF"
+            android:visibility="gone" />
+        <com.example.schoolbattle.gamesonedevice.CanvasView_reversi_one_device
+            android:id="@+id/signature_canvas_reversi_one_device"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF"
+            android:visibility="gone"/>
+        <com.example.schoolbattle.gamesonedevice.CanvasView_Go_one_divice
+            android:id="@+id/signature_canvas_go_one_divice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF"
+            android:visibility="gone"/>
+        <com.example.schoolbattle.gamesonedevice.CanvasView_SNAKE
+            android:id="@+id/signature_canvas_snake_one_device"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF"
+            android:visibility="gone"/>
+        <com.example.schoolbattle.gamesonedevice.CanvasView_VIRUS
+            android:id="@+id/signature_canvas_virus_one_device"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF"
+            android:visibility="gone"/>
     </FrameLayout>
 
     <androidx.appcompat.widget.Toolbar

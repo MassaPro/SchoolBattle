@@ -13,7 +13,8 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
-import kotlinx.android.synthetic.main.activity_reversi_one_divice.*
+import kotlinx.android.synthetic.main.activity_one_device_games_template.*
+
 
 class ReversiOneDivice : AppCompatActivity() {
     fun encode(h: MutableList<Triple<Int,Int,Int>>):String
@@ -84,43 +85,44 @@ class ReversiOneDivice : AppCompatActivity() {
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_reversi_one_divice)
+        setContentView(R.layout.activity_one_device_games_template)
+        signature_canvas_reversi_one_device.visibility = View.VISIBLE
         signature_canvas_reversi_one_device.activity = this
         CONTEXT = this
 
         if(Design == "Egypt" ) {
-            name_player1_one_divice_reversi.setTextColor(Color.BLACK)
-            name_player2_one_divice_reversi.setTextColor(Color.BLACK)
-            name_player1_one_divice_reversi.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            name_player2_one_divice_reversi.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            name_player2_one_divice_reversi.setTextSize(20f)
-            name_player1_one_divice_reversi.setTextSize(20f)
-            button_player_1_reversi_one_divice.setBackgroundResource(R.drawable.player1_egypt);
-            button_player_2_reversi_one_divice.setBackgroundResource(R.drawable.player2_egypt);
-            player_1_icon_reversi_one_divice.setBackgroundResource(R.drawable.black_chip_egypt);
-            player_2_icon_reversi_one_divice.setBackgroundResource(R.drawable.white_chip_egypt)
-            toolbar_reversi_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_reversi_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            label_one_device_reversi.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_reversi_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
-            to_back_reversi_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_reversi_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            name_player1_one_divice.setTextColor(Color.BLACK)
+            name_player2_one_divice.setTextColor(Color.BLACK)
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            button_player_1_one_divice.setBackgroundResource(R.drawable.player1_egypt);
+            button_player_2_one_divice.setBackgroundResource(R.drawable.player2_egypt);
+            player_1_icon_one_divice.setBackgroundResource(R.drawable.black_chip_egypt);
+            player_2_icon_one_divice.setBackgroundResource(R.drawable.white_chip_egypt)
+            toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            label_one_device.setBackgroundResource(R.drawable.background_egypt);
+            bottom_navigation_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
         }
         else if(Design == "Casino" ) {
-            name_player1_one_divice_reversi.setTextColor(Color.YELLOW)
-            name_player2_one_divice_reversi.setTextColor(Color.YELLOW)
-            name_player1_one_divice_reversi.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_one_divice_reversi.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_one_divice_reversi.setTextSize(20f)
-            name_player1_one_divice_reversi.setTextSize(20f)
-            button_player_1_reversi_one_divice.setBackgroundResource(R.drawable.tower1_casino);
-            button_player_2_reversi_one_divice.setBackgroundResource(R.drawable.tower2_casino);
-            toolbar_reversi_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_reversi_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device_reversi.setBackgroundResource(R.drawable.background_casino);
-            bottom_navigation_reversi_one_divice.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_reversi_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_reversi_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            name_player1_one_divice.setTextColor(Color.YELLOW)
+            name_player2_one_divice.setTextColor(Color.YELLOW)
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            button_player_1_one_divice.setBackgroundResource(R.drawable.tower1_casino);
+            button_player_2_one_divice.setBackgroundResource(R.drawable.tower2_casino);
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            label_one_device.setBackgroundResource(R.drawable.background_casino);
+            bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
         }
 
 
@@ -189,14 +191,14 @@ class ReversiOneDivice : AppCompatActivity() {
         }
         signature_canvas_reversi_one_device.invalidate()
 
-        to_back_reversi_one_divice.setOnClickListener {
+        to_back_one_divice.setOnClickListener {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 2)
             startActivity(intent)
         }
 
-        bottom_navigation_reversi_one_divice.setOnNavigationItemSelectedListener { item ->
+        bottom_navigation_one_divice.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
                     dialog_rules =
