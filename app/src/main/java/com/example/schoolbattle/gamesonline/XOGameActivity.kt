@@ -142,6 +142,7 @@ class XOGameActivity : AppCompatActivity() {
         }
 
 
+        var timeListener: ValueEventListener? = null
         gameData.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
@@ -241,12 +242,11 @@ class XOGameActivity : AppCompatActivity() {
                             }
                         }
                     }
-
-
-
+                    timeListener?.let { myRef.removeEventListener(it) }
                     myRef.child(type + "XOGames").child(if (opponentsName < yourName)
                         opponentsName + '_' + yourName else yourName + '_' + opponentsName
                     ).removeValue()
+
 
                     myRef.child("Users").child(yourName).child(type + "Games").child("$opponentsName XOGame").removeValue()
                     myRef.child("Users").child(opponentsName).child(type + "Games").child("$yourName XOGame").removeValue()
@@ -261,58 +261,60 @@ class XOGameActivity : AppCompatActivity() {
             }
         })
 
-        gameData.child("FIELD").addValueEventListener(object: ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {}
+        if (type == "Blitz") {
+            timeListener = gameData.child("FIELD").addValueEventListener(object: ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {}
 
-            override fun onDataChange(p0: DataSnapshot) {
-                var cnt = 0
-                for (i in 0..6) {
-                    for (j in 0..5) {
-                        if (p0.child("$i").hasChild("$j")) {
-                            cnt++
-                            //signature_canvas.FIELD[i][j] = p0.child("FIELD").child("$i").child("$j").value.toString().toInt()
-                        }
-                    }
-                }
-                initTrueTime(applicationContext)
-                if ((cnt%2 != 1) != signature_canvas.isFirstMove) {//TODO predpolagaem xod protivnika tok chto nachilsa
-                    //your movwe
-                    Finish_time_1 += trueTime.time - timeBegin
-                    timeBegin_1 = trueTime.time
-                    val timeList = listOf(
-                        Finish_time.toString(),
-                        Finish_time_1.toString(),
-                        timeBegin.toString(),
-                        timeBegin_1.toString(),
-                        cnt.toString()
-                    )
-                    gameData.child("Time").setValue(timeList)
-                } else {
-                    Finish_time += trueTime.time - timeBegin_1
-                    gameData.child("Time").addValueEventListener(object: ValueEventListener {
-                        override fun onCancelled(p0: DatabaseError) {}
-                        override fun onDataChange(p0: DataSnapshot) {
-                            if (p0.exists()) {
-                                val lst = p0.value as List<String>
-                                initTrueTime(applicationContext)
-                                if (cnt == lst[4].toInt()) {
-                                    var Finish_time_sync = lst[0].toLong()
-                                    var Finish_time_1_sync = lst[1].toLong()
-                                    var timeBegin_1_sync = lst[2].toLong()
-                                    var timeBegin_sync =  lst[3].toLong()
-
-                                    Finish_time = Finish_time_1_sync
-                                    timeBegin = trueTime.time
-                                    Toast.makeText(this@XOGameActivity, "dlkl" + cnt.toString(), Toast.LENGTH_LONG).show()
-                                }
-
+                override fun onDataChange(p0: DataSnapshot) {
+                    var cnt = 0
+                    for (i in 0..6) {
+                        for (j in 0..5) {
+                            if (p0.child("$i").hasChild("$j")) {
+                                cnt++
+                                //signature_canvas.FIELD[i][j] = p0.child("FIELD").child("$i").child("$j").value.toString().toInt()
                             }
                         }
-                    })
+                    }
+                    initTrueTime(applicationContext)
+                    if ((cnt%2 != 1) != signature_canvas.isFirstMove) {//TODO predpolagaem xod protivnika tok chto nachilsa
+                        //your movwe
+                        Finish_time_1 += trueTime.time - timeBegin
+                        timeBegin_1 = trueTime.time
+                        val timeList = listOf(
+                            Finish_time.toString(),
+                            Finish_time_1.toString(),
+                            timeBegin.toString(),
+                            timeBegin_1.toString(),
+                            cnt.toString()
+                        )
+                        gameData.child("Time").setValue(timeList)
+                    } else {
+                        Finish_time += trueTime.time - timeBegin_1
+                        gameData.child("Time").addValueEventListener(object: ValueEventListener {
+                            override fun onCancelled(p0: DatabaseError) {}
+                            override fun onDataChange(p0: DataSnapshot) {
+                                if (p0.exists()) {
+                                    val lst = p0.value as List<String>
+                                    initTrueTime(applicationContext)
+                                    if (cnt == lst[4].toInt()) {
+                                        var Finish_time_sync = lst[0].toLong()
+                                        var Finish_time_1_sync = lst[1].toLong()
+                                        var timeBegin_1_sync = lst[2].toLong()
+                                        var timeBegin_sync =  lst[3].toLong()
+
+                                        Finish_time = Finish_time_1_sync
+                                        timeBegin = trueTime.time
+                                        Toast.makeText(this@XOGameActivity, "dlkl" + cnt.toString(), Toast.LENGTH_LONG).show()
+                                    }
+
+                                }
+                            }
+                        })
+                    }
+                    //if (cnt % 2 == )
                 }
-                //if (cnt % 2 == )
-            }
-        })
+            })
+        }
     }
 
     override fun onPause() {

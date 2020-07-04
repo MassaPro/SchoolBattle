@@ -121,7 +121,7 @@ class GameListActivity : Fragment() {
                         putExtra("opponentName", item.name)
                     }
                 }
-
+                intent.putExtra("type", "")
                 v.context.startActivity(intent)
             }
         }
