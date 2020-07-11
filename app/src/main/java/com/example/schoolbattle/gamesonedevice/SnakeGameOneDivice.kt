@@ -650,12 +650,12 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
             dialog = Show_Result_one_Device(activity)
             if(check_win() == 1)
             {
-                dialog?.showResult_one_device("КРАСНАЯ ПОБЕДИЛА","SnakeGame",activity)
+                dialog?.showResult_one_device("Игрок 1 победил","SnakeGame",activity)
                 return true
             }
             if(check_win() == 2)
             {
-                dialog?.showResult_one_device("СИНЯЯ ПОБЕДИЛА","SnakeGame",activity)
+                dialog?.showResult_one_device("Игрок 2 победил","SnakeGame",activity)
                 return true
             }
         }

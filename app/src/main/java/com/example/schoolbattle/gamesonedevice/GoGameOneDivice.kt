@@ -631,11 +631,11 @@ class CanvasView_Go_one_divice(context: Context, attrs: AttributeSet?) : View(co
             dialog = Show_Result_one_Device(activity)
             if(check_win()==1)
             {
-                dialog?.showResult_one_device("КРАСНЫЕ ПОБЕДИЛИ","GoGame",activity)
+                dialog?.showResult_one_device("Игрок 1 победил","GoGame",activity)
             }
             if(check_win()==2)
             {
-                dialog?.showResult_one_device("CИНИЕ ПОБЕДИЛИ","GoGame",activity)
+                dialog?.showResult_one_device("Игрок 2 победил","GoGame",activity)
             }
             if(check_win()==3)
             {

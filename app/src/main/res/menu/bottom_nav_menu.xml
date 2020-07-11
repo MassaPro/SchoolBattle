@@ -23,4 +23,10 @@
         android:icon="@drawable/ic_settings_black_24dp"
         android:title="@string/title_notifications" />
 
+    <item
+        android:id="@+id/navigation_shop"
+        android:icon="@drawable/shop_icon"
+        android:title="Магазин" />
+
+
 </menu>

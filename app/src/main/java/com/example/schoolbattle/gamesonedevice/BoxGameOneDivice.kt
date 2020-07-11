@@ -720,11 +720,11 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
             dialog = Show_Result_one_Device(activity)
             if(check_win()==1)
             {
-                dialog?.showResult_one_device("КРАСНЫЕ ПОБЕДИЛИ","BoxGame",activity)
+                dialog?.showResult_one_device("Игрок 1 победил","BoxGame",activity)
             }
             if(check_win()==2)
             {
-                dialog?.showResult_one_device("СИНИЕ ПОБЕДИЛИ","BoxGame",activity)
+                dialog?.showResult_one_device("Игрок 2 победил","BoxGame",activity)
             }
             if(check_win()==3)
             {

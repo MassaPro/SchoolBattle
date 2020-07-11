@@ -159,14 +159,14 @@ class XOGame_oneDivice : AppCompatActivity() {
             {
                 dialog =
                     Show_Result_one_Device(this@XOGame_oneDivice)
-                dialog?.showResult_one_device("КРЕСТИКИ ПОБЕДИЛИ","XOGame",this)
+                dialog?.showResult_one_device("Игрок 1 победил","XOGame",this)
 
             }
             if(signature_canvas_xog_one_device.EXODUS == 2)
             {
                 dialog =
                     Show_Result_one_Device(this@XOGame_oneDivice)
-                dialog?.showResult_one_device("НОЛИКИ ПОБЕДИЛИ","XOGame",this)
+                dialog?.showResult_one_device("Игрок 2 победил","XOGame",this)
             }
         }
         to_back_one_divice.setOnClickListener {
