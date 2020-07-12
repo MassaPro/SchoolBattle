@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolbattle.gamesonline.*
 import kotlinx.android.synthetic.main.activity_game_item.view.*
-import kotlinx.android.synthetic.main.activity_settings.*
+import kotlinx.android.synthetic.main.activity_list_of_current_games.*
 
 class GameListActivity : Fragment() {
 
@@ -37,7 +37,7 @@ class GameListActivity : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         CONTEXT = requireActivity()
-        return inflater.inflate(R.layout.activity_settings, container, false)
+        return inflater.inflate(R.layout.activity_list_of_current_games, container, false)
 
 
 

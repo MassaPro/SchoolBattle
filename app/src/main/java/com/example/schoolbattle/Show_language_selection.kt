@@ -55,8 +55,6 @@ class Show_language_selection(activity: FragmentActivity)  {
             button_English.setTypeface(null, Typeface.BOLD);
             val prefs = type_activity.getSharedPreferences("UserData", Context.MODE_PRIVATE)
             val data_from_memory = prefs.getString("language", "").toString()
-            var textChanged = type_activity.findViewById(R.id.languageSelected) as TextView
-            textChanged.text = data_from_memory
             val handler = android.os.Handler()
             handler.postDelayed({ dialog_language.dismiss() }, 300)
         }
@@ -69,8 +67,6 @@ class Show_language_selection(activity: FragmentActivity)  {
             button_Russia.setTypeface(null, Typeface.BOLD);
             val prefs = type_activity.getSharedPreferences("UserData", Context.MODE_PRIVATE)
             val data_from_memory = prefs.getString("language", "").toString()
-            var textChanged = type_activity.findViewById(R.id.languageSelected) as TextView
-            textChanged.text = data_from_memory
             val handler = android.os.Handler()
             handler.postDelayed({ dialog_language.dismiss() }, 300)
         }
