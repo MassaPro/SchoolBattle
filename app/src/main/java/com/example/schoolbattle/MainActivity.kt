@@ -58,8 +58,9 @@ class MainActivity : Fragment() {
         CONTEXT = requireActivity()
 
 
-        Design = prfs?.getString("design", "Normal").toString()
-
+        Design = prfs?.getString("design", "Normal").toString()                 //дизайн
+        SOUND = prfs?.getString("sound", "").toString() == "true"       //получаем из памяти звук
+        VIBRATION = prfs?.getString("vibration", "").toString() == "true"       //получаем из памяти звук
         if (Design == "Egypt"){
             game_menu.setBackgroundResource(R.drawable.game_menu_egypt)
             //nav_view.setBackgroundColor(rgb(224, 164, 103));

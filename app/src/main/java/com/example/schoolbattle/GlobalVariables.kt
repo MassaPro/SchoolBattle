@@ -4,6 +4,11 @@ import android.app.Activity
 import android.content.Context
 import com.google.firebase.database.ChildEventListener
 
+
+
+//______________________________________________________________________
+var SOUND: Boolean = false
+var VIBRATION: Boolean = false
 //____________________________________________________________________________________________________________________________
 var Design: String = "Normal"               //дизайн
 val PICTURE_STYLES = mapOf(0 to R.drawable.icon_normal_design, 1 to R.drawable.icon_egypt_design, 2 to R.drawable.icon_casino_design)

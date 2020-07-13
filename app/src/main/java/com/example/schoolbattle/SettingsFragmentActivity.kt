@@ -24,8 +24,6 @@ import kotlinx.android.synthetic.main.profile_dialog.view.*
 
 
 class SettingsFragmentActivity : Fragment() {
-    private var dialog_parametrs: Show_language_selection? = null
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -85,14 +83,36 @@ class SettingsFragmentActivity : Fragment() {
             startActivity(intent)
             activity?.finish()
         }
-        soundSwitch.isChecked = true
 
-        soundSwitch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) {
-                //
-            } else {
-                //
+
+        soundSwitch.isChecked = SOUND                //настройка свитчера звука
+        soundSwitch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { _, isChecked ->
+            SOUND = isChecked
+            val editor = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)?.edit()
+            if(SOUND)
+            {
+                editor?.putString("sound","true")
             }
+            else
+            {
+                editor?.putString("sound","false")
+            }
+            editor?.apply()
+        })
+
+        vibrationSwitch.isChecked = VIBRATION               //настройка свитчера звука
+        vibrationSwitch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { _, isChecked ->
+            VIBRATION = isChecked
+            val editor = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)?.edit()
+            if(VIBRATION)
+            {
+                editor?.putString("vibration","true")
+            }
+            else
+            {
+                editor?.putString("vibration","false")
+            }
+            editor?.apply()
         })
 
         val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
