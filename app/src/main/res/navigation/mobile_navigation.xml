@@ -29,7 +29,7 @@
         tools:layout="@layout/activity_settings_fragment" />
     <fragment
         android:id="@+id/navigation_shop"
-        android:name="com.example.schoolbattle.ShopFragmentActivity"
+        android:name="com.example.schoolbattle.shop.ShopFragmentActivity"
         android:label="@string/title_notifications"
         tools:layout="@layout/activity_settings_fragment" />
 </navigation>

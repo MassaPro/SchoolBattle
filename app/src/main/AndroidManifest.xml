@@ -10,8 +10,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ShopFragmentActivity"/>
-        <activity android:name=".SettingsFragmentActivity"/>
+        <activity android:name=".shop.Premium"></activity>
+        <activity android:name=".shop.Designs" />
+        <activity android:name=".shop.Emotions" />
+        <activity android:name=".shop.Avatars" />
+        <activity android:name=".shop.ShopFragmentActivity" />
+        <activity android:name=".SettingsFragmentActivity" />
         <activity android:name=".gamesonline.TEST" />
         <activity android:name=".social.FriendsAndFollowers" />
         <activity android:name=".social.ProfileUserActivity" />
