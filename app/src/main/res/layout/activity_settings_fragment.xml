@@ -8,30 +8,39 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="559dp"
-        app:layout_constraintBottom_toTopOf="@+id/toolbar2"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tb1">
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="fill_parent"
             android:padding="3dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/item_design"
-                android:layout_width="401dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                app:layoutManager="LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="52dp"
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_design" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/item_design"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="52dp"
+                app:layoutManager="LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/choose_design"
-                app:layout_constraintVertical_bias="0.0"
                 tools:context=".SettingsFragmentActivity"
                 tools:listitem="@layout/design_item" />
 
@@ -39,12 +48,12 @@
                 android:id="@+id/choose_design"
                 android:layout_width="294dp"
                 android:layout_height="58dp"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="64dp"
                 android:gravity="center"
                 android:text="Выбор дизайна"
                 android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.418"
+                app:layout_constraintHorizontal_bias="0.426"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/vibrationSwitch" />
 
@@ -52,7 +61,7 @@
                 android:id="@+id/vibrationSwitch"
                 android:layout_width="293dp"
                 android:layout_height="54dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="36dp"
                 android:text="Вибрация"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="@+id/choose_design"
@@ -64,11 +73,11 @@
                 android:id="@+id/soundSwitch"
                 android:layout_width="293dp"
                 android:layout_height="54dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="100dp"
                 android:text="Звук"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="@+id/choose_design"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/choose_design"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -77,17 +86,15 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb1"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <Button
@@ -119,17 +126,6 @@
         app:layout_constraintEnd_toEndOf="@+id/tb1"
         app:layout_constraintStart_toEndOf="@+id/toolbarNameSettings"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar2"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
