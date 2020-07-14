@@ -1,6 +1,5 @@
 package com.example.schoolbattle
 
-import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -15,12 +14,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.example.schoolbattle.gamesonline.*
-import kotlinx.android.synthetic.main.activity_game_item.view.*
-import kotlinx.android.synthetic.main.activity_list_of_current_games.*
 import kotlinx.android.synthetic.main.activity_settings_fragment.*
 import kotlinx.android.synthetic.main.design_item.view.*
-import kotlinx.android.synthetic.main.profile_dialog.view.*
 
 
 class SettingsFragmentActivity : Fragment() {
@@ -36,14 +31,14 @@ class SettingsFragmentActivity : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        (activity as AppCompatActivity?)!!.setSupportActionBar(my_toolbar_settings)
+        (activity as AppCompatActivity?)!!.setSupportActionBar(tb1)
 
         if (Design == "Normal") {
             settings_menu.setBackgroundColor(Color.WHITE)
         }
         if (Design == "Casino") {
             settings_menu.setBackgroundResource(R.drawable.background_casino)
-            my_toolbar_settings.setBackgroundColor(argb(0,0,0,0))
+            tb1.setBackgroundColor(argb(0,0,0,0))
 
             choose_design.setBackgroundColor(argb(0,0,0,0))
             choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
@@ -58,7 +53,7 @@ class SettingsFragmentActivity : Fragment() {
         }
         if (Design == "Egypt") {
             settings_menu.setBackgroundResource(R.drawable.background_egypt)
-            my_toolbar_settings.setBackgroundColor(rgb(224,164,103));
+            tb1.setBackgroundColor(rgb(224,164,103));
 
             choose_design.setBackgroundColor(argb(0,0,0,0))
             choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))

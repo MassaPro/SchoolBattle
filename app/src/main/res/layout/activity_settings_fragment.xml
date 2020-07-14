@@ -8,12 +8,12 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="566dp"
+        android:layout_height="559dp"
         app:layout_constraintBottom_toTopOf="@+id/toolbar2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_toolbar_settings">
+        app:layout_constraintTop_toBottomOf="@+id/tb1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -76,7 +76,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/my_toolbar_settings"
+        android:id="@+id/tb1"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:background="?attr/colorPrimary"
@@ -100,10 +100,10 @@
 
 
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/my_toolbar_settings"
-        app:layout_constraintStart_toStartOf="@+id/my_toolbar_settings"
-        app:layout_constraintTop_toTopOf="@+id/my_toolbar_settings"
-        app:layout_constraintBottom_toBottomOf="@+id/my_toolbar_settings"
+        app:layout_constraintEnd_toEndOf="@+id/tb1"
+        app:layout_constraintStart_toStartOf="@+id/tb1"
+        app:layout_constraintTop_toTopOf="@+id/tb1"
+        app:layout_constraintBottom_toBottomOf="@+id/tb1"
         />
 
     <Button
@@ -115,8 +115,8 @@
         android:textAllCaps="false"
         android:textColor="@android:color/holo_red_light"
 
-        app:layout_constraintBottom_toBottomOf="@+id/my_toolbar_settings"
-        app:layout_constraintEnd_toEndOf="@+id/my_toolbar_settings"
+        app:layout_constraintBottom_toBottomOf="@+id/tb1"
+        app:layout_constraintEnd_toEndOf="@+id/tb1"
         app:layout_constraintStart_toEndOf="@+id/toolbarNameSettings"
         app:layout_constraintTop_toTopOf="parent" />
 
