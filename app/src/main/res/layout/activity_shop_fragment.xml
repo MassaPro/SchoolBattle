@@ -8,12 +8,65 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_shop"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar_shop_layout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorGrey">
-    </androidx.appcompat.widget.Toolbar>
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_shop"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorGrey"
+            ads:layout_constraintBottom_toBottomOf="parent"
+            ads:layout_constraintEnd_toEndOf="parent"
+            ads:layout_constraintHorizontal_bias="0.0"
+            ads:layout_constraintStart_toStartOf="parent"
+            ads:layout_constraintTop_toTopOf="parent"
+            ads:layout_constraintVertical_bias="0.0"></androidx.appcompat.widget.Toolbar>
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="24dp"
+            android:background="@drawable/money"
+            ads:layout_constraintBottom_toBottomOf="parent"
+            ads:layout_constraintEnd_toEndOf="@+id/toolbar_shop"
+            ads:layout_constraintHorizontal_bias="0.0"
+            ads:layout_constraintStart_toEndOf="@+id/money_shop_toolbar"
+            ads:layout_constraintTop_toTopOf="@+id/money_shop_toolbar"
+            ads:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/button_shop_name"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:text="Button"
+            ads:layout_constraintEnd_toEndOf="@+id/toolbar_shop"
+            ads:layout_constraintHorizontal_bias="0.498"
+            ads:layout_constraintStart_toStartOf="@+id/toolbar_shop"
+            ads:layout_constraintTop_toTopOf="@+id/toolbar_shop" />
+
+        <TextView
+            android:id="@+id/money_shop_toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:gravity="right|center"
+            android:text="Цена"
+            android:textSize="20dp"
+            ads:layout_constraintBottom_toBottomOf="@+id/toolbar_shop"
+            ads:layout_constraintStart_toEndOf="@+id/button_shop_name"
+            ads:layout_constraintTop_toTopOf="@+id/button_shop_name"
+            ads:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs_shop"
@@ -23,7 +76,7 @@
         app:tabGravity="fill"
         app:tabIndicatorHeight="5dp"
         app:tabMode="fixed"
-        android:layout_below="@+id/toolbar_shop">
+        android:layout_below="@+id/toolbar_shop_layout">
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager.widget.ViewPager
@@ -33,19 +86,4 @@
         android:layout_below="@+id/tabs_shop">
     </androidx.viewpager.widget.ViewPager>
 
-    <Button
-        android:id="@+id/button_shop_name"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_alignBottom="@+id/toolbar_shop"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="151dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="142dp"
-        android:layout_marginBottom="0dp"
-        android:gravity="center"
-        android:background="@android:color/transparent"
-        android:text="Button" />
 </RelativeLayout>

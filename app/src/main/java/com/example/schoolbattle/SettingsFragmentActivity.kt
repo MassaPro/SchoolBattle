@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.design_item.view.*
 
 
 var fragment_activity : AppCompatActivity? = null
+
 class SettingsFragmentActivity : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,

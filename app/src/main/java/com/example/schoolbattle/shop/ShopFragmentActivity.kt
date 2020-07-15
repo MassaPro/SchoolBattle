@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -24,12 +25,15 @@ import kotlinx.android.synthetic.main.activity_null.view.*
 import kotlinx.android.synthetic.main.activity_settings_fragment.*
 import kotlinx.android.synthetic.main.activity_shop_fragment.*
 
+
+
 class ShopFragmentActivity : Fragment (){
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         (activity as AppCompatActivity?)!!.setSupportActionBar(tb1)
+
 
 
     }
@@ -54,6 +58,7 @@ class ShopFragmentActivity : Fragment (){
         var fon = v.findViewById<View>(R.id.shop_menu)
         var t_shop = v.findViewById<View>(R.id.toolbar_shop)
         var name  = v.findViewById<View>(R.id.button_shop_name) as Button
+        var money = v.findViewById<View>(R.id.money_shop_toolbar) as TextView
         if(Design == "Normal")
         {
             t_shop.setBackgroundColor(rgb(214,214,214))
@@ -73,6 +78,7 @@ class ShopFragmentActivity : Fragment (){
         val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val globalName = prefs?.getString("username", "").toString()
         name.text = globalName
+        money.text  = MONEY.toString()
         /**
          * Set an Apater for the View Pager
          */
