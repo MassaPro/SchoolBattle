@@ -9,24 +9,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.example.schoolbattle.CONTEXT
-import com.example.schoolbattle.Design
-import com.example.schoolbattle.R
+import com.example.schoolbattle.*
 import com.example.schoolbattle.social.FriendsList
 import com.example.schoolbattle.social.MyProfile
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_game_menu.*
 import kotlinx.android.synthetic.main.activity_null.view.*
+import kotlinx.android.synthetic.main.activity_settings_fragment.*
 import kotlinx.android.synthetic.main.activity_shop_fragment.*
 
 class ShopFragmentActivity : Fragment (){
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        CONTEXT = requireActivity()
+
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        (activity as AppCompatActivity?)!!.setSupportActionBar(tb1)
+
 
     }
 
@@ -36,10 +40,14 @@ class ShopFragmentActivity : Fragment (){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        CONTEXT = requireActivity()
         /**
          * Inflate tab_layout and setup Views.
          */
         var v: View = inflater.inflate(R.layout.activity_shop_fragment, container, false)
+
+
+
         tabLayout = v.findViewById<View>(R.id.tabs_shop) as TabLayout
         viewPager = v.findViewById<View>(R.id.viewpager_shop) as ViewPager
 

@@ -1,5 +1,6 @@
 package com.example.schoolbattle
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -9,7 +10,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.CompoundButton
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
@@ -18,6 +21,8 @@ import kotlinx.android.synthetic.main.activity_settings_fragment.*
 import kotlinx.android.synthetic.main.design_item.view.*
 
 
+
+var fragment_activity : AppCompatActivity? = null
 class SettingsFragmentActivity : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,6 +35,8 @@ class SettingsFragmentActivity : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        fragment_activity = activity as AppCompatActivity
 
         (activity as AppCompatActivity?)!!.setSupportActionBar(tb1)
 
@@ -145,6 +152,7 @@ class SettingsFragmentActivity : Fragment() {
 
 
     }*/
+
 }
 
 private fun DesignsetupRecyclerView(recyclerView: RecyclerView) {
@@ -182,8 +190,11 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                 editor.putString("design","Casino")
                 editor.apply()
             }
-            val intent = Intent(v.context,NavigatorActivity::class.java)
-            v.context.startActivity(intent)
+
+            val t = fragment_activity?.supportFragmentManager?.beginTransaction()
+            val mFrag: Fragment= SettingsFragmentActivity()                    //ПРОСТО ПИЗДЕЦ
+            t?.replace(R.id.settings_menu,mFrag)?.commitNowAllowingStateLoss()
+
         }
     }
 
