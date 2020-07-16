@@ -16,11 +16,19 @@
     <item
         android:id="@+id/navigation_social"
         android:icon="@drawable/ic_freinds_black_24dp"
-        android:title="@string/title_notifications" />
+        android:title="Профиль" />
+
+    <item
+        android:id="@+id/navigation_shop"
+        android:icon="@drawable/shop_icon"
+        android:title="Магазин" />
+
 
     <item
         android:id="@+id/navigation_settings"
         android:icon="@drawable/ic_settings_black_24dp"
         android:title="@string/title_notifications" />
+
+
 
 </menu>

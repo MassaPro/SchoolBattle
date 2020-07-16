@@ -66,4 +66,6 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
 
     implementation 'com.github.instacart.truetime-android:library:3.3'
+
+
 }

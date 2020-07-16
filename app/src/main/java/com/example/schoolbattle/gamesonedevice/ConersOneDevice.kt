@@ -702,13 +702,13 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
             if (chek_win() == 2) {3
                 dialog =
                     Show_Result_one_Device(activity)
-                dialog?.showResult_one_device("СЕРЫЕ ПОБЕДИЛИ", "AngleGame", activity)
+                dialog?.showResult_one_device("Игрок 1 победил", "AngleGame", activity)
                 return true
             }
             if (chek_win() == 1) {
                 dialog =
                     Show_Result_one_Device(activity)
-                dialog?.showResult_one_device("ЧЕРНЫЕ ПОБЕДИЛИ", "AngleGame", activity)
+                dialog?.showResult_one_device("Игрок 2 победил", "AngleGame", activity)
                 return true
             }
         }

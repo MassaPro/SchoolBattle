@@ -1,5 +1,6 @@
 package com.example.schoolbattle
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -10,15 +11,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toolbar
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationMenu
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_settings_fragment.*
+import kotlinx.android.synthetic.main.design_item.view.*
 
+
+
+var fragment_activity : AppCompatActivity? = null
 
 class SettingsFragmentActivity : Fragment() {
-    private var dialog_parametrs: Show_language_selection? = null
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,27 +41,22 @@ class SettingsFragmentActivity : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        (activity as AppCompatActivity?)!!.setSupportActionBar(my_toolbar_settings)
+        fragment_activity = activity as AppCompatActivity
+
+        (activity as AppCompatActivity?)!!.setSupportActionBar(tb1)
 
         if (Design == "Normal") {
             settings_menu.setBackgroundColor(Color.WHITE)
         }
         if (Design == "Casino") {
-            settings_menu.setBackgroundResource(R.drawable.background_casino)
-            my_toolbar_settings.setBackgroundColor(argb(0,0,0,0))
+            settings_menu.setBackgroundResource(R.drawable.background2_casino)
+            tb1.setBackgroundColor(argb(0,0,0,0))
 
             choose_design.setBackgroundColor(argb(0,0,0,0))
             choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             choose_design.setTextColor(Color.YELLOW)
             choose_design.setTextSize(20f)
 
-            languageChange.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            languageChange.setTextColor(Color.YELLOW)
-            languageChange.setTextSize(20f)
-
-            languageSelected.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            languageSelected.setTextColor(Color.YELLOW)
-            languageSelected.setTextSize(20f)
 
             soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             soundSwitch.setTextColor(Color.YELLOW)
@@ -60,20 +65,14 @@ class SettingsFragmentActivity : Fragment() {
         }
         if (Design == "Egypt") {
             settings_menu.setBackgroundResource(R.drawable.background_egypt)
-            my_toolbar_settings.setBackgroundColor(rgb(224,164,103));
+            tb1.setBackgroundColor(rgb(224,164,103));
 
             choose_design.setBackgroundColor(argb(0,0,0,0))
             choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
             //choose_design.setTextColor(Color.YELLOW)
             choose_design.setTextSize(18f)
 
-            languageChange.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            //languageChange.setTextColor(Color.YELLOW)
-            languageChange.setTextSize(20f)
 
-            languageSelected.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            //languageSelected.setTextColor(Color.YELLOW)
-            languageSelected.setTextSize(20f)
 
             soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
             //soundSwitch.setTextColor(Color.YELLOW)
@@ -91,14 +90,36 @@ class SettingsFragmentActivity : Fragment() {
             startActivity(intent)
             activity?.finish()
         }
-        soundSwitch.isChecked = true
 
-        soundSwitch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) {
-                //
-            } else {
-                //
+
+        soundSwitch.isChecked = SOUND                //настройка свитчера звука
+        soundSwitch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { _, isChecked ->
+            SOUND = isChecked
+            val editor = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)?.edit()
+            if(SOUND)
+            {
+                editor?.putString("sound","true")
             }
+            else
+            {
+                editor?.putString("sound","false")
+            }
+            editor?.apply()
+        })
+
+        vibrationSwitch.isChecked = VIBRATION               //настройка свитчера звука
+        vibrationSwitch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { _, isChecked ->
+            VIBRATION = isChecked
+            val editor = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)?.edit()
+            if(VIBRATION)
+            {
+                editor?.putString("vibration","true")
+            }
+            else
+            {
+                editor?.putString("vibration","false")
+            }
+            editor?.apply()
         })
 
         val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
@@ -110,32 +131,18 @@ class SettingsFragmentActivity : Fragment() {
             data_from_memory = "EN"
         }
 
-        languageSelected.text = data_from_memory
-
-        languageChange.setOnClickListener {
-            //Toast.makeText(activity,"Change text", Toast.LENGTH_LONG).show()
-            dialog_parametrs = activity?.let { it1 -> Show_language_selection(it1) }
-            activity?.let { it1 -> dialog_parametrs?.showResult_window(it1) }
 
 
-            /*val handler = android.os.Handler()
-            val delay = 1000 //milliseconds
-            handler.postDelayed(object : Runnable {
-                override fun run() {
-                    val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
-                    var data_from_memory = prefs?.getString("language", "").toString()
-                    languageSelected.text = data_from_memory
-                    handler.postDelayed(this, delay.toLong())
-                }
-            }, delay.toLong())*/
 
 
-        }
 
-        choose_design.setOnClickListener {
-            val intent = Intent(context, Choose_design_Activity::class.java)
-            startActivity(intent)
-        }
+
+
+
+        DesignsetupRecyclerView(item_design)
+        gamesRecycler = item_design
+        gamesRecycler.isNestedScrollingEnabled = false;
+        item_design.adapter?.notifyDataSetChanged()
 
     }
 
@@ -150,4 +157,97 @@ class SettingsFragmentActivity : Fragment() {
 
 
     }*/
+
 }
+
+private fun DesignsetupRecyclerView(recyclerView: RecyclerView) {
+    recyclerView.adapter = DesignItemRecyclerViewAdapter(ARRAY_OF_DESIGN)
+}
+
+
+
+class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
+    RecyclerView.Adapter<DesignItemRecyclerViewAdapter.ViewHolder>() {
+
+    private val onClickListener: View.OnClickListener
+
+    init {
+        onClickListener = View.OnClickListener { v ->
+            var item = v.tag
+            if(item == 0)
+            {
+                Design = "Normal"
+                val editor = v.context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("design","Normal")
+                editor.apply()
+            }
+            else if(item == 1)
+            {
+                Design = "Egypt"
+                val editor = v.context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("design","Egypt")
+                editor.apply()
+            }
+            else if(item == 2)
+            {
+                Design = "Casino"
+                val editor = v.context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("design","Casino")
+                editor.apply()
+            }
+
+            val t = fragment_activity?.supportFragmentManager?.beginTransaction()
+            val mFrag: Fragment= SettingsFragmentActivity()                    //ПРОСТО ПИЗДЕЦ
+            t?.replace(R.id.settings_menu,mFrag)?.commitNowAllowingStateLoss()
+
+            if(Design == "Normal")
+            {
+                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE);
+            }
+            else if(Design == "Egypt")
+            {
+                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(rgb(224, 164, 103));
+            }
+            else if(Design == "Casino")
+            {
+                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_casino)
+            }
+
+
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.design_item, parent, false)
+        return ViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        PICTURE_STYLES[ARRAY_OF_DESIGN[position]]?.let { holder.img.setBackgroundResource(it) }     //картинка для стиля
+        if(AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == Design)
+        {
+            holder.contentView.setText(PICTURE_TEXT[ARRAY_OF_DESIGN[position]] + "(установлено)")          //название стиля
+        }
+        else
+        {
+            holder.contentView.setText(PICTURE_TEXT[ARRAY_OF_DESIGN[position]])          //название стиля
+        }
+        with(holder.itemView) {
+            tag = ARRAY_OF_DESIGN[position]
+            setOnClickListener(onClickListener)
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return ARRAY_OF_DESIGN.size
+
+
+    }
+
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        var img: ImageView = view.img_design
+        var contentView: TextView = view.id_text_design
+    }
+}
+

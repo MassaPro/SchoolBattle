@@ -940,12 +940,12 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
                 dialog = Show_Result_one_Device(activity)
                 if(ch==1)
                 {
-                    dialog?.showResult_one_device("КРАСНЫЕ ПОБЕДИЛИ","VirusGame",activity)
+                    dialog?.showResult_one_device("Игрок 1 победил","VirusGame",activity)
                     return true
                 }
                 if(ch==2)
                 {
-                    dialog?.showResult_one_device("CИНИЕ ПОБЕДИЛИ","VirusGame",activity)
+                    dialog?.showResult_one_device("Игрок 2 победил","VirusGame",activity)
                     return true
                 }
                 if(ch==3)

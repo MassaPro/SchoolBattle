@@ -1027,11 +1027,11 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
             dialog = Show_Result_one_Device(activity)
             if(check_win()==1)
             {
-                dialog?.showResult_one_device("КРАСНЫЕ ПОБЕДИЛИ","DotGame",activity)
+                dialog?.showResult_one_device("Игрок 1 победил","DotGame",activity)
             }
             if(check_win()==2)
             {
-                dialog?.showResult_one_device("CИНИЕ ПОБЕДИЛИ","DotGame",activity)
+                dialog?.showResult_one_device("Игрок 2 победил","DotGame",activity)
             }
             if(check_win()==3)
             {

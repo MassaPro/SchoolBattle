@@ -13,6 +13,9 @@ import android.view.Window
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -26,6 +29,8 @@ import kotlinx.android.synthetic.main.activity_friends_list.*
 var now: Context? = null
 
 class NavigatorActivity : AppCompatActivity() {
+
+
 
     override fun onResume() {
         super.onResume()
@@ -47,6 +52,8 @@ class NavigatorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigator)
 
+
+
         Log.d("VISIT","121212121")
         CONTEXT = this
 
@@ -60,6 +67,8 @@ class NavigatorActivity : AppCompatActivity() {
         //val appBarConfiguration = AppBarConfiguration(setOf(
           //  R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
         //setupActionBarWithNavController(navController, appBarConfiguration)
+        var f : Fragment = SettingsFragmentActivity()
+        val t = supportFragmentManager.beginTransaction()
         navView.setupWithNavController(navController)
 
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
@@ -163,6 +172,9 @@ class NavigatorActivity : AppCompatActivity() {
                     }
                 }
             })
+
+
+
     }
 
 

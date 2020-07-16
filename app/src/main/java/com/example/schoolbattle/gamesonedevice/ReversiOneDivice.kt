@@ -1008,12 +1008,12 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
         if(check_win()>0 && event!!.getAction()  == MotionEvent.ACTION_UP && !blocked) {
             if (check_win() == 2) {3
                 dialog = Show_Result_one_Device(activity)
-                dialog?.showResult_one_device("СЕРЫЕ ПОБЕДИЛИ", "Reversi", activity)
+                dialog?.showResult_one_device("Игрок 1 победил", "Reversi", activity)
                 return true
             }
             if (check_win() == 1) {
                 dialog = Show_Result_one_Device(activity)
-                dialog?.showResult_one_device("ЧЕРНЫЕ ПОБЕДИЛИ", "Reversi", activity)
+                dialog?.showResult_one_device("Игрок 2 победил", "Reversi", activity)
                 return true
             }
             if(check_win() == 3)

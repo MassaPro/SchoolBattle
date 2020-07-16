@@ -284,7 +284,34 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
         {
             var X : Int = Snake_1.last().first
             var Y: Int = Snake_1.last().second
-
+            if(X == 0)
+            {
+                if(FIELD[10][Y] == 0)
+                {
+                    return 0
+                }
+            }
+            if(Y == 0)
+            {
+                if(FIELD[X][10] == 0)
+                {
+                    return 0
+                }
+            }
+            if(X == 10)
+            {
+                if(FIELD[0][Y] == 0)
+                {
+                    return 0
+                }
+            }
+            if(Y == 10)
+            {
+                if(FIELD[X][0] == 0)
+                {
+                    return 0
+                }
+            }
             if(X>0)
             {
                 if(FIELD[X-1][Y] == 0)
@@ -293,7 +320,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
                 }
             }
 
-            if(X<8)
+            if(X<10)
             {
                 if(FIELD[X+1][Y] == 0)
                 {
@@ -307,7 +334,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
                     return 0
                 }
             }
-            if(Y<8)
+            if(Y<10)
             {
                 if(FIELD[X][Y+1] == 0)
                 {
@@ -321,6 +348,34 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
             var X : Int = Snake_2.last().first
             var Y: Int = Snake_2.last().second
 
+            if(X == 0)
+            {
+                if(FIELD[10][Y] == 0)
+                {
+                    return 0
+                }
+            }
+            if(Y == 0)
+            {
+                if(FIELD[X][10] == 0)
+                {
+                    return 0
+                }
+            }
+            if(X == 10)
+            {
+                if(FIELD[0][Y] == 0)
+                {
+                    return 0
+                }
+            }
+            if(Y == 10)
+            {
+                if(FIELD[X][0] == 0)
+                {
+                    return 0
+                }
+            }
             if(X>0)
             {
                 if(FIELD[X-1][Y] == 0)
@@ -329,7 +384,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
                 }
             }
 
-            if(X<8)
+            if(X<10)
             {
                 if(FIELD[X+1][Y] == 0)
                 {
@@ -343,7 +398,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
                     return 0
                 }
             }
-            if(Y<8)
+            if(Y<10)
             {
                 if(FIELD[X][Y+1] == 0)
                 {
@@ -374,7 +429,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
     var border_1: Paint = Paint()
     var border_2: Paint = Paint()
 
-    var FIELD = Array(9){IntArray(9)}     //для фишеК
+    var FIELD = Array(11){IntArray(11)}     //для фишеК
     var A: MutableList<Pair<Int,Int>> = mutableListOf()
     var TREE_OF_WAYS: MutableList<MutableList<Pair<Int,Int>>> = mutableListOf()
     var CELLS = Array(10){Array(15){IntArray(6)} }            //массив клеток в которых мы будем проводить ребра
@@ -455,116 +510,120 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
 
         for(i in 0 until size_field_y+1)          //вырисовка горизонтальных линий
         {
-            if(i == 0 || i == size_field_y)
-            {
-                canvas?.drawLine(indent,k,width+indent,k,border_1)
-            }
-            else
-            {
-                canvas?.drawLine(indent,k,width+indent,k,Line_paint)
-            }
+
+            canvas?.drawLine(indent,k,width+indent,k,Line_paint)
             k = k + step
         }
 
         k = indent
         for(i in 0 until size_field_x+1)         //вырисовка вертикальных линий
         {
-            if(i == 0 ||  i == size_field_x)
-            {
-                canvas?.drawLine(k, height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())+ 5f,k,height-advertising_line-5f,border_1)
-            }
-            else
-            {
-                canvas?.drawLine(k, height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())+ 5f,k,height-advertising_line-5f,Line_paint)
-            }
 
+            canvas?.drawLine(k, height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())+ 5f,k,height-advertising_line-5f,Line_paint)
             k = k + step
         }
 
         var x: Float;
         var y: Float
-        x = indent + step
-        y = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat()) + step
-        for(i in 0..size_field_x-2)                    //вырисовка точек
+        x = indent
+        y = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())
+        for(i in 0..size_field_x)                    //вырисовка точек
         {
-            for(j in 0..size_field_y-2)
+            for(j in 0..size_field_y)
             {
                 canvas?.drawCircle(x,y,radius_of_point,paint_circle)
                 y += step
             }
             x += step
-            y  = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat()) + step
+            y  = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())
         }
 
         for(i in 0 until Snake_1.size - 1)     //вырисовка ребер змеи
         {
-            var X: Float = indent + step*Snake_1[i].first + step
-            var Y: Float =  height - advertising_line - width + step*Snake_1[i].second + step
-            var X1: Float = indent + step*Snake_1[i+1].first + step
-            var Y1: Float =  height - advertising_line - width + step*Snake_1[i+1].second + step
-            canvas?.drawLine(X,Y,X1,Y1,paint_rib_1)
-
+            var X: Float = indent + step*Snake_1[i].first
+            var Y: Float =  height - advertising_line - width + step*Snake_1[i].second
+            var X1: Float = indent + step*Snake_1[i+1].first
+            var Y1: Float =  height - advertising_line - width + step*Snake_1[i+1].second
+            if(abs(Snake_1[i].first - Snake_1[i+1].first) + abs(Snake_1[i].second - Snake_1[i+1].second) <= 2)
+            {
+               canvas?.drawLine(X,Y,X1,Y1,paint_rib_1)
+            }
 
             if(Snake_1[i].second == Snake_1[i+1].second &&Snake_1[i].first < Snake_1[i+1].first )
             {
-                canvas?.drawLine(X-5,Y,X1+5,Y1,paint_rib_1)
+                if(abs(Snake_1[i].first - Snake_1[i+1].first) + abs(Snake_1[i].second - Snake_1[i+1].second) <= 2)
+                {
+                    canvas?.drawLine(X - 5, Y, X1 + 5, Y1, paint_rib_1)
+                }
             }
             if(Snake_1[i].second == Snake_1[i+1].second &&Snake_1[i].first > Snake_1[i+1].first )
             {
-                canvas?.drawLine(X+5,Y,X1-5,Y1,paint_rib_1)
+                if(abs(Snake_1[i].first - Snake_1[i+1].first) + abs(Snake_1[i].second - Snake_1[i+1].second) <= 2)
+                {
+                    canvas?.drawLine(X+5,Y,X1-5,Y1,paint_rib_1)
+                }
             }
         }
         for(i in 0 until Snake_2.size - 1)      //вырисовка ребер змеи
         {
-            var X: Float = indent + step*Snake_2[i].first + step
-            var Y: Float =  height - advertising_line - width + step*Snake_2[i].second + step
-            var X1: Float = indent + step*Snake_2[i+1].first + step
-            var Y1: Float =  height - advertising_line - width + step*Snake_2[i+1].second + step
-            canvas?.drawLine(X,Y,X1,Y1,paint_rib_2)
+            var X: Float = indent + step*Snake_2[i].first
+            var Y: Float =  height - advertising_line - width + step*Snake_2[i].second
+            var X1: Float = indent + step*Snake_2[i+1].first
+            var Y1: Float =  height - advertising_line - width + step*Snake_2[i+1].second
+            if(abs(Snake_2[i].first - Snake_2[i+1].first) + abs(Snake_2[i].second - Snake_2[i+1].second) <= 2)
+            {
+                canvas?.drawLine(X,Y,X1,Y1,paint_rib_2)
+            }
             if(Snake_2[i].second == Snake_2[i+1].second &&Snake_2[i].first < Snake_2[i+1].first )
             {
-                canvas?.drawLine(X-5,Y,X1+5,Y1,paint_rib_2)
+                if(abs(Snake_2[i].first - Snake_2[i+1].first) + abs(Snake_2[i].second - Snake_2[i+1].second) <= 2)
+                {
+                    canvas?.drawLine(X - 5, Y, X1 + 5, Y1, paint_rib_2)
+                }
             }
             if(Snake_2[i].second == Snake_2[i+1].second &&Snake_2[i].first > Snake_2[i+1].first )
             {
-                canvas?.drawLine(X+5,Y,X1-5,Y1,paint_rib_2)
+                if(abs(Snake_2[i].first - Snake_2[i+1].first) + abs(Snake_2[i].second - Snake_2[i+1].second) <= 2)
+                {
+                    canvas?.drawLine(X+5,Y,X1-5,Y1,paint_rib_2)
+                }
             }
         }
 
         if(Snake_1.size>0)
         {
-            var X: Float = indent + step * Snake_1[0].first + step - step / 5f
-            var X1: Float = indent + step * Snake_1[0].first + step + step / 5f
+            var X: Float = indent + step * Snake_1[0].first  - step / 5f
+            var X1: Float = indent + step * Snake_1[0].first  + step / 5f
             var Y: Float =
-                height - advertising_line - width + step * Snake_1[0].second + step - step / 5f
+                height - advertising_line - width + step * Snake_1[0].second  - step / 5f
             var Y1: Float =
-                height - advertising_line - width + step * Snake_1[0].second + step + step / 5f
+                height - advertising_line - width + step * Snake_1[0].second  + step / 5f
             canvas?.drawLine(X, Y, X1, Y1, paint_rib_1)
             canvas?.drawLine(X, Y1, X1, Y, paint_rib_1)
         }
 
         if(Snake_2.size>0)
         {
-            var _X: Float = indent + step * Snake_2[0].first + step - step / 5f
-            var _X1: Float = indent + step * Snake_2[0].first + step + step / 5f
+            var _X: Float = indent + step * Snake_2[0].first - step / 5f
+            var _X1: Float = indent + step * Snake_2[0].first + step / 5f
             var _Y: Float =
-                height - advertising_line - width + step * Snake_2[0].second + step - step / 5f
+                height - advertising_line - width + step * Snake_2[0].second  - step / 5f
             var _Y1: Float =
-                height - advertising_line - width + step * Snake_2[0].second + step + step / 5f
+                height - advertising_line - width + step * Snake_2[0].second  + step / 5f
             canvas?.drawLine(_X, _Y, _X1, _Y1, paint_rib_2)
             canvas?.drawLine(_X, _Y1, _X1, _Y, paint_rib_2)
         }
 
         if(Snake_1.size > 1)
         {
-            var X: Float = indent + step*Snake_1.last().first + step
-            var Y: Float = height - width - advertising_line + step*Snake_1.last().second + step
+            var X: Float = indent + step*Snake_1.last().first
+            var Y: Float = height - width - advertising_line + step*Snake_1.last().second
             canvas?.drawCircle(X,Y,radius_of_point*2,paint_rib_1)
         }
         if(Snake_2.size > 1)
         {
-            var X: Float = indent + step*Snake_2.last().first + step
-            var Y: Float = height - width - advertising_line + step*Snake_2.last().second + step
+            var X: Float = indent + step*Snake_2.last().first
+            var Y: Float = height - width - advertising_line + step*Snake_2.last().second
             canvas?.drawCircle(X,Y,radius_of_point*2,paint_rib_2)
         }
 
@@ -591,23 +650,23 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
             dialog = Show_Result_one_Device(activity)
             if(check_win() == 1)
             {
-                dialog?.showResult_one_device("КРАСНАЯ ПОБЕДИЛА","SnakeGame",activity)
+                dialog?.showResult_one_device("Игрок 1 победил","SnakeGame",activity)
                 return true
             }
             if(check_win() == 2)
             {
-                dialog?.showResult_one_device("СИНЯЯ ПОБЕДИЛА","SnakeGame",activity)
+                dialog?.showResult_one_device("Игрок 2 победил","SnakeGame",activity)
                 return true
             }
         }
         circlex = event!!.x
         circley = event!!.y
 
-        x = indent + step
-        y = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat()) + step
-        for(i in 0..size_field_x - 2)
+        x = indent
+        y = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())
+        for(i in 0..size_field_x)
         {
-            for(j in 0..size_field_y - 2)
+            for(j in 0..size_field_y)
             {
                 if(correction_touch(x,y))
                 {
@@ -628,7 +687,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
                             }
                             else
                             {
-                                if((i == Snake_1.last().first && abs(j -Snake_1.last().second) == 1) || (j == Snake_1.last().second && abs(i -Snake_1.last().first) == 1))
+                                if((i == Snake_1.last().first && abs(j -Snake_1.last().second)%9 == 1) || (j == Snake_1.last().second && abs(i -Snake_1.last().first)%9 == 1))
                                 {
                                     Snake_1.add(Pair(i,j))
                                     FIELD[i][j] = 1
@@ -656,7 +715,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
                             }
                             else
                             {
-                                if((i == Snake_2.last().first && abs(j -Snake_2.last().second) == 1) || (j == Snake_2.last().second && abs(i -Snake_2.last().first) == 1))
+                                if((i == Snake_2.last().first && abs(j -Snake_2.last().second)%9 == 1) || (j == Snake_2.last().second && abs(i -Snake_2.last().first)%9 == 1))
                                 {
                                     Snake_2.add(Pair(i,j))
                                     FIELD[i][j] = 2
@@ -674,7 +733,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
                 y += step
             }
             x  += step
-            y = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat()) + step
+            y = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())
         }
         x = 0f
         y = 0f

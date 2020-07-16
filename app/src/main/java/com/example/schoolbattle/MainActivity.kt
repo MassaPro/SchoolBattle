@@ -1,27 +1,20 @@
 package com.example.schoolbattle
 
 
-import android.app.Dialog
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.Color.argb
 import android.graphics.Color.rgb
 import android.os.Bundle
 import android.view.*
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_game_menu.*
 
-public var Design: String = "Egypt"
+
 
 
 lateinit var gamesRecycler: RecyclerView
@@ -58,8 +51,16 @@ class MainActivity : Fragment() {
         CONTEXT = requireActivity()
 
 
-        Design = prfs?.getString("design", "Normal").toString()
-
+        if(ARRAY_OF_DESIGN.size < DECODE(prfs?.getString("open_design", INITIAL_AMOUNT.toString()).toString()).size)
+        {
+            ARRAY_OF_DESIGN =  DECODE(prfs?.getString("open_design", INITIAL_AMOUNT.toString()).toString())
+        }
+        MONEY = prfs?.getString("money", INITIAL_AMOUNT.toString()).toString().toInt()         //не забыть положить другую сумму если идет вход в аккаунт
+        money_icon.setBackgroundResource(R.drawable.money)
+        money.text = MONEY.toString()
+        Design = prfs?.getString("design", "Normal").toString()                 //дизайн
+        SOUND = prfs?.getString("sound", "").toString() == "true"       //получаем из памяти звук
+        VIBRATION = prfs?.getString("vibration", "").toString() == "true"       //получаем из памяти звук
         if (Design == "Egypt"){
             game_menu.setBackgroundResource(R.drawable.game_menu_egypt)
             //nav_view.setBackgroundColor(rgb(224, 164, 103));
@@ -167,17 +168,17 @@ class MainActivity : Fragment() {
         val globalName = prefs?.getString("username", "")
         toolbarName2.text = globalName
 
-        logOut2.setOnClickListener {
-            val editor = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)?.edit()
-            editor?.putString("username", "")
-            editor?.apply()
-            recyclerSet.clear()
-            myRef.child("Users").child(globalName.toString()).child("Games").removeEventListener(
-                listener)
-            val intent = Intent(activity, NullActivity::class.java)
-            startActivity(intent)
-            activity?.finish()
-        }
+     //   money.setOnClickListener {
+       //     val editor = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)?.edit()
+        //    editor?.putString("username", "")
+      //      editor?.apply()
+      //      recyclerSet.clear()
+   //         myRef.child("Users").child(globalName.toString()).child("Games").removeEventListener(
+     //           listener)
+   //         val intent = Intent(activity, NullActivity::class.java)
+  //          startActivity(intent)
+   //         activity?.finish()
+  //      }
         newGameButton.setOnClickListener {
             val intent = Intent(activity, NewGameActivity::class.java)
             //activity?.overridePendingTransition(0, 0)

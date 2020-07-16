@@ -6,20 +6,94 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/my_toolbar_settings"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:padding="3dp">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="4dp"
+                android:background="@android:color/transparent"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_design" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/item_design"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="52dp"
+                app:layoutManager="LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/choose_design"
+                tools:context=".SettingsFragmentActivity"
+                tools:listitem="@layout/design_item" />
+
+            <TextView
+                android:id="@+id/choose_design"
+                android:layout_width="294dp"
+                android:layout_height="58dp"
+                android:layout_marginTop="64dp"
+                android:gravity="center"
+                android:text="Выбор дизайна"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.426"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vibrationSwitch" />
+
+            <Switch
+                android:id="@+id/vibrationSwitch"
+                android:layout_width="293dp"
+                android:layout_height="54dp"
+                android:layout_marginTop="36dp"
+                android:text="Вибрация"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/choose_design"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/choose_design"
+                app:layout_constraintTop_toBottomOf="@+id/soundSwitch" />
+
+            <Switch
+                android:id="@+id/soundSwitch"
+                android:layout_width="293dp"
+                android:layout_height="54dp"
+                android:layout_marginTop="100dp"
+                android:text="Звук"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/choose_design"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/choose_design"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <Button
@@ -32,80 +106,25 @@
 
 
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/my_toolbar_settings"
-        app:layout_constraintStart_toStartOf="@+id/my_toolbar_settings"
-        app:layout_constraintTop_toTopOf="@+id/my_toolbar_settings"
-        app:layout_constraintBottom_toBottomOf="@+id/my_toolbar_settings"
+        app:layout_constraintEnd_toEndOf="@+id/tb1"
+        app:layout_constraintStart_toStartOf="@+id/tb1"
+        app:layout_constraintTop_toTopOf="@+id/tb1"
+        app:layout_constraintBottom_toBottomOf="@+id/tb1"
         />
 
     <Button
         android:id="@+id/logOutSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAllCaps="false"
         android:background="@android:color/transparent"
-        android:text="Log Out"
+        android:text="Выход"
+        android:textAllCaps="false"
         android:textColor="@android:color/holo_red_light"
 
-        app:layout_constraintBottom_toBottomOf="@+id/my_toolbar_settings"
-        app:layout_constraintEnd_toEndOf="@+id/my_toolbar_settings"
+        app:layout_constraintBottom_toBottomOf="@+id/tb1"
+        app:layout_constraintEnd_toEndOf="@+id/tb1"
         app:layout_constraintStart_toEndOf="@+id/toolbarNameSettings"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Switch
-        android:id="@+id/soundSwitch"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="Sound"
-        android:textSize="20sp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginRight="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_toolbar_settings"
-        app:layout_constraintVertical_bias="0.05" />
-
-    <TextView
-        android:id="@+id/languageChange"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="60dp"
-        android:paddingVertical="15dp"
-        android:text="Language"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/soundSwitch" />
-
-    <TextView
-        android:id="@+id/languageSelected"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:textColor="@android:color/black"
-        android:text="EN"
-        android:paddingVertical="15dp"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/languageChange"
-        app:layout_constraintEnd_toEndOf="@+id/languageChange"
-        app:layout_constraintTop_toTopOf="@+id/languageChange" />
-
-    <Button
-        android:id="@+id/choose_design"
-        android:layout_width="294dp"
-        android:layout_height="58dp"
-        android:text="Выбор дизайна"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/languageChange"
-        app:layout_constraintVertical_bias="0.058" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

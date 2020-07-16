@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_design_shop"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_design_shop"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"></ImageView>
+
+            <TextView
+                android:id="@+id/id_text_design_shop"
+                android:layout_width="0dp"
+                android:layout_height="57dp"
+                android:layout_margin="3dp"
+                android:textAppearance="?attr/textAppearanceListItem"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/img_design_shop"
+                app:layout_constraintTop_toTopOf="@+id/img_design_shop"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/price_design"
+                android:layout_width="111dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="24dp"
+                android:gravity="right|center_vertical"
+                android:text="цена"
+                app:layout_constraintEnd_toStartOf="@+id/icon_money_in_price_design"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/img_design_shop"
+                app:layout_constraintTop_toBottomOf="@+id/id_text_design_shop" />
+
+            <ImageView
+                android:id="@+id/icon_money_in_price_design"
+                android:layout_width="63dp"
+                android:layout_height="42dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/price_design" />
+
+            <Button
+                android:id="@+id/item_button_shop_design"
+                android:layout_width="169dp"
+                android:layout_height="47dp"
+                android:text="купить"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.772"
+                app:layout_constraintStart_toEndOf="@+id/img_design_shop"
+                app:layout_constraintTop_toBottomOf="@+id/price_design"
+                app:layout_constraintVertical_bias="1.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
