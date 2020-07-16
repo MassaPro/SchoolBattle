@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.design_shop_item.view.*
 import kotlinx.android.synthetic.main.profile_dialog.view.*
 import kotlinx.android.synthetic.main.shop_dialog.*
 
-var locale_context : Context? = null
+var locale_context : AppCompatActivity? = null
 var HELPED_CONTEXT : Context? = null
 
 var vasa : View? = null
@@ -45,6 +45,7 @@ class Designs  : Fragment() {
    //     vasa = activity.setContentView(R.layout.activity_shop_fragment)
         HELPED_CONTEXT = activity
 
+        locale_context = activity as AppCompatActivity
 
       //  vasa = (activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(R.layout.activity_shop_fragment, null)
      //   (activity as AppCompatActivity?)!!.setSupportActionBar(tb1_shop_design)
@@ -129,8 +130,9 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
 
 
 
-                 //   v.setContentView(R.layout.activity_shop_fragment)
-                    vasa!!.money_shop_toolbar!!.text = MONEY.toString()
+                    //val v: View = (locale_context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(R.layout.activity_shop_fragment, null)
+                    locale_context!!.findViewById<TextView>(R.id.money_shop_toolbar).text =  MONEY.toString()
+                    //v.money_shop_toolbar!!.text = MONEY.toString()
 
                     dialog_shop.dismiss()
                 }
