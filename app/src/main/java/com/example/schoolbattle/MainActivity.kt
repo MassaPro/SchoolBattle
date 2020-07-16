@@ -50,6 +50,12 @@ class MainActivity : Fragment() {
         val username = prfs?.getString("username", "")
         CONTEXT = requireActivity()
 
+
+        if(ARRAY_OF_DESIGN.size < DECODE(prfs?.getString("open_design", INITIAL_AMOUNT.toString()).toString()).size)
+        {
+            ARRAY_OF_DESIGN =  DECODE(prfs?.getString("open_design", INITIAL_AMOUNT.toString()).toString())
+        }
+        MONEY = prfs?.getString("money", INITIAL_AMOUNT.toString()).toString().toInt()         //не забыть положить другую сумму если идет вход в аккаунт
         money_icon.setBackgroundResource(R.drawable.money)
         money.text = MONEY.toString()
         Design = prfs?.getString("design", "Normal").toString()                 //дизайн

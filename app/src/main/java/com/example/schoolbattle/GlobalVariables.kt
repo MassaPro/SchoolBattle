@@ -21,6 +21,8 @@ var AUXILIARY_MAP_OF_DESIGNS = mapOf(0 to "Normal", 1 to "Egypt", 2 to "Casino")
 
 var AVATAR : Int = 0                //номер аватарки
 
+
+var INITIAL_AMOUNT: Int = 100          //начальная сумма
 var MONEY: Int = 100                  //ДЕНЬГИ
 
 
@@ -32,3 +34,36 @@ lateinit var listener: ChildEventListener
 var recyclerSet: RecyclerSet = RecyclerSet()
 var recyclerSetBlitz: RecyclerSetBlitz = RecyclerSetBlitz()
 lateinit var CONTEXT: Activity
+
+
+  //__________________________________________________________________для пихания в память телефона
+fun CODE(m : MutableList<Int>): String
+{
+    var s: String = ""
+    for(i in m)
+    {
+        s+=i.toString()
+        s+='a'
+    }
+    return s
+}
+
+fun DECODE(s : String): MutableList<Int>
+{
+    var m: MutableList<Int> = mutableListOf()
+    var k: Int = 0
+    for(i in s.indices)
+    {
+        if(s[i]!='a')
+        {
+            k *= 10
+            k += s[i].toInt() - '0'.toInt()
+        }
+        else
+        {
+            m.add(k)
+            k = 0
+        }
+    }
+    return(m)
+}

@@ -1,5 +1,6 @@
 package com.example.schoolbattle.shop
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
@@ -31,7 +32,7 @@ var HELPED_CONTEXT : Context? = null
 
 var vasa : View? = null
 
-private var dialog: Proof_of_purchase? = null
+
 
 class Designs  : Fragment() {
 
@@ -90,6 +91,7 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
         return ViewHolder(view)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         PICTURE_STYLES[ARRAY_OF_DESIGN_SHOP[position]]?.let { holder.img.setBackgroundResource(it) }     //картинка для стиля
@@ -119,21 +121,33 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
                 var dialog_shop = Dialog(HELPED_CONTEXT!!)
                 dialog_shop.setContentView(R.layout.shop_dialog)
 
+                dialog_shop.price_shop.text = holder.price.text
+                dialog_shop.description.text = "Купить <" + PICTURE_TEXT[ARRAY_OF_DESIGN_SHOP[position]] + "> за"
+
                 dialog_shop.show()
                 dialog_shop.buy_shop_dialog.setOnClickListener {
                     MONEY -= holder.price.text.toString().toInt()
                     ARRAY_OF_DESIGN.add(ARRAY_OF_DESIGN_SHOP[position])
                     holder.price.text = ""
                     holder.icon.setImageResource(R.drawable.nulevoe)
-                    holder.button.setBackgroundColor(argb(0,0,0,0))
+                    holder.button.setBackgroundColor(argb(0, 0, 0, 0))
                     holder.button.text = "(КУПЛЕНО)"
+                    locale_context!!.findViewById<TextView>(R.id.money_shop_toolbar).text =
+                        MONEY.toString()
 
+                    val editor =
+                        locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                            .edit()
+                    editor.putString("money", MONEY.toString())
+                    editor.putString("open_design", CODE(ARRAY_OF_DESIGN))
+                    editor.apply()
 
-
-                    //val v: View = (locale_context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(R.layout.activity_shop_fragment, null)
-                    locale_context!!.findViewById<TextView>(R.id.money_shop_toolbar).text =  MONEY.toString()
-                    //v.money_shop_toolbar!!.text = MONEY.toString()
-
+                    dialog_shop.dismiss()
+                }
+                dialog_shop.button_close_2_shop_dialog.setOnClickListener {
+                    dialog_shop.dismiss()
+                }
+                dialog_shop.button_close_shop_dialog.setOnClickListener {
                     dialog_shop.dismiss()
                 }
 

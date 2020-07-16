@@ -13,10 +13,14 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toolbar
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationMenu
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_settings_fragment.*
 import kotlinx.android.synthetic.main.design_item.view.*
 
@@ -45,7 +49,7 @@ class SettingsFragmentActivity : Fragment() {
             settings_menu.setBackgroundColor(Color.WHITE)
         }
         if (Design == "Casino") {
-            settings_menu.setBackgroundResource(R.drawable.background_casino)
+            settings_menu.setBackgroundResource(R.drawable.background2_casino)
             tb1.setBackgroundColor(argb(0,0,0,0))
 
             choose_design.setBackgroundColor(argb(0,0,0,0))
@@ -195,6 +199,20 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
             val t = fragment_activity?.supportFragmentManager?.beginTransaction()
             val mFrag: Fragment= SettingsFragmentActivity()                    //ПРОСТО ПИЗДЕЦ
             t?.replace(R.id.settings_menu,mFrag)?.commitNowAllowingStateLoss()
+
+            if(Design == "Normal")
+            {
+                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE);
+            }
+            else if(Design == "Egypt")
+            {
+                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(rgb(224, 164, 103));
+            }
+            else if(Design == "Casino")
+            {
+                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_casino)
+            }
+
 
         }
     }
