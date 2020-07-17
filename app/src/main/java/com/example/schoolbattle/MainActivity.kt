@@ -51,10 +51,15 @@ class MainActivity : Fragment() {
         CONTEXT = requireActivity()
 
 
-        if(ARRAY_OF_DESIGN.size < DECODE(prfs?.getString("open_design", INITIAL_AMOUNT.toString()).toString()).size)
+        if(ARRAY_OF_DESIGN.size < DECODE(prfs?.getString("open_design", "0").toString()).size)
         {
-            ARRAY_OF_DESIGN =  DECODE(prfs?.getString("open_design", INITIAL_AMOUNT.toString()).toString())
+            ARRAY_OF_DESIGN =  DECODE(prfs?.getString("open_design", 0.toString()).toString())
         }
+        if(ARRAY_OF_AVATAR.size < DECODE(prfs?.getString("open_avatars", 0.toString()).toString()).size)
+        {
+            ARRAY_OF_AVATAR =  DECODE(prfs?.getString("open_avatars", 0.toString()).toString())
+        }
+        AVATAR = prfs?.getString("avatar_number", 0.toString()).toString().toInt()
         MONEY = prfs?.getString("money", INITIAL_AMOUNT.toString()).toString().toInt()         //не забыть положить другую сумму если идет вход в аккаунт
         money_icon.setBackgroundResource(R.drawable.money)
         money.text = MONEY.toString()

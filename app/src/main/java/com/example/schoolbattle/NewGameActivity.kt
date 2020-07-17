@@ -45,6 +45,8 @@ class NewGameActivity : AppCompatActivity() {
         setupRecyclerView(game_list, intent.getIntExtra("playType", -1), this)
 
 
+
+
         //val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         //val globalName = prefs.getString("username", "")
         //val intent = Intent(applicationContext, StupidGameActivity::class.java)
