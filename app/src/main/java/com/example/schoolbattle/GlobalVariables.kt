@@ -22,7 +22,7 @@ var AUXILIARY_MAP_OF_DESIGNS = mapOf(0 to "Normal", 1 to "Egypt", 2 to "Casino",
 //____________________________________________________________________________________________________________________________
 var AVATAR: Int = 0               //аватары
 val PICTURE_AVATAR = mapOf(0 to R.drawable.avatar1, 1 to R.drawable.avatar1, 2 to R.drawable.avatar1,3 to R.drawable.avatar1)
-val AVATAR_TEXT = mapOf(0 to "Бабай аватар", 1 to "Аватар - банан", 2 to "Т - 90",3 to "AK 47")
+val AVATAR_TEXT = mapOf(0 to "Бабай аватар", 1 to "банан", 2 to "Т - 90",3 to "AK 47")
 val PRICE_OD_AVATAR = mapOf(0 to 10,1 to 20,2 to 30,3 to 90)
 var ARRAY_OF_AVATAR_SHOP: MutableList<Int>  = mutableListOf(0,1,2,3)             //номера  дизайнов в магазине
 var ARRAY_OF_AVATAR: MutableList<Int>  = mutableListOf(0,1)             //номера открытых дизайнов

@@ -69,6 +69,7 @@ class MyProfile : Fragment() {
             ProfileAvatarsetupRecyclerView(dialog_find_ava.item_profile_ava)
             gamesRecycler = dialog_find_ava.item_profile_ava
             gamesRecycler.isNestedScrollingEnabled = false;
+
             gamesRecycler.layoutManager = GridLayoutManager(locale_context, 3)
             dialog_find_ava.item_profile_ava.adapter?.notifyDataSetChanged()
         }
