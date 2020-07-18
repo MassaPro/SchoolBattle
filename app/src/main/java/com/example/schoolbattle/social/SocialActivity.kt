@@ -47,6 +47,8 @@ class SocialActivity : Fragment() {
         tabLayout!!.post { tabLayout!!.setupWithViewPager(
             viewPager
         ) }
+
+
         return v
     }
 
@@ -58,6 +60,7 @@ class SocialActivity : Fragment() {
             when (position) {
                 0 -> return MyProfile()
                 1 -> return FriendsList()
+                2 -> return Subscriptions()
             }
             return Fragment()
         }
@@ -75,8 +78,12 @@ class SocialActivity : Fragment() {
                     return "Профиль"
                 }
                 1 -> {
-                    return "Друзья"
+                    return "Подписчики"
                 }
+                2 -> {
+                    return "Подписки"
+                }
+
             }
             return null
         }
@@ -85,6 +92,6 @@ class SocialActivity : Fragment() {
     companion object {
         var tabLayout: TabLayout? = null
         var viewPager: ViewPager? = null
-        var int_items = 2
+        var int_items = 3
     }
 }

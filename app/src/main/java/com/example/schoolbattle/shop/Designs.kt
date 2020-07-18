@@ -1,10 +1,8 @@
 package com.example.schoolbattle.shop
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
 import android.graphics.Color.argb
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,18 +11,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_designs.*
-import kotlinx.android.synthetic.main.activity_shop_fragment.*
-import kotlinx.android.synthetic.main.activity_shop_fragment.view.*
-import kotlinx.android.synthetic.main.activity_shop_fragment.view.money_shop_toolbar
 import kotlinx.android.synthetic.main.design_shop_item.view.*
-import kotlinx.android.synthetic.main.profile_dialog.view.*
 import kotlinx.android.synthetic.main.shop_dialog.*
 
 var locale_context : AppCompatActivity? = null
@@ -116,8 +108,7 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
         holder.button.setOnClickListener{
             if(ARRAY_OF_DESIGN_SHOP[position] !in ARRAY_OF_DESIGN)          //если дизайн не куплен
             {
-               // dialog = Proof_of_purchase(HELPED_CONTEXT!!,locale_context!!,"Design",ARRAY_OF_DESIGN_SHOP[position].toString().toInt(), PRICE_OD_DESIGN[ARRAY_OF_DESIGN_SHOP[position].toString().toInt()]!!)
-             //   dialog?.showResult()
+
                 var dialog_shop = Dialog(HELPED_CONTEXT!!)
                 dialog_shop.setContentView(R.layout.shop_dialog)
 
@@ -163,7 +154,7 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var img: ImageView = view.img_design_shop
+        var img: ImageView = view.img_ava
         var contentView: TextView = view.id_text_design_shop
         var price: TextView = view.price_design
         var icon: ImageView = view.icon_money_in_price_design
