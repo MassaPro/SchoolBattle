@@ -53,9 +53,10 @@
         <activity android:name=".StupidGameActivity" />
         <activity android:name=".NewGameActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".NullActivity">
+        <activity android:name=".NullActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

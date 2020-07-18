@@ -3,19 +3,19 @@ package com.example.schoolbattle
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_null.*
 
 
 class NullActivity : AppCompatActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_null)
-
         CONTEXT = this
-
 
 
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
