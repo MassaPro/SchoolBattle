@@ -10,14 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".social.Ava_Dialog"></activity>
-        <activity android:name=".social.Subscriptions" />
-        <activity android:name=".shop.Premium" />
-        <activity android:name=".shop.Designs" />
-        <activity android:name=".shop.Emotions" />
-        <activity android:name=".shop.Avatars" />
-        <activity android:name=".shop.ShopFragmentActivity" />
-        <activity android:name=".SettingsFragmentActivity" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-8137188857901546~1022017686"/>
         <activity android:name=".gamesonline.TEST" />
         <activity android:name=".social.FriendsAndFollowers" />
         <activity android:name=".social.ProfileUserActivity" />

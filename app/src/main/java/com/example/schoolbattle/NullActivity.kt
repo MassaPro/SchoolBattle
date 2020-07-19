@@ -7,6 +7,7 @@ import android.os.Handler
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_null.*
 
 
@@ -17,6 +18,7 @@ class NullActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         CONTEXT = this
 
+        MobileAds.initialize(this) {}           //для рекламы
 
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val username = prefs.getString("username", "")

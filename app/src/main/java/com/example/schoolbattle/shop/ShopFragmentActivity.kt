@@ -127,7 +127,7 @@ class ShopFragmentActivity : Fragment (){
                     return "Дизайн"
                 }
                 3 -> {
-                    return "Cпециальное"
+                    return "ПРЕМИУМ"
                 }
             }
             return null

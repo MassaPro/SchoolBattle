@@ -56,7 +56,7 @@ class Emotions : Fragment()  {
 
 
 private fun ShopEMOTIONsetupRecyclerView(recyclerView: RecyclerView) {
-    recyclerView.adapter = ShopEMOTIONsItemRecyclerViewAdapter(ARRAY_OF_DESIGN_SHOP)
+    recyclerView.adapter = ShopEMOTIONsItemRecyclerViewAdapter(ARRAY_OF_EMOTION_SHOP)
 }
 
 

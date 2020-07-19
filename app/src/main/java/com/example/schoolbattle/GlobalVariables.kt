@@ -39,6 +39,17 @@ var ARRAY_OF_EMOTION: MutableList<Int>  = mutableListOf(0,1)             //но�
 var AUXILIARY_MAP_OF_EMOTION = mapOf(0 to "emotion1", 1 to "emotion2", 2 to "emotion3",3 to "emotion4")
 //__________________________________________________________________________________________________________________________________
 
+
+//____________________________________________________________________________________________________________________________
+var SPECIALLY: String = "ava1"               //СПЕЦИАЛЬНОЕ
+val PICTURE_SPECIALLY = mapOf(0 to R.drawable.avatar1, 1 to R.drawable.avatar1, 2 to R.drawable.avatar1,3 to R.drawable.avatar1)
+val SPECIALLY_TEXT = mapOf(0 to "ВИДЕО С ВОЗНАГРАЖДЕНИЕМ", 1 to "ПРЕМИУМ АККАУНТ", 2 to "ШОШОШОШО",3 to "ДЛДДЛДЛДЛ")
+val PRICE_OD_SPECIALLY = mapOf(0 to 10,1 to 20,2 to 30,3 to 90)
+var ARRAY_OF_SPECIALLY_SHOP: MutableList<Int>  = mutableListOf(0,1,2,3)             //номера  дизайнов в магазине
+var ARRAY_OF_SPECIALLY: MutableList<Int>  = mutableListOf()             //номера открытых дизайнов
+var AUXILIARY_MAP_OF_SPECIALLY = mapOf(0 to "specially1", 1 to "specially2", 2 to "specially3",3 to "specially4")
+//__________________________________________________________________________________________________________________________________
+
 var INITIAL_AMOUNT: Int = 100          //начальная сумма
 var MONEY: Int = 100                  //ДЕНЬГИ
 
