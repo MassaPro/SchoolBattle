@@ -1,24 +1,30 @@
 package com.example.schoolbattle.gamesonline
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.net.ConnectivityManager
 import android.os.Bundle
+import android.os.Handler
 import android.util.AttributeSet
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.schoolbattle.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
+import com.instacart.library.truetime.TrueTime
 import kotlinx.android.synthetic.main.activity_online_games_temlate.*
+import java.util.*
 
 
 //TODO , рисовать ребра только один раз до этого узнав, также можно не включать в цепочки вершины которые окружены 6 такими же вершинами
@@ -26,6 +32,12 @@ import kotlinx.android.synthetic.main.activity_online_games_temlate.*
 class DotGameActivity: AppCompatActivity() {
     private var isRun = false
     private var dialog: ShowResult? = null
+
+    var Finish_time: Long  = 0
+    var timeBegin: Long = 0
+
+    var Finish_time_1: Long  = 0
+    var timeBegin_1: Long =0
 
     override fun onResume() {
         super.onResume()
@@ -61,14 +73,20 @@ class DotGameActivity: AppCompatActivity() {
 
 
         val type = intent.getStringExtra("type")
-        if (type != "") {
-            //TODO()
-            //ALF CODE HERE
-        }
         val gameData = myRef.child(type + "DotGames").child(
             if (opponentsName < yourName)
                 opponentsName + '_' + yourName else yourName + '_' + opponentsName
         )
+
+        if (type != "") {
+            initTrueTime(this)
+            Finish_time = trueTime.time + 1000*60*10
+            timeBegin = trueTime.time
+
+            Finish_time_1 = trueTime.time + 1000*60*10
+            timeBegin_1 = trueTime.time
+            runTimer(gameData)
+        }
         //signature_canvas3.blocked = true
         signature_canvas3.positionData = gameData
         signature_canvas3.blocked = true
@@ -198,6 +216,203 @@ class DotGameActivity: AppCompatActivity() {
                 }
             }
         })
+
+
+        var timeListener: ValueEventListener? = null
+        if (type == "Blitz") {
+            timeListener = gameData.child("FIELD").addValueEventListener(object: ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {}
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    var cnt = 0
+                    for (i in signature_canvas3.FIELD.indices) {
+                        for (j in signature_canvas3.FIELD[i].indices) {
+                            if (p0.child("$i").hasChild("$j")) {
+                                cnt++
+                                //signature_canvas3.FIELD[i][j] = p0.child("FIELD").child("$i").child("$j").value.toString().toInt()
+                            }
+                        }
+                    }
+                    Toast.makeText(this@DotGameActivity, cnt.toString(), Toast.LENGTH_LONG);
+                    initTrueTime(applicationContext)
+                    if ((cnt%2 != 1) != signature_canvas3.isFirstMove) {//TODO predpolagaem xod protivnika tok chto nachilsa
+                        //your movwe
+                        Finish_time_1 += trueTime.time - timeBegin
+                        timeBegin_1 = trueTime.time
+                        val timeList = listOf(
+                            Finish_time.toString(),
+                            Finish_time_1.toString(),
+                            timeBegin.toString(),
+                            timeBegin_1.toString(),
+                            cnt.toString()
+                        )
+                        gameData.child("Time").setValue(timeList)
+                    } else {
+                        Finish_time += trueTime.time - timeBegin_1
+                        gameData.child("Time").addValueEventListener(object: ValueEventListener {
+                            override fun onCancelled(p0: DatabaseError) {}
+                            override fun onDataChange(p0: DataSnapshot) {
+                                if (p0.exists()) {
+                                    val lst = p0.value as List<String>
+                                    initTrueTime(applicationContext)
+                                    if (cnt == lst[4].toInt()) {
+                                        var Finish_time_sync = lst[0].toLong()
+                                        var Finish_time_1_sync = lst[1].toLong()
+                                        var timeBegin_1_sync = lst[2].toLong()
+                                        var timeBegin_sync =  lst[3].toLong()
+
+                                        Finish_time = Finish_time_1_sync
+                                        timeBegin = trueTime.time
+                                    }
+
+                                }
+                            }
+                        })
+                    }
+                    //if (cnt % 2 == )
+                }
+            })
+        }
+    }
+
+    private fun runTimer(positionData: DatabaseReference) {
+        val handler: Handler = Handler()
+        handler.post(
+            object: Runnable {
+                override fun run() {
+                    //если будут проблемы с скоротью перенести в onCreate
+
+                    var cnt: Int = 0
+                    for(i in 0 until signature_canvas3.FIELD.size)
+                    {
+                        for(j in 0 until  signature_canvas3.FIELD[0].size)
+                        {
+                            if(signature_canvas3.FIELD[i][j] != 0)
+                            {
+                                cnt++
+                            }
+                        }
+                    }
+                    initTrueTime(applicationContext)
+
+                    if((cnt%2 != 1) == signature_canvas3.isFirstMove) {
+                        if(trueTime.time<Finish_time)
+                        {
+                            var min_finish : Long = Finish_time/1000/60
+                            var second_finish: Long = (Finish_time - min_finish*60*1000)/1000
+
+                            var min_now: Long  = trueTime.time/1000/60
+                            var second_now : Long  = (trueTime.time - min_now*60*1000)/1000
+
+                            if(second_now>second_finish)
+                            {
+                                if (min_finish - min_now - 1 == 10.toLong() && second_finish - second_now + 60 > 0) {
+                                    second_finish = second_now
+                                }
+                                if( (timer2_xog_online.text[0].toInt() - '0'.toInt())*60*10+(timer2_xog_online.text[1].toInt() - '0'.toInt())*60 +(timer2_xog_online.text[3].toInt() - '0'.toInt())*10 + (timer2_xog_online.text[4].toInt() - '0'.toInt()) >(min_finish - min_now - 1) *60 + second_finish - second_now + 60)
+                                {
+                                    timer2_xog_online.text = add_null( (min_finish - min_now - 1).toString()) + ":" + add_null( (second_finish - second_now + 60).toString())
+                                }
+                            }
+                            else
+                            {
+                                if (min_finish - min_now == 10.toLong() && second_finish - second_now > 0) {
+                                    second_finish = second_now
+                                }
+                                if( (timer2_xog_online.text[0].toInt() - '0'.toInt())*60*10+(timer2_xog_online.text[1].toInt() - '0'.toInt())*60 +(timer2_xog_online.text[3].toInt() - '0'.toInt())*10 + (timer2_xog_online.text[4].toInt() - '0'.toInt()) >(min_finish - min_now ) *60 + second_finish - second_now )
+                                {
+                                    timer2_xog_online.text = add_null( (min_finish - min_now).toString()) + ":" + add_null( (second_finish - second_now).toString())
+                                }
+                                if((timer2_xog_online.text[0].toInt() - '0'.toInt())*60*10+(timer2_xog_online.text[1].toInt() - '0'.toInt())*60 +(timer2_xog_online.text[3].toInt() - '0'.toInt())*10 + (timer2_xog_online.text[4].toInt() - '0'.toInt())<=5)
+                                {
+                                    timer2_xog_online.setTextColor(Color.RED)
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            timer2_xog_online.setTextColor(Color.RED)
+                            timer2_xog_online.text = "time's up"
+                        }
+
+
+                    }
+                    else
+                    {
+
+                        if(trueTime.time<Finish_time_1)
+                        {
+                            var min_finish : Long = Finish_time_1/1000/60
+                            var second_finish: Long = (Finish_time_1 - min_finish*60*1000)/1000
+
+                            var min_now: Long  = trueTime.time/1000/60
+                            var second_now : Long  = (trueTime.time - min_now*60*1000)/1000
+
+                            if(second_now>second_finish)
+                            {
+                                if( (timer_xog_online.text[0].toInt() - '0'.toInt())*60*10+(timer_xog_online.text[1].toInt() - '0'.toInt())*60 +(timer_xog_online.text[3].toInt() - '0'.toInt())*10 + (timer_xog_online.text[4].toInt() - '0'.toInt()) >(min_finish - min_now - 1) *60 + second_finish - second_now + 60)
+                                {
+                                    timer_xog_online.text = add_null( (min_finish - min_now - 1).toString()) + ":" + add_null( (second_finish - second_now + 60).toString())
+                                }
+                            }
+                            else
+                            {
+                                if( (timer_xog_online.text[0].toInt() - '0'.toInt())*60*10+(timer_xog_online.text[1].toInt() - '0'.toInt())*60 +(timer_xog_online.text[3].toInt() - '0'.toInt())*10 + (timer_xog_online.text[4].toInt() - '0'.toInt()) >(min_finish - min_now ) *60 + second_finish - second_now )
+                                {
+                                    timer_xog_online.text = add_null( (min_finish - min_now).toString()) + ":" + add_null( (second_finish - second_now).toString())
+                                }
+                            }
+                            if((timer_xog_online.text[0].toInt() - '0'.toInt())*60*10+(timer_xog_online.text[1].toInt() - '0'.toInt())*60 +(timer_xog_online.text[3].toInt() - '0'.toInt())*10 + (timer_xog_online.text[4].toInt() - '0'.toInt())<=5)
+                            {
+                                timer_xog_online.setTextColor(Color.RED)
+                            }
+                        }
+                        else
+                        {
+                            timer_xog_online.setTextColor(Color.RED)
+                            timer_xog_online.text = "time's up"
+                        }
+
+                    }
+                    handler.postDelayed(this, 100)
+                }
+            }
+        )
+
+    }
+    companion object {
+        val trueTime: Date
+            get() = if (TrueTime.isInitialized()) TrueTime.now() else Date()
+
+        fun initTrueTime(ctx: Context) {
+            if (isNetworkConnected(ctx)) {
+                if (!TrueTime.isInitialized()) {
+                    val trueTime = InitTrueTimeAsyncTask(ctx)
+                    trueTime.execute()
+                }
+            }
+        }
+
+        @SuppressLint("ServiceCast")
+        fun isNetworkConnected(ctx: Context): Boolean {
+            val cm = ctx
+                .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val ni = cm.activeNetworkInfo
+            return ni != null && ni.isConnectedOrConnecting
+        }
+
+        fun add_null(s: String):String
+        {
+            if(s.length == 1)
+            {
+                return "0" + s
+            }
+            else
+            {
+                return s
+            }
+        }
     }
 
     override fun onPause() {
@@ -869,22 +1084,17 @@ class CanvasViewDot(context: Context, attrs: AttributeSet?) : View(context, attr
                             if (red_or_blue == 1) {
                                 FIELD[i][j] = 1
                                 a[j][i] = 1
+                                positionData.child("a").child("$j").child("$i").setValue(a[j][i].toString())
+                                positionData.child("FIELD").child("$i").child("$j").setValue(FIELD[i][j].toString())
                                 p = find(1, a, 16, 11)
                             } else {
                                 FIELD[i][j] = 2
                                 a[j][i] = 2
+                                positionData.child("a").child("$j").child("$i").setValue(a[j][i].toString())
+                                positionData.child("FIELD").child("$i").child("$j").setValue(FIELD[i][j].toString())
                                 p = find(2, a, 16, 11)
                             }
-                            for (i in 0..size_field_x) {
-                                for (j in 0..size_field_y) {
-                                    if (a[j][i] != 0 && FIELD[i][j] != 0) {
 
-                                        positionData.child("a").child("$j").child("$i").setValue(a[j][i].toString())
-                                        positionData.child("FIELD").child("$i").child("$j")
-                                            .setValue(FIELD[i][j].toString())
-                                    }
-                                }
-                            }
                             positionData.child("red_or_blue").setValue(red_or_blue)
                             invalidate()
                             break
