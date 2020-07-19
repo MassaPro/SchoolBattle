@@ -124,6 +124,22 @@ class ReversiOneDivice : AppCompatActivity() {
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
         }
+        else if(Design == "Rome" ) {
+            name_player1_one_divice.setTextColor(Color.rgb(193, 150, 63))
+            name_player2_one_divice.setTextColor(Color.rgb(193, 150, 63))
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            button_player_1_one_divice.setBackgroundResource(R.drawable.white_chip_rome);
+            button_player_2_one_divice.setBackgroundResource(R.drawable.black_chip_rome);
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            label_one_device.setBackgroundResource(R.drawable.background_rome);
+            bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+        }
 
 
 
@@ -844,9 +860,9 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
 
     init{
         Line_paint.setColor(Color.RED)          //ресур для линий (ширина и цвет)
-        Line_paint.setStrokeWidth(10f)
-        Line_paint1.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
-        Line_paint1.setStrokeWidth(10f)
+        Line_paint.setStrokeWidth(5f)
+        Line_paint1.setColor(Color.RED)          //ресур для линий (ширина и цвет)
+        Line_paint1.setStrokeWidth(5f)
 
         if(Design == "Egypt")
         {
@@ -860,6 +876,11 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
             Line_paint.setStrokeWidth(10f)
             Line_paint1.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
             Line_paint1.setStrokeWidth(10f)
+        }
+        else if(Design == "Rome") {
+            Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
+            Line_paint.setStrokeWidth(5f)
+
         }
         // TODO нужно взять из DataBase (статистика ходов)
         for( i in 0..7) {
@@ -882,14 +903,18 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
 
 
 
-    var black_chip_normal : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black);       //картинки фишек и подсветки
-    var grey_chip_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.grey);
+    var black_chip_normal : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black_chip_normal);       //картинки фишек и подсветки
+    var grey_chip_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.white_chip_normal);
 
     var black_chip_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black_chip_egypt);
     var grey_chip_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.white_chip_egypt)
 
     var black_chip_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.red_chip_casino);
     var grey_chip_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black_chip_casino);
+
+    var black_chip_rome: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.white_chip_rome);
+    var grey_chip_rome: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black_chip_rome);
+
     var green: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.green);
 
 
@@ -958,6 +983,11 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
         {
             right_black_chip = Bitmap.createScaledBitmap(black_chip_casino,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
             right_grey_chip = Bitmap.createScaledBitmap(grey_chip_casino,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+        }
+        else if (Design == "Rome")
+        {
+            right_black_chip = Bitmap.createScaledBitmap(black_chip_rome,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+            right_grey_chip = Bitmap.createScaledBitmap(grey_chip_rome,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
         }
 
         for( i in 0..7) // расстановка фишек

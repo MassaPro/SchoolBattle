@@ -56,11 +56,19 @@ class GameListActivity : Fragment() {
             //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
         }
 
-        if (Design == "Casino"){
+        else if (Design == "Casino"){
             game_list_playing.setBackgroundResource(R.drawable.background2_casino);
             my_toolbar2.setBackgroundColor(argb(0,0,0,0))
             toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             toolbarName2.setTextColor(Color.YELLOW)
+            toolbarName2.setTextSize(20f)
+            //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+        }
+        else if (Design == "Rome"){
+            game_list_playing.setBackgroundResource(R.drawable.background_rome);
+            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
+            toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            toolbarName2.setTextColor(rgb(193,150,63))
             toolbarName2.setTextSize(20f)
             //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
         }

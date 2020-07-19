@@ -137,6 +137,22 @@ class BoxGameOneDivice : AppCompatActivity() {
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
         }
+        else if(Design == "Rome" ) {
+            name_player1_one_divice.setTextColor(Color.rgb(193, 150, 63))
+            name_player2_one_divice.setTextColor(Color.rgb(193, 150, 63))
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            button_player_1_one_divice.setBackgroundResource(R.drawable.box1_rome);
+            button_player_2_one_divice.setBackgroundResource(R.drawable.box2_rome);
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            label_one_device.setBackgroundResource(R.drawable.background_rome);
+            bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+        }
 
         to_back_one_divice.setOnClickListener {
             this.finish()
@@ -520,9 +536,16 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
             paint_rib_1.setColor(Color.RED)          //цвета для ребер  и их ширина
             paint_rib_2.setColor(Color.BLACK)
         }
-        if (Design == "Egypt"){
+        else if (Design == "Egypt"){
+            Line_paint.setColor(Color.argb(0, 217, 217,217))          //ресур для линий (ширина и цвет)
+        }
+        else if (Design == "Rome"){
             Line_paint.setColor(Color.argb(0, 217, 217,217))          //ресур для линий (ширина и цвет)
 
+            paint_circle.setColor(Color.BLACK)     //цвета для точек
+
+            paint_rib_2.setColor(Color.rgb(193,150,63))          //цвета для ребер  и их ширина
+            paint_rib_1.setColor(Color.BLACK)
         }
 
         // TODO нужно взять из DataBase (статистика ходов)
@@ -556,6 +579,9 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
 
     var box1_casino : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_casino);
     var box2_casino : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_casino);
+
+    var box1_rome : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_rome);
+    var box2_rome : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_rome);
 
 
 
@@ -606,6 +632,11 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
         {
             right_red = Bitmap.createScaledBitmap(box1_casino,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
             right_blue = Bitmap.createScaledBitmap(box2_casino,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+        }
+        else if (Design == "Rome")
+        {
+            right_red = Bitmap.createScaledBitmap(box1_rome,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+            right_blue = Bitmap.createScaledBitmap(box2_rome,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
         }
 
         for(i in 0 until size_field_x+1)          //вырисовка горизонтальных линий

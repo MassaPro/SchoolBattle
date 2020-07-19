@@ -33,8 +33,11 @@ class FriendsList : Fragment() {
             //content.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
             //id_text.setTextColor(Color.WHITE)
         }
-        if (Design == "Casino"){
+        else if (Design == "Casino"){
             friends_list.setBackgroundResource(R.drawable.background2_casino)
+        }
+        else if (Design == "Rome"){
+            friends_list.setBackgroundResource(R.drawable.background_rome)
         }
     }
 

@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.schoolbattle.CONTEXT
+import com.example.schoolbattle.Design
 import com.example.schoolbattle.R
+import kotlinx.android.synthetic.main.activity_friends_list.*
 import kotlinx.android.synthetic.main.activity_my_profile.*
 
 class MyProfile : Fragment() {
@@ -24,6 +26,17 @@ class MyProfile : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (Design == "Egypt"){
+            myprofile.setBackgroundResource(R.drawable.background_egypt)
+        }
+        else if (Design == "Casino"){
+            myprofile.setBackgroundResource(R.drawable.background2_casino)
+        }
+        else if (Design == "Rome"){
+            myprofile.setBackgroundResource(R.drawable.background_rome)
+        }
+
         val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val username = prefs?.getString("username", "")
         profileMyName.text = username

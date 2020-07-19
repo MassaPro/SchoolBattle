@@ -110,6 +110,40 @@ class MainActivity : Fragment() {
             blitz.setTextColor(Color.YELLOW)
             blitz.setTextSize(20f)
         }
+        else if (Design == "Rome"){
+            game_menu.setBackgroundResource(R.drawable.game_menu_rome)
+            //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
+            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
+
+            toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            toolbarName2.setTextColor(rgb(193,150,63))
+            toolbarName2.setTextSize(20f)
+
+            searchButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            searchButton.setTextColor(rgb(193,150,63))
+            searchButton.setTextSize(20f)
+            searchButton.setBackgroundColor(argb(0,0,0,0))
+
+            newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            newGameButton.setTextColor(rgb(193,150,63))
+            newGameButton.setTextSize(19f)
+            newGameButton.setBackgroundColor(argb(0,0,0,0))
+
+            oneDevice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            oneDevice.setTextColor(rgb(193,150,63))
+            oneDevice.setTextSize(20f)
+            oneDevice.setBackgroundColor(argb(0,0,0,0))
+
+            playWithComp.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            playWithComp.setTextColor(rgb(193,150,63))
+            playWithComp.setTextSize(20f)
+            playWithComp.setBackgroundColor(argb(0,0,0,0))
+
+            blitz.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            blitz.setTextColor(rgb(193,150,63))
+            blitz.setTextSize(20f)
+            blitz.setBackgroundColor(argb(0,0,0,0))
+        }
 
 
         searchButton.setOnClickListener {

@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
-        android:text="выбор игры"
+        android:text="ВЫБОР ИГРЫ"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@+id/my_toolbar2"
         app:layout_constraintEnd_toEndOf="@+id/my_toolbar2"

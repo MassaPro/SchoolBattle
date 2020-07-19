@@ -109,8 +109,8 @@ class ConersOneDevice : AppCompatActivity() {
             name_player1_one_divice.setTextSize(20f)
             button_player_1_one_divice.setBackgroundResource(R.drawable.player1_egypt);
             button_player_2_one_divice.setBackgroundResource(R.drawable.player2_egypt);
-            player_1_icon_one_divice.setBackgroundResource(R.drawable.white_chip_egypt);
-            player_2_icon_one_divice.setBackgroundResource(R.drawable.black_chip_egypt)
+            player_1_icon_one_divice.setBackgroundResource(R.drawable.black_chip_egypt);
+            player_2_icon_one_divice.setBackgroundResource(R.drawable.white_chip_egypt)
             toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
 
@@ -131,6 +131,22 @@ class ConersOneDevice : AppCompatActivity() {
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             label_one_device.setBackgroundResource(R.drawable.background_casino);
+            bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+        }
+        else if(Design == "Rome" ) {
+            name_player1_one_divice.setTextColor(Color.rgb(193, 150, 63))
+            name_player2_one_divice.setTextColor(Color.rgb(193, 150, 63))
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            button_player_1_one_divice.setBackgroundResource(R.drawable.white_chip_rome);
+            button_player_2_one_divice.setBackgroundResource(R.drawable.black_chip_rome);
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            label_one_device.setBackgroundResource(R.drawable.background_rome);
             bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
@@ -530,6 +546,11 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
             Line_paint.setColor(Color.WHITE)          //ресур для линий (ширина и цвет)
             Line_paint.setStrokeWidth(5f)
         }
+        else if(Design == "Rome")
+        {
+            Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
+            Line_paint.setStrokeWidth(5f)
+        }
 
 
         // TODO нужно взять из DataBase (статистика ходов)
@@ -558,14 +579,17 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
 
 
 
-    var black_chip_normal : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black);       //картинки фишек и подсветки
-    var grey_chip_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.grey);
+    var black_chip_normal : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black_chip_normal);       //картинки фишек и подсветки
+    var grey_chip_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.white_chip_normal);
 
     var black_chip_egypt:Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black_chip_egypt);
     var grey_chip_egypt:Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.white_chip_egypt);
 
     var black_chip_casino:Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.red_chip_casino);
     var grey_chip_casino:Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black_chip_casino);
+
+    var black_chip_rome: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.white_chip_rome);
+    var grey_chip_rome: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black_chip_rome);
 
     var illumination: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.illumination);
     var green: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.green
@@ -636,6 +660,11 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
             right_grey_chip  = Bitmap.createScaledBitmap(grey_chip_casino,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
             right_illumination = Bitmap.createScaledBitmap(illumination,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
             right_green  = Bitmap.createScaledBitmap(green,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+        }
+        else if (Design == "Rome")
+        {
+            right_black_chip = Bitmap.createScaledBitmap(black_chip_rome,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+            right_grey_chip = Bitmap.createScaledBitmap(grey_chip_rome,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
         }
 
 

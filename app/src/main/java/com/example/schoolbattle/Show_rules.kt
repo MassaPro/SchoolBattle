@@ -72,6 +72,14 @@ class Show_rules(activity: Activity) {
             dialog_one_device.rules.setBackgroundResource(R.drawable.background_egypt);
             button_close.setBackgroundResource(R.drawable.close_cross)
         }
+        else if (Design == "Casino"){
+            dialog_one_device.rules.setBackgroundResource(R.drawable.background2_casino);
+            button_close.setBackgroundResource(R.drawable.close_cross)
+        }
+        else if (Design == "Rome"){
+            dialog_one_device.rules.setBackgroundResource(R.drawable.background_rome);
+            button_close.setBackgroundResource(R.drawable.close_cross)
+        }
 
         button_close.setOnClickListener {
             dialog_one_device.dismiss()

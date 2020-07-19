@@ -129,6 +129,22 @@ class XOGame_oneDivice : AppCompatActivity() {
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
         }
+        else if(Design == "Rome" ) {
+            name_player1_one_divice.setTextColor(rgb(193,150,63))
+            name_player2_one_divice.setTextColor(rgb(193,150,63))
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            button_player_1_one_divice.setBackgroundResource(R.drawable.cross_rome);
+            button_player_2_one_divice.setBackgroundResource(R.drawable.null_rome);
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            label_one_device.setBackgroundResource(R.drawable.background_rome);
+            bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+        }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
         if (usedToClear == "clear") {
@@ -422,10 +438,10 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
 
 
     init {
-        Line_paint.color = Color.RED          //ресур для линий (ширина и цвет)
+        Line_paint.color = Color.BLACK          //ресур для линий (ширина и цвет)
         Line_paint.strokeWidth = 10f
 
-        Line_paint_1.color = Color.RED          //ресур для линий (ширина и цвет)
+        Line_paint_1.color = Color.BLACK          //ресур для линий (ширина и цвет)
         Line_paint_1.strokeWidth = 20f
 
         if(Design == "Egypt")
@@ -439,6 +455,14 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
         else if (Design == "Casino")
         {
             Line_paint.color = Color.WHITE          //ресур для линий (ширина и цвет)
+            Line_paint.strokeWidth = 7f
+
+            Line_paint_1.color = Color.RED          //ресур для линий (ширина и цвет)
+            Line_paint_1.strokeWidth = 20f
+        }
+        else if (Design == "Rome")
+        {
+            Line_paint.color = rgb(193,150,63)    //ресур для линий (ширина и цвет)
             Line_paint.strokeWidth = 7f
 
             Line_paint_1.color = Color.RED          //ресур для линий (ширина и цвет)
@@ -463,6 +487,9 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
 
     var cross_casino : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cross_casino)       //картинки крестиков и нулей
     var null_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.null_casino)
+
+    var cross_rome : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cross_rome)       //картинки крестиков и нулей
+    var null_rome: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.null_rome)
 
    // var BackgroundColor_Egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.background_egypt)
     var icon_green : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.illumination)
@@ -512,6 +539,10 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
         else if(Design == "Casino") {
             right_cross = Bitmap.createScaledBitmap(cross_casino,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
             right_null = Bitmap.createScaledBitmap(null_casino,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+        }
+        else if(Design == "Rome") {
+            right_cross = Bitmap.createScaledBitmap(cross_rome,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+            right_null = Bitmap.createScaledBitmap(null_rome,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
         }
 
 
