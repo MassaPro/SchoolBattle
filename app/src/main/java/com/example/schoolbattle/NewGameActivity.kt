@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.Intent.getIntent
 import android.content.Intent.getIntentOld
+import android.graphics.Color
 import android.graphics.Color.argb
 import android.graphics.Color.rgb
 import androidx.appcompat.app.AppCompatActivity
@@ -12,12 +13,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.ColorRes
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_game_item.*
 import kotlinx.android.synthetic.main.activity_new_game.*
 import kotlinx.android.synthetic.main.activity_new_game_item.view.*
+import kotlinx.android.synthetic.main.activity_settings_fragment.*
 
 var NewGame: Activity = Activity()
 
@@ -33,11 +36,19 @@ class NewGameActivity : AppCompatActivity() {
             game_list_menu.setBackgroundResource(R.drawable.background_egypt);
             my_toolbar2.setBackgroundColor(rgb(224,164,103))
             text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            text.setTextColor(Color.BLACK)
         }
-        if (Design == "Casino"){
+        else if (Design == "Casino"){
             game_list_menu.setBackgroundResource(R.drawable.background2_casino);
             my_toolbar2.setBackgroundColor(argb(0,224,164,103))
             text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            text.setTextColor(Color.YELLOW)
+        }
+        else if (Design == "Rome"){
+            game_list_menu.setBackgroundResource(R.drawable.background_rome);
+            my_toolbar2.setBackgroundColor(argb(0,224,164,103))
+            text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            text.setTextColor(rgb(193,150,63))
         }
 
         NewGame = this

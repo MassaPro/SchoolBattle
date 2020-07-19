@@ -68,11 +68,17 @@ class ShopFragmentActivity : Fragment (){
         {
             t_shop.setBackgroundColor(rgb(224,164,103))
             fon.setBackgroundResource(R.drawable.background_egypt)
+
         }
         else if(Design == "Casino")
         {
             t_shop.setBackgroundColor(rgb(0,0,0))
             fon.setBackgroundResource(R.drawable.background2_casino)
+        }
+        else if(Design == "Rome")
+        {
+            t_shop.setBackgroundColor(rgb(0,0,0))
+            fon.setBackgroundResource(R.drawable.background_rome)
         }
 
         val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)

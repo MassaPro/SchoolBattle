@@ -57,13 +57,12 @@ class SettingsFragmentActivity : Fragment() {
             choose_design.setTextColor(Color.YELLOW)
             choose_design.setTextSize(20f)
 
-
             soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             soundSwitch.setTextColor(Color.YELLOW)
             //soundSwitch.setBackgroundColor(Color.YELLOW)
             soundSwitch.setTextSize(20f)
         }
-        if (Design == "Egypt") {
+        else if (Design == "Egypt") {
             settings_menu.setBackgroundResource(R.drawable.background_egypt)
             tb1.setBackgroundColor(rgb(224,164,103));
 
@@ -72,10 +71,22 @@ class SettingsFragmentActivity : Fragment() {
             //choose_design.setTextColor(Color.YELLOW)
             choose_design.setTextSize(18f)
 
-
-
             soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
             //soundSwitch.setTextColor(Color.YELLOW)
+            //soundSwitch.setBackgroundColor(Color.YELLOW)
+            soundSwitch.setTextSize(20f)
+        }
+        else if (Design == "Rome") {
+            settings_menu.setBackgroundResource(R.drawable.background_rome)
+            tb1.setBackgroundColor(argb(0,0,0,0))
+
+            choose_design.setBackgroundColor(argb(0,0,0,0))
+            choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            //choose_design.setTextColor(Color.YELLOW)
+            choose_design.setTextSize(18f)
+
+            soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            soundSwitch.setTextColor(rgb(193,150,63))
             //soundSwitch.setBackgroundColor(Color.YELLOW)
             soundSwitch.setTextSize(20f)
         }
@@ -195,6 +206,13 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                 editor.putString("design","Casino")
                 editor.apply()
             }
+            else if(item == 3)
+            {
+                Design = "Rome"
+                val editor = v.context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("design","Rome")
+                editor.apply()
+            }
 
             val t = fragment_activity?.supportFragmentManager?.beginTransaction()
             val mFrag: Fragment= SettingsFragmentActivity()                    //ПРОСТО ПИЗДЕЦ
@@ -211,6 +229,10 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
             else if(Design == "Casino")
             {
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_casino)
+            }
+            else if(Design == "Rome")
+            {
+                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_rome)
             }
 
 

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Color.rgb
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
@@ -92,6 +93,12 @@ class Show_Result_one_Device(activity: Activity) {
             dialog_one_device.linearLayout_one_device.setBackgroundResource(R.drawable.win_casino);
             dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             dialog_one_device.resultText_one_device.setTextColor(Color.YELLOW)
+            button_close.setBackgroundResource(R.drawable.close_cross)
+        }
+        if (Design == "Rome"){
+            dialog_one_device.linearLayout_one_device.setBackgroundResource(R.drawable.win_rome);
+            dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            dialog_one_device.resultText_one_device.setTextColor(rgb(193, 150, 63))
             button_close.setBackgroundResource(R.drawable.close_cross)
         }
         

@@ -19,6 +19,10 @@ import com.example.schoolbattle.*
 import com.example.schoolbattle.shop.HELPED_CONTEXT
 import com.example.schoolbattle.shop.locale_context
 import kotlinx.android.synthetic.main.activity_ava__dialog.*
+import com.example.schoolbattle.CONTEXT
+import com.example.schoolbattle.Design
+import com.example.schoolbattle.R
+import kotlinx.android.synthetic.main.activity_friends_list.*
 import kotlinx.android.synthetic.main.activity_my_profile.*
 import kotlinx.android.synthetic.main.ava_item_profile.view.*
 import kotlinx.android.synthetic.main.design_shop_item.view.*
@@ -43,6 +47,16 @@ class MyProfile : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         PICTURE_AVATAR[AVATAR]?.let { image_global_ava.setImageResource(it) }
+        if (Design == "Egypt"){
+            myprofile.setBackgroundResource(R.drawable.background_egypt)
+        }
+        else if (Design == "Casino"){
+            myprofile.setBackgroundResource(R.drawable.background2_casino)
+        }
+        else if (Design == "Rome"){
+            myprofile.setBackgroundResource(R.drawable.background_rome)
+        }
+
         val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val username = prefs?.getString("username", "")
         profileMyName.text = username

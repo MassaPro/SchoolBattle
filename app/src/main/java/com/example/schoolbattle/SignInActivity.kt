@@ -29,22 +29,23 @@ class SignInActivity : AppCompatActivity() {
         if (Design == "Egypt"){
             sign_in_menu.setBackgroundResource(R.drawable.sign_in_egypt);
             signInButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            signInButton.setBackgroundColor(
-                Color.argb(0,
-                    0,
-                    0,
-                    0
-                )
-            )
+            signInButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
             signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            signUpButton.setBackgroundColor(
-                Color.argb(0,
-                    0,
-                    0,
-                    0
-                )
-            )
-
+            signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+        }
+        else if (Design == "Casino"){
+            sign_in_menu.setBackgroundResource(R.drawable.sign_in_egypt);
+            signInButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            signInButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+        }
+        if (Design == "Rome"){
+            sign_in_menu.setBackgroundResource(R.drawable.sign_in_rome);
+            signInButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            signInButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
         }
 
         SignIn = this
