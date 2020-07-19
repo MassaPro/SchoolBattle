@@ -140,7 +140,6 @@ class ReversiOneDivice : AppCompatActivity() {
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
         }
-        
 
 
 
