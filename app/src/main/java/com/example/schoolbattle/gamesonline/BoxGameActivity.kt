@@ -443,6 +443,7 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
                         if (correction_touch(x,y+step/2f))
                         {
                             VERTICAL_RIB[i][j] = 1
+                            positionData.child("VERTICAL_RIB").child("$i").child("$j").setValue(VERTICAL_RIB[i][j])
                             red_or_blue = "blue"
                             isCorrect = true
                             Log.d("DOPO","ЛОЛ")
@@ -453,6 +454,7 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
                         if (correction_touch(x,y+step/2f))
                         {
                             VERTICAL_RIB[i][j] = 2
+                            positionData.child("VERTICAL_RIB").child("$i").child("$j").setValue(VERTICAL_RIB[i][j])
                             red_or_blue = "red"
                             isCorrect = true
                             Log.d("DOPO","ЛОЛ")
@@ -480,6 +482,7 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
                         if (correction_touch(x+step/2f,y))
                         {
                             HORIZONTAL_RIB[i][j] = 1
+                            positionData.child("HORIZONTAL_RIB").child("$i").child("$j").setValue(HORIZONTAL_RIB[i][j])
                             red_or_blue = "blue"
                             isCorrect = true
                             Log.d("DOPO","ЛОЛ")
@@ -490,6 +493,7 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
                         if (correction_touch(x+step/2f,y))
                         {
                             HORIZONTAL_RIB[i][j] = 2
+                            positionData.child("HORIZONTAL_RIB").child("$i").child("$j").setValue(HORIZONTAL_RIB[i][j])
                             red_or_blue = "red"
                             isCorrect = true
                             Log.d("DOPO","ЛОЛ")
@@ -523,10 +527,12 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
                     if(red_or_blue == "red")
                     {
                         FIELD[i][j] = 1
+                        positionData.child("FIELD").child("$i").child("$j").setValue(FIELD[i][j])
                     }
                     else
                     {
                         FIELD[i][j] = 2
+                        positionData.child("FIELD").child("$i").child("$j").setValue(FIELD[i][j])
                     }
                 }
             }
@@ -536,24 +542,6 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
         invalidate()
         if (isCorrect) {
             positionData.child("red_or_blue").setValue(red_or_blue)
-            for (i in FIELD.indices) {
-                for (j in FIELD[i].indices) {
-                    if (FIELD[i][j] != 0)
-                    positionData.child("FIELD").child("$i").child("$j").setValue(FIELD[i][j])
-                }
-            }
-            for (i in VERTICAL_RIB.indices) {
-                for (j in VERTICAL_RIB[i].indices) {
-                    if (VERTICAL_RIB[i][j] != 0)
-                    positionData.child("VERTICAL_RIB").child("$i").child("$j").setValue(VERTICAL_RIB[i][j])
-                }
-            }
-            for (i in HORIZONTAL_RIB.indices) {
-                for (j in HORIZONTAL_RIB[i].indices) {
-                    if (HORIZONTAL_RIB[i][j] != 0)
-                    positionData.child("HORIZONTAL_RIB").child("$i").child("$j").setValue(HORIZONTAL_RIB[i][j])
-                }
-            }
         }
         return true
     }

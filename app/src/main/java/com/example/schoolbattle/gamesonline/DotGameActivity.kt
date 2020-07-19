@@ -1084,22 +1084,17 @@ class CanvasViewDot(context: Context, attrs: AttributeSet?) : View(context, attr
                             if (red_or_blue == 1) {
                                 FIELD[i][j] = 1
                                 a[j][i] = 1
+                                positionData.child("a").child("$j").child("$i").setValue(a[j][i].toString())
+                                positionData.child("FIELD").child("$i").child("$j").setValue(FIELD[i][j].toString())
                                 p = find(1, a, 16, 11)
                             } else {
                                 FIELD[i][j] = 2
                                 a[j][i] = 2
+                                positionData.child("a").child("$j").child("$i").setValue(a[j][i].toString())
+                                positionData.child("FIELD").child("$i").child("$j").setValue(FIELD[i][j].toString())
                                 p = find(2, a, 16, 11)
                             }
-                            for (i in 0..size_field_x) {
-                                for (j in 0..size_field_y) {
-                                    if (a[j][i] != 0 && FIELD[i][j] != 0) {
 
-                                        positionData.child("a").child("$j").child("$i").setValue(a[j][i].toString())
-                                        positionData.child("FIELD").child("$i").child("$j")
-                                            .setValue(FIELD[i][j].toString())
-                                    }
-                                }
-                            }
                             positionData.child("red_or_blue").setValue(red_or_blue)
                             invalidate()
                             break
