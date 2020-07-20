@@ -51,18 +51,7 @@ class ProfileUserActivity : AppCompatActivity() {
             }
         })
 
-        profileMyFriendsIn.setOnClickListener {
-            val intent = Intent(this, FriendsAndFollowers::class.java)
-            intent.putExtra("friendsType", "in")
-            intent.putExtra("curName", item)
-            startActivity(intent)
-        }
-        profileMyFriendsOut.setOnClickListener {
-            val intent = Intent(this, FriendsAndFollowers::class.java)
-            intent.putExtra("friendsType", "out")
-            intent.putExtra("curName", item)
-            startActivity(intent)
-        }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem) =

@@ -1,16 +1,25 @@
 package com.example.schoolbattle.social
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.example.schoolbattle.Design
-import com.example.schoolbattle.FRIENDS
-import com.example.schoolbattle.R
+import com.example.schoolbattle.*
+import com.example.schoolbattle.shop.HELPED_CONTEXT
+import com.example.schoolbattle.shop.locale_context
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import kotlinx.android.synthetic.main.activity_designs.*
+import kotlinx.android.synthetic.main.activity_friends_and_followers.*
+import kotlinx.android.synthetic.main.activity_friends_and_followers_item.view.*
 import kotlinx.android.synthetic.main.activity_friends_item.view.*
 import kotlinx.android.synthetic.main.activity_friends_list.*
 
@@ -18,15 +27,15 @@ import kotlinx.android.synthetic.main.activity_friends_list.*
 class FriendsList : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.activity_friends_list, container, false)
+        return inflater.inflate(R.layout.activity_friends_and_followers, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setupRecyclerView(activity?.findViewById(R.id.friends_list) as RecyclerView)
-        friends_list.adapter?.notifyDataSetChanged()
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        locale_context = activity as AppCompatActivity
         if (Design == "Egypt"){
-            friends_list.setBackgroundResource(R.drawable.background_egypt)
+            back_friends_followers.setBackgroundResource(R.drawable.background_egypt)
             //nav_view.setBackgroundColor(rgb(224, 164, 103));
             //my_toolbar2.setBackgroundColor(rgb(224,164,103))
             //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
@@ -34,70 +43,84 @@ class FriendsList : Fragment() {
             //id_text.setTextColor(Color.WHITE)
         }
         else if (Design == "Casino"){
-            friends_list.setBackgroundResource(R.drawable.background2_casino)
+            back_friends_followers.setBackgroundResource(R.drawable.background2_casino)
         }
         else if (Design == "Rome"){
-            friends_list.setBackgroundResource(R.drawable.background_rome)
+            back_friends_followers.setBackgroundResource(R.drawable.background_rome)
         }
-    }
+        val prefs = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        var username = prefs?.getString("username", "")
+        if (locale_context!!.intent.getStringExtra("curName") != null) {
+            username = locale_context!!.intent.getStringExtra("curName")
+        }
+        Toast.makeText(locale_context, username, Toast.LENGTH_LONG).show()
+        val friendsIn = mutableListOf<String>()
 
-    private fun setupRecyclerView(recyclerView: RecyclerView) {
-        recyclerView.adapter =
-            SimpleItemRecyclerViewAdapter(
-                FRIENDS
-            )
-    }
+        recyclerViewFriendsAndFollowers.adapter =
+            ItemRecyclerViewAdapter(friendsIn)
+        myRef.child("Users").child(username.toString()).child("FriendsIn").addChildEventListener(object:
+            ChildEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onChildMoved(p0: DataSnapshot, p1: String?) {}
+            override fun onChildChanged(p0: DataSnapshot, p1: String?) {}
 
-    class SimpleItemRecyclerViewAdapter(private val ITEMS: MutableList<String>):
-        RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
+            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+                friendsIn.add(p0.value as String)
+                if(recyclerViewFriendsAndFollowers?.adapter!=null)
+                {
+                    (recyclerViewFriendsAndFollowers?.adapter as ItemRecyclerViewAdapter).notifyItemInserted(friendsIn.size - 1)
+                }
 
-        private val onClickListener: View.OnClickListener
-
-        init {
-            onClickListener = View.OnClickListener { v ->
-                val item = v.tag as String
-                val intent = Intent(v.context, ProfileUserActivity::class.java)
-                v.context.startActivity(intent)
-                /*val rev = v.context?.let { Dialog(it) }
-                val window: Window? = rev?.window
-                val wlp = window?.attributes
-                wlp?.gravity = Gravity.TOP
-                rev?.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                rev?.setCancelable(false)
-                rev?.setCanceledOnTouchOutside(true)
-                rev?.setContentView(R.layout.profile_dialog)
-                (rev?.findViewById(R.id.profileName) as TextView).text = item
-                rev?.show()
-                (rev?.findViewById(R.id.profile_play) as Button).setOnClickListener {
-                    val prfs = v.context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
-                    val username = prfs?.getString("username", "")
-                    myRef.child("Users").child(item).child("Revanches").child(username!!).child("gameName").setValue("StupidGame")
-                }*/
-                //v.context.startActivity(intent)
             }
-        }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.activity_friends_item, parent, false)
-            return ViewHolder(view)
-        }
+            override fun onChildRemoved(p0: DataSnapshot) {
+                friendsIn.remove(p0.value as String)
+                if(recyclerViewFriendsAndFollowers!!.adapter != null)
+                {
+                    recyclerViewFriendsAndFollowers.adapter?.notifyDataSetChanged()
+                }
 
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.idView.text = ITEMS[position]
-            with(holder.itemView) {
-                tag = ITEMS[position]
-                setOnClickListener(onClickListener)
             }
-        }
+        })
 
-        override fun getItemCount(): Int {
-            return ITEMS.size
-        }
-
-        inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val idView: TextView = view.id_text
-            //val contentView: TextView = view.content
-        }
     }
 }
+
+
+class ItemRecyclerViewAdapter(private val ITEMS: MutableList<String>):
+    RecyclerView.Adapter<ItemRecyclerViewAdapter.ViewHolder>() {
+
+    private val onClickListener: View.OnClickListener
+
+    init {
+        onClickListener = View.OnClickListener { v ->
+            val intent = Intent(v.context, ProfileUserActivity::class.java)
+            intent.putExtra("name", v.tag as String)
+            v.context.startActivity(intent)
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.activity_friends_and_followers_item, parent, false)
+        return ViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.idView.text = ITEMS[position]
+        with(holder.itemView) {
+            tag = ITEMS[position]
+            setOnClickListener(onClickListener)
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return ITEMS.size
+    }
+
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val idView: TextView = view.textViewFriendsAndFollowers
+    }
+}
+
+

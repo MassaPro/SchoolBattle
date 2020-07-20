@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:id = "@+id/game_menu"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:background="@android:color/white">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id = "@+id/game_menu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
 
 
@@ -42,7 +42,7 @@ android:background="@android:color/white">
 
     <Button
         android:id="@+id/newGameButton"
-        android:layout_width="160dp"
+        android:layout_width="wrap_content"
         android:layout_height="78dp"
         android:layout_marginBottom="16dp"
         android:text="долгая-онлайн"
@@ -85,7 +85,7 @@ android:background="@android:color/white">
     <Button
         android:id="@+id/oneDevice"
         android:layout_width="330dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
         android:text="Игра на одном устройстве"
         app:layout_constraintEnd_toEndOf="@+id/playWithComp"
@@ -96,7 +96,7 @@ android:background="@android:color/white">
     <Button
         android:id="@+id/playWithComp"
         android:layout_width="330dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="игра с компьютером"
         app:layout_constraintEnd_toEndOf="@+id/searchButton"
@@ -107,7 +107,7 @@ android:background="@android:color/white">
     <Button
         android:id="@+id/searchButton"
         android:layout_width="330dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Поиск Соперника"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,7 +117,7 @@ android:background="@android:color/white">
 
     <Button
         android:id="@+id/blitz"
-        android:layout_width="160dp"
+        android:layout_width="wrap_content"
         android:layout_height="78dp"
         android:gravity="center"
         android:text="блиц-онлайн"

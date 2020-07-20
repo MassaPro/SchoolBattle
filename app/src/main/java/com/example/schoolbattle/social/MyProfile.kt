@@ -60,16 +60,7 @@ class MyProfile : Fragment() {
         val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val username = prefs?.getString("username", "")
         profileMyName.text = username
-        profileMyFriendsIn.setOnClickListener {
-            val intent = Intent(context, FriendsAndFollowers::class.java)
-            intent.putExtra("friendsType", "in")
-            startActivity(intent)
-        }
-        profileMyFriendsOut.setOnClickListener {
-            val intent = Intent(context, FriendsAndFollowers::class.java)
-            intent.putExtra("friendsType", "out")
-            startActivity(intent)
-        }
+
 
         image_global_ava.setOnClickListener {
             var dialog_find_ava = Dialog(locale_context!!)
@@ -125,6 +116,13 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
                 AVATAR = ARRAY_OF_AVATAR[position]
                 val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
                 editor.putString("avatar_number", ARRAY_OF_AVATAR[position].toString())
+
+                val prefs = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                var username = prefs?.getString("username", "")
+                if (username != null) {
+                    myRef.child("users").child(username).child("image").setValue(ARRAY_OF_AVATAR[position].toString())
+                }
+
                 D?.dismiss()
             }
         }

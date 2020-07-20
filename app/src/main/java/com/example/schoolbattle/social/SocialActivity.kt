@@ -1,6 +1,7 @@
 package com.example.schoolbattle.social
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +11,11 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.schoolbattle.CONTEXT
+import com.example.schoolbattle.NewGameActivity
 import com.example.schoolbattle.R
+import com.example.schoolbattle.SearchActivity
 import com.google.android.material.tabs.TabLayout
+import kotlinx.android.synthetic.main.activity_social.view.*
 
 class SocialActivity : Fragment() {
 
@@ -48,7 +52,11 @@ class SocialActivity : Fragment() {
             viewPager
         ) }
 
-
+        v.search_social.setBackgroundResource(R.drawable.search)
+        v.search_social.setOnClickListener {
+            val intent = Intent(activity, SearchActivity::class.java)
+            startActivity(intent)
+        }
         return v
     }
 
@@ -59,8 +67,8 @@ class SocialActivity : Fragment() {
         override fun getItem(position: Int): Fragment {
             when (position) {
                 0 -> return MyProfile()
-                1 -> return FriendsList()
-                2 -> return Subscriptions()
+                2 -> return FriendsList()
+                1 -> return Subscriptions()
             }
             return Fragment()
         }
@@ -77,11 +85,11 @@ class SocialActivity : Fragment() {
                 0 -> {
                     return "Профиль"
                 }
-                1 -> {
-                    return "Подписчики"
-                }
                 2 -> {
                     return "Подписки"
+                }
+                1 -> {
+                    return "Подписчики"
                 }
 
             }
