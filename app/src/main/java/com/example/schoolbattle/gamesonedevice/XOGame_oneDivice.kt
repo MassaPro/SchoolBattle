@@ -5,16 +5,24 @@ import android.content.Intent
 import android.graphics.*
 import android.graphics.Color.argb
 import android.graphics.Color.rgb
+import android.media.AudioManager
+import android.media.SoundPool
 import android.os.Bundle
+import android.os.Vibrator
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
+import com.example.schoolbattle.shop.locale_context
 import kotlinx.android.synthetic.main.activity_one_device_games_template.*
+
+
+//Загружаем в SoundPool звуковой файл с папки raw:
 
 
 class XOGame_oneDivice : AppCompatActivity() {
@@ -85,10 +93,16 @@ class XOGame_oneDivice : AppCompatActivity() {
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
 
+        mSound.load(this, R.raw.xlup, 1);
+        vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
+
         CONTEXT = this
         //var h : MutableList<Triple<Int,Int,Int>> =  mutableListOf(Triple(231,231,777),Triple(231,231,777),Triple(231,231,777))
         //Log.w("momlol",decode(encode(h)).toString())
         setContentView(R.layout.activity_one_device_games_template)
+
+
+
         signature_canvas_xog_one_device.visibility = View.VISIBLE
         signature_canvas_xog_one_device.t1 = findViewById(R.id.name_player1_one_divice) as TextView
         signature_canvas_xog_one_device.t2 = findViewById(R.id.name_player2_one_divice) as TextView
@@ -663,6 +677,14 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
                         cross_or_nul = "cross"
                     }
                     Log.w("ppppppp", FIELD[0][0].toString())
+                    if(SOUND)
+                    {
+                        mSound.play(1,1F,1F,1,0,1F)
+                    }
+                    if(VIBRATION)
+                    {
+                        vibratorService?.vibrate(70)
+                    }
                     invalidate()
                 }
                 else
@@ -687,6 +709,14 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
                             cross_or_nul = "cross"
                         }
                         Log.w("ppppppp", FIELD[0][0].toString())
+                        if(SOUND)
+                        {
+                            mSound.play(1,1F,1F,1,0,1F)
+                        }
+                        if(VIBRATION)
+                        {
+                            vibratorService?.vibrate(70)
+                        }
                         invalidate()
                     }
                 }

@@ -8,6 +8,7 @@ import android.content.Intent
 import android.graphics.*
 import android.graphics.Color.argb
 import android.graphics.Color.rgb
+import android.os.Vibrator
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
@@ -88,6 +89,10 @@ class VirusOneDivice : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Log.d("VISIT","121212121")
         CONTEXT = this
+
+        mSound.load(this, R.raw.xlup, 1);
+        vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
+
         setContentView(R.layout.activity_one_device_games_template)
         signature_canvas_virus_one_device.visibility = View.VISIBLE
         signature_canvas_virus_one_device.activity = this
@@ -885,6 +890,14 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
                                         val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
                                         editor.putString("virus_one_divice", data_from_memory)
                                         editor.apply()
+                                        if(SOUND)
+                                        {
+                                            mSound.play(1,1F,1F,1,0,1F)
+                                        }
+                                        if(VIBRATION)
+                                        {
+                                            vibratorService?.vibrate(70)
+                                        }
                                         invalidate()
                                     }
                                 } else {
@@ -897,6 +910,14 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
                                         val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
                                         editor.putString("virus_one_divice", data_from_memory)
                                         editor.apply()
+                                        if(SOUND)
+                                        {
+                                            mSound.play(1,1F,1F,1,0,1F)
+                                        }
+                                        if(VIBRATION)
+                                        {
+                                            vibratorService?.vibrate(70)
+                                        }
                                         invalidate()
                                     }
                                 }
@@ -912,6 +933,14 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
                                         val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
                                         editor.putString("virus_one_divice", data_from_memory)
                                         editor.apply()
+                                        if(SOUND)
+                                        {
+                                            mSound.play(1,1F,1F,1,0,1F)
+                                        }
+                                        if(VIBRATION)
+                                        {
+                                            vibratorService?.vibrate(70)
+                                        }
                                         invalidate()
                                     }
                                 } else {
@@ -924,6 +953,14 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
                                         val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
                                         editor.putString("virus_one_divice", data_from_memory)
                                         editor.apply()
+                                        if(SOUND)
+                                        {
+                                            mSound.play(1,1F,1F,1,0,1F)
+                                        }
+                                        if(VIBRATION)
+                                        {
+                                            vibratorService?.vibrate(70)
+                                        }
                                         invalidate()
                                     }
                                 }
@@ -939,6 +976,14 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
                                     val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
                                     editor.putString("virus_one_divice", data_from_memory)
                                     editor.apply()
+                                    if(SOUND)
+                                    {
+                                        mSound.play(1,1F,1F,1,0,1F)
+                                    }
+                                    if(VIBRATION)
+                                    {
+                                        vibratorService?.vibrate(70)
+                                    }
                                     invalidate()
                                 }
                             } else {
@@ -952,6 +997,14 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
                                         val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
                                         editor.putString("virus_one_divice", data_from_memory)
                                         editor.apply()
+                                        if(SOUND)
+                                        {
+                                            mSound.play(1,1F,1F,1,0,1F)
+                                        }
+                                        if(VIBRATION)
+                                        {
+                                            vibratorService?.vibrate(70)
+                                        }
                                         invalidate()
                                     }
                                 }

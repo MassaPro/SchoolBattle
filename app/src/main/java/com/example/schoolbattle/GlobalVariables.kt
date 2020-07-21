@@ -2,9 +2,19 @@ package com.example.schoolbattle
 
 import android.app.Activity
 import android.content.Context
+import android.content.Context.VIBRATOR_SERVICE
+import android.media.AudioManager
+import android.media.SoundPool
+import android.os.Vibrator
+import androidx.core.content.ContextCompat.getSystemService
 import com.google.firebase.database.ChildEventListener
 
 
+//      инициализация звука
+var mSound : SoundPool = SoundPool(1, AudioManager.STREAM_MUSIC,0);
+var vibratorService : Vibrator? = null
+var TIME_OF_VIBRATE = 70
+//
 
 //______________________________________________________________________
 var SOUND: Boolean = false

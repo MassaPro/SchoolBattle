@@ -7,6 +7,7 @@ import android.graphics.*
 import android.graphics.Color.argb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Vibrator
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
@@ -102,6 +103,9 @@ class BoxGameOneDivice : AppCompatActivity() {
         signature_canvas_box_one_device.t2 = findViewById(R.id.name_player2_one_divice) as TextView
 
         CONTEXT = this
+
+        mSound.load(this, R.raw.xlup, 1);
+        vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
         if(Design == "Egypt" ) {
             name_player1_one_divice.setTextColor(Color.BLACK)
@@ -782,6 +786,15 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
                             editor.apply()
                             red_or_blue = "blue"
                             Log.d("DOPO","ЛОЛ")
+                            if(SOUND)
+                            {
+                                mSound.play(1,1F,1F,1,0,1F)
+                            }
+                            if(VIBRATION)
+                            {
+                                vibratorService?.vibrate(70)
+                            }
+                            invalidate()
                         }
                     }
                     else
@@ -796,6 +809,15 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
                             editor.apply()
                             red_or_blue = "red"
                             Log.d("DOPO","ЛОЛ")
+                            if(SOUND)
+                            {
+                                mSound.play(1,1F,1F,1,0,1F)
+                            }
+                            if(VIBRATION)
+                            {
+                                vibratorService?.vibrate(70)
+                            }
+                            invalidate()
                         }
                     }
                 }
@@ -827,6 +849,15 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
                             editor.apply()
                             red_or_blue = "blue"
                             Log.d("DOPO","ЛОЛ")
+                            if(SOUND)
+                            {
+                                mSound.play(1,1F,1F,1,0,1F)
+                            }
+                            if(VIBRATION)
+                            {
+                                vibratorService?.vibrate(70)
+                            }
+                            invalidate()
                         }
                     }
                     else
@@ -841,6 +872,15 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
                             editor.apply()
                             red_or_blue = "red"
                             Log.d("DOPO","ЛОЛ")
+                            if(SOUND)
+                            {
+                                mSound.play(1,1F,1F,1,0,1F)
+                            }
+                            if(VIBRATION)
+                            {
+                                vibratorService?.vibrate(70)
+                            }
+                            invalidate()
                         }
                     }
                 }
@@ -867,6 +907,7 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
                         {
                             red_or_blue = "red"
                         }
+
                     }
                     if(red_or_blue == "red")
                     {
@@ -876,13 +917,15 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
                     {
                         FIELD[i][j] = 2
                     }
+                    invalidate()
 
                 }
             }
         }
         x = 0f
         y = 0f
-        invalidate()
+
+
         return true
     }
 

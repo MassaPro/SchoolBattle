@@ -72,15 +72,13 @@
         android:id="@+id/money"
         android:layout_width="78dp"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
         android:background="@android:color/transparent"
         android:gravity="right|center_vertical"
         android:text="бабки"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/my_toolbar2"
-        app:layout_constraintStart_toEndOf="@+id/toolbarName2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toBottomOf="@+id/money_icon"
+        app:layout_constraintEnd_toStartOf="@+id/money_icon"
+        app:layout_constraintTop_toTopOf="@+id/money_icon" />
 
     <Button
         android:id="@+id/oneDevice"
@@ -132,12 +130,9 @@
         android:id="@+id/money_icon"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        app:layout_constraintBottom_toBottomOf="@+id/money"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.272"
-        app:layout_constraintStart_toEndOf="@+id/money"
-        app:layout_constraintTop_toTopOf="@+id/money"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toBottomOf="@+id/my_toolbar2"
+        app:layout_constraintEnd_toEndOf="@+id/my_toolbar2"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

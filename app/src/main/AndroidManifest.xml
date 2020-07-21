@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.schoolbattle">
-
+    <uses-permission android:name="android.permission.VIBRATE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,7 +14,6 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-8137188857901546~1022017686"/>
         <activity android:name=".gamesonline.TEST" />
-        <activity android:name=".social.FriendsAndFollowers" />
         <activity android:name=".social.ProfileUserActivity" />
         <activity android:name=".BlitzActivity" />
         <activity android:name=".SearchActivity" />
@@ -24,17 +23,14 @@
         <activity android:name=".gameswithcomp.ConersWithComputer" />
         <activity android:name=".gameswithcomp.BoxGameWithComputer" />
         <activity android:name=".gamesonline.SnakeGameActivity" />
-        <activity android:name=".social.FriendsList" />
         <activity android:name=".gamesonedevice.ReversiOneDivice" />
         <activity android:name=".gamesonedevice.GoGameOneDivice" />
         <activity android:name=".gamesonline.BoxGameActivity" />
-        <activity android:name=".Show_parametr_with_computer" />
         <activity android:name=".gamesonedevice.VirusOneDivice" />
         <activity android:name=".gamesonedevice.BoxGameOneDivice" />
         <activity android:name=".gamesonedevice.SnakeGameOneDivice" />
         <activity android:name=".gamesonedevice.DotGameOneDivice" />
         <activity android:name=".gamesonedevice.ConersOneDevice" />
-        <activity android:name=".Show_Result_with_Computer" />
         <activity android:name=".gameswithcomp.XOGame_withComputer" />
         <activity android:name=".gamesonedevice.XOGame_oneDivice" />
         <activity android:name=".PlayWithComputerActivity" />

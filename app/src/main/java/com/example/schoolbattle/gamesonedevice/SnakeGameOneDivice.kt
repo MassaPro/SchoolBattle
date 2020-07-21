@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Vibrator
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -85,6 +86,10 @@ class SnakeGameOneDivice : AppCompatActivity() {
         setContentView(R.layout.activity_one_device_games_template)
         signature_canvas_snake_one_device.visibility = View.VISIBLE
         CONTEXT = this
+
+        mSound.load(this, R.raw.xlup, 1);
+        vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
+
         signature_canvas_snake_one_device.activity = this
 
 
@@ -764,6 +769,15 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
                                 val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
                                 editor.putString("snake_one_divice", data_from_memory)
                                 editor.apply()
+                                if(SOUND)
+                                {
+                                    mSound.play(1,1F,1F,1,0,1F)
+                                }
+                                if(VIBRATION)
+                                {
+                                    vibratorService?.vibrate(70)
+                                }
+                                invalidate()
                             }
                             else
                             {
@@ -777,6 +791,15 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
                                     val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
                                     editor.putString("snake_one_divice", data_from_memory)
                                     editor.apply()
+                                    if(SOUND)
+                                    {
+                                        mSound.play(1,1F,1F,1,0,1F)
+                                    }
+                                    if(VIBRATION)
+                                    {
+                                        vibratorService?.vibrate(70)
+                                    }
+                                    invalidate()
                                 }
                             }
                         }
@@ -792,6 +815,16 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
                                 val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
                                 editor.putString("snake_one_divice", data_from_memory)
                                 editor.apply()
+
+                                if(SOUND)
+                                {
+                                    mSound.play(1,1F,1F,1,0,1F)
+                                }
+                                if(VIBRATION)
+                                {
+                                    vibratorService?.vibrate(70)
+                                }
+                                invalidate()
                             }
                             else
                             {
@@ -805,6 +838,16 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
                                     val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
                                     editor.putString("snake_one_divice", data_from_memory)
                                     editor.apply()
+
+                                    if(SOUND)
+                                    {
+                                        mSound.play(1,1F,1F,1,0,1F)
+                                    }
+                                    if(VIBRATION)
+                                    {
+                                        vibratorService?.vibrate(70)
+                                    }
+                                    invalidate()
                                 }
                             }
                         }
@@ -817,7 +860,6 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
         }
         x = 0f
         y = 0f
-        invalidate()
         return true
     }
 

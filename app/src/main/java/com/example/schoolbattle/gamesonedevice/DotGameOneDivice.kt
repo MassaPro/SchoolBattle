@@ -7,6 +7,7 @@ import android.graphics.*
 import android.graphics.Color.argb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Vibrator
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
@@ -89,6 +90,9 @@ class DotGameOneDivice : AppCompatActivity() {
         signature_canvas_dots_one_divice.visibility = View.VISIBLE
         signature_canvas_dots_one_divice.activity = this
         CONTEXT = this
+
+        mSound.load(this, R.raw.xlup, 1);
+        vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
         signature_canvas_dots_one_divice.t1 = findViewById(R.id.name_player1_one_divice) as TextView
         signature_canvas_dots_one_divice.t2 = findViewById(R.id.name_player2_one_divice) as TextView
@@ -1104,6 +1108,14 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
                         val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
                         editor.putString("dot_one_divice", data_from_memory)
                         editor.apply()
+                        if(SOUND)
+                        {
+                            mSound.play(1,1F,1F,1,0,1F)
+                        }
+                        if(VIBRATION)
+                        {
+                            vibratorService?.vibrate(70)
+                        }
                         invalidate()
 
 

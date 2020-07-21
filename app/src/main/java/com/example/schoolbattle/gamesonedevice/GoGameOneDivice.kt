@@ -7,6 +7,7 @@ import android.graphics.*
 import android.graphics.Color.argb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Vibrator
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
@@ -87,6 +88,10 @@ class GoGameOneDivice : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_one_device_games_template)
+
+        mSound.load(this, R.raw.xlup, 1);
+        vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
+
         signature_canvas_go_one_divice.visibility = View.VISIBLE
         signature_canvas_go_one_divice.activity = this
 
@@ -718,6 +723,14 @@ class CanvasView_Go_one_divice(context: Context, attrs: AttributeSet?) : View(co
                                     FIELD[i][j] = 0
                                 }
                             }
+                        }
+                        if(SOUND)
+                        {
+                            mSound.play(1,1F,1F,1,0,1F)
+                        }
+                        if(VIBRATION)
+                        {
+                            vibratorService?.vibrate(70)
                         }
                         invalidate()
 

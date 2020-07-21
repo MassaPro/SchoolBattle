@@ -7,6 +7,7 @@ import android.graphics.*
 import android.graphics.Color.argb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Vibrator
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
@@ -96,6 +97,9 @@ class ConersOneDevice : AppCompatActivity() {
         signature_canvas_corners_one_device.visibility = View.VISIBLE
         signature_canvas_corners_one_device.activity = this
         CONTEXT = this
+
+        mSound.load(this, R.raw.xlup, 1);
+        vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
         signature_canvas_corners_one_device.t1 = findViewById(R.id.name_player1_one_divice) as TextView
         signature_canvas_corners_one_device.t2 = findViewById(R.id.name_player2_one_divice) as TextView
@@ -759,6 +763,14 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
                     if (Array_of_illumination[X][Y] == 1 || Array_of_illumination[X][Y] == 2)     //если подсвечена область
                     {
                         FIELD[X][Y] = FIELD[lastX][lastY]         //перемещение фишки
+                        if(SOUND)
+                        {
+                            mSound.play(1,1F,1F,1,0,1F)
+                        }
+                        if(VIBRATION)
+                        {
+                            vibratorService?.vibrate(70)
+                        }
                         History.add(mutableListOf(lastX,lastY,X,Y))
                         var data_from_memory = encode(History)
                         val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
@@ -877,6 +889,7 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
                         PHASE = true
                     }
                 }
+
                 invalidate()
             }
             lastX = X
