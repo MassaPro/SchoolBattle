@@ -14,6 +14,7 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -685,6 +686,7 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
                     {
                         vibratorService?.vibrate(70)
                     }
+                        //    Toast.makeText(CONTEXT, VIBRATION.toString(), Toast.LENGTH_LONG).show()
                     invalidate()
                 }
                 else
@@ -717,6 +719,7 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
                         {
                             vibratorService?.vibrate(70)
                         }
+                            // Toast.makeText(CONTEXT, VIBRATION.toString(), Toast.LENGTH_LONG).show()
                         invalidate()
                     }
                 }

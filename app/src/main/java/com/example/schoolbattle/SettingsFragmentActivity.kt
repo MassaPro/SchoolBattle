@@ -133,14 +133,7 @@ class SettingsFragmentActivity : Fragment() {
             editor?.apply()
         })
 
-        val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
-        var data_from_memory = prefs?.getString("language", "").toString()
-        if (data_from_memory == "") {
-            val editor = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)?.edit()
-            editor?.putString("language", "EN")
-            editor?.apply()
-            data_from_memory = "EN"
-        }
+
 
 
 

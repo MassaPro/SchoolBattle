@@ -11,9 +11,8 @@ import com.google.firebase.database.ChildEventListener
 
 
 //      инициализация звука
-var mSound : SoundPool = SoundPool(1, AudioManager.STREAM_MUSIC,0);
+var mSound : SoundPool = SoundPool(1, AudioManager.STREAM_SYSTEM,0);
 var vibratorService : Vibrator? = null
-var TIME_OF_VIBRATE = 70
 //
 
 //______________________________________________________________________

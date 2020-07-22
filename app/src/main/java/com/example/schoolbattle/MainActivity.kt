@@ -64,9 +64,15 @@ class MainActivity : Fragment() {
         money_icon.setBackgroundResource(R.drawable.money)
         money.text = MONEY.toString()
         Design = prfs?.getString("design", "Normal").toString()                 //дизайн
-        SOUND = prfs?.getString("sound", "").toString() == "true"       //получаем из памяти звук
+        SOUND = prfs?.getString("sound", "").toString() == "true"
         VIBRATION = prfs?.getString("vibration", "").toString() == "true"       //получаем из памяти звук
-        if (Design == "Egypt"){
+
+        if(Design == "Normal")
+        {
+            blitz.width = 320
+            newGameButton.width = 320
+        }
+        else if (Design == "Egypt"){
             game_menu.setBackgroundResource(R.drawable.game_menu_egypt)
             //nav_view.setBackgroundColor(rgb(224, 164, 103));
             my_toolbar2.setBackgroundColor(rgb(224,164,103))

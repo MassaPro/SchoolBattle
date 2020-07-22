@@ -32,9 +32,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 var Vidos : RewardedVideoAd? = null
+lateinit var mRewardedVideoAd: RewardedVideoAd
 class Specially : Fragment(),RewardedVideoAdListener {
-
-    private lateinit var mRewardedVideoAd: RewardedVideoAd
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -44,11 +43,11 @@ class Specially : Fragment(),RewardedVideoAdListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(locale_context)
-        mRewardedVideoAd.rewardedVideoAdListener = this
+            // mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(locale_context)
+     //   mRewardedVideoAd.rewardedVideoAdListener = this
 
         Vidos = mRewardedVideoAd
-        loadRewardedVideoAd()
+       // loadRewardedVideoAd()
         //     vasa = activity.setContentView(R.layout.activity_shop_fragment)
 
         choose_design_shop.text = "Купленные эмоции можно вы сможете использовать во время игры"
@@ -66,11 +65,6 @@ class Specially : Fragment(),RewardedVideoAdListener {
 
 
 
-    }
-
-    private fun loadRewardedVideoAd() {
-        mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917",          //TODO зменить на настоящий идентификатор
-            AdRequest.Builder().build())
     }
     override fun onRewarded(reward: RewardItem) {
 
@@ -117,6 +111,13 @@ class Specially : Fragment(),RewardedVideoAdListener {
     }
 
 
+
+
+}
+
+fun loadRewardedVideoAd() {
+    mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917",          //TODO зменить на настоящий идентификатор
+        AdRequest.Builder().build())
 }
 
 

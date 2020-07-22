@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.Gravity
 import android.view.Window
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -18,6 +19,11 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.schoolbattle.shop.loadRewardedVideoAd
+import com.example.schoolbattle.shop.locale_context
+import com.example.schoolbattle.shop.mRewardedVideoAd
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.reward.RewardItem
 import com.google.android.gms.ads.reward.RewardedVideoAdListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DataSnapshot
@@ -25,11 +31,12 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_navigator.*
 import kotlinx.android.synthetic.main.activity_friends_list.*
+import kotlinx.android.synthetic.main.reward_dialog.*
 
 
 var now: Context? = null
 
-class NavigatorActivity : AppCompatActivity() {
+class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
 
 
 
@@ -58,6 +65,9 @@ class NavigatorActivity : AppCompatActivity() {
         setContentView(R.layout.activity_navigator)
 
 
+        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this)
+        mRewardedVideoAd.rewardedVideoAdListener = this
+        loadRewardedVideoAd()
 
         Log.d("VISIT","121212121")
         CONTEXT = this
@@ -179,6 +189,38 @@ class NavigatorActivity : AppCompatActivity() {
             })
 
 
+
+    }
+
+    override fun onRewarded(reward: RewardItem) {
+
+    }
+
+    override fun onRewardedVideoAdLeftApplication() {
+
+    }
+
+    override fun onRewardedVideoAdClosed() {
+
+    }
+
+    override fun onRewardedVideoAdFailedToLoad(errorCode: Int) {
+
+    }
+
+    override fun onRewardedVideoAdLoaded() {
+
+    }
+
+    override fun onRewardedVideoAdOpened() {
+
+    }
+
+    override fun onRewardedVideoStarted() {
+
+    }
+
+    override fun onRewardedVideoCompleted() {
 
     }
 
