@@ -2,8 +2,6 @@ package com.example.schoolbattle
 
 import android.app.Activity
 import android.content.Intent
-import android.content.Intent.getIntent
-import android.content.Intent.getIntentOld
 import android.graphics.Color
 import android.graphics.Color.argb
 import android.graphics.Color.rgb
@@ -13,14 +11,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.ColorRes
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_game_item.*
+import com.example.schoolbattle.engine.BlitzActivity
+import com.example.schoolbattle.engine.StupidGameActivity
 import kotlinx.android.synthetic.main.activity_new_game.*
 import kotlinx.android.synthetic.main.activity_new_game_item.view.*
-import kotlinx.android.synthetic.main.activity_settings_fragment.*
 
 var NewGame: Activity = Activity()
 

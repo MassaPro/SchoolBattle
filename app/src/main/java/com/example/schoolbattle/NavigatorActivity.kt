@@ -1,7 +1,5 @@
 package com.example.schoolbattle
 
-import android.app.Activity
-import android.app.Application
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
@@ -11,20 +9,18 @@ import android.util.Log
 import android.view.Gravity
 import android.view.Window
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.gms.ads.reward.RewardedVideoAdListener
+import com.example.schoolbattle.engine.initCatchPlayersListenerForBlitzGame
+import com.example.schoolbattle.engine.updateRecycler
+import com.example.schoolbattle.engine.updateRecyclerBlitz
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_navigator.*
-import kotlinx.android.synthetic.main.activity_friends_list.*
 
 
 var now: Context? = null
@@ -78,10 +74,9 @@ class NavigatorActivity : AppCompatActivity() {
 
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val username = prefs.getString("username", "")
-        if (username != null) {
-            updateRecycler(username)
-            updateRecyclerBlitz(username)
-        }
+        initCatchPlayersListenerForBlitzGame(username!!, this)
+        updateRecycler(username)
+        updateRecyclerBlitz(username)
         myRef.child("Users").child(username.toString()).child("Revanches").addValueEventListener(
             object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}

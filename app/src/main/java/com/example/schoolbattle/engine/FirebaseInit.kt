@@ -1,11 +1,9 @@
-package com.example.schoolbattle
+package com.example.schoolbattle.engine
 
-import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.util.Log
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
+import com.example.schoolbattle.*
 import com.example.schoolbattle.gamesonline.*
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot

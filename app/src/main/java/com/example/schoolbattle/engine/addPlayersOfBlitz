@@ -1,0 +1,35 @@
+'use strict';
+
+const functions = require('firebase-functions');
+
+// The Firebase Admin SDK to access Cloud Firestore.
+const admin = require('firebase-admin');
+admin.initializeApp();
+
+  exports.addPlayersOfBlitz = functions.database.ref('/blitz-wait-list/{gameId}/{userId}').onWrite(async (change, context) => {
+      const parentRef = change.after.ref.parent;
+      const snapshot = await parentRef.once('value');
+      const gameId = context.params.gameId;
+      if (snapshot.numChildren() >= 2) {
+        let childCount = 0;
+        let firstName = "";
+        let secondName = "";
+        const updates = {};
+
+        snapshot.forEach((child) => {
+          ++childCount;
+          if (childCount === 1) {
+            firstName = child.key
+          } else if (childCount === 2) {
+            secondName = child.key
+            updates['Users/' + secondName + '/blitz/' + gameId + '/' + firstName] = 0;
+            updates['Users/' + firstName + '/blitz/' + gameId + '/' + secondName] = 0;
+            updates['blitz-wait-list/' + gameId + '/' + firstName] = null;
+            updates['blitz-wait-list/' + gameId + '/' + secondName] = null;
+          }
+        });
+        // Update the parent.
+        return parentRef.parent.parent.update(updates);
+      }
+      return null;
+    });

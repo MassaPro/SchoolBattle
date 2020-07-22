@@ -15,7 +15,7 @@
             android:value="ca-app-pub-8137188857901546~1022017686"/>
         <activity android:name=".gamesonline.TEST" />
         <activity android:name=".social.ProfileUserActivity" />
-        <activity android:name=".BlitzActivity" />
+        <activity android:name=".engine.BlitzActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".gameswithcomp.SnakeGameWithComputer" />
         <activity android:name=".gameswithcomp.ReversiWithComputer" />
@@ -37,11 +37,11 @@
         <activity android:name=".OneDevicePlayActivity" />
         <activity android:name=".gamesonline.DotGameActivity" />
         <activity android:name=".NavigatorActivity" />
-        <activity android:name=".GameListActivity" />
+        <activity android:name=".engine.GameListActivity" />
         <activity android:name=".gamesonline.XOGameActivity" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".gamesonline.StupidGameActivityTwoPlayers" />
-        <activity android:name=".StupidGameActivity" />
+        <activity android:name=".engine.StupidGameActivity" />
         <activity android:name=".NewGameActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".NullActivity"

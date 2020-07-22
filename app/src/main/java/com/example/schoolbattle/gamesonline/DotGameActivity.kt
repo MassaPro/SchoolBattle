@@ -11,13 +11,14 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
 import android.util.AttributeSet
-import android.util.DisplayMetrics
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.schoolbattle.*
+import com.example.schoolbattle.engine.ShowResult
+import com.example.schoolbattle.engine.StupidGame
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference

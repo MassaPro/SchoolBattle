@@ -1,4 +1,4 @@
-package com.example.schoolbattle
+package com.example.schoolbattle.engine
 
 import android.content.Context
 import android.content.Intent
@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.schoolbattle.*
 import com.example.schoolbattle.gamesonline.*
 import kotlinx.android.synthetic.main.activity_game_item.view.*
 import kotlinx.android.synthetic.main.activity_list_of_current_games.*
@@ -52,14 +53,20 @@ class GameListActivity : Fragment() {
         if (Design == "Egypt"){
             game_list_playing.setBackgroundResource(R.drawable.game_list_menu_egypt);
             my_toolbar2.setBackgroundColor(rgb(224,164,103))
-            toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            toolbarName2.setTypeface(ResourcesCompat.getFont(
+                CONTEXT,
+                R.font.s
+            ))
             //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
         }
 
         else if (Design == "Casino"){
             game_list_playing.setBackgroundResource(R.drawable.background2_casino);
             my_toolbar2.setBackgroundColor(argb(0,0,0,0))
-            toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            toolbarName2.setTypeface(ResourcesCompat.getFont(
+                CONTEXT,
+                R.font.casino
+            ))
             toolbarName2.setTextColor(Color.YELLOW)
             toolbarName2.setTextSize(20f)
             //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
@@ -67,7 +74,10 @@ class GameListActivity : Fragment() {
         else if (Design == "Rome"){
             game_list_playing.setBackgroundResource(R.drawable.background_rome);
             my_toolbar2.setBackgroundColor(argb(0,0,0,0))
-            toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            toolbarName2.setTypeface(ResourcesCompat.getFont(
+                CONTEXT,
+                R.font.rome
+            ))
             toolbarName2.setTextColor(rgb(193,150,63))
             toolbarName2.setTextSize(20f)
             //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
@@ -89,7 +99,10 @@ class GameListActivity : Fragment() {
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-        recyclerView.adapter = SimpleItemRecyclerViewAdapter(GAMES)
+        recyclerView.adapter =
+            SimpleItemRecyclerViewAdapter(
+                GAMES
+            )
     }
 
     class SimpleItemRecyclerViewAdapter(private val ITEMS: MutableList<Game>):

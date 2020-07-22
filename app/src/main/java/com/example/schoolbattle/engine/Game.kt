@@ -1,16 +1,16 @@
-package com.example.schoolbattle
+package com.example.schoolbattle.engine
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.Context
-import android.content.DialogInterface
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
+import com.example.schoolbattle.R
+import com.example.schoolbattle.myRef
+import com.example.schoolbattle.now
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import kotlin.random.Random
 
 class Game(val name: String = "", val type: String = "StupidGame", val text: String = "you VS") {
     override fun toString(): String {

@@ -5,7 +5,7 @@
     android:id="@+id/randomPlayerButton"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StupidGameActivity">
+    tools:context=".engine.StupidGameActivity">
 
     <ProgressBar
         android:id="@+id/progressBar"

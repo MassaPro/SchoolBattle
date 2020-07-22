@@ -1,7 +1,6 @@
 package com.example.schoolbattle.gamesonline
 
 import android.app.Activity
-import android.app.Dialog
 import android.content.Context
 import android.graphics.*
 import android.graphics.Color.argb
@@ -13,6 +12,8 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import com.example.schoolbattle.*
+import com.example.schoolbattle.engine.ShowResult
+import com.example.schoolbattle.engine.StupidGame
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference

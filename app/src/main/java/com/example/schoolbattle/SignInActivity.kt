@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_sign_in.*
 
 
 var database = FirebaseDatabase.getInstance()
-var myRef: DatabaseReference = database.getReference("SchoolBattle")
+var myRef: DatabaseReference = database.reference
 
 var SignIn: Activity = Activity()
 

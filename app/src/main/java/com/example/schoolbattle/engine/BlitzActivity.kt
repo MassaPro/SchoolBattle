@@ -1,9 +1,10 @@
-package com.example.schoolbattle
+package com.example.schoolbattle.engine
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.schoolbattle.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -13,6 +14,10 @@ class BlitzActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_blitz)
+        val globalName = getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "")
+        val gameName = intent?.getStringExtra("gameName").toString()
+        myRef.child("blitz-wait-list").child(gameName).child(globalName!!).onDisconnect().removeValue()
+        myRef.child("blitz-wait-list").child(gameName).child(globalName).setValue(globalName)
     }
 
     private var eventListener: ValueEventListener? = null
@@ -28,15 +33,14 @@ class BlitzActivity : AppCompatActivity() {
         currentContext = this
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val globalName = prefs.getString("username", "")
-        var gameName = intent?.getStringExtra("gameName").toString()
-
+        val gameName = intent?.getStringExtra("gameName").toString()
         is_pressed = true
         //button.setOnClickListener {
         //  button.isEnabled = false
         Toast.makeText(this, "onCreate", Toast.LENGTH_LONG).show()
 
         gameName
-        eventListener = myRef.addValueEventListener(object : ValueEventListener {
+        /*eventListener = myRef.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -71,7 +75,7 @@ class BlitzActivity : AppCompatActivity() {
                     myRef.child( "Blitz" + gameName + "Users").child(globalName.toString()).setValue(globalName)
                 }
             }
-        })
+        })*/
         //}
     }
 
@@ -81,10 +85,14 @@ class BlitzActivity : AppCompatActivity() {
         is_pressed = false
         state = false
 
+
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val globalName = prefs.getString("username", "")
         val gameName = intent?.getStringExtra("gameName").toString()
-        eventListener?.let { myRef.removeEventListener(it) }
-        myRef.child("Blitz" + gameName + "Users").child(globalName.toString()).removeValue()
+
+        myRef.child("blitz-wait-list").child(gameName).child(globalName!!).removeValue()
+        //eventListener?.let { myRef.removeEventListener(it) }
+        //myRef.child("Blitz" + gameName + "Users").child(globalName.toString()).removeValue()
+        finish()
     }
 }

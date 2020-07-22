@@ -2,11 +2,12 @@ package com.example.schoolbattle
 
 import android.app.Activity
 import android.content.Context
-import android.content.Context.VIBRATOR_SERVICE
 import android.media.AudioManager
 import android.media.SoundPool
 import android.os.Vibrator
-import androidx.core.content.ContextCompat.getSystemService
+import com.example.schoolbattle.engine.Game
+import com.example.schoolbattle.engine.RecyclerSet
+import com.example.schoolbattle.engine.RecyclerSetBlitz
 import com.google.firebase.database.ChildEventListener
 
 
@@ -69,8 +70,10 @@ var FRIENDS: MutableList<String> = mutableListOf()
 var CHOOSE_GAMES: MutableList<String> = mutableListOf("StupidGame", "XOGame", "DotGame", "GoGame", "SnakeGame", "BoxGame", "AngleGame","VirusGame","Reversi")
 var currentContext: Context? = null
 lateinit var listener: ChildEventListener
-var recyclerSet: RecyclerSet = RecyclerSet()
-var recyclerSetBlitz: RecyclerSetBlitz = RecyclerSetBlitz()
+var recyclerSet: RecyclerSet =
+    RecyclerSet()
+var recyclerSetBlitz: RecyclerSetBlitz =
+    RecyclerSetBlitz()
 lateinit var CONTEXT: Activity
 
 
@@ -104,4 +107,10 @@ fun DECODE(s : String): MutableList<Int>
         }
     }
     return(m)
+}
+
+// Шифровка игры в файрбейз
+fun encodeGame(user: String?, opponent: String?): String {
+    if (user == null || opponent == null) return ""
+    return if (user.toString() < opponent.toString()) "$user $opponent" else "$opponent $user"
 }

@@ -7,7 +7,6 @@ import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.provider.ContactsContract
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
@@ -19,12 +18,9 @@ import com.google.firebase.database.*
 import com.instacart.library.truetime.TrueTime
 import kotlinx.android.synthetic.main.activity_x_o_game.*
 import java.util.*
-import java.text.DateFormat
-import android.content.Intent
 import android.graphics.Color.*
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.math.min
+import com.example.schoolbattle.engine.ShowResult
+import com.example.schoolbattle.engine.StupidGame
 
 
 class XOGameActivity : AppCompatActivity() {

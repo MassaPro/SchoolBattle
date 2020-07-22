@@ -1,15 +1,17 @@
-package com.example.schoolbattle
+package com.example.schoolbattle.engine
 
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.schoolbattle.CONTEXT
+import com.example.schoolbattle.R
+import com.example.schoolbattle.currentContext
+import com.example.schoolbattle.myRef
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.activity_stupid_game.*
 
 var StupidGame: Activity = Activity()
 
@@ -36,13 +38,12 @@ class StupidGameActivity : AppCompatActivity() {
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val globalName = prefs.getString("username", "")
         val gameName = intent?.getStringExtra("gameName").toString()
-
         is_pressed = true
         //button.setOnClickListener {
           //  button.isEnabled = false
             Toast.makeText(this, "onCreate", Toast.LENGTH_LONG).show()
 
-            eventListener = myRef.addValueEventListener(object : ValueEventListener {
+            /*eventListener = myRef.addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
 
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -77,7 +78,7 @@ class StupidGameActivity : AppCompatActivity() {
                         myRef.child(gameName + "Users").child(globalName.toString()).setValue(globalName)
                     }
                 }
-            })
+            })*/
         //}
     }
 
