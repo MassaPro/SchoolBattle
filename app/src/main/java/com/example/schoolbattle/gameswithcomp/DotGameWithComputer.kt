@@ -4,17 +4,17 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.schoolbattle.R
-import kotlinx.android.synthetic.main.activity_dot_game_with_computer.*
+import kotlinx.android.synthetic.main.activity_computer_games_template.*
 
 class DotGameWithComputer : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dot_game_with_computer)
+        setContentView(R.layout.activity_computer_games_template)
 
 
 
-        bottom_navigation_dot_with_computer.setOnNavigationItemSelectedListener { item ->
+        bottom_navigation_template_with_computer.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
 

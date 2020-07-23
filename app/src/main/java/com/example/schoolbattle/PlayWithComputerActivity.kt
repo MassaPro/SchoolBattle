@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.view.KeyEvent
 import com.example.schoolbattle.gameswithcomp.*
 
-var delayTime : Long = 500
+var delayTime : Long = 1000
 
 
 class PlayWithComputerActivity : AppCompatActivity() {
