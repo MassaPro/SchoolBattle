@@ -80,6 +80,11 @@ class ShopFragmentActivity : Fragment (){
             t_shop.setBackgroundColor(rgb(0,0,0))
             fon.setBackgroundResource(R.drawable.background_rome)
         }
+        else if(Design == "Gothic")
+        {
+            t_shop.setBackgroundColor(rgb(0,0,0))
+            fon.setBackgroundResource(R.drawable.background_gothic)
+        }
 
         val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val globalName = prefs?.getString("username", "").toString()

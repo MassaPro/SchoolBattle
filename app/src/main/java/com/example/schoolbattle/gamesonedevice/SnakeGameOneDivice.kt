@@ -143,6 +143,22 @@ class SnakeGameOneDivice : AppCompatActivity() {
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
         }
+        else if(Design == "Gothic" ) {
+            name_player1_one_divice.setTextColor(Color.WHITE)
+            name_player2_one_divice.setTextColor(Color.YELLOW)
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            //button_player_1_one_divice.setBackgroundResource(R.drawable.cross_gothic);
+            //button_player_2_one_divice.setBackgroundResource(R.drawable.null_gothic);
+            toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            label_one_device.setBackgroundResource(R.drawable.background_gothic);
+            bottom_navigation_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+        }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
         if (usedToClear == "clear") {
@@ -547,6 +563,21 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
             paint_rib_2.setColor(Color.BLACK)          //цвета для ребер  и их ширина
             paint_rib_1.setStrokeWidth(10f)
             paint_rib_1.setColor(Color.rgb(193,150,63))
+            paint_rib_2.setStrokeWidth(10f)
+
+            border_1.setColor(Color.rgb(180, 180, 180))
+            border_1.setStrokeWidth(10f)
+        }
+        else if(Design == "Gothic") {
+
+            Line_paint.setColor(Color.rgb(100, 100, 100))          //ресур для линий (ширина и цвет)
+            Line_paint.setStrokeWidth(5f)
+
+            paint_circle.setColor(Color.rgb(180, 180, 180))     //цвета для точек
+
+            paint_rib_2.setColor(Color.WHITE)          //цвета для ребер  и их ширина
+            paint_rib_1.setStrokeWidth(10f)
+            paint_rib_1.setColor(Color.YELLOW)
             paint_rib_2.setStrokeWidth(10f)
 
             border_1.setColor(Color.rgb(180, 180, 180))

@@ -72,6 +72,14 @@ class GameListActivity : Fragment() {
             toolbarName2.setTextSize(20f)
             //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
         }
+        else if (Design == "Gothic"){
+            game_list_playing.setBackgroundResource(R.drawable.background_gothic);
+            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
+            toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            toolbarName2.setTextColor(Color.WHITE)
+            toolbarName2.setTextSize(20f)
+            //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+        }
 
         // (activity as AppCompatActivity).setSupportActionBar(findViewById(R.id.my_toolbar))
         //setSupportActionBar(findViewById(R.id.my_toolbar))

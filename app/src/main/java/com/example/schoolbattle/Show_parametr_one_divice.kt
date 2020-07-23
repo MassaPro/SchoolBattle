@@ -55,7 +55,7 @@ class Show_parametr_one_divice_one_Device(activity: Activity) {
         {
             dialog_one_device.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_rome)
 
-            dialog_one_device.parametrs_one_device_configuring.setTypeface(ResourcesCompat.getFont(c, R.font.casino))
+            dialog_one_device.parametrs_one_device_configuring.setTypeface(ResourcesCompat.getFont(c, R.font.rome))
             dialog_one_device.parametrs_one_device_configuring.setBackgroundColor(Color.argb(0, 0,0,0))
             dialog_one_device.parametrs_one_device_configuring.setTextColor(Color.rgb(193, 150, 63))
 
@@ -66,6 +66,22 @@ class Show_parametr_one_divice_one_Device(activity: Activity) {
             dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.casino))
             dialog_one_device.switch_parametrs_one_device_2.setBackgroundColor(Color.argb(0, 0,0,0))
             dialog_one_device.switch_parametrs_one_device_2.setTextColor(Color.rgb(193, 150, 63))
+        }
+        else if(Design == "Gothic")
+        {
+            dialog_one_device.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_gothic)
+
+            dialog_one_device.parametrs_one_device_configuring.setTypeface(ResourcesCompat.getFont(c, R.font.gothic))
+            dialog_one_device.parametrs_one_device_configuring.setBackgroundColor(Color.argb(0, 0,0,0))
+            dialog_one_device.parametrs_one_device_configuring.setTextColor(Color.WHITE)
+
+            dialog_one_device.parametrs_one_device_rules.setTypeface(ResourcesCompat.getFont(c, R.font.gothic))
+            dialog_one_device.parametrs_one_device_rules.setBackgroundColor(Color.argb(0, 0,0,0))
+            dialog_one_device.parametrs_one_device_rules.setTextColor(Color.WHITE)
+
+            dialog_one_device.parametrs_one_device_xs.setTypeface(ResourcesCompat.getFont(c, R.font.gothic))
+            dialog_one_device.parametrs_one_device_xs.setBackgroundColor(Color.argb(0, 0,0,0))
+            dialog_one_device.parametrs_one_device_xs.setTextColor(Color.WHITE)
         }
 
 

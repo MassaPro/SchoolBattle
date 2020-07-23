@@ -35,17 +35,37 @@ class SignInActivity : AppCompatActivity() {
         }
         else if (Design == "Casino"){
             sign_in_menu.setBackgroundResource(R.drawable.sign_in_egypt);
-            signInButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            signInButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             signInButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
         }
         if (Design == "Rome"){
             sign_in_menu.setBackgroundResource(R.drawable.sign_in_rome);
             signInButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
             signInButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            signInButton.setTextColor(Color.rgb(193, 150, 63))
+
             signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
             signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            signUpButton.setTextColor(Color.rgb(193, 150, 63))
+        }
+        if (Design == "Gothic"){
+            sign_in_menu.setBackgroundResource(R.drawable.sign_in_gothic);
+
+            nameText.setTextColor(Color.WHITE)
+            nameText.setBackgroundColor(Color.rgb(30, 30, 30))
+
+            passwordText.setTextColor(Color.WHITE)
+            passwordText.setBackgroundColor(Color.rgb(30, 30, 30))
+
+            signInButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            signInButton.setTextColor(Color.WHITE)
+            signInButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+
+            signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            signUpButton.setTextColor(Color.WHITE)
         }
 
         SignIn = this

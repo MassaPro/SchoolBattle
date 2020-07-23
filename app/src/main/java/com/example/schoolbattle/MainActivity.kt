@@ -155,6 +155,40 @@ class MainActivity : Fragment() {
             blitz.setTextSize(20f)
             blitz.setBackgroundColor(argb(0,0,0,0))
         }
+        else if (Design == "Gothic"){
+            game_menu.setBackgroundResource(R.drawable.game_menu_gothic)
+            //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
+            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
+
+            toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            toolbarName2.setTextColor(Color.WHITE)
+            toolbarName2.setTextSize(20f)
+
+            searchButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            searchButton.setTextColor(Color.WHITE)
+            searchButton.setTextSize(20f)
+            searchButton.setBackgroundColor(argb(0,0,0,0))
+
+            newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            newGameButton.setTextColor(Color.WHITE)
+            newGameButton.setTextSize(19f)
+            newGameButton.setBackgroundColor(argb(0,0,0,0))
+
+            oneDevice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            oneDevice.setTextColor(Color.WHITE)
+            oneDevice.setTextSize(20f)
+            oneDevice.setBackgroundColor(argb(0,0,0,0))
+
+            playWithComp.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            playWithComp.setTextColor(Color.WHITE)
+            playWithComp.setTextSize(20f)
+            playWithComp.setBackgroundColor(argb(0,0,0,0))
+
+            blitz.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            blitz.setTextColor(Color.WHITE)
+            blitz.setTextSize(20f)
+            blitz.setBackgroundColor(argb(0,0,0,0))
+        }
 
 
         searchButton.setOnClickListener {

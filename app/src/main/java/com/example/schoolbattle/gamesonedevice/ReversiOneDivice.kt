@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.*
 import android.graphics.Color.argb
+import android.graphics.Color.rgb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Vibrator
@@ -141,6 +142,22 @@ class ReversiOneDivice : AppCompatActivity() {
             toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             label_one_device.setBackgroundResource(R.drawable.background_rome);
             bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+        }
+        else if(Design == "Gothic" ) {
+            name_player1_one_divice.setTextColor(Color.WHITE)
+            name_player2_one_divice.setTextColor(Color.WHITE)
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            button_player_1_one_divice.setBackgroundResource(R.drawable.white_chip_gothic);
+            button_player_2_one_divice.setBackgroundResource(R.drawable.black_chip_gothic);
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            label_one_device.setBackgroundResource(R.drawable.background_gothic);
+            bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
         }
@@ -884,7 +901,10 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
         else if(Design == "Rome") {
             Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
             Line_paint.setStrokeWidth(5f)
-
+        }
+        else if(Design == "Gothic") {
+            Line_paint.setColor(Color.rgb(100,100,100))          //ресур для линий (ширина и цвет)
+            Line_paint.setStrokeWidth(5f)
         }
         // TODO нужно взять из DataBase (статистика ходов)
         for( i in 0..7) {
@@ -919,7 +939,13 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
     var black_chip_rome: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.white_chip_rome);
     var grey_chip_rome: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black_chip_rome);
 
+    var black_chip_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.white_chip_gothic);
+    var grey_chip_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black_chip_gothic);
+
+
     var green: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.green);
+    var romb1: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.romb);
+    var romb2: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.romb2);
 
 
     override fun draw(canvas: Canvas?) {
@@ -973,10 +999,11 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
 
         var right_black_chip: Bitmap
         var right_grey_chip: Bitmap
+        var right_green:Bitmap
 
         right_black_chip = Bitmap.createScaledBitmap(black_chip_normal,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
         right_grey_chip = Bitmap.createScaledBitmap(grey_chip_normal,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-        val right_green:Bitmap = Bitmap.createScaledBitmap(green,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+        right_green = Bitmap.createScaledBitmap(green,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
 
         if(Design == "Egypt")
         {
@@ -992,6 +1019,13 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
         {
             right_black_chip = Bitmap.createScaledBitmap(black_chip_rome,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
             right_grey_chip = Bitmap.createScaledBitmap(grey_chip_rome,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            right_green = Bitmap.createScaledBitmap(romb2,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+        }
+        else if (Design == "Gothic")
+        {
+            right_black_chip = Bitmap.createScaledBitmap(black_chip_gothic,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+            right_grey_chip = Bitmap.createScaledBitmap(grey_chip_gothic,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            right_green = Bitmap.createScaledBitmap(romb1,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
         }
 
         for( i in 0..7) // расстановка фишек
