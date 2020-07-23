@@ -23,19 +23,22 @@
             android:id="@+id/signature_canvas_box_with_computer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:visibility="gone" />
 
         <com.example.schoolbattle.gameswithcomp.CanvasView_xog_with_computer
             android:id="@+id/signature_canvas_xog_with_computer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:visibility="gone"  />
 
         <com.example.schoolbattle.gameswithcomp.CanvasView_reversi_with_computer
             android:id="@+id/signature_canvas_reversi_with_computer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:visibility="gone" />
 
     </FrameLayout>
 

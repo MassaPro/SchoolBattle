@@ -41,7 +41,7 @@ class SignInActivity : AppCompatActivity() {
             signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
         }
         if (Design == "Rome"){
-            sign_in_menu.setBackgroundResource(R.drawable.sign_in_rome);
+            //sign_in_menu.setBackgroundResource(R.drawable.sign_in_rome);
             signInButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
             signInButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
             signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
