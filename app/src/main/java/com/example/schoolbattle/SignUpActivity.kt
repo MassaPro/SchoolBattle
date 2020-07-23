@@ -33,7 +33,7 @@ class SignUpActivity : AppCompatActivity() {
 
         }
         else if (Design == "Rome"){
-            //sign_up_menu.setBackgroundResource(R.drawable.sign_in_rome);
+            sign_up_menu.setBackgroundResource(R.drawable.sign_in_rome);
             signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
             signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
 
