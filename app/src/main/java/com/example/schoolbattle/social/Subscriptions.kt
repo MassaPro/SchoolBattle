@@ -47,6 +47,10 @@ class Subscriptions : Fragment() {
         else if (Design == "Rome"){
             back_friends_followers.setBackgroundResource(R.drawable.background_rome)
         }
+        else if (Design == "Gothic"){
+            back_friends_followers.setBackgroundResource(R.drawable.background_gothic)
+        }
+
         val prefs = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         var username = prefs?.getString("username", "")
         if (locale_context!!.intent.getStringExtra("curName") != null) {

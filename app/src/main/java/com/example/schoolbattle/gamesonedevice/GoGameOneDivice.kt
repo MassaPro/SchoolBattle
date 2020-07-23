@@ -116,8 +116,8 @@ class GoGameOneDivice : AppCompatActivity() {
             name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             name_player2_one_divice.setTextSize(20f)
             name_player1_one_divice.setTextSize(20f)
-            button_player_1_one_divice.setBackgroundResource(R.drawable.tower1_casino);
-            button_player_2_one_divice.setBackgroundResource(R.drawable.tower2_casino);
+            button_player_1_one_divice.setBackgroundResource(R.drawable.tower2_casino);
+            button_player_2_one_divice.setBackgroundResource(R.drawable.tower1_casino);
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             label_one_device.setBackgroundResource(R.drawable.background_casino);
@@ -138,6 +138,22 @@ class GoGameOneDivice : AppCompatActivity() {
             toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             label_one_device.setBackgroundResource(R.drawable.background_rome);
             bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+        }
+        else if(Design == "Gothic" ) {
+            name_player1_one_divice.setTextColor(Color.WHITE)
+            name_player2_one_divice.setTextColor(Color.YELLOW)
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            //button_player_1_one_divice.setBackgroundResource(R.drawable.cross_gothic);
+            //button_player_2_one_divice.setBackgroundResource(R.drawable.null_gothic);
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            label_one_device.setBackgroundResource(R.drawable.background_gothic);
+            bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
         }
@@ -520,13 +536,13 @@ class CanvasView_Go_one_divice(context: Context, attrs: AttributeSet?) : View(co
             shading_2.setStrokeWidth(2f)
         }
         else if(Design == "Casino") {
-            paint_rib_1.setColor(Color.BLACK) //цвета для ребер  и их ширина
-            paint_rib_1.setStrokeWidth(5f)
-            paint_rib_2.setColor(Color.RED)
+            paint_rib_2.setColor(Color.BLACK) //цвета для ребер  и их ширина
             paint_rib_2.setStrokeWidth(5f)
+            paint_rib_1.setColor(Color.RED)
+            paint_rib_1.setStrokeWidth(5f)
 
-            shading_1.setColor(Color.BLACK)
-            shading_2.setColor(Color.RED)
+            shading_2.setColor(Color.BLACK)
+            shading_1.setColor(Color.RED)
             shading_1.setStrokeWidth(2f)
             shading_2.setStrokeWidth(2f)
         }
@@ -540,6 +556,19 @@ class CanvasView_Go_one_divice(context: Context, attrs: AttributeSet?) : View(co
 
             shading_1.setColor(Color.BLACK)
             shading_2.setColor(Color.rgb(193,150,63))
+            shading_1.setStrokeWidth(2f)
+            shading_2.setStrokeWidth(2f)
+        }
+        else if(Design == "Gothic") {
+            Line_paint.setColor(Color.rgb(100,100,100))      //ресур для линий (ширина и цвет)
+            paint_circle.setColor(Color.rgb(100,100,100))
+            paint_rib_1.setColor(Color.WHITE) //цвета для ребер  и их ширина
+            paint_rib_1.setStrokeWidth(5f)
+            paint_rib_2.setColor(Color.YELLOW)
+            paint_rib_2.setStrokeWidth(5f)
+
+            shading_1.setColor(Color.WHITE)
+            shading_2.setColor(Color.YELLOW)
             shading_1.setStrokeWidth(2f)
             shading_2.setStrokeWidth(2f)
         }

@@ -40,15 +40,22 @@ class NewGameActivity : AppCompatActivity() {
         }
         else if (Design == "Casino"){
             game_list_menu.setBackgroundResource(R.drawable.background2_casino);
-            my_toolbar2.setBackgroundColor(argb(0,224,164,103))
+            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
             text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             text.setTextColor(Color.YELLOW)
         }
         else if (Design == "Rome"){
             game_list_menu.setBackgroundResource(R.drawable.background_rome);
-            my_toolbar2.setBackgroundColor(argb(0,224,164,103))
+            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
             text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
             text.setTextColor(rgb(193,150,63))
+        }
+
+        else if (Design == "Gothic"){
+            game_list_menu.setBackgroundResource(R.drawable.background_gothic);
+            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
+            text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            text.setTextColor(Color.WHITE)
         }
 
         NewGame = this

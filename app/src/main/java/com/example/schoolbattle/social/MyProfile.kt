@@ -56,6 +56,9 @@ class MyProfile : Fragment() {
         else if (Design == "Rome"){
             myprofile.setBackgroundResource(R.drawable.background_rome)
         }
+        else if (Design == "Gothic"){
+            myprofile.setBackgroundResource(R.drawable.background_gothic)
+        }
 
         val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val username = prefs?.getString("username", "")

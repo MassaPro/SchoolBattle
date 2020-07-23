@@ -45,11 +45,12 @@ class NavigatorActivity : AppCompatActivity() {
         }
         if (Design == "Casino"){
             nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
-            //navigation_dashboard.setBackground
         }
         if (Design == "Rome"){
             nav_view.setBackgroundResource(R.drawable.bottom_navigation_rome)
-            //navigation_dashboard.setBackground
+        }
+        if (Design == "Gothic"){
+            nav_view.setBackgroundResource(R.drawable.bottom_navigation_gothic)
         }
     }
 

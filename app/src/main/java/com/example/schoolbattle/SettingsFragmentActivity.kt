@@ -90,6 +90,20 @@ class SettingsFragmentActivity : Fragment() {
             //soundSwitch.setBackgroundColor(Color.YELLOW)
             soundSwitch.setTextSize(20f)
         }
+        else if (Design == "Gothic") {
+            settings_menu.setBackgroundResource(R.drawable.background_gothic)
+            tb1.setBackgroundColor(argb(0,0,0,0))
+
+            choose_design.setBackgroundColor(argb(0,0,0,0))
+            choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            //choose_design.setTextColor(Color.YELLOW)
+            choose_design.setTextSize(18f)
+
+            soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            soundSwitch.setTextColor(Color.WHITE)
+            //soundSwitch.setBackgroundColor(Color.YELLOW)
+            soundSwitch.setTextSize(20f)
+        }
 
 
         logOutSettings.setOnClickListener {
@@ -213,6 +227,13 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                 editor.putString("design","Rome")
                 editor.apply()
             }
+            else if(item == 4)
+            {
+                Design = "Gothic"
+                val editor = v.context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("design","Gothic")
+                editor.apply()
+            }
 
             val t = fragment_activity?.supportFragmentManager?.beginTransaction()
             val mFrag: Fragment= SettingsFragmentActivity()                    //ПРОСТО ПИЗДЕЦ
@@ -233,6 +254,10 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
             else if(Design == "Rome")
             {
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_rome)
+            }
+            else if(Design == "Gothic")
+            {
+                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_gothic)
             }
 
 
