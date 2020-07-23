@@ -202,7 +202,7 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
     }
 
     override fun onRewardedVideoAdClosed() {
-
+        loadRewardedVideoAd()
     }
 
     override fun onRewardedVideoAdFailedToLoad(errorCode: Int) {
@@ -222,7 +222,19 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
     }
 
     override fun onRewardedVideoCompleted() {
-
+        loadRewardedVideoAd()
+        var dialog_reward : Dialog = locale_context!!.let { Dialog(it) }
+        dialog_reward.setContentView(R.layout.reward_dialog)
+        dialog_reward.price_reward.text = "10" //TODO ОБЯЗАТЕЛЬНО НЕ ЗАБЫТЬ ПОМЕНЯТЬ ЗДЕСЬ ЦЕНУ
+        dialog_reward.close_reward.setOnClickListener {
+            dialog_reward.dismiss()
+        }
+        dialog_reward.ok_reward.setOnClickListener {
+            dialog_reward.dismiss()
+        }
+        dialog_reward.show()
+        MONEY += 10
+        locale_context?.findViewById<TextView>(R.id.money_shop_toolbar)?.text = MONEY.toString()
     }
 
 
