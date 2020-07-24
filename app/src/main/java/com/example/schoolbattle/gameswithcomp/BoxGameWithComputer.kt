@@ -15,7 +15,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_computer_games_template.*
 
-var BoxMode = 1
+var BoxMode = 0
 
 class BoxGameWithComputer : AppCompatActivity() {
     fun encode(h: MutableList<MutableList<Int>>):String
@@ -96,8 +96,21 @@ class BoxGameWithComputer : AppCompatActivity() {
         setContentView(R.layout.activity_computer_games_template)
         signature_canvas_box_with_computer.visibility = (View.VISIBLE)
         signature_canvas_box_with_computer.activity = this
-
         CONTEXT = this
+
+
+        val prefs2 = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        BoxMode = prefs2.getInt("BoxGameMode", 0)
+        if (BoxMode == 0) {
+            val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+            editor.putInt("BoxGameMode", 1)
+            editor.apply()
+            BoxMode = 1
+        }
+        if (BoxMode == 2) {
+            signature_canvas_box_with_computer.blocked = true
+        }
+
 
         if(Design == "Egypt" ) {
             name_player1_with_computer_template.setTextColor(Color.BLACK)
@@ -137,7 +150,7 @@ class BoxGameWithComputer : AppCompatActivity() {
         to_back_template_with_computer.setOnClickListener {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
-            intent.putExtra("playType", 2)
+            intent.putExtra("playType", 3)
             startActivity(intent)
         }
 
@@ -227,6 +240,8 @@ class BoxGameWithComputer : AppCompatActivity() {
             signature_canvas_box_with_computer.invalidate()
         }
 
+
+        //TODO first computer move
 
         bottom_navigation_template_with_computer.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -852,7 +867,8 @@ class CanvasView_Boxs_with_computer(context: Context, attrs: AttributeSet?) : Vi
                         }
                     }
                 }  // рядом2
-            } else {
+            }
+            else {
                 if (!fla2) {
                     for (i in 0..6) {
                         for (j in 0..7) {

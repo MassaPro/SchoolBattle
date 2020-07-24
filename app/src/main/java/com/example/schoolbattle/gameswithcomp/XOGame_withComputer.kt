@@ -178,7 +178,7 @@ class XOGame_withComputer : AppCompatActivity() {
             startActivity(intent)
         }
 
-        if (XOGameMode == 2 && signature_canvas_xog_with_computer.History.size == 0) {
+        if (XOGameMode == 2 && signature_canvas_xog_with_computer.History.size == 0) {      // first computer move
             var find_x = 0
             var find_y = 0
             var fla = 0
