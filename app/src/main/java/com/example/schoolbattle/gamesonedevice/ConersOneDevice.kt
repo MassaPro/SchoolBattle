@@ -301,7 +301,30 @@ class ConersOneDevice : AppCompatActivity() {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 2)
-            startActivity(intent)
+            if(mInterstitialAd_in_offline_games.isLoaded)
+            {
+                Intent_for_offline_games = intent
+                mInterstitialAd_in_offline_games.show()
+            }
+            else
+            {
+                this.startActivity(intent)
+            }
+        }
+    }
+    override fun onBackPressed()
+    {
+        super.onBackPressed()
+        var intent = Intent(this, NewGameActivity::class.java)
+        intent.putExtra("playType", 2)
+        if(mInterstitialAd_in_offline_games.isLoaded)
+        {
+            Intent_for_offline_games = intent
+            mInterstitialAd_in_offline_games.show()
+        }
+        else
+        {
+            this.startActivity(intent)
         }
     }
 }
