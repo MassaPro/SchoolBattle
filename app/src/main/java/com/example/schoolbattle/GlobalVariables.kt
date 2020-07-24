@@ -3,6 +3,9 @@ package com.example.schoolbattle
 import android.app.Activity
 import android.content.Context
 import android.content.Context.VIBRATOR_SERVICE
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.Color.rgb
 import android.media.AudioManager
 import android.media.SoundPool
 import android.os.Vibrator
@@ -103,4 +106,37 @@ fun DECODE(s : String): MutableList<Int>
         }
     }
     return(m)
+}
+fun generateColorStateList() :ColorStateList
+{
+
+    var checkedColor:Int = rgb(255,255,255) 
+    var uncheckedColor:Int = rgb(255,148,148)
+
+    when (Design) {
+        "Normal" -> {
+
+        }
+        "Egypt" -> {
+
+
+        }
+        "Casino" -> {
+
+        }
+        "Rome" -> {
+
+        }
+        "Gothic" -> {
+
+        }
+    }
+    val states = arrayOf(
+        intArrayOf(android.R.attr.state_checked),
+        intArrayOf(-android.R.attr.state_checked))
+    val colors = intArrayOf(
+        checkedColor, // checked
+        uncheckedColor // unchecked
+        )
+    return ColorStateList(states, colors)
 }

@@ -33,7 +33,7 @@ import java.util.*
 
 var Vidos : RewardedVideoAd? = null
 lateinit var mRewardedVideoAd: RewardedVideoAd
-class Specially : Fragment(),RewardedVideoAdListener {
+class Specially : Fragment(){
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -66,47 +66,14 @@ class Specially : Fragment(),RewardedVideoAdListener {
 
 
     }
-    override fun onRewarded(reward: RewardItem) {
 
-    }
-
-    override fun onRewardedVideoAdLeftApplication() {
-
-    }
-
-    override fun onRewardedVideoAdClosed() {
-        loadRewardedVideoAd()
-    }
-
-    override fun onRewardedVideoAdFailedToLoad(errorCode: Int) {
-
-    }
-
-    override fun onRewardedVideoAdLoaded() {
-
-    }
-
-    override fun onRewardedVideoAdOpened() {
-
-    }
-
-    override fun onRewardedVideoStarted() {
-
-    }
-
-    override fun onRewardedVideoCompleted() {
-        
-    }
 
 
 
 
 }
 
-fun loadRewardedVideoAd() {
-    mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917",          //TODO зменить на настоящий идентификатор
-        AdRequest.Builder().build())
-}
+
 
 
 

@@ -3,6 +3,7 @@ package com.example.schoolbattle
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Color.argb
 import android.graphics.Color.rgb
@@ -13,8 +14,6 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_game_menu.*
-
-
 
 
 lateinit var gamesRecycler: RecyclerView
@@ -71,6 +70,8 @@ class MainActivity : Fragment() {
         {
             blitz.width = 320
             newGameButton.width = 320
+
+
         }
         else if (Design == "Egypt"){
             game_menu.setBackgroundResource(R.drawable.game_menu_egypt)
@@ -286,3 +287,4 @@ class MainActivity : Fragment() {
         }
     }
 }
+

@@ -19,9 +19,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.schoolbattle.shop.loadRewardedVideoAd
+
 import com.example.schoolbattle.shop.locale_context
 import com.example.schoolbattle.shop.mRewardedVideoAd
+import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.reward.RewardItem
 import com.google.android.gms.ads.reward.RewardedVideoAdListener
@@ -66,6 +67,8 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
         setContentView(R.layout.activity_navigator)
 
 
+
+
         mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this)
         mRewardedVideoAd.rewardedVideoAdListener = this
         loadRewardedVideoAd()
@@ -78,6 +81,9 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         now = this
         val navController = findNavController(R.id.nav_host_fragment)
+
+        nav_view.itemIconTintList = generateColorStateList()
+        nav_view.itemTextColor = generateColorStateList()
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         //val appBarConfiguration = AppBarConfiguration(setOf(
@@ -235,7 +241,16 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
         dialog_reward.show()
         MONEY += 10
         locale_context?.findViewById<TextView>(R.id.money_shop_toolbar)?.text = MONEY.toString()
+        val editor =
+            locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                .edit()
+        editor.putString("money", MONEY.toString())
+        editor.apply()
     }
 
+    fun loadRewardedVideoAd() {
+        mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917",          //TODO зменить на настоящий идентификатор
+            AdRequest.Builder().build())
+    }
 
 }
