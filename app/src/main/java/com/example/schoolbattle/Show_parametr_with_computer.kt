@@ -103,6 +103,22 @@ class Show_parametr_with_computer(activity: Activity) {
             }
         }
 
+        if (gameType == "GoGame") {
+            val changeModeButton = dialog_with_computer.findViewById(R.id.changeModeWithComputer) as Button
+            changeModeButton.setOnClickListener{
+                val prefs2 = type_activity.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                var GoGameMode = prefs2.getInt("GoGameMode", 0)
+                val editor = type_activity.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putInt("GoGameMode", 3 - GoGameMode)
+                editor.apply()
+
+                val intent = Intent(type_activity, GoGameWithComputer::class.java).apply {
+                    putExtra("usedToClear", "clear")
+                }
+                type_activity.finish()
+                type_activity.startActivity(intent)
+            }
+        }
 
         if (gameType == "Reversi") {
             val changeModeButton = dialog_with_computer.findViewById(R.id.changeModeWithComputer) as Button

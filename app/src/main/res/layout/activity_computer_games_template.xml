@@ -47,6 +47,20 @@
             android:textColor="#FFFFFF"
             android:visibility="gone"  />
 
+        <com.example.schoolbattle.gameswithcomp.CanvasView_Dots_with_computer
+            android:id="@+id/signature_canvas_dots_with_computer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF"
+            android:visibility="gone"  />
+
+        <com.example.schoolbattle.gameswithcomp.CanvasView_Go_with_computer
+            android:id="@+id/signature_canvas_go_with_computer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF"
+            android:visibility="gone"  />
+
 
 
     </FrameLayout>

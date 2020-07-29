@@ -103,6 +103,9 @@ class ConersWithComputer : AppCompatActivity() {
         signature_canvas_corners_with_computer.activity = this
         CONTEXT = this
 
+        mSound.load(this, R.raw.xlup, 1);
+        vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
+
 
         val prefs2 = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         AngleGameMode = prefs2.getInt("AngleGameMode", 0)
@@ -112,12 +115,16 @@ class ConersWithComputer : AppCompatActivity() {
             editor.apply()
             AngleGameMode = 1
         }
-        if (AngleGameMode == 2) {
-            signature_canvas_corners_with_computer.blocked = true        // TODO check
+        signature_canvas_corners_with_computer.blockedOnTouch = false
+
+        val prefs_first = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        signature_canvas_corners_with_computer.History = decode(prefs_first.getString("corner_with_computer", "").toString())
+        if (AngleGameMode == 2 && signature_canvas_corners_with_computer.History.size == 0) {
+            signature_canvas_corners_with_computer.blockedOnTouch = true        // TODO check
         }
 
-        mSound.load(this, R.raw.xlup, 1);
-        vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
+
+
 
         signature_canvas_corners_with_computer.t1 = findViewById(R.id.name_player1_with_computer_template) as TextView
         signature_canvas_corners_with_computer.t2 = findViewById(R.id.name_player2_with_computer_template) as TextView
@@ -225,8 +232,177 @@ class ConersWithComputer : AppCompatActivity() {
             signature_canvas_corners_with_computer.invalidate()
         }
 
-        //TODO first computer move
 
+
+        if (AngleGameMode == 2 && signature_canvas_corners_with_computer.History.size == 0) {
+            signature_canvas_corners_with_computer.blockedOnTouch = true
+
+            val handler = android.os.Handler()
+            handler.postDelayed({
+                var flag = 0
+
+                var list_x: MutableList<Int> = mutableListOf(0, 1, 2, 3, 4, 5, 6, 7)
+                var list_y: MutableList<Int> = mutableListOf(0, 1, 2, 3, 4, 5, 6, 7)
+                list_x.shuffle()
+                list_y.shuffle()
+
+                for (i in list_x) {
+                    for (j in list_y) {
+                        if (signature_canvas_corners_with_computer.FIELD[i][j] == 3 - AngleGameMode) {
+                            signature_canvas_corners_with_computer.MakeLight(i, j, 1)
+
+                            if (AngleGameMode == 1) {
+                                for (i2 in 0..i) {
+                                    for (j2 in j..7) {
+
+                                        if (i2 != i || j2 != j) {
+
+                                            if (signature_canvas_corners_with_computer.Array_of_illumination[i2][j2] == 1 || signature_canvas_corners_with_computer.Array_of_illumination[i2][j2] == 2)     //если подсвечена область
+                                            {
+                                                signature_canvas_corners_with_computer.FIELD[i2][j2] =
+                                                    signature_canvas_corners_with_computer.FIELD[i][j]         //перемещение фишки
+                                                signature_canvas_corners_with_computer.History.add(mutableListOf(i, j, i2, j2))
+                                                var data_from_memory = encode(signature_canvas_corners_with_computer.History)
+                                                val editor = getSharedPreferences(
+                                                    "UserData",
+                                                    Context.MODE_PRIVATE
+                                                ).edit()
+                                                editor.putString(
+                                                    "corner_with_computer",
+                                                    data_from_memory
+                                                )
+                                                editor.apply()
+                                                signature_canvas_corners_with_computer.FIELD[i][j] = 0
+                                                if (signature_canvas_corners_with_computer.Black_or_grey_chip == "black")          //смена игроков, чтобы нельзя было сделать ходы подряд одному игроку
+                                                {
+                                                    signature_canvas_corners_with_computer.Black_or_grey_chip = "grey"
+                                                } else {
+                                                    signature_canvas_corners_with_computer.Black_or_grey_chip = "black"
+                                                }
+
+                                                flag = 1
+                                                break
+                                            }
+
+                                        }
+                                    }
+                                    if (flag == 1) {
+                                        break
+                                    }
+                                }
+                            }
+
+
+                            if (AngleGameMode == 2 && flag == 0) {
+                                for (i2 in i..7) {
+                                    for (j2 in j..7) {
+
+                                        if (i2 != i || j2 != j) {
+
+                                            if (signature_canvas_corners_with_computer.Array_of_illumination[i2][j2] == 1 || signature_canvas_corners_with_computer.Array_of_illumination[i2][j2] == 2)     //если подсвечена область
+                                            {
+                                                signature_canvas_corners_with_computer.FIELD[i2][j2] =
+                                                    signature_canvas_corners_with_computer.FIELD[i][j]         //перемещение фишки
+
+                                                signature_canvas_corners_with_computer.History.add(mutableListOf(i, j, i2, j2))
+                                                var data_from_memory = encode(signature_canvas_corners_with_computer.History)
+                                                val editor = getSharedPreferences(
+                                                    "UserData",
+                                                    Context.MODE_PRIVATE
+                                                ).edit()
+                                                editor.putString(
+                                                    "corner_with_computer",
+                                                    data_from_memory
+                                                )
+                                                editor.apply()
+                                                signature_canvas_corners_with_computer.FIELD[i][j] = 0
+                                                if (signature_canvas_corners_with_computer.Black_or_grey_chip == "black")          //смена игроков, чтобы нельзя было сделать ходы подряд одному игроку
+                                                {
+                                                    signature_canvas_corners_with_computer.Black_or_grey_chip = "grey"
+                                                } else {
+                                                    signature_canvas_corners_with_computer.Black_or_grey_chip = "black"
+                                                }
+
+                                                flag = 1
+                                                break
+                                            }
+
+                                        }
+                                    }
+                                    if (flag == 1) {
+                                        break
+                                    }
+                                }
+                            }
+
+
+
+
+                            if (flag == 0) {
+                                for (i2 in 0..7) {
+                                    for (j2 in 0..7) {
+
+                                        if (i2 != i || j2 != j) {
+
+                                            if (signature_canvas_corners_with_computer.Array_of_illumination[i2][j2] == 1 || signature_canvas_corners_with_computer.Array_of_illumination[i2][j2] == 2)     //если подсвечена область
+                                            {
+                                                signature_canvas_corners_with_computer.FIELD[i2][j2] =
+                                                    signature_canvas_corners_with_computer.FIELD[i][j]         //перемещение фишки
+
+                                                signature_canvas_corners_with_computer.History.add(mutableListOf(i, j, i2, j2))
+                                                var data_from_memory = encode(signature_canvas_corners_with_computer.History)
+                                                val editor = getSharedPreferences(
+                                                    "UserData",
+                                                    Context.MODE_PRIVATE
+                                                ).edit()
+                                                editor.putString(
+                                                    "corner_with_computer",
+                                                    data_from_memory
+                                                )
+                                                editor.apply()
+                                                signature_canvas_corners_with_computer.FIELD[i][j] = 0
+                                                if (signature_canvas_corners_with_computer.Black_or_grey_chip == "black")          //смена игроков, чтобы нельзя было сделать ходы подряд одному игроку
+                                                {
+                                                    signature_canvas_corners_with_computer.Black_or_grey_chip = "grey"
+                                                } else {
+                                                    signature_canvas_corners_with_computer.Black_or_grey_chip = "black"
+                                                }
+
+                                                flag = 1
+                                                break
+                                            }
+
+                                        }
+                                    }
+                                    if (flag == 1) {
+                                        break
+                                    }
+                                }
+                            }
+
+                            for (i2 in 0..7) {
+                                for (j2 in 0..7) {
+                                    signature_canvas_corners_with_computer.Array_of_illumination[i2][j2] = 0   //обнуляем массива подсветки, чтобы он не оображался
+                                }
+                            }
+
+                            if (flag == 1) {
+                                break
+                            }
+                        }
+                    }
+                    if (flag == 1) {
+                        break
+                    }
+                }
+
+                signature_canvas_corners_with_computer.blockedOnTouch = false
+
+                signature_canvas_corners_with_computer.invalidate()
+
+
+            }, delayTime)
+        }
 
 
         bottom_navigation_template_with_computer.setOnNavigationItemSelectedListener { item ->
@@ -243,7 +419,7 @@ class ConersWithComputer : AppCompatActivity() {
                         Show_parametr_with_computer(
                             this@ConersWithComputer
                         )
-                    dialog_parametrs?.showResult_with_computer(this, "Reversi")
+                    dialog_parametrs?.showResult_with_computer(this, "AngleGame")
                 }
                 R.id.page_3 ->{
                     this.finish()
@@ -527,6 +703,8 @@ class CanvasView_corners_with_computer (context: Context, attrs: AttributeSet?) 
     lateinit var t2: TextView
 
 
+    var blockedOnTouch = false
+
     var History: MutableList<MutableList<Int>> = mutableListOf()
     var EXODUS : Int = 0
     var indent : Float = 0f
@@ -741,7 +919,7 @@ class CanvasView_corners_with_computer (context: Context, attrs: AttributeSet?) 
     }
 
 
-    fun MakeLight(X: Int, Y:Int) {
+    fun MakeLight(X: Int, Y:Int, comp: Int) {
 
         var s: Int = 0
         //   Log.d("DOPO",X.toString()+" "+ Y.toString() + " " + lastX.toString() + " " + lastY.toString())
@@ -828,9 +1006,10 @@ class CanvasView_corners_with_computer (context: Context, attrs: AttributeSet?) 
             }
         }
 
-        if (s == 0)
-        {
-            PHASE = true
+        if (comp == 0) {
+            if (s == 0) {
+                PHASE = true
+            }
         }
 
     }
@@ -845,6 +1024,10 @@ class CanvasView_corners_with_computer (context: Context, attrs: AttributeSet?) 
         if(chek_win() >0 && event!!.getAction() == MotionEvent.ACTION_UP && blocked)
         {
             blocked=!blocked
+            return true
+        }
+
+        if (blockedOnTouch) {
             return true
         }
         var dialog: Show_Result_with_Computer? = null
@@ -917,7 +1100,7 @@ class CanvasView_corners_with_computer (context: Context, attrs: AttributeSet?) 
                 }
                 else
                 {
-                    MakeLight(X, Y)
+                    MakeLight(X, Y, 0)
                 }
 
                 invalidate()
@@ -929,9 +1112,10 @@ class CanvasView_corners_with_computer (context: Context, attrs: AttributeSet?) 
 
 
         if ((Black_or_grey_chip == "black" && AngleGameMode == 2) || (Black_or_grey_chip == "grey" && AngleGameMode == 1)) {
+            blockedOnTouch = true
+
             val handler = android.os.Handler()
             handler.postDelayed({
-
                 var flag = 0
 
                 var list_x: MutableList<Int> = mutableListOf(0, 1, 2, 3, 4, 5, 6, 7)
@@ -942,7 +1126,7 @@ class CanvasView_corners_with_computer (context: Context, attrs: AttributeSet?) 
                 for (i in list_x) {
                     for (j in list_y) {
                         if (FIELD[i][j] == 3 - AngleGameMode) {
-                            MakeLight(i, j)
+                            MakeLight(i, j, 1)
 
                             if (AngleGameMode == 1) {
                                 for (i2 in 0..i) {
@@ -954,12 +1138,6 @@ class CanvasView_corners_with_computer (context: Context, attrs: AttributeSet?) 
                                             {
                                                 FIELD[i2][j2] =
                                                     FIELD[i][j]         //перемещение фишки
-                                                if (SOUND) {
-                                                    mSound.play(1, 1F, 1F, 1, 0, 1F)
-                                                }
-                                                if (VIBRATION) {
-                                                    vibratorService?.vibrate(70)
-                                                }
                                                 History.add(mutableListOf(i, j, i2, j2))
                                                 var data_from_memory = encode(History)
                                                 val editor = context.getSharedPreferences(
@@ -994,7 +1172,7 @@ class CanvasView_corners_with_computer (context: Context, attrs: AttributeSet?) 
 
                             if (AngleGameMode == 2 && flag == 0) {
                                 for (i2 in i..7) {
-                                    for (j2 in j..7) {
+                                    for (j2 in 0..j) {
 
                                         if (i2 != i || j2 != j) {
 
@@ -1002,12 +1180,7 @@ class CanvasView_corners_with_computer (context: Context, attrs: AttributeSet?) 
                                             {
                                                 FIELD[i2][j2] =
                                                     FIELD[i][j]         //перемещение фишки
-                                                if (SOUND) {
-                                                    mSound.play(1, 1F, 1F, 1, 0, 1F)
-                                                }
-                                                if (VIBRATION) {
-                                                    vibratorService?.vibrate(70)
-                                                }
+
                                                 History.add(mutableListOf(i, j, i2, j2))
                                                 var data_from_memory = encode(History)
                                                 val editor = context.getSharedPreferences(
@@ -1052,12 +1225,7 @@ class CanvasView_corners_with_computer (context: Context, attrs: AttributeSet?) 
                                             {
                                                 FIELD[i2][j2] =
                                                     FIELD[i][j]         //перемещение фишки
-                                                if (SOUND) {
-                                                    mSound.play(1, 1F, 1F, 1, 0, 1F)
-                                                }
-                                                if (VIBRATION) {
-                                                    vibratorService?.vibrate(70)
-                                                }
+
                                                 History.add(mutableListOf(i, j, i2, j2))
                                                 var data_from_memory = encode(History)
                                                 val editor = context.getSharedPreferences(
@@ -1105,6 +1273,7 @@ class CanvasView_corners_with_computer (context: Context, attrs: AttributeSet?) 
                     }
                 }
 
+                blockedOnTouch = false
 
                 invalidate()
 
