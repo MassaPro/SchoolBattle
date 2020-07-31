@@ -67,6 +67,23 @@ class SignInActivity : AppCompatActivity() {
             signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
             signUpButton.setTextColor(Color.WHITE)
         }
+        if (Design == "Japan"){
+            sign_in_menu.setBackgroundResource(R.drawable.sign_in_japan);
+
+            nameText.setTextColor(Color.BLACK)
+            nameText.setBackgroundColor(Color.WHITE)
+
+            passwordText.setTextColor(Color.BLACK)
+            passwordText.setBackgroundColor(Color.WHITE)
+
+            signInButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            signInButton.setTextColor(Color.BLACK)
+            signInButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+
+            signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            signUpButton.setTextColor(Color.BLACK)
+        }
 
         SignIn = this
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)

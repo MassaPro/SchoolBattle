@@ -51,6 +51,21 @@ class SignUpActivity : AppCompatActivity() {
             repeatPassword.setTextColor(Color.WHITE)
             repeatPassword.setBackgroundColor(Color.rgb(30, 30, 30))
         }
+        else if (Design == "Japan"){
+            sign_up_menu.setBackgroundResource(R.drawable.sign_in_japan);
+            signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            signUpButton.setTextColor(Color.BLACK)
+
+            nameTextInit.setTextColor(Color.BLACK)
+            nameTextInit.setBackgroundColor(Color.WHITE)
+
+            passwordTextInit.setTextColor(Color.BLACK)
+            passwordTextInit.setBackgroundColor(Color.WHITE)
+
+            repeatPassword.setTextColor(Color.BLACK)
+            repeatPassword.setBackgroundColor(Color.WHITE)
+        }
 
         fun noSpace() {
             Toast.makeText(this,"Name should not contain spaces", Toast.LENGTH_LONG).show()
