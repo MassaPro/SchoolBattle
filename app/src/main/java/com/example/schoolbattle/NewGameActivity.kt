@@ -2,8 +2,6 @@ package com.example.schoolbattle
 
 import android.app.Activity
 import android.content.Intent
-import android.content.Intent.getIntent
-import android.content.Intent.getIntentOld
 import android.graphics.Color
 import android.graphics.Color.argb
 import android.graphics.Color.rgb
@@ -13,14 +11,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.ColorRes
+import androidx.cardview.widget.CardView
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_game_item.*
 import kotlinx.android.synthetic.main.activity_new_game.*
 import kotlinx.android.synthetic.main.activity_new_game_item.view.*
-import kotlinx.android.synthetic.main.activity_settings_fragment.*
 
 var NewGame: Activity = Activity()
 
@@ -35,8 +31,9 @@ class NewGameActivity : AppCompatActivity() {
         if (Design == "Egypt"){
             game_list_menu.setBackgroundResource(R.drawable.background_egypt);
             my_toolbar2.setBackgroundColor(rgb(224,164,103))
-            text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             text.setTextColor(Color.BLACK)
+            //new_game_card.setBackgroundResource(R.drawable.background_egypt)
         }
         else if (Design == "Casino"){
             game_list_menu.setBackgroundResource(R.drawable.background2_casino);
@@ -58,9 +55,17 @@ class NewGameActivity : AppCompatActivity() {
             text.setTextColor(Color.WHITE)
         }
 
+        else if (Design == "Japan"){
+            game_list_menu.setBackgroundResource(R.drawable.background_japan);
+            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
+            text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            text.setTextColor(Color.BLACK)
+        }
+
         NewGame = this
         game_list.layoutManager = GridLayoutManager(this, 2)
         setupRecyclerView(game_list, intent.getIntExtra("playType", -1), this)
+
 
 
 
@@ -84,7 +89,6 @@ class NewGameActivity : AppCompatActivity() {
         init {
             onClickListener = View.OnClickListener { v ->
                 val item = v.tag as String
-
                 if (type == 1) {
                     val intent = Intent(v.context, StupidGameActivity::class.java).apply {
                         putExtra("gameName", item)
@@ -117,8 +121,34 @@ class NewGameActivity : AppCompatActivity() {
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.activity_new_game_item, parent, false)
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_new_game_item, parent, false)
+            if (Design == "Egypt"){
+                view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.background_egypt)
+                view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+            }
+            else if (Design == "Casino"){
+                view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.new_game_item_casino)
+                view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                view.findViewById<TextView>(R.id.textView2).setTextColor(Color.YELLOW)
+            }
+            else if (Design == "Rome"){
+                view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.new_game_item_rome)
+                view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                view.findViewById<TextView>(R.id.textView2).setTextColor(Color.rgb(193, 150, 63))
+            }
+
+            else if (Design == "Gothic"){
+                view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.new_game_item_gothic)
+                view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                view.findViewById<TextView>(R.id.textView2).setTextColor(Color.WHITE)
+            }
+
+            else if (Design == "Japan"){
+                view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.new_game_item_japan)
+                view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            }
+
+            //card2.setBackgroundResource(R.drawable.background_egypt)
             return ViewHolder(view)
         }
 

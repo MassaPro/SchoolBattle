@@ -101,8 +101,8 @@ class SnakeGameOneDivice : AppCompatActivity() {
             name_player1_one_divice.setTextSize(20f)
             button_player_1_one_divice.setBackgroundResource(R.drawable.player1_egypt);
             button_player_2_one_divice.setBackgroundResource(R.drawable.player2_egypt);
-            player_1_icon_one_divice.setBackgroundResource(R.drawable.black_chip_egypt);
-            player_2_icon_one_divice.setBackgroundResource(R.drawable.white_chip_egypt)
+            player_1_icon_one_divice.setBackgroundResource(R.drawable.chip1_egypt);
+            player_2_icon_one_divice.setBackgroundResource(R.drawable.chip2_egypt)
             toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
 
@@ -118,8 +118,8 @@ class SnakeGameOneDivice : AppCompatActivity() {
             name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             name_player2_one_divice.setTextSize(20f)
             name_player1_one_divice.setTextSize(20f)
-            button_player_1_one_divice.setBackgroundResource(R.drawable.black_chip_casino);
-            button_player_2_one_divice.setBackgroundResource(R.drawable.red_chip_casino);
+            button_player_1_one_divice.setBackgroundResource(R.drawable.chip2_casino);
+            button_player_2_one_divice.setBackgroundResource(R.drawable.chip1_casino);
             toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             label_one_device.setBackgroundResource(R.drawable.background_casino);
@@ -134,8 +134,8 @@ class SnakeGameOneDivice : AppCompatActivity() {
             name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
             name_player2_one_divice.setTextSize(20f)
             name_player1_one_divice.setTextSize(20f)
-            button_player_1_one_divice.setBackgroundResource(R.drawable.white_chip_rome);
-            button_player_2_one_divice.setBackgroundResource(R.drawable.black_chip_rome);
+            button_player_1_one_divice.setBackgroundResource(R.drawable.chip1_rome);
+            button_player_2_one_divice.setBackgroundResource(R.drawable.chip2_rome);
             toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             label_one_device.setBackgroundResource(R.drawable.background_rome);
@@ -155,6 +155,22 @@ class SnakeGameOneDivice : AppCompatActivity() {
             toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             label_one_device.setBackgroundResource(R.drawable.background_gothic);
+            bottom_navigation_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+        }
+        else if(Design == "Japan" ) {
+            name_player1_one_divice.setTextColor(Color.BLACK)
+            name_player2_one_divice.setTextColor(Color.BLACK)
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            //button_player_1_one_divice.setBackgroundResource(R.drawable.chip1_japan);
+            //button_player_2_one_divice.setBackgroundResource(R.drawable.chip2_japan);
+            toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            label_one_device.setBackgroundResource(R.drawable.background_japan);
             bottom_navigation_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
@@ -580,8 +596,19 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
             paint_rib_1.setColor(Color.YELLOW)
             paint_rib_2.setStrokeWidth(10f)
 
-            border_1.setColor(Color.rgb(180, 180, 180))
-            border_1.setStrokeWidth(10f)
+        }
+        else if(Design == "Japan") {
+
+            Line_paint.setColor(Color.rgb(160,160,160))          //ресур для линий (ширина и цвет)
+            Line_paint.setStrokeWidth(5f)
+
+            paint_circle.setColor(Color.rgb(160,160,160))     //цвета для точек
+
+            paint_rib_2.setColor(Color.RED)          //цвета для ребер  и их ширина
+            paint_rib_1.setStrokeWidth(10f)
+            paint_rib_1.setColor(Color.rgb(37,103,28))
+            paint_rib_2.setStrokeWidth(10f)
+
         }
 
         for(i in 0 until FIELD.size)

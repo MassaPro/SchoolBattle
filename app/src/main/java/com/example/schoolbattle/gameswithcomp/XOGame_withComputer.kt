@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_computer_games_template.*
-import java.util.*
 
 var XOGameMode = 0
 
@@ -115,8 +114,8 @@ class XOGame_withComputer : AppCompatActivity() {
         if(Design == "Egypt" ) {
             name_player1_with_computer_template.setTextColor(Color.BLACK)
             name_player2_with_computer_template.setTextColor(Color.BLACK)
-            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             name_player2_with_computer_template.setTextSize(20f)
             name_player1_with_computer_template.setTextSize(20f)
             button_player_1_template_with_computer.setBackgroundResource(R.drawable.player1_egypt);

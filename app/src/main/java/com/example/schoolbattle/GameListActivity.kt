@@ -52,7 +52,7 @@ class GameListActivity : Fragment() {
         if (Design == "Egypt"){
             game_list_playing.setBackgroundResource(R.drawable.game_list_menu_egypt);
             my_toolbar2.setBackgroundColor(rgb(224,164,103))
-            toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
         }
 
@@ -77,6 +77,15 @@ class GameListActivity : Fragment() {
             my_toolbar2.setBackgroundColor(argb(0,0,0,0))
             toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
             toolbarName2.setTextColor(Color.WHITE)
+            toolbarName2.setTextSize(20f)
+            //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+        }
+
+        else if (Design == "Japan"){
+            game_list_playing.setBackgroundResource(R.drawable.background_japan);
+            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
+            toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            toolbarName2.setTextColor(Color.BLACK)
             toolbarName2.setTextSize(20f)
             //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
         }

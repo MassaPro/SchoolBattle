@@ -20,7 +20,7 @@ class Show_Result_with_Computer(activity: Activity) {
 
         if (Design == "Egypt"){
             dialog_with_computer.linearLayout_with_computer.setBackgroundResource(R.drawable.win_egypt);
-            dialog_with_computer.resultText_with_computer.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            dialog_with_computer.resultText_with_computer.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
         }
 
         val button_revanshe = dialog_with_computer.findViewById(R.id.restart_with_computer) as Button

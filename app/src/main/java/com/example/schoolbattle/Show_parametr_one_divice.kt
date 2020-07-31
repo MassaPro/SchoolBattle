@@ -9,7 +9,6 @@ import android.graphics.Color
 import android.view.Window
 import android.widget.CompoundButton
 import androidx.core.content.res.ResourcesCompat
-import kotlinx.android.synthetic.main.activity_settings_fragment.*
 import kotlinx.android.synthetic.main.parametrs_one_divice.*
 
 
@@ -26,13 +25,13 @@ class Show_parametr_one_divice_one_Device(activity: Activity) {
         {
             dialog_one_device.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_egypt)
 
-            dialog_one_device.parametrs_one_device_configuring.setTypeface(ResourcesCompat.getFont(c, R.font.s))
+            dialog_one_device.parametrs_one_device_configuring.setTypeface(ResourcesCompat.getFont(c, R.font.egypt))
             dialog_one_device.parametrs_one_device_configuring.setBackgroundColor(Color.argb(0, 0,0,0))
 
-            dialog_one_device.switch_parametrs_one_device_1.setTypeface(ResourcesCompat.getFont(c, R.font.s))
+            dialog_one_device.switch_parametrs_one_device_1.setTypeface(ResourcesCompat.getFont(c, R.font.egypt))
             dialog_one_device.switch_parametrs_one_device_1.setBackgroundColor(Color.argb(0, 0,0,0))
 
-            dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.s))
+            dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.egypt))
             dialog_one_device.switch_parametrs_one_device_1.setBackgroundColor(Color.argb(0, 0,0,0))
         }
         else if(Design == "Casino")
@@ -82,6 +81,22 @@ class Show_parametr_one_divice_one_Device(activity: Activity) {
             dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.gothic))
             dialog_one_device.switch_parametrs_one_device_2.setBackgroundColor(Color.argb(0, 0,0,0))
             dialog_one_device.switch_parametrs_one_device_2.setTextColor(Color.WHITE)
+        }
+        else if(Design == "Japan")
+        {
+            dialog_one_device.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_japan)
+
+            dialog_one_device.parametrs_one_device_configuring.setTypeface(ResourcesCompat.getFont(c, R.font.japan))
+            dialog_one_device.parametrs_one_device_configuring.setBackgroundColor(Color.argb(0, 0,0,0))
+            dialog_one_device.parametrs_one_device_configuring.setTextColor(Color.BLACK)
+
+            dialog_one_device.switch_parametrs_one_device_1.setTypeface(ResourcesCompat.getFont(c, R.font.japan))
+            dialog_one_device.switch_parametrs_one_device_1.setBackgroundColor(Color.argb(0, 0,0,0))
+            dialog_one_device.switch_parametrs_one_device_1.setTextColor(Color.BLACK)
+
+            dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.japan))
+            dialog_one_device.switch_parametrs_one_device_2.setBackgroundColor(Color.argb(0, 0,0,0))
+            dialog_one_device.switch_parametrs_one_device_2.setTextColor(Color.BLACK)
         }
 
 

@@ -28,9 +28,9 @@ class SignInActivity : AppCompatActivity() {
 
         if (Design == "Egypt"){
             sign_in_menu.setBackgroundResource(R.drawable.sign_in_egypt);
-            signInButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            signInButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             signInButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
         }
         else if (Design == "Casino"){

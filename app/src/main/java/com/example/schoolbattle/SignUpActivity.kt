@@ -22,7 +22,7 @@ class SignUpActivity : AppCompatActivity() {
 
         if (Design == "Egypt"){
             sign_up_menu.setBackgroundResource(R.drawable.sign_up_egypt);
-            signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
         }
         else if (Design == "Casino"){

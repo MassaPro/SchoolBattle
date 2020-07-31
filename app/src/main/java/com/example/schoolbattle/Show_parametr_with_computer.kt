@@ -25,9 +25,9 @@ class Show_parametr_with_computer(activity: Activity) {
 
         if(Design == "Egypt")
         {
-            dialog_with_computer.parametrs_with_computer_configuring.setTypeface(ResourcesCompat.getFont(c, R.font.s))
-            dialog_with_computer.parametrs_with_computer_rules.setTypeface(ResourcesCompat.getFont(c, R.font.s))
-            dialog_with_computer.parametrs_with_computer_xs.setTypeface(ResourcesCompat.getFont(c, R.font.s))
+            dialog_with_computer.parametrs_with_computer_configuring.setTypeface(ResourcesCompat.getFont(c, R.font.egypt))
+            dialog_with_computer.parametrs_with_computer_rules.setTypeface(ResourcesCompat.getFont(c, R.font.egypt))
+            dialog_with_computer.parametrs_with_computer_xs.setTypeface(ResourcesCompat.getFont(c, R.font.egypt))
             dialog_with_computer.linearLayout_parametrs_with_computer.setBackgroundResource(R.drawable.background_egypt);
             dialog_with_computer.parametrs_with_computer_configuring.setBackgroundColor(
                 Color.argb(0,

@@ -60,6 +60,9 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
         if (Design == "Gothic"){
             nav_view.setBackgroundResource(R.drawable.bottom_navigation_gothic)
         }
+        if (Design == "Japan"){
+            nav_view.setBackgroundColor(Color.WHITE)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -5,8 +5,6 @@ import android.content.Intent
 import android.graphics.*
 import android.graphics.Color.argb
 import android.graphics.Color.rgb
-import android.media.AudioManager
-import android.media.SoundPool
 import android.os.Bundle
 import android.os.Vibrator
 import android.util.AttributeSet
@@ -14,12 +12,9 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
-import com.example.schoolbattle.shop.locale_context
 import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
 
@@ -114,8 +109,8 @@ class XOGame_oneDivice : AppCompatActivity() {
         if(Design == "Egypt" ) {
             name_player1_one_divice.setTextColor(Color.BLACK)
             name_player2_one_divice.setTextColor(Color.BLACK)
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             name_player2_one_divice.setTextSize(20f)
             name_player1_one_divice.setTextSize(20f)
             button_player_1_one_divice.setBackgroundResource(R.drawable.player1_egypt);
@@ -172,6 +167,22 @@ class XOGame_oneDivice : AppCompatActivity() {
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             label_one_device.setBackgroundResource(R.drawable.background_gothic);
+            bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+        }
+        else if(Design == "Japan" ) {
+            name_player1_one_divice.setTextColor(Color.BLACK)
+            name_player2_one_divice.setTextColor(Color.BLACK)
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            button_player_1_one_divice.setBackgroundResource(R.drawable.cross_japan);
+            button_player_2_one_divice.setBackgroundResource(R.drawable.null_japan);
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            label_one_device.setBackgroundResource(R.drawable.background_japan);
             bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
@@ -480,32 +491,31 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
             Line_paint.color = Color.BLACK          //ресур для линий (ширина и цвет)
             Line_paint.strokeWidth = 7f
 
-            Line_paint_1.color = Color.BLACK          //ресур для линий (ширина и цвет)
-            Line_paint_1.strokeWidth = 20f
         }
         else if (Design == "Casino")
         {
             Line_paint.color = Color.WHITE          //ресур для линий (ширина и цвет)
             Line_paint.strokeWidth = 7f
 
-            Line_paint_1.color = Color.RED          //ресур для линий (ширина и цвет)
-            Line_paint_1.strokeWidth = 20f
         }
         else if (Design == "Rome")
         {
             Line_paint.color = rgb(193,150,63)    //ресур для линий (ширина и цвет)
             Line_paint.strokeWidth = 7f
 
-            Line_paint_1.color = Color.RED          //ресур для линий (ширина и цвет)
-            Line_paint_1.strokeWidth = 20f
         }
         else if (Design == "Gothic")
         {
             Line_paint.color = rgb(100,100,100)   //ресур для линий (ширина и цвет)
             Line_paint.strokeWidth = 7f
 
-            Line_paint_1.color = Color.WHITE          //ресур для линий (ширина и цвет)
-            Line_paint_1.strokeWidth = 20f
+        }
+
+        else if (Design == "Japan")
+        {
+            Line_paint.color = Color.BLACK   //ресур для линий (ширина и цвет)
+            Line_paint.strokeWidth = 7f
+
         }
 
 
@@ -532,6 +542,9 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
 
     var cross_gothic : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cross_gothic)       //картинки крестиков и нулей
     var null_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.null_gothic)
+
+    var cross_japan : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cross_japan)       //картинки крестиков и нулей
+    var null_japan: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.null_japan)
 
    // var BackgroundColor_Egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.background_egypt)
     var icon_green : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.illumination)
@@ -589,6 +602,10 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
         else if(Design == "Gothic") {
             right_cross = Bitmap.createScaledBitmap(cross_gothic,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
             right_null = Bitmap.createScaledBitmap(null_gothic,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+        }
+        else if(Design == "Japan") {
+            right_cross = Bitmap.createScaledBitmap(cross_japan,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+            right_null = Bitmap.createScaledBitmap(null_japan,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
         }
 
 

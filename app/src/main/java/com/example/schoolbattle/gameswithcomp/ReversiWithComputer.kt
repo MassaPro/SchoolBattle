@@ -103,14 +103,14 @@ class ReversiWithComputer : AppCompatActivity() {
         if(Design == "Egypt" ) {
             name_player1_with_computer_template.setTextColor(Color.BLACK)
             name_player2_with_computer_template.setTextColor(Color.BLACK)
-            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             name_player2_with_computer_template.setTextSize(20f)
             name_player1_with_computer_template.setTextSize(20f)
             button_player_1_template_with_computer.setBackgroundResource(R.drawable.player1_egypt)
             button_player_2_template_with_computer.setBackgroundResource(R.drawable.player2_egypt)
-            player_1_icon_template_with_computer.setBackgroundResource(R.drawable.black_chip_egypt)
-            player_2_icon_template_with_computer.setBackgroundResource(R.drawable.white_chip_egypt)
+            player_1_icon_template_with_computer.setBackgroundResource(R.drawable.chip1_egypt)
+            player_2_icon_template_with_computer.setBackgroundResource(R.drawable.chip2_egypt)
             toolbar_template_with_computer.setBackgroundColor(Color.argb(0, 0, 0, 0))
             toolbar2_template_with_computer.setBackgroundColor(Color.argb(0, 0, 0, 0))
             label_with_computer.setBackgroundResource(R.drawable.background_egypt)
@@ -1078,11 +1078,11 @@ class CanvasView_reversi_with_computer(context: Context, attrs: AttributeSet?) :
     var black_chip_normal : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black)       //картинки фишек и подсветки
     var grey_chip_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.grey)
 
-    var black_chip_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black_chip_egypt)
-    var grey_chip_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.white_chip_egypt)
+    var black_chip_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip1_egypt)
+    var grey_chip_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip2_egypt)
 
-    var black_chip_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.red_chip_casino)
-    var grey_chip_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black_chip_casino)
+    var black_chip_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip1_casino)
+    var grey_chip_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip2_casino)
     var green: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.green)
 
 
