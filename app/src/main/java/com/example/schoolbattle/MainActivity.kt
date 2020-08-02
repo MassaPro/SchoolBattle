@@ -1,22 +1,21 @@
 package com.example.schoolbattle
 
+
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Color.argb
+import android.graphics.Color.rgb
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat.finishAffinity
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.internal.ContextUtils
-import com.google.android.material.internal.ContextUtils.getActivity
-import kotlinx.android.synthetic.main.activity_game_item.view.*
-import kotlinx.android.synthetic.main.activity_game_list.*
+import kotlinx.android.synthetic.main.activity_game_menu.*
+
+
+
 
 lateinit var gamesRecycler: RecyclerView
 
@@ -30,6 +29,7 @@ class MainActivity : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        CONTEXT = requireActivity()
         //val navView: BottomNavigationView = findViewById(R.id.nav_view)
         //navView.selectedItemId = R.id.navigation_home
     }
@@ -39,115 +39,210 @@ class MainActivity : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.activity_game_list, container, false)
-        return root
+        return inflater.inflate(R.layout.activity_game_menu, container, false)
     }
+
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        val prfs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        val username = prfs?.getString("username", "")
+        CONTEXT = requireActivity()
 
 
-       // (activity as AppCompatActivity).setSupportActionBar(findViewById(R.id.my_toolbar))
-        //setSupportActionBar(findViewById(R.id.my_toolbar))
+        if(ARRAY_OF_DESIGN.size < DECODE(prfs?.getString("open_design", "0").toString()).size)
+        {
+            ARRAY_OF_DESIGN =  DECODE(prfs?.getString("open_design", 0.toString()).toString())
+        }
+        if(ARRAY_OF_AVATAR.size < DECODE(prfs?.getString("open_avatars", 0.toString()).toString()).size)
+        {
+            ARRAY_OF_AVATAR =  DECODE(prfs?.getString("open_avatars", 0.toString()).toString())
+        }
+        AVATAR = prfs?.getString("avatar_number", 0.toString()).toString().toInt()
+        MONEY = prfs?.getString("money", INITIAL_AMOUNT.toString()).toString().toInt()         //не забыть положить другую сумму если идет вход в аккаунт
+        money_icon.setBackgroundResource(R.drawable.money)
+        money.text = MONEY.toString()
+        Design = prfs?.getString("design", "Normal").toString()                 //дизайн
+        SOUND = prfs?.getString("sound", "").toString() == "true"       //получаем из памяти звук
+        VIBRATION = prfs?.getString("vibration", "").toString() == "true"       //получаем из памяти звук
+        if (Design == "Egypt"){
+            game_menu.setBackgroundResource(R.drawable.game_menu_egypt)
+            //nav_view.setBackgroundColor(rgb(224, 164, 103));
+            my_toolbar2.setBackgroundColor(rgb(224,164,103))
+            searchButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            searchButton.setBackgroundColor(argb(0,0,0,0))
+            newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            newGameButton.setBackgroundColor(argb(0,0,0,0))
+            oneDevice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            oneDevice.setBackgroundColor(argb(0,0,0,0))
+            playWithComp.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            playWithComp.setBackgroundColor(argb(0,0,0,0))
+            blitz.setBackgroundColor(argb(0,0,0,0))
+            blitz.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+        }
+        else if (Design == "Casino"){
+            game_menu.setBackgroundResource(R.drawable.game_menu_casino)
+            //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
+            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
 
-        /*val navView: BottomNavigationView = findViewById(R.id.nav_view)
-        navView.selectedItemId = R.id.navigation_home
-        navView.setOnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.navigation_home -> {
-                    // put your code here
-                    return@setOnNavigationItemSelectedListener true
-                }
-                R.id.navigation_dashboard -> {
-                    val intent = Intent(activity, SettingsActivity::class.java)
-                    startActivity(intent)
-                    //overridePendingTransition(0, 0)
-                    // put your code here
-                    return@setOnNavigationItemSelectedListener true
-                }
+            toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            toolbarName2.setTextColor(Color.YELLOW)
+            toolbarName2.setTextSize(20f)
+
+            searchButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            searchButton.setTextColor(Color.YELLOW)
+            searchButton.setTextSize(20f)
+            searchButton.setBackgroundColor(argb(0,0,0,0))
+
+            newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            newGameButton.setTextColor(Color.YELLOW)
+            newGameButton.setTextSize(20f)
+            newGameButton.setBackgroundColor(argb(0,0,0,0))
+
+            oneDevice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            oneDevice.setTextColor(Color.YELLOW)
+            oneDevice.setTextSize(20f)
+            oneDevice.setBackgroundColor(argb(0,0,0,0))
+
+            playWithComp.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            playWithComp.setTextColor(Color.YELLOW)
+            playWithComp.setTextSize(20f)
+            playWithComp.setBackgroundColor(argb(0,0,0,0))
+
+            blitz.setBackgroundColor(argb(0,0,0,0))
+            blitz.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            blitz.setTextColor(Color.YELLOW)
+            blitz.setTextSize(20f)
+        }
+        else if (Design == "Rome"){
+            game_menu.setBackgroundResource(R.drawable.game_menu_rome)
+            //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
+            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
+
+            toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            toolbarName2.setTextColor(rgb(193,150,63))
+            toolbarName2.setTextSize(20f)
+
+            searchButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            searchButton.setTextColor(rgb(193,150,63))
+            searchButton.setTextSize(20f)
+            searchButton.setBackgroundColor(argb(0,0,0,0))
+
+            newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            newGameButton.setTextColor(rgb(193,150,63))
+            newGameButton.setTextSize(19f)
+            newGameButton.setBackgroundColor(argb(0,0,0,0))
+
+            oneDevice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            oneDevice.setTextColor(rgb(193,150,63))
+            oneDevice.setTextSize(20f)
+            oneDevice.setBackgroundColor(argb(0,0,0,0))
+
+            playWithComp.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            playWithComp.setTextColor(rgb(193,150,63))
+            playWithComp.setTextSize(20f)
+            playWithComp.setBackgroundColor(argb(0,0,0,0))
+
+            blitz.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            blitz.setTextColor(rgb(193,150,63))
+            blitz.setTextSize(20f)
+            blitz.setBackgroundColor(argb(0,0,0,0))
+        }
+
+
+        searchButton.setOnClickListener {
+            val intent = Intent(this.activity, SearchActivity::class.java)
+            activity?.startActivity(intent)
+            activity?.overridePendingTransition(0, 0)
+            /*val dialog = Dialog(this.requireContext())
+
+
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setCancelable(false)
+            dialog.setCanceledOnTouchOutside(true)
+            dialog.setContentView(R.layout.activity_search_game_dialog)
+            val srch = dialog.findViewById(R.id.search_field) as SearchView
+            srch.queryHint = "Поиск соперника"
+            srch.setOnClickListener {
+                srch.isIconified = false
             }
-            false
-        }*/
+            srch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+                override fun onQueryTextChange(newText: String): Boolean {
+                    dialog.findViewById<TextView>(R.id.res).text=""
+                    return false
+                }
+
+                override fun onQueryTextSubmit(query: String): Boolean {
+                    if (query == username) {
+                        dialog.findViewById<TextView>(R.id.res).text="ТЫ ДУБ?"
+                        dialog.findViewById<TextView>(R.id.res).setTextColor(Color.RED)
+                        return false
+                    }
+                    myRef.child("Users").child(query).addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onCancelled(p0: DatabaseError) {}
+                        override fun onDataChange(p0: DataSnapshot) {
+                            if (p0.hasChildren()) {
+                                dialog.findViewById<TextView>(R.id.res).text="ВЫЗОВ ОТПРАВЛЕН!"
+                                dialog.findViewById<TextView>(R.id.res).setTextColor(Color.GREEN)
+                                myRef.child("Users").child(query).child("Revanches").child(username!!).child("gameName").setValue("StupidGame")
+                            } else {
+                                dialog.findViewById<TextView>(R.id.res).text="НЕВЕРНОЕ ИМЯ"
+                                dialog.findViewById<TextView>(R.id.res).setTextColor(Color.RED)
+                            }
+                        }
+                    })
+                    return false
+                }
+
+            })
+            dialog.show()*/
+
+        }
+       // (activity as AppCompatActivity).setSupportActionBar(findViewById(R.id.my_toolbar))
+        (activity as AppCompatActivity?)!!.setSupportActionBar(my_toolbar2)
+
         val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val globalName = prefs?.getString("username", "")
-        toolbarName.text = globalName
-        updateRecycler(globalName.toString())
+        toolbarName2.text = globalName
 
-        setupRecyclerView(item_list)
-        gamesRecycler = item_list
-
-        logOut.setOnClickListener {
-            val editor = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)?.edit()
-            editor?.putString("username", "")
-            editor?.apply()
-            recyclerSet.clear()
-            myRef.child("Users").child(globalName.toString()).child("Games").removeEventListener(
-                listener)
-            val intent = Intent(activity, NullActivity::class.java)
-            startActivity(intent)
-            activity?.finish()
-        }
-
+     //   money.setOnClickListener {
+       //     val editor = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)?.edit()
+        //    editor?.putString("username", "")
+      //      editor?.apply()
+      //      recyclerSet.clear()
+   //         myRef.child("Users").child(globalName.toString()).child("Games").removeEventListener(
+     //           listener)
+   //         val intent = Intent(activity, NullActivity::class.java)
+  //          startActivity(intent)
+   //         activity?.finish()
+  //      }
         newGameButton.setOnClickListener {
             val intent = Intent(activity, NewGameActivity::class.java)
+            //activity?.overridePendingTransition(0, 0)
+            intent.putExtra("playType", 1)
+            startActivity(intent)
+
+        }
+        blitz.setOnClickListener {
+            val intent = Intent(activity, NewGameActivity::class.java)
+            //activity?.overridePendingTransition(0, 0)
+            intent.putExtra("playType", 0)
+            startActivity(intent)
+
+        }
+        oneDevice.setOnClickListener {
+            val intent = Intent(activity, NewGameActivity::class.java)
+            //activity?.overridePendingTransition(0, 0)
+            intent.putExtra("playType", 2)
             startActivity(intent)
         }
-    }
-
-    private fun setupRecyclerView(recyclerView: RecyclerView) {
-        recyclerView.adapter = SimpleItemRecyclerViewAdapter(GAMES)
-    }
-
-    class SimpleItemRecyclerViewAdapter(private val ITEMS: MutableList<Game>):
-        RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
-
-        private val onClickListener: View.OnClickListener
-
-        init {
-            onClickListener = View.OnClickListener { v ->
-                val item = v.tag as Game
-                val intent = if (item.name.contains("StupidGame")) {
-                    Intent(v.context, StupidGameActivityTwoPlayers::class.java).apply {
-                        putExtra("opponentName", item.name)
-                    }
-                } else if (item.name.contains("XOGame")) {
-                    Intent(v.context, XOGameActivity::class.java).apply {
-                        putExtra("opponentName", item.name)
-                    }
-                } else {
-                    Intent(v.context, DotGameActivity::class
-
-                        .java).apply {
-                        putExtra("opponentName", item.name)
-                    }
-                }
-
-                v.context.startActivity(intent)
-            }
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.activity_game_item, parent, false)
-            return ViewHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.idView.text = ITEMS[position].type + ": You vs"
-            holder.contentView.text = ITEMS[position].name
-            with(holder.itemView) {
-                tag = ITEMS[position]
-                setOnClickListener(onClickListener)
-            }
-        }
-
-        override fun getItemCount(): Int {
-            return ITEMS.size
-        }
-
-        inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val idView: TextView = view.id_text
-            val contentView: TextView = view.content
+        playWithComp.setOnClickListener {
+            //activity?.overridePendingTransition(0, 0)
+            val intent = Intent(activity, NewGameActivity::class.java)
+            intent.putExtra("playType", 3)
+            startActivity(intent)
         }
     }
 }

@@ -3,15 +3,17 @@ package com.example.schoolbattle
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
 
 var database = FirebaseDatabase.getInstance()
-var myRef: DatabaseReference = database.getReference("SchoolBattle")
+var myRef: DatabaseReference = database.reference
 
 var SignIn: Activity = Activity()
 
@@ -21,6 +23,30 @@ class SignInActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
+
+        CONTEXT = this
+
+        if (Design == "Egypt"){
+            sign_in_menu.setBackgroundResource(R.drawable.sign_in_egypt);
+            signInButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            signInButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+        }
+        else if (Design == "Casino"){
+            sign_in_menu.setBackgroundResource(R.drawable.sign_in_egypt);
+            signInButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            signInButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+        }
+        if (Design == "Rome"){
+            sign_in_menu.setBackgroundResource(R.drawable.sign_in_rome);
+            signInButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            signInButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+        }
 
         SignIn = this
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
@@ -88,5 +114,10 @@ class SignInActivity : AppCompatActivity() {
         if (username != "") {
             finish()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        CONTEXT = this
     }
 }

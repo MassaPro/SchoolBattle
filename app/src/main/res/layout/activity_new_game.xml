@@ -3,6 +3,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id ="@+id/game_list_menu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
@@ -10,8 +11,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -42,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
-        android:text="Choose Game"
+        android:text="ВЫБОР ИГРЫ"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@+id/my_toolbar2"
         app:layout_constraintEnd_toEndOf="@+id/my_toolbar2"
