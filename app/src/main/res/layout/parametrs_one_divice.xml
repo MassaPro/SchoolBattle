@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout_parametrs_one_device"
+        android:layout_width="223dp"
+        android:layout_height="368dp"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.225">
+
+
+        <Button
+            android:id="@+id/parametrs_one_device_configuring"
+            android:layout_width="164dp"
+            android:layout_height="43dp"
+            android:background="#76FF03"
+            android:text="Настройки"
+            android:textAllCaps="false"
+            android:textSize="23sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.772" />
+
+        <Button
+            android:id="@+id/parametrs_one_device_rules"
+            android:layout_width="191dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="52dp"
+            android:text="Button"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/parametrs_one_device_configuring"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.044" />
+
+        <Button
+            android:id="@+id/parametrs_one_device_xs"
+            android:layout_width="178dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="44dp"
+            android:text="что-нибудь еще"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/parametrs_one_device_configuring"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.488"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/parametrs_one_device_rules"
+            app:layout_constraintVertical_bias="0.954" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

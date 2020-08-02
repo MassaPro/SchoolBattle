@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/label_one_device"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <FrameLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/toolbar2_one_divice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_one_divice">
+
+        <com.example.schoolbattle.gamesonedevice.CanvasView_Boxs
+            android:id="@+id/signature_canvas_box_one_device"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF"
+            android:visibility="gone"/>
+        <com.example.schoolbattle.gamesonedevice.CanvasView_xog_one_device
+            android:id="@+id/signature_canvas_xog_one_device"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF"
+            android:visibility="gone" />
+        <com.example.schoolbattle.gamesonedevice.CanvasView_Dots_one_divice
+            android:id="@+id/signature_canvas_dots_one_divice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF"
+            android:visibility="gone"/>
+        <com.example.schoolbattle.gamesonedevice.CanvasView_corners_one_device
+            android:id="@+id/signature_canvas_corners_one_device"
+            android:layout_width="match_parent"
+            android:layout_height="585dp"
+            android:textColor="#FFFFFF"
+            android:visibility="gone" />
+        <com.example.schoolbattle.gamesonedevice.CanvasView_reversi_one_device
+            android:id="@+id/signature_canvas_reversi_one_device"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF"
+            android:visibility="gone"/>
+        <com.example.schoolbattle.gamesonedevice.CanvasView_Go_one_divice
+            android:id="@+id/signature_canvas_go_one_divice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF"
+            android:visibility="gone"/>
+        <com.example.schoolbattle.gamesonedevice.CanvasView_SNAKE
+            android:id="@+id/signature_canvas_snake_one_device"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF"
+            android:visibility="gone"/>
+        <com.example.schoolbattle.gamesonedevice.CanvasView_VIRUS
+            android:id="@+id/signature_canvas_virus_one_device"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF"
+            android:visibility="gone"/>
+    </FrameLayout>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_one_divice"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_one_divice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation_one_divice"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:backgroundTint="#e6e6e6"
+        app:itemIconTint="@drawable/bottom_menu_selector"
+        app:itemTextAppearanceActive="@style/BottomNavigationView.Active_one_divice"
+        app:itemTextAppearanceInactive="@style/BottomNavigationView_one_divice"
+        app:itemTextColor="#000000"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:menu="@menu/menu_for_game_one_divice">
+
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2_one_divice"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_one_divice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/button_player_2_one_divice"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_one_divice"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar_one_divice"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar_one_divice"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/player_2_icon_one_divice"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/button_player_2_one_divice"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar_one_divice"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/button_player_2_one_divice"
+        app:layout_constraintTop_toTopOf="@+id/button_player_2_one_divice"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <TextView
+        android:id="@+id/name_player2_one_divice"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="Игрок 2"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_one_divice"
+        app:layout_constraintEnd_toStartOf="@+id/button_player_2_one_divice"
+        app:layout_constraintHorizontal_bias="0.427"
+        app:layout_constraintStart_toEndOf="@+id/to_back_one_divice"
+        app:layout_constraintTop_toTopOf="@+id/toolbar_one_divice"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/button_player_1_one_divice"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar2_one_divice"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar2_one_divice"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar2_one_divice"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/name_player1_one_divice"
+        android:layout_width="wrap_content"
+        android:layout_height="51dp"
+        android:gravity="center"
+        android:text="Игрок 1"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar2_one_divice"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar2_one_divice"
+        app:layout_constraintHorizontal_bias="0.419"
+        app:layout_constraintStart_toEndOf="@+id/button_player_1_one_divice"
+        app:layout_constraintTop_toTopOf="@+id/toolbar2_one_divice"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/player_1_icon_one_divice"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        app:layout_constraintBottom_toBottomOf="@+id/button_player_1_one_divice"
+        app:layout_constraintEnd_toEndOf="@+id/button_player_1_one_divice"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button_player_1_one_divice"
+        app:layout_constraintVertical_bias="0.285" />
+
+    <Button
+        android:id="@+id/to_back_one_divice"
+        android:layout_width="68dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/arrow_back"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_one_divice"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar_one_divice"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/toolbar_one_divice"
+        app:layout_constraintTop_toTopOf="@+id/toolbar_one_divice"></Button>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

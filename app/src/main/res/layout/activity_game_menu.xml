@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id = "@+id/game_menu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        app:itemIconTint="@drawable/nav_selector"
+        app:itemTextColor="@drawable/nav_selector"
+        app:itemTextAppearanceActive="@style/BottomNavigationView.Active_menu"
+        app:itemTextAppearanceInactive="@style/BottomNavigationView_menu"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar2"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/newGameButton"
+        android:layout_width="wrap_content"
+        android:layout_height="78dp"
+        android:layout_marginBottom="16dp"
+        android:text="долгая-онлайн"
+        app:layout_constraintBottom_toTopOf="@+id/oneDevice"
+        app:layout_constraintEnd_toEndOf="@+id/oneDevice"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarName2"
+        app:layout_constraintVertical_bias="0.961" />
+
+    <Button
+        android:id="@+id/toolbarName2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="Button"
+        android:textAllCaps="false"
+
+
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/my_toolbar2"
+        app:layout_constraintEnd_toEndOf="@+id/my_toolbar2"
+        app:layout_constraintHorizontal_bias="0.436"
+        app:layout_constraintStart_toStartOf="@+id/my_toolbar2"
+        app:layout_constraintTop_toTopOf="@+id/my_toolbar2"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/money"
+        android:layout_width="78dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        android:gravity="right|center_vertical"
+        android:text="бабки"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/money_icon"
+        app:layout_constraintEnd_toStartOf="@+id/money_icon"
+        app:layout_constraintTop_toTopOf="@+id/money_icon" />
+
+    <Button
+        android:id="@+id/oneDevice"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:text="Игра на одном устройстве"
+        app:layout_constraintEnd_toEndOf="@+id/playWithComp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/playWithComp"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarName2" />
+
+    <Button
+        android:id="@+id/playWithComp"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="игра с компьютером"
+        app:layout_constraintEnd_toEndOf="@+id/searchButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/searchButton"
+        app:layout_constraintTop_toBottomOf="@+id/oneDevice" />
+
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Поиск Соперника"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playWithComp" />
+
+    <Button
+        android:id="@+id/blitz"
+        android:layout_width="wrap_content"
+        android:layout_height="78dp"
+        android:gravity="center"
+        android:text="блиц-онлайн"
+        app:layout_constraintBottom_toTopOf="@+id/oneDevice"
+        app:layout_constraintEnd_toStartOf="@+id/newGameButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/oneDevice"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar2"
+        app:layout_constraintVertical_bias="0.609" />
+
+    <ImageButton
+        android:id="@+id/money_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/my_toolbar2"
+        app:layout_constraintEnd_toEndOf="@+id/my_toolbar2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
