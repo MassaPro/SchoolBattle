@@ -15,8 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_game_menu.*
 
 
-
-
 lateinit var gamesRecycler: RecyclerView
 
 class MainActivity : Fragment() {
@@ -64,22 +62,30 @@ class MainActivity : Fragment() {
         money_icon.setBackgroundResource(R.drawable.money)
         money.text = MONEY.toString()
         Design = prfs?.getString("design", "Normal").toString()                 //дизайн
-        SOUND = prfs?.getString("sound", "").toString() == "true"       //получаем из памяти звук
+        SOUND = prfs?.getString("sound", "").toString() == "true"
         VIBRATION = prfs?.getString("vibration", "").toString() == "true"       //получаем из памяти звук
-        if (Design == "Egypt"){
+
+        if(Design == "Normal")
+        {
+            blitz.width = 320
+            newGameButton.width = 320
+
+
+        }
+        else if (Design == "Egypt"){
             game_menu.setBackgroundResource(R.drawable.game_menu_egypt)
             //nav_view.setBackgroundColor(rgb(224, 164, 103));
             my_toolbar2.setBackgroundColor(rgb(224,164,103))
-            searchButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            searchButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             searchButton.setBackgroundColor(argb(0,0,0,0))
-            newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             newGameButton.setBackgroundColor(argb(0,0,0,0))
-            oneDevice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            oneDevice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             oneDevice.setBackgroundColor(argb(0,0,0,0))
-            playWithComp.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            playWithComp.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             playWithComp.setBackgroundColor(argb(0,0,0,0))
             blitz.setBackgroundColor(argb(0,0,0,0))
-            blitz.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            blitz.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
         }
         else if (Design == "Casino"){
             game_menu.setBackgroundResource(R.drawable.game_menu_casino)
@@ -90,15 +96,15 @@ class MainActivity : Fragment() {
             toolbarName2.setTextColor(Color.YELLOW)
             toolbarName2.setTextSize(20f)
 
-            searchButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            searchButton.setTextColor(Color.YELLOW)
-            searchButton.setTextSize(20f)
-            searchButton.setBackgroundColor(argb(0,0,0,0))
-
             newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             newGameButton.setTextColor(Color.YELLOW)
             newGameButton.setTextSize(20f)
             newGameButton.setBackgroundColor(argb(0,0,0,0))
+
+            blitz.setBackgroundColor(argb(0,0,0,0))
+            blitz.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            blitz.setTextColor(Color.YELLOW)
+            blitz.setTextSize(20f)
 
             oneDevice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             oneDevice.setTextColor(Color.YELLOW)
@@ -110,10 +116,10 @@ class MainActivity : Fragment() {
             playWithComp.setTextSize(20f)
             playWithComp.setBackgroundColor(argb(0,0,0,0))
 
-            blitz.setBackgroundColor(argb(0,0,0,0))
-            blitz.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            blitz.setTextColor(Color.YELLOW)
-            blitz.setTextSize(20f)
+            searchButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            searchButton.setTextColor(Color.YELLOW)
+            searchButton.setTextSize(20f)
+            searchButton.setBackgroundColor(argb(0,0,0,0))
         }
         else if (Design == "Rome"){
             game_menu.setBackgroundResource(R.drawable.game_menu_rome)
@@ -124,15 +130,15 @@ class MainActivity : Fragment() {
             toolbarName2.setTextColor(rgb(193,150,63))
             toolbarName2.setTextSize(20f)
 
-            searchButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-            searchButton.setTextColor(rgb(193,150,63))
-            searchButton.setTextSize(20f)
-            searchButton.setBackgroundColor(argb(0,0,0,0))
-
             newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
             newGameButton.setTextColor(rgb(193,150,63))
             newGameButton.setTextSize(19f)
             newGameButton.setBackgroundColor(argb(0,0,0,0))
+
+            blitz.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            blitz.setTextColor(rgb(193,150,63))
+            blitz.setTextSize(20f)
+            blitz.setBackgroundColor(argb(0,0,0,0))
 
             oneDevice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
             oneDevice.setTextColor(rgb(193,150,63))
@@ -144,12 +150,83 @@ class MainActivity : Fragment() {
             playWithComp.setTextSize(20f)
             playWithComp.setBackgroundColor(argb(0,0,0,0))
 
-            blitz.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-            blitz.setTextColor(rgb(193,150,63))
+            searchButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            searchButton.setTextColor(rgb(193,150,63))
+            searchButton.setTextSize(20f)
+            searchButton.setBackgroundColor(argb(0,0,0,0))
+        }
+        else if (Design == "Gothic"){
+            game_menu.setBackgroundResource(R.drawable.game_menu_gothic)
+            //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
+            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
+
+            toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            toolbarName2.setTextColor(Color.WHITE)
+            toolbarName2.setTextSize(20f)
+
+            newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            newGameButton.setTextColor(Color.WHITE)
+            newGameButton.setTextSize(19f)
+            newGameButton.setBackgroundColor(argb(0,0,0,0))
+
+            blitz.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            blitz.setTextColor(Color.WHITE)
             blitz.setTextSize(20f)
             blitz.setBackgroundColor(argb(0,0,0,0))
+
+            oneDevice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            oneDevice.setTextColor(Color.WHITE)
+            oneDevice.setTextSize(20f)
+            oneDevice.setBackgroundColor(argb(0,0,0,0))
+
+            playWithComp.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            playWithComp.setTextColor(Color.WHITE)
+            playWithComp.setTextSize(20f)
+            playWithComp.setBackgroundColor(argb(0,0,0,0))
+
+            searchButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            searchButton.setTextColor(Color.WHITE)
+            searchButton.setTextSize(20f)
+            searchButton.setBackgroundColor(argb(0,0,0,0))
+        }
+        else if (Design == "Japan"){
+            game_menu.setBackgroundResource(R.drawable.game_menu_japan)
+            //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
+            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
+
+            toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            toolbarName2.setTextColor(Color.BLACK)
+            toolbarName2.setTextSize(20f)
+
+            newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            newGameButton.setTextColor(Color.BLACK)
+            newGameButton.setTextSize(16f)
+            newGameButton.setBackgroundColor(argb(0,0,0,0))
+
+            blitz.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            blitz.setTextColor(Color.BLACK)
+            blitz.setTextSize(16f)
+            blitz.setBackgroundColor(argb(0,0,0,0))
+
+            oneDevice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            oneDevice.setTextColor(Color.BLACK)
+            oneDevice.setTextSize(16f)
+            oneDevice.setBackgroundColor(argb(0,0,0,0))
+
+            playWithComp.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            playWithComp.setTextColor(Color.BLACK)
+            playWithComp.setTextSize(17f)
+            playWithComp.setBackgroundColor(argb(0,0,0,0))
+
+            searchButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            searchButton.setTextColor(Color.BLACK)
+            searchButton.setTextSize(17f)
+            searchButton.setBackgroundColor(argb(0,0,0,0))
+
         }
 
+       // (activity as AppCompatActivity).setSupportActionBar(findViewById(R.id.my_toolbar))
+        (activity as AppCompatActivity?)!!.setSupportActionBar(my_toolbar2)
 
         searchButton.setOnClickListener {
             val intent = Intent(this.activity, SearchActivity::class.java)
@@ -246,3 +323,4 @@ class MainActivity : Fragment() {
         }
     }
 }
+

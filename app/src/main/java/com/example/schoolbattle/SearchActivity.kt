@@ -18,8 +18,6 @@ import kotlinx.android.synthetic.main.activity_search_item.view.*
 class SearchActivity : AppCompatActivity() {
 
     private var USERS: MutableList<String> = mutableListOf()
-    private var IMAGES: MutableList<String> = mutableListOf()
-
     var rec: RecyclerView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +28,7 @@ class SearchActivity : AppCompatActivity() {
         val searchView = findViewById<SearchView>(R.id.search_field)
         searchView.onActionViewExpanded()
 
-        recyclerViewSearch.adapter = ItemRecyclerViewAdapter(USERS, IMAGES)
+        recyclerViewSearch.adapter = ItemRecyclerViewAdapter(USERS)
         rec = recyclerViewSearch
         rec?.adapter?.notifyDataSetChanged()
 
@@ -41,7 +39,6 @@ class SearchActivity : AppCompatActivity() {
                 if (query == null || query.isEmpty()) {
                     blocked = true
                     USERS.clear()
-                    IMAGES.clear()
                     rec?.adapter?.notifyDataSetChanged()
                     return false
                 }
@@ -54,7 +51,6 @@ class SearchActivity : AppCompatActivity() {
                 while (to <= USERS.size - 1) {
                     if (!USERS[to].startsWith(query) ||!USERS[to].contains(query)) {
                         USERS.removeAt(to)
-                        IMAGES.removeAt(to)
                         to--
                     }
                     to++
@@ -65,11 +61,9 @@ class SearchActivity : AppCompatActivity() {
                     override fun onDataChange(p0: DataSnapshot) {
                         Toast.makeText(this@SearchActivity, query + ' ' + blocked, Toast.LENGTH_LONG).show()
                         USERS.clear()
-                        IMAGES.clear()
                         for (i in p0.children) {
                             if (!blocked && i.key.toString().startsWith(query) && i.key.toString().contains(query)) {
                                 USERS.add(i.key.toString())
-                                IMAGES.add(i.child("image").value.toString())
                                 rec?.adapter?.notifyDataSetChanged()
                             }
                         }
@@ -86,7 +80,7 @@ class SearchActivity : AppCompatActivity() {
         })
     }
 
-    class ItemRecyclerViewAdapter(private val ITEMS: MutableList<String>, private val ITEMS2: MutableList<String>):
+    class ItemRecyclerViewAdapter(private val ITEMS: MutableList<String>):
         RecyclerView.Adapter<ItemRecyclerViewAdapter.ViewHolder>() {
 
         private val onClickListener: View.OnClickListener
@@ -106,9 +100,9 @@ class SearchActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.idView.text = ITEMS[position] + " " + ITEMS2[position]
+            holder.idView.text = ITEMS[position]
             with(holder.itemView) {
-                tag = ITEMS[position] + " " + ITEMS2[position]
+                tag = ITEMS[position]
                 setOnClickListener(onClickListener)
             }
         }

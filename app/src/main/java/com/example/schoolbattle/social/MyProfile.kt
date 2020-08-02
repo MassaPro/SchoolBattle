@@ -47,15 +47,6 @@ class MyProfile : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         PICTURE_AVATAR[AVATAR]?.let { image_global_ava.setImageResource(it) }
-        if (Design == "Egypt"){
-            myprofile.setBackgroundResource(R.drawable.background_egypt)
-        }
-        else if (Design == "Casino"){
-            myprofile.setBackgroundResource(R.drawable.background2_casino)
-        }
-        else if (Design == "Rome"){
-            myprofile.setBackgroundResource(R.drawable.background_rome)
-        }
 
         val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val username = prefs?.getString("username", "")

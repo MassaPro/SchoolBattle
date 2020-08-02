@@ -10,18 +10,21 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.example.schoolbattle.CONTEXT
-import com.example.schoolbattle.NewGameActivity
-import com.example.schoolbattle.R
-import com.example.schoolbattle.SearchActivity
+import com.example.schoolbattle.*
 import com.google.android.material.tabs.TabLayout
+import kotlinx.android.synthetic.main.activity_social.*
 import kotlinx.android.synthetic.main.activity_social.view.*
+import kotlinx.android.synthetic.main.activity_social.view.social_menu
 
 class SocialActivity : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        CONTEXT = requireActivity()
+        //CONTEXT = requireActivity()
+
+
+
+
     }
 
     @SuppressLint("WrongViewCast")
@@ -33,6 +36,8 @@ class SocialActivity : Fragment() {
         /**
          * Inflate tab_layout and setup Views.
          */
+        CONTEXT = requireActivity()
+
         val v: View = inflater.inflate(R.layout.activity_social, container, false)
         tabLayout = v.findViewById<View>(
             R.id.tabs
@@ -52,11 +57,32 @@ class SocialActivity : Fragment() {
             viewPager
         ) }
 
-        v.search_social.setBackgroundResource(R.drawable.search)
+        var fon = v.findViewById<View>(R.id.social_menu)
+
+
+
+        //v.search_social.setBackgroundResource(R.drawable.search)
         v.search_social.setOnClickListener {
             val intent = Intent(activity, SearchActivity::class.java)
             startActivity(intent)
         }
+
+        if (Design == "Egypt"){
+            fon.setBackgroundResource(R.drawable.background_egypt)
+        }
+        else if (Design == "Casino"){
+            fon.setBackgroundResource(R.drawable.background2_casino)
+        }
+        else if (Design == "Rome"){
+            fon.setBackgroundResource(R.drawable.background_rome)
+        }
+        else if (Design == "Gothic"){
+            fon.setBackgroundResource(R.drawable.background_gothic)
+        }
+        else if (Design == "Japan"){
+            fon.setBackgroundResource(R.drawable.background_japan)
+        }
+
         return v
     }
 

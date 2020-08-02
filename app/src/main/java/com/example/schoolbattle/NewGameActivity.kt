@@ -107,8 +107,34 @@ class NewGameActivity : AppCompatActivity() {
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.activity_new_game_item, parent, false)
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_new_game_item, parent, false)
+            if (Design == "Egypt"){
+                view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.background_egypt)
+                view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+            }
+            else if (Design == "Casino"){
+                view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.new_game_item_casino)
+                view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                view.findViewById<TextView>(R.id.textView2).setTextColor(Color.YELLOW)
+            }
+            else if (Design == "Rome"){
+                view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.new_game_item_rome)
+                view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                view.findViewById<TextView>(R.id.textView2).setTextColor(Color.rgb(193, 150, 63))
+            }
+
+            else if (Design == "Gothic"){
+                view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.new_game_item_gothic)
+                view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                view.findViewById<TextView>(R.id.textView2).setTextColor(Color.WHITE)
+            }
+
+            else if (Design == "Japan"){
+                view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.new_game_item_japan)
+                view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            }
+
+            //card2.setBackgroundResource(R.drawable.background_egypt)
             return ViewHolder(view)
         }
 

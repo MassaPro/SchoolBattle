@@ -1,6 +1,5 @@
 package com.example.schoolbattle
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -13,13 +12,10 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toolbar
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomnavigation.BottomNavigationMenu
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_settings_fragment.*
 import kotlinx.android.synthetic.main.design_item.view.*
@@ -48,6 +44,24 @@ class SettingsFragmentActivity : Fragment() {
         if (Design == "Normal") {
             settings_menu.setBackgroundColor(Color.WHITE)
         }
+
+        else if (Design == "Egypt") {
+            settings_menu.setBackgroundResource(R.drawable.background_egypt)
+            tb1.setBackgroundColor(rgb(224,164,103));
+
+            choose_design.setBackgroundColor(argb(0,0,0,0))
+            choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+            //choose_design.setTextColor(Color.YELLOW)
+            choose_design.setTextSize(24f)
+
+            soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+            //soundSwitch.setSwitchColor(Color.YELLOW)
+            //soundSwitch.setBackgroundColor(Color.YELLOW)
+            soundSwitch.setTextSize(24f)
+            vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+            vibrationSwitch.setTextSize(24f)
+        }
+
         if (Design == "Casino") {
             settings_menu.setBackgroundResource(R.drawable.background2_casino)
             tb1.setBackgroundColor(argb(0,0,0,0))
@@ -55,40 +69,67 @@ class SettingsFragmentActivity : Fragment() {
             choose_design.setBackgroundColor(argb(0,0,0,0))
             choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             choose_design.setTextColor(Color.YELLOW)
-            choose_design.setTextSize(20f)
+            choose_design.setTextSize(24f)
 
             soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             soundSwitch.setTextColor(Color.YELLOW)
-            //soundSwitch.setBackgroundColor(Color.YELLOW)
-            soundSwitch.setTextSize(20f)
-        }
-        else if (Design == "Egypt") {
-            settings_menu.setBackgroundResource(R.drawable.background_egypt)
-            tb1.setBackgroundColor(rgb(224,164,103));
+            soundSwitch.setTextSize(24f)
 
-            choose_design.setBackgroundColor(argb(0,0,0,0))
-            choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            //choose_design.setTextColor(Color.YELLOW)
-            choose_design.setTextSize(18f)
-
-            soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            //soundSwitch.setTextColor(Color.YELLOW)
-            //soundSwitch.setBackgroundColor(Color.YELLOW)
-            soundSwitch.setTextSize(20f)
+            vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            vibrationSwitch.setTextSize(24f)
+            vibrationSwitch.setTextColor(Color.YELLOW)
         }
+
         else if (Design == "Rome") {
             settings_menu.setBackgroundResource(R.drawable.background_rome)
             tb1.setBackgroundColor(argb(0,0,0,0))
 
             choose_design.setBackgroundColor(argb(0,0,0,0))
             choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-            //choose_design.setTextColor(Color.YELLOW)
-            choose_design.setTextSize(18f)
+            choose_design.setTextColor(rgb(193,150,63))
+            choose_design.setTextSize(24f)
 
             soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
             soundSwitch.setTextColor(rgb(193,150,63))
-            //soundSwitch.setBackgroundColor(Color.YELLOW)
-            soundSwitch.setTextSize(20f)
+            soundSwitch.setTextSize(24f)
+
+            vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            vibrationSwitch.setTextSize(24f)
+            vibrationSwitch.setTextColor(rgb(193,150,63))
+        }
+        else if (Design == "Gothic") {
+            settings_menu.setBackgroundResource(R.drawable.background_gothic)
+            tb1.setBackgroundColor(argb(0,0,0,0))
+
+            choose_design.setBackgroundColor(argb(0,0,0,0))
+            choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            choose_design.setTextColor(Color.WHITE)
+            choose_design.setTextSize(24f)
+
+            soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            soundSwitch.setTextColor(Color.WHITE)
+            soundSwitch.setTextSize(24f)
+
+            vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            vibrationSwitch.setTextSize(24f)
+            vibrationSwitch.setTextColor(Color.WHITE)
+        }
+        else if (Design == "Japan") {
+            settings_menu.setBackgroundResource(R.drawable.background_japan)
+            tb1.setBackgroundColor(argb(0,0,0,0))
+
+            choose_design.setBackgroundColor(argb(0,0,0,0))
+            choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            choose_design.setTextColor(Color.BLACK)
+            choose_design.setTextSize(24f)
+
+            soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            soundSwitch.setTextColor(Color.BLACK)
+            soundSwitch.setTextSize(24f)
+
+            vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            vibrationSwitch.setTextSize(24f)
+            vibrationSwitch.setTextColor(Color.BLACK)
         }
 
 
@@ -133,14 +174,7 @@ class SettingsFragmentActivity : Fragment() {
             editor?.apply()
         })
 
-        val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
-        var data_from_memory = prefs?.getString("language", "").toString()
-        if (data_from_memory == "") {
-            val editor = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)?.edit()
-            editor?.putString("language", "EN")
-            editor?.apply()
-            data_from_memory = "EN"
-        }
+
 
 
 
@@ -213,6 +247,20 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                 editor.putString("design","Rome")
                 editor.apply()
             }
+            else if(item == 4)
+            {
+                Design = "Gothic"
+                val editor = v.context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("design","Gothic")
+                editor.apply()
+            }
+            else if(item == 5)
+            {
+                Design = "Japan"
+                val editor = v.context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("design","Japan")
+                editor.apply()
+            }
 
             val t = fragment_activity?.supportFragmentManager?.beginTransaction()
             val mFrag: Fragment= SettingsFragmentActivity()                    //ПРОСТО ПИЗДЕЦ
@@ -233,6 +281,14 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
             else if(Design == "Rome")
             {
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_rome)
+            }
+            else if(Design == "Gothic")
+            {
+                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_gothic)
+            }
+            else if(Design == "Japan")
+            {
+                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE)
             }
 
 

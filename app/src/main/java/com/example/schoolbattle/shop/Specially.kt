@@ -32,9 +32,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 var Vidos : RewardedVideoAd? = null
-class Specially : Fragment(),RewardedVideoAdListener {
-
-    private lateinit var mRewardedVideoAd: RewardedVideoAd
+lateinit var mRewardedVideoAd: RewardedVideoAd
+class Specially : Fragment(){
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -49,6 +48,11 @@ class Specially : Fragment(),RewardedVideoAdListener {
 
         Vidos = mRewardedVideoAd
         loadRewardedVideoAd()
+            // mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(locale_context)
+     //   mRewardedVideoAd.rewardedVideoAdListener = this
+
+        Vidos = mRewardedVideoAd
+       // loadRewardedVideoAd()
         //     vasa = activity.setContentView(R.layout.activity_shop_fragment)
 
         choose_design_shop.text = "Купленные эмоции можно вы сможете использовать во время игры"
@@ -118,6 +122,13 @@ class Specially : Fragment(),RewardedVideoAdListener {
 
 
 }
+
+
+
+
+}
+
+
 
 
 

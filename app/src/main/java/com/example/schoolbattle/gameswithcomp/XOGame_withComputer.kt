@@ -15,7 +15,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
-import kotlinx.android.synthetic.main.activity_x_o_game_with_computer.*
+import kotlinx.android.synthetic.main.activity_computer_games_template.*
 
 var XOGameMode = 0
 
@@ -85,7 +85,8 @@ class XOGame_withComputer : AppCompatActivity() {
     @ExperimentalStdlibApi
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
-        setContentView(R.layout.activity_x_o_game_with_computer)
+        setContentView(R.layout.activity_computer_games_template)
+        signature_canvas_xog_with_computer.visibility = (View.VISIBLE)
         signature_canvas_xog_with_computer.activ = this
         CONTEXT = this
 
@@ -97,48 +98,51 @@ class XOGame_withComputer : AppCompatActivity() {
             editor.apply()
             XOGameMode = 1
         }
+        if (XOGameMode == 2) {
+            signature_canvas_xog_with_computer.blocked = true
+        }
 
         //var h : MutableList<Triple<Int,Int,Int>> =  mutableListOf(Triple(231,231,777),Triple(231,231,777),Triple(231,231,777))
         //Log.w("momlol",decode(encode(h)).toString())
 
-        signature_canvas_xog_with_computer.t1 = findViewById(R.id.name_player1_with_computer_xog) as TextView
-        signature_canvas_xog_with_computer.t2 = findViewById(R.id.name_player2_with_computer_xog) as TextView
+        signature_canvas_xog_with_computer.t1 = findViewById(R.id.name_player1_with_computer_template) as TextView
+        signature_canvas_xog_with_computer.t2 = findViewById(R.id.name_player2_with_computer_template) as TextView
         signature_canvas_xog_with_computer.t1.text = "Игрок 1"
         signature_canvas_xog_with_computer.t2.text = "Игрок 2"
         //signature_canvas_xog_with_computer.t1.set
 
         if(Design == "Egypt" ) {
-            name_player1_with_computer_xog.setTextColor(Color.BLACK)
-            name_player2_with_computer_xog.setTextColor(Color.BLACK)
-            name_player1_with_computer_xog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            name_player2_with_computer_xog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            name_player2_with_computer_xog.setTextSize(20f)
-            name_player1_with_computer_xog.setTextSize(20f)
-            button_player_1_xog_with_computer.setBackgroundResource(R.drawable.player1_egypt);
-            button_player_2_xog_with_computer.setBackgroundResource(R.drawable.player2_egypt);
-            player_1_icon_xog_with_computer.setBackgroundResource(R.drawable.cross_egypt);
-            player_2_icon_xog_with_computer.setBackgroundResource(R.drawable.circle_egypt);
+            name_player1_with_computer_template.setTextColor(Color.BLACK)
+            name_player2_with_computer_template.setTextColor(Color.BLACK)
+            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+            name_player2_with_computer_template.setTextSize(20f)
+            name_player1_with_computer_template.setTextSize(20f)
+            button_player_1_template_with_computer.setBackgroundResource(R.drawable.player1_egypt);
+            button_player_2_template_with_computer.setBackgroundResource(R.drawable.player2_egypt);
+            player_1_icon_template_with_computer.setBackgroundResource(R.drawable.cross_egypt);
+            player_2_icon_template_with_computer.setBackgroundResource(R.drawable.circle_egypt);
             label_with_computer.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_xog_with_computer.setBackgroundColor(rgb(224,164,103))
-            to_back_xog_with_computer.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_xog_with_computer.setBackgroundColor(argb(0,0,0,0))
-            toolbar2_xog_with_computer.setBackgroundColor(argb(0,0,0,0))
+            bottom_navigation_template_with_computer.setBackgroundColor(rgb(224,164,103))
+            to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_template_with_computer.setBackgroundColor(argb(0,0,0,0))
+            toolbar2_template_with_computer.setBackgroundColor(argb(0,0,0,0))
         }
         else if(Design == "Casino" ) {
-            name_player1_with_computer_xog.setTextColor(Color.YELLOW)
-            name_player2_with_computer_xog.setTextColor(Color.YELLOW)
-            name_player1_with_computer_xog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_with_computer_xog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_with_computer_xog.setTextSize(20f)
-            name_player1_with_computer_xog.setTextSize(20f)
-            button_player_1_xog_with_computer.setBackgroundResource(R.drawable.tower1_casino);
-            button_player_2_xog_with_computer.setBackgroundResource(R.drawable.tower2_casino);
-            toolbar_xog_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_xog_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            name_player1_with_computer_template.setTextColor(Color.YELLOW)
+            name_player2_with_computer_template.setTextColor(Color.YELLOW)
+            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_with_computer_template.setTextSize(20f)
+            name_player1_with_computer_template.setTextSize(20f)
+            button_player_1_template_with_computer.setBackgroundResource(R.drawable.tower1_casino);
+            button_player_2_template_with_computer.setBackgroundResource(R.drawable.tower2_casino);
+            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
             label_with_computer.setBackgroundResource(R.drawable.background_casino);
-            bottom_navigation_xog_with_computer.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_xog_with_computer.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_xog_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            bottom_navigation_template_with_computer.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
         }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
@@ -166,7 +170,7 @@ class XOGame_withComputer : AppCompatActivity() {
         }
         signature_canvas_xog_with_computer.invalidate()
 
-        to_back_xog_with_computer.setOnClickListener {
+        to_back_template_with_computer.setOnClickListener {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 3)
@@ -282,7 +286,7 @@ class XOGame_withComputer : AppCompatActivity() {
             }, delayTime)
         }
 
-        bottom_navigation_xog_with_computer.setOnNavigationItemSelectedListener { item ->
+        bottom_navigation_template_with_computer.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
                     dialog_rules =
@@ -747,23 +751,14 @@ class CanvasView_xog_with_computer(context: Context, attrs: AttributeSet?) : Vie
 
         var dialog: Show_Result_with_Computer? = null
 
-        if(EXODUS == 1 && XOGameMode == 1) {
+        if(EXODUS == 1) {
             dialog = Show_Result_with_Computer(activ)
             dialog.showResult_with_Computer("Победа","XOGame",activ)
 
         }
-        if(EXODUS == 2 && XOGameMode == 1) {
+        if(EXODUS == 2) {
             dialog = Show_Result_with_Computer(activ)
             dialog.showResult_with_Computer("Поражение","XOGame",activ)
-        }
-        if(EXODUS == 1 && XOGameMode == 2) {
-            dialog = Show_Result_with_Computer(activ)
-            dialog.showResult_with_Computer("Поражение","XOGame",activ)
-
-        }
-        if(EXODUS == 2 && XOGameMode == 2) {
-            dialog = Show_Result_with_Computer(activ)
-            dialog.showResult_with_Computer("Победа","XOGame",activ)
         }
         if (EXODUS == 3) {
             dialog = Show_Result_with_Computer(activ)

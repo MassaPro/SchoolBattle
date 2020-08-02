@@ -1,5 +1,7 @@
 package com.example.schoolbattle
 
+import android.app.Activity
+import android.app.Application
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
@@ -9,8 +11,12 @@ import android.util.Log
 import android.view.Gravity
 import android.view.Window
 import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.schoolbattle.engine.initCatchPlayersListenerForBlitzGame
@@ -25,7 +31,50 @@ import kotlinx.android.synthetic.main.activity_navigator.*
 
 var now: Context? = null
 
-class NavigatorActivity : AppCompatActivity() {
+import com.example.schoolbattle.shop.locale_context
+import com.example.schoolbattle.shop.mRewardedVideoAd
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.reward.RewardItem
+import com.google.android.gms.ads.reward.RewardedVideoAdListener
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_navigator.*
+import kotlinx.android.synthetic.main.activity_friends_list.*
+import kotlinx.android.synthetic.main.reward_dialog.*
+
+
+var now: Context? = null
+
+class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
+
+
+
+    override fun onResume() {
+        super.onResume()
+        CONTEXT = this
+        now = this
+        if (Design == "Normal"){
+            nav_view.setBackgroundColor(Color.WHITE);
+        }
+        if (Design == "Egypt"){
+            nav_view.setBackgroundColor(rgb(224, 164, 103));
+        }
+        if (Design == "Casino"){
+            nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
+        }
+        if (Design == "Rome"){
+            nav_view.setBackgroundResource(R.drawable.bottom_navigation_rome)
+        }
+        if (Design == "Gothic"){
+            nav_view.setBackgroundResource(R.drawable.bottom_navigation_gothic)
+        }
+        if (Design == "Japan"){
+            nav_view.setBackgroundColor(Color.WHITE)
+        }
+    }
 
 
 
@@ -55,6 +104,11 @@ class NavigatorActivity : AppCompatActivity() {
 
 
 
+
+        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this)
+        mRewardedVideoAd.rewardedVideoAdListener = this
+        loadRewardedVideoAd()
+
         Log.d("VISIT","121212121")
         CONTEXT = this
 
@@ -63,6 +117,9 @@ class NavigatorActivity : AppCompatActivity() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         now = this
         val navController = findNavController(R.id.nav_host_fragment)
+
+        nav_view.itemIconTintList = generateColorStateList()
+        nav_view.itemTextColor = generateColorStateList()
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         //val appBarConfiguration = AppBarConfiguration(setOf(
@@ -74,9 +131,10 @@ class NavigatorActivity : AppCompatActivity() {
 
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val username = prefs.getString("username", "")
-        initCatchPlayersListenerForBlitzGame(username!!, this)
-        updateRecycler(username)
-        updateRecyclerBlitz(username)
+        if (username != null) {
+            updateRecycler(username)
+            updateRecyclerBlitz(username)
+        }
         myRef.child("Users").child(username.toString()).child("Revanches").addValueEventListener(
             object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
@@ -177,5 +235,58 @@ class NavigatorActivity : AppCompatActivity() {
 
     }
 
+    override fun onRewarded(reward: RewardItem) {
+
+    }
+
+    override fun onRewardedVideoAdLeftApplication() {
+
+    }
+
+    override fun onRewardedVideoAdClosed() {
+        loadRewardedVideoAd()
+    }
+
+    override fun onRewardedVideoAdFailedToLoad(errorCode: Int) {
+
+    }
+
+    override fun onRewardedVideoAdLoaded() {
+
+    }
+
+    override fun onRewardedVideoAdOpened() {
+
+    }
+
+    override fun onRewardedVideoStarted() {
+
+    }
+
+    override fun onRewardedVideoCompleted() {
+        loadRewardedVideoAd()
+        var dialog_reward : Dialog = locale_context!!.let { Dialog(it) }
+        dialog_reward.setContentView(R.layout.reward_dialog)
+        dialog_reward.price_reward.text = "10" //TODO ОБЯЗАТЕЛЬНО НЕ ЗАБЫТЬ ПОМЕНЯТЬ ЗДЕСЬ ЦЕНУ
+        dialog_reward.close_reward.setOnClickListener {
+            dialog_reward.dismiss()
+        }
+        dialog_reward.ok_reward.setOnClickListener {
+            dialog_reward.dismiss()
+        }
+        dialog_reward.show()
+        MONEY += 10
+        locale_context?.findViewById<TextView>(R.id.money_shop_toolbar)?.text = MONEY.toString()
+        val editor =
+            locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                .edit()
+        editor.putString("money", MONEY.toString())
+        editor.apply()
+    }
+
+    fun loadRewardedVideoAd() {
+        mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917",          //TODO зменить на настоящий идентификатор
+            AdRequest.Builder().build())
+    }
 
 }

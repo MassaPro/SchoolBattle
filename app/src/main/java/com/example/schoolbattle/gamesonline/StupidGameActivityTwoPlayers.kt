@@ -5,8 +5,6 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.schoolbattle.*
-import com.example.schoolbattle.engine.ShowResult
-import com.example.schoolbattle.engine.StupidGame
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener

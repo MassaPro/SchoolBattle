@@ -31,14 +31,14 @@
             android:id="@+id/imageView4"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginEnd="5dp"
             android:background="@drawable/money"
             ads:layout_constraintBottom_toBottomOf="parent"
             ads:layout_constraintEnd_toEndOf="@+id/toolbar_shop"
-            ads:layout_constraintHorizontal_bias="0.0"
-            ads:layout_constraintStart_toEndOf="@+id/money_shop_toolbar"
-            ads:layout_constraintTop_toTopOf="@+id/money_shop_toolbar"
-            ads:layout_constraintVertical_bias="0.0" />
+            ads:layout_constraintHorizontal_bias="1.0"
+            ads:layout_constraintStart_toStartOf="@+id/toolbar_shop"
+            ads:layout_constraintTop_toTopOf="parent"
+            ads:layout_constraintVertical_bias="1.0" />
 
         <Button
             android:id="@+id/button_shop_name"
@@ -56,14 +56,13 @@
             android:id="@+id/money_shop_toolbar"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginEnd="5dp"
             android:gravity="right|center"
             android:text="Цена"
             android:textSize="20dp"
-            ads:layout_constraintBottom_toBottomOf="@+id/toolbar_shop"
-            ads:layout_constraintStart_toEndOf="@+id/button_shop_name"
-            ads:layout_constraintTop_toTopOf="@+id/button_shop_name"
-            ads:layout_constraintVertical_bias="0.0" />
+            ads:layout_constraintBottom_toBottomOf="@+id/imageView4"
+            ads:layout_constraintEnd_toStartOf="@+id/imageView4"
+            ads:layout_constraintTop_toTopOf="@+id/imageView4" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

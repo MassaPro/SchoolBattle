@@ -33,20 +33,8 @@ class Subscriptions : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         locale_context = activity as AppCompatActivity
-        if (Design == "Egypt"){
-            back_friends_followers.setBackgroundResource(R.drawable.background_egypt)
-            //nav_view.setBackgroundColor(rgb(224, 164, 103));
-            //my_toolbar2.setBackgroundColor(rgb(224,164,103))
-            //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            //content.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            //id_text.setTextColor(Color.WHITE)
-        }
-        else if (Design == "Casino"){
-            back_friends_followers.setBackgroundResource(R.drawable.background2_casino)
-        }
-        else if (Design == "Rome"){
-            back_friends_followers.setBackgroundResource(R.drawable.background_rome)
-        }
+
+
         val prefs = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         var username = prefs?.getString("username", "")
         if (locale_context!!.intent.getStringExtra("curName") != null) {

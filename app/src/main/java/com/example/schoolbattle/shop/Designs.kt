@@ -47,7 +47,7 @@ class Designs  : Fragment() {
         gamesRecycler.isNestedScrollingEnabled = false;
         item_design_shop.adapter?.notifyDataSetChanged()
 
-
+        //item_design_shop.setBackgroundResource(R.drawable.new_game_item_casino)
 
 
     }

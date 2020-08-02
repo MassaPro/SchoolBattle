@@ -13,7 +13,7 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
-import kotlinx.android.synthetic.main.activity_reversi_with_computer.*
+import kotlinx.android.synthetic.main.activity_computer_games_template.*
 
 
 var ReversiMode = 0
@@ -85,7 +85,9 @@ class ReversiWithComputer : AppCompatActivity() {
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_reversi_with_computer)
+        setContentView(R.layout.activity_computer_games_template)
+        signature_canvas_reversi_with_computer.visibility = (View.VISIBLE)
+
         signature_canvas_reversi_with_computer.activity = this
         CONTEXT = this
 
@@ -99,38 +101,38 @@ class ReversiWithComputer : AppCompatActivity() {
         }
 
         if(Design == "Egypt" ) {
-            name_player1_with_computer_reversi.setTextColor(Color.BLACK)
-            name_player2_with_computer_reversi.setTextColor(Color.BLACK)
-            name_player1_with_computer_reversi.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            name_player2_with_computer_reversi.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            name_player2_with_computer_reversi.setTextSize(20f)
-            name_player1_with_computer_reversi.setTextSize(20f)
-            button_player_1_reversi_with_computer.setBackgroundResource(R.drawable.player1_egypt)
-            button_player_2_reversi_with_computer.setBackgroundResource(R.drawable.player2_egypt)
-            player_1_icon_reversi_with_computer.setBackgroundResource(R.drawable.black_chip_egypt)
-            player_2_icon_reversi_with_computer.setBackgroundResource(R.drawable.white_chip_egypt)
-            toolbar_reversi_with_computer.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_reversi_with_computer.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            label_with_computer_reversi.setBackgroundResource(R.drawable.background_egypt)
-            bottom_navigation_reversi_with_computer.setBackgroundColor(Color.rgb(224, 164, 103))
-            to_back_reversi_with_computer.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_reversi_with_computer.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            name_player1_with_computer_template.setTextColor(Color.BLACK)
+            name_player2_with_computer_template.setTextColor(Color.BLACK)
+            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+            name_player2_with_computer_template.setTextSize(20f)
+            name_player1_with_computer_template.setTextSize(20f)
+            button_player_1_template_with_computer.setBackgroundResource(R.drawable.player1_egypt)
+            button_player_2_template_with_computer.setBackgroundResource(R.drawable.player2_egypt)
+            player_1_icon_template_with_computer.setBackgroundResource(R.drawable.chip1_egypt)
+            player_2_icon_template_with_computer.setBackgroundResource(R.drawable.chip2_egypt)
+            toolbar_template_with_computer.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            toolbar2_template_with_computer.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            label_with_computer.setBackgroundResource(R.drawable.background_egypt)
+            bottom_navigation_template_with_computer.setBackgroundColor(Color.rgb(224, 164, 103))
+            to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_template_with_computer.setBackgroundColor(Color.argb(0, 0, 0, 0))
         }
         else if(Design == "Casino" ) {
-            name_player1_with_computer_reversi.setTextColor(Color.YELLOW)
-            name_player2_with_computer_reversi.setTextColor(Color.YELLOW)
-            name_player1_with_computer_reversi.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_with_computer_reversi.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_with_computer_reversi.setTextSize(20f)
-            name_player1_with_computer_reversi.setTextSize(20f)
-            button_player_1_reversi_with_computer.setBackgroundResource(R.drawable.tower1_casino)
-            button_player_2_reversi_with_computer.setBackgroundResource(R.drawable.tower2_casino)
-            toolbar_reversi_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_reversi_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
-            label_with_computer_reversi.setBackgroundResource(R.drawable.background_casino)
-            bottom_navigation_reversi_with_computer.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_reversi_with_computer.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_reversi_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            name_player1_with_computer_template.setTextColor(Color.YELLOW)
+            name_player2_with_computer_template.setTextColor(Color.YELLOW)
+            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_with_computer_template.setTextSize(20f)
+            name_player1_with_computer_template.setTextSize(20f)
+            button_player_1_template_with_computer.setBackgroundResource(R.drawable.tower1_casino)
+            button_player_2_template_with_computer.setBackgroundResource(R.drawable.tower2_casino)
+            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            label_with_computer.setBackgroundResource(R.drawable.background_casino)
+            bottom_navigation_template_with_computer.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
         }
 
 
@@ -381,14 +383,14 @@ class ReversiWithComputer : AppCompatActivity() {
 
         }
 
-        to_back_reversi_with_computer.setOnClickListener {
+        to_back_template_with_computer.setOnClickListener {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 3)
             startActivity(intent)
         }
 
-        bottom_navigation_reversi_with_computer.setOnNavigationItemSelectedListener { item ->
+        bottom_navigation_template_with_computer.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
                     dialog_rules =
@@ -1076,11 +1078,11 @@ class CanvasView_reversi_with_computer(context: Context, attrs: AttributeSet?) :
     var black_chip_normal : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black)       //картинки фишек и подсветки
     var grey_chip_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.grey)
 
-    var black_chip_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black_chip_egypt)
-    var grey_chip_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.white_chip_egypt)
+    var black_chip_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip1_egypt)
+    var grey_chip_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip2_egypt)
 
-    var black_chip_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.red_chip_casino)
-    var grey_chip_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.black_chip_casino)
+    var black_chip_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip1_casino)
+    var grey_chip_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip2_casino)
     var green: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.green)
 
 

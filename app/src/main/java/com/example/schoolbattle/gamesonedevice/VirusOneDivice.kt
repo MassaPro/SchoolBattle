@@ -100,8 +100,8 @@ class VirusOneDivice : AppCompatActivity() {
         if(Design == "Egypt" ) {
             name_player1_one_divice.setTextColor(Color.BLACK)
             name_player2_one_divice.setTextColor(Color.BLACK)
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             name_player2_one_divice.setTextSize(20f)
             name_player1_one_divice.setTextSize(20f)
             button_player_1_one_divice.setBackgroundResource(R.drawable.player1_egypt);
@@ -143,6 +143,38 @@ class VirusOneDivice : AppCompatActivity() {
             toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             label_one_device.setBackgroundResource(R.drawable.background_rome);
             bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+        }
+        else if(Design == "Gothic" ) {
+            name_player1_one_divice.setTextColor(Color.WHITE)
+            name_player2_one_divice.setTextColor(Color.WHITE)
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            button_player_1_one_divice.setBackgroundResource(R.drawable.tower1_gothic);
+            button_player_2_one_divice.setBackgroundResource(R.drawable.tower2_gothic);
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            label_one_device.setBackgroundResource(R.drawable.background_gothic);
+            bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+        }
+        else if(Design == "Japan" ) {
+            name_player1_one_divice.setTextColor(Color.BLACK)
+            name_player2_one_divice.setTextColor(Color.BLACK)
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            button_player_1_one_divice.setBackgroundResource(R.drawable.tower1_japan);
+            button_player_2_one_divice.setBackgroundResource(R.drawable.tower2_japan);
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            label_one_device.setBackgroundResource(R.drawable.background_japan);
+            bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
         }
@@ -730,7 +762,12 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
         }
         if (Design == "Rome"){
             Line_paint.setColor(rgb(193,150,63))          //ресур для линий (ширина и цвет)
-
+        }
+        if (Design == "Gothic"){
+            Line_paint.setColor(rgb(100,100,100))          //ресур для линий (ширина и цвет)
+        }
+        if (Design == "Japan"){
+            Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
         }
 
 
@@ -745,22 +782,32 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
     var virus1_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.virus1_normal);
     var virus2_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.virus2_normal);
     var tower1_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower1_normal);
-    var tower2_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_normal)
+    var tower2_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_normal);
 
     var virus1_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.virus1_egypt);
     var virus2_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.virus2_egypt);
     var tower1_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower1_egypt);
-    var tower2_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_egypt)
+    var tower2_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_egypt);
 
     var virus1_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.virus1_casino);
     var virus2_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.virus2_casino);
     var tower1_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower1_casino);
-    var tower2_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_casino)
+    var tower2_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_casino);
 
     var virus1_rome: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.virus1_rome);
     var virus2_rome: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.virus2_rome);
     var tower1_rome: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower1_rome);
-    var tower2_rome: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_rome)
+    var tower2_rome: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_rome);
+
+    var virus1_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_gothic);
+    var virus2_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_gothic);
+    var tower1_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower1_gothic);
+    var tower2_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_gothic);
+
+    var virus1_japan: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.virus1_japan);
+    var virus2_japan: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.virus2_japan);
+    var tower1_japan: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower1_japan);
+    var tower2_japan: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_japan);
 
 
     override fun draw(canvas: Canvas?) {
@@ -805,6 +852,20 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
             right_virus2 = Bitmap.createScaledBitmap(virus2_rome,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
             right_tower1 = Bitmap.createScaledBitmap(tower1_rome,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
             right_tower2 = Bitmap.createScaledBitmap(tower2_rome,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+        }
+        else if (Design == "Gothic")
+        {
+            right_virus1 = Bitmap.createScaledBitmap(virus1_gothic,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            right_virus2 = Bitmap.createScaledBitmap(virus2_gothic,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            right_tower1 = Bitmap.createScaledBitmap(tower1_gothic,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            right_tower2 = Bitmap.createScaledBitmap(tower2_gothic,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+        }
+        else if (Design == "Japan")
+        {
+            right_virus1 = Bitmap.createScaledBitmap(virus1_japan,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            right_virus2 = Bitmap.createScaledBitmap(virus2_japan,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            right_tower1 = Bitmap.createScaledBitmap(tower1_japan,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            right_tower2 = Bitmap.createScaledBitmap(tower2_japan,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
         }
 
         var k: Float = height - width  - advertising_line

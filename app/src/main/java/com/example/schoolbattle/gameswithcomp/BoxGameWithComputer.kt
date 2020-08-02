@@ -13,7 +13,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
-import kotlinx.android.synthetic.main.activity_box_game_with_computer.*
+import kotlinx.android.synthetic.main.activity_computer_games_template.*
 
 var BoxMode = 1
 
@@ -93,47 +93,48 @@ class BoxGameWithComputer : AppCompatActivity() {
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_box_game_with_computer)
+        setContentView(R.layout.activity_computer_games_template)
+        signature_canvas_box_with_computer.visibility = (View.VISIBLE)
         signature_canvas_box_with_computer.activity = this
 
         CONTEXT = this
 
         if(Design == "Egypt" ) {
-            name_player1_with_computer_box.setTextColor(Color.BLACK)
-            name_player2_with_computer_box.setTextColor(Color.BLACK)
-            name_player1_with_computer_box.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            name_player2_with_computer_box.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            name_player2_with_computer_box.setTextSize(20f)
-            name_player1_with_computer_box.setTextSize(20f)
-            button_player_1_box_with_computer.setBackgroundResource(R.drawable.player1_egypt);
-            button_player_2_box_with_computer.setBackgroundResource(R.drawable.player2_egypt);
-            player_1_icon_box_with_computer.setBackgroundResource(R.drawable.box2_egypt);
-            player_2_icon_box_with_computer.setBackgroundResource(R.drawable.box1_egypt)
-            toolbar_box_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_box_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
-            label_with_computer_box.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_box_with_computer.setBackgroundColor(Color.rgb(224, 164, 103))
-            to_back_box_with_computer.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_box_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            name_player1_with_computer_template.setTextColor(Color.BLACK)
+            name_player2_with_computer_template.setTextColor(Color.BLACK)
+            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+            name_player2_with_computer_template.setTextSize(20f)
+            name_player1_with_computer_template.setTextSize(20f)
+            button_player_1_template_with_computer.setBackgroundResource(R.drawable.player1_egypt);
+            button_player_2_template_with_computer.setBackgroundResource(R.drawable.player2_egypt);
+            //player_1_icon_template_with_computer.setBackgroundResource(R.drawable.template2_egypt);
+            //player_2_icon_template_with_computer.setBackgroundResource(R.drawable.template1_egypt)
+            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            label_with_computer.setBackgroundResource(R.drawable.background_egypt);
+            bottom_navigation_template_with_computer.setBackgroundColor(Color.rgb(224, 164, 103))
+            to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
         }
         else if(Design == "Casino" ) {
-            name_player1_with_computer_box.setTextColor(Color.YELLOW)
-            name_player2_with_computer_box.setTextColor(Color.YELLOW)
-            name_player1_with_computer_box.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_with_computer_box.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_with_computer_box.setTextSize(20f)
-            name_player1_with_computer_box.setTextSize(20f)
-            button_player_1_box_with_computer.setBackgroundResource(R.drawable.tower1_casino);
-            button_player_2_box_with_computer.setBackgroundResource(R.drawable.tower2_casino);
-            toolbar_box_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_box_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
-            label_with_computer_box.setBackgroundResource(R.drawable.background_casino);
-            bottom_navigation_box_with_computer.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_box_with_computer.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_box_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            name_player1_with_computer_template.setTextColor(Color.YELLOW)
+            name_player2_with_computer_template.setTextColor(Color.YELLOW)
+            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_with_computer_template.setTextSize(20f)
+            name_player1_with_computer_template.setTextSize(20f)
+            button_player_1_template_with_computer.setBackgroundResource(R.drawable.tower1_casino);
+            button_player_2_template_with_computer.setBackgroundResource(R.drawable.tower2_casino);
+            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            label_with_computer.setBackgroundResource(R.drawable.background_casino);
+            bottom_navigation_template_with_computer.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
         }
 
-        to_back_box_with_computer.setOnClickListener {
+        to_back_template_with_computer.setOnClickListener {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 2)
@@ -227,7 +228,7 @@ class BoxGameWithComputer : AppCompatActivity() {
         }
 
 
-        bottom_navigation_box_with_computer.setOnNavigationItemSelectedListener { item ->
+        bottom_navigation_template_with_computer.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
                     dialog_rules =

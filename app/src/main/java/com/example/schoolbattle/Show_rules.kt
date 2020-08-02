@@ -3,6 +3,7 @@ package com.example.schoolbattle
 import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
@@ -71,14 +72,30 @@ class Show_rules(activity: Activity) {
         if (Design == "Egypt"){
             dialog_one_device.rules.setBackgroundResource(R.drawable.background_egypt);
             button_close.setBackgroundResource(R.drawable.close_cross)
+            dialog_one_device.text_rules.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
         }
         else if (Design == "Casino"){
             dialog_one_device.rules.setBackgroundResource(R.drawable.background2_casino);
             button_close.setBackgroundResource(R.drawable.close_cross)
+            dialog_one_device.text_rules.setTextColor(Color.YELLOW)
+            dialog_one_device.text_rules.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
         }
         else if (Design == "Rome"){
             dialog_one_device.rules.setBackgroundResource(R.drawable.background_rome);
             button_close.setBackgroundResource(R.drawable.close_cross)
+            dialog_one_device.text_rules.setTextColor(Color.rgb(193, 150, 63))
+            dialog_one_device.text_rules.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+        }
+        else if (Design == "Gothic"){
+            dialog_one_device.rules.setBackgroundResource(R.drawable.background_gothic);
+            button_close.setBackgroundResource(R.drawable.close_cross)
+            dialog_one_device.text_rules.setTextColor(Color.WHITE)
+            dialog_one_device.text_rules.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+        }
+        else if (Design == "Japan"){
+            dialog_one_device.rules.setBackgroundResource(R.drawable.background_japan);
+            button_close.setBackgroundResource(R.drawable.close_cross)
+            dialog_one_device.text_rules.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
         }
 
         button_close.setOnClickListener {

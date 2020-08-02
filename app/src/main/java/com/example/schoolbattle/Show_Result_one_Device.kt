@@ -85,7 +85,7 @@ class Show_Result_one_Device(activity: Activity) {
 
         if (Design == "Egypt"){
             dialog_one_device.linearLayout_one_device.setBackgroundResource(R.drawable.win_egypt);
-            dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             //dialog_one_device.resultText_one_device.setTextColor(Color.WHITE)
             button_close.setBackgroundResource(R.drawable.close_cross)
         }
