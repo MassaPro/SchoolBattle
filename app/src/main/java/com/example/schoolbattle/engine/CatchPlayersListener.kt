@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.widget.Toast
 import com.example.schoolbattle.gamesonline.DotGameActivity
+import com.example.schoolbattle.gamesonline.SnakeGameActivity
 import com.example.schoolbattle.gamesonline.TEST
 import com.example.schoolbattle.gamesonline.XOGameActivity
 import com.example.schoolbattle.myRef
@@ -19,6 +20,8 @@ fun initCatchPlayersListenerForBlitzGame(username: String, context: Context) {
                 Intent(context, XOGameActivity::class.java)
             } else if (p0.key.toString() == "DotGame") {
                 Intent(context, DotGameActivity::class.java)
+            } else if (p0.key.toString() == "SnakeGame") {
+                Intent(context, SnakeGameActivity::class.java)
             } else {
                 Intent(context, TEST::class.java)
             }

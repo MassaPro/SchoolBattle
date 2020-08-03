@@ -33,7 +33,7 @@ import java.util.*
 
 var Vidos : RewardedVideoAd? = null
 lateinit var mRewardedVideoAd: RewardedVideoAd
-class Specially : Fragment(){
+class Specially : Fragment(), RewardedVideoAdListener {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -119,11 +119,6 @@ class Specially : Fragment(){
         MONEY += 10
         locale_context?.findViewById<TextView>(R.id.money_shop_toolbar)?.text = MONEY.toString()
     }
-
-
-}
-
-
 
 
 }

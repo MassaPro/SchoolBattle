@@ -38,11 +38,11 @@ interface BlitzGameEngine {
                     }
                     userT.text = cntUser.toString()
                     opponentT.text = cntOpponent.toString()
-                    if (cntUser >= 300L) {
+                    if (cntUser >= 500L) {
                         positionData.child("winner").setValue(opponent)
                         this.cancel()
                     }
-                    if (cntOpponent >= 300L) {
+                    if (cntOpponent >= 500L) {
                         positionData.child("winner").setValue(user)
                         this.cancel()
                     }

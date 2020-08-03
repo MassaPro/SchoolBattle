@@ -11,7 +11,9 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
 import com.example.schoolbattle.*
+import com.example.schoolbattle.engine.BlitzGameEngine
 import com.example.schoolbattle.engine.ShowResult
 import com.example.schoolbattle.engine.StupidGame
 import com.google.firebase.database.DataSnapshot
@@ -19,10 +21,16 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_snake_game.*
+import kotlinx.android.synthetic.main.activity_x_o_game.*
+import java.util.*
 
 class SnakeGameActivity : AppCompatActivity() {
     private var isRun = false
-    private var dialog: ShowResult? = null
+    private var engine: BlitzGameEngine? = null
+    var yourName = ""
+    var opponentsName = ""
+    var type = ""
+    lateinit var gameData: DatabaseReference
 
     override fun onResume() {
         super.onResume()
@@ -33,7 +41,8 @@ class SnakeGameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
-        setContentView(R.layout.activity_snake_game)
+        setContentView(R.layout.activity_online_games_temlate)
+        signature_canvas_snake_online.visibility = View.VISIBLE
 
         currentContext = this
         CONTEXT = this
@@ -41,16 +50,12 @@ class SnakeGameActivity : AppCompatActivity() {
 
         if (StupidGame != Activity()) StupidGame.finish()
         if (NewGame != Activity()) NewGame.finish()
-        val yourName =
+        yourName =
             getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "")
                 .toString()
-        var opponentsName_: String = intent?.getStringExtra("opponentName").toString()
-        val type = intent.getStringExtra("type")
-        if (type != "") {
-            TODO()
-            //ALF CODE HERE
-        }
-        var opponentsName = ""
+        val opponentsName_: String = intent?.getStringExtra("opponent").toString()
+        type = intent.getStringExtra("type")!!
+        opponentsName = ""
         for (i in opponentsName_) {
             if (i == ' ') break
             opponentsName += i
@@ -61,15 +66,39 @@ class SnakeGameActivity : AppCompatActivity() {
         //      youName.text = yourName
         //    opponentName.text = opponentsName
 
-        val gameData = myRef.child(type + "SnakeGames").child(
+        gameData = myRef.child(type).child("SnakeGame").child(
             if (opponentsName < yourName)
                 opponentsName + '_' + yourName else yourName + '_' + opponentsName
         )
+        signature_canvas_snake_online.isFirstMove = intent.getStringExtra("move") == "1"
+        button_player_1_online_xog.text = yourName
+        button_player_2_online_xog.text = opponentsName
+        signature_canvas_snake_online.username = yourName
         signature_canvas_snake_online.blocked = true
         signature_canvas_snake_online.positionData = gameData
-        
-        button_player_1_online_snake.text = yourName
-        button_player_2_online_snake.text = opponentsName
+
+        if (type == "blitz") {
+            engine = object : BlitzGameEngine {
+                override var timer = Timer(true)
+                override var cntUser = 0
+                override var cntOpponent = 0
+                override val userT = timer2_xog_online
+                override val opponentT = timer_xog_online
+                override val user = yourName
+                override val opponent = opponentsName
+                override var move = intent.getStringExtra("move") == "1"
+                override var positionData = gameData
+                override var activity: Activity = this@SnakeGameActivity
+                override var cnt = 0
+                override var type = "SnakeGame"
+                override var isFinished = false
+            }
+            engine?.init()
+            signature_canvas_snake_online.engine = engine
+        }
+
+        //button_player_1_online_snake.text = yourName
+        //button_player_2_online_snake.text = opponentsName
         if(Design == "Egypt" ) {
             button_player_1_online_snake.setTextColor(Color.BLACK)
             button_player_2_online_snake.setTextColor(Color.BLACK)
@@ -94,15 +123,23 @@ class SnakeGameActivity : AppCompatActivity() {
             override fun onCancelled(p0: DatabaseError) {}
 
             override fun onDataChange(p0: DataSnapshot) {
+                signature_canvas_snake_online.blocked = true
+                if (p0.childrenCount >= 2) {
+                    engine?.changeMoveAndSyncTimer(p0)
+                }
+                Log.w("LLLLL", "JOP")
+                var count = 0
                 for (i in 0..signature_canvas_snake_online.FIELD.size - 1) {
                     for (j in 0..signature_canvas_snake_online.FIELD[i].size - 1) {
                         if (p0.child("FIELD").child("$i").hasChild("$j")) {
                             signature_canvas_snake_online.FIELD[i][j] =
                                 p0.child("FIELD").child("$i").child("$j").value.toString().toInt()
+                            count++
                         }
                     }
                 }
                 var cnt = 0
+
                 for (i in p0.child("Snake_1").children) {
                     Log.w("SSSS", Pair(i.child("first").value.toString(),
                         i.child("second").value.toString()).toString())
@@ -124,33 +161,37 @@ class SnakeGameActivity : AppCompatActivity() {
                     }
                     cnt++
                 }
-
-                signature_canvas_snake_online.red_or_blue = if (p0.hasChild("red_or_blue")) p0.child("red_or_blue").value.toString() else "red"
+                if (p0.hasChild("red_or_blue")) {
+                    signature_canvas_snake_online.red_or_blue = p0.child("red_or_blue").value.toString()
+                }
+                if (signature_canvas_snake_online.isFirstMove == (signature_canvas_snake_online.red_or_blue == "red")) {
+                    signature_canvas_snake_online.blocked = false
+                }
+                //if (signature_canvas_snake_online.red_or_blue == "red" && signature_canvas_snake_online.isFirstMove ||
+                  //  signature_canvas_snake_online.red_or_blue == "blue" && !signature_canvas_snake_online.isFirstMove) {
+                    //signature_canvas_snake_online.blocked = false
+                //}
+                Log.w("red_or_blue", signature_canvas_snake_online.red_or_blue)
                 signature_canvas_snake_online.invalidate()
-                if ((signature_canvas_snake_online.red_or_blue == "red") == (p0.child("Move").toString().toBoolean() == (yu == '0'))) signature_canvas_snake_online.blocked = false
+
                 val ch = signature_canvas_snake_online.check_win()
-                if (ch != 0) {
+                if (ch != -1 && ch != 0 || p0.hasChild("winner")) {
+                    engine?.stopTimer()
                     signature_canvas_snake_online.blocked = true
-                    val res = if (ch == 2 && yu == '0' || ch == 1 && yu == '1') {
+                    var res = if (ch == 2 && yu == '0' || ch == 1 && yu == '1') {
                         "Победа"
                     } else if (ch == 2 && yu == '1' || ch == 1 && yu == '0') {
                         "Поражение"
                     } else {
                         "Ничья"
                     }
-
-
-                    myRef.child(type + "SnakeGames").child(if (opponentsName < yourName)
-                        opponentsName + '_' + yourName else yourName + '_' + opponentsName
-                    ).removeValue()
-
-                    myRef.child("Users").child(yourName).child(type + "Games").child("$opponentsName SnakeGame").removeValue()
-                    myRef.child("Users").child(opponentsName).child(type + "Games").child("$yourName SnakeGame").removeValue()
-                    dialog =
-                        ShowResult(this@SnakeGameActivity)
-                    if (isRun) {
-                        dialog?.showResult(res, "SnakeGame", yourName, opponentsName)
+                    if (p0.child("winner").value.toString() == yourName) {
+                        res = "Победа"
                     }
+                    if (p0.child("winner").value.toString() == opponentsName) {
+                        res = "Поражение"
+                    }
+                    engine?.finish(res, this@SnakeGameActivity, isRun)
                     gameData.removeEventListener(this)
                 }
             }
@@ -161,15 +202,10 @@ class SnakeGameActivity : AppCompatActivity() {
         super.onPause()
         isRun = false
         currentContext = null
-        if (dialog != null) {
-            dialog?.delete()
-            finish()
-        } else {
-            Log.w("HHH", "NONULL")
-        }
+        engine?.finish("Поражение", this@SnakeGameActivity, isRun)
+        finish()
     }
 }
-
 
 class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(context, attrs) {
     fun encode(h: MutableList<Triple<Int,Int,Int>>):String
@@ -247,7 +283,34 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
         {
             var X : Int = Snake_1.last().first
             var Y: Int = Snake_1.last().second
-
+            if(X == 0)
+            {
+                if(FIELD[10][Y] == 0)
+                {
+                    return 0
+                }
+            }
+            if(Y == 0)
+            {
+                if(FIELD[X][10] == 0)
+                {
+                    return 0
+                }
+            }
+            if(X == 10)
+            {
+                if(FIELD[0][Y] == 0)
+                {
+                    return 0
+                }
+            }
+            if(Y == 10)
+            {
+                if(FIELD[X][0] == 0)
+                {
+                    return 0
+                }
+            }
             if(X>0)
             {
                 if(FIELD[X-1][Y] == 0)
@@ -256,7 +319,7 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
                 }
             }
 
-            if(X<8)
+            if(X<10)
             {
                 if(FIELD[X+1][Y] == 0)
                 {
@@ -270,7 +333,7 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
                     return 0
                 }
             }
-            if(Y<8)
+            if(Y<10)
             {
                 if(FIELD[X][Y+1] == 0)
                 {
@@ -284,6 +347,34 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
             var X : Int = Snake_2.last().first
             var Y: Int = Snake_2.last().second
 
+            if(X == 0)
+            {
+                if(FIELD[10][Y] == 0)
+                {
+                    return 0
+                }
+            }
+            if(Y == 0)
+            {
+                if(FIELD[X][10] == 0)
+                {
+                    return 0
+                }
+            }
+            if(X == 10)
+            {
+                if(FIELD[0][Y] == 0)
+                {
+                    return 0
+                }
+            }
+            if(Y == 10)
+            {
+                if(FIELD[X][0] == 0)
+                {
+                    return 0
+                }
+            }
             if(X>0)
             {
                 if(FIELD[X-1][Y] == 0)
@@ -292,7 +383,7 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
                 }
             }
 
-            if(X<8)
+            if(X<10)
             {
                 if(FIELD[X+1][Y] == 0)
                 {
@@ -306,7 +397,7 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
                     return 0
                 }
             }
-            if(Y<8)
+            if(Y<10)
             {
                 if(FIELD[X][Y+1] == 0)
                 {
@@ -315,11 +406,13 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
             }
             return 1
         }
-        return 0
+        return -1
     }
 
     lateinit var activity: Activity
 
+    var isFirstMove = false
+    var username = ""
     var History: MutableList<Triple<Int,Int,Int>> = mutableListOf()
     var Snake_1: MutableList<Pair<Int,Int>>  =  mutableListOf()
     var Snake_2: MutableList<Pair<Int,Int>>  =  mutableListOf()         //векторы координат путей
@@ -337,7 +430,9 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
     var border_1: Paint = Paint()
     var border_2: Paint = Paint()
 
-    var FIELD = Array(9){IntArray(9)}     //для фишеК
+    var engine: BlitzGameEngine? = null
+
+    var FIELD = Array(11){IntArray(11)}     //для фишеК
     var A: MutableList<Pair<Int,Int>> = mutableListOf()
     var TREE_OF_WAYS: MutableList<MutableList<Pair<Int,Int>>> = mutableListOf()
     var CELLS = Array(10){Array(15){IntArray(6)} }            //массив клеток в которых мы будем проводить ребра
@@ -351,11 +446,7 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
     var size_field_y  : Int = 0
     var step : Float = 0f
     var k : Float = 0f
-
-
-
     lateinit var positionData: DatabaseReference
-
 
 
     init{
@@ -375,6 +466,79 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
         border_1.setStrokeWidth(10f)
         border_2.setColor(Color.GRAY)
         border_2.setStrokeWidth(20f)
+
+        if(Design == "Egypt"){
+
+            Line_paint.setColor(Color.rgb(100, 100, 100))          //ресур для линий (ширина и цвет)
+            Line_paint.setStrokeWidth(5f)
+
+            paint_circle.setColor(Color.rgb(100, 100, 100))     //цвета для точек
+
+            paint_rib_1.setColor(Color.BLACK)          //цвета для ребер  и их ширина
+            paint_rib_1.setStrokeWidth(10f)
+            paint_rib_2.setColor(Color.WHITE)
+            paint_rib_2.setStrokeWidth(10f)
+
+            border_1.setColor(Color.rgb(100, 100, 100))
+            border_1.setStrokeWidth(10f)
+        }
+        else if(Design == "Casino"){
+
+            Line_paint.setColor(Color.WHITE)          //ресур для линий (ширина и цвет)
+            Line_paint.setStrokeWidth(5f)
+
+            paint_circle.setColor(Color.WHITE)     //цвета для точек
+
+            paint_rib_1.setColor(Color.BLACK)          //цвета для ребер  и их ширина
+            paint_rib_1.setStrokeWidth(10f)
+            paint_rib_2.setColor(Color.RED)
+            paint_rib_2.setStrokeWidth(10f)
+
+            border_1.setColor(Color.WHITE)
+            border_1.setStrokeWidth(10f)
+        }
+
+        else if(Design == "Rome"){
+
+            Line_paint.setColor(Color.rgb(180, 180, 180))          //ресур для линий (ширина и цвет)
+            Line_paint.setStrokeWidth(5f)
+
+            paint_circle.setColor(Color.rgb(180, 180, 180))     //цвета для точек
+
+            paint_rib_2.setColor(Color.BLACK)          //цвета для ребер  и их ширина
+            paint_rib_1.setStrokeWidth(10f)
+            paint_rib_1.setColor(Color.rgb(193,150,63))
+            paint_rib_2.setStrokeWidth(10f)
+
+            border_1.setColor(Color.rgb(180, 180, 180))
+            border_1.setStrokeWidth(10f)
+        }
+        else if(Design == "Gothic") {
+
+            Line_paint.setColor(Color.rgb(100, 100, 100))          //ресур для линий (ширина и цвет)
+            Line_paint.setStrokeWidth(5f)
+
+            paint_circle.setColor(Color.rgb(180, 180, 180))     //цвета для точек
+
+            paint_rib_2.setColor(Color.WHITE)          //цвета для ребер  и их ширина
+            paint_rib_1.setStrokeWidth(10f)
+            paint_rib_1.setColor(Color.YELLOW)
+            paint_rib_2.setStrokeWidth(10f)
+
+        }
+        else if(Design == "Japan") {
+
+            Line_paint.setColor(Color.rgb(160,160,160))          //ресур для линий (ширина и цвет)
+            Line_paint.setStrokeWidth(5f)
+
+            paint_circle.setColor(Color.rgb(160,160,160))     //цвета для точек
+
+            paint_rib_2.setColor(Color.RED)          //цвета для ребер  и их ширина
+            paint_rib_1.setStrokeWidth(10f)
+            paint_rib_1.setColor(Color.rgb(37,103,28))
+            paint_rib_2.setStrokeWidth(10f)
+
+        }
 
         for(i in 0 until FIELD.size)
         {
@@ -418,116 +582,120 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
 
         for(i in 0 until size_field_y+1)          //вырисовка горизонтальных линий
         {
-            if(i == 0 || i == size_field_y)
-            {
-                canvas?.drawLine(indent,k,width+indent,k,border_1)
-            }
-            else
-            {
-                canvas?.drawLine(indent,k,width+indent,k,Line_paint)
-            }
+
+            canvas?.drawLine(indent,k,width+indent,k,Line_paint)
             k = k + step
         }
 
         k = indent
         for(i in 0 until size_field_x+1)         //вырисовка вертикальных линий
         {
-            if(i == 0 ||  i == size_field_x)
-            {
-                canvas?.drawLine(k, height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())+ 5f,k,height-advertising_line-5f,border_1)
-            }
-            else
-            {
-                canvas?.drawLine(k, height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())+ 5f,k,height-advertising_line-5f,Line_paint)
-            }
 
+            canvas?.drawLine(k, height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())+ 5f,k,height-advertising_line-5f,Line_paint)
             k = k + step
         }
 
         var x: Float;
         var y: Float
-        x = indent + step
-        y = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat()) + step
-        for(i in 0..size_field_x-2)                    //вырисовка точек
+        x = indent
+        y = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())
+        for(i in 0..size_field_x)                    //вырисовка точек
         {
-            for(j in 0..size_field_y-2)
+            for(j in 0..size_field_y)
             {
                 canvas?.drawCircle(x,y,radius_of_point,paint_circle)
                 y += step
             }
             x += step
-            y  = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat()) + step
+            y  = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())
         }
 
         for(i in 0 until Snake_1.size - 1)     //вырисовка ребер змеи
         {
-            var X: Float = indent + step*Snake_1[i].first + step
-            var Y: Float =  height - advertising_line - width + step*Snake_1[i].second + step
-            var X1: Float = indent + step*Snake_1[i+1].first + step
-            var Y1: Float =  height - advertising_line - width + step*Snake_1[i+1].second + step
-            canvas?.drawLine(X,Y,X1,Y1,paint_rib_1)
-
+            var X: Float = indent + step*Snake_1[i].first
+            var Y: Float =  height - advertising_line - width + step*Snake_1[i].second
+            var X1: Float = indent + step*Snake_1[i+1].first
+            var Y1: Float =  height - advertising_line - width + step*Snake_1[i+1].second
+            if(Math.abs(Snake_1[i].first - Snake_1[i + 1].first) + Math.abs(Snake_1[i].second - Snake_1[i + 1].second) <= 2)
+            {
+                canvas?.drawLine(X,Y,X1,Y1,paint_rib_1)
+            }
 
             if(Snake_1[i].second == Snake_1[i+1].second &&Snake_1[i].first < Snake_1[i+1].first )
             {
-                canvas?.drawLine(X-5,Y,X1+5,Y1,paint_rib_1)
+                if(Math.abs(Snake_1[i].first - Snake_1[i + 1].first) + Math.abs(Snake_1[i].second - Snake_1[i + 1].second) <= 2)
+                {
+                    canvas?.drawLine(X - 5, Y, X1 + 5, Y1, paint_rib_1)
+                }
             }
             if(Snake_1[i].second == Snake_1[i+1].second &&Snake_1[i].first > Snake_1[i+1].first )
             {
-                canvas?.drawLine(X+5,Y,X1-5,Y1,paint_rib_1)
+                if(Math.abs(Snake_1[i].first - Snake_1[i + 1].first) + Math.abs(Snake_1[i].second - Snake_1[i + 1].second) <= 2)
+                {
+                    canvas?.drawLine(X+5,Y,X1-5,Y1,paint_rib_1)
+                }
             }
         }
         for(i in 0 until Snake_2.size - 1)      //вырисовка ребер змеи
         {
-            var X: Float = indent + step*Snake_2[i].first + step
-            var Y: Float =  height - advertising_line - width + step*Snake_2[i].second + step
-            var X1: Float = indent + step*Snake_2[i+1].first + step
-            var Y1: Float =  height - advertising_line - width + step*Snake_2[i+1].second + step
-            canvas?.drawLine(X,Y,X1,Y1,paint_rib_2)
+            var X: Float = indent + step*Snake_2[i].first
+            var Y: Float =  height - advertising_line - width + step*Snake_2[i].second
+            var X1: Float = indent + step*Snake_2[i+1].first
+            var Y1: Float =  height - advertising_line - width + step*Snake_2[i+1].second
+            if(Math.abs(Snake_2[i].first - Snake_2[i + 1].first) + Math.abs(Snake_2[i].second - Snake_2[i + 1].second) <= 2)
+            {
+                canvas?.drawLine(X,Y,X1,Y1,paint_rib_2)
+            }
             if(Snake_2[i].second == Snake_2[i+1].second &&Snake_2[i].first < Snake_2[i+1].first )
             {
-                canvas?.drawLine(X-5,Y,X1+5,Y1,paint_rib_2)
+                if(Math.abs(Snake_2[i].first - Snake_2[i + 1].first) + Math.abs(Snake_2[i].second - Snake_2[i + 1].second) <= 2)
+                {
+                    canvas?.drawLine(X - 5, Y, X1 + 5, Y1, paint_rib_2)
+                }
             }
             if(Snake_2[i].second == Snake_2[i+1].second &&Snake_2[i].first > Snake_2[i+1].first )
             {
-                canvas?.drawLine(X+5,Y,X1-5,Y1,paint_rib_2)
+                if(Math.abs(Snake_2[i].first - Snake_2[i + 1].first) + Math.abs(Snake_2[i].second - Snake_2[i + 1].second) <= 2)
+                {
+                    canvas?.drawLine(X+5,Y,X1-5,Y1,paint_rib_2)
+                }
             }
         }
 
         if(Snake_1.size>0)
         {
-            var X: Float = indent + step * Snake_1[0].first + step - step / 5f
-            var X1: Float = indent + step * Snake_1[0].first + step + step / 5f
+            var X: Float = indent + step * Snake_1[0].first  - step / 5f
+            var X1: Float = indent + step * Snake_1[0].first  + step / 5f
             var Y: Float =
-                height - advertising_line - width + step * Snake_1[0].second + step - step / 5f
+                height - advertising_line - width + step * Snake_1[0].second  - step / 5f
             var Y1: Float =
-                height - advertising_line - width + step * Snake_1[0].second + step + step / 5f
+                height - advertising_line - width + step * Snake_1[0].second  + step / 5f
             canvas?.drawLine(X, Y, X1, Y1, paint_rib_1)
             canvas?.drawLine(X, Y1, X1, Y, paint_rib_1)
         }
 
         if(Snake_2.size>0)
         {
-            var _X: Float = indent + step * Snake_2[0].first + step - step / 5f
-            var _X1: Float = indent + step * Snake_2[0].first + step + step / 5f
+            var _X: Float = indent + step * Snake_2[0].first - step / 5f
+            var _X1: Float = indent + step * Snake_2[0].first + step / 5f
             var _Y: Float =
-                height - advertising_line - width + step * Snake_2[0].second + step - step / 5f
+                height - advertising_line - width + step * Snake_2[0].second  - step / 5f
             var _Y1: Float =
-                height - advertising_line - width + step * Snake_2[0].second + step + step / 5f
+                height - advertising_line - width + step * Snake_2[0].second  + step / 5f
             canvas?.drawLine(_X, _Y, _X1, _Y1, paint_rib_2)
             canvas?.drawLine(_X, _Y1, _X1, _Y, paint_rib_2)
         }
 
         if(Snake_1.size > 1)
         {
-            var X: Float = indent + step*Snake_1.last().first + step
-            var Y: Float = height - width - advertising_line + step*Snake_1.last().second + step
+            var X: Float = indent + step*Snake_1.last().first
+            var Y: Float = height - width - advertising_line + step*Snake_1.last().second
             canvas?.drawCircle(X,Y,radius_of_point*2,paint_rib_1)
         }
         if(Snake_2.size > 1)
         {
-            var X: Float = indent + step*Snake_2.last().first + step
-            var Y: Float = height - width - advertising_line + step*Snake_2.last().second + step
+            var X: Float = indent + step*Snake_2.last().first
+            var Y: Float = height - width - advertising_line + step*Snake_2.last().second
             canvas?.drawCircle(X,Y,radius_of_point*2,paint_rib_2)
         }
 
@@ -537,25 +705,23 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
 
     var blocked : Boolean = true
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-
         if (blocked) {
             return true
         }
-
         indent = 20f //оступ, чтобы можно было тыкнуть в границу
         advertising_line =  (height - 10*step)/2
         circlex = event!!.x
         circley = event!!.y
 
-        x = indent + step
-        y = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat()) + step
-        for(i in 0..size_field_x - 2)
+        x = indent
+        y = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())
+        val upd = mutableMapOf<String, Any>()
+        for(i in 0..size_field_x)
         {
-            for(j in 0..size_field_y - 2)
+            for(j in 0..size_field_y)
             {
                 if(correction_touch(x,y))
                 {
-                    //blocked = true
                     if(FIELD[i][j] == 0)
                     {
                         if(red_or_blue == "red")
@@ -565,31 +731,44 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
                                 Snake_1.add(Pair(i,j))
                                 FIELD[i][j] = 1
                                 red_or_blue = "blue"
-                                blocked = true
-                                positionData.child("red_or_blue").setValue(red_or_blue)
-                                positionData.child("FIELD").child("$i").child("$j").setValue(FIELD[i][j])
-                                positionData.child("Snake_1").child((Snake_1.size - 1).toString()).child("first").setValue(Snake_1.last().first.toString())
-                                positionData.child("Snake_1").child((Snake_1.size - 1).toString()).child("second").setValue(Snake_1.last().second.toString())
-
+                                upd["red_or_blue"] = red_or_blue
+                                upd["FIELD/$i/$j"] = FIELD[i][j]
+                                upd["Snake_1/" + (Snake_1.size - 1) + "/first"] = Snake_1.last().first
+                                upd["Snake_1/" + (Snake_1.size - 1) + "/second"] = Snake_1.last().second
+                                if(SOUND)
+                                {
+                                    mSound.play(1,1F,1F,1,0,1F)
+                                }
+                                if(VIBRATION)
+                                {
+                                    vibratorService?.vibrate(70)
+                                }
+                                invalidate()
                             }
                             else
                             {
-                                if((i == Snake_1.last().first && Math.abs(j - Snake_1.last().second) == 1) || (j == Snake_1.last().second && Math.abs(
+                                if((i == Snake_1.last().first && Math.abs(j - Snake_1.last().second) %9 == 1) || (j == Snake_1.last().second && Math.abs(
                                         i - Snake_1.last().first
-                                    ) == 1))
+                                    ) %9 == 1))
                                 {
                                     Snake_1.add(Pair(i,j))
                                     FIELD[i][j] = 1
                                     red_or_blue = "blue"
-                                    blocked = true
-                                    positionData.child("red_or_blue").setValue(red_or_blue)
-                                    positionData.child("FIELD").child("$i").child("$j").setValue(FIELD[i][j])
-                                    positionData.child("Snake_1").child((Snake_1.size - 1).toString()).child("first").setValue(Snake_1.last().first.toString())
-                                    positionData.child("Snake_1").child((Snake_1.size - 1).toString()).child("second").setValue(Snake_1.last().second.toString())
-
+                                    upd["red_or_blue"] = red_or_blue
+                                    upd["FIELD/$i/$j"] = FIELD[i][j]
+                                    upd["Snake_1/" + (Snake_1.size - 1) + "/first"] = Snake_1.last().first
+                                    upd["Snake_1/" + (Snake_1.size - 1) + "/second"] = Snake_1.last().second
+                                    if(SOUND)
+                                    {
+                                        mSound.play(1,1F,1F,1,0,1F)
+                                    }
+                                    if(VIBRATION)
+                                    {
+                                        vibratorService?.vibrate(70)
+                                    }
+                                    invalidate()
                                 }
                             }
-
                         }
                         else
                         {
@@ -598,27 +777,44 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
                                 Snake_2.add(Pair(i,j))
                                 FIELD[i][j] = 2
                                 red_or_blue = "red"
-                                blocked = true
-                                positionData.child("red_or_blue").setValue(red_or_blue)
-                                positionData.child("FIELD").child("$i").child("$j").setValue(FIELD[i][j])
-                                positionData.child("Snake_2").child((Snake_2.size - 1).toString()).child("first").setValue(Snake_2.last().first.toString())
-                                positionData.child("Snake_2").child((Snake_2.size - 1).toString()).child("second").setValue(Snake_2.last().second.toString())
+                                upd["red_or_blue"] = red_or_blue
+                                upd["FIELD/$i/$j"] = FIELD[i][j]
+                                upd["Snake_2/" + (Snake_2.size - 1) + "/first"] = Snake_2.last().first
+                                upd["Snake_2/" + (Snake_2.size - 1) + "/second"] = Snake_2.last().second
+
+                                if(SOUND)
+                                {
+                                    mSound.play(1,1F,1F,1,0,1F)
+                                }
+                                if(VIBRATION)
+                                {
+                                    vibratorService?.vibrate(70)
+                                }
+                                invalidate()
                             }
                             else
                             {
-                                if((i == Snake_2.last().first && Math.abs(j - Snake_2.last().second) == 1) || (j == Snake_2.last().second && Math.abs(
+                                if((i == Snake_2.last().first && Math.abs(j - Snake_2.last().second) %9 == 1) || (j == Snake_2.last().second && Math.abs(
                                         i - Snake_2.last().first
-                                    ) == 1))
+                                    ) %9 == 1))
                                 {
                                     Snake_2.add(Pair(i,j))
                                     FIELD[i][j] = 2
                                     red_or_blue = "red"
-                                    blocked = true
-                                    positionData.child("red_or_blue").setValue(red_or_blue)
-                                    positionData.child("FIELD").child("$i").child("$j").setValue(FIELD[i][j])
-                                    positionData.child("Snake_2").child((Snake_2.size - 1).toString()).child("first").setValue(Snake_2.last().first.toString())
-                                    positionData.child("Snake_2").child((Snake_2.size - 1).toString()).child("second").setValue(Snake_2.last().second.toString())
+                                    upd["red_or_blue"] = red_or_blue
+                                    upd["FIELD/$i/$j"] = FIELD[i][j]
+                                    upd["Snake_2/" + (Snake_2.size - 1) + "/first"] = Snake_2.last().first
+                                    upd["Snake_2/" + (Snake_2.size - 1) + "/second"] = Snake_2.last().second
 
+                                    if(SOUND)
+                                    {
+                                        mSound.play(1,1F,1F,1,0,1F)
+                                    }
+                                    if(VIBRATION)
+                                    {
+                                        vibratorService?.vibrate(70)
+                                    }
+                                    invalidate()
                                 }
                             }
                         }
@@ -627,11 +823,16 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
                 y += step
             }
             x  += step
-            y = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat()) + step
+            y = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())
         }
         x = 0f
         y = 0f
-        invalidate()
+        if (upd.isNotEmpty()) {
+            upd["time/$username"] = engine?.cntUser.toString()
+            positionData.updateChildren(upd)
+            upd.clear()
+            blocked = true
+        }
         return true
     }
 

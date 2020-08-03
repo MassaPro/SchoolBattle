@@ -7,6 +7,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.Color.rgb
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.Gravity
 import android.view.Window
@@ -22,15 +23,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.schoolbattle.engine.initCatchPlayersListenerForBlitzGame
 import com.example.schoolbattle.engine.updateRecycler
 import com.example.schoolbattle.engine.updateRecyclerBlitz
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_navigator.*
-
-
-var now: Context? = null
-
 import com.example.schoolbattle.shop.locale_context
 import com.example.schoolbattle.shop.mRewardedVideoAd
 import com.google.android.gms.ads.AdRequest
@@ -45,12 +38,9 @@ import kotlinx.android.synthetic.main.activity_navigator.*
 import kotlinx.android.synthetic.main.activity_friends_list.*
 import kotlinx.android.synthetic.main.reward_dialog.*
 
-
 var now: Context? = null
 
 class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
-
-
 
     override fun onResume() {
         super.onResume()
@@ -73,28 +63,6 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
         }
         if (Design == "Japan"){
             nav_view.setBackgroundColor(Color.WHITE)
-        }
-    }
-
-
-
-    override fun onResume() {
-        super.onResume()
-        CONTEXT = this
-        now = this
-        if (Design == "Normal"){
-            nav_view.setBackgroundColor(Color.WHITE);
-        }
-        if (Design == "Egypt"){
-            nav_view.setBackgroundColor(rgb(224, 164, 103));
-        }
-        if (Design == "Casino"){
-            nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
-            //navigation_dashboard.setBackground
-        }
-        if (Design == "Rome"){
-            nav_view.setBackgroundResource(R.drawable.bottom_navigation_rome)
-            //navigation_dashboard.setBackground
         }
     }
 
@@ -135,6 +103,8 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
             updateRecycler(username)
             updateRecyclerBlitz(username)
         }
+
+        initCatchPlayersListenerForBlitzGame(username!!, this)
         myRef.child("Users").child(username.toString()).child("Revanches").addValueEventListener(
             object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
