@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import com.example.schoolbattle.*
+import com.example.schoolbattle.engine.BlitzGameEngine
 import com.example.schoolbattle.engine.ShowResult
 import com.example.schoolbattle.engine.StupidGame
 import com.google.firebase.database.DataSnapshot
@@ -20,11 +21,19 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_box_game.*
+import kotlinx.android.synthetic.main.activity_box_game.signature_canvas_box
+import kotlinx.android.synthetic.main.activity_online_games_temlate.*
+import java.util.*
 
 class BoxGameActivity : AppCompatActivity() {
 
     private var isRun = false
     private var dialog: ShowResult? = null
+    private var opponentsName = ""
+    private  var yourName = ""
+    private lateinit var gameData: DatabaseReference
+    private var engine: BlitzGameEngine? = null
+
 
     override fun onResume() {
         super.onResume()
@@ -40,16 +49,16 @@ class BoxGameActivity : AppCompatActivity() {
         currentContext = this
         isRun = true
         super.onResume()
-        setContentView(R.layout.activity_box_game)
-
+        setContentView(R.layout.activity_online_games_temlate)
+        signature_canvas_box.visibility = View.VISIBLE
 
         if (StupidGame != Activity()) StupidGame.finish()
         if (NewGame != Activity()) NewGame.finish()
-        val yourName =
+        yourName =
             getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "")
                 .toString()
-        var opponentsName_: String = intent?.getStringExtra("opponentName").toString()
-        var opponentsName = ""
+        val opponentsName_: String = intent?.getStringExtra("opponent").toString()
+        opponentsName = ""
         for (i in opponentsName_) {
             if (i == ' ') break
             opponentsName += i
@@ -61,19 +70,36 @@ class BoxGameActivity : AppCompatActivity() {
         //    opponentName.text = opponentsName
 
         val type = intent.getStringExtra("type")
-        if (type != "") {
-            TODO()
-            //ALF CODE HERE
-        }
-        val gameData = myRef.child(type + "BoxGames").child(
+        gameData = myRef.child(type!!).child("BoxGame").child(
             if (opponentsName < yourName)
                 opponentsName + '_' + yourName else yourName + '_' + opponentsName
         )
         signature_canvas_box.positionData = gameData
         signature_canvas_box.blocked = true
+        signature_canvas_box.username = yourName
+        signature_canvas_box.isFirstMove = intent.getStringExtra("move") == "1"
+        button_player_1_online_xog.text = yourName
+        button_player_2_online_xog.text = opponentsName
 
-        button_player_1_online_box.text = yourName
-        button_player_2_online_box.text = opponentsName
+        if (type == "blitz") {
+            engine = object : BlitzGameEngine {
+                override var timer = Timer(true)
+                override var cntUser = 0
+                override var cntOpponent = 0
+                override val userT = timer2_xog_online
+                override val opponentT = timer_xog_online
+                override val user = yourName
+                override val opponent = opponentsName
+                override var move = intent.getStringExtra("move") == "1"
+                override var positionData = gameData
+                override var activity: Activity = this@BoxGameActivity
+                override var cnt = 0
+                override var type = "BoxGame"
+                override var isFinished = false
+            }
+            engine?.init()
+            signature_canvas_box.engine = engine
+        }
 
         if(Design == "Egypt" ) {
             button_player_1_online_box.setTextColor(Color.BLACK)
@@ -102,10 +128,6 @@ class BoxGameActivity : AppCompatActivity() {
 
             override fun onDataChange(p0: DataSnapshot) {
                 signature_canvas_box.blocked = true
-
-
-                signature_canvas_box.red_or_blue = if (p0.hasChild("red_or_blue")) p0.child("red_or_blue").value.toString() else "red"
-                if ((signature_canvas_box.red_or_blue == "red") == (p0.child("Move").toString().toBoolean() == (yu == '0'))) signature_canvas_box.blocked = false
                 for (i in signature_canvas_box.FIELD.indices) {
                     for (j in signature_canvas_box.FIELD[i].indices) {
                         if (p0.child("FIELD").child("$i").hasChild("$j"))
@@ -125,6 +147,16 @@ class BoxGameActivity : AppCompatActivity() {
                     }
                 }
 
+                if (p0.hasChild("red_or_blue")) {
+                    if (signature_canvas_box.doMove || signature_canvas_box.red_or_blue != p0.child("red_or_blue").value.toString()) {
+                        signature_canvas_box.doMove = false
+                        engine?.changeMoveAndSyncTimer(p0)
+                    }
+                    signature_canvas_box.red_or_blue = p0.child("red_or_blue").value.toString()
+                }
+                if (signature_canvas_box.isFirstMove == (signature_canvas_box.red_or_blue == "red")) {
+                    signature_canvas_box.blocked = false
+                }
                 signature_canvas_box.invalidate()
                 fun check_win() : Int
                 {
@@ -165,7 +197,7 @@ class BoxGameActivity : AppCompatActivity() {
                     }
                 }
                 val ch = check_win()
-                if (ch != 0) {
+                if (p0.hasChild("winner") || ch != 0) {
                     signature_canvas_box.blocked = true
                     var res = if (ch == 2 && yu == '0' || ch == 1 && yu == '1') {
                             "Победа"
@@ -174,17 +206,13 @@ class BoxGameActivity : AppCompatActivity() {
                         } else {
                             "Ничья"
                         }
-                    myRef.child(type + "BoxGames").child(if (opponentsName < yourName)
-                        opponentsName + '_' + yourName else yourName + '_' + opponentsName
-                    ).removeValue()
-
-                    myRef.child("Users").child(yourName).child(type + "Games").child("$opponentsName BoxGame").removeValue()
-                    myRef.child("Users").child(opponentsName).child(type + "Games").child("$yourName BoxGame").removeValue()
-                    dialog =
-                        ShowResult(this@BoxGameActivity)
-                    if (isRun) {
-                        dialog?.showResult(res, "BoxGame", yourName, opponentsName)
+                    if (p0.child("winner").value.toString() == yourName) {
+                        res = "Победа"
                     }
+                    if (p0.child("winner").value.toString() == opponentsName) {
+                        res = "Поражение"
+                    }
+                    engine?.finish(res, this@BoxGameActivity, isRun)
                     gameData.removeEventListener(this)
                 }
             }
@@ -195,12 +223,8 @@ class BoxGameActivity : AppCompatActivity() {
         super.onPause()
         isRun = false
         currentContext = null
-        if (dialog != null) {
-            dialog?.delete()
-            finish()
-        } else {
-            Log.w("HHH", "NONULL")
-        }
+        engine?.finish("Поражение", this, isRun)
+        finish()
     }
 }
 
@@ -215,6 +239,10 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
     }
 
     lateinit var positionData: DatabaseReference
+
+    var username = ""
+    var engine: BlitzGameEngine? = null
+    var isFirstMove = false
 
     var lastx: Int = 0
     var lasty: Int = 0
@@ -421,6 +449,8 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
 
     }
 
+    var doMove = false
+
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if (blocked) {
@@ -434,6 +464,9 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
 
         x = indent               //проверка по вертикальным линиям
         y = height - advertising_line - width
+
+        val upd = mutableMapOf<String, Any>()
+
         for(i in 0..7)
         {
             for(j in 0..6)
@@ -445,7 +478,8 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
                         if (correction_touch(x,y+step/2f))
                         {
                             VERTICAL_RIB[i][j] = 1
-                            positionData.child("VERTICAL_RIB").child("$i").child("$j").setValue(VERTICAL_RIB[i][j])
+                            upd["VERTICAL_RIB/$i/$j"] = VERTICAL_RIB[i][j]
+                            //positionData.child("VERTICAL_RIB").child("$i").child("$j").setValue(VERTICAL_RIB[i][j])
                             red_or_blue = "blue"
                             isCorrect = true
                             Log.d("DOPO","ЛОЛ")
@@ -456,7 +490,8 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
                         if (correction_touch(x,y+step/2f))
                         {
                             VERTICAL_RIB[i][j] = 2
-                            positionData.child("VERTICAL_RIB").child("$i").child("$j").setValue(VERTICAL_RIB[i][j])
+                            upd["VERTICAL_RIB/$i/$j"] = VERTICAL_RIB[i][j]
+                            //positionData.child("VERTICAL_RIB").child("$i").child("$j").setValue(VERTICAL_RIB[i][j])
                             red_or_blue = "red"
                             isCorrect = true
                             Log.d("DOPO","ЛОЛ")
@@ -484,7 +519,8 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
                         if (correction_touch(x+step/2f,y))
                         {
                             HORIZONTAL_RIB[i][j] = 1
-                            positionData.child("HORIZONTAL_RIB").child("$i").child("$j").setValue(HORIZONTAL_RIB[i][j])
+                            upd["HORIZONTAL_RIB/$i/$j"] = HORIZONTAL_RIB[i][j]
+                            //positionData.child("HORIZONTAL_RIB").child("$i").child("$j").setValue(HORIZONTAL_RIB[i][j])
                             red_or_blue = "blue"
                             isCorrect = true
                             Log.d("DOPO","ЛОЛ")
@@ -495,7 +531,8 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
                         if (correction_touch(x+step/2f,y))
                         {
                             HORIZONTAL_RIB[i][j] = 2
-                            positionData.child("HORIZONTAL_RIB").child("$i").child("$j").setValue(HORIZONTAL_RIB[i][j])
+                            upd["HORIZONTAL_RIB/$i/$j"] = HORIZONTAL_RIB[i][j]
+                            //positionData.child("HORIZONTAL_RIB").child("$i").child("$j").setValue(HORIZONTAL_RIB[i][j])
                             red_or_blue = "red"
                             isCorrect = true
                             Log.d("DOPO","ЛОЛ")
@@ -507,34 +544,36 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
             x += step
             y  = height - advertising_line - width
         }
-        var flag: Boolean = false
+        var flag = false
+        var bur = true
         for(i in 0..6)
         {
             for(j in 0..6)
             {
                 if(VERTICAL_RIB[i][j]>0 && HORIZONTAL_RIB[i][j]>0 && HORIZONTAL_RIB[i][j+1]>0 && VERTICAL_RIB[i+1][j]>0 && FIELD[i][j]==0) //если образовался квадратик
                 {
-                    if(flag == false)
+                    if(!flag)
                     {
+                        bur = false
                         flag = true
-                        if(red_or_blue == "red")            //снова ходит тот же игрок
+                        red_or_blue = if(red_or_blue == "red")            //снова ходит тот же игрок
                         {
-                            red_or_blue = "blue"
-                        }
-                        else
-                        {
-                            red_or_blue = "red"
+                            "blue"
+                        } else {
+                            "red"
                         }
                     }
                     if(red_or_blue == "red")
                     {
                         FIELD[i][j] = 1
-                        positionData.child("FIELD").child("$i").child("$j").setValue(FIELD[i][j])
+                        upd["FIELD/$i/$j"] = FIELD[i][j]
+                        //positionData.child("FIELD").child("$i").child("$j").setValue(FIELD[i][j])
                     }
                     else
                     {
                         FIELD[i][j] = 2
-                        positionData.child("FIELD").child("$i").child("$j").setValue(FIELD[i][j])
+                        upd["FIELD/$i/$j"] = FIELD[i][j]
+                        //positionData.child("FIELD").child("$i").child("$j").setValue(FIELD[i][j])
                     }
                 }
             }
@@ -543,7 +582,12 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
         y = 0f
         invalidate()
         if (isCorrect) {
-            positionData.child("red_or_blue").setValue(red_or_blue)
+            if (bur) {
+                doMove = true
+            }
+            upd["red_or_blue"] = red_or_blue
+            upd["time/$username"] = engine?.cntUser.toString()
+            positionData.updateChildren(upd)
         }
         return true
     }

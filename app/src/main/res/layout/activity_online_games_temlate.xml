@@ -30,6 +30,20 @@
             android:textColor="#FFFFFF"
             android:visibility="gone" />
 
+        <com.example.schoolbattle.gamesonline.CanvasViewReversi
+            android:id="@+id/signature_canvas_reversi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF"
+            android:visibility="gone" />
+
+        <com.example.schoolbattle.gamesonline.CanvasView_Boxs_online
+            android:id="@+id/signature_canvas_box"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF"
+            android:visibility="gone" />
+
         <com.example.schoolbattle.gamesonline.CanvasView_SNAKE_online
             android:id="@+id/signature_canvas_snake_online"
             android:layout_width="match_parent"

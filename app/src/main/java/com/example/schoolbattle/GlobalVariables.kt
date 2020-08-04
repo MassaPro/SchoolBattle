@@ -72,7 +72,7 @@ var MONEY: Int = 100                  //ДЕНЬГИ
 
 var GAMES: MutableList<Game> = mutableListOf()
 var FRIENDS: MutableList<String> = mutableListOf()
-var CHOOSE_GAMES: MutableList<String> = mutableListOf("StupidGame", "XOGame", "DotGame", "GoGame", "SnakeGame", "BoxGame", "AngleGame","VirusGame","Reversi")
+var CHOOSE_GAMES: MutableList<String> = mutableListOf("XOGame", "DotGame", "SnakeGame", "BoxGame", "AngleGame", "VirusGame","Reversi")
 var currentContext: Context? = null
 lateinit var listener: ChildEventListener
 var recyclerSet: RecyclerSet = RecyclerSet()
@@ -122,8 +122,7 @@ fun generateColorStateList() :ColorStateList
 
         }
         "Egypt" -> {
-
-
+            
         }
         "Casino" -> {
 
