@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.schoolbattle">
+
     <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +14,9 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-8137188857901546~1022017686"/>
+            android:value="ca-app-pub-8137188857901546~1022017686" />
+
+
         <activity android:name=".gamesonline.TEST" />
         <activity android:name=".social.ProfileUserActivity" />
         <activity android:name=".engine.BlitzActivity" />
@@ -44,10 +48,11 @@
         <activity android:name=".engine.StupidGameActivity" />
         <activity android:name=".NewGameActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".NullActivity"
+        <activity
+            android:name=".NullActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

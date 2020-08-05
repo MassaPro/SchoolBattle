@@ -12,9 +12,13 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
+import com.example.schoolbattle.shop.locale_context
+import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
 
@@ -22,6 +26,7 @@ import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
 
 class XOGame_oneDivice : AppCompatActivity() {
+
     fun encode(h: MutableList<Triple<Int,Int,Int>>):String
     {
         var answer: String = ""
@@ -88,6 +93,9 @@ class XOGame_oneDivice : AppCompatActivity() {
     @ExperimentalStdlibApi
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
+
+
+        mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
 
         mSound.load(this, R.raw.xlup, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
@@ -231,7 +239,15 @@ class XOGame_oneDivice : AppCompatActivity() {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 2)
-            startActivity(intent)
+            if(mInterstitialAd_in_offline_games.isLoaded)
+            {
+                Intent_for_offline_games = intent
+                mInterstitialAd_in_offline_games.show()
+            }
+            else
+            {
+                this.startActivity(intent)
+            }
         }
 
         bottom_navigation_one_divice.setOnNavigationItemSelectedListener { item ->
@@ -288,6 +304,24 @@ class XOGame_oneDivice : AppCompatActivity() {
         }
 
 
+    }
+
+    override fun onBackPressed()
+    {
+        super.onBackPressed()
+        this.finish()
+        var intent = Intent(this, NewGameActivity::class.java)
+        intent.putExtra("playType", 2)
+        if(mInterstitialAd_in_offline_games.isLoaded)
+        {
+            Intent_for_offline_games = intent
+            mInterstitialAd_in_offline_games.show()
+        }
+        else
+        {
+            this.startActivity(intent)
+            this.finish()
+        }
     }
 }
 

@@ -14,6 +14,7 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
+import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
 
@@ -87,6 +88,9 @@ class ReversiOneDivice : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_one_device_games_template)
+
+        mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+
         signature_canvas_reversi_one_device.visibility = View.VISIBLE
         signature_canvas_reversi_one_device.activity = this
         CONTEXT = this
@@ -247,7 +251,15 @@ class ReversiOneDivice : AppCompatActivity() {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 2)
-            startActivity(intent)
+            if(mInterstitialAd_in_offline_games.isLoaded)
+            {
+                Intent_for_offline_games = intent
+                mInterstitialAd_in_offline_games.show()
+            }
+            else
+            {
+                this.startActivity(intent)
+            }
         }
 
         bottom_navigation_one_divice.setOnNavigationItemSelectedListener { item ->
@@ -341,6 +353,21 @@ class ReversiOneDivice : AppCompatActivity() {
             true
         }
 
+    }
+    override fun onBackPressed()
+    {
+        super.onBackPressed()
+        var intent = Intent(this, NewGameActivity::class.java)
+        intent.putExtra("playType", 2)
+        if(mInterstitialAd_in_offline_games.isLoaded)
+        {
+            Intent_for_offline_games = intent
+            mInterstitialAd_in_offline_games.show()
+        }
+        else
+        {
+            this.startActivity(intent)
+        }
     }
 
 }

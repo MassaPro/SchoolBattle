@@ -111,7 +111,7 @@ fun DECODE(s : String): MutableList<Int>
 fun generateColorStateList() :ColorStateList
 {
 
-    var checkedColor:Int = rgb(255,255,255) 
+    var checkedColor:Int = rgb(255,255,255)
     var uncheckedColor:Int = rgb(255,148,148)
 
     when (Design) {

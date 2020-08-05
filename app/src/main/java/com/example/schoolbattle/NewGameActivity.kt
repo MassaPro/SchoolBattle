@@ -16,18 +16,27 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolbattle.engine.BlitzActivity
 import com.example.schoolbattle.engine.StupidGameActivity
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
+import kotlinx.android.synthetic.main.activity_game_item.*
 import kotlinx.android.synthetic.main.activity_new_game.*
 import kotlinx.android.synthetic.main.activity_new_game_item.view.*
 
 var NewGame: Activity = Activity()
 
+
 class NewGameActivity : AppCompatActivity() {
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_game)
         CONTEXT = this
+
+
+
 
         if (Design == "Egypt"){
             game_list_menu.setBackgroundResource(R.drawable.background_egypt);
@@ -88,6 +97,7 @@ class NewGameActivity : AppCompatActivity() {
                     }
                     v.context.startActivity(intent)
                     activity.overridePendingTransition(0 , 0)
+
                 }
                 if (type == 3) {
                     val intent = Intent(v.context, PlayWithComputerActivity::class.java).apply {
@@ -158,6 +168,14 @@ class NewGameActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         CONTEXT = this
+    }
+
+    override fun onBackPressed()
+    {
+        super.onBackPressed()
+        var intent = Intent(this,NavigatorActivity::class.java)
+        this.startActivity(intent)
+        this.finish()
     }
 }
 

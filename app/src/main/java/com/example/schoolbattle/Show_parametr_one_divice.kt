@@ -136,7 +136,16 @@ class Show_parametr_one_divice_one_Device(activity: Activity) {
 
         dialog_one_device.parametrs_one_device_configuring.setOnClickListener {
             val intent = Intent(c, NavigatorActivity::class.java)
-            c.startActivity(intent)
+            if(mInterstitialAd_in_offline_games.isLoaded)
+            {
+                Intent_for_offline_games = intent
+                mInterstitialAd_in_offline_games.show()
+            }
+            else
+            {
+                c.startActivity(intent)
+            }
+
         }
         dialog_one_device.show()
     }

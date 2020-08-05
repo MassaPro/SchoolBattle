@@ -15,6 +15,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
+import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
 class DotGameOneDivice : AppCompatActivity() {
@@ -87,6 +88,9 @@ class DotGameOneDivice : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_one_device_games_template)
+
+        mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+
         signature_canvas_dots_one_divice.visibility = View.VISIBLE
         signature_canvas_dots_one_divice.activity = this
         CONTEXT = this
@@ -289,9 +293,32 @@ class DotGameOneDivice : AppCompatActivity() {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 2)
-            startActivity(intent)
+            if(mInterstitialAd_in_offline_games.isLoaded)
+            {
+                Intent_for_offline_games = intent
+                mInterstitialAd_in_offline_games.show()
+            }
+            else
+            {
+                this.startActivity(intent)
+            }
         }
 
+    }
+    override fun onBackPressed()
+    {
+        super.onBackPressed()
+        var intent = Intent(this, NewGameActivity::class.java)
+        intent.putExtra("playType", 2)
+        if(mInterstitialAd_in_offline_games.isLoaded)
+        {
+            Intent_for_offline_games = intent
+            mInterstitialAd_in_offline_games.show()
+        }
+        else
+        {
+            this.startActivity(intent)
+        }
     }
 }
 
