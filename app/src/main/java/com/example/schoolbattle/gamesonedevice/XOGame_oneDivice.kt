@@ -187,6 +187,22 @@ class XOGame_oneDivice : AppCompatActivity() {
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
         }
+        else if(Design == "Noir" ) {
+            name_player1_one_divice.setTextColor(Color.WHITE)
+            name_player2_one_divice.setTextColor(Color.WHITE)
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            button_player_1_one_divice.setBackgroundResource(R.drawable.cross_noir);
+            button_player_2_one_divice.setBackgroundResource(R.drawable.null_noir);
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            label_one_device.setBackgroundResource(R.drawable.background_noir);
+            bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+        }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
         if (usedToClear == "clear") {
@@ -517,6 +533,12 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
             Line_paint.strokeWidth = 7f
 
         }
+        else if (Design == "Noir")
+        {
+            Line_paint.color = rgb(100,100,100)   //ресур для линий (ширина и цвет)
+            Line_paint.strokeWidth = 7f
+
+        }
 
 
         // TODO нужно взять из DataBase (статистика ходов)
@@ -545,6 +567,9 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
 
     var cross_japan : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cross_japan)       //картинки крестиков и нулей
     var null_japan: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.null_japan)
+
+    var cross_noir : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cross_noir)       //картинки крестиков и нулей
+    var null_noir: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.null_noir)
 
    // var BackgroundColor_Egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.background_egypt)
     var icon_green : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.illumination)
@@ -606,6 +631,10 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
         else if(Design == "Japan") {
             right_cross = Bitmap.createScaledBitmap(cross_japan,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
             right_null = Bitmap.createScaledBitmap(null_japan,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+        }
+        else if(Design == "Noir") {
+            right_cross = Bitmap.createScaledBitmap(cross_noir,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+            right_null = Bitmap.createScaledBitmap(null_noir,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
         }
 
 

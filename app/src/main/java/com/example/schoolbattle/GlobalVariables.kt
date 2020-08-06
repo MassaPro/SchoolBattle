@@ -24,12 +24,12 @@ var VIBRATION: Boolean = false
 //____________________________________________________________________________________________________________________________
 var Design: String = "Normal"               //дизайн
 val PICTURE_STYLES = mapOf(0 to R.drawable.avatar1, 1 to R.drawable.game_menu_egypt, 2 to R.drawable.game_menu_casino,3 to R.drawable.game_menu_rome,4 to R.drawable.game_menu_gothic,
-    5 to R.drawable.game_menu_japan)
-val PICTURE_TEXT = mapOf(0 to "Деловой стиль", 1 to "Eгипетскй стиль", 2 to "Казино стиль",3 to "Римский стиль",4 to "Готический стиль",5 to "Японский стиль")
-val PRICE_OD_DESIGN = mapOf(0 to 10,1 to 20,2 to 30,3 to 90,4 to 1, 5 to 3)
-var ARRAY_OF_DESIGN_SHOP: MutableList<Int>  = mutableListOf(0,1,2,3,4,5)             //номера  дизайнов в магазине
+    5 to R.drawable.game_menu_japan, 6 to R.drawable.game_menu_noir)
+val PICTURE_TEXT = mapOf(0 to "Деловой стиль", 1 to "Eгипетскй стиль", 2 to "Казино стиль",3 to "Римский стиль",4 to "Готический стиль",5 to "Японский стиль", 6 to "Нуар")
+val PRICE_OD_DESIGN = mapOf(0 to 10,1 to 20,2 to 30,3 to 90,4 to 1, 5 to 3, 6 to 10)
+var ARRAY_OF_DESIGN_SHOP: MutableList<Int>  = mutableListOf(0,1,2,3,4,5,6)             //номера  дизайнов в магазине
 var ARRAY_OF_DESIGN: MutableList<Int>  = mutableListOf(0,1)             //номера открытых дизайнов
-var AUXILIARY_MAP_OF_DESIGNS = mapOf(0 to "Normal", 1 to "Egypt", 2 to "Casino",3 to "Rome", 4 to "Gothic", 5 to "Japan")
+var AUXILIARY_MAP_OF_DESIGNS = mapOf(0 to "Normal", 1 to "Egypt", 2 to "Casino",3 to "Rome", 4 to "Gothic", 5 to "Japan", 6 to "Noir")
 //__________________________________________________________________________________________________________________________________
 
 //____________________________________________________________________________________________________________________________

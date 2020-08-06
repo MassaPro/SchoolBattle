@@ -131,6 +131,23 @@ class SettingsFragmentActivity : Fragment() {
             vibrationSwitch.setTextSize(24f)
             vibrationSwitch.setTextColor(Color.BLACK)
         }
+        else if (Design == "Noir") {
+            settings_menu.setBackgroundResource(R.drawable.background_noir)
+            tb1.setBackgroundColor(argb(0,0,0,0))
+
+            choose_design.setBackgroundColor(argb(0,0,0,0))
+            choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+            choose_design.setTextColor(Color.WHITE)
+            choose_design.setTextSize(24f)
+
+            soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+            soundSwitch.setTextColor(Color.WHITE)
+            soundSwitch.setTextSize(24f)
+
+            vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+            vibrationSwitch.setTextSize(24f)
+            vibrationSwitch.setTextColor(Color.WHITE)
+        }
 
 
         logOutSettings.setOnClickListener {
@@ -261,6 +278,13 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                 editor.putString("design","Japan")
                 editor.apply()
             }
+            else if(item == 6)
+            {
+                Design = "Noir"
+                val editor = v.context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("design","Noir")
+                editor.apply()
+            }
 
             val t = fragment_activity?.supportFragmentManager?.beginTransaction()
             val mFrag: Fragment= SettingsFragmentActivity()                    //ПРОСТО ПИЗДЕЦ
@@ -289,6 +313,10 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
             else if(Design == "Japan")
             {
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE)
+            }
+            else if(Design == "Noir")
+            {
+                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.BLACK)
             }
 
 

@@ -61,6 +61,12 @@ class NewGameActivity : AppCompatActivity() {
             text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
             text.setTextColor(Color.BLACK)
         }
+        else if (Design == "Noir"){
+            game_list_menu.setBackgroundColor(rgb(30,30,30));
+            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
+            text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+            text.setTextColor(Color.WHITE)
+        }
 
         NewGame = this
         game_list.layoutManager = GridLayoutManager(this, 2)
@@ -146,6 +152,11 @@ class NewGameActivity : AppCompatActivity() {
             else if (Design == "Japan"){
                 view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.new_game_item_japan)
                 view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            }
+            else if (Design == "Noir"){
+                view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.new_game_item_noir)
+                view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                view.findViewById<TextView>(R.id.textView2).setTextColor(Color.WHITE)
             }
 
             //card2.setBackgroundResource(R.drawable.background_egypt)
