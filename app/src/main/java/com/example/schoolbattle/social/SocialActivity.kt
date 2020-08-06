@@ -12,9 +12,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.schoolbattle.*
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.activity_social.*
 import kotlinx.android.synthetic.main.activity_social.view.*
-import kotlinx.android.synthetic.main.activity_social.view.social_menu
 
 class SocialActivity : Fragment() {
 
@@ -81,6 +79,9 @@ class SocialActivity : Fragment() {
         }
         else if (Design == "Japan"){
             fon.setBackgroundResource(R.drawable.background_japan)
+        }
+        else if (Design == "Noir"){
+            fon.setBackgroundResource(R.drawable.background_noir)
         }
 
         return v

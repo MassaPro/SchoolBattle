@@ -73,6 +73,9 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
         if (Design == "Japan"){
             nav_view.setBackgroundColor(Color.WHITE)
         }
+        if (Design == "Noir"){
+            nav_view.setBackgroundColor(Color.BLACK)
+        }
     }
 
 

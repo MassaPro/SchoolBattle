@@ -182,6 +182,22 @@ class VirusOneDivice : AppCompatActivity() {
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
         }
+        else if(Design == "Noir" ) {
+            name_player1_one_divice.setTextColor(Color.WHITE)
+            name_player2_one_divice.setTextColor(Color.WHITE)
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            button_player_1_one_divice.setBackgroundResource(R.drawable.tower1_noir);
+            button_player_2_one_divice.setBackgroundResource(R.drawable.tower2_noir);
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            label_one_device.setBackgroundResource(R.drawable.background_noir);
+            bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+        }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
         if (usedToClear == "clear") {
@@ -796,6 +812,9 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
         if (Design == "Japan"){
             Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
         }
+        if (Design == "Noir"){
+            Line_paint.setColor(rgb(100,100,100))          //ресур для линий (ширина и цвет)
+        }
 
 
         for (i in 0 until FIELD.size) {
@@ -835,6 +854,11 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
     var virus2_japan: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.virus2_japan);
     var tower1_japan: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower1_japan);
     var tower2_japan: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_japan);
+
+    var virus1_noir: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip1_noir);
+    var virus2_noir: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip2_noir);
+    var tower1_noir: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower1_noir);
+    var tower2_noir: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_noir);
 
 
     override fun draw(canvas: Canvas?) {
@@ -893,6 +917,13 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
             right_virus2 = Bitmap.createScaledBitmap(virus2_japan,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
             right_tower1 = Bitmap.createScaledBitmap(tower1_japan,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
             right_tower2 = Bitmap.createScaledBitmap(tower2_japan,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+        }
+        else if (Design == "Noir")
+        {
+            right_virus1 = Bitmap.createScaledBitmap(virus1_noir,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            right_virus2 = Bitmap.createScaledBitmap(virus2_noir,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            right_tower1 = Bitmap.createScaledBitmap(tower1_noir,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            right_tower2 = Bitmap.createScaledBitmap(tower2_noir,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
         }
 
         var k: Float = height - width  - advertising_line

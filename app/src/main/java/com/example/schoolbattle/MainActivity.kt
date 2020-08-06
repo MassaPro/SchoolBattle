@@ -224,6 +224,41 @@ class MainActivity : Fragment() {
             searchButton.setBackgroundColor(argb(0,0,0,0))
 
         }
+        else if (Design == "Noir"){
+            game_menu.setBackgroundResource(R.drawable.game_menu_noir)
+            //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
+            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
+
+            toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+            toolbarName2.setTextColor(Color.WHITE)
+            toolbarName2.setTextSize(20f)
+
+            newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+            newGameButton.setTextColor(Color.WHITE)
+            newGameButton.setTextSize(16f)
+            newGameButton.setBackgroundColor(argb(0,0,0,0))
+
+            blitz.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+            blitz.setTextColor(Color.WHITE)
+            blitz.setTextSize(16f)
+            blitz.setBackgroundColor(argb(0,0,0,0))
+
+            oneDevice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+            oneDevice.setTextColor(Color.WHITE)
+            oneDevice.setTextSize(16f)
+            oneDevice.setBackgroundColor(argb(0,0,0,0))
+
+            playWithComp.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+            playWithComp.setTextColor(Color.WHITE)
+            playWithComp.setTextSize(17f)
+            playWithComp.setBackgroundColor(argb(0,0,0,0))
+
+            searchButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+            searchButton.setTextColor(Color.WHITE)
+            searchButton.setTextSize(17f)
+            searchButton.setBackgroundColor(argb(0,0,0,0))
+
+        }
 
        // (activity as AppCompatActivity).setSupportActionBar(findViewById(R.id.my_toolbar))
         (activity as AppCompatActivity?)!!.setSupportActionBar(my_toolbar2)

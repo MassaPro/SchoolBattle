@@ -97,6 +97,12 @@ class Show_rules(activity: Activity) {
             button_close.setBackgroundResource(R.drawable.close_cross)
             dialog_one_device.text_rules.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
         }
+        else if (Design == "Noir"){
+            dialog_one_device.rules.setBackgroundResource(R.drawable.background_noir);
+            button_close.setBackgroundResource(R.drawable.close_cross)
+            dialog_one_device.text_rules.setTextColor(Color.WHITE)
+            dialog_one_device.text_rules.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+        }
 
         button_close.setOnClickListener {
             dialog_one_device.dismiss()
