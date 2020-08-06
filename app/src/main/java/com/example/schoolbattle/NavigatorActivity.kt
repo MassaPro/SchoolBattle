@@ -30,8 +30,6 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_navigator.*
 
 
-var now: Context? = null
-
 import com.example.schoolbattle.shop.locale_context
 import com.example.schoolbattle.shop.mRewardedVideoAd
 import com.google.android.gms.ads.AdListener
@@ -40,10 +38,6 @@ import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.reward.RewardItem
 import com.google.android.gms.ads.reward.RewardedVideoAdListener
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_navigator.*
 import kotlinx.android.synthetic.main.activity_friends_list.*
 import kotlinx.android.synthetic.main.reward_dialog.*
@@ -83,25 +77,7 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
 
 
 
-    override fun onResume() {
-        super.onResume()
-        CONTEXT = this
-        now = this
-        if (Design == "Normal"){
-            nav_view.setBackgroundColor(Color.WHITE);
-        }
-        if (Design == "Egypt"){
-            nav_view.setBackgroundColor(rgb(224, 164, 103));
-        }
-        if (Design == "Casino"){
-            nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
-            //navigation_dashboard.setBackground
-        }
-        if (Design == "Rome"){
-            nav_view.setBackgroundResource(R.drawable.bottom_navigation_rome)
-            //navigation_dashboard.setBackground
-        }
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -10,6 +10,9 @@ import android.media.AudioManager
 import android.media.SoundPool
 import android.os.Vibrator
 import androidx.core.content.ContextCompat.getSystemService
+import com.example.schoolbattle.engine.Game
+import com.example.schoolbattle.engine.RecyclerSet
+import com.example.schoolbattle.engine.RecyclerSetBlitz
 import com.google.firebase.database.ChildEventListener
 
 
@@ -116,20 +119,28 @@ fun generateColorStateList() :ColorStateList
 
     when (Design) {
         "Normal" -> {
-
+            checkedColor = rgb(0,0,0)
+            uncheckedColor = rgb(0,0,0)
         }
         "Egypt" -> {
-
-
+            checkedColor = rgb(0,0,0)
+            uncheckedColor = rgb(0,0,0)
         }
         "Casino" -> {
-
+            checkedColor = Color.YELLOW
+            uncheckedColor  = Color.YELLOW
         }
         "Rome" -> {
-
+            checkedColor = Color.rgb(193, 150, 63)
+            uncheckedColor = Color.rgb(193, 150, 63)
         }
         "Gothic" -> {
-
+            checkedColor = rgb(255,255,255)
+            uncheckedColor = rgb(255,255,255)
+        }
+        "Japan" -> {
+            checkedColor = rgb(0,0,0)
+            uncheckedColor = rgb(0,0,0)
         }
     }
     val states = arrayOf(

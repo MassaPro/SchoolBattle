@@ -16,7 +16,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.schoolbattle.shop.locale_context
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_navigator.*
 import kotlinx.android.synthetic.main.activity_settings_fragment.*
 import kotlinx.android.synthetic.main.design_item.view.*
 
@@ -41,6 +43,8 @@ class SettingsFragmentActivity : Fragment() {
 
         (activity as AppCompatActivity?)!!.setSupportActionBar(tb1)
 
+        (activity as AppCompatActivity?)!!.findViewById<BottomNavigationView>(R.id.nav_view).itemIconTintList = generateColorStateList()
+        (activity as AppCompatActivity?)!!.findViewById<BottomNavigationView>(R.id.nav_view).itemTextColor = generateColorStateList()
         if (Design == "Normal") {
             settings_menu.setBackgroundColor(Color.WHITE)
         }
