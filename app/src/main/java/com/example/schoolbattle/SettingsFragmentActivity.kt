@@ -346,7 +346,6 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
         with(holder.itemView) {
             tag = ARRAY_OF_DESIGN[position]
             setOnClickListener(onClickListener)
-            var topopopoopekfoepfoke = 1
         }
     }
 

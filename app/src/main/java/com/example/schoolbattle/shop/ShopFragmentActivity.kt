@@ -5,19 +5,24 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.Color.rgb
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.schoolbattle.*
 import com.google.android.material.tabs.TabLayout
+import kotlinx.android.synthetic.main.activity_new_game.view.*
 import kotlinx.android.synthetic.main.activity_settings_fragment.*
+import kotlinx.android.synthetic.main.activity_shop_fragment.*
+
 
 
 class ShopFragmentActivity : Fragment (){
@@ -27,32 +32,12 @@ class ShopFragmentActivity : Fragment (){
         super.onActivityCreated(savedInstanceState)
         (activity as AppCompatActivity?)!!.setSupportActionBar(tb1)
 
+        locale_context = activity as AppCompatActivity?
+
+        var fon = locale_context!!.findViewById<View>(R.id.shop_menu)
+        var t_shop = locale_context!!.findViewById<View>(R.id.toolbar_shop)
 
 
-    }
-
-    @SuppressLint("WrongViewCast")
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        CONTEXT = requireActivity()
-        /**
-         * Inflate tab_layout and setup Views.
-         */
-        var v: View = inflater.inflate(R.layout.activity_shop_fragment, container, false)
-
-
-
-        tabLayout = v.findViewById<View>(R.id.tabs_shop) as TabLayout
-        viewPager = v.findViewById<View>(R.id.viewpager_shop) as ViewPager
-
-        var fon = v.findViewById<View>(R.id.shop_menu)
-        var t_shop = v.findViewById<View>(R.id.toolbar_shop)
-        var name  = v.findViewById<View>(R.id.button_shop_name) as Button
-        var money = v.findViewById<View>(R.id.money_shop_toolbar) as TextView
-        //var text1 = v.findViewById<TextView>(R.id.choose_design_shop)
         if(Design == "Normal")
         {
             t_shop.setBackgroundColor(rgb(214,214,214))
@@ -60,6 +45,31 @@ class ShopFragmentActivity : Fragment (){
         }
         else if(Design == "Egypt")
         {
+            tabLayout!!.setBackgroundResource(R.drawable.background_egypt)     //фон табов
+            for (i in 0 until tabLayout!!.tabCount) {
+                var tv : TextView? = null
+                if(i ==0)
+                {
+                    tv  = helped_text1
+                }
+                if(i ==1 )
+                {
+                     tv  = helped_text2
+                }
+                if(i == 2)
+                {
+                    tv  = helped_text3
+                }
+                if(i == 3)
+                {
+                     tv = helped_text4
+                }
+                tv?.textSize = 12.6f        //так задаешь размер
+                tv?.setTextColor(Color.BLACK)   //цвет
+                tv?.typeface = locale_context?.let { ResourcesCompat.getFont(it, R.font.egypt) } //шрифт
+                tabLayout!!.getTabAt(i)?.customView = tv;
+            }
+
             t_shop.setBackgroundColor(rgb(224,164,103))
             fon.setBackgroundResource(R.drawable.background_egypt)
 
@@ -92,6 +102,31 @@ class ShopFragmentActivity : Fragment (){
             //text1.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
         }
 
+    }
+
+    @SuppressLint("WrongViewCast")
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        CONTEXT = requireActivity()
+        /**
+         * Inflate tab_layout and setup Views.
+         */
+        var v: View = inflater.inflate(R.layout.activity_shop_fragment, container, false)
+
+
+
+        tabLayout = v.findViewById<View>(R.id.tabs_shop) as TabLayout
+        viewPager = v.findViewById<View>(R.id.viewpager_shop) as ViewPager
+
+
+        var name  = v.findViewById<View>(R.id.button_shop_name) as Button
+        var money = v.findViewById<View>(R.id.money_shop_toolbar) as TextView
+        //var text1 = v.findViewById<TextView>(R.id.choose_design_shop)
+
+
         val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val globalName = prefs?.getString("username", "").toString()
         name.text = globalName
@@ -105,9 +140,10 @@ class ShopFragmentActivity : Fragment (){
          * The setupWithViewPager dose't works without the runnable .
          * Maybe a Support Library Bug .
          */
-        tabLayout!!.post { tabLayout!!.setupWithViewPager(
-            viewPager
-        ) }
+        tabLayout!!.setupWithViewPager(viewPager)
+
+
+
         return v
     }
 

@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolbattle.*
@@ -43,7 +44,12 @@ class Avatars : Fragment() {
         gamesRecycler.isNestedScrollingEnabled = false;
         item_design_shop.adapter?.notifyDataSetChanged()
 
-
+        if(Design == "Egypt")
+        {
+            choose_design_shop.typeface =  locale_context?.let { ResourcesCompat.getFont(it, R.font.egypt) }
+            choose_design_shop.setTextColor(Color.BLACK)
+            choose_design_shop.textSize = 20f
+        }
 
 
     }

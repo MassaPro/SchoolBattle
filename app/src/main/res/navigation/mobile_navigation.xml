@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.schoolbattle.GameListActivity"
+        android:name="com.example.schoolbattle.engine.GameListActivity"
         android:label="@string/title_dashboard"
         tools:layout="@layout/activity_list_of_current_games" />
 
@@ -32,4 +32,7 @@
         android:name="com.example.schoolbattle.shop.ShopFragmentActivity"
         android:label="@string/title_notifications"
         tools:layout="@layout/activity_settings_fragment" />
+    <fragment
+        android:id="@+id/helped_xren_text"
+        tools:layout="@layout/custom_tab" />
 </navigation>
