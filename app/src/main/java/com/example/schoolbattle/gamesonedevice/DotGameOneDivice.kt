@@ -696,7 +696,11 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
         height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)
         advertising_line =(height - width/size_field_x*size_field_y)/2         //полоска для рекламы
 
-        step = width/size_field_x
+        step = if(width/size_field_x < height/size_field_y) {
+            width/size_field_x
+        } else {
+            height/size_field_y
+        }
         k = height-width*(size_field_y.toFloat()/size_field_x.toFloat())-advertising_line
 
         if(Design == "Normal")

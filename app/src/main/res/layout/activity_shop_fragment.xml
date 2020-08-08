@@ -73,6 +73,7 @@
             android:textSize="15sp"
             android:singleLine="true"
             android:gravity="center"
+            android:layout_margin="0dp"
             android:layout_height="match_parent" />
         <TextView
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -82,7 +83,8 @@
             android:textSize="15sp"
             android:text="Эмоции"
             android:singleLine="true"
-            android:gravity="center"
+            android:gravity="center|left"
+            android:layout_margin="0dp"
             android:layout_height="match_parent" />
         <TextView
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -92,7 +94,8 @@
             android:textSize="15sp"
             android:singleLine="true"
             android:text="Дизайн"
-            android:gravity="center"
+            android:layout_margin="0dp"
+            android:gravity="center|left"
             android:layout_height="match_parent" />
         <TextView
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -101,8 +104,9 @@
             android:layout_width="wrap_content"
             android:text="Премиум"
             android:textSize="15sp"
+            android:layout_margin="0dp"
             android:singleLine="true"
-            android:gravity="center"
+            android:gravity="center|left"
             android:layout_height="match_parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

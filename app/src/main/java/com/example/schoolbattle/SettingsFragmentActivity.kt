@@ -50,6 +50,8 @@ class SettingsFragmentActivity : Fragment() {
         }
 
         else if (Design == "Egypt") {
+            divider_settings.setBackgroundColor(Color.BLACK)
+
             settings_menu.setBackgroundResource(R.drawable.background_egypt)
             tb1.setBackgroundColor(rgb(224,164,103));
 
@@ -300,7 +302,7 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
             }
             else if(Design == "Egypt")
             {
-                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(rgb(224, 164, 103));
+                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(rgb(224, 164, 103))
             }
             else if(Design == "Casino")
             {
