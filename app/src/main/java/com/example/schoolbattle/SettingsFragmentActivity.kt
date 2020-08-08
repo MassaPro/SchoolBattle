@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.CompoundButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -41,6 +42,36 @@ class SettingsFragmentActivity : Fragment() {
 
         fragment_activity = activity as AppCompatActivity
 
+        if(Design == "Normal")
+        {
+            fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE);
+        }
+        else if(Design == "Egypt")
+        {
+            fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(rgb(224, 164, 103))
+        }
+        else if(Design == "Casino")
+        {
+            fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_casino)
+        }
+        else if(Design == "Rome")
+        {
+            fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_rome)
+        }
+        else if(Design == "Gothic")
+        {
+            fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_gothic)
+        }
+        else if(Design == "Japan")
+        {
+            fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE)
+        }
+        else if(Design == "Noir")
+        {
+            fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.BLACK)
+        }
+
+        locale_context = activity as AppCompatActivity
         (activity as AppCompatActivity?)!!.setSupportActionBar(tb1)
 
         (activity as AppCompatActivity?)!!.findViewById<BottomNavigationView>(R.id.nav_view).itemIconTintList = generateColorStateList()
@@ -50,7 +81,6 @@ class SettingsFragmentActivity : Fragment() {
         }
 
         else if (Design == "Egypt") {
-            divider_settings.setBackgroundColor(Color.BLACK)
 
             settings_menu.setBackgroundResource(R.drawable.background_egypt)
             tb1.setBackgroundColor(rgb(224,164,103));
@@ -237,97 +267,6 @@ private fun DesignsetupRecyclerView(recyclerView: RecyclerView) {
 class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
     RecyclerView.Adapter<DesignItemRecyclerViewAdapter.ViewHolder>() {
 
-    private val onClickListener: View.OnClickListener
-
-    init {
-        onClickListener = View.OnClickListener { v ->
-            var item = v.tag
-            if(item == 0)
-            {
-                Design = "Normal"
-                val editor = v.context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                editor.putString("design","Normal")
-                editor.apply()
-            }
-            else if(item == 1)
-            {
-                Design = "Egypt"
-                val editor = v.context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                editor.putString("design","Egypt")
-                editor.apply()
-            }
-            else if(item == 2)
-            {
-                Design = "Casino"
-                val editor = v.context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                editor.putString("design","Casino")
-                editor.apply()
-            }
-            else if(item == 3)
-            {
-                Design = "Rome"
-                val editor = v.context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                editor.putString("design","Rome")
-                editor.apply()
-            }
-            else if(item == 4)
-            {
-                Design = "Gothic"
-                val editor = v.context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                editor.putString("design","Gothic")
-                editor.apply()
-            }
-            else if(item == 5)
-            {
-                Design = "Japan"
-                val editor = v.context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                editor.putString("design","Japan")
-                editor.apply()
-            }
-            else if(item == 6)
-            {
-                Design = "Noir"
-                val editor = v.context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                editor.putString("design","Noir")
-                editor.apply()
-            }
-
-            val t = fragment_activity?.supportFragmentManager?.beginTransaction()
-            val mFrag: Fragment= SettingsFragmentActivity()                    //ПРОСТО ПИЗДЕЦ
-            t?.replace(R.id.settings_menu,mFrag)?.commitNowAllowingStateLoss()
-
-            if(Design == "Normal")
-            {
-                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE);
-            }
-            else if(Design == "Egypt")
-            {
-                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(rgb(224, 164, 103))
-            }
-            else if(Design == "Casino")
-            {
-                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_casino)
-            }
-            else if(Design == "Rome")
-            {
-                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_rome)
-            }
-            else if(Design == "Gothic")
-            {
-                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_gothic)
-            }
-            else if(Design == "Japan")
-            {
-                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE)
-            }
-            else if(Design == "Noir")
-            {
-                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.BLACK)
-            }
-
-
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -339,15 +278,68 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
         PICTURE_STYLES[ARRAY_OF_DESIGN[position]]?.let { holder.img.setBackgroundResource(it) }     //картинка для стиля
         if(AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == Design)
         {
-            holder.contentView.setText(PICTURE_TEXT[ARRAY_OF_DESIGN[position]] + "(установлено)")          //название стиля
+            holder.button_prem.setBackgroundResource(R.drawable.nulevoe)
+            holder.button_prem.text = "(УСТАНОВЛЕНО)"
+            holder.button_prem.isClickable = false
         }
-        else
-        {
-            holder.contentView.setText(PICTURE_TEXT[ARRAY_OF_DESIGN[position]])          //название стиля
-        }
+        holder.contentView.setText(PICTURE_TEXT[ARRAY_OF_DESIGN[position]]) //название стиля
         with(holder.itemView) {
             tag = ARRAY_OF_DESIGN[position]
-            setOnClickListener(onClickListener)
+        }
+        holder.button_prem.setOnClickListener {
+            if(ARRAY_OF_DESIGN[position] == 0)
+            {
+                Design = "Normal"
+                val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("design","Normal")
+                editor.apply()
+            }
+            if(ARRAY_OF_DESIGN[position] == 1)
+            {
+                Design = "Egypt"
+                val editor =  locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("design","Egypt")
+                editor.apply()
+            }
+            if(ARRAY_OF_DESIGN[position] == 2)
+            {
+                Design = "Casino"
+                val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("design","Casino")
+                editor.apply()
+            }
+            if(ARRAY_OF_DESIGN[position] == 3)
+            {
+                Design = "Rome"
+                val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("design","Rome")
+                editor.apply()
+            }
+            if(ARRAY_OF_DESIGN[position] == 4)
+            {
+                Design = "Gothic"
+                val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("design","Gothic")
+                editor.apply()
+            }
+            if(ARRAY_OF_DESIGN[position] == 5)
+            {
+                Design = "Japan"
+                val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("design","Japan")
+                editor.apply()
+            }
+            if(ARRAY_OF_DESIGN[position] == 6)
+            {
+                Design = "Noir"
+                val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("design","Noir")
+                editor.apply()
+            }
+            val t = fragment_activity?.supportFragmentManager?.beginTransaction()
+            val mFrag: Fragment= SettingsFragmentActivity()                    //ПРОСТО ПИЗДЕЦ
+            t?.replace(R.id.settings_menu,mFrag)?.commitNowAllowingStateLoss()
+
         }
     }
 
@@ -360,6 +352,7 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var img: ImageView = view.img_design
         var contentView: TextView = view.id_text_design
+        var button_prem: Button = view.primenuty
     }
 }
 
