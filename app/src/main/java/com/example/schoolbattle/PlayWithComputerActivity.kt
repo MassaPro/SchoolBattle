@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
+import android.widget.Toast
 import com.example.schoolbattle.gameswithcomp.*
 
 var delayTime : Long = 1000
@@ -21,9 +22,10 @@ class PlayWithComputerActivity : AppCompatActivity() {
         val yourName = prefs.getString("username", "") // имя пользователя
         val gameType = intent.getStringExtra("gameName") // тип игры
 
-        if(gameType == "XOGame")
+        if(gameType == "BoxGame")
         {
-            val intent = Intent(this, XOGame_withComputer::class.java)
+            val intent = Intent(this,
+                BoxGameWithComputer::class.java)
             startActivity(intent)
             finish()
         }
@@ -43,26 +45,14 @@ class PlayWithComputerActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        if(gameType == "SnakeGame")
+
+        if(gameType == "GoGame")
         {
             val intent = Intent(this,
-                SnakeGameWithComputer::class.java)
+                GoGameWithComputer::class.java)
             startActivity(intent)
             finish()
         }
-        if(gameType == "BoxGame")
-        {
-            val intent = Intent(this,
-                BoxGameWithComputer::class.java)
-            startActivity(intent)
-            finish()
-        }
-        /*if(gameType == "VirusGame")       // ADD
-        {
-            val intent = Intent(this,VirusWithComputer::class.java)
-            startActivity(intent)
-            finish()
-        }*/
 
         if(gameType == "Reversi")
         {
@@ -71,6 +61,35 @@ class PlayWithComputerActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        if(gameType == "SnakeGame")
+        {
+            val intent = Intent(this,
+                SnakeGameWithComputer::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        if(gameType == "VirusGame")
+        {
+            val intent = Intent(this,
+                VirusWithComputer::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+
+        if(gameType == "XOGame")
+        {
+            val intent = Intent(this,
+                XOGame_withComputer::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+
+
+
 
     }
 

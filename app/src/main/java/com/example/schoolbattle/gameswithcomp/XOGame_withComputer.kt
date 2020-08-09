@@ -7,6 +7,7 @@ import android.graphics.*
 import android.graphics.Color.argb
 import android.graphics.Color.rgb
 import android.os.Bundle
+import android.os.Vibrator
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
@@ -90,6 +91,9 @@ class XOGame_withComputer : AppCompatActivity() {
         signature_canvas_xog_with_computer.activ = this
         CONTEXT = this
 
+        mSound.load(this, R.raw.xlup, 1);
+        vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
+
         val prefs2 = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         XOGameMode = prefs2.getInt("XOGameMode", 0)
         if (XOGameMode == 0) {
@@ -98,7 +102,11 @@ class XOGame_withComputer : AppCompatActivity() {
             editor.apply()
             XOGameMode = 1
         }
-        if (XOGameMode == 2) {
+        signature_canvas_xog_with_computer.blocked = false
+
+        val prefs_first = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        signature_canvas_xog_with_computer.History = decode(prefs_first.getString("xog_with_computer", "").toString())
+        if (XOGameMode == 2 && signature_canvas_xog_with_computer.History.size == 0) {
             signature_canvas_xog_with_computer.blocked = true
         }
 
@@ -177,7 +185,9 @@ class XOGame_withComputer : AppCompatActivity() {
             startActivity(intent)
         }
 
-        if (XOGameMode == 2 && signature_canvas_xog_with_computer.History.size == 0) {
+        if (XOGameMode == 2 && signature_canvas_xog_with_computer.History.size == 0) {      // first computer move
+            signature_canvas_xog_with_computer.blocked = true
+
             var find_x = 0
             var find_y = 0
             var fla = 0
@@ -186,6 +196,7 @@ class XOGame_withComputer : AppCompatActivity() {
 
             val handler = android.os.Handler()
             handler.postDelayed({
+
                 for (j in 5 downTo 0) {
                     for (i in 0..6) {
                         if (signature_canvas_xog_with_computer.FIELD[i][j] == 0 && (j == 5 || signature_canvas_xog_with_computer.FIELD[i][j + 1] != 0)) {
@@ -338,8 +349,8 @@ class XOGame_withComputer : AppCompatActivity() {
                                 signature_canvas_xog_with_computer.invalidate()
                             }
                         } else {
-                            if (signature_canvas_xog_with_computer.EXODUS != XOGameMode) {
-                                if (signature_canvas_xog_with_computer.History.size > 0) {            //TODO дописать когда самый первый ход убираем
+                            if (signature_canvas_xog_with_computer.EXODUS == 1) {
+                                if (signature_canvas_xog_with_computer.History.size > 0) {
                                     signature_canvas_xog_with_computer.History.removeLast()
                                     var data_from_memory =
                                         encode(signature_canvas_xog_with_computer.History)
@@ -365,7 +376,7 @@ class XOGame_withComputer : AppCompatActivity() {
                                     signature_canvas_xog_with_computer.invalidate()
                                 }
                             } else {
-                                if (signature_canvas_xog_with_computer.History.size > 1) {            //TODO дописать когда самый первый ход убираем
+                                if (signature_canvas_xog_with_computer.History.size > 1) {
                                     signature_canvas_xog_with_computer.History.removeLast()
                                     signature_canvas_xog_with_computer.History.removeLast()
                                     var data_from_memory =
@@ -842,6 +853,12 @@ class CanvasView_xog_with_computer(context: Context, attrs: AttributeSet?) : Vie
                         editor.apply()
                         cross_or_nul = "cross"
                     }
+                    if(SOUND) {
+                        mSound.play(1,1F,1F,1,0,1F)
+                    }
+                    if(VIBRATION) {
+                        vibratorService?.vibrate(70)
+                    }
                     Log.w("ppppppp", FIELD[0][0].toString())
                     invalidate()
 
@@ -960,6 +977,8 @@ class CanvasView_xog_with_computer(context: Context, attrs: AttributeSet?) : Vie
                 }
             }
         }
+
+
         return true
     }
 }

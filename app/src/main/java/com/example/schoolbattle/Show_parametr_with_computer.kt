@@ -9,8 +9,7 @@ import android.widget.Button
 import android.widget.Toast
 import android.graphics.Color
 import androidx.core.content.res.ResourcesCompat
-import com.example.schoolbattle.gameswithcomp.ReversiWithComputer
-import com.example.schoolbattle.gameswithcomp.XOGame_withComputer
+import com.example.schoolbattle.gameswithcomp.*
 import kotlinx.android.synthetic.main.parametrs_with_computer.*
 
 class Show_parametr_with_computer(activity: Activity) {
@@ -52,6 +51,73 @@ class Show_parametr_with_computer(activity: Activity) {
             )
         }
 
+        if (gameType == "BoxGame") {
+            val changeModeButton = dialog_with_computer.findViewById(R.id.changeModeWithComputer) as Button
+            changeModeButton.setOnClickListener{
+                val prefs2 = type_activity.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                var BoxGameMode = prefs2.getInt("BoxGameMode", 0)
+                val editor = type_activity.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putInt("BoxGameMode", 3 - BoxGameMode)
+                editor.apply()
+
+                val intent = Intent(type_activity, BoxGameWithComputer::class.java).apply {
+                    putExtra("usedToClear", "clear")
+                }
+                type_activity.finish()
+                type_activity.startActivity(intent)
+            }
+        }
+
+        if (gameType == "AngleGame") {
+            val changeModeButton = dialog_with_computer.findViewById(R.id.changeModeWithComputer) as Button
+            changeModeButton.setOnClickListener{
+                val prefs2 = type_activity.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                var AngleGameMode = prefs2.getInt("AngleGameMode", 0)
+                val editor = type_activity.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putInt("AngleGameMode", 3 - AngleGameMode)
+                editor.apply()
+
+                val intent = Intent(type_activity, ConersWithComputer::class.java).apply {
+                    putExtra("usedToClear", "clear")
+                }
+                type_activity.finish()
+                type_activity.startActivity(intent)
+            }
+        }
+
+        if (gameType == "DotGame") {
+            val changeModeButton = dialog_with_computer.findViewById(R.id.changeModeWithComputer) as Button
+            changeModeButton.setOnClickListener{
+                val prefs2 = type_activity.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                var DotGameMode = prefs2.getInt("DotGameMode", 0)
+                val editor = type_activity.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putInt("DotGameMode", 3 - DotGameMode)
+                editor.apply()
+
+                val intent = Intent(type_activity, DotGameWithComputer::class.java).apply {
+                    putExtra("usedToClear", "clear")
+                }
+                type_activity.finish()
+                type_activity.startActivity(intent)
+            }
+        }
+
+        if (gameType == "GoGame") {
+            val changeModeButton = dialog_with_computer.findViewById(R.id.changeModeWithComputer) as Button
+            changeModeButton.setOnClickListener{
+                val prefs2 = type_activity.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                var GoGameMode = prefs2.getInt("GoGameMode", 0)
+                val editor = type_activity.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putInt("GoGameMode", 3 - GoGameMode)
+                editor.apply()
+
+                val intent = Intent(type_activity, GoGameWithComputer::class.java).apply {
+                    putExtra("usedToClear", "clear")
+                }
+                type_activity.finish()
+                type_activity.startActivity(intent)
+            }
+        }
 
         if (gameType == "Reversi") {
             val changeModeButton = dialog_with_computer.findViewById(R.id.changeModeWithComputer) as Button
@@ -69,6 +135,41 @@ class Show_parametr_with_computer(activity: Activity) {
                 type_activity.startActivity(intent)
             }
         }
+
+        if (gameType == "SnakeGame") {
+            val changeModeButton = dialog_with_computer.findViewById(R.id.changeModeWithComputer) as Button
+            changeModeButton.setOnClickListener{
+                val prefs2 = type_activity.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                var SnakeGameMode = prefs2.getInt("SnakeGameMode", 0)
+                val editor = type_activity.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putInt("SnakeGameMode", 3 - SnakeGameMode)
+                editor.apply()
+
+                val intent = Intent(type_activity, SnakeGameWithComputer::class.java).apply {
+                    putExtra("usedToClear", "clear")
+                }
+                type_activity.finish()
+                type_activity.startActivity(intent)
+            }
+        }
+
+        if (gameType == "VirusGame") {
+            val changeModeButton = dialog_with_computer.findViewById(R.id.changeModeWithComputer) as Button
+            changeModeButton.setOnClickListener{
+                val prefs2 = type_activity.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                var VirusGameMode = prefs2.getInt("VirusGameMode", 0)
+                val editor = type_activity.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putInt("VirusGameMode", 3 - VirusGameMode)
+                editor.apply()
+
+                val intent = Intent(type_activity, VirusWithComputer::class.java).apply {
+                    putExtra("usedToClear", "clear")
+                }
+                type_activity.finish()
+                type_activity.startActivity(intent)
+            }
+        }
+
         if (gameType == "XOGame") {
             val changeModeButton = dialog_with_computer.findViewById(R.id.changeModeWithComputer) as Button
             changeModeButton.setOnClickListener{
