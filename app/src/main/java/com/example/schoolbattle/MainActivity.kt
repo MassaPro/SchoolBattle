@@ -12,7 +12,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.schoolbattle.shop.locale_context
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_game_menu.*
+import kotlinx.android.synthetic.main.activity_navigator.*
 
 
 lateinit var gamesRecycler: RecyclerView

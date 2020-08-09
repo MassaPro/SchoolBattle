@@ -76,6 +76,8 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
         if (Design == "Noir"){
             nav_view.setBackgroundColor(Color.BLACK)
         }
+        nav_view.itemIconTintList = generateColorStateList()
+        nav_view.itemTextColor = generateColorStateList()
     }
 
 
@@ -89,6 +91,9 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
         mInterstitialAd_in_offline_games = InterstitialAd(this)
         mInterstitialAd_in_offline_games.adUnitId = "ca-app-pub-3940256099942544/1033173712"
         mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+
+
+
 
         mInterstitialAd_in_offline_games.adListener = object: AdListener() {
             override fun onAdLoaded() {
@@ -141,8 +146,7 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
         now = this
         val navController = findNavController(R.id.nav_host_fragment)
 
-        nav_view.itemIconTintList = generateColorStateList()
-        nav_view.itemTextColor = generateColorStateList()
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         //val appBarConfiguration = AppBarConfiguration(setOf(
