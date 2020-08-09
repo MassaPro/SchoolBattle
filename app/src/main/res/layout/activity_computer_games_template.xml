@@ -61,6 +61,14 @@
             android:textColor="#FFFFFF"
             android:visibility="gone"  />
 
+        <com.example.schoolbattle.gameswithcomp.CanvasView_virus_with_computer
+            android:id="@+id/signature_canvas_virus_with_computer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF"
+            android:visibility="gone"  />
+
+
 
 
     </FrameLayout>

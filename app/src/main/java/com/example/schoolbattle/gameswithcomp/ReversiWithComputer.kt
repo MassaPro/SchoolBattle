@@ -1196,6 +1196,264 @@ class CanvasView_reversi_with_computer(context: Context, attrs: AttributeSet?) :
             }
         }
 
+        if ((Black_or_grey_chip == "black" && ReversiMode == 2) || (Black_or_grey_chip == "grey" && ReversiMode == 1)) {
+            blockedOnTouch = true
+
+
+            if (Black_or_grey_chip == "black") {
+                illumination(1)
+            } else {
+                illumination(2)
+            }
+            var flag: Boolean = true
+            for (i in 0 until Array_of_illumination.size) {
+                for (j in 0 until Array_of_illumination[0].size) {
+                    if (Array_of_illumination[i][j] != 0) {
+                        flag = false
+                    }
+                }
+            }
+
+            val handler = android.os.Handler()
+            handler.postDelayed({
+                if (!flag) {
+                    var fla = false
+
+                    val list_x: MutableList<Int> = mutableListOf(0, 7, 0, 7)
+                    val list_y: MutableList<Int> = mutableListOf(0, 0, 7, 7)
+
+                    for (i2 in 0 until 3) {
+                        if (Array_of_illumination[list_x[i2]][list_y[i2]] != 0) {
+                            if (Black_or_grey_chip == "black") {
+                                FIELD[list_x[i2]][list_y[i2]] = 1
+                                History.add(Triple(list_x[i2], list_y[i2], 1))
+                                val data_from_memory = encode(History)
+                                val editor = context.getSharedPreferences(
+                                    "UserData",
+                                    Context.MODE_PRIVATE
+                                ).edit()
+                                editor.putString(
+                                    "reversi_with_computer",
+                                    data_from_memory
+                                )
+                                editor.apply()
+                                Black_or_grey_chip = "grey"
+                            } else {
+                                FIELD[list_x[i2]][list_y[i2]] = 2
+                                History.add(Triple(list_x[i2], list_y[i2], 2))
+                                val data_from_memory = encode(History)
+                                val editor = context.getSharedPreferences(
+                                    "UserData",
+                                    Context.MODE_PRIVATE
+                                ).edit()
+                                editor.putString(
+                                    "reversi_with_computer",
+                                    data_from_memory
+                                )
+                                editor.apply()
+                                Black_or_grey_chip = "black"
+                            }
+
+
+                            ////////////
+                            fla = true
+
+                            for (i in 0..7) {
+                                for (j in 0..7) {
+                                    Array_of_illumination[i][j] = 0
+                                }
+                            }
+                            change_array(list_x[i2], list_y[i2])
+
+                            if (Black_or_grey_chip == "black") {
+                                illumination(1)
+                            } else {
+                                illumination(2)
+                            }
+
+                            break
+                        }
+                    }
+
+
+                    if (fla == false) {
+                        for (i2 in 2 until 5) {
+                            for (j2 in 2 until 5) {
+                                if (Array_of_illumination[i2][j2] != 0) {
+                                    if (Black_or_grey_chip == "black") {
+                                        FIELD[i2][j2] = 1
+                                        History.add(Triple(i2, j2, 1))
+                                        val data_from_memory = encode(History)
+                                        val editor = context.getSharedPreferences(
+                                            "UserData",
+                                            Context.MODE_PRIVATE
+                                        ).edit()
+                                        editor.putString(
+                                            "reversi_with_computer",
+                                            data_from_memory
+                                        )
+                                        editor.apply()
+                                        Black_or_grey_chip = "grey"
+                                    } else {
+                                        FIELD[i2][j2] = 2
+                                        History.add(Triple(i2, j2, 2))
+                                        val data_from_memory = encode(History)
+                                        val editor = context.getSharedPreferences(
+                                            "UserData",
+                                            Context.MODE_PRIVATE
+                                        ).edit()
+                                        editor.putString(
+                                            "reversi_with_computer",
+                                            data_from_memory
+                                        )
+                                        editor.apply()
+                                        Black_or_grey_chip = "black"
+                                    }
+
+
+                                    ////////////
+                                    fla = true
+
+                                    for (i in 0..7) {
+                                        for (j in 0..7) {
+                                            Array_of_illumination[i][j] = 0
+                                        }
+                                    }
+                                    change_array(i2, j2)
+
+                                    if (Black_or_grey_chip == "black") {
+                                        illumination(1)
+                                    } else {
+                                        illumination(2)
+                                    }
+
+                                    /*for (i in 0 until Array_of_illumination.size) {
+                                for (j in 0 until Array_of_illumination[0].size) {
+                                    if (Array_of_illumination[i][j] == 1) {
+                                        flag = false
+                                    }
+                                }
+                            }*/
+                                    break
+                                }
+                            }
+                            if (fla == true) {
+                                break
+                            }
+                        }
+                    }
+
+                    if (fla == false) {
+                        for (i2 in 0 until Array_of_illumination.size) {
+                            for (j2 in 0 until Array_of_illumination[0].size) {
+                                if (Array_of_illumination[i2][j2] != 0) {
+                                    if (Black_or_grey_chip == "black") {
+                                        FIELD[i2][j2] = 1
+                                        History.add(Triple(i2, j2, 1))
+                                        val data_from_memory = encode(History)
+                                        val editor = context.getSharedPreferences(
+                                            "UserData",
+                                            Context.MODE_PRIVATE
+                                        ).edit()
+                                        editor.putString(
+                                            "reversi_with_computer",
+                                            data_from_memory
+                                        )
+                                        editor.apply()
+                                        Black_or_grey_chip = "grey"
+                                    } else {
+                                        FIELD[i2][j2] = 2
+                                        History.add(Triple(i2, j2, 2))
+                                        val data_from_memory = encode(History)
+                                        val editor = context.getSharedPreferences(
+                                            "UserData",
+                                            Context.MODE_PRIVATE
+                                        ).edit()
+                                        editor.putString(
+                                            "reversi_with_computer",
+                                            data_from_memory
+                                        )
+                                        editor.apply()
+                                        Black_or_grey_chip = "black"
+                                    }
+
+
+                                    ////////////
+                                    fla = true
+
+                                    for (i in 0..7) {
+                                        for (j in 0..7) {
+                                            Array_of_illumination[i][j] = 0
+                                        }
+                                    }
+                                    change_array(i2, j2)
+
+                                    if (Black_or_grey_chip == "black") {
+                                        illumination(1)
+                                    } else {
+                                        illumination(2)
+                                    }
+
+                                    break
+                                }
+                            }
+                            if (fla == true) {
+                                break
+                            }
+                        }
+                    }
+
+
+                    blockedOnTouch = false
+                    invalidate()
+                }
+
+                if (flag)                                    //если игрок не может походить то ход переходит другому
+                {
+                    blockedOnTouch = !blockedOnTouch
+
+                    if (Black_or_grey_chip == "black") {
+                        Black_or_grey_chip = "grey"
+                        illumination(2)
+                    } else {
+                        Black_or_grey_chip = "black"
+                        illumination(1)
+                    }
+                }
+
+
+                var dialog: Show_Result_with_Computer? = null
+
+
+                if (check_win() > 0) {       //TODO more check
+                    if (check_win() == 2 && ReversiMode == 1) {
+                        dialog = Show_Result_with_Computer(activity)
+                        dialog.showResult_with_Computer("Поражение", "Reversi", activity)
+                    }
+                    if (check_win() == 1 && ReversiMode == 1) {
+                        dialog = Show_Result_with_Computer(activity)
+                        dialog.showResult_with_Computer("Победа", "Reversi", activity)
+                    }
+                    if (check_win() == 2 && ReversiMode == 2) {
+                        dialog = Show_Result_with_Computer(activity)
+                        dialog.showResult_with_Computer("Победа", "Reversi", activity)
+                    }
+                    if (check_win() == 1 && ReversiMode == 2) {
+                        dialog = Show_Result_with_Computer(activity)
+                        dialog.showResult_with_Computer("Поражение", "Reversi", activity)
+                    }
+                    if (check_win() == 3) {
+                        dialog = Show_Result_with_Computer(activity)
+                        dialog.showResult_with_Computer("Ничья", "Reversi", activity)
+                    }
+                }
+
+
+            }, delayTime)
+
+
+
+        }
     }
 
 
@@ -1214,7 +1472,7 @@ class CanvasView_reversi_with_computer(context: Context, attrs: AttributeSet?) :
         }
         var dialog: Show_Result_with_Computer? = null
 
-        if(check_win()>0 && event!!.getAction()  == MotionEvent.ACTION_UP && !blocked) {
+        if(check_win()>0 && event!!.getAction()  == MotionEvent.ACTION_UP && !blocked) {     //TODO more check
             if (check_win() == 2 && ReversiMode == 1) {
                 dialog = Show_Result_with_Computer(activity)
                 dialog.showResult_with_Computer("Поражение", "Reversi", activity)
@@ -1319,220 +1577,52 @@ class CanvasView_reversi_with_computer(context: Context, attrs: AttributeSet?) :
                     }
                 }
 
+                if (flag) {                                   //если игрок не может походить то ход переходит другому
+                    blockedOnTouch = !blockedOnTouch
+
+                    if (Black_or_grey_chip == "black") {
+                        Black_or_grey_chip = "grey"
+                        illumination(2)
+                    } else {
+                        Black_or_grey_chip = "black"
+                        illumination(1)
+                    }
+                }
+
                 invalidate()
 
 
-                if ((Black_or_grey_chip == "black" && ReversiMode == 2) || (Black_or_grey_chip == "grey" && ReversiMode == 1)) {
-                        blockedOnTouch = true
-
-                        val handler = android.os.Handler()
-                        handler.postDelayed({
-                            if (!flag) {
-                                var fla = false
-
-                                val list_x: MutableList<Int> = mutableListOf(0, 7, 0, 7)
-                                val list_y: MutableList<Int> = mutableListOf(0, 0, 7, 7)
-
-                                for (i2 in 0 until 3) {
-                                    if (Array_of_illumination[list_x[i2]][list_y[i2]] != 0) {
-                                        if (Black_or_grey_chip == "black") {
-                                            FIELD[list_x[i2]][list_y[i2]] = 1
-                                            History.add(Triple(list_x[i2], list_y[i2], 1))
-                                            val data_from_memory = encode(History)
-                                            val editor = context.getSharedPreferences(
-                                                "UserData",
-                                                Context.MODE_PRIVATE
-                                            ).edit()
-                                            editor.putString(
-                                                "reversi_with_computer",
-                                                data_from_memory
-                                            )
-                                            editor.apply()
-                                            Black_or_grey_chip = "grey"
-                                        } else {
-                                            FIELD[list_x[i2]][list_y[i2]] = 2
-                                            History.add(Triple(list_x[i2], list_y[i2], 2))
-                                            val data_from_memory = encode(History)
-                                            val editor = context.getSharedPreferences(
-                                                "UserData",
-                                                Context.MODE_PRIVATE
-                                            ).edit()
-                                            editor.putString(
-                                                "reversi_with_computer",
-                                                data_from_memory
-                                            )
-                                            editor.apply()
-                                            Black_or_grey_chip = "black"
-                                        }
-
-
-                                        ////////////
-                                        fla = true
-
-                                        for (i in 0..7) {
-                                            for (j in 0..7) {
-                                                Array_of_illumination[i][j] = 0
-                                            }
-                                        }
-                                        change_array(list_x[i2], list_y[i2])
-
-                                        if (Black_or_grey_chip == "black") {
-                                            illumination(1)
-                                        } else {
-                                            illumination(2)
-                                        }
-
-                                        break
-                                    }
-                                }
-
-
-                                if (fla == false) {
-                                    for (i2 in 2 until 5) {
-                                        for (j2 in 2 until 5) {
-                                            if (Array_of_illumination[i2][j2] != 0) {
-                                                if (Black_or_grey_chip == "black") {
-                                                    FIELD[i2][j2] = 1
-                                                    History.add(Triple(i2, j2, 1))
-                                                    val data_from_memory = encode(History)
-                                                    val editor = context.getSharedPreferences(
-                                                        "UserData",
-                                                        Context.MODE_PRIVATE
-                                                    ).edit()
-                                                    editor.putString(
-                                                        "reversi_with_computer",
-                                                        data_from_memory
-                                                    )
-                                                    editor.apply()
-                                                    Black_or_grey_chip = "grey"
-                                                } else {
-                                                    FIELD[i2][j2] = 2
-                                                    History.add(Triple(i2, j2, 2))
-                                                    val data_from_memory = encode(History)
-                                                    val editor = context.getSharedPreferences(
-                                                        "UserData",
-                                                        Context.MODE_PRIVATE
-                                                    ).edit()
-                                                    editor.putString(
-                                                        "reversi_with_computer",
-                                                        data_from_memory
-                                                    )
-                                                    editor.apply()
-                                                    Black_or_grey_chip = "black"
-                                                }
-
-
-                                                ////////////
-                                                fla = true
-
-                                                for (i in 0..7) {
-                                                    for (j in 0..7) {
-                                                        Array_of_illumination[i][j] = 0
-                                                    }
-                                                }
-                                                change_array(i2, j2)
-
-                                                if (Black_or_grey_chip == "black") {
-                                                    illumination(1)
-                                                } else {
-                                                    illumination(2)
-                                                }
-
-                                                /*for (i in 0 until Array_of_illumination.size) {
-                                            for (j in 0 until Array_of_illumination[0].size) {
-                                                if (Array_of_illumination[i][j] == 1) {
-                                                    flag = false
-                                                }
-                                            }
-                                        }*/
-                                                break
-                                            }
-                                        }
-                                        if (fla == true) {
-                                            break
-                                        }
-                                    }
-                                }
-
-                                if (fla == false) {
-                                    for (i2 in 0 until Array_of_illumination.size) {
-                                        for (j2 in 0 until Array_of_illumination[0].size) {
-                                            if (Array_of_illumination[i2][j2] != 0) {
-                                                if (Black_or_grey_chip == "black") {
-                                                    FIELD[i2][j2] = 1
-                                                    History.add(Triple(i2, j2, 1))
-                                                    val data_from_memory = encode(History)
-                                                    val editor = context.getSharedPreferences(
-                                                        "UserData",
-                                                        Context.MODE_PRIVATE
-                                                    ).edit()
-                                                    editor.putString(
-                                                        "reversi_with_computer",
-                                                        data_from_memory
-                                                    )
-                                                    editor.apply()
-                                                    Black_or_grey_chip = "grey"
-                                                } else {
-                                                    FIELD[i2][j2] = 2
-                                                    History.add(Triple(i2, j2, 2))
-                                                    val data_from_memory = encode(History)
-                                                    val editor = context.getSharedPreferences(
-                                                        "UserData",
-                                                        Context.MODE_PRIVATE
-                                                    ).edit()
-                                                    editor.putString(
-                                                        "reversi_with_computer",
-                                                        data_from_memory
-                                                    )
-                                                    editor.apply()
-                                                    Black_or_grey_chip = "black"
-                                                }
-
-
-                                                ////////////
-                                                fla = true
-
-                                                for (i in 0..7) {
-                                                    for (j in 0..7) {
-                                                        Array_of_illumination[i][j] = 0
-                                                    }
-                                                }
-                                                change_array(i2, j2)
-
-                                                if (Black_or_grey_chip == "black") {
-                                                    illumination(1)
-                                                } else {
-                                                    illumination(2)
-                                                }
-
-                                                break
-                                            }
-                                        }
-                                        if (fla == true) {
-                                            break
-                                        }
-                                    }
-                                }
-
-                            }
-                            blockedOnTouch = false
-                            invalidate()
-
-
-                            if (flag)                                    //если игрок не может походить то ход переходит другому
-                            {
-                                if (Black_or_grey_chip == "black") {
-                                    Black_or_grey_chip = "grey"
-                                    illumination(2)
-                                } else {
-                                    Black_or_grey_chip = "black"
-                                    illumination(1)
-                                }
-                            }
-
-
-                        }, delayTime)
+                if(check_win()>0) {       //TODO more check
+                    if (check_win() == 2 && ReversiMode == 1) {
+                        dialog = Show_Result_with_Computer(activity)
+                        dialog.showResult_with_Computer("Поражение", "Reversi", activity)
+                        return true
                     }
+                    if (check_win() == 1 && ReversiMode == 1) {
+                        dialog = Show_Result_with_Computer(activity)
+                        dialog.showResult_with_Computer("Победа", "Reversi", activity)
+                        return true
+                    }
+                    if (check_win() == 2 && ReversiMode == 2) {
+                        dialog = Show_Result_with_Computer(activity)
+                        dialog.showResult_with_Computer("Победа", "Reversi", activity)
+                        return true
+                    }
+                    if (check_win() == 1 && ReversiMode == 2) {
+                        dialog = Show_Result_with_Computer(activity)
+                        dialog.showResult_with_Computer("Поражение", "Reversi", activity)
+                        return true
+                    }
+                    if(check_win() == 3)
+                    {
+                        dialog = Show_Result_with_Computer(activity)
+                        dialog.showResult_with_Computer("Ничья", "Reversi", activity)
+                        return true
+                    }
+                }
+
+
+
 
 
             }

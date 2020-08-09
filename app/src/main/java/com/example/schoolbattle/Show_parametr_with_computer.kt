@@ -85,7 +85,6 @@ class Show_parametr_with_computer(activity: Activity) {
             }
         }
 
-
         if (gameType == "DotGame") {
             val changeModeButton = dialog_with_computer.findViewById(R.id.changeModeWithComputer) as Button
             changeModeButton.setOnClickListener{

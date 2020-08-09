@@ -1014,6 +1014,8 @@ class CanvasView_corners_with_computer (context: Context, attrs: AttributeSet?) 
 
     }
 
+
+
     var blocked : Boolean = false
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         advertising_line = (height - 8*step)/2
@@ -1033,16 +1035,14 @@ class CanvasView_corners_with_computer (context: Context, attrs: AttributeSet?) 
         var dialog: Show_Result_with_Computer? = null
 
         if(chek_win()>0 && event!!.getAction()  == MotionEvent.ACTION_UP && !blocked) {
-            if (chek_win() == 2) {
-                dialog =
-                    Show_Result_with_Computer(activity)
-                dialog?.showResult_with_Computer("Игрок 1 победил", "AngleGame", activity)
+            if (chek_win() == AngleGameMode) {         //TODO more check
+                dialog = Show_Result_with_Computer(activity)
+                dialog?.showResult_with_Computer("Победа", "AngleGame", activity)
                 return true
             }
-            if (chek_win() == 1) {
-                dialog =
-                    Show_Result_with_Computer(activity)
-                dialog?.showResult_with_Computer("Игрок 2 победил", "AngleGame", activity)
+            if (chek_win() != AngleGameMode) {
+                dialog = Show_Result_with_Computer(activity)
+                dialog?.showResult_with_Computer("Поражение", "AngleGame", activity)
                 return true
             }
         }
@@ -1111,6 +1111,20 @@ class CanvasView_corners_with_computer (context: Context, attrs: AttributeSet?) 
         Log.w("DOPO",Black_or_grey_chip)
 
 
+        if(chek_win()>0) {
+            if (chek_win() == AngleGameMode) {         //TODO more check
+                dialog = Show_Result_with_Computer(activity)
+                dialog?.showResult_with_Computer("Победа", "AngleGame", activity)
+                return true
+            }
+            if (chek_win() != AngleGameMode) {
+                dialog = Show_Result_with_Computer(activity)
+                dialog?.showResult_with_Computer("Поражение", "AngleGame", activity)
+                return true
+            }
+        }
+
+
         if ((Black_or_grey_chip == "black" && AngleGameMode == 2) || (Black_or_grey_chip == "grey" && AngleGameMode == 1)) {
             blockedOnTouch = true
 
@@ -1169,7 +1183,6 @@ class CanvasView_corners_with_computer (context: Context, attrs: AttributeSet?) 
                                 }
                             }
 
-
                             if (AngleGameMode == 2 && flag == 0) {
                                 for (i2 in i..7) {
                                     for (j2 in 0..j) {
@@ -1211,8 +1224,6 @@ class CanvasView_corners_with_computer (context: Context, attrs: AttributeSet?) 
                                     }
                                 }
                             }
-
-
 
 
                             if (flag == 0) {
@@ -1281,6 +1292,19 @@ class CanvasView_corners_with_computer (context: Context, attrs: AttributeSet?) 
             }, delayTime)
         }
 
+
+        if(chek_win()>0) {
+            if (chek_win() == AngleGameMode) {         //TODO more check
+                dialog = Show_Result_with_Computer(activity)
+                dialog?.showResult_with_Computer("Победа", "AngleGame", activity)
+                return true
+            }
+            if (chek_win() != AngleGameMode) {
+                dialog = Show_Result_with_Computer(activity)
+                dialog?.showResult_with_Computer("Поражение", "AngleGame", activity)
+                return true
+            }
+        }
 
         return true
     }

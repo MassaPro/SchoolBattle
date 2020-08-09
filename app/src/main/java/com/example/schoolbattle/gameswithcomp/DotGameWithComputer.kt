@@ -217,523 +217,23 @@ class DotGameWithComputer : AppCompatActivity() {
             val handler = android.os.Handler()
             handler.postDelayed({
 
-                var fla = false
-                for (i in 0..signature_canvas_dots_with_computer.size_field_x) {                   //вырисовка точек
-                    for (j in 0..signature_canvas_dots_with_computer.size_field_y) {
-                        if (i + 2 <= signature_canvas_dots_with_computer.size_field_x && j + 1 <= signature_canvas_dots_with_computer.size_field_y && j > 0) {
-                            var a1 = 0
-                            if (signature_canvas_dots_with_computer.FIELD[i][j] != 0)
-                                a1++
-                            if (signature_canvas_dots_with_computer.FIELD[i + 1][j + 1] != 0)
-                                a1++
-                            if (signature_canvas_dots_with_computer.FIELD[i + 1][j - 1] != 0)
-                                a1++
-                            if (signature_canvas_dots_with_computer.FIELD[i + 2][j] != 0)
-                                a1++
 
-                            if (a1 == 3) {
-                                var X = -1
-                                var Y = -1
-                                if (signature_canvas_dots_with_computer.FIELD[i][j] == 0) {
-                                    X = i
-                                    Y = j
-                                }
-                                if (signature_canvas_dots_with_computer.FIELD[i + 1][j - 1] == 0) {
-                                    X = i + 1
-                                    Y = j - 1
-                                }
-                                if (signature_canvas_dots_with_computer.FIELD[i + 1][j + 1] == 0) {
-                                    X = i + 1
-                                    Y = j + 1
-                                }
-                                if (signature_canvas_dots_with_computer.FIELD[i + 2][j] == 0) {
-                                    X = i + 2
-                                    Y = j
-                                }
-
-                                if (X != -1) {
-                                    if (signature_canvas_dots_with_computer.FIELD[X][Y] == 0 && signature_canvas_dots_with_computer.a[Y][X] == 0) {
-                                        if (signature_canvas_dots_with_computer.red_or_blue == 1) {
-                                            signature_canvas_dots_with_computer.red_or_blue = 2
-                                            signature_canvas_dots_with_computer.FIELD[X][Y] = 1
-                                            signature_canvas_dots_with_computer.a[Y][X] = 1
-                                        } else {
-                                            signature_canvas_dots_with_computer.red_or_blue = 1
-                                            signature_canvas_dots_with_computer.FIELD[X][Y] = 2
-                                            signature_canvas_dots_with_computer.a[Y][X] = 2
-                                        }
-                                        signature_canvas_dots_with_computer.History.add(Triple(X, Y, signature_canvas_dots_with_computer.FIELD[X][Y]))
-                                        var data_from_memory = encode(signature_canvas_dots_with_computer.History)
-                                        val editor =
-                                            getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                        editor.putString("dot_with_computer", data_from_memory)
-                                        editor.apply()
-
-                                        fla = true
-                                        break
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    if (fla)
-                        break
+                if (signature_canvas_dots_with_computer.red_or_blue == 1) {
+                    signature_canvas_dots_with_computer.red_or_blue = 2
+                    signature_canvas_dots_with_computer.FIELD[5][7] = 1
+                    signature_canvas_dots_with_computer.a[7][5] = 1
+                } else {
+                    signature_canvas_dots_with_computer.red_or_blue = 1
+                    signature_canvas_dots_with_computer.FIELD[5][7] = 2
+                    signature_canvas_dots_with_computer.a[5][7] = 2
                 }
+                signature_canvas_dots_with_computer.History.add(Triple(5, 7, signature_canvas_dots_with_computer.FIELD[5][7]))
+                var data_from_memory = encode(signature_canvas_dots_with_computer.History)
+                val editor =
+                    getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("dot_with_computer", data_from_memory)
+                editor.apply()
 
-                var varToCheck = signature_canvas_dots_with_computer.red_or_blue
-
-                if ((0..1).random() == 0)
-                    varToCheck = 3 - varToCheck
-
-                if (!fla) {
-                    for (i in 0..signature_canvas_dots_with_computer.size_field_x) {                   //вырисовка точек
-                        for (j in 0..signature_canvas_dots_with_computer.size_field_y) {
-                            if (i + 1 <= signature_canvas_dots_with_computer.size_field_x && j + 1 <= signature_canvas_dots_with_computer.size_field_y) {
-                                var a1 = 0
-                                if (signature_canvas_dots_with_computer.FIELD[i][j] == varToCheck)
-                                    a1++
-                                if (signature_canvas_dots_with_computer.FIELD[i][j + 1] == varToCheck)
-                                    a1++
-                                if (signature_canvas_dots_with_computer.FIELD[i + 1][j + 1] == varToCheck)
-                                    a1++
-
-                                if (a1 == 2) {
-                                    var X = -1
-                                    var Y = -1
-                                    if (signature_canvas_dots_with_computer.FIELD[i][j] == 0) {
-                                        X = i
-                                        Y = j
-                                    }
-                                    if (signature_canvas_dots_with_computer.FIELD[i][j + 1] == 0) {
-                                        X = i
-                                        Y = j + 1
-                                    }
-                                    if (signature_canvas_dots_with_computer.FIELD[i + 1][j + 1] == 0) {
-                                        X = i + 1
-                                        Y = j + 1
-                                    }
-
-                                    if (X != -1) {
-                                        if (signature_canvas_dots_with_computer.FIELD[X][Y] == 0 && signature_canvas_dots_with_computer.a[Y][X] == 0) {
-                                            if (signature_canvas_dots_with_computer.red_or_blue == 1) {
-                                                signature_canvas_dots_with_computer.red_or_blue = 2
-                                                signature_canvas_dots_with_computer.FIELD[X][Y] = 1
-                                                signature_canvas_dots_with_computer.a[Y][X] = 1
-                                            } else {
-                                                signature_canvas_dots_with_computer.red_or_blue = 1
-                                                signature_canvas_dots_with_computer.FIELD[X][Y] = 2
-                                                signature_canvas_dots_with_computer.a[Y][X] = 2
-                                            }
-                                            signature_canvas_dots_with_computer.History.add(Triple(X, Y, signature_canvas_dots_with_computer.FIELD[X][Y]))
-                                            var data_from_memory = encode(signature_canvas_dots_with_computer.History)
-                                            val editor =
-                                                getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                            editor.putString("dot_with_computer", data_from_memory)
-                                            editor.apply()
-
-                                            fla = true
-                                            break
-                                        }
-                                    }
-                                }
-                            }
-
-                            if (i > 0 && j + 1 <= signature_canvas_dots_with_computer.size_field_y) {
-                                var a1 = 0
-                                if (signature_canvas_dots_with_computer.FIELD[i][j] == varToCheck)
-                                    a1++
-                                if (signature_canvas_dots_with_computer.FIELD[i][j + 1] == varToCheck)
-                                    a1++
-                                if (signature_canvas_dots_with_computer.FIELD[i - 1][j + 1] == varToCheck)
-                                    a1++
-
-                                if (a1 == 2) {
-                                    var X = -1
-                                    var Y = -1
-                                    if (signature_canvas_dots_with_computer.FIELD[i][j] == 0) {
-                                        X = i
-                                        Y = j
-                                    }
-                                    if (signature_canvas_dots_with_computer.FIELD[i][j + 1] == 0) {
-                                        X = i
-                                        Y = j + 1
-                                    }
-                                    if (signature_canvas_dots_with_computer.FIELD[i - 1][j + 1] == 0) {
-                                        X = i - 1
-                                        Y = j + 1
-                                    }
-
-                                    if (X != -1) {
-                                        if (signature_canvas_dots_with_computer.FIELD[X][Y] == 0 && signature_canvas_dots_with_computer.a[Y][X] == 0) {
-                                            if (signature_canvas_dots_with_computer.red_or_blue == 1) {
-                                                signature_canvas_dots_with_computer.red_or_blue = 2
-                                                signature_canvas_dots_with_computer.FIELD[X][Y] = 1
-                                                signature_canvas_dots_with_computer.a[Y][X] = 1
-                                            } else {
-                                                signature_canvas_dots_with_computer.red_or_blue = 1
-                                                signature_canvas_dots_with_computer.FIELD[X][Y] = 2
-                                                signature_canvas_dots_with_computer.a[Y][X] = 2
-                                            }
-                                            signature_canvas_dots_with_computer.History.add(Triple(X, Y, signature_canvas_dots_with_computer.FIELD[X][Y]))
-                                            var data_from_memory = encode(signature_canvas_dots_with_computer.History)
-                                            val editor =
-                                                getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                            editor.putString("dot_with_computer", data_from_memory)
-                                            editor.apply()
-
-                                            fla = true
-                                            break
-                                        }
-                                    }
-                                }
-                            }
-
-                            if (i > 0 && j + 1 <= signature_canvas_dots_with_computer.size_field_y) {
-                                var a1 = 0
-                                if (signature_canvas_dots_with_computer.FIELD[i][j] == varToCheck)
-                                    a1++
-                                if (signature_canvas_dots_with_computer.FIELD[i - 1][j] == varToCheck)
-                                    a1++
-                                if (signature_canvas_dots_with_computer.FIELD[i][j + 1] == varToCheck)
-                                    a1++
-
-                                if (a1 == 2) {
-                                    var X = -1
-                                    var Y = -1
-                                    if (signature_canvas_dots_with_computer.FIELD[i][j] == 0) {
-                                        X = i
-                                        Y = j
-                                    }
-                                    if (signature_canvas_dots_with_computer.FIELD[i - 1][j] == 0) {
-                                        X = i - 1
-                                        Y = j
-                                    }
-                                    if (signature_canvas_dots_with_computer.FIELD[i][j + 1] == 0) {
-                                        X = i
-                                        Y = j + 1
-                                    }
-
-                                    if (X != -1) {
-                                        if (signature_canvas_dots_with_computer.FIELD[X][Y] == 0 && signature_canvas_dots_with_computer.a[Y][X] == 0) {
-                                            if (signature_canvas_dots_with_computer.red_or_blue == 1) {
-                                                signature_canvas_dots_with_computer.red_or_blue = 2
-                                                signature_canvas_dots_with_computer.FIELD[X][Y] = 1
-                                                signature_canvas_dots_with_computer.a[Y][X] = 1
-                                            } else {
-                                                signature_canvas_dots_with_computer.red_or_blue = 1
-                                                signature_canvas_dots_with_computer.FIELD[X][Y] = 2
-                                                signature_canvas_dots_with_computer.a[Y][X] = 2
-                                            }
-                                            signature_canvas_dots_with_computer.History.add(Triple(X, Y, signature_canvas_dots_with_computer.FIELD[X][Y]))
-                                            var data_from_memory = encode(signature_canvas_dots_with_computer.History)
-                                            val editor =
-                                                getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                            editor.putString("dot_with_computer", data_from_memory)
-                                            editor.apply()
-
-                                            fla = true
-                                            break
-                                        }
-                                    }
-                                }
-                            }
-
-                            if (i + 1 <= signature_canvas_dots_with_computer.size_field_x && j + 1 <= signature_canvas_dots_with_computer.size_field_y) {
-                                var a1 = 0
-                                if (signature_canvas_dots_with_computer.FIELD[i][j] == varToCheck)
-                                    a1++
-                                if (signature_canvas_dots_with_computer.FIELD[i + 1][j] == varToCheck)
-                                    a1++
-                                if (signature_canvas_dots_with_computer.FIELD[i][j + 1] == varToCheck)
-                                    a1++
-
-                                if (a1 == 2) {
-                                    var X = -1
-                                    var Y = -1
-                                    if (signature_canvas_dots_with_computer.FIELD[i][j] == 0) {
-                                        X = i
-                                        Y = j
-                                    }
-                                    if (signature_canvas_dots_with_computer.FIELD[i + 1][j] == 0) {
-                                        X = i + 1
-                                        Y = j
-                                    }
-                                    if (signature_canvas_dots_with_computer.FIELD[i][j + 1] == 0) {
-                                        X = i
-                                        Y = j + 1
-                                    }
-
-                                    if (X != -1) {
-                                        if (signature_canvas_dots_with_computer.FIELD[X][Y] == 0 && signature_canvas_dots_with_computer.a[Y][X] == 0) {
-                                            if (signature_canvas_dots_with_computer.red_or_blue == 1) {
-                                                signature_canvas_dots_with_computer.red_or_blue = 2
-                                                signature_canvas_dots_with_computer.FIELD[X][Y] = 1
-                                                signature_canvas_dots_with_computer.a[Y][X] = 1
-                                            } else {
-                                                signature_canvas_dots_with_computer.red_or_blue = 1
-                                                signature_canvas_dots_with_computer.FIELD[X][Y] = 2
-                                                signature_canvas_dots_with_computer.a[Y][X] = 2
-                                            }
-                                            signature_canvas_dots_with_computer.History.add(Triple(X, Y, signature_canvas_dots_with_computer.FIELD[X][Y]))
-                                            var data_from_memory = encode(signature_canvas_dots_with_computer.History)
-                                            val editor =
-                                                getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                            editor.putString("dot_with_computer", data_from_memory)
-                                            editor.apply()
-
-                                            fla = true
-                                            break
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        if (fla)
-                            break
-                    }
-                }
-
-                varToCheck = 3 - varToCheck
-
-                if (!fla) {
-                    for (i in 0..signature_canvas_dots_with_computer.size_field_x) {                   //вырисовка точек
-                        for (j in 0..signature_canvas_dots_with_computer.size_field_y) {
-                            if (i + 1 <= signature_canvas_dots_with_computer.size_field_x && j + 1 <= signature_canvas_dots_with_computer.size_field_y) {
-                                var a1 = 0
-                                if (signature_canvas_dots_with_computer.FIELD[i][j] == varToCheck)
-                                    a1++
-                                if (signature_canvas_dots_with_computer.FIELD[i][j + 1] == varToCheck)
-                                    a1++
-                                if (signature_canvas_dots_with_computer.FIELD[i + 1][j + 1] == varToCheck)
-                                    a1++
-
-                                if (a1 == 2) {
-                                    var X = -1
-                                    var Y = -1
-                                    if (signature_canvas_dots_with_computer.FIELD[i][j] == 0) {
-                                        X = i
-                                        Y = j
-                                    }
-                                    if (signature_canvas_dots_with_computer.FIELD[i][j + 1] == 0) {
-                                        X = i
-                                        Y = j + 1
-                                    }
-                                    if (signature_canvas_dots_with_computer.FIELD[i + 1][j + 1] == 0) {
-                                        X = i + 1
-                                        Y = j + 1
-                                    }
-
-                                    if (X != -1) {
-                                        if (signature_canvas_dots_with_computer.FIELD[X][Y] == 0 && signature_canvas_dots_with_computer.a[Y][X] == 0) {
-                                            if (signature_canvas_dots_with_computer.red_or_blue == 1) {
-                                                signature_canvas_dots_with_computer.red_or_blue = 2
-                                                signature_canvas_dots_with_computer.FIELD[X][Y] = 1
-                                                signature_canvas_dots_with_computer.a[Y][X] = 1
-                                            } else {
-                                                signature_canvas_dots_with_computer.red_or_blue = 1
-                                                signature_canvas_dots_with_computer.FIELD[X][Y] = 2
-                                                signature_canvas_dots_with_computer.a[Y][X] = 2
-                                            }
-                                            signature_canvas_dots_with_computer.History.add(Triple(X, Y, signature_canvas_dots_with_computer.FIELD[X][Y]))
-                                            var data_from_memory = encode(signature_canvas_dots_with_computer.History)
-                                            val editor =
-                                                getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                            editor.putString("dot_with_computer", data_from_memory)
-                                            editor.apply()
-
-                                            fla = true
-                                            break
-                                        }
-                                    }
-                                }
-                            }
-
-                            if (i > 0 && j + 1 <= signature_canvas_dots_with_computer.size_field_y) {
-                                var a1 = 0
-                                if (signature_canvas_dots_with_computer.FIELD[i][j] == varToCheck)
-                                    a1++
-                                if (signature_canvas_dots_with_computer.FIELD[i][j + 1] == varToCheck)
-                                    a1++
-                                if (signature_canvas_dots_with_computer.FIELD[i - 1][j + 1] == varToCheck)
-                                    a1++
-
-                                if (a1 == 2) {
-                                    var X = -1
-                                    var Y = -1
-                                    if (signature_canvas_dots_with_computer.FIELD[i][j] == 0) {
-                                        X = i
-                                        Y = j
-                                    }
-                                    if (signature_canvas_dots_with_computer.FIELD[i][j + 1] == 0) {
-                                        X = i
-                                        Y = j + 1
-                                    }
-                                    if (signature_canvas_dots_with_computer.FIELD[i - 1][j + 1] == 0) {
-                                        X = i - 1
-                                        Y = j + 1
-                                    }
-
-                                    if (X != -1) {
-                                        if (signature_canvas_dots_with_computer.FIELD[X][Y] == 0 && signature_canvas_dots_with_computer.a[Y][X] == 0) {
-                                            if (signature_canvas_dots_with_computer.red_or_blue == 1) {
-                                                signature_canvas_dots_with_computer.red_or_blue = 2
-                                                signature_canvas_dots_with_computer.FIELD[X][Y] = 1
-                                                signature_canvas_dots_with_computer.a[Y][X] = 1
-                                            } else {
-                                                signature_canvas_dots_with_computer.red_or_blue = 1
-                                                signature_canvas_dots_with_computer.FIELD[X][Y] = 2
-                                                signature_canvas_dots_with_computer.a[Y][X] = 2
-                                            }
-                                            signature_canvas_dots_with_computer.History.add(Triple(X, Y, signature_canvas_dots_with_computer.FIELD[X][Y]))
-                                            var data_from_memory = encode(signature_canvas_dots_with_computer.History)
-                                            val editor =
-                                                getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                            editor.putString("dot_with_computer", data_from_memory)
-                                            editor.apply()
-
-                                            fla = true
-                                            break
-                                        }
-                                    }
-                                }
-                            }
-
-                            if (i > 0 && j + 1 <= signature_canvas_dots_with_computer.size_field_y) {
-                                var a1 = 0
-                                if (signature_canvas_dots_with_computer.FIELD[i][j] == varToCheck)
-                                    a1++
-                                if (signature_canvas_dots_with_computer.FIELD[i - 1][j] == varToCheck)
-                                    a1++
-                                if (signature_canvas_dots_with_computer.FIELD[i][j + 1] == varToCheck)
-                                    a1++
-
-                                if (a1 == 2) {
-                                    var X = -1
-                                    var Y = -1
-                                    if (signature_canvas_dots_with_computer.FIELD[i][j] == 0) {
-                                        X = i
-                                        Y = j
-                                    }
-                                    if (signature_canvas_dots_with_computer.FIELD[i - 1][j] == 0) {
-                                        X = i - 1
-                                        Y = j
-                                    }
-                                    if (signature_canvas_dots_with_computer.FIELD[i][j + 1] == 0) {
-                                        X = i
-                                        Y = j + 1
-                                    }
-
-                                    if (X != -1) {
-                                        if (signature_canvas_dots_with_computer.FIELD[X][Y] == 0 && signature_canvas_dots_with_computer.a[Y][X] == 0) {
-                                            if (signature_canvas_dots_with_computer.red_or_blue == 1) {
-                                                signature_canvas_dots_with_computer.red_or_blue = 2
-                                                signature_canvas_dots_with_computer.FIELD[X][Y] = 1
-                                                signature_canvas_dots_with_computer.a[Y][X] = 1
-                                            } else {
-                                                signature_canvas_dots_with_computer.red_or_blue = 1
-                                                signature_canvas_dots_with_computer.FIELD[X][Y] = 2
-                                                signature_canvas_dots_with_computer.a[Y][X] = 2
-                                            }
-                                            signature_canvas_dots_with_computer.History.add(Triple(X, Y, signature_canvas_dots_with_computer.FIELD[X][Y]))
-                                            var data_from_memory = encode(signature_canvas_dots_with_computer.History)
-                                            val editor =
-                                                getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                            editor.putString("dot_with_computer", data_from_memory)
-                                            editor.apply()
-
-                                            fla = true
-                                            break
-                                        }
-                                    }
-                                }
-                            }
-
-                            if (i + 1 <= signature_canvas_dots_with_computer.size_field_x && j + 1 <= signature_canvas_dots_with_computer.size_field_y) {
-                                var a1 = 0
-                                if (signature_canvas_dots_with_computer.FIELD[i][j] == varToCheck)
-                                    a1++
-                                if (signature_canvas_dots_with_computer.FIELD[i + 1][j] == varToCheck)
-                                    a1++
-                                if (signature_canvas_dots_with_computer.FIELD[i][j + 1] == varToCheck)
-                                    a1++
-
-                                if (a1 == 2) {
-                                    var X = -1
-                                    var Y = -1
-                                    if (signature_canvas_dots_with_computer.FIELD[i][j] == 0) {
-                                        X = i
-                                        Y = j
-                                    }
-                                    if (signature_canvas_dots_with_computer.FIELD[i + 1][j] == 0) {
-                                        X = i + 1
-                                        Y = j
-                                    }
-                                    if (signature_canvas_dots_with_computer.FIELD[i][j + 1] == 0) {
-                                        X = i
-                                        Y = j + 1
-                                    }
-
-                                    if (X != -1) {
-                                        if (signature_canvas_dots_with_computer.FIELD[X][Y] == 0 && signature_canvas_dots_with_computer.a[Y][X] == 0) {
-                                            if (signature_canvas_dots_with_computer.red_or_blue == 1) {
-                                                signature_canvas_dots_with_computer.red_or_blue = 2
-                                                signature_canvas_dots_with_computer.FIELD[X][Y] = 1
-                                                signature_canvas_dots_with_computer.a[Y][X] = 1
-                                            } else {
-                                                signature_canvas_dots_with_computer.red_or_blue = 1
-                                                signature_canvas_dots_with_computer.FIELD[X][Y] = 2
-                                                signature_canvas_dots_with_computer.a[Y][X] = 2
-                                            }
-                                            signature_canvas_dots_with_computer.History.add(Triple(X, Y, signature_canvas_dots_with_computer.FIELD[X][Y]))
-                                            var data_from_memory = encode(signature_canvas_dots_with_computer.History)
-                                            val editor =
-                                                getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                            editor.putString("dot_with_computer", data_from_memory)
-                                            editor.apply()
-
-                                            fla = true
-                                            break
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        if (fla)
-                            break
-                    }
-                }
-
-                if (!fla) {
-                    for (i in 0..signature_canvas_dots_with_computer.size_field_x) {                   //вырисовка точек
-                        for (j in 0..signature_canvas_dots_with_computer.size_field_y) {
-                            val X = i
-                            val Y = j
-                            if (signature_canvas_dots_with_computer.FIELD[X][Y] == 0 && signature_canvas_dots_with_computer.a[Y][X] == 0) {
-                                if (signature_canvas_dots_with_computer.red_or_blue == 1) {
-                                    signature_canvas_dots_with_computer.red_or_blue = 2
-                                    signature_canvas_dots_with_computer.FIELD[X][Y] = 1
-                                    signature_canvas_dots_with_computer.a[Y][X] = 1
-                                } else {
-                                    signature_canvas_dots_with_computer.red_or_blue = 1
-                                    signature_canvas_dots_with_computer.FIELD[X][Y] = 2
-                                    signature_canvas_dots_with_computer.a[Y][X] = 2
-                                }
-                                signature_canvas_dots_with_computer.History.add(Triple(X, Y, signature_canvas_dots_with_computer.FIELD[X][Y]))
-                                var data_from_memory = encode(signature_canvas_dots_with_computer.History)
-                                val editor =
-                                    getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                editor.putString("dot_with_computer", data_from_memory)
-                                editor.apply()
-
-
-                                fla = true
-                                break
-                            }
-                        }
-                        if (fla)
-                            break
-                    }
-                }
 
                 signature_canvas_dots_with_computer.blockedOnTouch = false
                 signature_canvas_dots_with_computer.invalidate()
@@ -801,6 +301,44 @@ class DotGameWithComputer : AppCompatActivity() {
                                 2 - (signature_canvas_dots_with_computer.red_or_blue + 1) % 2
                         }
                         signature_canvas_dots_with_computer.invalidate()
+                    }
+                    if (signature_canvas_dots_with_computer.History.size > 0 && signature_canvas_dots_with_computer.History[signature_canvas_dots_with_computer.History.size - 1].third != DotGameMode) {
+                        signature_canvas_dots_with_computer.History.removeLast()
+                        var data_from_memory = encode(signature_canvas_dots_with_computer.History)
+                        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                        editor.putString("dot_with_computer", data_from_memory)
+                        editor.apply()
+                        signature_canvas_dots_with_computer.red_or_blue = 2
+                        for (i in 0 until signature_canvas_dots_with_computer.FIELD.size) {
+                            for (j in 0 until signature_canvas_dots_with_computer.FIELD[0].size) {
+                                signature_canvas_dots_with_computer.FIELD[i][j] = 0
+                            }
+                        }
+                        signature_canvas_dots_with_computer.a.clear()
+                        for (i in 0 until 16) {
+                            signature_canvas_dots_with_computer.a.add(mutableListOf())
+                        }
+                        for (i in signature_canvas_dots_with_computer.a.indices) {
+                            for (j in 0 until 11) {
+                                signature_canvas_dots_with_computer.a[i].add(0)
+                            }
+                        }
+                        for (i in signature_canvas_dots_with_computer.History) {
+                            signature_canvas_dots_with_computer.FIELD[i.first][i.second] = i.third
+                            signature_canvas_dots_with_computer.a[i.second][i.first] = i.third
+                            signature_canvas_dots_with_computer.find(
+                                i.third,
+                                signature_canvas_dots_with_computer.a,
+                                16,
+                                11
+                            )
+                            signature_canvas_dots_with_computer.red_or_blue =
+                                2 - (signature_canvas_dots_with_computer.red_or_blue + 1) % 2
+                        }
+                        signature_canvas_dots_with_computer.invalidate()
+                    }
+                    if (DotGameMode == signature_canvas_dots_with_computer.red_or_blue) {
+                        signature_canvas_dots_with_computer.blockedOnTouch = true
                     }
                 }
 
@@ -1133,26 +671,15 @@ class CanvasView_Dots_with_computer(context: Context, attrs: AttributeSet?) : Vi
 
 
 
-        var useless = check_win()
+        check_win()
         if (DotGameMode == 1) {
-            t1.text = "Игрок 1: $global_cnt1"
+            t1.text = "Игрок 1: $global_cnt1"         //TODO right check for win
             t2.text = "Игрок 2: $global_cnt2"
         } else {
             t1.text = "Игрок 1: $global_cnt2"
             t2.text = "Игрок 2: $global_cnt1"
         }
 
-
-        /*if(red_or_blue%2 == 0)
-        {
-            t1.text ="игрок 1 думает..."
-            t2.text  = "игрок 2"
-        }
-        else
-        {
-            t1.text ="игрок 1"
-            t2.text  = "игрок 2 думает..."
-        }*/
 
         radius_of_point = 8f
         size_field_x  = 10
@@ -1620,108 +1147,6 @@ class CanvasView_Dots_with_computer(context: Context, attrs: AttributeSet?) : Vi
 
 
 
-
-    }
-
-
-    var blocked : Boolean = false
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-
-        Log.w("kolobok",check_win().toString())
-        if(check_win()<=0)
-        {
-            blocked = false
-        }
-        if(check_win() >0 && event!!.getAction() == MotionEvent.ACTION_UP && blocked)
-        {
-            blocked=!blocked
-        }
-        if(check_win() >0 && event!!.getAction()  == MotionEvent.ACTION_UP && !blocked)
-        {
-            blocked = !blocked
-            var dialog: Show_Result_with_Computer? = null
-            dialog = Show_Result_with_Computer(activity)
-            if(check_win()==1 && DotGameMode == 2)
-            {
-                dialog?.showResult_with_Computer("Победа","DotGame",activity)
-            }
-            if(check_win()==1 && DotGameMode == 1)
-            {
-                dialog?.showResult_with_Computer("Поражение","DotGame",activity)
-            }
-            if(check_win()==2 && DotGameMode == 2)
-            {
-                dialog?.showResult_with_Computer("Поражение","DotGame",activity)
-            }
-            if(check_win()==2 && DotGameMode == 1)
-            {
-                dialog?.showResult_with_Computer("Победа","DotGame",activity)
-            }
-            if(check_win()==3)
-            {
-                dialog?.showResult_with_Computer("Ничья","DotGame",activity)
-            }
-            return true
-        }
-
-        if (blockedOnTouch) {
-            return true
-        }
-
-
-        Is_defined_TREE_OF_WAYS = true
-        circlex = event!!.x
-        circley = event!!.y
-
-        var x1: Float = indent
-        var y1: Float = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())
-        for(i in 0..size_field_x)                    //вырисовка точек
-        {
-            for(j in 0..size_field_y)
-            {
-                if(correction_touch(x1,y1))
-                {
-                    if(FIELD[i][j] == 0 && a[j][i] == 0)
-                    {
-                        if(red_or_blue == 1)
-                        {
-                            red_or_blue = 2
-                            FIELD[i][j] = 1
-                            a[j][i] = 1
-                            p = find(1,a,16,11)
-                        }
-                        else
-                        {
-                            red_or_blue = 1
-                            FIELD[i][j]  = 2
-                            a[j][i]  = 2
-                            p = find(2,a,16,11)
-                        }
-                        History.add(Triple(i,j,FIELD[i][j]))
-                        var data_from_memory = encode(History)
-                        val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                        editor.putString("dot_with_computer", data_from_memory)
-                        editor.apply()
-                        if(SOUND)
-                        {
-                            mSound.play(1,1F,1F,1,0,1F)
-                        }
-                        if(VIBRATION)
-                        {
-                            vibratorService?.vibrate(70)
-                        }
-                        invalidate()
-
-
-                    }
-                }
-                y1+= step
-            }
-            x1  += step
-            y1 = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())
-        }
-
-
         if (red_or_blue == DotGameMode) {
             blockedOnTouch = true
 
@@ -1738,12 +1163,12 @@ class CanvasView_Dots_with_computer(context: Context, attrs: AttributeSet?) : Vi
                             var Y = j
                             if (FIELD[i][j] == 0 && a[j][i] == 0) {
 
-                                var useless = check_win()
+                                check_win()
                                 var save_cnt1 = global_cnt1
                                 var save_cnt2 = global_cnt2
                                 FIELD[i][j] = DotGameMode
                                 a[j][i] = DotGameMode
-                                useless = check_win()
+                                check_win()
                                 FIELD[i][j] = 0
                                 a[j][i] = 0
                                 Log.d("Qwww", "$save_cnt1 $global_cnt1 $save_cnt2 $global_cnt2")
@@ -1783,12 +1208,12 @@ class CanvasView_Dots_with_computer(context: Context, attrs: AttributeSet?) : Vi
                             var Y = j
                             if (FIELD[i][j] == 0 && a[j][i] == 0) {
 
-                                var useless = check_win()
+                                check_win()
                                 var save_cnt1 = global_cnt1
                                 var save_cnt2 = global_cnt2
                                 FIELD[i][j] = 3 - DotGameMode
                                 a[j][i] = 3 - DotGameMode
-                                useless = check_win()
+                                check_win()
                                 FIELD[i][j] = 0
                                 a[j][i] = 0
                                 Log.d("Qwww", "$save_cnt1 $global_cnt1 $save_cnt2 $global_cnt2")
@@ -2104,212 +1529,260 @@ class CanvasView_Dots_with_computer(context: Context, attrs: AttributeSet?) : Vi
                 varToCheck = 3 - varToCheck
 
                 if (!fla) {
-                for (i in 0..size_field_x) {                   //вырисовка точек
-                    for (j in 0..size_field_y) {
-                        if (i + 1 <= size_field_x && j + 1 <= size_field_y) {
-                            var a1 = 0
-                            if (FIELD[i][j] == varToCheck)
-                                a1++
-                            if (FIELD[i][j + 1] == varToCheck)
-                                a1++
-                            if (FIELD[i + 1][j + 1] == varToCheck)
-                                a1++
+                    for (i in 0..size_field_x) {                   //вырисовка точек
+                        for (j in 0..size_field_y) {
+                            if (i + 1 <= size_field_x && j + 1 <= size_field_y) {
+                                var a1 = 0
+                                if (FIELD[i][j] == varToCheck)
+                                    a1++
+                                if (FIELD[i][j + 1] == varToCheck)
+                                    a1++
+                                if (FIELD[i + 1][j + 1] == varToCheck)
+                                    a1++
 
-                            if (a1 == 2) {
-                                var X = -1
-                                var Y = -1
-                                if (FIELD[i][j] == 0) {
-                                    X = i
-                                    Y = j
-                                }
-                                if (FIELD[i][j + 1] == 0) {
-                                    X = i
-                                    Y = j + 1
-                                }
-                                if (FIELD[i + 1][j + 1] == 0) {
-                                    X = i + 1
-                                    Y = j + 1
-                                }
+                                if (a1 == 2) {
+                                    var X = -1
+                                    var Y = -1
+                                    if (FIELD[i][j] == 0) {
+                                        X = i
+                                        Y = j
+                                    }
+                                    if (FIELD[i][j + 1] == 0) {
+                                        X = i
+                                        Y = j + 1
+                                    }
+                                    if (FIELD[i + 1][j + 1] == 0) {
+                                        X = i + 1
+                                        Y = j + 1
+                                    }
 
-                                if (X != -1) {
-                                    if (FIELD[X][Y] == 0 && a[Y][X] == 0) {
-                                        if (red_or_blue == 1) {
-                                            red_or_blue = 2
-                                            FIELD[X][Y] = 1
-                                            a[Y][X] = 1
-                                        } else {
-                                            red_or_blue = 1
-                                            FIELD[X][Y] = 2
-                                            a[Y][X] = 2
+                                    if (X != -1) {
+                                        if (FIELD[X][Y] == 0 && a[Y][X] == 0) {
+                                            if (red_or_blue == 1) {
+                                                red_or_blue = 2
+                                                FIELD[X][Y] = 1
+                                                a[Y][X] = 1
+                                            } else {
+                                                red_or_blue = 1
+                                                FIELD[X][Y] = 2
+                                                a[Y][X] = 2
+                                            }
+                                            History.add(Triple(X, Y, FIELD[X][Y]))
+                                            var data_from_memory = encode(History)
+                                            val editor =
+                                                context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                            editor.putString("dot_with_computer", data_from_memory)
+                                            editor.apply()
+
+                                            fla = true
+                                            break
                                         }
-                                        History.add(Triple(X, Y, FIELD[X][Y]))
-                                        var data_from_memory = encode(History)
-                                        val editor =
-                                            context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                        editor.putString("dot_with_computer", data_from_memory)
-                                        editor.apply()
+                                    }
+                                }
+                            }
 
-                                        fla = true
-                                        break
+                            if (i > 0 && j + 1 <= size_field_y) {
+                                var a1 = 0
+                                if (FIELD[i][j] == varToCheck)
+                                    a1++
+                                if (FIELD[i][j + 1] == varToCheck)
+                                    a1++
+                                if (FIELD[i - 1][j + 1] == varToCheck)
+                                    a1++
+
+                                if (a1 == 2) {
+                                    var X = -1
+                                    var Y = -1
+                                    if (FIELD[i][j] == 0) {
+                                        X = i
+                                        Y = j
+                                    }
+                                    if (FIELD[i][j + 1] == 0) {
+                                        X = i
+                                        Y = j + 1
+                                    }
+                                    if (FIELD[i - 1][j + 1] == 0) {
+                                        X = i - 1
+                                        Y = j + 1
+                                    }
+
+                                    if (X != -1) {
+                                        if (FIELD[X][Y] == 0 && a[Y][X] == 0) {
+                                            if (red_or_blue == 1) {
+                                                red_or_blue = 2
+                                                FIELD[X][Y] = 1
+                                                a[Y][X] = 1
+                                            } else {
+                                                red_or_blue = 1
+                                                FIELD[X][Y] = 2
+                                                a[Y][X] = 2
+                                            }
+                                            History.add(Triple(X, Y, FIELD[X][Y]))
+                                            var data_from_memory = encode(History)
+                                            val editor =
+                                                context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                            editor.putString("dot_with_computer", data_from_memory)
+                                            editor.apply()
+
+                                            fla = true
+                                            break
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (i > 0 && j + 1 <= size_field_y) {
+                                var a1 = 0
+                                if (FIELD[i][j] == varToCheck)
+                                    a1++
+                                if (FIELD[i - 1][j] == varToCheck)
+                                    a1++
+                                if (FIELD[i][j + 1] == varToCheck)
+                                    a1++
+
+                                if (a1 == 2) {
+                                    var X = -1
+                                    var Y = -1
+                                    if (FIELD[i][j] == 0) {
+                                        X = i
+                                        Y = j
+                                    }
+                                    if (FIELD[i - 1][j] == 0) {
+                                        X = i - 1
+                                        Y = j
+                                    }
+                                    if (FIELD[i][j + 1] == 0) {
+                                        X = i
+                                        Y = j + 1
+                                    }
+
+                                    if (X != -1) {
+                                        if (FIELD[X][Y] == 0 && a[Y][X] == 0) {
+                                            if (red_or_blue == 1) {
+                                                red_or_blue = 2
+                                                FIELD[X][Y] = 1
+                                                a[Y][X] = 1
+                                            } else {
+                                                red_or_blue = 1
+                                                FIELD[X][Y] = 2
+                                                a[Y][X] = 2
+                                            }
+                                            History.add(Triple(X, Y, FIELD[X][Y]))
+                                            var data_from_memory = encode(History)
+                                            val editor =
+                                                context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                            editor.putString("dot_with_computer", data_from_memory)
+                                            editor.apply()
+
+                                            fla = true
+                                            break
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (i + 1 <= size_field_x && j + 1 <= size_field_y) {
+                                var a1 = 0
+                                if (FIELD[i][j] == varToCheck)
+                                    a1++
+                                if (FIELD[i + 1][j] == varToCheck)
+                                    a1++
+                                if (FIELD[i][j + 1] == varToCheck)
+                                    a1++
+
+                                if (a1 == 2) {
+                                    var X = -1
+                                    var Y = -1
+                                    if (FIELD[i][j] == 0) {
+                                        X = i
+                                        Y = j
+                                    }
+                                    if (FIELD[i + 1][j] == 0) {
+                                        X = i + 1
+                                        Y = j
+                                    }
+                                    if (FIELD[i][j + 1] == 0) {
+                                        X = i
+                                        Y = j + 1
+                                    }
+
+                                    if (X != -1) {
+                                        if (FIELD[X][Y] == 0 && a[Y][X] == 0) {
+                                            if (red_or_blue == 1) {
+                                                red_or_blue = 2
+                                                FIELD[X][Y] = 1
+                                                a[Y][X] = 1
+                                            } else {
+                                                red_or_blue = 1
+                                                FIELD[X][Y] = 2
+                                                a[Y][X] = 2
+                                            }
+                                            History.add(Triple(X, Y, FIELD[X][Y]))
+                                            var data_from_memory = encode(History)
+                                            val editor =
+                                                context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                            editor.putString("dot_with_computer", data_from_memory)
+                                            editor.apply()
+
+                                            fla = true
+                                            break
+                                        }
                                     }
                                 }
                             }
                         }
-
-                        if (i > 0 && j + 1 <= size_field_y) {
-                            var a1 = 0
-                            if (FIELD[i][j] == varToCheck)
-                                a1++
-                            if (FIELD[i][j + 1] == varToCheck)
-                                a1++
-                            if (FIELD[i - 1][j + 1] == varToCheck)
-                                a1++
-
-                            if (a1 == 2) {
-                                var X = -1
-                                var Y = -1
-                                if (FIELD[i][j] == 0) {
-                                    X = i
-                                    Y = j
-                                }
-                                if (FIELD[i][j + 1] == 0) {
-                                    X = i
-                                    Y = j + 1
-                                }
-                                if (FIELD[i - 1][j + 1] == 0) {
-                                    X = i - 1
-                                    Y = j + 1
-                                }
-
-                                if (X != -1) {
-                                    if (FIELD[X][Y] == 0 && a[Y][X] == 0) {
-                                        if (red_or_blue == 1) {
-                                            red_or_blue = 2
-                                            FIELD[X][Y] = 1
-                                            a[Y][X] = 1
-                                        } else {
-                                            red_or_blue = 1
-                                            FIELD[X][Y] = 2
-                                            a[Y][X] = 2
-                                        }
-                                        History.add(Triple(X, Y, FIELD[X][Y]))
-                                        var data_from_memory = encode(History)
-                                        val editor =
-                                            context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                        editor.putString("dot_with_computer", data_from_memory)
-                                        editor.apply()
-
-                                        fla = true
-                                        break
-                                    }
-                                }
-                            }
-                        }
-
-                        if (i > 0 && j + 1 <= size_field_y) {
-                            var a1 = 0
-                            if (FIELD[i][j] == varToCheck)
-                                a1++
-                            if (FIELD[i - 1][j] == varToCheck)
-                                a1++
-                            if (FIELD[i][j + 1] == varToCheck)
-                                a1++
-
-                            if (a1 == 2) {
-                                var X = -1
-                                var Y = -1
-                                if (FIELD[i][j] == 0) {
-                                    X = i
-                                    Y = j
-                                }
-                                if (FIELD[i - 1][j] == 0) {
-                                    X = i - 1
-                                    Y = j
-                                }
-                                if (FIELD[i][j + 1] == 0) {
-                                    X = i
-                                    Y = j + 1
-                                }
-
-                                if (X != -1) {
-                                    if (FIELD[X][Y] == 0 && a[Y][X] == 0) {
-                                        if (red_or_blue == 1) {
-                                            red_or_blue = 2
-                                            FIELD[X][Y] = 1
-                                            a[Y][X] = 1
-                                        } else {
-                                            red_or_blue = 1
-                                            FIELD[X][Y] = 2
-                                            a[Y][X] = 2
-                                        }
-                                        History.add(Triple(X, Y, FIELD[X][Y]))
-                                        var data_from_memory = encode(History)
-                                        val editor =
-                                            context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                        editor.putString("dot_with_computer", data_from_memory)
-                                        editor.apply()
-
-                                        fla = true
-                                        break
-                                    }
-                                }
-                            }
-                        }
-
-                        if (i + 1 <= size_field_x && j + 1 <= size_field_y) {
-                            var a1 = 0
-                            if (FIELD[i][j] == varToCheck)
-                                a1++
-                            if (FIELD[i + 1][j] == varToCheck)
-                                a1++
-                            if (FIELD[i][j + 1] == varToCheck)
-                                a1++
-
-                            if (a1 == 2) {
-                                var X = -1
-                                var Y = -1
-                                if (FIELD[i][j] == 0) {
-                                    X = i
-                                    Y = j
-                                }
-                                if (FIELD[i + 1][j] == 0) {
-                                    X = i + 1
-                                    Y = j
-                                }
-                                if (FIELD[i][j + 1] == 0) {
-                                    X = i
-                                    Y = j + 1
-                                }
-
-                                if (X != -1) {
-                                    if (FIELD[X][Y] == 0 && a[Y][X] == 0) {
-                                        if (red_or_blue == 1) {
-                                            red_or_blue = 2
-                                            FIELD[X][Y] = 1
-                                            a[Y][X] = 1
-                                        } else {
-                                            red_or_blue = 1
-                                            FIELD[X][Y] = 2
-                                            a[Y][X] = 2
-                                        }
-                                        History.add(Triple(X, Y, FIELD[X][Y]))
-                                        var data_from_memory = encode(History)
-                                        val editor =
-                                            context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                        editor.putString("dot_with_computer", data_from_memory)
-                                        editor.apply()
-
-                                        fla = true
-                                        break
-                                    }
-                                }
-                            }
-                        }
+                        if (fla)
+                            break
                     }
-                    if (fla)
-                        break
                 }
-            }
+
+
+                if (!fla) {
+                    for (i in 0..size_field_x) {                   //вырисовка точек
+                        for (j in 0..size_field_y) {
+                            val X = i
+                            val Y = j
+
+                            for (x_d in -1..1) {
+                                for (y_d in -1..1) {
+                                    if (i + x_d >= 0 && i + x_d <= size_field_x && j + y_d >= 0 && j + y_d <= size_field_y) {
+                                        if (FIELD[i + x_d][j + y_d] != 0) {
+                                            if (FIELD[X][Y] == 0 && a[Y][X] == 0) {
+                                                if (red_or_blue == 1) {
+                                                    red_or_blue = 2
+                                                    FIELD[X][Y] = 1
+                                                    a[Y][X] = 1
+                                                } else {
+                                                    red_or_blue = 1
+                                                    FIELD[X][Y] = 2
+                                                    a[Y][X] = 2
+                                                }
+                                                History.add(Triple(X, Y, FIELD[X][Y]))
+                                                var data_from_memory = encode(History)
+                                                val editor =
+                                                    context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                                editor.putString("dot_with_computer", data_from_memory)
+                                                editor.apply()
+
+
+                                                fla = true
+                                                break
+                                            }
+                                        }
+                                    }
+                                }
+                                if (fla)
+                                    break
+                            }
+                            if (fla)
+                                break
+
+                        }
+                        if (fla)
+                            break
+                    }
+                }
+
 
                 if (!fla) {
                     for (i in 0..size_field_x) {                   //вырисовка точек
@@ -2352,6 +1825,159 @@ class CanvasView_Dots_with_computer(context: Context, attrs: AttributeSet?) : Vi
         }
 
 
+        if(check_win() > 0)
+        {       //TODO more check
+            var dialog: Show_Result_with_Computer? = null
+            dialog = Show_Result_with_Computer(activity)
+            if(check_win()==1 && DotGameMode == 2)
+            {
+                dialog?.showResult_with_Computer("Победа","DotGame",activity)
+            }
+            if(check_win()==1 && DotGameMode == 1)
+            {
+                dialog?.showResult_with_Computer("Поражение","DotGame",activity)
+            }
+            if(check_win()==2 && DotGameMode == 2)
+            {
+                dialog?.showResult_with_Computer("Поражение","DotGame",activity)
+            }
+            if(check_win()==2 && DotGameMode == 1)
+            {
+                dialog?.showResult_with_Computer("Победа","DotGame",activity)
+            }
+            if(check_win()==3)
+            {
+                dialog?.showResult_with_Computer("Ничья","DotGame",activity)
+            }
+        }
+
+    }
+
+
+    var blocked : Boolean = false
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+
+        Log.w("kolobok",check_win().toString())
+        if(check_win()<=0)
+        {
+            blocked = false
+        }
+        if(check_win() >0 && event!!.getAction() == MotionEvent.ACTION_UP && blocked)
+        {
+            blocked=!blocked
+        }
+        if(check_win() >0 && event!!.getAction()  == MotionEvent.ACTION_UP && !blocked)
+        {       //TODO more check
+            blocked = !blocked
+            var dialog: Show_Result_with_Computer? = null
+            dialog = Show_Result_with_Computer(activity)
+            if(check_win()==1 && DotGameMode == 2)
+            {
+                dialog?.showResult_with_Computer("Победа","DotGame",activity)
+            }
+            if(check_win()==1 && DotGameMode == 1)
+            {
+                dialog?.showResult_with_Computer("Поражение","DotGame",activity)
+            }
+            if(check_win()==2 && DotGameMode == 2)
+            {
+                dialog?.showResult_with_Computer("Поражение","DotGame",activity)
+            }
+            if(check_win()==2 && DotGameMode == 1)
+            {
+                dialog?.showResult_with_Computer("Победа","DotGame",activity)
+            }
+            if(check_win()==3)
+            {
+                dialog?.showResult_with_Computer("Ничья","DotGame",activity)
+            }
+            return true
+        }
+
+        if (blockedOnTouch) {
+            return true
+        }
+
+
+        Is_defined_TREE_OF_WAYS = true
+        circlex = event!!.x
+        circley = event!!.y
+
+        var x1: Float = indent
+        var y1: Float = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())
+        for(i in 0..size_field_x)                    //вырисовка точек
+        {
+            for(j in 0..size_field_y)
+            {
+                if(correction_touch(x1,y1))
+                {
+                    if(FIELD[i][j] == 0 && a[j][i] == 0)
+                    {
+                        if(red_or_blue == 1)
+                        {
+                            red_or_blue = 2
+                            FIELD[i][j] = 1
+                            a[j][i] = 1
+                            p = find(1,a,16,11)
+                        }
+                        else
+                        {
+                            red_or_blue = 1
+                            FIELD[i][j]  = 2
+                            a[j][i]  = 2
+                            p = find(2,a,16,11)
+                        }
+                        History.add(Triple(i,j,FIELD[i][j]))
+                        var data_from_memory = encode(History)
+                        val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                        editor.putString("dot_with_computer", data_from_memory)
+                        editor.apply()
+                        if(SOUND)
+                        {
+                            mSound.play(1,1F,1F,1,0,1F)
+                        }
+                        if(VIBRATION)
+                        {
+                            vibratorService?.vibrate(70)
+                        }
+                        invalidate()
+
+
+                    }
+                }
+                y1+= step
+            }
+            x1  += step
+            y1 = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())
+        }
+
+
+        if(check_win() > 0)
+        {       //TODO more check
+            var dialog: Show_Result_with_Computer? = null
+            dialog = Show_Result_with_Computer(activity)
+            if(check_win()==1 && DotGameMode == 2)
+            {
+                dialog?.showResult_with_Computer("Победа","DotGame",activity)
+            }
+            if(check_win()==1 && DotGameMode == 1)
+            {
+                dialog?.showResult_with_Computer("Поражение","DotGame",activity)
+            }
+            if(check_win()==2 && DotGameMode == 2)
+            {
+                dialog?.showResult_with_Computer("Поражение","DotGame",activity)
+            }
+            if(check_win()==2 && DotGameMode == 1)
+            {
+                dialog?.showResult_with_Computer("Победа","DotGame",activity)
+            }
+            if(check_win()==3)
+            {
+                dialog?.showResult_with_Computer("Ничья","DotGame",activity)
+            }
+            return true
+        }
 
 
         return true

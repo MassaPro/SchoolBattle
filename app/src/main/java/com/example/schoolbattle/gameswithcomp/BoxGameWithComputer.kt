@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_computer_games_template.*
+import kotlinx.android.synthetic.main.activity_online_games_temlate.*
 
 var BoxMode = 0
 
@@ -256,7 +257,50 @@ class BoxGameWithComputer : AppCompatActivity() {
 
                 val handler = android.os.Handler()
                 handler.postDelayed({
-                    var fla2 = false
+
+
+                    if (Math.random() < 0.5) {
+                        if(signature_canvas_box_with_computer.red_or_blue == "red" && BoxMode == 2) {
+                            signature_canvas_box_with_computer.VERTICAL_RIB[3][3] = 1
+                            signature_canvas_box_with_computer.History.add(mutableListOf(1,1,3,3))
+                            var data_from_memory = encode(signature_canvas_box_with_computer.History)
+                            val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                            editor.putString("box_with_computer", data_from_memory)
+                            editor.apply()
+                            signature_canvas_box_with_computer.red_or_blue = "blue"
+                        } else if (signature_canvas_box_with_computer.red_or_blue == "blue" && BoxMode == 1) {
+                            signature_canvas_box_with_computer.VERTICAL_RIB[3][3] = 2
+                            signature_canvas_box_with_computer.History.add(mutableListOf(2,1,3,3))
+                            var data_from_memory = encode(signature_canvas_box_with_computer.History)
+                            val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                            editor.putString("box_with_computer", data_from_memory)
+                            editor.apply()
+                            signature_canvas_box_with_computer.red_or_blue = "red"
+                        }
+                    } else {
+                        if(signature_canvas_box_with_computer.red_or_blue == "red" && BoxMode == 2) {
+                            signature_canvas_box_with_computer.HORIZONTAL_RIB[3][3] = 1
+                            signature_canvas_box_with_computer.History.add(mutableListOf(1,2,3,3))
+                            var data_from_memory = encode(signature_canvas_box_with_computer.History)
+                            val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                            editor.putString("box_with_computer", data_from_memory)
+                            editor.apply()
+                            signature_canvas_box_with_computer.red_or_blue = "blue"
+                        } else if (signature_canvas_box_with_computer.red_or_blue == "blue" && BoxMode == 1) {
+                            signature_canvas_box_with_computer.HORIZONTAL_RIB[3][3] = 2
+                            signature_canvas_box_with_computer.History.add(mutableListOf(2,2,3,3))
+                            var data_from_memory = encode(signature_canvas_box_with_computer.History)
+                            val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                            editor.putString("box_with_computer", data_from_memory)
+                            editor.apply()
+                            signature_canvas_box_with_computer.red_or_blue = "red"
+                        }
+                    }
+
+
+
+
+                    /*var fla2 = false
 
                     for(i in 0..6) {         // очевидно
                         for(j in 0..6) {
@@ -537,7 +581,7 @@ class BoxGameWithComputer : AppCompatActivity() {
                                 }
                             }
                         }
-                    }
+                    }*/
 
                     signature_canvas_box_with_computer.blockedOnTouch = false
                     signature_canvas_box_with_computer.invalidate()
@@ -654,6 +698,8 @@ class BoxGameWithComputer : AppCompatActivity() {
                                 }
                             }
                         }
+
+                        signature_canvas_box_with_computer.blockedOnTouch = false
                         signature_canvas_box_with_computer.invalidate()
                     }
                 }
@@ -1004,141 +1050,255 @@ class CanvasView_Boxs_with_computer(context: Context, attrs: AttributeSet?) : Vi
         }
 
 
-        if ((red_or_blue == "red" && BoxMode == 2) || (red_or_blue == "blue" && BoxMode == 1)) {
-            blockedOnTouch = true
+        if (check_win() == 0) {
+            if ((red_or_blue == "red" && BoxMode == 2) || (red_or_blue == "blue" && BoxMode == 1)) {
+                blockedOnTouch = true
 
-            val handler = android.os.Handler()
-            handler.postDelayed({
-                var fla2 = false
+                val handler = android.os.Handler()
+                handler.postDelayed({
+                    var fla2 = false
 
-                for(i in 0..6) {         // очевидно
-                    for(j in 0..6) {
-                        var a1 = 0
-                        var a2 = 0
-                        var a3 = 0
-                        var a4 = 0
-                        if (VERTICAL_RIB[i][j]>0)
-                            a1 = 1
-                        if (HORIZONTAL_RIB[i][j]>0)
-                            a2 = 1
-                        if (HORIZONTAL_RIB[i][j+1]>0)
-                            a3 = 1
-                        if (VERTICAL_RIB[i+1][j]>0)
-                            a4 = 1
-                        if (a1 + a2 + a3 + a4 == 3 && FIELD[i][j] == 0) {
-                            if (VERTICAL_RIB[i][j] == 0) {
-                                if(red_or_blue == "red" && BoxMode == 2) {
-                                    VERTICAL_RIB[i][j] = 1
-                                    History.add(mutableListOf(1,1,i,j))
-                                    var data_from_memory = encode(History)
-                                    val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                    editor.putString("box_with_computer", data_from_memory)
-                                    editor.apply()
-                                    red_or_blue = "blue"
-                                } else if (red_or_blue == "blue" && BoxMode == 1) {
-                                    VERTICAL_RIB[i][j] = 2
-                                    History.add(mutableListOf(2,1,i,j))
-                                    var data_from_memory = encode(History)
-                                    val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                    editor.putString("box_with_computer", data_from_memory)
-                                    editor.apply()
-                                    red_or_blue = "red"
-                                }
-                                fla2 = true
-                            } else if (HORIZONTAL_RIB[i][j] == 0) {
-                                if(red_or_blue == "red" && BoxMode == 2) {
-                                    HORIZONTAL_RIB[i][j] = 1
-                                    History.add(mutableListOf(1,2,i,j))
-                                    var data_from_memory = encode(History)
-                                    val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                    editor.putString("box_with_computer", data_from_memory)
-                                    editor.apply()
-                                    red_or_blue = "blue"
-                                } else if (red_or_blue == "blue" && BoxMode == 1) {
-                                    HORIZONTAL_RIB[i][j] = 2
-                                    History.add(mutableListOf(2,2,i,j))
-                                    var data_from_memory = encode(History)
-                                    val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                    editor.putString("box_with_computer", data_from_memory)
-                                    editor.apply()
-                                    red_or_blue = "red"
-                                }
-                                fla2 = true
-                            } else if (HORIZONTAL_RIB[i][j+1] == 0) {
-                                if(red_or_blue == "red" && BoxMode == 2) {
-                                    HORIZONTAL_RIB[i][j + 1] = 1
-                                    History.add(mutableListOf(1,2,i,j + 1))
-                                    var data_from_memory = encode(History)
-                                    val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                    editor.putString("box_with_computer", data_from_memory)
-                                    editor.apply()
-                                    red_or_blue = "blue"
-                                } else if (red_or_blue == "blue" && BoxMode == 1) {
-                                    HORIZONTAL_RIB[i][j + 1] = 2
-                                    History.add(mutableListOf(2,2,i,j + 1))
-                                    var data_from_memory = encode(History)
-                                    val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                    editor.putString("box_with_computer", data_from_memory)
-                                    editor.apply()
-                                    red_or_blue = "red"
-                                }
-                                fla2 = true
-                            } else if (VERTICAL_RIB[i+1][j] == 0) {
-                                if(red_or_blue == "red" && BoxMode == 2) {
-                                    VERTICAL_RIB[i + 1][j] = 1
-                                    History.add(mutableListOf(1,1,i + 1,j))
-                                    var data_from_memory = encode(History)
-                                    val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                    editor.putString("box_with_computer", data_from_memory)
-                                    editor.apply()
-                                    red_or_blue = "blue"
-                                } else if (red_or_blue == "blue" && BoxMode == 1) {
-                                    VERTICAL_RIB[i + 1][j] = 2
-                                    History.add(mutableListOf(2,1,i + 1,j))
-                                    var data_from_memory = encode(History)
-                                    val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                    editor.putString("box_with_computer", data_from_memory)
-                                    editor.apply()
-                                    red_or_blue = "red"
-                                }
-                                fla2 = true
+                    for (i in 0..6) {         // очевидно
+                        for (j in 0..6) {
+                            var a1 = 0
+                            var a2 = 0
+                            var a3 = 0
+                            var a4 = 0
+                            if (VERTICAL_RIB[i][j] > 0)
+                                a1 = 1
+                            if (HORIZONTAL_RIB[i][j] > 0)
+                                a2 = 1
+                            if (HORIZONTAL_RIB[i][j + 1] > 0)
+                                a3 = 1
+                            if (VERTICAL_RIB[i + 1][j] > 0)
+                                a4 = 1
+                            if (a1 + a2 + a3 + a4 == 3 && FIELD[i][j] == 0) {
+                                if (VERTICAL_RIB[i][j] == 0) {
+                                    if (red_or_blue == "red" && BoxMode == 2) {
+                                        VERTICAL_RIB[i][j] = 1
+                                        History.add(mutableListOf(1, 1, i, j))
+                                        var data_from_memory = encode(History)
+                                        val editor = context.getSharedPreferences(
+                                            "UserData",
+                                            Context.MODE_PRIVATE
+                                        ).edit()
+                                        editor.putString("box_with_computer", data_from_memory)
+                                        editor.apply()
+                                        red_or_blue = "blue"
+                                    } else if (red_or_blue == "blue" && BoxMode == 1) {
+                                        VERTICAL_RIB[i][j] = 2
+                                        History.add(mutableListOf(2, 1, i, j))
+                                        var data_from_memory = encode(History)
+                                        val editor = context.getSharedPreferences(
+                                            "UserData",
+                                            Context.MODE_PRIVATE
+                                        ).edit()
+                                        editor.putString("box_with_computer", data_from_memory)
+                                        editor.apply()
+                                        red_or_blue = "red"
+                                    }
+                                    fla2 = true
+                                } else if (HORIZONTAL_RIB[i][j] == 0) {
+                                    if (red_or_blue == "red" && BoxMode == 2) {
+                                        HORIZONTAL_RIB[i][j] = 1
+                                        History.add(mutableListOf(1, 2, i, j))
+                                        var data_from_memory = encode(History)
+                                        val editor = context.getSharedPreferences(
+                                            "UserData",
+                                            Context.MODE_PRIVATE
+                                        ).edit()
+                                        editor.putString("box_with_computer", data_from_memory)
+                                        editor.apply()
+                                        red_or_blue = "blue"
+                                    } else if (red_or_blue == "blue" && BoxMode == 1) {
+                                        HORIZONTAL_RIB[i][j] = 2
+                                        History.add(mutableListOf(2, 2, i, j))
+                                        var data_from_memory = encode(History)
+                                        val editor = context.getSharedPreferences(
+                                            "UserData",
+                                            Context.MODE_PRIVATE
+                                        ).edit()
+                                        editor.putString("box_with_computer", data_from_memory)
+                                        editor.apply()
+                                        red_or_blue = "red"
+                                    }
+                                    fla2 = true
+                                } else if (HORIZONTAL_RIB[i][j + 1] == 0) {
+                                    if (red_or_blue == "red" && BoxMode == 2) {
+                                        HORIZONTAL_RIB[i][j + 1] = 1
+                                        History.add(mutableListOf(1, 2, i, j + 1))
+                                        var data_from_memory = encode(History)
+                                        val editor = context.getSharedPreferences(
+                                            "UserData",
+                                            Context.MODE_PRIVATE
+                                        ).edit()
+                                        editor.putString("box_with_computer", data_from_memory)
+                                        editor.apply()
+                                        red_or_blue = "blue"
+                                    } else if (red_or_blue == "blue" && BoxMode == 1) {
+                                        HORIZONTAL_RIB[i][j + 1] = 2
+                                        History.add(mutableListOf(2, 2, i, j + 1))
+                                        var data_from_memory = encode(History)
+                                        val editor = context.getSharedPreferences(
+                                            "UserData",
+                                            Context.MODE_PRIVATE
+                                        ).edit()
+                                        editor.putString("box_with_computer", data_from_memory)
+                                        editor.apply()
+                                        red_or_blue = "red"
+                                    }
+                                    fla2 = true
+                                } else if (VERTICAL_RIB[i + 1][j] == 0) {
+                                    if (red_or_blue == "red" && BoxMode == 2) {
+                                        VERTICAL_RIB[i + 1][j] = 1
+                                        History.add(mutableListOf(1, 1, i + 1, j))
+                                        var data_from_memory = encode(History)
+                                        val editor = context.getSharedPreferences(
+                                            "UserData",
+                                            Context.MODE_PRIVATE
+                                        ).edit()
+                                        editor.putString("box_with_computer", data_from_memory)
+                                        editor.apply()
+                                        red_or_blue = "blue"
+                                    } else if (red_or_blue == "blue" && BoxMode == 1) {
+                                        VERTICAL_RIB[i + 1][j] = 2
+                                        History.add(mutableListOf(2, 1, i + 1, j))
+                                        var data_from_memory = encode(History)
+                                        val editor = context.getSharedPreferences(
+                                            "UserData",
+                                            Context.MODE_PRIVATE
+                                        ).edit()
+                                        editor.putString("box_with_computer", data_from_memory)
+                                        editor.apply()
+                                        red_or_blue = "red"
+                                    }
+                                    fla2 = true
 
+
+                                }
+                                if (fla2)
+                                    break
 
                             }
-                            if (fla2)
-                                break
-
                         }
-                    }
-                    if (fla2)
-                        break
-                }    // очевидно
+                        if (fla2)
+                            break
+                    }    // очевидно
 
-                if (!fla2) {
-                    var list_x2: MutableList<Int> = mutableListOf(0, 1, 2, 3, 4, 5, 6, 7)
-                    var list_y2: MutableList<Int> = mutableListOf(0, 1, 2, 3, 4, 5, 6)
-                    list_x2.shuffle()
-                    list_y2.shuffle()
-                    if (Math.random() < 0.5) {
+                    if (!fla2) {
+                        var list_x2: MutableList<Int> = mutableListOf(0, 1, 2, 3, 4, 5, 6, 7)
+                        var list_y2: MutableList<Int> = mutableListOf(0, 1, 2, 3, 4, 5, 6)
+                        list_x2.shuffle()
+                        list_y2.shuffle()
+                        if (Math.random() < 0.5) {
+                            for (i in list_x2) {
+                                for (j in list_y2) {
+                                    if (VERTICAL_RIB[i][j] == 0 && ((i > 0 && j <= 6 && VERTICAL_RIB[i - 1][j] > 0) || (j > 0 && i <= 7 && VERTICAL_RIB[i][j - 1] > 0) || (i < 7 && j <= 6 && VERTICAL_RIB[i + 1][j] > 0) || (j < 6 && i <= 7 && VERTICAL_RIB[i][j + 1] > 0) || (i > 0 && j <= 7 && HORIZONTAL_RIB[i - 1][j] > 0) || (j > 0 && i <= 6 && HORIZONTAL_RIB[i][j - 1] > 0) || (i < 6 && j <= 7 && HORIZONTAL_RIB[i + 1][j] > 0) || (j < 7 && i <= 6 && HORIZONTAL_RIB[i][j + 1] > 0))) {
+
+                                        if (red_or_blue == "red" && BoxMode == 2) {
+
+                                            VERTICAL_RIB[i][j] = 1
+                                            History.add(mutableListOf(1, 1, i, j))
+                                            var data_from_memory = encode(History)
+                                            val editor = context.getSharedPreferences(
+                                                "UserData",
+                                                Context.MODE_PRIVATE
+                                            ).edit()
+                                            editor.putString("box_with_computer", data_from_memory)
+                                            editor.apply()
+                                            red_or_blue = "blue"
+                                        } else if (red_or_blue == "blue" && BoxMode == 1) {
+
+                                            VERTICAL_RIB[i][j] = 2
+                                            History.add(mutableListOf(2, 1, i, j))
+                                            var data_from_memory = encode(History)
+                                            val editor = context.getSharedPreferences(
+                                                "UserData",
+                                                Context.MODE_PRIVATE
+                                            ).edit()
+                                            editor.putString("box_with_computer", data_from_memory)
+                                            editor.apply()
+                                            red_or_blue = "red"
+                                        }
+
+                                        fla2 = true
+                                        break
+                                    }
+                                }
+                                if (fla2) {
+                                    break
+                                }
+                            }
+                        } else {
+                            for (i in list_y2) {
+                                for (j in list_x2) {
+                                    if (HORIZONTAL_RIB[i][j] == 0 && ((i > 0 && j <= 6 && VERTICAL_RIB[i - 1][j] > 0) || (j > 0 && i <= 7 && VERTICAL_RIB[i][j - 1] > 0) || (i < 7 && j <= 6 && VERTICAL_RIB[i + 1][j] > 0) || (j < 6 && i <= 7 && VERTICAL_RIB[i][j + 1] > 0) || (i > 0 && j <= 7 && HORIZONTAL_RIB[i - 1][j] > 0) || (j > 0 && i <= 6 && HORIZONTAL_RIB[i][j - 1] > 0) || (i < 6 && j <= 7 && HORIZONTAL_RIB[i + 1][j] > 0) || (j < 7 && i <= 6 && HORIZONTAL_RIB[i][j + 1] > 0))) {
+                                        if (red_or_blue == "red" && BoxMode == 2) {
+                                            HORIZONTAL_RIB[i][j] = 1
+                                            History.add(mutableListOf(1, 2, i, j))
+                                            var data_from_memory = encode(History)
+                                            val editor = context.getSharedPreferences(
+                                                "UserData",
+                                                Context.MODE_PRIVATE
+                                            ).edit()
+                                            editor.putString("box_with_computer", data_from_memory)
+                                            editor.apply()
+                                            red_or_blue = "blue"
+                                        } else if (red_or_blue == "blue" && BoxMode == 1) {
+                                            HORIZONTAL_RIB[i][j] = 2
+                                            History.add(mutableListOf(2, 2, i, j))
+                                            var data_from_memory = encode(History)
+                                            val editor = context.getSharedPreferences(
+                                                "UserData",
+                                                Context.MODE_PRIVATE
+                                            ).edit()
+                                            editor.putString("box_with_computer", data_from_memory)
+                                            editor.apply()
+                                            red_or_blue = "red"
+                                        }
+
+                                        fla2 = true
+                                        break
+                                    }
+                                }
+                                if (fla2) {
+                                    break
+                                }
+                            }
+                        }
+                    }   // рядом
+
+
+                    if (!fla2) {
+                        var list_x2: MutableList<Int> = mutableListOf(0, 1, 2, 3, 4, 5, 6, 7)
+                        var list_y2: MutableList<Int> = mutableListOf(0, 1, 2, 3, 4, 5, 6)
+                        list_x2.shuffle()
+                        list_y2.shuffle()
                         for (i in list_x2) {
                             for (j in list_y2) {
-                                if (VERTICAL_RIB[i][j] == 0 && ((i > 0 && j <= 6 && VERTICAL_RIB[i - 1][j] > 0) || (j > 0 && i <= 7 && VERTICAL_RIB[i][j - 1] > 0) || (i < 7 && j <= 6 && VERTICAL_RIB[i + 1][j] > 0) || (j < 6 && i <= 7 && VERTICAL_RIB[i][j + 1] > 0) || (i > 0 && j <= 7 && HORIZONTAL_RIB[i - 1][j] > 0) || (j > 0 && i <= 6 && HORIZONTAL_RIB[i][j - 1] > 0) || (i < 6 && j <= 7 && HORIZONTAL_RIB[i + 1][j] > 0) || (j < 7 && i <= 6 && HORIZONTAL_RIB[i][j + 1] > 0))) {
+                                if (VERTICAL_RIB[i][j] == 0) {
 
-                                    if(red_or_blue == "red" && BoxMode == 2) {
+                                    if (red_or_blue == "red" && BoxMode == 2) {
 
                                         VERTICAL_RIB[i][j] = 1
-                                        History.add(mutableListOf(1,1,i,j))
+                                        History.add(mutableListOf(1, 1, i, j))
                                         var data_from_memory = encode(History)
-                                        val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                        val editor = context.getSharedPreferences(
+                                            "UserData",
+                                            Context.MODE_PRIVATE
+                                        ).edit()
                                         editor.putString("box_with_computer", data_from_memory)
                                         editor.apply()
                                         red_or_blue = "blue"
                                     } else if (red_or_blue == "blue" && BoxMode == 1) {
 
                                         VERTICAL_RIB[i][j] = 2
-                                        History.add(mutableListOf(2,1,i,j))
+                                        History.add(mutableListOf(2, 1, i, j))
                                         var data_from_memory = encode(History)
-                                        val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                        val editor = context.getSharedPreferences(
+                                            "UserData",
+                                            Context.MODE_PRIVATE
+                                        ).edit()
                                         editor.putString("box_with_computer", data_from_memory)
                                         editor.apply()
                                         red_or_blue = "red"
@@ -1152,23 +1312,35 @@ class CanvasView_Boxs_with_computer(context: Context, attrs: AttributeSet?) : Vi
                                 break
                             }
                         }
-                    } else {
+                    }  //  оставшиеся
+
+                    if (!fla2) {
+                        var list_x2: MutableList<Int> = mutableListOf(0, 1, 2, 3, 4, 5, 6, 7)
+                        var list_y2: MutableList<Int> = mutableListOf(0, 1, 2, 3, 4, 5, 6)
+                        list_x2.shuffle()
+                        list_y2.shuffle()
                         for (i in list_y2) {
                             for (j in list_x2) {
-                                if (HORIZONTAL_RIB[i][j] == 0 && ((i > 0 && j <= 6 && VERTICAL_RIB[i - 1][j] > 0) || (j > 0 && i <= 7 && VERTICAL_RIB[i][j - 1] > 0) || (i < 7 && j <= 6 && VERTICAL_RIB[i + 1][j] > 0) || (j < 6 && i <= 7 && VERTICAL_RIB[i][j + 1] > 0) || (i > 0 && j <= 7 && HORIZONTAL_RIB[i - 1][j] > 0) || (j > 0 && i <= 6 && HORIZONTAL_RIB[i][j - 1] > 0) || (i < 6 && j <= 7 && HORIZONTAL_RIB[i + 1][j] > 0) || (j < 7 && i <= 6 && HORIZONTAL_RIB[i][j + 1] > 0))) {
-                                    if(red_or_blue == "red" && BoxMode == 2) {
+                                if (HORIZONTAL_RIB[i][j] == 0) {
+                                    if (red_or_blue == "red" && BoxMode == 2) {
                                         HORIZONTAL_RIB[i][j] = 1
-                                        History.add(mutableListOf(1,2,i,j))
+                                        History.add(mutableListOf(1, 2, i, j))
                                         var data_from_memory = encode(History)
-                                        val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                        val editor = context.getSharedPreferences(
+                                            "UserData",
+                                            Context.MODE_PRIVATE
+                                        ).edit()
                                         editor.putString("box_with_computer", data_from_memory)
                                         editor.apply()
                                         red_or_blue = "blue"
                                     } else if (red_or_blue == "blue" && BoxMode == 1) {
                                         HORIZONTAL_RIB[i][j] = 2
-                                        History.add(mutableListOf(2,2,i,j))
+                                        History.add(mutableListOf(2, 2, i, j))
                                         var data_from_memory = encode(History)
-                                        val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                        val editor = context.getSharedPreferences(
+                                            "UserData",
+                                            Context.MODE_PRIVATE
+                                        ).edit()
                                         editor.putString("box_with_computer", data_from_memory)
                                         editor.apply()
                                         red_or_blue = "red"
@@ -1182,123 +1354,55 @@ class CanvasView_Boxs_with_computer(context: Context, attrs: AttributeSet?) : Vi
                                 break
                             }
                         }
-                    }
-                }   // рядом
+                    }   //   оставшиеся
 
 
-                if (!fla2) {
-                    var list_x2: MutableList<Int> = mutableListOf(0, 1, 2, 3, 4, 5, 6, 7)
-                    var list_y2: MutableList<Int> = mutableListOf(0, 1, 2, 3, 4, 5, 6)
-                    list_x2.shuffle()
-                    list_y2.shuffle()
-                    for (i in list_x2) {
-                        for (j in list_y2) {
-                            if (VERTICAL_RIB[i][j] == 0) {
-
-                                if(red_or_blue == "red" && BoxMode == 2) {
-
-                                    VERTICAL_RIB[i][j] = 1
-                                    History.add(mutableListOf(1,1,i,j))
-                                    var data_from_memory = encode(History)
-                                    val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                    editor.putString("box_with_computer", data_from_memory)
-                                    editor.apply()
-                                    red_or_blue = "blue"
-                                } else if (red_or_blue == "blue" && BoxMode == 1) {
-
-                                    VERTICAL_RIB[i][j] = 2
-                                    History.add(mutableListOf(2,1,i,j))
-                                    var data_from_memory = encode(History)
-                                    val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                    editor.putString("box_with_computer", data_from_memory)
-                                    editor.apply()
-                                    red_or_blue = "red"
-                                }
-
-                                fla2 = true
-                                break
-                            }
-                        }
-                        if (fla2) {
-                            break
-                        }
-                    }
-                }  //  оставшиеся
-
-                if (!fla2) {
-                    var list_x2: MutableList<Int> = mutableListOf(0, 1, 2, 3, 4, 5, 6, 7)
-                    var list_y2: MutableList<Int> = mutableListOf(0, 1, 2, 3, 4, 5, 6)
-                    list_x2.shuffle()
-                    list_y2.shuffle()
-                    for (i in list_y2) {
-                        for (j in list_x2) {
-                            if (HORIZONTAL_RIB[i][j] == 0) {
-                                if(red_or_blue == "red" && BoxMode == 2) {
-                                    HORIZONTAL_RIB[i][j] = 1
-                                    History.add(mutableListOf(1,2,i,j))
-                                    var data_from_memory = encode(History)
-                                    val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                    editor.putString("box_with_computer", data_from_memory)
-                                    editor.apply()
-                                    red_or_blue = "blue"
-                                } else if (red_or_blue == "blue" && BoxMode == 1) {
-                                    HORIZONTAL_RIB[i][j] = 2
-                                    History.add(mutableListOf(2,2,i,j))
-                                    var data_from_memory = encode(History)
-                                    val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                    editor.putString("box_with_computer", data_from_memory)
-                                    editor.apply()
-                                    red_or_blue = "red"
-                                }
-
-                                fla2 = true
-                                break
-                            }
-                        }
-                        if (fla2) {
-                            break
-                        }
-                    }
-                }   //   оставшиеся
-
-
-                var flag = false
-                for(i in 0..6) {
-                    for(j in 0..6)
-                    {
-                        if(VERTICAL_RIB[i][j]>0 && HORIZONTAL_RIB[i][j]>0 && HORIZONTAL_RIB[i][j+1]>0 && VERTICAL_RIB[i+1][j]>0 && FIELD[i][j]==0) //если образовался квадратик
-                        {
-                            if(flag == false)
+                    var flag = false
+                    for (i in 0..6) {
+                        for (j in 0..6) {
+                            if (VERTICAL_RIB[i][j] > 0 && HORIZONTAL_RIB[i][j] > 0 && HORIZONTAL_RIB[i][j + 1] > 0 && VERTICAL_RIB[i + 1][j] > 0 && FIELD[i][j] == 0) //если образовался квадратик
                             {
-                                flag = true
-                                if(red_or_blue == "red")            //снова ходит тот же игрок
-                                {
-                                    red_or_blue = "blue"
+                                if (flag == false) {
+                                    flag = true
+                                    if (red_or_blue == "red")            //снова ходит тот же игрок
+                                    {
+                                        red_or_blue = "blue"
+                                    } else {
+                                        red_or_blue = "red"
+                                    }
                                 }
-                                else
-                                {
-                                    red_or_blue = "red"
+                                if (red_or_blue == "red") {
+                                    FIELD[i][j] = 1
+                                } else {
+                                    FIELD[i][j] = 2
                                 }
-                            }
-                            if(red_or_blue == "red")
-                            {
-                                FIELD[i][j] = 1
-                            }
-                            else
-                            {
-                                FIELD[i][j] = 2
                             }
                         }
                     }
-                }
 
-                blockedOnTouch = false
-                invalidate()
+                    blockedOnTouch = false
+                    invalidate()
 
-            }, delayTime)
+                }, delayTime)
+            }
+        } else {
+            blockedOnTouch = true
+
+            var dialog: Show_Result_with_Computer? = null
+            dialog = Show_Result_with_Computer(activity)
+            if(check_win() == BoxMode)      //TODO more check
+            {
+                dialog?.showResult_with_Computer("Победа","BoxGame",activity)
+            }
+            if(check_win() == 3 - BoxMode)
+            {
+                dialog?.showResult_with_Computer("Поражение","BoxGame",activity)
+            }
+            if(check_win()==3)
+            {
+                dialog?.showResult_with_Computer("Ничья","BoxGame",activity)
+            }
         }
-
-
 
     }
 
@@ -1320,17 +1424,17 @@ class CanvasView_Boxs_with_computer(context: Context, attrs: AttributeSet?) : Vi
             blocked = !blocked
             var dialog: Show_Result_with_Computer? = null
             dialog = Show_Result_with_Computer(activity)
-            if(check_win()==1)
+            if(check_win() == BoxMode)      //TODO more check
             {
-                dialog?.showResult_with_Computer("КРАСНЫЕ ПОБЕДИЛИ","BoxGame",activity)
+                dialog?.showResult_with_Computer("Победа","BoxGame",activity)
             }
-            if(check_win()==2)
+            if(check_win() == 3 - BoxMode)
             {
-                dialog?.showResult_with_Computer("СИНИЕ ПОБЕДИЛИ","BoxGame",activity)
+                dialog?.showResult_with_Computer("Поражение","BoxGame",activity)
             }
             if(check_win()==3)
             {
-                dialog?.showResult_with_Computer("НИЧЬЯ","BoxGame",activity)
+                dialog?.showResult_with_Computer("Ничья","BoxGame",activity)
             }
         }
 

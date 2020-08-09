@@ -978,6 +978,8 @@ class CanvasView_xog_with_computer(context: Context, attrs: AttributeSet?) : Vie
                 }
             }
         }
+
+
         return true
     }
 }
