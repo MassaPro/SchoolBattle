@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.schoolbattle.engine.initCatchPlayersListenerForBlitzGame
+import com.example.schoolbattle.engine.initCatchPlayersListenerForLongGame
 import com.example.schoolbattle.engine.updateRecycler
 import com.example.schoolbattle.engine.updateRecyclerBlitz
 import kotlinx.android.synthetic.main.activity_navigator.*
@@ -105,6 +106,7 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
         }
 
         initCatchPlayersListenerForBlitzGame(username!!, this)
+        initCatchPlayersListenerForLongGame(username, this)
         myRef.child("Users").child(username.toString()).child("Revanches").addValueEventListener(
             object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}

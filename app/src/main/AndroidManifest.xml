@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".gamesonline.ReversiGameActivity"></activity>
+        <activity android:name=".engine.LongActivity"></activity>
+        <activity android:name=".gamesonline.ReversiGameActivity" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

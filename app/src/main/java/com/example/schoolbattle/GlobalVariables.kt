@@ -10,6 +10,7 @@ import android.media.AudioManager
 import android.media.SoundPool
 import android.os.Vibrator
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolbattle.engine.Game
 import com.example.schoolbattle.engine.RecyclerSet
 import com.example.schoolbattle.engine.RecyclerSetBlitz
@@ -79,6 +80,11 @@ var recyclerSet: RecyclerSet = RecyclerSet()
 var recyclerSetBlitz: RecyclerSetBlitz = RecyclerSetBlitz()
 lateinit var CONTEXT: Activity
 
+
+//Текущие игры в долгой
+data class LongGame(val key: String, val type: String, val opponent: String, val move: String)
+var CURRENTGAMES: MutableList<LongGame> = mutableListOf()
+var currentGamesRecycler: RecyclerView? = null
 
   //__________________________________________________________________для пихания в память телефона
 fun CODE(m : MutableList<Int>): String

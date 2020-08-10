@@ -16,6 +16,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolbattle.engine.BlitzActivity
+import com.example.schoolbattle.engine.LongActivity
 import com.example.schoolbattle.engine.StupidGameActivity
 import kotlinx.android.synthetic.main.activity_new_game.*
 import kotlinx.android.synthetic.main.activity_new_game_item.view.*
@@ -77,7 +78,7 @@ class NewGameActivity : AppCompatActivity() {
                 val item = v.tag as String
 
                 if (type == 1) {
-                    val intent = Intent(v.context, StupidGameActivity::class.java).apply {
+                    val intent = Intent(v.context, LongActivity::class.java).apply {
                         putExtra("gameName", item)
                     }
                     v.context.startActivity(intent)
