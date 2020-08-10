@@ -15,6 +15,8 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
+import com.google.android.gms.ads.AdRequest
+import kotlinx.android.synthetic.main.activity_game_over_one_device.*
 import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
 class DotGameOneDivice : AppCompatActivity() {
@@ -87,6 +89,9 @@ class DotGameOneDivice : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_one_device_games_template)
+
+        mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+
         signature_canvas_dots_one_divice.visibility = View.VISIBLE
         signature_canvas_dots_one_divice.activity = this
         CONTEXT = this
@@ -177,6 +182,22 @@ class DotGameOneDivice : AppCompatActivity() {
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             label_one_device.setBackgroundResource(R.drawable.background_japan);
+            bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+        }
+        else if(Design == "Noir" ) {
+            name_player1_one_divice.setTextColor(Color.WHITE)
+            name_player2_one_divice.setTextColor(Color.RED)
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            //button_player_1_one_divice.setBackgroundResource(R.drawable.cross_gothic);
+            //button_player_2_one_divice.setBackgroundResource(R.drawable.null_gothic);
+            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            label_one_device.setBackgroundResource(R.drawable.background_noir);
             bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
@@ -289,9 +310,32 @@ class DotGameOneDivice : AppCompatActivity() {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 2)
-            startActivity(intent)
+            if(mInterstitialAd_in_offline_games.isLoaded)
+            {
+                Intent_for_offline_games = intent
+                mInterstitialAd_in_offline_games.show()
+            }
+            else
+            {
+                this.startActivity(intent)
+            }
         }
 
+    }
+    override fun onBackPressed()
+    {
+        super.onBackPressed()
+        var intent = Intent(this, NewGameActivity::class.java)
+        intent.putExtra("playType", 2)
+        if(mInterstitialAd_in_offline_games.isLoaded)
+        {
+            Intent_for_offline_games = intent
+            mInterstitialAd_in_offline_games.show()
+        }
+        else
+        {
+            this.startActivity(intent)
+        }
     }
 }
 
@@ -378,7 +422,7 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
                 {
                     return 0
                 }
-                if(a[j][i]!= FIELD[i][j])
+                if(a[j][i]!= FIELD[i][j] && FIELD[i][j]!=0)
                 {
                     if(a[j][i]==1)
                     {
@@ -406,6 +450,41 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
                 return 2
             }
         }
+    }
+
+    fun score1() : Int {
+        var cnt1 : Int = 0
+        for(i in 0 until FIELD.size)
+        {
+            for(j in 0 until FIELD[0].size)
+            {
+                if(a[j][i]!= FIELD[i][j] && FIELD[i][j]!=0)
+                {
+                    if(a[j][i]==1)
+                    {
+                        cnt1++
+                    }
+                }
+            }
+        }
+        return cnt1
+    }
+    fun score2() : Int {
+        var cnt2 : Int = 0
+        for(i in 0 until FIELD.size)
+        {
+            for(j in 0 until FIELD[0].size)
+            {
+                if(a[j][i]!= FIELD[i][j] && FIELD[i][j]!=0)
+                {
+                    if(a[j][i]!=1)
+                    {
+                        cnt2++
+                    }
+                }
+            }
+        }
+        return cnt2
     }
 
 
@@ -594,6 +673,19 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
             shading_1.setStrokeWidth(2f)
             shading_2.setStrokeWidth(2f)
         }
+        else if(Design == "Noir") {
+            Line_paint.setColor(Color.rgb(100,100,100))      //ресур для линий (ширина и цвет)
+            paint_circle.setColor(Color.rgb(100,100,100))
+            paint_rib_1.setColor(Color.RED) //цвета для ребер  и их ширина
+            paint_rib_1.setStrokeWidth(5f)
+            paint_rib_2.setColor(Color.WHITE)
+            paint_rib_2.setStrokeWidth(5f)
+
+            shading_1.setColor(Color.RED)
+            shading_2.setColor(Color.WHITE)
+            shading_1.setStrokeWidth(2f)
+            shading_2.setStrokeWidth(2f)
+        }
 
         for(i in 0 until FIELD.size)
         {
@@ -640,7 +732,11 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
         height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)
         advertising_line =(height - width/size_field_x*size_field_y)/2         //полоска для рекламы
 
-        step = width/size_field_x
+        step = if(width/size_field_x < height/size_field_y) {
+            width/size_field_x
+        } else {
+            height/size_field_y
+        }
         k = height-width*(size_field_y.toFloat()/size_field_x.toFloat())-advertising_line
 
         if(Design == "Normal")
@@ -1121,15 +1217,18 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
             dialog = Show_Result_one_Device(activity)
             if(check_win()==1)
             {
-                dialog?.showResult_one_device("Игрок 1 победил","DotGame",activity)
+                dialog?.showResult_one_device("Игрок 2 победил","DotGame",activity)
+                dialog.dialog_one_device.score_result_one_device.text = score1().toString() + ":" + score2().toString()
             }
             if(check_win()==2)
             {
-                dialog?.showResult_one_device("Игрок 2 победил","DotGame",activity)
+                dialog?.showResult_one_device("Игрок 1 победил","DotGame",activity)
+                dialog.dialog_one_device.score_result_one_device.text = score2().toString() + ":" + score1().toString()
             }
             if(check_win()==3)
             {
                 dialog?.showResult_one_device("НИЧЬЯ","DotGame",activity)
+                dialog.dialog_one_device.score_result_one_device.text = score1().toString() + ":" + score2().toString()
             }
             return true
         }

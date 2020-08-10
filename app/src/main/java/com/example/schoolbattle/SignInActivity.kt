@@ -84,6 +84,23 @@ class SignInActivity : AppCompatActivity() {
             signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
             signUpButton.setTextColor(Color.BLACK)
         }
+        if (Design == "Noir"){
+            sign_in_menu.setBackgroundResource(R.drawable.sign_in_noir);
+
+            nameText.setTextColor(Color.WHITE)
+            nameText.setBackgroundColor(Color.rgb(30, 30, 30))
+
+            passwordText.setTextColor(Color.WHITE)
+            passwordText.setBackgroundColor(Color.rgb(30, 30, 30))
+
+            signInButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+            signInButton.setTextColor(Color.WHITE)
+            signInButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+
+            signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+            signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            signUpButton.setTextColor(Color.WHITE)
+        }
 
         SignIn = this
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)

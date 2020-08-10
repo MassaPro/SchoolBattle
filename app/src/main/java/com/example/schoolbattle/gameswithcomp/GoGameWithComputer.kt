@@ -1,4 +1,4 @@
-package com.example.schoolbattle.gamesonedevice
+package com.example.schoolbattle.gameswithcomp
 
 import android.app.Activity
 import android.content.Context
@@ -14,12 +14,11 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
-import com.google.android.gms.ads.AdRequest
-import kotlinx.android.synthetic.main.activity_one_device_games_template.*
+import kotlinx.android.synthetic.main.activity_computer_games_template.*
 
 
 
-class GoGameOneDivice : AppCompatActivity() {
+class GoGameWithComputer : AppCompatActivity() {
 
 
     fun encode(h: MutableList<Triple<Int,Int,Int>>):String
@@ -83,222 +82,188 @@ class GoGameOneDivice : AppCompatActivity() {
         return answer
     }
 
-    private var dialog_parametrs: Show_parametr_one_divice_one_Device? = null
+    private var dialog_parametrs: Show_parametr_with_computer? = null
     private var dialog_rules: Show_rules? = null
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_one_device_games_template)
-
-        mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+        setContentView(R.layout.activity_computer_games_template)
 
         mSound.load(this, R.raw.xlup, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
-        signature_canvas_go_one_divice.visibility = View.VISIBLE
-        signature_canvas_go_one_divice.activity = this
+        signature_canvas_go_with_computer.visibility = View.VISIBLE
+        signature_canvas_go_with_computer.activity = this
 
         if(Design == "Egypt")
         {
-            name_player1_one_divice.setTextColor(Color.BLACK)
-            name_player2_one_divice.setTextColor(Color.BLACK)
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-            name_player2_one_divice.setTextSize(20f)
-            name_player1_one_divice.setTextSize(20f)
-            button_player_1_one_divice.setBackgroundResource(R.drawable.player1_egypt);
-            button_player_2_one_divice.setBackgroundResource(R.drawable.player2_egypt);
-            player_1_icon_one_divice.setBackgroundResource(R.drawable.cross_egypt);
-            player_2_icon_one_divice.setBackgroundResource(R.drawable.circle_egypt)
-            toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background_egypt);
-            toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            bottom_navigation_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
-            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            name_player1_with_computer_template.setTextColor(Color.BLACK)
+            name_player2_with_computer_template.setTextColor(Color.BLACK)
+            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            name_player2_with_computer_template.setTextSize(20f)
+            name_player1_with_computer_template.setTextSize(20f)
+            button_player_1_template_with_computer.setBackgroundResource(R.drawable.player1_egypt);
+            button_player_2_template_with_computer.setBackgroundResource(R.drawable.player2_egypt);
+            player_1_icon_template_with_computer.setBackgroundResource(R.drawable.cross_egypt);
+            player_2_icon_template_with_computer.setBackgroundResource(R.drawable.circle_egypt)
+            toolbar_template_with_computer.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            toolbar2_template_with_computer.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            label_with_computer.setBackgroundResource(R.drawable.background_egypt);
+            toolbar_template_with_computer.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            bottom_navigation_template_with_computer.setBackgroundColor(Color.rgb(224, 164, 103))
+            to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
         }
         else if(Design == "Casino" ) {
-            name_player1_one_divice.setTextColor(Color.YELLOW)
-            name_player2_one_divice.setTextColor(Color.YELLOW)
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_one_divice.setTextSize(20f)
-            name_player1_one_divice.setTextSize(20f)
-            button_player_1_one_divice.setBackgroundResource(R.drawable.tower2_casino);
-            button_player_2_one_divice.setBackgroundResource(R.drawable.tower1_casino);
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background_casino);
-            bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            name_player1_with_computer_template.setTextColor(Color.YELLOW)
+            name_player2_with_computer_template.setTextColor(Color.YELLOW)
+            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_with_computer_template.setTextSize(20f)
+            name_player1_with_computer_template.setTextSize(20f)
+            button_player_1_template_with_computer.setBackgroundResource(R.drawable.tower1_casino);
+            button_player_2_template_with_computer.setBackgroundResource(R.drawable.tower2_casino);
+            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            label_with_computer.setBackgroundResource(R.drawable.background_casino);
+            bottom_navigation_template_with_computer.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
         }
         else if(Design == "Rome" ) {
-            name_player1_one_divice.setTextColor(Color.rgb(193, 150, 63))
-            name_player2_one_divice.setTextColor(Color.rgb(193, 150, 63))
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-            name_player2_one_divice.setTextSize(20f)
-            name_player1_one_divice.setTextSize(20f)
+            name_player1_with_computer_template.setTextColor(Color.rgb(193, 150, 63))
+            name_player2_with_computer_template.setTextColor(Color.rgb(193, 150, 63))
+            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            name_player2_with_computer_template.setTextSize(20f)
+            name_player1_with_computer_template.setTextSize(20f)
             //button_player_1_one_divice.setBackgroundResource(R.drawable.cross_rome);
             //button_player_2_one_divice.setBackgroundResource(R.drawable.null_rome);
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background_rome);
-            bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-        }
-        else if(Design == "Gothic" ) {
-            name_player1_one_divice.setTextColor(Color.WHITE)
-            name_player2_one_divice.setTextColor(Color.YELLOW)
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-            name_player2_one_divice.setTextSize(20f)
-            name_player1_one_divice.setTextSize(20f)
-            //button_player_1_one_divice.setBackgroundResource(R.drawable.cross_gothic);
-            //button_player_2_one_divice.setBackgroundResource(R.drawable.null_gothic);
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background_gothic);
-            bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
-            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-        }
-        else if(Design == "Japan" ) {
-            name_player1_one_divice.setTextColor(Color.BLACK)
-            name_player2_one_divice.setTextColor(Color.BLACK)
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-            name_player2_one_divice.setTextSize(20f)
-            name_player1_one_divice.setTextSize(20f)
-            //button_player_1_one_divice.setBackgroundResource(R.drawable.chip1_japan);
-            //button_player_2_one_divice.setBackgroundResource(R.drawable.chip2_japan);
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background_japan);
-            bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
-            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            label_with_computer.setBackgroundResource(R.drawable.background_rome);
+            bottom_navigation_template_with_computer.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
         }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
         if (usedToClear == "clear") {
             val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-            editor.putString("go_one_divice", "")
+            editor.putString("go_with_computer", "")
             editor.apply()
         }
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
-        signature_canvas_go_one_divice.History = decode(prefs.getString("go_one_divice", "").toString())
-        if (signature_canvas_go_one_divice.History.size > 0) {
-            signature_canvas_go_one_divice.red_or_blue = 2
-            for (i in 0 until signature_canvas_go_one_divice.FIELD.size) {
-                for (j in 0 until signature_canvas_go_one_divice.FIELD[0].size) {
-                    signature_canvas_go_one_divice.FIELD[i][j] = 0
+        signature_canvas_go_with_computer.History = decode(prefs.getString("go_with_computer", "").toString())
+        if (signature_canvas_go_with_computer.History.size > 0) {
+            signature_canvas_go_with_computer.red_or_blue = 2
+            for (i in 0 until signature_canvas_go_with_computer.FIELD.size) {
+                for (j in 0 until signature_canvas_go_with_computer.FIELD[0].size) {
+                    signature_canvas_go_with_computer.FIELD[i][j] = 0
                 }
             }
-            signature_canvas_go_one_divice.a.clear()
+            signature_canvas_go_with_computer.a.clear()
             for (i in 0 until 16) {
-                signature_canvas_go_one_divice.a.add(mutableListOf())
+                signature_canvas_go_with_computer.a.add(mutableListOf())
             }
-            for (i in signature_canvas_go_one_divice.a.indices) {
+            for (i in signature_canvas_go_with_computer.a.indices) {
                 for (j in 0 until 11) {
-                    signature_canvas_go_one_divice.a[i].add(0)
+                    signature_canvas_go_with_computer.a[i].add(0)
                 }
             }
-            for (i in signature_canvas_go_one_divice.History) {
-                signature_canvas_go_one_divice.FIELD[i.first][i.second] = i.third
-                signature_canvas_go_one_divice.a[i.second][i.first] = i.third
-                signature_canvas_go_one_divice.find(
+            for (i in signature_canvas_go_with_computer.History) {
+                signature_canvas_go_with_computer.FIELD[i.first][i.second] = i.third
+                signature_canvas_go_with_computer.a[i.second][i.first] = i.third
+                signature_canvas_go_with_computer.find(
                     i.third,
-                    signature_canvas_go_one_divice.a,
+                    signature_canvas_go_with_computer.a,
                     16,
                     11
                 )
-                signature_canvas_go_one_divice.red_or_blue =
-                    2 - (signature_canvas_go_one_divice.red_or_blue + 1) % 2
+                signature_canvas_go_with_computer.red_or_blue =
+                    2 - (signature_canvas_go_with_computer.red_or_blue + 1) % 2
             }
-            for(i in 0 until  signature_canvas_go_one_divice.FIELD.size)
+            for(i in 0 until  signature_canvas_go_with_computer.FIELD.size)
             {
-                for(j in 0 until signature_canvas_go_one_divice.FIELD[0].size)
+                for(j in 0 until signature_canvas_go_with_computer.FIELD[0].size)
                 {
-                    if(signature_canvas_go_one_divice.FIELD[i][j]!=0 && signature_canvas_go_one_divice.FIELD[i][j]!=signature_canvas_go_one_divice.a[j][i])
+                    if(signature_canvas_go_with_computer.FIELD[i][j]!=0 && signature_canvas_go_with_computer.FIELD[i][j]!=signature_canvas_go_with_computer.a[j][i])
                     {
-                        signature_canvas_go_one_divice.FIELD[i][j] = 0
+                        signature_canvas_go_with_computer.FIELD[i][j] = 0
                     }
                 }
             }
-            signature_canvas_go_one_divice.invalidate()
+            signature_canvas_go_with_computer.invalidate()
         }
-        //combacks_one_divice.setVisibility(View.GONE);
-        bottom_navigation_one_divice.setOnNavigationItemSelectedListener { item ->
+        //combacks_with_computer.setVisibility(View.GONE);
+        bottom_navigation_template_with_computer.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
                     dialog_rules =
                         Show_rules(
-                            this@GoGameOneDivice
+                            this@GoGameWithComputer
                         )
                     dialog_rules?.show("GoGame")
                 }
                 R.id.page_2 ->{
                     dialog_parametrs =
-                        Show_parametr_one_divice_one_Device(
-                            this@GoGameOneDivice
+                        Show_parametr_with_computer(
+                            this@GoGameWithComputer
                         )
-                    dialog_parametrs?.showResult_one_device()
+                    dialog_parametrs?.showResult_with_computer(this, "GoGame")
                 }
                 R.id.page_3 ->{
                     this.finish()
                     val intent = Intent(this,
-                        GoGameOneDivice::class.java).apply {
+                        GoGameWithComputer::class.java).apply {
                         putExtra("usedToClear", "clear")}
                     startActivity(intent)
                 }
                 R.id.page_4 ->{
-                    if (signature_canvas_go_one_divice.History.size > 0) {
-                        signature_canvas_go_one_divice.History.removeLast()
-                        var data_from_memory = encode(signature_canvas_go_one_divice.History)
+                    if (signature_canvas_go_with_computer.History.size > 0) {
+                        signature_canvas_go_with_computer.History.removeLast()
+                        var data_from_memory = encode(signature_canvas_go_with_computer.History)
                         val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                        editor.putString("go_one_divice", data_from_memory)
+                        editor.putString("go_with_computer", data_from_memory)
                         editor.apply()
-                        signature_canvas_go_one_divice.red_or_blue = 2
-                        for (i in 0 until signature_canvas_go_one_divice.FIELD.size) {
-                            for (j in 0 until signature_canvas_go_one_divice.FIELD[0].size) {
-                                signature_canvas_go_one_divice.FIELD[i][j] = 0
+                        signature_canvas_go_with_computer.red_or_blue = 2
+                        for (i in 0 until signature_canvas_go_with_computer.FIELD.size) {
+                            for (j in 0 until signature_canvas_go_with_computer.FIELD[0].size) {
+                                signature_canvas_go_with_computer.FIELD[i][j] = 0
                             }
                         }
-                        signature_canvas_go_one_divice.a.clear()
+                        signature_canvas_go_with_computer.a.clear()
                         for (i in 0 until 16) {
-                            signature_canvas_go_one_divice.a.add(mutableListOf())
+                            signature_canvas_go_with_computer.a.add(mutableListOf())
                         }
-                        for (i in signature_canvas_go_one_divice.a.indices) {
+                        for (i in signature_canvas_go_with_computer.a.indices) {
                             for (j in 0 until 11) {
-                                signature_canvas_go_one_divice.a[i].add(0)
+                                signature_canvas_go_with_computer.a[i].add(0)
                             }
                         }
-                        for (i in signature_canvas_go_one_divice.History) {
-                            signature_canvas_go_one_divice.FIELD[i.first][i.second] = i.third
-                            signature_canvas_go_one_divice.a[i.second][i.first] = i.third
-                            signature_canvas_go_one_divice.find(
+                        for (i in signature_canvas_go_with_computer.History) {
+                            signature_canvas_go_with_computer.FIELD[i.first][i.second] = i.third
+                            signature_canvas_go_with_computer.a[i.second][i.first] = i.third
+                            signature_canvas_go_with_computer.find(
                                 i.third,
-                                signature_canvas_go_one_divice.a,
+                                signature_canvas_go_with_computer.a,
                                 16,
                                 11
                             )
-                            signature_canvas_go_one_divice.red_or_blue =
-                                2 - (signature_canvas_go_one_divice.red_or_blue + 1) % 2
+                            signature_canvas_go_with_computer.red_or_blue =
+                                2 - (signature_canvas_go_with_computer.red_or_blue + 1) % 2
                         }
-                        for(i in 0 until  signature_canvas_go_one_divice.FIELD.size)
+                        for(i in 0 until  signature_canvas_go_with_computer.FIELD.size)
                         {
-                            for(j in 0 until signature_canvas_go_one_divice.FIELD[0].size)
+                            for(j in 0 until signature_canvas_go_with_computer.FIELD[0].size)
                             {
-                                if(signature_canvas_go_one_divice.FIELD[i][j]!=0 && signature_canvas_go_one_divice.FIELD[i][j]!=signature_canvas_go_one_divice.a[j][i])
+                                if(signature_canvas_go_with_computer.FIELD[i][j]!=0 && signature_canvas_go_with_computer.FIELD[i][j]!=signature_canvas_go_with_computer.a[j][i])
                                 {
-                                    signature_canvas_go_one_divice.FIELD[i][j] = 0
+                                    signature_canvas_go_with_computer.FIELD[i][j] = 0
                                 }
                             }
                         }
-                        signature_canvas_go_one_divice.invalidate()
+                        signature_canvas_go_with_computer.invalidate()
                     }
                 }
 
@@ -306,41 +271,18 @@ class GoGameOneDivice : AppCompatActivity() {
             true
         }
 
-        to_back_one_divice.setOnClickListener {
+        to_back_template_with_computer.setOnClickListener {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 2)
-            if(mInterstitialAd_in_offline_games.isLoaded)
-            {
-                Intent_for_offline_games = intent
-                mInterstitialAd_in_offline_games.show()
-            }
-            else
-            {
-                this.startActivity(intent)
-            }
+            startActivity(intent)
         }
 
-    }
-    override fun onBackPressed()
-    {
-        super.onBackPressed()
-        var intent = Intent(this, NewGameActivity::class.java)
-        intent.putExtra("playType", 2)
-        if(mInterstitialAd_in_offline_games.isLoaded)
-        {
-            Intent_for_offline_games = intent
-            mInterstitialAd_in_offline_games.show()
-        }
-        else
-        {
-            this.startActivity(intent)
-        }
     }
 }
 
 
-class CanvasView_Go_one_divice(context: Context, attrs: AttributeSet?) : View(context, attrs) {
+class CanvasView_Go_with_computer(context: Context, attrs: AttributeSet?) : View(context, attrs) {
     fun encode(h: MutableList<Triple<Int,Int,Int>>):String
     {
         var answer: String = ""
@@ -583,13 +525,13 @@ class CanvasView_Go_one_divice(context: Context, attrs: AttributeSet?) : View(co
             shading_2.setStrokeWidth(2f)
         }
         else if(Design == "Casino") {
-            paint_rib_2.setColor(Color.BLACK) //цвета для ребер  и их ширина
-            paint_rib_2.setStrokeWidth(5f)
-            paint_rib_1.setColor(Color.RED)
+            paint_rib_1.setColor(Color.BLACK) //цвета для ребер  и их ширина
             paint_rib_1.setStrokeWidth(5f)
+            paint_rib_2.setColor(Color.RED)
+            paint_rib_2.setStrokeWidth(5f)
 
-            shading_2.setColor(Color.BLACK)
-            shading_1.setColor(Color.RED)
+            shading_1.setColor(Color.BLACK)
+            shading_2.setColor(Color.RED)
             shading_1.setStrokeWidth(2f)
             shading_2.setStrokeWidth(2f)
         }
@@ -603,32 +545,6 @@ class CanvasView_Go_one_divice(context: Context, attrs: AttributeSet?) : View(co
 
             shading_1.setColor(Color.BLACK)
             shading_2.setColor(Color.rgb(193,150,63))
-            shading_1.setStrokeWidth(2f)
-            shading_2.setStrokeWidth(2f)
-        }
-        else if(Design == "Gothic") {
-            Line_paint.setColor(Color.rgb(100,100,100))      //ресур для линий (ширина и цвет)
-            paint_circle.setColor(Color.rgb(100,100,100))
-            paint_rib_1.setColor(Color.WHITE) //цвета для ребер  и их ширина
-            paint_rib_1.setStrokeWidth(5f)
-            paint_rib_2.setColor(Color.YELLOW)
-            paint_rib_2.setStrokeWidth(5f)
-
-            shading_1.setColor(Color.WHITE)
-            shading_2.setColor(Color.YELLOW)
-            shading_1.setStrokeWidth(2f)
-            shading_2.setStrokeWidth(2f)
-        }
-        else if(Design == "Japan") {
-            Line_paint.setColor(Color.rgb(160,160,160))      //ресур для линий (ширина и цвет)
-            paint_circle.setColor(Color.rgb(160,160,160))
-            paint_rib_1.setColor(Color.rgb(37,103,28)) //зелёный
-            paint_rib_1.setStrokeWidth(5f)
-            paint_rib_2.setColor(Color.RED)
-            paint_rib_2.setStrokeWidth(5f)
-
-            shading_1.setColor(Color.rgb(37,103,28))
-            shading_2.setColor(Color.RED)
             shading_1.setStrokeWidth(2f)
             shading_2.setStrokeWidth(2f)
         }
@@ -745,19 +661,19 @@ class CanvasView_Go_one_divice(context: Context, attrs: AttributeSet?) : View(co
         if(check_win() >0 && event!!.getAction()  == MotionEvent.ACTION_UP && !blocked)
         {
             blocked = !blocked
-            var dialog: Show_Result_one_Device? = null
-            dialog = Show_Result_one_Device(activity)
+            var dialog: Show_Result_with_Computer? = null
+            dialog = Show_Result_with_Computer(activity)
             if(check_win()==1)
             {
-                dialog?.showResult_one_device("Игрок 1 победил","GoGame",activity)
+                dialog?.showResult_with_Computer("Игрок 1 победил","GoGame",activity)
             }
             if(check_win()==2)
             {
-                dialog?.showResult_one_device("Игрок 2 победил","GoGame",activity)
+                dialog?.showResult_with_Computer("Игрок 2 победил","GoGame",activity)
             }
             if(check_win()==3)
             {
-                dialog?.showResult_one_device("НИЧЬЯ","GoGame",activity)
+                dialog?.showResult_with_Computer("НИЧЬЯ","GoGame",activity)
             }
             return true
         }
@@ -795,7 +711,7 @@ class CanvasView_Go_one_divice(context: Context, attrs: AttributeSet?) : View(co
                         History.add(Triple(i,j,FIELD[i][j]))
                         var data_from_memory = encode(History)
                         val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                        editor.putString("go_one_divice", data_from_memory)
+                        editor.putString("go_with_computer", data_from_memory)
                         editor.apply()
 
                         for(i in 0 until  FIELD.size)

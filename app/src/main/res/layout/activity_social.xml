@@ -25,7 +25,7 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_below="@+id/toolbar_social"
         android:elevation="4dp"
         app:tabGravity="fill"
@@ -62,4 +62,30 @@
         android:layout_toStartOf="@+id/search_social"
         android:gravity="center|right"
         android:text="Найти" />
+
+    <TextView
+        android:id = "@+id/helped_text_social_1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="Профиль">
+    </TextView>
+    <TextView
+        android:id = "@+id/helped_text_social_2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="Подписки">
+    </TextView>
+    <TextView
+        android:id = "@+id/helped_text_social_3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="Подписчики">
+    </TextView>
+
 </RelativeLayout>

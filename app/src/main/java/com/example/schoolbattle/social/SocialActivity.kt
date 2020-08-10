@@ -2,19 +2,33 @@ package com.example.schoolbattle.social
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.schoolbattle.*
+import com.example.schoolbattle.shop.ShopFragmentActivity
+import com.example.schoolbattle.shop.locale_context
+import com.example.schoolbattle.social.FriendsList
+import com.example.schoolbattle.social.MyProfile
+import com.example.schoolbattle.social.Subscriptions
 import com.google.android.material.tabs.TabLayout
+import kotlinx.android.synthetic.main.activity_settings_fragment.*
 import kotlinx.android.synthetic.main.activity_social.*
 import kotlinx.android.synthetic.main.activity_social.view.*
-import kotlinx.android.synthetic.main.activity_social.view.social_menu
+import kotlinx.android.synthetic.main.activity_social.view.helped_text_social_1
+import kotlinx.android.synthetic.main.activity_social.view.helped_text_social_2
+import kotlinx.android.synthetic.main.activity_social.view.helped_text_social_3
+import org.w3c.dom.Text
 
 class SocialActivity : Fragment() {
 
@@ -53,9 +67,7 @@ class SocialActivity : Fragment() {
          * The setupWithViewPager dose't works without the runnable .
          * Maybe a Support Library Bug .
          */
-        tabLayout!!.post { tabLayout!!.setupWithViewPager(
-            viewPager
-        ) }
+        tabLayout!!.setupWithViewPager(viewPager)
 
         var fon = v.findViewById<View>(R.id.social_menu)
 
@@ -67,8 +79,26 @@ class SocialActivity : Fragment() {
             startActivity(intent)
         }
 
+        locale_context = activity as AppCompatActivity
         if (Design == "Egypt"){
             fon.setBackgroundResource(R.drawable.background_egypt)
+            tabLayout!!.setBackgroundResource(R.drawable.background_egypt)     //фон табов
+            for (i in 0 until tabLayout!!.tabCount) {
+                var tv: TextView =v.findViewById(R.id.helped_text_social_1)
+                if (i == 0) {
+                    tv = v.helped_text_social_1
+                }
+                if (i == 1) {
+                    tv =v.helped_text_social_2
+                }
+                if (i == 2) {
+                    tv =v.helped_text_social_3
+                }
+                tv.textSize = 14.3f        //так задаешь размер
+                tv.setTextColor(Color.BLACK)   //цвет
+                tv.typeface = ResourcesCompat.getFont(locale_context!!, R.font.egypt)  //шрифт
+                tabLayout!!.getTabAt(i)?.customView = tv;
+            }
         }
         else if (Design == "Casino"){
             fon.setBackgroundResource(R.drawable.background2_casino)
@@ -81,6 +111,16 @@ class SocialActivity : Fragment() {
         }
         else if (Design == "Japan"){
             fon.setBackgroundResource(R.drawable.background_japan)
+        }
+        else if (Design == "Noir"){
+            fon.setBackgroundResource(R.drawable.background_noir)
+        }
+
+
+
+        if(Design == "Egypt")
+        {
+
         }
 
         return v

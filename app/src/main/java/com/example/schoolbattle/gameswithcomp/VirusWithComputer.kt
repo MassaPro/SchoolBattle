@@ -1,4 +1,4 @@
-package com.example.schoolbattle.gamesonedevice
+package com.example.schoolbattle.gameswithcomp
 
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
@@ -16,10 +16,11 @@ import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
 import com.google.android.gms.ads.AdRequest
-import kotlinx.android.synthetic.main.activity_one_device_games_template.*
+import kotlinx.android.synthetic.main.activity_computer_games_template.*
 
+var VirusGameMode = 0
 
-class VirusOneDivice : AppCompatActivity() {
+class VirusWithComputer : AppCompatActivity() {
 
     fun encode(h: MutableList<Triple<Int,Int,Int>>):String
     {
@@ -83,13 +84,16 @@ class VirusOneDivice : AppCompatActivity() {
     }
 
 
-    private var dialog_parametrs: Show_parametr_one_divice_one_Device? = null
+    private var dialog_parametrs: Show_parametr_with_computer? = null
     private var dialog_rules: Show_rules? = null
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_computer_games_template)
+        signature_canvas_virus_with_computer.visibility = View.VISIBLE
+        signature_canvas_virus_with_computer.activity = this
 
-        mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+        //mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
 
         Log.d("VISIT","121212121")
         CONTEXT = this
@@ -97,215 +101,195 @@ class VirusOneDivice : AppCompatActivity() {
         mSound.load(this, R.raw.xlup, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
-        setContentView(R.layout.activity_one_device_games_template)
-        signature_canvas_virus_one_device.visibility = View.VISIBLE
-        signature_canvas_virus_one_device.activity = this
+
+        val prefs2 = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        VirusGameMode = prefs2.getInt("VirusGameMode", 0)
+        if (VirusGameMode == 0) {
+            val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+            editor.putInt("DotGameMode", 1)
+            editor.apply()
+            VirusGameMode = 1
+        }
+        signature_canvas_virus_with_computer.blockedOnTouch = false
+        val prefs_first = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        signature_canvas_virus_with_computer.History = decode(prefs_first.getString("virus_with_computer", "").toString())
+        if (VirusGameMode == 2 && signature_canvas_virus_with_computer.History.size == 0) {
+            signature_canvas_virus_with_computer.blockedOnTouch = true         // TODO check
+        }
 
         if(Design == "Egypt" ) {
-            name_player1_one_divice.setTextColor(Color.BLACK)
-            name_player2_one_divice.setTextColor(Color.BLACK)
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-            name_player2_one_divice.setTextSize(20f)
-            name_player1_one_divice.setTextSize(20f)
-            button_player_1_one_divice.setBackgroundResource(R.drawable.player1_egypt);
-            button_player_2_one_divice.setBackgroundResource(R.drawable.player2_egypt);
-            player_1_icon_one_divice.setBackgroundResource(R.drawable.virus1_egypt);
-            player_2_icon_one_divice.setBackgroundResource(R.drawable.virus2_egypt);
-            label_one_device.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_one_divice.setBackgroundColor(rgb(224,164,103))
-            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_one_divice.setBackgroundColor(argb(0,0,0,0))
-            toolbar2_one_divice.setBackgroundColor(argb(0,0,0,0))
+            name_player1_with_computer_template.setTextColor(Color.BLACK)
+            name_player2_with_computer_template.setTextColor(Color.BLACK)
+            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            name_player2_with_computer_template.setTextSize(20f)
+            name_player1_with_computer_template.setTextSize(20f)
+            button_player_1_template_with_computer.setBackgroundResource(R.drawable.player1_egypt);
+            button_player_2_template_with_computer.setBackgroundResource(R.drawable.player2_egypt);
+            player_1_icon_template_with_computer.setBackgroundResource(R.drawable.virus1_egypt);
+            player_2_icon_template_with_computer.setBackgroundResource(R.drawable.virus2_egypt);
+            label_with_computer.setBackgroundResource(R.drawable.background_egypt);
+            bottom_navigation_template_with_computer.setBackgroundColor(rgb(224,164,103))
+            to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_template_with_computer.setBackgroundColor(argb(0,0,0,0))
+            toolbar2_template_with_computer.setBackgroundColor(argb(0,0,0,0))
         }
         else if(Design == "Casino" ) {
-            name_player1_one_divice.setTextColor(Color.YELLOW)
-            name_player2_one_divice.setTextColor(Color.YELLOW)
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_one_divice.setTextSize(20f)
-            name_player1_one_divice.setTextSize(20f)
-            button_player_1_one_divice.setBackgroundResource(R.drawable.tower1_casino);
-            button_player_2_one_divice.setBackgroundResource(R.drawable.tower2_casino);
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background_casino);
-            bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            name_player1_with_computer_template.setTextColor(Color.YELLOW)
+            name_player2_with_computer_template.setTextColor(Color.YELLOW)
+            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            name_player2_with_computer_template.setTextSize(20f)
+            name_player1_with_computer_template.setTextSize(20f)
+            button_player_1_template_with_computer.setBackgroundResource(R.drawable.tower1_casino);
+            button_player_2_template_with_computer.setBackgroundResource(R.drawable.tower2_casino);
+            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            label_with_computer.setBackgroundResource(R.drawable.background_casino);
+            bottom_navigation_template_with_computer.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
         }
         else if(Design == "Rome" ) {
-            name_player1_one_divice.setTextColor(rgb(193,150,63))
-            name_player2_one_divice.setTextColor(rgb(193,150,63))
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-            name_player2_one_divice.setTextSize(20f)
-            name_player1_one_divice.setTextSize(20f)
-            button_player_1_one_divice.setBackgroundResource(R.drawable.tower1_rome);
-            button_player_2_one_divice.setBackgroundResource(R.drawable.tower2_rome);
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background_rome);
-            bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            name_player1_with_computer_template.setTextColor(rgb(193,150,63))
+            name_player2_with_computer_template.setTextColor(rgb(193,150,63))
+            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+            name_player2_with_computer_template.setTextSize(20f)
+            name_player1_with_computer_template.setTextSize(20f)
+            button_player_1_template_with_computer.setBackgroundResource(R.drawable.tower1_rome);
+            button_player_2_template_with_computer.setBackgroundResource(R.drawable.tower2_rome);
+            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            label_with_computer.setBackgroundResource(R.drawable.background_rome);
+            bottom_navigation_template_with_computer.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
         }
         else if(Design == "Gothic" ) {
-            name_player1_one_divice.setTextColor(Color.WHITE)
-            name_player2_one_divice.setTextColor(Color.WHITE)
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-            name_player2_one_divice.setTextSize(20f)
-            name_player1_one_divice.setTextSize(20f)
-            button_player_1_one_divice.setBackgroundResource(R.drawable.tower1_gothic);
-            button_player_2_one_divice.setBackgroundResource(R.drawable.tower2_gothic);
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background_gothic);
-            bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
-            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-        }
-        else if(Design == "Japan" ) {
-            name_player1_one_divice.setTextColor(Color.BLACK)
-            name_player2_one_divice.setTextColor(Color.BLACK)
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-            name_player2_one_divice.setTextSize(20f)
-            name_player1_one_divice.setTextSize(20f)
-            button_player_1_one_divice.setBackgroundResource(R.drawable.tower1_japan);
-            button_player_2_one_divice.setBackgroundResource(R.drawable.tower2_japan);
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background_japan);
-            bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
-            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-        }
-        else if(Design == "Noir" ) {
-            name_player1_one_divice.setTextColor(Color.WHITE)
-            name_player2_one_divice.setTextColor(Color.WHITE)
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
-            name_player2_one_divice.setTextSize(20f)
-            name_player1_one_divice.setTextSize(20f)
-            button_player_1_one_divice.setBackgroundResource(R.drawable.tower1_noir);
-            button_player_2_one_divice.setBackgroundResource(R.drawable.tower2_noir);
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background_noir);
-            bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
-            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            name_player1_with_computer_template.setTextColor(Color.WHITE)
+            name_player2_with_computer_template.setTextColor(Color.WHITE)
+            //name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            //name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            name_player2_with_computer_template.setTextSize(20f)
+            name_player1_with_computer_template.setTextSize(20f)
+            //button_player_1_template_with_computer.setBackgroundResource(R.drawable.tower1_gothic);
+            //button_player_2_template_with_computer.setBackgroundResource(R.drawable.tower2_gothic);
+            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            //label_with_computer.setBackgroundResource(R.drawable.background_gothic);
+            bottom_navigation_template_with_computer.setBackgroundColor(argb(0,0,0,0))
+            to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
         }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
         if (usedToClear == "clear") {
             val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-            editor.putString("virus_one_divice", "")
+            editor.putString("virus_with_computer", "")
             editor.apply()
         }
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
-        signature_canvas_virus_one_device.History = decode(prefs.getString("virus_one_divice", "").toString())
+        signature_canvas_virus_with_computer.History = decode(prefs.getString("virus_with_computer", "").toString())
 
-        for (i in 0 until signature_canvas_virus_one_device.FIELD.size) {
-            for (j in 0 until signature_canvas_virus_one_device.FIELD[0].size) {
-                signature_canvas_virus_one_device.FIELD[i][j] = 0
+        for (i in 0 until signature_canvas_virus_with_computer.FIELD.size) {
+            for (j in 0 until signature_canvas_virus_with_computer.FIELD[0].size) {
+                signature_canvas_virus_with_computer.FIELD[i][j] = 0
             }
         }
-        signature_canvas_virus_one_device.COUNTER_BLUE =  0
-        signature_canvas_virus_one_device.COUNTER_RED = 0
-        signature_canvas_virus_one_device.red_or_blue = 0
-        for(i in signature_canvas_virus_one_device.History)
+        signature_canvas_virus_with_computer.COUNTER_BLUE =  0
+        signature_canvas_virus_with_computer.COUNTER_RED = 0
+        signature_canvas_virus_with_computer.red_or_blue = 0
+        for(i in signature_canvas_virus_with_computer.History)
         {
-            signature_canvas_virus_one_device.FIELD[i.first][i.second] = i.third
+            signature_canvas_virus_with_computer.FIELD[i.first][i.second] = i.third
             if(i.third == 1)
             {
-                signature_canvas_virus_one_device.COUNTER_RED++
+                signature_canvas_virus_with_computer.COUNTER_RED++
             }
             if(i.third == 2)
             {
-                signature_canvas_virus_one_device.COUNTER_BLUE++
+                signature_canvas_virus_with_computer.COUNTER_BLUE++
             }
-            signature_canvas_virus_one_device.red_or_blue = (signature_canvas_virus_one_device.red_or_blue+1)%6
+            signature_canvas_virus_with_computer.red_or_blue = (signature_canvas_virus_with_computer.red_or_blue+1)%6
         }
 
 
 
 
-        bottom_navigation_one_divice.setOnNavigationItemSelectedListener { item ->
+        bottom_navigation_template_with_computer.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
                     dialog_rules =
                         Show_rules(
-                            this@VirusOneDivice
+                            this@VirusWithComputer
                         )
                     dialog_rules?.show("VirusGame")
                 }
                 R.id.page_2 ->{
                     dialog_parametrs =
-                        Show_parametr_one_divice_one_Device(
-                            this@VirusOneDivice
+                        Show_parametr_with_computer(
+                            this@VirusWithComputer
                         )
-                    dialog_parametrs?.showResult_one_device()
+                    dialog_parametrs?.showResult_with_computer(this, "VirusGame")
                 }
                 R.id.page_3 ->{
                     this.finish()
-                    val intent = Intent(this, VirusOneDivice::class.java).apply {
+                    val intent = Intent(this, VirusWithComputer::class.java).apply {
                         putExtra("usedToClear", "clear")}
                     startActivity(intent)
                 }
                 R.id.page_4 ->{
-                    if(signature_canvas_virus_one_device.History.size>0)
+                    if(signature_canvas_virus_with_computer.History.size>0)
                     {
-                        signature_canvas_virus_one_device.History.removeLast()
-                        var data_from_memory = encode(signature_canvas_virus_one_device.History)
+                        signature_canvas_virus_with_computer.History.removeLast()
+                        var data_from_memory = encode(signature_canvas_virus_with_computer.History)
                         val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                        editor.putString("virus_one_divice", data_from_memory)
+                        editor.putString("virus_with_computer", data_from_memory)
                         editor.apply()
-                        signature_canvas_virus_one_device.red_or_blue =0
-                        signature_canvas_virus_one_device.COUNTER_RED = 0
-                        signature_canvas_virus_one_device.COUNTER_BLUE = 0
-                        for(i in 0 until signature_canvas_virus_one_device.FIELD.size)
+                        signature_canvas_virus_with_computer.red_or_blue =0
+                        signature_canvas_virus_with_computer.COUNTER_RED = 0
+                        signature_canvas_virus_with_computer.COUNTER_BLUE = 0
+                        for(i in 0 until signature_canvas_virus_with_computer.FIELD.size)
                         {
-                            for(j in 0 until signature_canvas_virus_one_device.FIELD[0].size)
+                            for(j in 0 until signature_canvas_virus_with_computer.FIELD[0].size)
                             {
-                                signature_canvas_virus_one_device.FIELD[i][j] = 0
+                                signature_canvas_virus_with_computer.FIELD[i][j] = 0
                             }
                         }
-                        for(i in signature_canvas_virus_one_device.History)
+                        for(i in signature_canvas_virus_with_computer.History)
                         {
-                            signature_canvas_virus_one_device.FIELD[i.first][i.second] = i.third
-                            signature_canvas_virus_one_device.red_or_blue = (signature_canvas_virus_one_device.red_or_blue+1)%6
+                            signature_canvas_virus_with_computer.FIELD[i.first][i.second] = i.third
+                            signature_canvas_virus_with_computer.red_or_blue = (signature_canvas_virus_with_computer.red_or_blue+1)%6
                             if(2- i.third%2 == 1)
                             {
-                                signature_canvas_virus_one_device.COUNTER_RED++
+                                signature_canvas_virus_with_computer.COUNTER_RED++
                             }
                             else
                             {
-                                signature_canvas_virus_one_device.COUNTER_BLUE++
+                                signature_canvas_virus_with_computer.COUNTER_BLUE++
                             }
                         }
-                        signature_canvas_virus_one_device.invalidate()
+                        signature_canvas_virus_with_computer.invalidate()
                     }
                 }
 
             }
             true
         }
-        to_back_one_divice.setOnClickListener {
+        to_back_template_with_computer.setOnClickListener {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
-            intent.putExtra("playType", 2)
-            if(mInterstitialAd_in_offline_games.isLoaded)
+            intent.putExtra("playType", 3)
+            /*if(mInterstitialAd_in_offline_games.isLoaded)
             {
                 Intent_for_offline_games = intent
                 mInterstitialAd_in_offline_games.show()
             }
             else
-            {
+            {*/
                 this.startActivity(intent)
-            }
+            //}
         }
 
 
@@ -314,20 +298,20 @@ class VirusOneDivice : AppCompatActivity() {
     {
         super.onBackPressed()
         var intent = Intent(this, NewGameActivity::class.java)
-        intent.putExtra("playType", 2)
-        if(mInterstitialAd_in_offline_games.isLoaded)
+        intent.putExtra("playType", 3)
+        /*if(mInterstitialAd_in_offline_games.isLoaded)
         {
             Intent_for_offline_games = intent
             mInterstitialAd_in_offline_games.show()
         }
         else
-        {
+        {*/
             this.startActivity(intent)
-        }
+        //}
     }
 }
 
-class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, attrs) {
+class CanvasView_virus_with_computer (context: Context, attrs: AttributeSet?) : View(context, attrs) {
 
     fun encode(h: MutableList<Triple<Int,Int,Int>>):String
     {
@@ -412,14 +396,14 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
                 }
             }
         }
-       for(t in 0 until  50)
-       {
-           for(i in 0 until FIELD.size)
-           {
-               for(j in 0 until FIELD[0].size)
-               {
-                   if(HELP[i][j] == z)
-                   {
+        for(t in 0 until  50)
+        {
+            for(i in 0 until FIELD.size)
+            {
+                for(j in 0 until FIELD[0].size)
+                {
+                    if(HELP[i][j] == z)
+                    {
                         if(i>0)
                         {
                             if(FIELD[i-1][j] == z+2)
@@ -427,74 +411,74 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
                                 HELP[i-1][j] = z
                             }
                         }
-                       if(i<9)
-                       {
-                           if(FIELD[i+1][j] == z+2)
-                           {
-                               HELP[i+1][j] = z
-                           }
-                       }
-                       if(j>0)
-                       {
-                           if(FIELD[i][j-1] == z+2)
-                           {
-                               HELP[i][j-1] = z
-                           }
-                       }
-                       if(j<9)
-                       {
-                           if(FIELD[i][j+1] == z+2)
-                           {
-                               HELP[i][j+1] = z
-                           }
-                       }
-                       if(i>0 && j>0)
-                       {
-                           if(FIELD[i-1][j-1] == z+2)
-                           {
-                               HELP[i-1][j-1] = z
-                           }
-                       }
-                       if(i>0 &&  j<9)
-                       {
-                           if(FIELD[i-1][j+1] == z+2)
-                           {
-                               HELP[i-1][j+1] = z
-                           }
-                       }
-                       if(i<9 && j>0)
-                       {
-                           if(FIELD[i+1][j-1] == z+2)
-                           {
-                               HELP[i+1][j-1] = z
-                           }
-                       }
-                       if(i<9 && j<9)
-                       {
-                           if(FIELD[i+1][j+1] == z+2)
-                           {
-                               HELP[i+1][j+1] = z
-                           }
-                       }
-                   }
-               }
-           }
-       }
+                        if(i<9)
+                        {
+                            if(FIELD[i+1][j] == z+2)
+                            {
+                                HELP[i+1][j] = z
+                            }
+                        }
+                        if(j>0)
+                        {
+                            if(FIELD[i][j-1] == z+2)
+                            {
+                                HELP[i][j-1] = z
+                            }
+                        }
+                        if(j<9)
+                        {
+                            if(FIELD[i][j+1] == z+2)
+                            {
+                                HELP[i][j+1] = z
+                            }
+                        }
+                        if(i>0 && j>0)
+                        {
+                            if(FIELD[i-1][j-1] == z+2)
+                            {
+                                HELP[i-1][j-1] = z
+                            }
+                        }
+                        if(i>0 &&  j<9)
+                        {
+                            if(FIELD[i-1][j+1] == z+2)
+                            {
+                                HELP[i-1][j+1] = z
+                            }
+                        }
+                        if(i<9 && j>0)
+                        {
+                            if(FIELD[i+1][j-1] == z+2)
+                            {
+                                HELP[i+1][j-1] = z
+                            }
+                        }
+                        if(i<9 && j<9)
+                        {
+                            if(FIELD[i+1][j+1] == z+2)
+                            {
+                                HELP[i+1][j+1] = z
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-      if(x>0)
-      {
-          if(HELP[x-1][y] == z)
-          {
-              return true
-          }
-      }
-     if(x<9)
-      {
-         if(HELP[x+1][y] == z)
-         {
-             return true
-         }
-      }
+        if(x>0)
+        {
+            if(HELP[x-1][y] == z)
+            {
+                return true
+            }
+        }
+        if(x<9)
+        {
+            if(HELP[x+1][y] == z)
+            {
+                return true
+            }
+        }
         if(y>0)
         {
             if(HELP[x][y-1] == z)
@@ -754,6 +738,8 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
 
     lateinit var activity: Activity
 
+    var blockedOnTouch: Boolean = false
+
     var History: MutableList<Triple<Int,Int,Int>> = mutableListOf()
 
     var red_or_blue: Int            // всего 6 фаз
@@ -809,12 +795,6 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
         if (Design == "Gothic"){
             Line_paint.setColor(rgb(100,100,100))          //ресур для линий (ширина и цвет)
         }
-        if (Design == "Japan"){
-            Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
-        }
-        if (Design == "Noir"){
-            Line_paint.setColor(rgb(100,100,100))          //ресур для линий (ширина и цвет)
-        }
 
 
         for (i in 0 until FIELD.size) {
@@ -845,25 +825,15 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
     var tower1_rome: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower1_rome);
     var tower2_rome: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_rome);
 
-    var virus1_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_gothic);
-    var virus2_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_gothic);
-    var tower1_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower1_gothic);
-    var tower2_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_gothic);
-
-    var virus1_japan: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.virus1_japan);
-    var virus2_japan: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.virus2_japan);
-    var tower1_japan: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower1_japan);
-    var tower2_japan: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_japan);
-
-    var virus1_noir: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip1_noir);
-    var virus2_noir: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip2_noir);
-    var tower1_noir: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower1_noir);
-    var tower2_noir: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_noir);
+    //var virus1_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_gothic);     // TODO
+    //var virus2_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_gothic);
+    //var tower1_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower1_gothic);
+    //var tower2_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_gothic);
 
 
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
-        
+
         size_field_x = 10
         size_field_y = 10
         indent = 0f
@@ -905,25 +875,11 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
             right_tower2 = Bitmap.createScaledBitmap(tower2_rome,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
         }
         else if (Design == "Gothic")
-        {
-            right_virus1 = Bitmap.createScaledBitmap(virus1_gothic,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-            right_virus2 = Bitmap.createScaledBitmap(virus2_gothic,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-            right_tower1 = Bitmap.createScaledBitmap(tower1_gothic,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-            right_tower2 = Bitmap.createScaledBitmap(tower2_gothic,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-        }
-        else if (Design == "Japan")
-        {
-            right_virus1 = Bitmap.createScaledBitmap(virus1_japan,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-            right_virus2 = Bitmap.createScaledBitmap(virus2_japan,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-            right_tower1 = Bitmap.createScaledBitmap(tower1_japan,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-            right_tower2 = Bitmap.createScaledBitmap(tower2_japan,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-        }
-        else if (Design == "Noir")
-        {
-            right_virus1 = Bitmap.createScaledBitmap(virus1_noir,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-            right_virus2 = Bitmap.createScaledBitmap(virus2_noir,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-            right_tower1 = Bitmap.createScaledBitmap(tower1_noir,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-            right_tower2 = Bitmap.createScaledBitmap(tower2_noir,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+        {       // TODO
+            //right_virus1 = Bitmap.createScaledBitmap(virus1_gothic,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            //right_virus2 = Bitmap.createScaledBitmap(virus2_gothic,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            //right_tower1 = Bitmap.createScaledBitmap(tower1_gothic,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            //right_tower2 = Bitmap.createScaledBitmap(tower2_gothic,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
         }
 
         var k: Float = height - width  - advertising_line
@@ -977,6 +933,171 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
         }
 
 
+        if ((red_or_blue < 3 && VirusGameMode == 2) || (red_or_blue >= 3 && VirusGameMode == 1)) {
+            blockedOnTouch = true
+
+            val handler = android.os.Handler()
+            handler.postDelayed({
+
+                var list_x: MutableList<Int> = mutableListOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+                var list_y: MutableList<Int> = mutableListOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+                list_x.shuffle()
+                list_y.shuffle()
+
+                var fla: Boolean = false
+
+
+                if (!fla) {
+                    for (i in list_x) {
+                        for (j in list_y) {
+                            if (FIELD[i][j] != 0) {
+                                if (FIELD[i][j] == 1 && red_or_blue > 2) {
+                                    if (is_anround(i, j, 2)) {
+                                        FIELD[i][j] = 4
+                                        History.add(Triple(i, j, FIELD[i][j]))
+                                        COUNTER_BLUE++
+                                        red_or_blue = (red_or_blue + 1) % 6
+                                        var data_from_memory = encode(History)
+                                        val editor = context.getSharedPreferences(
+                                            "UserData",
+                                            Context.MODE_PRIVATE
+                                        ).edit()
+                                        editor.putString("virus_with_computer", data_from_memory)
+                                        editor.apply()
+                                        fla = true
+                                        break
+                                    }
+                                } else {
+                                    if (FIELD[i][j] == 2 && red_or_blue < 3) {
+                                        if (is_anround(i, j, 1)) {
+                                            FIELD[i][j] = 3
+                                            History.add(Triple(i, j, FIELD[i][j]))
+                                            COUNTER_RED++
+                                            red_or_blue = (red_or_blue + 1) % 6
+                                            var data_from_memory = encode(History)
+                                            val editor = context.getSharedPreferences(
+                                                "UserData",
+                                                Context.MODE_PRIVATE
+                                            ).edit()
+                                            editor.putString(
+                                                "virus_with_computer",
+                                                data_from_memory
+                                            )
+                                            editor.apply()
+                                            fla = true
+                                            break
+                                        }
+                                    }
+                                }
+                            }
+
+
+                        }
+                        if (fla)
+                            break
+                    }
+                }
+
+                if (!fla) {
+                    for (i in list_x) {
+                        for (j in list_y) {
+                            if (FIELD[i][j] == 0) {
+                                if (red_or_blue < 3) {
+                                    if (COUNTER_RED == 0) {
+                                        if ((i == 0 && j == 0) || (i == 9 && j == 0) || (i == 9 && j == 9) || (i == 0 && j == 9)) {
+                                            FIELD[i][j] = 1
+                                            History.add(Triple(i, j, FIELD[i][j]))
+                                            COUNTER_RED++
+                                            red_or_blue = (red_or_blue + 1) % 6
+                                            var data_from_memory = encode(History)
+                                            val editor = context.getSharedPreferences(
+                                                "UserData",
+                                                Context.MODE_PRIVATE
+                                            ).edit()
+                                            editor.putString(
+                                                "virus_with_computer",
+                                                data_from_memory
+                                            )
+                                            editor.apply()
+                                            fla = true
+                                            break
+                                        }
+                                    } else {
+                                        if (is_anround(i, j, 1)) {
+                                            FIELD[i][j] = 1
+                                            History.add(Triple(i, j, FIELD[i][j]))
+                                            COUNTER_RED++
+                                            red_or_blue = (red_or_blue + 1) % 6
+                                            var data_from_memory = encode(History)
+                                            val editor = context.getSharedPreferences(
+                                                "UserData",
+                                                Context.MODE_PRIVATE
+                                            ).edit()
+                                            editor.putString(
+                                                "virus_with_computer",
+                                                data_from_memory
+                                            )
+                                            editor.apply()
+                                            fla = true
+                                            break
+                                        }
+                                    }
+
+                                } else {
+                                    if (COUNTER_BLUE == 0) {
+                                        if ((i == 0 && j == 0) || (i == 9 && j == 0) || (i == 9 && j == 9) || (i == 0 && j == 9)) {
+                                            FIELD[i][j] = 2
+                                            History.add(Triple(i, j, FIELD[i][j]))
+                                            COUNTER_BLUE++
+                                            red_or_blue = (red_or_blue + 1) % 6
+                                            var data_from_memory = encode(History)
+                                            val editor = context.getSharedPreferences(
+                                                "UserData",
+                                                Context.MODE_PRIVATE
+                                            ).edit()
+                                            editor.putString(
+                                                "virus_with_computer",
+                                                data_from_memory
+                                            )
+                                            editor.apply()
+                                            fla = true
+                                            break
+                                        }
+                                    } else {
+                                        if (is_anround(i, j, 2)) {
+                                            FIELD[i][j] = 2
+                                            History.add(Triple(i, j, FIELD[i][j]))
+                                            COUNTER_BLUE++
+                                            red_or_blue = (red_or_blue + 1) % 6
+                                            var data_from_memory = encode(History)
+                                            val editor = context.getSharedPreferences(
+                                                "UserData",
+                                                Context.MODE_PRIVATE
+                                            ).edit()
+                                            editor.putString(
+                                                "virus_with_computer",
+                                                data_from_memory
+                                            )
+                                            editor.apply()
+                                            fla = true
+                                            break
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (fla)
+                            break
+                    }
+                }
+
+
+                blockedOnTouch = false
+                invalidate()
+            }, delayTime)
+        }
+
+
     }
 
 
@@ -984,6 +1105,9 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
         circlex = event!!.x
         circley = event!!.y
 
+        if (blockedOnTouch) {
+            return true
+        }
 
 
         if(event!!.getAction()  == MotionEvent.ACTION_UP) {
@@ -1007,7 +1131,7 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
                                         red_or_blue = (red_or_blue + 1) % 6
                                         var data_from_memory = encode(History)
                                         val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                        editor.putString("virus_one_divice", data_from_memory)
+                                        editor.putString("virus_with_computer", data_from_memory)
                                         editor.apply()
                                         if(SOUND)
                                         {
@@ -1027,7 +1151,7 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
                                         red_or_blue = (red_or_blue + 1) % 6
                                         var data_from_memory = encode(History)
                                         val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                        editor.putString("virus_one_divice", data_from_memory)
+                                        editor.putString("virus_with_computer", data_from_memory)
                                         editor.apply()
                                         if(SOUND)
                                         {
@@ -1050,7 +1174,7 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
                                         red_or_blue = (red_or_blue + 1) % 6
                                         var data_from_memory = encode(History)
                                         val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                        editor.putString("virus_one_divice", data_from_memory)
+                                        editor.putString("virus_with_computer", data_from_memory)
                                         editor.apply()
                                         if(SOUND)
                                         {
@@ -1070,7 +1194,7 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
                                         red_or_blue = (red_or_blue + 1) % 6
                                         var data_from_memory = encode(History)
                                         val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                        editor.putString("virus_one_divice", data_from_memory)
+                                        editor.putString("virus_with_computer", data_from_memory)
                                         editor.apply()
                                         if(SOUND)
                                         {
@@ -1093,7 +1217,7 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
                                     red_or_blue = (red_or_blue + 1) % 6
                                     var data_from_memory = encode(History)
                                     val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                    editor.putString("virus_one_divice", data_from_memory)
+                                    editor.putString("virus_with_computer", data_from_memory)
                                     editor.apply()
                                     if(SOUND)
                                     {
@@ -1114,7 +1238,7 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
                                         red_or_blue = (red_or_blue + 1) % 6
                                         var data_from_memory = encode(History)
                                         val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                        editor.putString("virus_one_divice", data_from_memory)
+                                        editor.putString("virus_with_computer", data_from_memory)
                                         editor.apply()
                                         if(SOUND)
                                         {
@@ -1140,24 +1264,31 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
             var ch = check_win()
             if(ch>0)
             {
-                var dialog: Show_Result_one_Device? = null
-                dialog = Show_Result_one_Device(activity)
+                var dialog: Show_Result_with_Computer? = null
+                dialog = Show_Result_with_Computer(activity)
                 if(ch==1)
                 {
-                    dialog?.showResult_one_device("Игрок 1 победил","VirusGame",activity)
+                    dialog?.showResult_with_Computer("Игрок 1 победил","VirusGame",activity)
                     return true
                 }
                 if(ch==2)
                 {
-                    dialog?.showResult_one_device("Игрок 2 победил","VirusGame",activity)
+                    dialog?.showResult_with_Computer("Игрок 2 победил","VirusGame",activity)
                     return true
                 }
                 if(ch==3)
                 {
-                    dialog?.showResult_one_device("НИЧЬЯ","VirusGame",activity)
+                    dialog?.showResult_with_Computer("НИЧЬЯ","VirusGame",activity)
                     return true
                 }
             }
+
+
+
+
+
+
+
         }
 
         return true

@@ -12,6 +12,7 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
+import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 import java.lang.Math.abs
 
@@ -83,6 +84,9 @@ class SnakeGameOneDivice : AppCompatActivity() {
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+
         setContentView(R.layout.activity_one_device_games_template)
         signature_canvas_snake_one_device.visibility = View.VISIBLE
         CONTEXT = this
@@ -171,6 +175,22 @@ class SnakeGameOneDivice : AppCompatActivity() {
             toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             label_one_device.setBackgroundResource(R.drawable.background_japan);
+            bottom_navigation_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+        }
+        else if(Design == "Noir" ) {
+            name_player1_one_divice.setTextColor(Color.WHITE)
+            name_player2_one_divice.setTextColor(Color.RED)
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+            name_player2_one_divice.setTextSize(20f)
+            name_player1_one_divice.setTextSize(20f)
+            //button_player_1_one_divice.setBackgroundResource(R.drawable.cross_gothic);
+            //button_player_2_one_divice.setBackgroundResource(R.drawable.null_gothic);
+            toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            label_one_device.setBackgroundResource(R.drawable.background_noir);
             bottom_navigation_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
@@ -271,10 +291,33 @@ class SnakeGameOneDivice : AppCompatActivity() {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 2)
-            startActivity(intent)
+            if(mInterstitialAd_in_offline_games.isLoaded)
+            {
+                Intent_for_offline_games = intent
+                mInterstitialAd_in_offline_games.show()
+            }
+            else
+            {
+                this.startActivity(intent)
+            }
         }
 
 
+    }
+    override fun onBackPressed()
+    {
+        super.onBackPressed()
+        var intent = Intent(this, NewGameActivity::class.java)
+        intent.putExtra("playType", 2)
+        if(mInterstitialAd_in_offline_games.isLoaded)
+        {
+            Intent_for_offline_games = intent
+            mInterstitialAd_in_offline_games.show()
+        }
+        else
+        {
+            this.startActivity(intent)
+        }
     }
 }
 
@@ -607,6 +650,19 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
             paint_rib_2.setColor(Color.RED)          //цвета для ребер  и их ширина
             paint_rib_1.setStrokeWidth(10f)
             paint_rib_1.setColor(Color.rgb(37,103,28))
+            paint_rib_2.setStrokeWidth(10f)
+
+        }
+        else if(Design == "Noir") {
+
+            Line_paint.setColor(Color.rgb(100, 100, 100))          //ресур для линий (ширина и цвет)
+            Line_paint.setStrokeWidth(5f)
+
+            paint_circle.setColor(Color.rgb(180, 180, 180))     //цвета для точек
+
+            paint_rib_2.setColor(Color.RED)          //цвета для ребер  и их ширина
+            paint_rib_1.setStrokeWidth(10f)
+            paint_rib_1.setColor(Color.WHITE)
             paint_rib_2.setStrokeWidth(10f)
 
         }

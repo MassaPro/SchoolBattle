@@ -13,7 +13,7 @@ import com.example.schoolbattle.gamesonedevice.*
 import kotlinx.android.synthetic.main.activity_game_over_one_device.*
 
 class Show_Result_one_Device(activity: Activity) {
-    private val dialog_one_device = Dialog(activity)
+    var dialog_one_device = Dialog(activity)
     fun showResult_one_device(result: String,Game_Type: String,type_activity: Activity) {
         dialog_one_device.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog_one_device.setCancelable(false)
@@ -29,7 +29,16 @@ class Show_Result_one_Device(activity: Activity) {
                 val intent = Intent(type_activity, XOGame_oneDivice::class.java).apply {
                     putExtra("usedToClear", "clear")}
                 type_activity.finish()
-                type_activity.startActivity(intent)
+                if(mInterstitialAd_in_offline_games.isLoaded)
+                {
+                    Intent_for_offline_games = intent
+                    mInterstitialAd_in_offline_games.show()
+                }
+                else
+                {
+                    type_activity.startActivity(intent)
+                }
+
             }
             if(Game_Type == "AngleGame")
             {
@@ -37,7 +46,15 @@ class Show_Result_one_Device(activity: Activity) {
                     ConersOneDevice::class.java).apply {
                     putExtra("usedToClear", "clear")}
                 type_activity.finish()
-                type_activity.startActivity(intent)
+                if(mInterstitialAd_in_offline_games.isLoaded)
+                {
+                    Intent_for_offline_games = intent
+                    mInterstitialAd_in_offline_games.show()
+                }
+                else
+                {
+                    type_activity.startActivity(intent)
+                }
             }
             if(Game_Type == "DotGame")
             {
@@ -45,14 +62,30 @@ class Show_Result_one_Device(activity: Activity) {
                     DotGameOneDivice::class.java).apply {
                     putExtra("usedToClear", "clear")}
                 type_activity.finish()
-                type_activity.startActivity(intent)
+                if(mInterstitialAd_in_offline_games.isLoaded)
+                {
+                    Intent_for_offline_games = intent
+                    mInterstitialAd_in_offline_games.show()
+                }
+                else
+                {
+                    type_activity.startActivity(intent)
+                }
             }
             if(Game_Type == "SnakeGame")
             {
                 val intent = Intent(type_activity,
                     SnakeGameOneDivice::class.java).apply {
                     putExtra("usedToClear", "clear")}
-                type_activity.startActivity(intent)
+                if(mInterstitialAd_in_offline_games.isLoaded)
+                {
+                    Intent_for_offline_games = intent
+                    mInterstitialAd_in_offline_games.show()
+                }
+                else
+                {
+                    type_activity.startActivity(intent)
+                }
             }
             if(Game_Type == "BoxGame")
             {
@@ -60,7 +93,15 @@ class Show_Result_one_Device(activity: Activity) {
                     BoxGameOneDivice::class.java).apply {
                     putExtra("usedToClear", "clear")}
                 type_activity.finish()
-                type_activity.startActivity(intent)
+                if(mInterstitialAd_in_offline_games.isLoaded)
+                {
+                    Intent_for_offline_games = intent
+                    mInterstitialAd_in_offline_games.show()
+                }
+                else
+                {
+                    type_activity.startActivity(intent)
+                }
             }
             if(Game_Type == "VirusGame")
             {
@@ -68,14 +109,30 @@ class Show_Result_one_Device(activity: Activity) {
                     VirusOneDivice::class.java).apply {
                     putExtra("usedToClear", "clear")}
                 type_activity.finish()
-                type_activity.startActivity(intent)
+                if(mInterstitialAd_in_offline_games.isLoaded)
+                {
+                    Intent_for_offline_games = intent
+                    mInterstitialAd_in_offline_games.show()
+                }
+                else
+                {
+                    type_activity.startActivity(intent)
+                }
             }
             if(Game_Type == "Reversi")
             {
                 val intent = Intent(type_activity,ReversiOneDivice::class.java).apply {
                     putExtra("usedToClear", "clear")}
                 type_activity.finish()
-                type_activity.startActivity(intent)
+                if(mInterstitialAd_in_offline_games.isLoaded)
+                {
+                    Intent_for_offline_games = intent
+                    mInterstitialAd_in_offline_games.show()
+                }
+                else
+                {
+                    type_activity.startActivity(intent)
+                }
             }
 
         }

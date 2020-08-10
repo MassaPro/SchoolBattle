@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Color.rgb
 import android.os.Bundle
@@ -25,22 +26,24 @@ import com.example.schoolbattle.engine.initCatchPlayersListenerForLongGame
 import com.example.schoolbattle.engine.updateRecycler
 import com.example.schoolbattle.engine.updateRecyclerBlitz
 import kotlinx.android.synthetic.main.activity_navigator.*
+
+
 import com.example.schoolbattle.shop.locale_context
 import com.example.schoolbattle.shop.mRewardedVideoAd
+import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.reward.RewardItem
 import com.google.android.gms.ads.reward.RewardedVideoAdListener
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_navigator.*
 import kotlinx.android.synthetic.main.activity_friends_list.*
 import kotlinx.android.synthetic.main.reward_dialog.*
 
 var now: Context? = null
 
+var Intent_for_offline_games : Intent? =  null
+lateinit var mInterstitialAd_in_offline_games: InterstitialAd
 class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
 
     override fun onResume() {
@@ -60,17 +63,69 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
             nav_view.setBackgroundResource(R.drawable.bottom_navigation_rome)
         }
         if (Design == "Gothic"){
-            nav_view.setBackgroundResource(R.drawable.bottom_navigation_gothic)
+            //nav_view.setBackgroundResource(R.drawable.bottom_navigation_gothic)
+            nav_view.setBackgroundColor(Color.BLACK)
         }
         if (Design == "Japan"){
             nav_view.setBackgroundColor(Color.WHITE)
         }
+        if (Design == "Noir"){
+            nav_view.setBackgroundColor(Color.BLACK)
+        }
+        nav_view.itemIconTintList = generateColorStateList()
+        nav_view.itemTextColor = generateColorStateList()
     }
+
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigator)
 
+        mInterstitialAd_in_offline_games = InterstitialAd(this)
+        mInterstitialAd_in_offline_games.adUnitId = "ca-app-pub-3940256099942544/1033173712"
+        mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+
+
+
+
+        mInterstitialAd_in_offline_games.adListener = object: AdListener() {
+            override fun onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+                //Код, который будет выполнен после завершения загрузки объявления.
+            }
+
+            override fun onAdFailedToLoad(errorCode: Int) {
+                // Code to be executed when an ad request fails.
+                //Код, который будет выполняться при сбое рекламного запроса..
+                startActivity(Intent_for_offline_games)
+            }
+
+            override fun onAdOpened() {
+                // Code to be executed when the ad is displayed.
+                //Код, который будет выполнен при показе объявления
+            }
+
+            override fun onAdClicked() {        //для норм пацанов функция
+                // Code to be executed when the user clicks on an ad.
+                //Код, который будет выполняться, когда пользователь нажимает на объявление.
+            }
+
+            override fun onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+                //Код, который будет выполнен, когда пользователь покинет приложение
+            }
+
+            override fun onAdClosed() {
+                // Code to be executed when the interstitial ad is closed.
+                //Код, который будет выполняться при закрытии интерстициального объявления.
+
+                startActivity(Intent_for_offline_games)
+                mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+            }
+        }
 
 
 
@@ -87,8 +142,7 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
         now = this
         val navController = findNavController(R.id.nav_host_fragment)
 
-        nav_view.itemIconTintList = generateColorStateList()
-        nav_view.itemTextColor = generateColorStateList()
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         //val appBarConfiguration = AppBarConfiguration(setOf(

@@ -12,12 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".gameswithcomp.VirusWithComputer"></activity>
+        <activity android:name=".gameswithcomp.GoGameWithComputer" />
         <activity android:name=".engine.LongActivity"></activity>
         <activity android:name=".gamesonline.ReversiGameActivity" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-8137188857901546~1022017686" />
+
 
         <activity android:name=".gamesonline.TEST" />
         <activity android:name=".social.ProfileUserActivity" />

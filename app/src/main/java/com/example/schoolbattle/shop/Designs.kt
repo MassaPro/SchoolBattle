@@ -3,6 +3,7 @@ package com.example.schoolbattle.shop
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Color.argb
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolbattle.*
@@ -49,6 +51,12 @@ class Designs  : Fragment() {
 
         //item_design_shop.setBackgroundResource(R.drawable.new_game_item_casino)
 
+        if(Design == "Egypt")
+        {
+            choose_design_shop.typeface =  locale_context?.let { ResourcesCompat.getFont(it, R.font.egypt) }
+            choose_design_shop.setTextColor(Color.BLACK)
+            choose_design_shop.textSize = 20f
+        }
 
     }
 

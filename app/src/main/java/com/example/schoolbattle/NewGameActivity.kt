@@ -18,18 +18,27 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolbattle.engine.BlitzActivity
 import com.example.schoolbattle.engine.LongActivity
 import com.example.schoolbattle.engine.StupidGameActivity
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
+import kotlinx.android.synthetic.main.activity_game_item.*
 import kotlinx.android.synthetic.main.activity_new_game.*
 import kotlinx.android.synthetic.main.activity_new_game_item.view.*
 
 var NewGame: Activity = Activity()
 
+
 class NewGameActivity : AppCompatActivity() {
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_game)
         CONTEXT = this
+
+
+
 
         if (Design == "Egypt"){
             game_list_menu.setBackgroundResource(R.drawable.background_egypt);
@@ -48,6 +57,26 @@ class NewGameActivity : AppCompatActivity() {
             my_toolbar2.setBackgroundColor(argb(0,224,164,103))
             text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
             text.setTextColor(rgb(193,150,63))
+        }
+
+        else if (Design == "Gothic"){
+            game_list_menu.setBackgroundResource(R.drawable.background_gothic);
+            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
+            text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            text.setTextColor(Color.WHITE)
+        }
+
+        else if (Design == "Japan"){
+            game_list_menu.setBackgroundResource(R.drawable.background_japan);
+            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
+            text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            text.setTextColor(Color.BLACK)
+        }
+        else if (Design == "Noir"){
+            game_list_menu.setBackgroundColor(rgb(30,30,30));
+            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
+            text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+            text.setTextColor(Color.WHITE)
         }
 
         NewGame = this
@@ -90,6 +119,7 @@ class NewGameActivity : AppCompatActivity() {
                     }
                     v.context.startActivity(intent)
                     activity.overridePendingTransition(0 , 0)
+
                 }
                 if (type == 3) {
                     val intent = Intent(v.context, PlayWithComputerActivity::class.java).apply {
@@ -135,6 +165,11 @@ class NewGameActivity : AppCompatActivity() {
                 view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.new_game_item_japan)
                 view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
             }
+            else if (Design == "Noir"){
+                view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.new_game_item_noir)
+                view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                view.findViewById<TextView>(R.id.textView2).setTextColor(Color.WHITE)
+            }
 
             //card2.setBackgroundResource(R.drawable.background_egypt)
             return ViewHolder(view)
@@ -160,6 +195,14 @@ class NewGameActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         CONTEXT = this
+    }
+
+    override fun onBackPressed()
+    {
+        super.onBackPressed()
+        var intent = Intent(this,NavigatorActivity::class.java)
+        this.startActivity(intent)
+        this.finish()
     }
 }
 
