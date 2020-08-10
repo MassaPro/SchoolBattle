@@ -106,36 +106,35 @@ class GameListActivity : Fragment() {
         init {
             onClickListener = View.OnClickListener { v ->
                 val item = v.tag as LongGame
-                val intent = if (item.type.contains("StupidGame")) {
-                    Intent(v.context, StupidGameActivityTwoPlayers::class.java).apply {
-                        putExtra("opponentName", item.type)
-                    }
-                } else if (item.type.contains("XOGame")) {
-                    Intent(v.context, XOGameActivity::class.java).apply {
-                        putExtra("opponentName", item.type)
+                val intent = if (item.type.contains("XOGame")) {
+                    Intent(v.context, XOGameActivity::class
+                        .java).apply {
                     }
                 } else if (item.type.contains("DotGame")){
                     Intent(v.context, DotGameActivity::class
                         .java).apply {
-                        putExtra("opponentName", item.type)
                     }
                 } else if (item.type.contains("BoxGame")){
                     Intent(v.context, BoxGameActivity::class
                         .java).apply {
-                        putExtra("opponentName", item.type)
                     }
                 } else if (item.type.contains("SnakeGame")){
                     Intent(v.context, SnakeGameActivity::class
                         .java).apply {
-                        putExtra("opponentName", item.type)
+                    }
+                } else if (item.type.contains("Reversi")){
+                    Intent(v.context, ReversiGameActivity::class
+                        .java).apply {
                     }
                 } else {
-                    Intent(v.context, StupidGameActivity::class
+                    Intent(v.context, TEST::class
                         .java).apply {
-                        putExtra("opponentName", item.type)
                     }
                 }
-                intent.putExtra("type", "")
+                intent.putExtra("opponent", item.opponent)
+                intent.putExtra("move", item.move)
+                intent.putExtra("type", "long")
+                intent.putExtra("key", item.key)
                 v.context.startActivity(intent)
             }
         }

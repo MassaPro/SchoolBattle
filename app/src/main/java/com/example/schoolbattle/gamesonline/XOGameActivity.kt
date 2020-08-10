@@ -21,20 +21,19 @@ import java.util.*
 import android.graphics.Color.*
 import android.widget.TextView
 import com.example.schoolbattle.engine.BlitzGameEngine
+import com.example.schoolbattle.engine.LongGameEngine
 import com.example.schoolbattle.engine.ShowResult
 import com.example.schoolbattle.engine.StupidGame
 
 class XOGameActivity : AppCompatActivity() {
     private var isRun = false
     private var engine: BlitzGameEngine? = null
+    private var engineLong: LongGameEngine? = null
 
     var yourName = ""
     var opponentsName = ""
     var type = ""
-    val gameData = myRef.child(type).child("XOGame").child(
-        if (opponentsName < yourName)
-            opponentsName + '_' + yourName else yourName + '_' + opponentsName
-    )
+    lateinit var gameData: DatabaseReference
 
 
     override fun onResume() {
@@ -89,10 +88,17 @@ class XOGameActivity : AppCompatActivity() {
         }
         val yu = if (opponentsName < yourName) '1' else '0'
         val op = if (opponentsName < yourName) '0' else '1'
-        val gameData = myRef.child(type).child("XOGame").child(
-            if (opponentsName < yourName)
-                opponentsName + '_' + yourName else yourName + '_' + opponentsName
-        )
+        if (intent.getStringExtra("key") != null) {
+            gameData = myRef.child(type).child("XOGame").child(
+                (if (opponentsName < yourName)
+                    opponentsName + '_' + yourName + intent.getStringExtra("key")!!  else yourName + '_' + opponentsName + intent.getStringExtra("key")!!)
+            )
+        } else {
+            gameData = myRef.child(type).child("XOGame").child(
+                (if (opponentsName < yourName)
+                    opponentsName + '_' + yourName  else yourName + '_' + opponentsName)
+            )
+        }
        // gameData.child("FIELDD").child("result").onDisconnect().setValue(yourName)
        // gameData.onDisconnect().removeValue()
         signature_canvas.blocked = true
@@ -139,6 +145,19 @@ class XOGameActivity : AppCompatActivity() {
             }
             engine?.init()
             signature_canvas.engine = engine
+            signature_canvas.username = yourName
+        } else {
+            engineLong = object : LongGameEngine {
+                override val userT = timer2_xog_online
+                override val opponentT = timer_xog_online
+                override val user = yourName
+                override val opponent = opponentsName
+                override var move = intent.getStringExtra("move") == "1"
+                override var positionData = gameData
+                override var activity: Activity = this@XOGameActivity
+                override var type = "XOGame"
+            }
+            engineLong?.init()
             signature_canvas.username = yourName
         }
         signature_canvas.isFirstMove = intent.getStringExtra("move") == "1"
@@ -251,6 +270,7 @@ class XOGameActivity : AppCompatActivity() {
                         res = "Поражение"
                     }
                     engine?.finish(res, this@XOGameActivity, isRun)
+                    engineLong?.finish(res, this@XOGameActivity, isRun)
                     gameData.removeEventListener(this)
                 }
             }
