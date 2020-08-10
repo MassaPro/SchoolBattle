@@ -16,6 +16,7 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
 import com.google.android.gms.ads.AdRequest
+import kotlinx.android.synthetic.main.activity_game_over_one_device.*
 import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
 class DotGameOneDivice : AppCompatActivity() {
@@ -421,7 +422,7 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
                 {
                     return 0
                 }
-                if(a[j][i]!= FIELD[i][j])
+                if(a[j][i]!= FIELD[i][j] && FIELD[i][j]!=0)
                 {
                     if(a[j][i]==1)
                     {
@@ -449,6 +450,41 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
                 return 2
             }
         }
+    }
+
+    fun score1() : Int {
+        var cnt1 : Int = 0
+        for(i in 0 until FIELD.size)
+        {
+            for(j in 0 until FIELD[0].size)
+            {
+                if(a[j][i]!= FIELD[i][j] && FIELD[i][j]!=0)
+                {
+                    if(a[j][i]==1)
+                    {
+                        cnt1++
+                    }
+                }
+            }
+        }
+        return cnt1
+    }
+    fun score2() : Int {
+        var cnt2 : Int = 0
+        for(i in 0 until FIELD.size)
+        {
+            for(j in 0 until FIELD[0].size)
+            {
+                if(a[j][i]!= FIELD[i][j] && FIELD[i][j]!=0)
+                {
+                    if(a[j][i]!=1)
+                    {
+                        cnt2++
+                    }
+                }
+            }
+        }
+        return cnt2
     }
 
 
@@ -1181,15 +1217,18 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
             dialog = Show_Result_one_Device(activity)
             if(check_win()==1)
             {
-                dialog?.showResult_one_device("Игрок 1 победил","DotGame",activity)
+                dialog?.showResult_one_device("Игрок 2 победил","DotGame",activity)
+                dialog.dialog_one_device.score_result_one_device.text = score1().toString() + ":" + score2().toString()
             }
             if(check_win()==2)
             {
-                dialog?.showResult_one_device("Игрок 2 победил","DotGame",activity)
+                dialog?.showResult_one_device("Игрок 1 победил","DotGame",activity)
+                dialog.dialog_one_device.score_result_one_device.text = score2().toString() + ":" + score1().toString()
             }
             if(check_win()==3)
             {
                 dialog?.showResult_one_device("НИЧЬЯ","DotGame",activity)
+                dialog.dialog_one_device.score_result_one_device.text = score1().toString() + ":" + score2().toString()
             }
             return true
         }

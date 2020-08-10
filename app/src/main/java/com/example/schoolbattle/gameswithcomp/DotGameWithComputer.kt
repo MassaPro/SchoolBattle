@@ -443,7 +443,7 @@ class CanvasView_Dots_with_computer(context: Context, attrs: AttributeSet?) : Vi
                 {
                     ret0 = 1
                 }
-                if(a[j][i]!= FIELD[i][j])
+                if(a[j][i]!= FIELD[i][j] && FIELD[i][j]!=0)
                 {
                     if(a[j][i]==1)
                     {

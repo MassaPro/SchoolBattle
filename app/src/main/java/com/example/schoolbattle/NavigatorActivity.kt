@@ -68,7 +68,8 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
             nav_view.setBackgroundResource(R.drawable.bottom_navigation_rome)
         }
         if (Design == "Gothic"){
-            nav_view.setBackgroundResource(R.drawable.bottom_navigation_gothic)
+            //nav_view.setBackgroundResource(R.drawable.bottom_navigation_gothic)
+            nav_view.setBackgroundColor(Color.BLACK)
         }
         if (Design == "Japan"){
             nav_view.setBackgroundColor(Color.WHITE)

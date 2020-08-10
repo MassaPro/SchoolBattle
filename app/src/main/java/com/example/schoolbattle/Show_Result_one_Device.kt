@@ -13,7 +13,7 @@ import com.example.schoolbattle.gamesonedevice.*
 import kotlinx.android.synthetic.main.activity_game_over_one_device.*
 
 class Show_Result_one_Device(activity: Activity) {
-    private val dialog_one_device = Dialog(activity)
+    var dialog_one_device = Dialog(activity)
     fun showResult_one_device(result: String,Game_Type: String,type_activity: Activity) {
         dialog_one_device.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog_one_device.setCancelable(false)
