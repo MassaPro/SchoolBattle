@@ -197,13 +197,14 @@ class NewGameActivity : AppCompatActivity() {
         CONTEXT = this
     }
 
-    override fun onBackPressed()
+    //TODO РАЗОБРАТЬСЯ С ВЫХОДОМ
+    /*override fun onBackPressed()
     {
         super.onBackPressed()
         var intent = Intent(this,NavigatorActivity::class.java)
         this.startActivity(intent)
         this.finish()
-    }
+    }*/
 }
 
 
