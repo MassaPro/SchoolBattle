@@ -52,6 +52,7 @@ fun initCatchPlayersListenerForLongGame(username: String, context: Context) {
     myRef.child("Users").child(username).child("long").addListenerForSingleValueEvent(object: ValueEventListener {
         override fun onCancelled(p: DatabaseError) {}
         override fun onDataChange(p: DataSnapshot) {
+            CURRENTGAMES.clear()
             for (i in p.children) {
                 s.add(i.key.toString())
                 Log.w("asasa", s.toString())
@@ -94,7 +95,7 @@ fun initCatchPlayersListenerForLongGame(username: String, context: Context) {
                     intent.putExtra("type", "long")
                     intent.putExtra("key", p0.key.toString())
                     for (i in p0.children) {
-                        for (j in p0.children) {
+                        for (j in i.children) {
                             intent.putExtra("opponent", j.key.toString())
                             intent.putExtra("move", j.value.toString())
                             break
@@ -106,7 +107,15 @@ fun initCatchPlayersListenerForLongGame(username: String, context: Context) {
                 override fun onCancelled(p0: DatabaseError) {}
                 override fun onChildChanged(p0: DataSnapshot, p1: String?) {}
                 override fun onChildMoved(p0: DataSnapshot, p1: String?) {}
-                override fun onChildRemoved(p0: DataSnapshot) {}
+                override fun onChildRemoved(p0: DataSnapshot) {
+                    s.remove(p0.key.toString())
+                    for (j in p0.children) {
+                        for (k in j.children) {
+                            CURRENTGAMES.remove(LongGame(p0.key!!, j.key!!, k.key!!, k.value.toString()))
+                            currentGamesRecycler?.adapter?.notifyDataSetChanged()
+                        }
+                    }
+                }
             })
 
         }

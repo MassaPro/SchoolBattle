@@ -156,7 +156,9 @@ class XOGameActivity : AppCompatActivity() {
                 override var positionData = gameData
                 override var activity: Activity = this@XOGameActivity
                 override var type = "XOGame"
+                override var key = intent.getStringExtra("key")
             }
+            Toast.makeText(this, engineLong?.key.toString(), Toast.LENGTH_LONG).show()
             engineLong?.init()
             signature_canvas.username = yourName
         }
