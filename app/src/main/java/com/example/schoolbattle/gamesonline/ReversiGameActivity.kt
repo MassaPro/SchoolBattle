@@ -50,7 +50,7 @@ class ReversiGameActivity : AppCompatActivity() {
         CONTEXT = this
         isRun = true
 
-        user =  getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("user", "")!!
+        user =  getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "")!!
         opponent = intent?.getStringExtra("opponent")!!
         val type = intent?.getStringExtra("type")!!
         gameData = if (intent.getStringExtra("key") != null) {
