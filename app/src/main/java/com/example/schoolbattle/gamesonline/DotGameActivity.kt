@@ -19,6 +19,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.schoolbattle.*
 import com.example.schoolbattle.engine.BlitzGameEngine
+import com.example.schoolbattle.engine.LongGameEngine
 import com.example.schoolbattle.engine.ShowResult
 import com.example.schoolbattle.engine.StupidGame
 import com.google.firebase.database.DataSnapshot
@@ -39,8 +40,8 @@ import java.util.*
 
 class DotGameActivity: AppCompatActivity() {
     private var isRun = false
-    private var dialog: ShowResult? = null
     private var engine: BlitzGameEngine? = null
+    private var engineLong: LongGameEngine? = null
 
     var yourName = ""
     var opponentsName = ""
@@ -87,10 +88,17 @@ class DotGameActivity: AppCompatActivity() {
 
 
         if (intent.getStringExtra("type") != null) type = intent.getStringExtra("type")!!
-        gameData = myRef.child(type).child("DotGame").child(
-            if (opponentsName < yourName)
-                opponentsName + '_' + yourName else yourName + '_' + opponentsName
-        )
+        gameData = if (intent.getStringExtra("key") != null) {
+            myRef.child(type).child("DotGame").child(
+                (if (opponentsName < yourName)
+                    opponentsName + '_' + yourName + intent.getStringExtra("key")!!  else yourName + '_' + opponentsName + intent.getStringExtra("key")!!)
+            )
+        } else {
+            myRef.child(type).child("DotGame").child(
+                (if (opponentsName < yourName)
+                    opponentsName + '_' + yourName  else yourName + '_' + opponentsName)
+            )
+        }
 
         //signature_canvas3.blocked = true
         signature_canvas3.positionData = gameData
@@ -116,8 +124,22 @@ class DotGameActivity: AppCompatActivity() {
             engine?.init()
             signature_canvas3.engine = engine
             signature_canvas3.username = yourName
+        } else {
+            engineLong = object : LongGameEngine {
+                override val userT = timer2_xog_online
+                override val opponentT = timer_xog_online
+                override val user = yourName
+                override val opponent = opponentsName
+                override var move = intent.getStringExtra("move") == "1"
+                override var positionData = gameData
+                override var activity: Activity = this@DotGameActivity
+                override var type = "DotGame"
+                override var key = intent.getStringExtra("key")
+            }
+            //Toast.makeText(this, engineLong?.key.toString(), Toast.LENGTH_LONG).show()
+            engineLong?.init()
         }
-
+        signature_canvas3.username = yourName
         signature_canvas3.isFirstMove = intent.getStringExtra("move") == "1"
         if (!signature_canvas3.isFirstMove) {
             signature_canvas3.red_or_blue = 2
@@ -277,6 +299,7 @@ class DotGameActivity: AppCompatActivity() {
                         res = "Поражение"
                     }
                     engine?.finish(res, this@DotGameActivity, isRun)
+                    engineLong?.finish(res, this@DotGameActivity, isRun)
                     gameData.removeEventListener(this)
                 }
             }

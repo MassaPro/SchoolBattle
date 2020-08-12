@@ -88,13 +88,13 @@ class XOGameActivity : AppCompatActivity() {
         }
         val yu = if (opponentsName < yourName) '1' else '0'
         val op = if (opponentsName < yourName) '0' else '1'
-        if (intent.getStringExtra("key") != null) {
-            gameData = myRef.child(type).child("XOGame").child(
+        gameData = if (intent.getStringExtra("key") != null) {
+            myRef.child(type).child("XOGame").child(
                 (if (opponentsName < yourName)
                     opponentsName + '_' + yourName + intent.getStringExtra("key")!!  else yourName + '_' + opponentsName + intent.getStringExtra("key")!!)
             )
         } else {
-            gameData = myRef.child(type).child("XOGame").child(
+            myRef.child(type).child("XOGame").child(
                 (if (opponentsName < yourName)
                     opponentsName + '_' + yourName  else yourName + '_' + opponentsName)
             )
@@ -160,8 +160,8 @@ class XOGameActivity : AppCompatActivity() {
             }
             Toast.makeText(this, engineLong?.key.toString(), Toast.LENGTH_LONG).show()
             engineLong?.init()
-            signature_canvas.username = yourName
         }
+        signature_canvas.username = yourName
         signature_canvas.isFirstMove = intent.getStringExtra("move") == "1"
         gameData.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}

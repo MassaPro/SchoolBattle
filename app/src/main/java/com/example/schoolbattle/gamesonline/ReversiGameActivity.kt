@@ -9,13 +9,22 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
 import com.example.schoolbattle.*
 import com.example.schoolbattle.engine.BlitzGameEngine
+import com.example.schoolbattle.engine.LongGameEngine
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_online_games_temlate.*
+import kotlinx.android.synthetic.main.activity_online_games_temlate.button_player_1_online_xog
+import kotlinx.android.synthetic.main.activity_online_games_temlate.button_player_2_online_xog
+import kotlinx.android.synthetic.main.activity_online_games_temlate.signature_canvas_snake_online
+import kotlinx.android.synthetic.main.activity_online_games_temlate.timer2_xog_online
+import kotlinx.android.synthetic.main.activity_online_games_temlate.timer_xog_online
+import kotlinx.android.synthetic.main.activity_snake_game.*
+import kotlinx.android.synthetic.main.activity_x_o_game.*
 import java.util.*
 
 class ReversiGameActivity : AppCompatActivity() {
@@ -25,6 +34,7 @@ class ReversiGameActivity : AppCompatActivity() {
     private var user = ""
     private lateinit var gameData: DatabaseReference
     private var engine: BlitzGameEngine? = null
+    private var engineLong: LongGameEngine? = null
 
     override fun onResume() {
         super.onResume()
@@ -40,14 +50,23 @@ class ReversiGameActivity : AppCompatActivity() {
         CONTEXT = this
         isRun = true
 
-        user =  getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "")!!
+        user =  getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("user", "")!!
         opponent = intent?.getStringExtra("opponent")!!
         val type = intent?.getStringExtra("type")!!
-        gameData = myRef.child(type).child("Reversi").child(
-            if (opponent < user) opponent + '_' + user else user + '_' + opponent)
+        gameData = if (intent.getStringExtra("key") != null) {
+            myRef.child(type).child("Reversi").child(
+                (if (opponent < user)
+                    opponent + '_' + user + intent.getStringExtra("key")!!  else user + '_' + opponent + intent.getStringExtra("key")!!)
+            )
+        } else {
+            myRef.child(type).child("Reversi").child(
+                (if (opponent < user)
+                    opponent + '_' + user  else user + '_' + opponent)
+            )
+        }
         signature_canvas_reversi.positionData = gameData
         signature_canvas_reversi.blocked = true
-        signature_canvas_reversi.username = user
+        signature_canvas_reversi.user = user
         signature_canvas_reversi.isFirstMove = intent.getStringExtra("move") == "1"
         button_player_1_online_xog.text = user
         button_player_2_online_xog.text = opponent
@@ -70,8 +89,22 @@ class ReversiGameActivity : AppCompatActivity() {
             }
             engine?.init()
             signature_canvas_reversi.engine = engine
+        } else {
+            engineLong = object : LongGameEngine {
+                override val userT = timer2_xog_online
+                override val opponentT = timer_xog_online
+                override val user = this@ReversiGameActivity.user
+                override val opponent = this@ReversiGameActivity.opponent
+                override var move = intent.getStringExtra("move") == "1"
+                override var positionData = gameData
+                override var activity: Activity = this@ReversiGameActivity
+                override var type = "ReversiGame"
+                override var key = intent.getStringExtra("key")
+            }
+            Toast.makeText(this, engineLong?.key.toString(), Toast.LENGTH_LONG).show()
+            engineLong?.init()
         }
-
+        signature_canvas_reversi.user = user
         gameData.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
@@ -114,6 +147,7 @@ class ReversiGameActivity : AppCompatActivity() {
                         res = "Поражение"
                     }
                     engine?.finish(res, this@ReversiGameActivity, isRun)
+                    engineLong?.finish(res, this@ReversiGameActivity, isRun)
                     gameData.removeEventListener(this)
                 }
             }
@@ -130,7 +164,7 @@ class ReversiGameActivity : AppCompatActivity() {
 
 class CanvasViewReversi(context: Context, attrs: AttributeSet?) : View(context, attrs) {
     lateinit var positionData: DatabaseReference
-    var username = ""
+    var user = ""
     var isFirstMove = false
 
 
@@ -1022,7 +1056,7 @@ class CanvasViewReversi(context: Context, attrs: AttributeSet?) : View(context, 
                 }
 
                 upd["black_or_grey"] = Black_or_grey_chip
-                upd["time/$username"] = engine?.cntUser.toString()
+                upd["time/$user"] = engine?.cntUser.toString()
                 positionData.updateChildren(upd)
                 blocked = true
                 invalidate()
