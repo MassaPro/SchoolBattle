@@ -21,6 +21,13 @@
         <item name="android:textSize">15sp</item>
     </style>
 
+    <style name="DialogStyle" parent="Base.Theme.AppCompat.Dialog">
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
+        <item name="windowFixedHeightMajor">100%</item>
+        <item name="windowFixedHeightMinor">100%</item>
+    </style>
+
     <style name="BottomNavigationView_online" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">10sp</item>
     </style>

@@ -45,6 +45,7 @@ class MyProfile : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         locale_context = activity as AppCompatActivity
         super.onViewCreated(view, savedInstanceState)
+        var dialog_find_ava = Dialog(locale_context!!)
 
         PICTURE_AVATAR[AVATAR]?.let { image_global_ava.setImageResource(it) }
 
@@ -54,7 +55,6 @@ class MyProfile : Fragment() {
 
 
         image_global_ava.setOnClickListener {
-            var dialog_find_ava = Dialog(locale_context!!)
             D = dialog_find_ava
             dialog_find_ava.setContentView(R.layout.activity_ava__dialog)
 
@@ -69,6 +69,8 @@ class MyProfile : Fragment() {
             gamesRecycler.layoutManager = GridLayoutManager(locale_context, 3)
             dialog_find_ava.item_profile_ava.adapter?.notifyDataSetChanged()
         }
+
+
     }
 }
 

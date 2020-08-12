@@ -47,7 +47,7 @@ var AUXILIARY_MAP_OF_AVATAR = mapOf(0 to "ava1", 1 to "ava2", 2 to "ava3",3 to "
 //__________________________________________________________________________________________________________________________________
 
 //____________________________________________________________________________________________________________________________
-var EMOTION: String = "ava1"               //ЭМОЦИИ
+var EMOTION: Int =  -1               //ЭМОЦИИ
 val PICTURE_EMOTION = mapOf(0 to R.drawable.avatar1, 1 to R.drawable.avatar1, 2 to R.drawable.avatar1,3 to R.drawable.avatar1)
 val EMOTION_TEXT = mapOf(0 to "Злость", 1 to "Хохот", 2 to "Ненависть",3 to "Умиление")
 val PRICE_OD_EMOTION = mapOf(0 to 10,1 to 20,2 to 30,3 to 90)

@@ -1,29 +1,41 @@
 package com.example.schoolbattle.gamesonline
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.graphics.*
-import android.net.ConnectivityManager
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color.RED
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.os.Handler
 import android.util.AttributeSet
 import android.util.Log
+import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.alpha
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.schoolbattle.*
-import com.example.schoolbattle.R
-import com.google.firebase.database.*
-import com.instacart.library.truetime.TrueTime
-import kotlinx.android.synthetic.main.activity_x_o_game.*
-import java.util.*
-import android.graphics.Color.*
-import android.widget.TextView
 import com.example.schoolbattle.engine.BlitzGameEngine
 import com.example.schoolbattle.engine.LongGameEngine
-import com.example.schoolbattle.engine.ShowResult
 import com.example.schoolbattle.engine.StupidGame
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_online_games_temlate.*
+import kotlinx.android.synthetic.main.activity_x_o_game.*
+import kotlinx.android.synthetic.main.activity_x_o_game.bottom_navigation_xog_online
+import kotlinx.android.synthetic.main.activity_x_o_game.button_player_1_online_xog
+import kotlinx.android.synthetic.main.activity_x_o_game.button_player_2_online_xog
+import kotlinx.android.synthetic.main.activity_x_o_game.signature_canvas
+import kotlinx.android.synthetic.main.activity_x_o_game.timer2_xog_online
+import kotlinx.android.synthetic.main.activity_x_o_game.timer_xog_online
+import kotlinx.android.synthetic.main.find_emotion.*
+import java.util.*
+
+var dialog_find_emotion : Dialog? = null
 
 class XOGameActivity : AppCompatActivity() {
     private var isRun = false
@@ -43,30 +55,61 @@ class XOGameActivity : AppCompatActivity() {
         CONTEXT = this
     }
 
+
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_online_games_temlate)
         signature_canvas.visibility = View.VISIBLE
 
-        if(Design == "Egypt" ) {
-            button_player_1_online_xog.setTextColor(BLACK)
-            button_player_2_online_xog.setTextColor(BLACK)
-            button_player_1_online_xog.textSize = 20f
-            button_player_2_online_xog.textSize = 20f
-            timer_xog_online.textSize = 15f
-            timer_xog_online.setTextColor(GREEN)
-            timer2_xog_online.textSize = 15f
-            timer2_xog_online.setTextColor(GREEN)
 
-            icon_player_1_xog_online.setBackgroundResource(R.drawable.player1_egypt);
-            icon_player_2_xog_online.setBackgroundResource(R.drawable.player2_egypt);
-            player_1_icon_xog_online.setBackgroundResource(R.drawable.cross_egypt);
-            player_2_icon_xog_online.setBackgroundResource(R.drawable.circle_egypt);
-            label_online_xog.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_xog_online.setBackgroundColor(rgb(224,164,103))
-            to_back_xog_online.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
-            toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+
+        bottom_navigation_xog_online.setOnNavigationItemSelectedListener { item ->
+            dialog_find_emotion = Dialog(this)
+            when (item.itemId) {
+                R.id.page_online_1 ->{
+
+                }
+                R.id.page_online_2 ->{
+
+                }
+                R.id.page_online_3 ->{
+                    dialog_find_emotion!!.setContentView(R.layout.find_emotion)
+                    Emotion_in_game(dialog_find_emotion!!.item_profile_emotion)
+                    gamesRecycler = dialog_find_emotion!!.item_profile_emotion
+                    gamesRecycler.isNestedScrollingEnabled = false;
+                    gamesRecycler.layoutManager = GridLayoutManager(this, 3)
+                    dialog_find_emotion!!.show()
+                    val d: Drawable = ColorDrawable(Color.BLACK)
+                    d.alpha = 130
+                    dialog_find_emotion!!.window!!.setBackgroundDrawable(d)
+                    val display = windowManager.defaultDisplay
+                    val size = Point()
+                    display.getSize(size)
+                    val width = size.x
+                    val height = size.y
+                    dialog_find_emotion!!.window!!.setLayout(width*11/12, height*5/6);
+                   // dialog_find_emotion.window!!.setGravity()
+                    dialog_find_emotion!!.setOnDismissListener {
+                        if(EMOTION!=-1)
+                        {
+                            button_emotion.alpha = 1f
+                            PICTURE_EMOTION[EMOTION]?.let { it1 -> button_emotion.setBackgroundResource(it1)}
+                            EMOTION = -1
+
+                            button_emotion.animate().alpha(0f).duration = 1000;
+                            button_emotion.animate().alpha(0f).startDelay = 1000
+                            button_emotion.setOnClickListener {
+                                button_emotion.setBackgroundResource(R.drawable.nulevoe)
+                            }
+                        }
+                    }
+
+                }
+                R.id.page_online_4 -> {
+
+                }
+            }
+            true
         }
 
         currentContext = this
@@ -105,26 +148,6 @@ class XOGameActivity : AppCompatActivity() {
         signature_canvas.positionData = gameData
         button_player_1_online_xog.text = yourName
         button_player_2_online_xog.text = opponentsName
-        if(Design == "Egypt" ) {
-            button_player_1_online_xog.setTextColor(BLACK)
-            button_player_2_online_xog.setTextColor(BLACK)
-            button_player_1_online_xog.textSize = 20f
-            button_player_2_online_xog.textSize = 20f
-            timer_xog_online.textSize = 15f
-            timer_xog_online.setTextColor(GREEN)
-            timer2_xog_online.textSize = 15f
-            timer2_xog_online.setTextColor(GREEN)
-
-            icon_player_1_xog_online.setBackgroundResource(R.drawable.player1_egypt);
-            icon_player_2_xog_online.setBackgroundResource(R.drawable.player2_egypt);
-            player_1_icon_xog_online.setBackgroundResource(R.drawable.cross_egypt);
-            player_2_icon_xog_online.setBackgroundResource(R.drawable.circle_egypt);
-            label_online_xog.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_xog_online.setBackgroundColor(rgb(224, 164, 103))
-            to_back_xog_online.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_xog_online.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_xog_online.setBackgroundColor(argb(0, 0, 0, 0))
-        }
 
 
         if (type == "blitz") {

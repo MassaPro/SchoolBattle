@@ -7,6 +7,15 @@
     android:id= "@+id/label_online_xog"
     android:background="@android:color/white">
 
+    <Button
+        android:id="@+id/button_emotion"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toTopOf="@+id/button_player_1_online_xog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <FrameLayout
         android:id="@+id/frameLayout4"
         android:layout_width="0dp"
@@ -50,6 +59,7 @@
             android:layout_height="match_parent"
             android:textColor="#FFFFFF"
             android:visibility="gone" />
+
     </FrameLayout>
 
 
