@@ -589,8 +589,7 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
     var k : Float = 0f
 
 
-
-
+    var line_who_do_move : Paint = Paint()
 
     init{
 
@@ -605,38 +604,51 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
         paint_rib_2.setColor(Color.BLUE)
         paint_rib_2.setStrokeWidth(5f)
 
-        if (Design == "Casino"){
+        line_who_do_move.strokeWidth = 7f
+
+        if(Design == "Normal")
+        {
+            line_who_do_move.strokeWidth = 14f
+            line_who_do_move.color = Color.GREEN
+        }
+        else if (Design == "Casino"){
             Line_paint.setColor(Color.argb(0, 0,0,0))          //ресур для линий (ширина и цвет)
             paint_circle.setColor(Color.WHITE)     //цвета для точек
             paint_rib_1.setColor(Color.RED)          //цвета для ребер  и их ширина
             paint_rib_2.setColor(Color.BLACK)
+            line_who_do_move.color = Color.RED
         }
         else if (Design == "Egypt"){
             Line_paint.setColor(Color.argb(0, 0,0,0))          //ресур для линий (ширина и цвет)
+            line_who_do_move.color = Color.RED
         }
         else if (Design == "Rome"){
             Line_paint.setColor(Color.argb(0, 0,0,0))          //ресур для линий (ширина и цвет)
             paint_circle.setColor(Color.BLACK)     //цвета для точек
             paint_rib_2.setColor(Color.rgb(193,150,63))          //цвета для ребер  и их ширина
             paint_rib_1.setColor(Color.BLACK)
+            line_who_do_move.color = Color.RED
         }
         else if (Design == "Gothic"){
             Line_paint.setColor(Color.argb(0, 0,0,0))          //ресур для линий (ширина и цвет)
             paint_circle.setColor(Color.WHITE)     //цвета для точек
             paint_rib_2.setColor(Color.RED)          //цвета для ребер  и их ширина
             paint_rib_1.setColor(Color.BLUE)
+            line_who_do_move.color = Color.RED
         }
         else if (Design == "Japan"){
             Line_paint.setColor(Color.argb(0, 0,0,0))          //ресур для линий (ширина и цвет)
             paint_circle.setColor(Color.BLACK)     //цвета для точек
             paint_rib_2.setColor(Color.RED)          //цвета для ребер  и их ширина
             paint_rib_1.setColor(Color.rgb(37,103,28))
+            line_who_do_move.color = Color.RED
         }
         else if (Design == "Noir"){
             Line_paint.setColor(Color.argb(0, 0,0,0))          //ресур для линий (ширина и цвет)
             paint_circle.setColor(rgb(100,100,100))     //цвета для точек
             paint_rib_2.setColor(rgb(193, 150, 63))          //цвета для ребер  и их ширина
             paint_rib_1.setColor(Color.WHITE)
+            line_who_do_move.color = Color.RED
         }
 
         // TODO нужно взять из DataBase (статистика ходов)
@@ -692,15 +704,18 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
 
+
         if(red_or_blue == "red")
         {
             t1.text ="игрок 1 думает..."
             t2.text  = "игрок 2"
+            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
         }
         else
         {
             t1.text ="игрок 1"
             t2.text  = "игрок 2 думает..."
+            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
         }
 
         radius_of_point = 10f

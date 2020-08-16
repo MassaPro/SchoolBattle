@@ -525,6 +525,8 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
     var paint : Paint = Paint()          //ресурсы для рисования
     var Line_paint: Paint = Paint()
     var Line_paint_1: Paint = Paint()
+
+    var line_who_do_move : Paint = Paint()
     var FIELD = Array(7){IntArray(6)}
     var cross_or_nul: String
 
@@ -535,29 +537,39 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
 
         Line_paint_1.color = Color.BLACK          //ресур для линий (ширина и цвет)
         Line_paint_1.strokeWidth = 20f
+        line_who_do_move.strokeWidth = 7f
 
-        if(Design == "Egypt")
+        if(Design == "Normal")
+        {
+            line_who_do_move.color =  Color.GREEN
+            line_who_do_move.strokeWidth = 14f
+        }
+        else if(Design == "Egypt")
         {
             Line_paint.color = Color.BLACK          //ресур для линий (ширина и цвет)
             Line_paint.strokeWidth = 7f
+            line_who_do_move.color = Color.RED
 
         }
         else if (Design == "Casino")
         {
             Line_paint.color = Color.WHITE          //ресур для линий (ширина и цвет)
             Line_paint.strokeWidth = 7f
+            line_who_do_move.color = Color.RED              //
 
         }
         else if (Design == "Rome")
         {
             Line_paint.color = rgb(193,150,63)    //ресур для линий (ширина и цвет)
             Line_paint.strokeWidth = 7f
+            line_who_do_move.color = Color.RED              //
 
         }
         else if (Design == "Gothic")
         {
             Line_paint.color = rgb(100,100,100)   //ресур для линий (ширина и цвет)
             Line_paint.strokeWidth = 7f
+            line_who_do_move.color = Color.RED              //
 
         }
 
@@ -565,12 +577,14 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
         {
             Line_paint.color = Color.BLACK   //ресур для линий (ширина и цвет)
             Line_paint.strokeWidth = 7f
+            line_who_do_move.color = Color.RED              //
 
         }
         else if (Design == "Noir")
         {
             Line_paint.color = rgb(100,100,100)   //ресур для линий (ширина и цвет)
             Line_paint.strokeWidth = 7f
+            line_who_do_move.color = Color.RED              //
 
         }
 
@@ -635,6 +649,8 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
         step = (width-2*indent)/size_field_x
         var advertising_line: Float = (height - step * 6) / 2
         var k: Float = height-(width-2*indent)-advertising_line
+
+
 
 
         var right_cross: Bitmap  //подгоняем картинку под размеры экрана телефона
@@ -704,6 +720,15 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
             }
         }
 
+
+        if(cross_or_nul == "cross")
+        {
+            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+        }
+        else
+        {
+            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+        }
 
         if(checkForWin_another_fun().size==9)
         {

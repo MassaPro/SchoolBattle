@@ -8,6 +8,15 @@
     android:background="@android:color/white">
 
     <Button
+        android:id="@+id/button_emotion_rival"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timer_xog_online" />
+
+    <Button
         android:id="@+id/button_emotion"
         android:layout_width="100dp"
         android:layout_height="100dp"

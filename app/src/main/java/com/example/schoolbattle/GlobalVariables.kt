@@ -52,7 +52,7 @@ val PICTURE_EMOTION = mapOf(0 to R.drawable.avatar1, 1 to R.drawable.avatar1, 2 
 val EMOTION_TEXT = mapOf(0 to "Злость", 1 to "Хохот", 2 to "Ненависть",3 to "Умиление")
 val PRICE_OD_EMOTION = mapOf(0 to 10,1 to 20,2 to 30,3 to 90)
 var ARRAY_OF_EMOTION_SHOP: MutableList<Int>  = mutableListOf(0,1,2,3)             //номера  дизайнов в магазине
-var ARRAY_OF_EMOTION: MutableList<Int>  = mutableListOf(0,1)             //номера открытых дизайнов
+var ARRAY_OF_EMOTION: MutableList<Int>  = mutableListOf(0,1)             //номера открытых эмоций
 var AUXILIARY_MAP_OF_EMOTION = mapOf(0 to "emotion1", 1 to "emotion2", 2 to "emotion3",3 to "emotion4")
 //__________________________________________________________________________________________________________________________________
 

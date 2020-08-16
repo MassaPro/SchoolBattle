@@ -63,6 +63,17 @@ class XOGameActivity : AppCompatActivity() {
 
 
 
+        fun emotion_from_rival(number_emotion: Int)     //TODO вызывай эту функцию и передавац значение эмоции из firebase
+        {
+            button_emotion_rival.alpha = 1f
+            PICTURE_EMOTION[number_emotion]?.let { it1 -> button_emotion_rival.setBackgroundResource(it1)}
+            button_emotion_rival.animate().alpha(0f).duration = 1000;
+            button_emotion_rival.animate().alpha(0f).startDelay = 1000
+            button_emotion_rival.setOnClickListener {
+                button_emotion_rival.setBackgroundResource(R.drawable.nulevoe)
+            }
+        }
+
         bottom_navigation_xog_online.setOnNavigationItemSelectedListener { item ->
             dialog_find_emotion = Dialog(this)
             when (item.itemId) {
@@ -92,10 +103,10 @@ class XOGameActivity : AppCompatActivity() {
                     dialog_find_emotion!!.setOnDismissListener {
                         if(EMOTION!=-1)
                         {
+                            //TODO в этот момент надо передать глобальную переменную EMOTION в firebase
                             button_emotion.alpha = 1f
                             PICTURE_EMOTION[EMOTION]?.let { it1 -> button_emotion.setBackgroundResource(it1)}
                             EMOTION = -1
-
                             button_emotion.animate().alpha(0f).duration = 1000;
                             button_emotion.animate().alpha(0f).startDelay = 1000
                             button_emotion.setOnClickListener {

@@ -602,6 +602,8 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
 
     var exception: Boolean = false
 
+    var line_who_do_move : Paint = Paint()
+
     init{
 
 
@@ -610,33 +612,45 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
 
         Line_paint.setColor(Color.RED)          //ресур для линий (ширина и цвет)
         Line_paint.setStrokeWidth(5f)
+        line_who_do_move.strokeWidth = 7f
 
-        if(Design == "Egypt")
+        if(Design == "Normal")
+        {
+            line_who_do_move.color = Color.GREEN
+        }
+        else if(Design == "Egypt")
         {
             Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
             Line_paint.setStrokeWidth(5f)
+            line_who_do_move.color = Color.RED
+
         }
         else if(Design == "Casino")
         {
             Line_paint.setColor(Color.WHITE)          //ресур для линий (ширина и цвет)
             Line_paint.setStrokeWidth(5f)
+            line_who_do_move.color = Color.RED
         }
         else if(Design == "Rome")
         {
             Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
             Line_paint.setStrokeWidth(5f)
+            line_who_do_move.color = Color.RED
         }
         else if(Design == "Gothic") {
             Line_paint.setColor(Color.rgb(100,100,100))          //ресур для линий (ширина и цвет)
             Line_paint.setStrokeWidth(5f)
+            line_who_do_move.color = Color.RED
         }
         else if(Design == "Japan") {
             Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
             Line_paint.setStrokeWidth(5f)
+            line_who_do_move.color = Color.RED
         }
         else if(Design == "Noir") {
             Line_paint.setColor(Color.rgb(100,100,100))          //ресур для линий (ширина и цвет)
             Line_paint.setStrokeWidth(5f)
+            line_who_do_move.color = Color.RED
         }
 
 
@@ -712,12 +726,16 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
         {
             t1.text ="игрок 1 думает..."
             t2.text  = "игрок 2"
+            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
         }
         else
         {
             t1.text ="игрок 1"
             t2.text  = "игрок 2 думает..."
+            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
         }
+
+
         //TODO() take field from database
 
 

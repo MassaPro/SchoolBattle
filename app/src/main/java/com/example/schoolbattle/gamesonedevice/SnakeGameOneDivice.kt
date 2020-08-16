@@ -10,6 +10,7 @@ import android.os.Vibrator
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
 import com.google.android.gms.ads.AdRequest
@@ -96,7 +97,8 @@ class SnakeGameOneDivice : AppCompatActivity() {
 
         signature_canvas_snake_one_device.activity = this
 
-
+        signature_canvas_snake_one_device.t1 = findViewById(R.id.name_player1_one_divice) as TextView
+        signature_canvas_snake_one_device.t2 = findViewById(R.id.name_player2_one_divice) as TextView
         if(Design == "Egypt" ) {
 
             name_player1_one_divice.setTextColor(Color.BLACK)
@@ -525,6 +527,9 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
 
     lateinit var activity: Activity
 
+    lateinit var t1: TextView
+    lateinit var t2: TextView
+
     var History: MutableList<Triple<Int,Int,Int>> = mutableListOf()
     var Snake_1: MutableList<Pair<Int,Int>>  =  mutableListOf()
     var Snake_2: MutableList<Pair<Int,Int>>  =  mutableListOf()         //векторы координат путей
@@ -561,9 +566,11 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
 
 
 
+    var line_who_do_move : Paint = Paint()
 
 
     init{
+        line_who_do_move.strokeWidth = 7f
 
         red_or_blue = "red"
         Line_paint.setColor(Color.rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
@@ -581,6 +588,11 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
         border_2.setColor(Color.GRAY)
         border_2.setStrokeWidth(20f)
 
+        line_who_do_move.strokeWidth  =  7f
+        if(Design == "Normal")
+        {
+            line_who_do_move.color = Color.GREEN
+        }
         if(Design == "Egypt"){
 
             Line_paint.setColor(Color.rgb(100, 100, 100))          //ресур для линий (ширина и цвет)
@@ -595,6 +607,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
 
             border_1.setColor(Color.rgb(100, 100, 100))
             border_1.setStrokeWidth(10f)
+            line_who_do_move.color = Color.RED
         }
         else if(Design == "Casino"){
 
@@ -610,6 +623,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
 
             border_1.setColor(Color.WHITE)
             border_1.setStrokeWidth(10f)
+            line_who_do_move.color = Color.RED
         }
 
         else if(Design == "Rome"){
@@ -626,6 +640,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
 
             border_1.setColor(Color.rgb(180, 180, 180))
             border_1.setStrokeWidth(10f)
+            line_who_do_move.color = Color.RED
         }
         else if(Design == "Gothic") {
 
@@ -638,7 +653,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
             paint_rib_1.setStrokeWidth(10f)
             paint_rib_1.setColor(Color.YELLOW)
             paint_rib_2.setStrokeWidth(10f)
-
+            line_who_do_move.color = Color.RED
         }
         else if(Design == "Japan") {
 
@@ -651,6 +666,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
             paint_rib_1.setStrokeWidth(10f)
             paint_rib_1.setColor(Color.rgb(37,103,28))
             paint_rib_2.setStrokeWidth(10f)
+            line_who_do_move.color = Color.RED
 
         }
         else if(Design == "Noir") {
@@ -665,6 +681,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
             paint_rib_1.setColor(Color.WHITE)
             paint_rib_2.setStrokeWidth(10f)
 
+            line_who_do_move.color = Color.RED
         }
 
         for(i in 0 until FIELD.size)
@@ -693,6 +710,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
         super.draw(canvas)
 
 
+
         radius_of_point = 8f
         size_field_x  = 10
         size_field_y  = 10
@@ -707,6 +725,20 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
 
        // canvas?.drawColor(Color.WHITE)
 
+
+        if(red_or_blue != "red")
+        {
+            t1.text = "Игрок 1 думает"
+            t2.text = "Игрок 2"
+            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+
+        }
+        else
+        {
+            t1.text = "Игрок 1"
+            t2.text = "Игрок 2 думает"
+            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+        }
         for(i in 0 until size_field_y+1)          //вырисовка горизонтальных линий
         {
 

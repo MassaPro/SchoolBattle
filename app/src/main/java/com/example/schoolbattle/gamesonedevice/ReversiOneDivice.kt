@@ -1248,6 +1248,7 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
                         Black_or_grey_chip = "black"
                         illumination(1);
                     }
+
                 }
 
                 if(SOUND)

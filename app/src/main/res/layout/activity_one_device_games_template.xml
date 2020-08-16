@@ -47,12 +47,6 @@
             android:layout_height="match_parent"
             android:textColor="#FFFFFF"
             android:visibility="gone"/>
-        <com.example.schoolbattle.gamesonedevice.CanvasView_Go_one_divice
-            android:id="@+id/signature_canvas_go_one_divice"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="#FFFFFF"
-            android:visibility="gone"/>
         <com.example.schoolbattle.gamesonedevice.CanvasView_SNAKE
             android:id="@+id/signature_canvas_snake_one_device"
             android:layout_width="wrap_content"

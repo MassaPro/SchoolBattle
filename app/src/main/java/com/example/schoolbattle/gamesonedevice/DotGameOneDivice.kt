@@ -583,8 +583,12 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
 
 
     var Is_defined_TREE_OF_WAYS : Boolean = false
+
+    var line_who_do_move : Paint = Paint()
+
     init{
 
+        line_who_do_move.strokeWidth = 7f
         for (i in 0 until 16) {
             a.add(mutableListOf())
         }
@@ -609,8 +613,12 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
         shading_1.setStrokeWidth(2f)
         shading_2.setStrokeWidth(2f)
 
-
-        if(Design == "Egypt") {
+        if(Design == "Normal")
+        {
+            line_who_do_move.strokeWidth = 14f
+            line_who_do_move.color = Color.GREEN
+        }
+        else if (Design == "Egypt") {
             Line_paint.setColor(Color.rgb(120, 120, 120))      //ресур для линий (ширина и цвет)
             paint_circle.setColor(Color.rgb(120, 120, 120))
             paint_rib_1.setColor(Color.BLACK) //цвета для ребер  и их ширина
@@ -622,6 +630,8 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
             shading_2.setColor(Color.WHITE)
             shading_1.setStrokeWidth(2f)
             shading_2.setStrokeWidth(2f)
+
+            line_who_do_move.color = Color.RED
         }
         else if(Design == "Casino") {
             paint_rib_2.setColor(Color.BLACK) //цвета для ребер  и их ширина
@@ -633,6 +643,7 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
             shading_1.setColor(Color.RED)
             shading_1.setStrokeWidth(2f)
             shading_2.setStrokeWidth(2f)
+            line_who_do_move.color = Color.RED
         }
         else if(Design == "Rome") {
             Line_paint.setColor(Color.rgb(180, 180, 180))      //ресур для линий (ширина и цвет)
@@ -646,6 +657,7 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
             shading_2.setColor(Color.rgb(193,150,63))
             shading_1.setStrokeWidth(2f)
             shading_2.setStrokeWidth(2f)
+            line_who_do_move.color = Color.RED
         }
         else if(Design == "Gothic") {
             Line_paint.setColor(Color.rgb(100,100,100))      //ресур для линий (ширина и цвет)
@@ -659,6 +671,7 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
             shading_2.setColor(Color.YELLOW)
             shading_1.setStrokeWidth(2f)
             shading_2.setStrokeWidth(2f)
+            line_who_do_move.color = Color.RED
         }
         else if(Design == "Japan") {
             Line_paint.setColor(Color.rgb(160,160,160))      //ресур для линий (ширина и цвет)
@@ -672,6 +685,7 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
             shading_2.setColor(Color.RED)
             shading_1.setStrokeWidth(2f)
             shading_2.setStrokeWidth(2f)
+            line_who_do_move.color = Color.RED
         }
         else if(Design == "Noir") {
             Line_paint.setColor(Color.rgb(100,100,100))      //ресур для линий (ширина и цвет)
@@ -685,6 +699,7 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
             shading_2.setColor(Color.WHITE)
             shading_1.setStrokeWidth(2f)
             shading_2.setStrokeWidth(2f)
+            line_who_do_move.color = Color.RED
         }
 
         for(i in 0 until FIELD.size)
@@ -717,11 +732,14 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
         {
             t1.text ="игрок 1 думает..."
             t2.text  = "игрок 2"
+      //      line_who_do_move.color = Color.RED ЗДЕСБ ПИШИ ЕСЛИ ХОСЧЕШЬ ПОМЕНЯТЬ ЦВЕТ ЭТОЙ ПОЛОСКИУ
+            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
         }
         else
         {
             t1.text ="игрок 1"
             t2.text  = "игрок 2 думает..."
+            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
         }
 
         radius_of_point = 8f
