@@ -1,14 +1,16 @@
 package com.example.schoolbattle.engine
 
+import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import android.view.Window
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
-import com.example.schoolbattle.CURRENTGAMES
-import com.example.schoolbattle.LongGame
-import com.example.schoolbattle.currentGamesRecycler
+import com.example.schoolbattle.*
 import com.example.schoolbattle.gamesonline.*
-import com.example.schoolbattle.myRef
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -49,6 +51,8 @@ fun initCatchPlayersListenerForBlitzGame(username: String, context: Context) {
 
 fun initCatchPlayersListenerForLongGame(username: String, context: Context) {
     val s: MutableSet<String> = mutableSetOf()
+    val isNeedInIntent: MutableSet<String> = mutableSetOf()
+    val notNeedToWarn: MutableSet<String> = mutableSetOf()
     myRef.child("Users").child(username).child("long").addListenerForSingleValueEvent(object: ValueEventListener {
         override fun onCancelled(p: DatabaseError) {}
         override fun onDataChange(p: DataSnapshot) {
@@ -69,9 +73,13 @@ fun initCatchPlayersListenerForLongGame(username: String, context: Context) {
                         return
                     }
                     s.add(p0.key.toString())
+                    lateinit var opponent: String
+                    lateinit var type: String
                     for (j in p0.children) {
                         for (k in j.children) {
                             CURRENTGAMES.add(LongGame(p0.key!!, j.key!!, k.key!!, k.value.toString()))
+                            opponent = k.key!!
+                            type = j.key!!
                             currentGamesRecycler?.adapter?.notifyDataSetChanged()
                         }
                     }
@@ -102,13 +110,25 @@ fun initCatchPlayersListenerForLongGame(username: String, context: Context) {
                         }
                         break
                     }
-                    context.startActivity(intent)
+                    if (!isNeedInIntent.contains(p0.key.toString())) {
+                        if (!notNeedToWarn.contains(p0.key.toString())) {
+                            Toast.makeText(
+                                CONTEXT,
+                                "$opponent принял вызов в $type",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    } else {
+                        context.startActivity(intent)
+                    }
                 }
                 override fun onCancelled(p0: DatabaseError) {}
                 override fun onChildChanged(p0: DataSnapshot, p1: String?) {}
                 override fun onChildMoved(p0: DataSnapshot, p1: String?) {}
                 override fun onChildRemoved(p0: DataSnapshot) {
                     s.remove(p0.key.toString())
+                    isNeedInIntent.remove(p0.key.toString())
+                    notNeedToWarn.remove(p0.key.toString())
                     for (j in p0.children) {
                         for (k in j.children) {
                             CURRENTGAMES.remove(LongGame(p0.key!!, j.key!!, k.key!!, k.value.toString()))
@@ -118,6 +138,61 @@ fun initCatchPlayersListenerForLongGame(username: String, context: Context) {
                 }
             })
 
+            myRef.child("Users").child(username).child("calls").addChildEventListener(object: ChildEventListener {
+                override fun onCancelled(p0: DatabaseError) {}
+                override fun onChildRemoved(p0: DataSnapshot) {}
+                override fun onChildChanged(p0: DataSnapshot, p1: String?) {}
+                override fun onChildMoved(p0: DataSnapshot, p1: String?) {}
+                @SuppressLint("SetTextI18n")
+                override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+                    for (j in p0.children) {
+                        for (k in j.children) {
+                            var data: LongGame? = null
+                            for (i0 in p0.children) {
+                                for (j0 in i0.children) {
+                                    data = LongGame(p0.key!!, i0.key!!, j0.key!!, j0.value.toString())
+                                }
+                            }
+                            val callDialog = Dialog(CONTEXT)
+                            callDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                            callDialog.setCancelable(false)
+                            callDialog.setCanceledOnTouchOutside(true)
+                            callDialog.setContentView(R.layout.call_dialog)
+                            val callDialogAdd = callDialog.findViewById(R.id.call_dialog_add) as Button
+                            val callDialogReject = callDialog.findViewById(R.id.call_dialog_reject) as Button
+                            val callDialogPlay = callDialog.findViewById(R.id.call_dialog_play) as Button
+                            val callDialogText = callDialog.findViewById(R.id.call_dialog_text) as TextView
+                            callDialogText.text = "${data?.opponent} хочет поиграть в ${data?.type}"
+                            callDialog.show()
+                            callDialogReject.setOnClickListener {
+                                myRef.child("Users").child(username).child("calls").child(p0.key.toString()).removeValue()
+                                callDialog.dismiss()
+                            }
+                            callDialogPlay.setOnClickListener {
+                                isNeedInIntent.add(data!!.key)
+                                notNeedToWarn.add(data.key)
+                                val upd = mutableMapOf<String, Any?>(
+                                    "Users/$username/calls/" + data.key to null,
+                                    "Users/$username/long/${data.key}/${data.type}/${data.opponent}" to data.move,
+                                    "Users/${data.opponent}/long/${data.key}/${data.type}/$username" to 1 - data.move.toInt()
+                                )
+                                myRef.updateChildren(upd)
+                                callDialog.dismiss()
+                            }
+                            callDialogAdd.setOnClickListener {
+                                notNeedToWarn.add(data!!.key)
+                                val upd = mutableMapOf<String, Any?>(
+                                    "Users/$username/calls/" + data.key to null,
+                                    "Users/$username/long/${data.key}/${data.type}/${data.opponent}" to data.move,
+                                    "Users/${data.opponent}/long/${data.key}/${data.type}/$username" to 1 - data.move.toInt()
+                                )
+                                myRef.updateChildren(upd)
+                                callDialog.dismiss()
+                            }
+                        }
+                    }
+                }
+            })
         }
     })
 }

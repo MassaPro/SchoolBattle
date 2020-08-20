@@ -6,12 +6,15 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.CheckBox
+import com.example.schoolbattle.NewGameActivity
 import com.example.schoolbattle.R
 import com.example.schoolbattle.myRef
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ServerValue
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_profile_user.*
+import java.util.*
 
 /**
  * An activity representing a single Item detail screen. This
@@ -27,10 +30,16 @@ class ProfileUserActivity : AppCompatActivity() {
 
         val satView: CheckBox = profileFriendship as CheckBox
         val prfs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
-        val username = prfs?.getString("username", "")
+        val username = prfs?.getString("username", "")!!
 
-        val item = intent.getStringExtra("name")
+        val item = intent.getStringExtra("name")!!
         profileMyName.text = item
+        profileSendCall.setOnClickListener {
+            val intent = Intent(this, NewGameActivity::class.java)
+            intent.putExtra("playType", 5)
+            intent.putExtra("opponent", item)
+            startActivity(intent)
+        }
         myRef.child("Users").child(username!!).child("FriendsIn").addListenerForSingleValueEvent(object :
             ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
@@ -41,11 +50,11 @@ class ProfileUserActivity : AppCompatActivity() {
                 satView.isChecked = p0.hasChild(item)
                 satView.setOnCheckedChangeListener { buttonView, isChecked ->
                     if (isChecked) {
-                        myRef.child("Users").child(username!!).child("FriendsIn").child(item).setValue(item)
-                        myRef.child("Users").child(item).child("FriendsOut").child(username!!).setValue(username)
+                        myRef.child("Users").child(username).child("FriendsIn").child(item).setValue(item)
+                        myRef.child("Users").child(item).child("FriendsOut").child(username).setValue(username)
                     } else {
-                        myRef.child("Users").child(username!!).child("FriendsIn").child(item).removeValue()
-                        myRef.child("Users").child(item).child("FriendsOut").child(username!!).removeValue()
+                        myRef.child("Users").child(username).child("FriendsIn").child(item).removeValue()
+                        myRef.child("Users").child(item).child("FriendsOut").child(username).removeValue()
                     }
                 }
             }
