@@ -14,6 +14,7 @@ import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.alpha
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.schoolbattle.*
@@ -24,6 +25,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_box_game.*
+import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 import kotlinx.android.synthetic.main.activity_online_games_temlate.*
 import kotlinx.android.synthetic.main.activity_x_o_game.*
 import kotlinx.android.synthetic.main.activity_x_o_game.bottom_navigation_xog_online
@@ -60,6 +63,7 @@ class XOGameActivity : AppCompatActivity() {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_online_games_temlate)
         signature_canvas.visibility = View.VISIBLE
+
 
 
 
@@ -309,6 +313,9 @@ class XOGameActivity : AppCompatActivity() {
                 }
             }
         })
+        if(Design == "Noir" ) {
+            label_online.setBackgroundResource(R.drawable.background_noir);
+        }
     }
 
     override fun onPause() {
@@ -473,10 +480,10 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
 
 
     var icon_cross_egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(),
-        R.drawable.cross_egypt
+        R.drawable.cross_normal
     )       //картинки крестиков и нулей
     var icon_null_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(),
-        R.drawable.circle_egypt
+        R.drawable.null_normal
     )
 
     // var BackgroundColor_Egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.background_egypt)

@@ -48,12 +48,13 @@ var AUXILIARY_MAP_OF_AVATAR = mapOf(0 to "ava1", 1 to "ava2", 2 to "ava3",3 to "
 
 //____________________________________________________________________________________________________________________________
 var EMOTION: Int =  -1               //ЭМОЦИИ
-val PICTURE_EMOTION = mapOf(0 to R.drawable.avatar1, 1 to R.drawable.avatar1, 2 to R.drawable.avatar1,3 to R.drawable.avatar1)
+val PICTURE_EMOTION = mapOf(0 to R.drawable.e0, 1 to R.drawable.e1, 2 to R.drawable.e2,3 to R.drawable.e3,4 to R.drawable.e4,
+   5 to R.drawable.e5,6 to R.drawable.e6,7 to R.drawable.e7,8 to R.drawable.e8,9 to R.drawable.e9)
 val EMOTION_TEXT = mapOf(0 to "Злость", 1 to "Хохот", 2 to "Ненависть",3 to "Умиление")
-val PRICE_OD_EMOTION = mapOf(0 to 10,1 to 20,2 to 30,3 to 90)
-var ARRAY_OF_EMOTION_SHOP: MutableList<Int>  = mutableListOf(0,1,2,3)             //номера  дизайнов в магазине
+val PRICE_OD_EMOTION = mapOf(0 to 10,1 to 20,2 to 30,3 to 90,4 to 1,5 to 1,6 to 1,7 to 1,8 to 1,9 to 1)
+var ARRAY_OF_EMOTION_SHOP: MutableList<Int>  = mutableListOf(0,1,2,3,4,5,6,7,8,9)             //номера  дизайнов в магазине
 var ARRAY_OF_EMOTION: MutableList<Int>  = mutableListOf(0,1)             //номера открытых эмоций
-var AUXILIARY_MAP_OF_EMOTION = mapOf(0 to "emotion1", 1 to "emotion2", 2 to "emotion3",3 to "emotion4")
+var AUXILIARY_MAP_OF_EMOTION = mapOf(0 to "e0", 1 to "e1", 2 to "e2",3 to "e3",4 to "e4",5 to "e5",6 to "e6",7 to "e7",8 to "e8",9 to "e9")
 //__________________________________________________________________________________________________________________________________
 
 
