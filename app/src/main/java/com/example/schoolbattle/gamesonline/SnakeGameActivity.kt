@@ -14,6 +14,7 @@ import android.view.View
 import android.widget.Toast
 import com.example.schoolbattle.*
 import com.example.schoolbattle.engine.BlitzGameEngine
+import com.example.schoolbattle.engine.LongGameEngine
 import com.example.schoolbattle.engine.ShowResult
 import com.example.schoolbattle.engine.StupidGame
 import com.google.firebase.database.DataSnapshot
@@ -31,6 +32,7 @@ class SnakeGameActivity : AppCompatActivity() {
     var opponentsName = ""
     var type = ""
     lateinit var gameData: DatabaseReference
+    private var engineLong: LongGameEngine? = null
 
     override fun onResume() {
         super.onResume()
@@ -66,10 +68,17 @@ class SnakeGameActivity : AppCompatActivity() {
         //      youName.text = yourName
         //    opponentName.text = opponentsName
 
-        gameData = myRef.child(type).child("SnakeGame").child(
-            if (opponentsName < yourName)
-                opponentsName + '_' + yourName else yourName + '_' + opponentsName
-        )
+        gameData = if (intent.getStringExtra("key") != null) {
+            myRef.child(type).child("SnakeGame").child(
+                (if (opponentsName < yourName)
+                    opponentsName + '_' + yourName + intent.getStringExtra("key")!!  else yourName + '_' + opponentsName + intent.getStringExtra("key")!!)
+            )
+        } else {
+            myRef.child(type).child("SnakeGame").child(
+                (if (opponentsName < yourName)
+                    opponentsName + '_' + yourName  else yourName + '_' + opponentsName)
+            )
+        }
         signature_canvas_snake_online.isFirstMove = intent.getStringExtra("move") == "1"
         button_player_1_online_xog.text = yourName
         button_player_2_online_xog.text = opponentsName
@@ -95,8 +104,22 @@ class SnakeGameActivity : AppCompatActivity() {
             }
             engine?.init()
             signature_canvas_snake_online.engine = engine
+        } else {
+            engineLong = object : LongGameEngine {
+                override val userT = timer2_xog_online
+                override val opponentT = timer_xog_online
+                override val user = yourName
+                override val opponent = opponentsName
+                override var move = intent.getStringExtra("move") == "1"
+                override var positionData = gameData
+                override var activity: Activity = this@SnakeGameActivity
+                override var type = "XOGame"
+                override var key = intent.getStringExtra("key")
+            }
+            Toast.makeText(this, engineLong?.key.toString(), Toast.LENGTH_LONG).show()
+            engineLong?.init()
         }
-
+        signature_canvas_snake_online.username = yourName
         //button_player_1_online_snake.text = yourName
         //button_player_2_online_snake.text = opponentsName
         if(Design == "Egypt" ) {
@@ -192,6 +215,7 @@ class SnakeGameActivity : AppCompatActivity() {
                         res = "Поражение"
                     }
                     engine?.finish(res, this@SnakeGameActivity, isRun)
+                    engineLong?.finish(res, this@SnakeGameActivity, isRun)
                     gameData.removeEventListener(this)
                 }
             }

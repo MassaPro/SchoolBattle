@@ -12,8 +12,10 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
 import com.example.schoolbattle.*
 import com.example.schoolbattle.engine.BlitzGameEngine
+import com.example.schoolbattle.engine.LongGameEngine
 import com.example.schoolbattle.engine.ShowResult
 import com.example.schoolbattle.engine.StupidGame
 import com.google.firebase.database.DataSnapshot
@@ -23,7 +25,14 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_box_game.*
 import kotlinx.android.synthetic.main.activity_box_game.signature_canvas_box
 import kotlinx.android.synthetic.main.activity_online_games_temlate.*
+import kotlinx.android.synthetic.main.activity_online_games_temlate.button_player_1_online_xog
+import kotlinx.android.synthetic.main.activity_online_games_temlate.button_player_2_online_xog
+import kotlinx.android.synthetic.main.activity_online_games_temlate.signature_canvas
+import kotlinx.android.synthetic.main.activity_online_games_temlate.timer2_xog_online
+import kotlinx.android.synthetic.main.activity_online_games_temlate.timer_xog_online
+import kotlinx.android.synthetic.main.activity_x_o_game.*
 import java.util.*
+import java.util.function.LongFunction
 
 class BoxGameActivity : AppCompatActivity() {
 
@@ -33,6 +42,7 @@ class BoxGameActivity : AppCompatActivity() {
     private  var yourName = ""
     private lateinit var gameData: DatabaseReference
     private var engine: BlitzGameEngine? = null
+    private var engineLong: LongGameEngine? = null
 
 
     override fun onResume() {
@@ -70,10 +80,17 @@ class BoxGameActivity : AppCompatActivity() {
         //    opponentName.text = opponentsName
 
         val type = intent.getStringExtra("type")
-        gameData = myRef.child(type!!).child("BoxGame").child(
-            if (opponentsName < yourName)
-                opponentsName + '_' + yourName else yourName + '_' + opponentsName
-        )
+        gameData = if (intent.getStringExtra("key") != null) {
+            myRef.child(type).child("BoxGame").child(
+                (if (opponentsName < yourName)
+                    opponentsName + '_' + yourName + intent.getStringExtra("key")!!  else yourName + '_' + opponentsName + intent.getStringExtra("key")!!)
+            )
+        } else {
+            myRef.child(type).child("BoxGame").child(
+                (if (opponentsName < yourName)
+                    opponentsName + '_' + yourName  else yourName + '_' + opponentsName)
+            )
+        }
         signature_canvas_box.positionData = gameData
         signature_canvas_box.blocked = true
         signature_canvas_box.username = yourName
@@ -99,8 +116,22 @@ class BoxGameActivity : AppCompatActivity() {
             }
             engine?.init()
             signature_canvas_box.engine = engine
-        }
+        } else {
+            engineLong = object : LongGameEngine {
+                override val userT = timer2_xog_online
+                override val opponentT = timer_xog_online
+                override val user = yourName
+                override val opponent = opponentsName
+                override var move = intent.getStringExtra("move") == "1"
+                override var positionData = gameData
+                override var activity: Activity = this@BoxGameActivity
+                override var type = "BoxGame"
+                override var key = intent.getStringExtra("key")
+            }
+            engineLong?.init()
 
+        }
+        signature_canvas_box.username = yourName
         if(Design == "Egypt" ) {
             button_player_1_online_box.setTextColor(Color.BLACK)
             button_player_2_online_box.setTextColor(Color.BLACK)
@@ -213,6 +244,7 @@ class BoxGameActivity : AppCompatActivity() {
                         res = "Поражение"
                     }
                     engine?.finish(res, this@BoxGameActivity, isRun)
+                    engineLong?.finish(res, this@BoxGameActivity, isRun)
                     gameData.removeEventListener(this)
                 }
             }

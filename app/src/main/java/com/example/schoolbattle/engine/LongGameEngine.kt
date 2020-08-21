@@ -19,6 +19,7 @@ interface LongGameEngine {
     var positionData: DatabaseReference
     var activity: Activity
     var type: String
+    var key: String
 
     fun init() {
         userT.text = ""
@@ -26,6 +27,11 @@ interface LongGameEngine {
     }
 
     fun finish(res: String, activity: Activity, isActivityRunning: Boolean) {
+        val upd = mutableMapOf<String, Any?>(
+            "Users/$opponent/long/$key" to null,
+            "Users/$opponent/long/$key" to null
+        )
+        myRef.updateChildren(upd)
         positionData.child("winner").onDisconnect().cancel()
         if (res == "Победа") {
             positionData.child("winner").setValue(user)

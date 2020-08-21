@@ -1,6 +1,7 @@
 package com.example.schoolbattle
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Color.argb
@@ -11,17 +12,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolbattle.engine.BlitzActivity
 import com.example.schoolbattle.engine.LongActivity
-import com.example.schoolbattle.engine.StupidGameActivity
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.InterstitialAd
-import kotlinx.android.synthetic.main.activity_game_item.*
 import kotlinx.android.synthetic.main.activity_new_game.*
 import kotlinx.android.synthetic.main.activity_new_game_item.view.*
 
@@ -80,8 +77,9 @@ class NewGameActivity : AppCompatActivity() {
         }
 
         NewGame = this
+        val opponent: String? = intent.getStringExtra("opponent")
         game_list.layoutManager = GridLayoutManager(this, 2)
-        setupRecyclerView(game_list, intent.getIntExtra("playType", -1), this)
+        setupRecyclerView(game_list, intent.getIntExtra("playType", -1), this, opponent)
 
 
 
@@ -93,11 +91,16 @@ class NewGameActivity : AppCompatActivity() {
         //finish()
     }
 
-    private fun setupRecyclerView(recyclerView: RecyclerView, type: Int, activity: Activity) {
-        recyclerView.adapter = NewGameActivity.SimpleItemRecyclerViewAdapter(CHOOSE_GAMES, type, activity)
+    private fun setupRecyclerView(
+        recyclerView: RecyclerView,
+        type: Int,
+        activity: Activity,
+        opponent: String?
+    ) {
+        recyclerView.adapter = NewGameActivity.SimpleItemRecyclerViewAdapter(CHOOSE_GAMES, type, activity, opponent)
     }
 
-    class SimpleItemRecyclerViewAdapter(private val ITEMS: MutableList<String>, type: Int, activity: Activity):
+    class SimpleItemRecyclerViewAdapter(private val ITEMS: MutableList<String>, type: Int, activity: Activity, opponent: String?):
         RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
         private val onClickListener: View.OnClickListener
@@ -134,6 +137,14 @@ class NewGameActivity : AppCompatActivity() {
                     }
                     v.context.startActivity(intent)
                     activity.overridePendingTransition(0 , 0)
+                }
+                if (type == 5) {
+                    val username = v.context.getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "")!!
+                    myRef.child("Users").child(opponent!!).child("calls")
+                        .child(System.currentTimeMillis().toString()).child(item)
+                        .child(username).setValue(System.currentTimeMillis() % 2).addOnSuccessListener {
+                            Toast.makeText(v.context, "Вызов отправлен!", Toast.LENGTH_LONG).show()
+                        }
                 }
             }
         }
