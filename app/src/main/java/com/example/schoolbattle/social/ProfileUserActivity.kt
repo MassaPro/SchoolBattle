@@ -40,7 +40,7 @@ class ProfileUserActivity : AppCompatActivity() {
             intent.putExtra("opponent", item)
             startActivity(intent)
         }
-        myRef.child("Users").child(username!!).child("FriendsIn").addListenerForSingleValueEvent(object :
+        myRef.child("Users").child(username).child("FriendsIn").addListenerForSingleValueEvent(object :
             ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 TODO("Not yet implemented")

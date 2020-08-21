@@ -139,10 +139,11 @@ class NewGameActivity : AppCompatActivity() {
                     activity.overridePendingTransition(0 , 0)
                 }
                 if (type == 5) {
+                    val systemTime = System.currentTimeMillis()
                     val username = v.context.getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "")!!
                     myRef.child("Users").child(opponent!!).child("calls")
-                        .child(System.currentTimeMillis().toString()).child(item)
-                        .child(username).setValue(System.currentTimeMillis() % 2).addOnSuccessListener {
+                        .child("9$systemTime").child(item)
+                        .child(username).setValue(systemTime % 2).addOnSuccessListener {
                             Toast.makeText(v.context, "Вызов отправлен!", Toast.LENGTH_LONG).show()
                         }
                 }

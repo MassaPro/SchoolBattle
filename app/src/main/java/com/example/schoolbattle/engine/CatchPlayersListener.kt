@@ -110,7 +110,7 @@ fun initCatchPlayersListenerForLongGame(username: String, context: Context) {
                         }
                         break
                     }
-                    if (!isNeedInIntent.contains(p0.key.toString())) {
+                    if (p0.key.toString()[0] == '9' && !isNeedInIntent.contains(p0.key.toString())) {
                         if (!notNeedToWarn.contains(p0.key.toString())) {
                             Toast.makeText(
                                 CONTEXT,
