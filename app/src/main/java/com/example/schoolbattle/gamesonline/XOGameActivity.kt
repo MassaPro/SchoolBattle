@@ -10,13 +10,10 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.AttributeSet
 import android.util.Log
-import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
-import androidx.core.graphics.alpha
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.schoolbattle.*
 import com.example.schoolbattle.engine.BlitzGameEngine
@@ -26,10 +23,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.activity_box_game.*
-import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 import kotlinx.android.synthetic.main.activity_online_games_temlate.*
-import kotlinx.android.synthetic.main.activity_x_o_game.*
 import kotlinx.android.synthetic.main.activity_x_o_game.bottom_navigation_xog_online
 import kotlinx.android.synthetic.main.activity_x_o_game.button_player_1_online_xog
 import kotlinx.android.synthetic.main.activity_x_o_game.button_player_2_online_xog
@@ -38,8 +32,6 @@ import kotlinx.android.synthetic.main.activity_x_o_game.timer2_xog_online
 import kotlinx.android.synthetic.main.activity_x_o_game.timer_xog_online
 import kotlinx.android.synthetic.main.find_emotion.*
 import java.util.*
-
-var dialog_find_emotion : Dialog? = null
 
 class XOGameActivity : AppCompatActivity() {
     private var isRun = false
@@ -64,51 +56,6 @@ class XOGameActivity : AppCompatActivity() {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_online_games_temlate)
         signature_canvas.visibility = View.VISIBLE
-
-
-        locale_activity_for_emotion = this
-
-
-        bottom_navigation_xog_online.setOnNavigationItemSelectedListener { item ->
-            dialog_find_emotion = Dialog(this)
-            when (item.itemId) {
-                R.id.page_online_1 ->{
-
-                }
-                R.id.page_online_2 ->{
-
-                }
-                R.id.page_online_3 ->{
-                    dialog_find_emotion!!.setContentView(R.layout.find_emotion)
-                    Emotion_in_game(dialog_find_emotion!!.item_profile_emotion)
-                    gamesRecycler = dialog_find_emotion!!.item_profile_emotion
-                    gamesRecycler.isNestedScrollingEnabled = false;
-                    gamesRecycler.layoutManager = GridLayoutManager(this, 3)
-                    dialog_find_emotion!!.show()
-                    val d: Drawable = ColorDrawable(Color.BLACK)
-                    d.alpha = 130
-                    dialog_find_emotion!!.window!!.setBackgroundDrawable(d)
-                    val display = windowManager.defaultDisplay
-                    val size = Point()
-                    display.getSize(size)
-                    val width = size.x
-                    val height = size.y
-                    dialog_find_emotion!!.window!!.setLayout(width*11/12, height*5/6);
-                   // dialog_find_emotion.window!!.setGravity()
-                    dialog_find_emotion!!.setOnDismissListener {
-                        if(EMOTION!=-1)
-                        {
-                            show_my_emotion()
-                        }
-                    }
-
-                }
-                R.id.page_online_4 -> {
-
-                }
-            }
-            true
-        }
 
         currentContext = this
         CONTEXT = this
@@ -140,6 +87,58 @@ class XOGameActivity : AppCompatActivity() {
                     opponentsName + '_' + yourName  else yourName + '_' + opponentsName)
             )
         }
+        //Emotions начало--------------------------------------------------------------------------------------------
+        val dialog_find_emotion = Dialog(this)
+        val emotions = object: ShowingEmotion {
+            override var locale_activity_for_emotion: Activity? = this@XOGameActivity
+            override var opponentPath = myRef.child("Users").child(opponentsName).child("emotions")
+            override var userPath = myRef.child("Users").child(yourName).child("emotions")
+            override var key = intent.getStringExtra("key")
+            override var flag = true
+        }
+        emotions.init()
+        bottom_navigation_xog_online.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.page_online_1 ->{
+
+                }
+                R.id.page_online_2 ->{
+
+                }
+                R.id.page_online_3 ->{
+                    dialog_find_emotion!!.setContentView(R.layout.find_emotion)
+                    Emotion_in_game(dialog_find_emotion!!.item_profile_emotion, dialog_find_emotion)
+                    gamesRecycler = dialog_find_emotion!!.item_profile_emotion
+                    gamesRecycler.isNestedScrollingEnabled = false
+                    gamesRecycler.layoutManager = GridLayoutManager(this, 3)
+                    dialog_find_emotion!!.show()
+                    val d: Drawable = ColorDrawable(Color.BLACK)
+                    d.alpha = 130
+                    dialog_find_emotion!!.window!!.setBackgroundDrawable(d)
+                    val display = windowManager.defaultDisplay
+                    val size = Point()
+                    display.getSize(size)
+                    val width = size.x
+                    val height = size.y
+                    dialog_find_emotion!!.window!!.setLayout(width*11/12, height*5/6);
+                    // dialog_find_emotion.window!!.setGravity()
+                    dialog_find_emotion!!.setOnDismissListener {
+                        if(EMOTION!=-1)
+                        {
+                            emotions.show_my_emotion()
+                        }
+                    }
+
+                }
+                R.id.page_online_4 -> {
+
+                }
+            }
+            true
+        }
+        //Emotion конец-----------------------------------------------------------------------------------------------
+
+
        // gameData.child("FIELDD").child("result").onDisconnect().setValue(yourName)
        // gameData.onDisconnect().removeValue()
         signature_canvas.blocked = true

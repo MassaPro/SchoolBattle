@@ -1,7 +1,7 @@
 package com.example.schoolbattle.gamesonline
 
 import android.annotation.SuppressLint
-import android.content.Context
+import android.app.Dialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,21 +10,19 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolbattle.*
 import com.example.schoolbattle.shop.locale_context
-import com.example.schoolbattle.social.D
-import kotlinx.android.synthetic.main.ava_item_profile.view.*
-import kotlinx.android.synthetic.main.design_shop_item.view.*
 import kotlinx.android.synthetic.main.emotion_item.view.*
 
-fun Emotion_in_game(recyclerView: RecyclerView) {
-    recyclerView.adapter = EmotionAdapter(ARRAY_OF_EMOTION)
+fun Emotion_in_game(recyclerView: RecyclerView, dialog_find_emotion: Dialog) {
+    recyclerView.adapter = EmotionAdapter(ARRAY_OF_EMOTION, dialog_find_emotion)
 }
 
 
 
-class EmotionAdapter(private val DESIGN_ITEMS: MutableList<Int>):
+class EmotionAdapter(private val DESIGN_ITEMS: MutableList<Int>, dialog_find_emotion: Dialog):
     RecyclerView.Adapter<EmotionAdapter.ViewHolder>() {
 
     private val onClickListener: View.OnClickListener
+    private val dialog_find_emotion = dialog_find_emotion
 
     init {
         onClickListener = View.OnClickListener { v ->
