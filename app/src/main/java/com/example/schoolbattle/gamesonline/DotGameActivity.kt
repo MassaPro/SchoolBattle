@@ -198,7 +198,7 @@ class DotGameActivity: AppCompatActivity() {
              */
         }
 
-        initMenuFunctions(this, bottom_navigation_xog_online, intent, yourName, opponentsName)
+        initMenuFunctions(this, bottom_navigation_xog_online, intent, yourName, opponentsName, gameData)
         gameData.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 

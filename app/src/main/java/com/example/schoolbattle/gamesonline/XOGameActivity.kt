@@ -89,7 +89,7 @@ class XOGameActivity : AppCompatActivity() {
             )
         }
         //Emotions начало--------------------------------------------------------------------------------------------
-        initMenuFunctions(this, bottom_navigation_xog_online, intent, yourName, opponentsName)
+        initMenuFunctions(this, bottom_navigation_xog_online, intent, yourName, opponentsName, gameData)
         //Emotion конец-----------------------------------------------------------------------------------------------
 
 

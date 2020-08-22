@@ -104,7 +104,7 @@ class ReversiGameActivity : AppCompatActivity() {
             engineLong?.init()
         }
         signature_canvas_reversi.user = user
-        initMenuFunctions(this, bottom_navigation_xog_online, intent, user, opponent)
+        initMenuFunctions(this, bottom_navigation_xog_online, intent, user, opponent, gameData)
         gameData.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 

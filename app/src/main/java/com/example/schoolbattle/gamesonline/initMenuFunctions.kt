@@ -7,16 +7,21 @@ import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.schoolbattle.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.database.DatabaseReference
+import kotlinx.android.synthetic.main.dialog_for_losers.*
 import kotlinx.android.synthetic.main.find_emotion.*
 
 fun initMenuFunctions(activity: Activity,
                       bottom_navigation_xog_online: BottomNavigationView,
                       intent: Intent,
-                      user: String, opponent: String) {
+                      user: String, opponent: String, positionData: DatabaseReference) {
     val dialog_find_emotion = Dialog(activity)
+    val loseDialog = Dialog(activity)
+
     val emotions = object: ShowingEmotion {
         override var locale_activity_for_emotion: Activity? = activity
         override var opponentPath = myRef.child("Users").child(opponent).child("emotions")
@@ -31,7 +36,12 @@ fun initMenuFunctions(activity: Activity,
 
             }
             R.id.page_online_2 ->{
-
+                loseDialog.setContentView(R.layout.dialog_for_losers)
+                loseDialog.dialog_for_losers_lose.setOnClickListener {
+                    positionData.child("winner").setValue(opponent)
+                    loseDialog.dismiss()
+                }
+                loseDialog.show()
             }
             R.id.page_online_3 ->{
                 dialog_find_emotion!!.setContentView(R.layout.find_emotion)

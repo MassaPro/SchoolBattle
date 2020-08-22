@@ -143,7 +143,7 @@ class SnakeGameActivity : AppCompatActivity() {
             toolbar_snake_online.setBackgroundColor(argb(0,0,0,0))
             toolbar2_snake_online.setBackgroundColor(argb(0,0,0,0))
         }
-        initMenuFunctions(this, bottom_navigation_xog_online, intent, yourName, opponentsName)
+        initMenuFunctions(this, bottom_navigation_xog_online, intent, yourName, opponentsName, gameData)
         gameData.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
