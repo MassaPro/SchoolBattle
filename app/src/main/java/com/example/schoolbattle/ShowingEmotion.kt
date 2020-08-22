@@ -47,6 +47,7 @@ interface ShowingEmotion {
     }
 
     fun show_emotion_from_rival(number_emotion: Int) {
+        locale_activity_for_emotion?.button_emotion_rival?.visibility = View.VISIBLE
         locale_activity_for_emotion?.button_emotion_rival?.alpha = 1f
         PICTURE_EMOTION[number_emotion]?.let { it1 ->
             locale_activity_for_emotion?.button_emotion_rival?.setBackgroundResource(
@@ -55,8 +56,13 @@ interface ShowingEmotion {
         }
         locale_activity_for_emotion?.button_emotion_rival?.animate()?.alpha(0f)?.duration = 1000;
         locale_activity_for_emotion?.button_emotion_rival?.animate()?.alpha(0f)?.startDelay = 1000
+        val r = Runnable {
+            locale_activity_for_emotion?.button_emotion_rival?.visibility = View.INVISIBLE
+        }
+        handler_for_emotion.postDelayed(r,2000)
         locale_activity_for_emotion?.button_emotion_rival?.setOnClickListener {
             locale_activity_for_emotion?.button_emotion_rival?.setBackgroundResource(R.drawable.nulevoe)
+            locale_activity_for_emotion?.button_emotion_rival?.visibility = View.INVISIBLE
         }
     }
 
