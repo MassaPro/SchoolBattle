@@ -94,7 +94,7 @@ class XOGameActivity : AppCompatActivity() {
             override var locale_activity_for_emotion: Activity? = this@XOGameActivity
             override var opponentPath = myRef.child("Users").child(opponentsName).child("emotions")
             override var userPath = myRef.child("Users").child(yourName).child("emotions")
-            override var key = intent.getStringExtra("key")
+            override var key = if (intent.getStringExtra("key") == null) "_" else intent.getStringExtra("key")
             override var flag = true
         }
         emotions.init()
