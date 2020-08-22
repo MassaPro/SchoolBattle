@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.graphics.Color.rgb
 import android.media.AudioManager
 import android.media.SoundPool
+import android.os.Handler
 import android.os.Vibrator
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,7 @@ import com.example.schoolbattle.engine.RecyclerSet
 import com.example.schoolbattle.engine.RecyclerSetBlitz
 import com.google.firebase.database.ChildEventListener
 
+var handler_for_emotion : Handler = Handler()
 
 //      инициализация звука
 var mSound : SoundPool = SoundPool(1, AudioManager.STREAM_SYSTEM,0);

@@ -57,6 +57,7 @@
         android:id="@+id/button_emotion_rival"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:visibility="invisible"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,6 +68,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:background="@android:color/transparent"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/button_player_1_online_xog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

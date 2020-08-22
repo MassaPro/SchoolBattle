@@ -5,9 +5,13 @@ import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import android.opengl.Visibility
 import android.util.Log
+import android.view.View
+import androidx.core.os.HandlerCompat.postDelayed
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_online_games_temlate.*
+import java.util.logging.Handler
 
 interface ShowingEmotion {
     var  locale_activity_for_emotion : Activity?
@@ -17,6 +21,7 @@ interface ShowingEmotion {
     var flag: Boolean
 
     fun show_my_emotion() {
+        locale_activity_for_emotion?.button_emotion?.visibility = View.VISIBLE
         locale_activity_for_emotion?.button_emotion?.alpha = 1f
         PICTURE_EMOTION[EMOTION]?.let { it1 ->
             locale_activity_for_emotion?.button_emotion?.setBackgroundResource(
@@ -27,9 +32,18 @@ interface ShowingEmotion {
         EMOTION = -1
         locale_activity_for_emotion?.button_emotion?.animate()?.alpha(0f)?.duration = 1000;
         locale_activity_for_emotion?.button_emotion?.animate()?.alpha(0f)?.startDelay = 1000
+
+
         locale_activity_for_emotion?.button_emotion?.setOnClickListener {
+            locale_activity_for_emotion?.button_emotion?.visibility = View.INVISIBLE
             locale_activity_for_emotion?.button_emotion?.setBackgroundResource(R.drawable.nulevoe)
         }
+        val r = Runnable {
+            locale_activity_for_emotion?.button_emotion?.visibility = View.INVISIBLE
+        }
+        handler_for_emotion.postDelayed(r,2000)
+
+
     }
 
     fun show_emotion_from_rival(number_emotion: Int) {
@@ -65,3 +79,4 @@ interface ShowingEmotion {
         })
     }
 }
+
