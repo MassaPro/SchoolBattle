@@ -24,7 +24,6 @@ import kotlinx.android.synthetic.main.activity_online_games_temlate.signature_ca
 import kotlinx.android.synthetic.main.activity_online_games_temlate.timer2_xog_online
 import kotlinx.android.synthetic.main.activity_online_games_temlate.timer_xog_online
 import kotlinx.android.synthetic.main.activity_snake_game.*
-import kotlinx.android.synthetic.main.activity_x_o_game.*
 import java.util.*
 
 class ReversiGameActivity : AppCompatActivity() {
@@ -105,6 +104,7 @@ class ReversiGameActivity : AppCompatActivity() {
             engineLong?.init()
         }
         signature_canvas_reversi.user = user
+        initMenuFunctions(this, bottom_navigation_xog_online, intent, user, opponent)
         gameData.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 

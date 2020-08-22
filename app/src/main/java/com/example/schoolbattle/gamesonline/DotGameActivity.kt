@@ -32,7 +32,6 @@ import kotlinx.android.synthetic.main.activity_online_games_temlate.button_playe
 import kotlinx.android.synthetic.main.activity_online_games_temlate.button_player_2_online_xog
 import kotlinx.android.synthetic.main.activity_online_games_temlate.timer2_xog_online
 import kotlinx.android.synthetic.main.activity_online_games_temlate.timer_xog_online
-import kotlinx.android.synthetic.main.activity_x_o_game.*
 import java.util.*
 
 
@@ -199,6 +198,7 @@ class DotGameActivity: AppCompatActivity() {
              */
         }
 
+        initMenuFunctions(this, bottom_navigation_xog_online, intent, yourName, opponentsName)
         gameData.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 

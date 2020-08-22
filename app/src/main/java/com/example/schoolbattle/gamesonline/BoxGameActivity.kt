@@ -12,7 +12,6 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Toast
 import com.example.schoolbattle.*
 import com.example.schoolbattle.engine.BlitzGameEngine
 import com.example.schoolbattle.engine.LongGameEngine
@@ -27,12 +26,9 @@ import kotlinx.android.synthetic.main.activity_box_game.signature_canvas_box
 import kotlinx.android.synthetic.main.activity_online_games_temlate.*
 import kotlinx.android.synthetic.main.activity_online_games_temlate.button_player_1_online_xog
 import kotlinx.android.synthetic.main.activity_online_games_temlate.button_player_2_online_xog
-import kotlinx.android.synthetic.main.activity_online_games_temlate.signature_canvas
 import kotlinx.android.synthetic.main.activity_online_games_temlate.timer2_xog_online
 import kotlinx.android.synthetic.main.activity_online_games_temlate.timer_xog_online
-import kotlinx.android.synthetic.main.activity_x_o_game.*
 import java.util.*
-import java.util.function.LongFunction
 
 class BoxGameActivity : AppCompatActivity() {
 
@@ -152,7 +148,7 @@ class BoxGameActivity : AppCompatActivity() {
             toolbar_box_online.setBackgroundColor(argb(0,0,0,0))
             toolbar2_box_online.setBackgroundColor(argb(0,0,0,0))
         }
-
+        initMenuFunctions(this, bottom_navigation_xog_online, intent, yourName, opponentsName)
         gameData.addValueEventListener(object : ValueEventListener {
 
             override fun onCancelled(p0: DatabaseError) {}
