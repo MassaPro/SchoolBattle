@@ -117,7 +117,7 @@ class DotGameOneDivice : AppCompatActivity() {
             player_1_icon_one_divice.setBackgroundResource(R.drawable.cross_egypt);
             player_2_icon_one_divice.setBackgroundResource(R.drawable.circle_egypt);
             label_one_device.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
+            bottom_navigation_one_divice.setBackgroundColor(Color.rgb(255, 230, 163))
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(argb(0,0,0,0))
             toolbar2_one_divice.setBackgroundColor(argb(0,0,0,0))

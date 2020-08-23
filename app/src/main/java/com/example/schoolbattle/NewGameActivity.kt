@@ -39,7 +39,7 @@ class NewGameActivity : AppCompatActivity() {
 
         if (Design == "Egypt"){
             game_list_menu.setBackgroundResource(R.drawable.background_egypt);
-            my_toolbar2.setBackgroundColor(rgb(224,164,103))
+            my_toolbar2.setBackgroundColor(rgb(255, 230, 163))
             text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
             text.setTextColor(Color.BLACK)
         }
@@ -70,7 +70,7 @@ class NewGameActivity : AppCompatActivity() {
             text.setTextColor(Color.BLACK)
         }
         else if (Design == "Noir"){
-            game_list_menu.setBackgroundColor(rgb(30,30,30));
+            game_list_menu.setBackgroundColor(rgb(20,20,20));
             my_toolbar2.setBackgroundColor(argb(0,0,0,0))
             text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
             text.setTextColor(Color.WHITE)

@@ -138,7 +138,7 @@ class SnakeGameActivity : AppCompatActivity() {
             player_1_icon_snake_online.setBackgroundResource(R.drawable.cross_egypt);
             player_2_icon_snake_online.setBackgroundResource(R.drawable.circle_egypt);
             label_online_snake.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_snake_online.setBackgroundColor(rgb(224,164,103))
+            bottom_navigation_snake_online.setBackgroundColor(rgb(255, 230, 163))
             to_back_snake_online.setBackgroundResource(R.drawable.arrow_back)
             toolbar_snake_online.setBackgroundColor(argb(0,0,0,0))
             toolbar2_snake_online.setBackgroundColor(argb(0,0,0,0))

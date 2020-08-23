@@ -125,7 +125,7 @@ class ReversiWithComputer : AppCompatActivity() {
             toolbar_template_with_computer.setBackgroundColor(Color.argb(0, 0, 0, 0))
             toolbar2_template_with_computer.setBackgroundColor(Color.argb(0, 0, 0, 0))
             label_with_computer.setBackgroundResource(R.drawable.background_egypt)
-            bottom_navigation_template_with_computer.setBackgroundColor(Color.rgb(224, 164, 103))
+            bottom_navigation_template_with_computer.setBackgroundColor(Color.rgb(255, 230, 163))
             to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
             toolbar_template_with_computer.setBackgroundColor(Color.argb(0, 0, 0, 0))
         }

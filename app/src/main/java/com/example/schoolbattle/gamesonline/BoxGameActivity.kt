@@ -143,7 +143,7 @@ class BoxGameActivity : AppCompatActivity() {
             player_1_icon_box_online.setBackgroundResource(R.drawable.cross_egypt);
             player_2_icon_box_online.setBackgroundResource(R.drawable.circle_egypt);
             label_online_box.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_box_online.setBackgroundColor(rgb(224,164,103))
+            bottom_navigation_box_online.setBackgroundColor(rgb(255, 230, 163))
             to_back_box_online.setBackgroundResource(R.drawable.arrow_back)
             toolbar_box_online.setBackgroundColor(argb(0,0,0,0))
             toolbar2_box_online.setBackgroundColor(argb(0,0,0,0))

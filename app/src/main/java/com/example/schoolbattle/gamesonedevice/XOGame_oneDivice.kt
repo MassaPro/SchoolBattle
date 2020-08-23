@@ -126,7 +126,7 @@ class XOGame_oneDivice : AppCompatActivity() {
             player_1_icon_one_divice.setBackgroundResource(R.drawable.cross_egypt);
             player_2_icon_one_divice.setBackgroundResource(R.drawable.circle_egypt);
             label_one_device.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_one_divice.setBackgroundColor(rgb(224,164,103))
+            bottom_navigation_one_divice.setBackgroundColor(rgb(255, 230, 163))
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(argb(0,0,0,0))
             toolbar2_one_divice.setBackgroundColor(argb(0,0,0,0))
@@ -543,6 +543,8 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
         {
             line_who_do_move.color =  Color.GREEN
             line_who_do_move.strokeWidth = 14f
+            Line_paint.setColor(rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
+            Line_paint.setStrokeWidth(7f)
         }
         else if(Design == "Egypt")
         {
@@ -553,7 +555,7 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
         }
         else if (Design == "Casino")
         {
-            Line_paint.color = Color.WHITE          //ресур для линий (ширина и цвет)
+            Line_paint.color = Color.YELLOW          //ресур для линий (ширина и цвет)
             Line_paint.strokeWidth = 7f
             line_who_do_move.color = Color.RED              //
 
@@ -562,14 +564,14 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
         {
             Line_paint.color = rgb(193,150,63)    //ресур для линий (ширина и цвет)
             Line_paint.strokeWidth = 7f
-            line_who_do_move.color = Color.RED              //
+            line_who_do_move.color = rgb(193,150,63)             //
 
         }
         else if (Design == "Gothic")
         {
             Line_paint.color = rgb(100,100,100)   //ресур для линий (ширина и цвет)
             Line_paint.strokeWidth = 7f
-            line_who_do_move.color = Color.RED              //
+            line_who_do_move.color = Color.WHITE              //
 
         }
 

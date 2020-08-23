@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.*
+import android.graphics.Color.rgb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Vibrator
@@ -103,6 +104,8 @@ class SnakeGameOneDivice : AppCompatActivity() {
 
             name_player1_one_divice.setTextColor(Color.BLACK)
             name_player2_one_divice.setTextColor(Color.BLACK)
+            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             name_player2_one_divice.setTextSize(20f)
             name_player1_one_divice.setTextSize(20f)
             button_player_1_one_divice.setBackgroundResource(R.drawable.player1_egypt);
@@ -113,7 +116,7 @@ class SnakeGameOneDivice : AppCompatActivity() {
             toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
 
             label_one_device.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
+            bottom_navigation_one_divice.setBackgroundColor(Color.rgb(255, 230, 163))
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
         }
@@ -574,7 +577,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
 
         red_or_blue = "red"
         Line_paint.setColor(Color.rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
-        Line_paint.setStrokeWidth(5f)
+        Line_paint.setStrokeWidth(7f)
 
         paint_circle.setColor(Color.rgb(217, 217, 217))     //цвета для точек
 
@@ -596,91 +599,58 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
         if(Design == "Egypt"){
 
             Line_paint.setColor(Color.rgb(100, 100, 100))          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(5f)
-
-            paint_circle.setColor(Color.rgb(100, 100, 100))     //цвета для точек
-
+            paint_circle.setColor(Color.rgb(100,100,100))
             paint_rib_1.setColor(Color.BLACK)          //цвета для ребер  и их ширина
-            paint_rib_1.setStrokeWidth(10f)
             paint_rib_2.setColor(Color.WHITE)
-            paint_rib_2.setStrokeWidth(10f)
 
             border_1.setColor(Color.rgb(100, 100, 100))
-            border_1.setStrokeWidth(10f)
             line_who_do_move.color = Color.RED
         }
         else if(Design == "Casino"){
 
             Line_paint.setColor(Color.WHITE)          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(5f)
-
             paint_circle.setColor(Color.WHITE)     //цвета для точек
-
             paint_rib_1.setColor(Color.BLACK)          //цвета для ребер  и их ширина
-            paint_rib_1.setStrokeWidth(10f)
             paint_rib_2.setColor(Color.RED)
-            paint_rib_2.setStrokeWidth(10f)
-
             border_1.setColor(Color.WHITE)
-            border_1.setStrokeWidth(10f)
-            line_who_do_move.color = Color.RED
+            line_who_do_move.color = Color.YELLOW
         }
 
         else if(Design == "Rome"){
 
             Line_paint.setColor(Color.rgb(180, 180, 180))          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(5f)
-
             paint_circle.setColor(Color.rgb(180, 180, 180))     //цвета для точек
-
             paint_rib_2.setColor(Color.BLACK)          //цвета для ребер  и их ширина
-            paint_rib_1.setStrokeWidth(10f)
             paint_rib_1.setColor(Color.rgb(193,150,63))
-            paint_rib_2.setStrokeWidth(10f)
-
             border_1.setColor(Color.rgb(180, 180, 180))
-            border_1.setStrokeWidth(10f)
-            line_who_do_move.color = Color.RED
+            line_who_do_move.color = Color.rgb(193, 150, 63)
         }
         else if(Design == "Gothic") {
 
             Line_paint.setColor(Color.rgb(100, 100, 100))          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(5f)
-
             paint_circle.setColor(Color.rgb(180, 180, 180))     //цвета для точек
-
             paint_rib_2.setColor(Color.WHITE)          //цвета для ребер  и их ширина
-            paint_rib_1.setStrokeWidth(10f)
             paint_rib_1.setColor(Color.YELLOW)
-            paint_rib_2.setStrokeWidth(10f)
+            border_1.setColor(Color.rgb(100, 100, 100))
             line_who_do_move.color = Color.RED
         }
         else if(Design == "Japan") {
 
-            Line_paint.setColor(Color.rgb(160,160,160))          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(5f)
-
-            paint_circle.setColor(Color.rgb(160,160,160))     //цвета для точек
-
+            Line_paint.setColor(rgb(160,160,160))          //ресур для линий (ширина и цвет)
+            paint_circle.setColor(rgb(160,160,160))     //цвета для точек
             paint_rib_2.setColor(Color.RED)          //цвета для ребер  и их ширина
-            paint_rib_1.setStrokeWidth(10f)
             paint_rib_1.setColor(Color.rgb(37,103,28))
-            paint_rib_2.setStrokeWidth(10f)
+            border_1.setColor(rgb(160,160,160))
             line_who_do_move.color = Color.RED
 
         }
         else if(Design == "Noir") {
 
             Line_paint.setColor(Color.rgb(100, 100, 100))          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(5f)
-
             paint_circle.setColor(Color.rgb(180, 180, 180))     //цвета для точек
-
             paint_rib_2.setColor(Color.RED)          //цвета для ребер  и их ширина
-            paint_rib_1.setStrokeWidth(10f)
             paint_rib_1.setColor(Color.WHITE)
-            paint_rib_2.setStrokeWidth(10f)
-
+            border_1.setColor(Color.rgb(100, 100, 100))
             line_who_do_move.color = Color.RED
         }
 

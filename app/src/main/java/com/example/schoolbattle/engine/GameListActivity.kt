@@ -49,7 +49,7 @@ class GameListActivity : Fragment() {
         Toast.makeText(requireContext(), CURRENTGAMES.size.toString(), Toast.LENGTH_LONG).show()
         if (Design == "Egypt"){
             game_list_playing.setBackgroundResource(R.drawable.game_list_menu_egypt);
-            my_toolbar2.setBackgroundColor(rgb(224,164,103))
+            my_toolbar2.setBackgroundColor(rgb(255, 230, 163))
             toolbarName2.setTypeface(ResourcesCompat.getFont(
                 CONTEXT,
                 R.font.s

@@ -78,7 +78,7 @@ class MainActivity : Fragment() {
         else if (Design == "Egypt"){
             game_menu.setBackgroundResource(R.drawable.game_menu_egypt)
             //nav_view.setBackgroundColor(rgb(224, 164, 103));
-            my_toolbar2.setBackgroundColor(rgb(224,164,103))
+            my_toolbar2.setBackgroundColor(rgb(255, 230, 163))
             searchButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             searchButton.setBackgroundColor(argb(0,0,0,0))
             newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))

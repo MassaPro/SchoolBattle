@@ -119,7 +119,7 @@ class ConersOneDevice : AppCompatActivity() {
             toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
 
             label_one_device.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
+            bottom_navigation_one_divice.setBackgroundColor(Color.rgb(255, 230, 163))
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
         }
@@ -610,8 +610,8 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
         PHASE = true
         motion_chip = false
 
-        Line_paint.setColor(Color.RED)          //ресур для линий (ширина и цвет)
-        Line_paint.setStrokeWidth(5f)
+        Line_paint.setColor(Color.rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
+        Line_paint.setStrokeWidth(7f)
         line_who_do_move.strokeWidth = 7f
 
         if(Design == "Normal")
@@ -621,35 +621,35 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
         else if(Design == "Egypt")
         {
             Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(5f)
+            Line_paint.setStrokeWidth(7f)
             line_who_do_move.color = Color.RED
 
         }
         else if(Design == "Casino")
         {
             Line_paint.setColor(Color.WHITE)          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(5f)
+            Line_paint.setStrokeWidth(7f)
             line_who_do_move.color = Color.RED
         }
         else if(Design == "Rome")
         {
             Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(5f)
-            line_who_do_move.color = Color.RED
+            Line_paint.setStrokeWidth(7f)
+            line_who_do_move.color = Color.rgb(193, 150, 63)
         }
         else if(Design == "Gothic") {
             Line_paint.setColor(Color.rgb(100,100,100))          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(5f)
+            Line_paint.setStrokeWidth(7f)
             line_who_do_move.color = Color.RED
         }
         else if(Design == "Japan") {
             Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(5f)
+            Line_paint.setStrokeWidth(7f)
             line_who_do_move.color = Color.RED
         }
         else if(Design == "Noir") {
             Line_paint.setColor(Color.rgb(100,100,100))          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(5f)
+            Line_paint.setStrokeWidth(7f)
             line_who_do_move.color = Color.RED
         }
 
@@ -768,14 +768,14 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
             right_black_chip  = Bitmap.createScaledBitmap(black_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
             right_grey_chip  = Bitmap.createScaledBitmap(grey_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
             right_illumination = Bitmap.createScaledBitmap(illumination,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-            right_green = Bitmap.createScaledBitmap(green,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            right_green = Bitmap.createScaledBitmap(romb3,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
         }
         else if(Design == "Casino")
         {
             right_black_chip  = Bitmap.createScaledBitmap(black_chip_casino,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
             right_grey_chip  = Bitmap.createScaledBitmap(grey_chip_casino,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
             right_illumination = Bitmap.createScaledBitmap(illumination,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-            right_green  = Bitmap.createScaledBitmap(green,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            right_green = Bitmap.createScaledBitmap(romb2,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
         }
         else if (Design == "Rome")
         {

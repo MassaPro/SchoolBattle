@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.Color.argb
 import android.graphics.Color.rgb
+import android.icu.text.Transliterator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import android.widget.CompoundButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -48,7 +50,7 @@ class SettingsFragmentActivity : Fragment() {
         }
         else if(Design == "Egypt")
         {
-            fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(rgb(224, 164, 103))
+            fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(rgb(255, 230, 163))
         }
         else if(Design == "Casino")
         {
@@ -83,7 +85,7 @@ class SettingsFragmentActivity : Fragment() {
         else if (Design == "Egypt") {
 
             settings_menu.setBackgroundResource(R.drawable.background_egypt)
-            tb1.setBackgroundColor(rgb(224,164,103));
+            tb1.setBackgroundColor(rgb(255, 230, 163));
 
             choose_design.setBackgroundColor(argb(0,0,0,0))
             choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
@@ -282,6 +284,83 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
             holder.button_prem.text = "(УСТАНОВЛЕНО)"
             holder.button_prem.isClickable = false
         }
+        //if(Design == "Egypt"){
+        //    holder.background_item.setBackgroundColor(rgb(224,164,103))
+        //}
+        if(AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == "Egypt"){
+            holder.background_item.setBackgroundColor(rgb(255, 230, 163))
+            holder.button_prem.textSize = 15f        //так задаешь размер
+            holder.button_prem.setTextColor(Color.BLACK)   //цвет
+            holder.button_prem.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+            holder.button_prem.setBackgroundColor(argb(0,0,0,0))
+
+            holder.contentView.textSize = 20f        //так задаешь размер
+            holder.contentView.setTextColor(Color.BLACK)   //цвет
+            holder.contentView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+            holder.contentView.setBackgroundColor(argb(0,0,0,0))
+
+        }
+        if(AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == "Casino"){
+            holder.background_item.setBackgroundResource(R.drawable.table)
+            holder.button_prem.textSize = 15f        //так задаешь размер
+            holder.button_prem.setTextColor(Color.YELLOW)   //цвет
+            holder.button_prem.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+            holder.button_prem.setBackgroundColor(argb(0,0,0,0))
+
+            holder.contentView.textSize = 20f        //так задаешь размер
+            holder.contentView.setTextColor(Color.YELLOW)   //цвет
+            holder.contentView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+            holder.contentView.setBackgroundColor(argb(0,0,0,0))
+        }
+        if(AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == "Rome"){
+            holder.background_item.setBackgroundResource(R.drawable.bottom_navigation_rome)
+            holder.button_prem.textSize = 15f        //так задаешь размер
+            holder.button_prem.setTextColor(rgb(193, 150, 63))   //цвет
+            holder.button_prem.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+            holder.button_prem.setBackgroundColor(argb(0,0,0,0))
+
+            holder.contentView.textSize = 20f        //так задаешь размер
+            holder.contentView.setTextColor(rgb(193, 150, 63))   //цвет
+            holder.contentView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+            holder.contentView.setBackgroundColor(argb(0,0,0,0))
+        }
+        if(AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == "Gothic"){
+            holder.background_item.setBackgroundColor(rgb(20,20,20))
+            holder.button_prem.textSize = 15f        //так задаешь размер
+            holder.button_prem.setTextColor(Color.WHITE)   //цвет
+            holder.button_prem.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+            holder.button_prem.setBackgroundColor(rgb(30,30,30))
+
+            holder.contentView.textSize = 20f        //так задаешь размер
+            holder.contentView.setTextColor(Color.WHITE)   //цвет
+            holder.contentView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+            //holder.contentView.setBackgroundColor(rgb(30,30,30))
+        }
+        if(AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == "Japan"){
+            holder.background_item.setBackgroundColor(Color.WHITE)
+            holder.button_prem.textSize = 15f        //так задаешь размер
+            holder.button_prem.setTextColor(Color.BLACK)   //цвет
+            holder.button_prem.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+            holder.button_prem.setBackgroundColor(argb(0,0,0,0))
+
+            holder.contentView.textSize = 20f        //так задаешь размер
+            holder.contentView.setTextColor(Color.BLACK)   //цвет
+            holder.contentView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+            holder.contentView.setBackgroundColor(argb(0,0,0,0))
+        }
+        if(AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == "Noir"){
+            holder.background_item.setBackgroundColor(rgb(20,20,20))
+            holder.button_prem.textSize = 15f        //так задаешь размер
+            holder.button_prem.setTextColor(Color.WHITE)   //цвет
+            holder.button_prem.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+            holder.button_prem.setBackgroundColor(rgb(30,30,30))
+
+            holder.contentView.textSize = 20f        //так задаешь размер
+            holder.contentView.setTextColor(Color.WHITE)   //цвет
+            holder.contentView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+            //holder.contentView.setBackgroundColor(rgb(30,30,30))
+        }
+
         holder.contentView.setText(PICTURE_TEXT[ARRAY_OF_DESIGN[position]]) //название стиля
         with(holder.itemView) {
             tag = ARRAY_OF_DESIGN[position]
@@ -353,6 +432,7 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
         var img: ImageView = view.img_design
         var contentView: TextView = view.id_text_design
         var button_prem: Button = view.primenuty
+        var background_item: CardView = view.card_design
     }
 }
 

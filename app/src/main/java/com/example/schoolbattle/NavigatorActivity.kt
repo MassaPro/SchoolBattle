@@ -58,7 +58,7 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
             nav_view.setBackgroundColor(Color.WHITE);
         }
         if (Design == "Egypt"){
-            nav_view.setBackgroundColor(rgb(224, 164, 103));
+            nav_view.setBackgroundColor(rgb(255, 230, 163));
         }
         if (Design == "Casino"){
             nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)

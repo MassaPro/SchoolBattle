@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.activity_friends_list.*
 import kotlinx.android.synthetic.main.activity_my_profile.*
 import kotlinx.android.synthetic.main.ava_item_profile.view.*
 import kotlinx.android.synthetic.main.design_shop_item.view.*
-import kotlinx.android.synthetic.main.design_shop_item.view.img_ava
+import kotlinx.android.synthetic.main.design_shop_item.view.img_ava_shop
 
 
 
@@ -133,7 +133,7 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var img: ImageView = view.img_ava
+        var img: ImageView = view.img_ava_profile
         var content: TextView = view.text_ava
     }
 }

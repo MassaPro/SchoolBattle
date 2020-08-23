@@ -131,7 +131,7 @@ class XOGame_withComputer : AppCompatActivity() {
             player_1_icon_template_with_computer.setBackgroundResource(R.drawable.cross_egypt);
             player_2_icon_template_with_computer.setBackgroundResource(R.drawable.circle_egypt);
             label_with_computer.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_template_with_computer.setBackgroundColor(rgb(224,164,103))
+            bottom_navigation_template_with_computer.setBackgroundColor(rgb(255, 230, 163))
             to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
             toolbar_template_with_computer.setBackgroundColor(argb(0,0,0,0))
             toolbar2_template_with_computer.setBackgroundColor(argb(0,0,0,0))

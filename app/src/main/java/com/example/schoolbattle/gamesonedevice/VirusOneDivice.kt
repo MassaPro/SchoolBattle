@@ -113,7 +113,7 @@ class VirusOneDivice : AppCompatActivity() {
             player_1_icon_one_divice.setBackgroundResource(R.drawable.virus1_egypt);
             player_2_icon_one_divice.setBackgroundResource(R.drawable.virus2_egypt);
             label_one_device.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_one_divice.setBackgroundColor(rgb(224,164,103))
+            bottom_navigation_one_divice.setBackgroundColor(rgb(255, 230, 163))
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(argb(0,0,0,0))
             toolbar2_one_divice.setBackgroundColor(argb(0,0,0,0))
@@ -786,7 +786,7 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
 
         red_or_blue = 0
         Line_paint.setColor(Color.rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
-        Line_paint.setStrokeWidth(5f)
+        Line_paint.setStrokeWidth(7f)
 
         paint_circle.setColor(Color.rgb(217, 217, 217))     //цвета для точек
 
@@ -814,6 +814,7 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
         }
         if (Design == "Noir"){
             Line_paint.setColor(rgb(100,100,100))          //ресур для линий (ширина и цвет)
+
         }
 
 

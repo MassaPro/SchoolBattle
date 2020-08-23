@@ -122,7 +122,7 @@ class BoxGameOneDivice : AppCompatActivity() {
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             label_one_device.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_one_divice.setBackgroundColor(Color.rgb(224, 164, 103))
+            bottom_navigation_one_divice.setBackgroundColor(Color.rgb(255, 230, 163))
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
         }
@@ -600,9 +600,9 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
         paint_circle.setColor(Color.BLACK)     //цвета для точек
 
         paint_rib_1.setColor(Color.RED)          //цвета для ребер  и их ширина
-        paint_rib_1.setStrokeWidth(5f)
+        paint_rib_1.setStrokeWidth(7f)
         paint_rib_2.setColor(Color.BLUE)
-        paint_rib_2.setStrokeWidth(5f)
+        paint_rib_2.setStrokeWidth(7f)
 
         line_who_do_move.strokeWidth = 7f
 
@@ -612,39 +612,38 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
             line_who_do_move.color = Color.GREEN
         }
         else if (Design == "Casino"){
-            Line_paint.setColor(Color.argb(0, 0,0,0))          //ресур для линий (ширина и цвет)
+
             paint_circle.setColor(Color.WHITE)     //цвета для точек
             paint_rib_1.setColor(Color.RED)          //цвета для ребер  и их ширина
             paint_rib_2.setColor(Color.BLACK)
-            line_who_do_move.color = Color.RED
+            line_who_do_move.color = Color.YELLOW
         }
         else if (Design == "Egypt"){
             Line_paint.setColor(Color.argb(0, 0,0,0))          //ресур для линий (ширина и цвет)
             line_who_do_move.color = Color.RED
         }
         else if (Design == "Rome"){
-            Line_paint.setColor(Color.argb(0, 0,0,0))          //ресур для линий (ширина и цвет)
+
             paint_circle.setColor(Color.BLACK)     //цвета для точек
             paint_rib_2.setColor(Color.rgb(193,150,63))          //цвета для ребер  и их ширина
             paint_rib_1.setColor(Color.BLACK)
-            line_who_do_move.color = Color.RED
+            line_who_do_move.color = rgb(193,150,63)
         }
         else if (Design == "Gothic"){
-            Line_paint.setColor(Color.argb(0, 0,0,0))          //ресур для линий (ширина и цвет)
+
             paint_circle.setColor(Color.WHITE)     //цвета для точек
             paint_rib_2.setColor(Color.RED)          //цвета для ребер  и их ширина
             paint_rib_1.setColor(Color.BLUE)
             line_who_do_move.color = Color.RED
         }
         else if (Design == "Japan"){
-            Line_paint.setColor(Color.argb(0, 0,0,0))          //ресур для линий (ширина и цвет)
             paint_circle.setColor(Color.BLACK)     //цвета для точек
             paint_rib_2.setColor(Color.RED)          //цвета для ребер  и их ширина
             paint_rib_1.setColor(Color.rgb(37,103,28))
             line_who_do_move.color = Color.RED
         }
         else if (Design == "Noir"){
-            Line_paint.setColor(Color.argb(0, 0,0,0))          //ресур для линий (ширина и цвет)
+
             paint_circle.setColor(rgb(100,100,100))     //цвета для точек
             paint_rib_2.setColor(rgb(193, 150, 63))          //цвета для ребер  и их ширина
             paint_rib_1.setColor(Color.WHITE)
@@ -674,8 +673,8 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
 
 
 
-    var red : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.red);       //картинки фишек и подсветки
-    var blue: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.blue);
+    var red : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_normal);       //картинки фишек и подсветки
+    var blue: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_normal);
 
     var box1_egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_egypt);
     var box2_egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_egypt);

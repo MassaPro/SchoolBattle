@@ -3,6 +3,7 @@ package com.example.schoolbattle.social
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Color.rgb
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -80,41 +81,71 @@ class SocialActivity : Fragment() {
         }
 
         locale_context = activity as AppCompatActivity
-        if (Design == "Egypt"){
-            fon.setBackgroundResource(R.drawable.background_egypt)
-            tabLayout!!.setBackgroundResource(R.drawable.background_egypt)     //фон табов
-            for (i in 0 until tabLayout!!.tabCount) {
-                var tv: TextView =v.findViewById(R.id.helped_text_social_1)
-                if (i == 0) {
-                    tv = v.helped_text_social_1
-                }
-                if (i == 1) {
-                    tv =v.helped_text_social_2
-                }
-                if (i == 2) {
-                    tv =v.helped_text_social_3
-                }
+
+        for (i in 0 until tabLayout!!.tabCount) {
+            var tv: TextView =v.findViewById(R.id.helped_text_social_1)
+            if (i == 0) {
+                tv = v.helped_text_social_1
+            }
+            if (i == 1) {
+                tv =v.helped_text_social_2
+            }
+            if (i == 2) {
+                tv =v.helped_text_social_3
+            }
+
+            if(Design == "Egypt"){
+                fon.setBackgroundResource(R.drawable.background_egypt)
+                //tabLayout!!.setBackgroundResource(R.drawable.background_egypt)     //фон табов
+                v.toolbar_social.setBackgroundColor(rgb(255, 230, 163))// панель поиска
                 tv.textSize = 14.3f        //так задаешь размер
                 tv.setTextColor(Color.BLACK)   //цвет
                 tv.typeface = ResourcesCompat.getFont(locale_context!!, R.font.egypt)  //шрифт
                 tabLayout!!.getTabAt(i)?.customView = tv;
             }
+            else if (Design == "Casino"){
+                fon.setBackgroundResource(R.drawable.background2_casino)
+                v.toolbar_social.setBackgroundResource(R.drawable.bottom_navigation_casino)
+                tv.textSize = 18f        //так задаешь размер
+                tv.setTextColor(Color.YELLOW)   //цвет
+                tv.typeface = ResourcesCompat.getFont(locale_context!!, R.font.casino)  //шрифт
+                tabLayout!!.getTabAt(i)?.customView = tv;
+            }
+            else if (Design == "Rome"){
+                fon.setBackgroundResource(R.drawable.background_rome)
+                v.toolbar_social.setBackgroundResource(R.drawable.bottom_navigation_rome)
+                tv.textSize = 21f        //так задаешь размер
+                tv.setTextColor(rgb(193, 150, 63))   //цвет
+                tv.typeface = ResourcesCompat.getFont(locale_context!!, R.font.rome)  //шрифт
+                tabLayout!!.getTabAt(i)?.customView = tv;
+            }
+            else if (Design == "Gothic"){
+                fon.setBackgroundResource(R.drawable.background_gothic)
+                v.toolbar_social.setBackgroundColor(rgb(20,20,20))
+                tv.textSize = 25f        //так задаешь размер
+                tv.setTextColor(Color.WHITE)   //цвет
+                tv.typeface = ResourcesCompat.getFont(locale_context!!, R.font.gothic)  //шрифт
+                tabLayout!!.getTabAt(i)?.customView = tv;
+            }
+            else if (Design == "Japan"){
+                fon.setBackgroundResource(R.drawable.background_japan)
+                v.toolbar_social.setBackgroundColor(Color.WHITE)
+                tv.textSize = 14f        //так задаешь размер
+                tv.setTextColor(Color.BLACK)   //цвет
+                tv.typeface = ResourcesCompat.getFont(locale_context!!, R.font.japan)  //шрифт
+                tabLayout!!.getTabAt(i)?.customView = tv;
+            }
+            else if (Design == "Noir"){
+                fon.setBackgroundResource(R.drawable.background_noir)
+                v.toolbar_social.setBackgroundColor(rgb(20,20,20))
+                tv.textSize = 18f        //так задаешь размер
+                tv.setTextColor(Color.WHITE)   //цвет
+                tv.typeface = ResourcesCompat.getFont(locale_context!!, R.font.noir)  //шрифт
+                tabLayout!!.getTabAt(i)?.customView = tv;
+            }
+
         }
-        else if (Design == "Casino"){
-            fon.setBackgroundResource(R.drawable.background2_casino)
-        }
-        else if (Design == "Rome"){
-            fon.setBackgroundResource(R.drawable.background_rome)
-        }
-        else if (Design == "Gothic"){
-            fon.setBackgroundResource(R.drawable.background_gothic)
-        }
-        else if (Design == "Japan"){
-            fon.setBackgroundResource(R.drawable.background_japan)
-        }
-        else if (Design == "Noir"){
-            fon.setBackgroundResource(R.drawable.background_noir)
-        }
+
 
 
 
