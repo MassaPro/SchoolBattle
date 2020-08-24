@@ -60,6 +60,12 @@ class MainActivity : Fragment() {
         {
             ARRAY_OF_AVATAR =  DECODE(prfs?.getString("open_avatars", 0.toString()).toString())
         }
+        if(ARRAY_OF_EMOTION.size < DECODE(prfs?.getString("open_emotions", 0.toString()).toString()).size)
+        {
+            ARRAY_OF_EMOTION =  DECODE(prfs?.getString("open_emotions", 0.toString()).toString())
+        }
+
+
         AVATAR = prfs?.getString("avatar_number", 0.toString()).toString().toInt()
         MONEY = prfs?.getString("money", INITIAL_AMOUNT.toString()).toString().toInt()         //не забыть положить другую сумму если идет вход в аккаунт
         money_icon.setBackgroundResource(R.drawable.money)

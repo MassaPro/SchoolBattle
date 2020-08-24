@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Color.rgb
+import android.graphics.Point
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -38,6 +39,14 @@ class ShopFragmentActivity : Fragment (){
         var t_shop = locale_context!!.findViewById<View>(R.id.toolbar_shop)
 
 
+
+      /*  val display = locale_context!!.windowManager.defaultDisplay
+        val size = Point()
+        display.getSize(size)
+        val width = size.x
+        val height = size.y
+        Log.v("пихдец",width.toString())
+        var super_const = width/720*(9/10)        */
 
         for (i in 0 until tabLayout!!.tabCount) {
             var tv : TextView? = null
@@ -80,7 +89,7 @@ class ShopFragmentActivity : Fragment (){
             }
             else if(Design == "Rome")
             {
-                tv?.textSize = 20f        //так задаешь размер
+                tv?.textSize = 20f       //так задаешь размер
                 tv?.setTextColor(rgb(193, 150, 63))   //цвет
                 tv?.typeface = locale_context?.let { ResourcesCompat.getFont(it, R.font.rome) } //шрифт
                 tabLayout!!.getTabAt(i)?.customView = tv;
