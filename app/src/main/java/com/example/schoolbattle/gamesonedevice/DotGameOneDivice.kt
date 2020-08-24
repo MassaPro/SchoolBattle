@@ -745,17 +745,24 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
         radius_of_point = 8f
         size_field_x  = 10
         size_field_y  = 15
-        indent = (getWidth().toFloat()/(size_field_x.toFloat()+1f))/2f //оступ, чтобы можно было тыкнуть в границу
-        width = getWidth().toFloat() - 2*indent
-        height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)
-        advertising_line =(height - width/size_field_x*size_field_y)/2         //полоска для рекламы
+        //indent = (getWidth().toFloat()/(size_field_x.toFloat()+1f))/2f //оступ, чтобы можно было тыкнуть в границу
 
-        step = if(width/size_field_x < height/size_field_y) {
-            width/size_field_x
+        height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)
+
+
+        step = if(getWidth()/(size_field_x+1) < height/(size_field_y+1/3)) {
+            getWidth().toFloat()/(size_field_x+1)
         } else {
-            height/size_field_y
+            height/(size_field_y.toFloat()+1/3)
         }
-        k = height-width*(size_field_y.toFloat()/size_field_x.toFloat())-advertising_line
+
+       // step = getWidth().toFloat()/(size_field_x+1)
+
+        indent = step/2
+        width = getWidth().toFloat() - 2*indent
+        advertising_line = (getHeight() - step*size_field_y)/2
+        k = advertising_line
+
 
         if(Design == "Normal")
         {
