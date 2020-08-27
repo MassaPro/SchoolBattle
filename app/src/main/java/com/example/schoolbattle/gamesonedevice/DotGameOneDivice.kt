@@ -758,7 +758,7 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
 
        // step = getWidth().toFloat()/(size_field_x+1)
 
-        indent = step/2
+        indent = (getWidth().toFloat() - size_field_x*step)/2
         width = getWidth().toFloat() - 2*indent
         advertising_line = (getHeight() - step*size_field_y)/2
         k = advertising_line
