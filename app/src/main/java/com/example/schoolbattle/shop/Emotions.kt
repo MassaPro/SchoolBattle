@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_designs.*
 import kotlinx.android.synthetic.main.design_shop_item.view.*
+import kotlinx.android.synthetic.main.internet_dialog.*
 import kotlinx.android.synthetic.main.shop_dialog.*
 
 class Emotions : Fragment()  {
@@ -230,44 +231,72 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
         }
 
         holder.button.setOnClickListener{
-            if(ARRAY_OF_EMOTION_SHOP[position] !in ARRAY_OF_EMOTION)          //если дизайн не куплен
+            var dialog_internet = Dialog(locale_context!!)
+            dialog_internet.setContentView(R.layout.internet_dialog)
+            fun buy_emotions(): Boolean
             {
-                // dialog = Proof_of_purchase(HELPED_CONTEXT!!,locale_context!!,"Design",ARRAY_OF_DESIGN_SHOP[position].toString().toInt(), PRICE_OD_DESIGN[ARRAY_OF_DESIGN_SHOP[position].toString().toInt()]!!)
-                //   dialog?.showResult()
-                var dialog_shop = Dialog(HELPED_CONTEXT!!)
-                dialog_shop.setContentView(R.layout.shop_dialog)
+                //TODO MONEY = MONEY from firebase
+                //TODO ARRAY_OF_EMOTION = ARRAY_OF_EMOTION from firebase
+                if(ARRAY_OF_EMOTION_SHOP[position] !in ARRAY_OF_EMOTION)          //если дизайн не куплен
+                {
+                    // dialog = Proof_of_purchase(HELPED_CONTEXT!!,locale_context!!,"Design",ARRAY_OF_DESIGN_SHOP[position].toString().toInt(), PRICE_OD_DESIGN[ARRAY_OF_DESIGN_SHOP[position].toString().toInt()]!!)
+                    //   dialog?.showResult()
+                    var dialog_shop = Dialog(HELPED_CONTEXT!!)
+                    dialog_shop.setContentView(R.layout.shop_dialog)
 
-                dialog_shop.price_shop.text = holder.price.text
-                dialog_shop.description.text = "Купить <" + EMOTION_TEXT[ARRAY_OF_EMOTION_SHOP[position]] + "> за"
+                    dialog_shop.price_shop.text = holder.price.text
+                    dialog_shop.description.text = "Купить <" + EMOTION_TEXT[ARRAY_OF_EMOTION_SHOP[position]] + "> за"
 
-                dialog_shop.show()
-                dialog_shop.buy_shop_dialog.setOnClickListener {
-                    MONEY -= holder.price.text.toString().toInt()
-                    ARRAY_OF_EMOTION.add(ARRAY_OF_EMOTION_SHOP[position])
-                    holder.price.text = ""
-                    holder.icon.setImageResource(R.drawable.nulevoe)
-                    holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                    holder.button.text = "(КУПЛЕНО)"
-                    locale_context!!.findViewById<TextView>(R.id.money_shop_toolbar).text =
-                        MONEY.toString()
+                    dialog_shop.show()
+                    dialog_shop.buy_shop_dialog.setOnClickListener {
+                        MONEY -= holder.price.text.toString().toInt()
+                        ARRAY_OF_EMOTION.add(ARRAY_OF_EMOTION_SHOP[position])
+                        //TODO MONEY передать в базу
+                        //TODO ARRAY_OF_EMOTION передать в базу
+                        holder.price.text = ""
+                        holder.icon.setImageResource(R.drawable.nulevoe)
+                        holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                        holder.button.text = "(КУПЛЕНО)"
+                        locale_context!!.findViewById<TextView>(R.id.money_shop_toolbar).text =
+                            MONEY.toString()
 
-                    val editor =
-                        locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE)
-                            .edit()
-                    editor.putString("money", MONEY.toString())
-                    editor.putString("open_emotions", CODE(ARRAY_OF_EMOTION))
-                    editor.apply()
+                        val editor =
+                            locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                                .edit()
+                        editor.putString("money", MONEY.toString())
+                        editor.putString("open_emotions", CODE(ARRAY_OF_EMOTION))
+                        editor.apply()
 
-                    dialog_shop.dismiss()
+                        dialog_shop.dismiss()
+                    }
+                    dialog_shop.button_close_2_shop_dialog.setOnClickListener {
+                        dialog_shop.dismiss()
+                    }
+                    dialog_shop.button_close_shop_dialog.setOnClickListener {
+                        dialog_shop.dismiss()
+                    }
+
                 }
-                dialog_shop.button_close_2_shop_dialog.setOnClickListener {
-                    dialog_shop.dismiss()
-                }
-                dialog_shop.button_close_shop_dialog.setOnClickListener {
-                    dialog_shop.dismiss()
-                }
-
+                return true
             }
+            fun check_internet():Boolean
+            {
+                if(verifyAvailableNetwork(locale_context!!))
+                {
+                    buy_emotions()
+                }
+                else
+                {
+                    dialog_internet.show()
+                    dialog_internet.button_update.setOnClickListener {
+                        dialog_internet.dismiss()
+                        check_internet()
+                    }
+                }
+                return true
+            }
+
+            check_internet()
         }
     }
 

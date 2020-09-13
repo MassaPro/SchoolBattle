@@ -3,6 +3,8 @@
     package="com.example.schoolbattle">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -33,7 +35,6 @@
         <activity android:name=".gameswithcomp.BoxGameWithComputer" />
         <activity android:name=".gamesonline.SnakeGameActivity" />
         <activity android:name=".gamesonedevice.ReversiOneDivice" />
-        <activity android:name=".gamesonedevice.GoGameOneDivice" />
         <activity android:name=".gamesonline.BoxGameActivity" />
         <activity android:name=".gamesonedevice.VirusOneDivice" />
         <activity android:name=".gamesonedevice.BoxGameOneDivice" />

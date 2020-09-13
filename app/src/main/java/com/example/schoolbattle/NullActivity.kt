@@ -2,6 +2,8 @@ package com.example.schoolbattle
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -17,6 +19,9 @@ class NullActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         CONTEXT = this
+
+        window.statusBarColor = Color.RED
+        supportActionBar?.setBackgroundDrawable(getDrawable(R.drawable.nulevoe))
 
         MobileAds.initialize(this) {}           //для рекламы
 
