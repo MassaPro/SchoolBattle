@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
@@ -172,6 +173,7 @@ class GameListActivity : Fragment() {
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.type.text = ITEMS[position].type
             holder.name.text = ITEMS[position].opponent
+            holder.avatar.setBackgroundResource(R.drawable.avatar1)
             with(holder.itemView) {
                 tag = ITEMS[position]
                 setOnClickListener(onClickListener)
@@ -185,6 +187,7 @@ class GameListActivity : Fragment() {
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val type: TextView = view.type
             val name: TextView = view.name
+            val avatar: Button = view.avatar_in_gamelist
         }
     }
 }

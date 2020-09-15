@@ -20,6 +20,7 @@ import com.example.schoolbattle.*
 import com.example.schoolbattle.shop.locale_context
 import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_one_device_games_template.*
+import kotlinx.android.synthetic.main.activity_x_o_game.*
 
 
 //Загружаем в SoundPool звуковой файл с папки raw:
@@ -106,6 +107,8 @@ class XOGame_oneDivice : AppCompatActivity() {
         setContentView(R.layout.activity_one_device_games_template)
 
 
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
 
         signature_canvas_xog_one_device.visibility = View.VISIBLE
         signature_canvas_xog_one_device.t1 = findViewById(R.id.name_player1_one_divice) as TextView
@@ -142,10 +145,11 @@ class XOGame_oneDivice : AppCompatActivity() {
             button_player_2_one_divice.setBackgroundResource(R.drawable.tower2_casino);
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background_casino);
+            label_one_device.setBackgroundResource(R.drawable.background2_casino);
             bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            bottom_navigation_one_divice.setBackgroundResource(R.drawable.bottom_navigation_casino)
         }
         else if(Design == "Rome" ) {
             name_player1_one_divice.setTextColor(rgb(193,150,63))
@@ -159,7 +163,7 @@ class XOGame_oneDivice : AppCompatActivity() {
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             label_one_device.setBackgroundResource(R.drawable.background_rome);
-            bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
+            bottom_navigation_one_divice.setBackgroundResource(R.drawable.bottom_navigation_rome)
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
         }
@@ -191,7 +195,7 @@ class XOGame_oneDivice : AppCompatActivity() {
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             label_one_device.setBackgroundResource(R.drawable.background_japan);
-            bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
+            bottom_navigation_one_divice.setBackgroundColor(Color.WHITE)
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
         }

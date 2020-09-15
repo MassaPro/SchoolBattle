@@ -56,8 +56,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/item_list"
         android:name="ru.startandroid.develop.myapplication.ItemListFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/toolbar4"
         app:layout_constraintEnd_toEndOf="parent"
