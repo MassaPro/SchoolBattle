@@ -62,7 +62,7 @@ class SettingsFragmentActivity : Fragment() {
         }
         else if(Design == "Gothic")
         {
-            fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_gothic)
+            fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.BLACK)
         }
         else if(Design == "Japan")
         {
@@ -102,7 +102,7 @@ class SettingsFragmentActivity : Fragment() {
 
         if (Design == "Casino") {
             settings_menu.setBackgroundResource(R.drawable.background2_casino)
-            tb1.setBackgroundColor(argb(0,0,0,0))
+            tb1.setBackgroundResource(R.drawable.bottom_navigation_casino)
 
             choose_design.setBackgroundColor(argb(0,0,0,0))
             choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
@@ -137,7 +137,7 @@ class SettingsFragmentActivity : Fragment() {
         }
         else if (Design == "Gothic") {
             settings_menu.setBackgroundResource(R.drawable.background_gothic)
-            tb1.setBackgroundColor(argb(0,0,0,0))
+            tb1.setBackgroundColor(Color.BLACK)
 
             choose_design.setBackgroundColor(argb(0,0,0,0))
             choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))

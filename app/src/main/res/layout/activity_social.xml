@@ -37,6 +37,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tabs">
+
+        <TextView
+            android:id="@+id/helped_text_social_3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="Подписчики"></TextView>
     </androidx.viewpager.widget.ViewPager>
 
     <Button
@@ -78,14 +86,6 @@
         android:gravity="center"
         android:singleLine="true"
         android:text="Подписки">
-    </TextView>
-    <TextView
-        android:id = "@+id/helped_text_social_3"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:singleLine="true"
-        android:text="Подписчики">
     </TextView>
 
 </RelativeLayout>

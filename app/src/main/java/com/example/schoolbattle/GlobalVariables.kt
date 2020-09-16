@@ -64,7 +64,7 @@ var AUXILIARY_MAP_OF_EMOTION = mapOf(0 to "e0", 1 to "e1", 2 to "e2",3 to "e3",4
 
 //____________________________________________________________________________________________________________________________
 var SPECIALLY: String = "ava1"               //СПЕЦИАЛЬНОЕ
-val PICTURE_SPECIALLY = mapOf(0 to R.drawable.avatar1, 1 to R.drawable.avatar1, 2 to R.drawable.avatar1,3 to R.drawable.avatar1)
+val PICTURE_SPECIALLY = mapOf(0 to R.drawable.video, 1 to R.drawable.vip, 2 to R.drawable.avatar1,3 to R.drawable.avatar1)
 val SPECIALLY_TEXT = mapOf(0 to "ВИДЕО С ВОЗНАГРАЖДЕНИЕМ", 1 to "ПРЕМИУМ АККАУНТ", 2 to "ШОШОШОШО",3 to "ДЛДДЛДЛДЛ")
 val PRICE_OD_SPECIALLY = mapOf(0 to 10,1 to 20,2 to 30,3 to 90)
 var ARRAY_OF_SPECIALLY_SHOP: MutableList<Int>  = mutableListOf(0,1)
@@ -146,6 +146,10 @@ fun generateColorStateList() :ColorStateList
             uncheckedColor = Color.rgb(193, 150, 63)
         }
         "Gothic" -> {
+            checkedColor = rgb(255,255,255)
+            uncheckedColor = rgb(255,255,255)
+        }
+        "Noir" -> {
             checkedColor = rgb(255,255,255)
             uncheckedColor = rgb(255,255,255)
         }

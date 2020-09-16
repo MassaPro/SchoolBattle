@@ -94,6 +94,7 @@ class SocialActivity : Fragment() {
                 tv =v.helped_text_social_3
             }
 
+            
             if(Design == "Egypt"){
                 fon.setBackgroundResource(R.drawable.background_egypt)
                 //tabLayout!!.setBackgroundResource(R.drawable.background_egypt)     //фон табов
@@ -149,10 +150,7 @@ class SocialActivity : Fragment() {
 
 
 
-        if(Design == "Egypt")
-        {
 
-        }
 
         return v
     }
