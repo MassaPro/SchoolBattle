@@ -82,6 +82,7 @@ class SocialActivity : Fragment() {
 
         locale_context = activity as AppCompatActivity
 
+        v.search_social.setBackgroundResource(R.drawable.search)
         for (i in 0 until tabLayout!!.tabCount) {
             var tv: TextView =v.findViewById(R.id.helped_text_social_1)
             if (i == 0) {
@@ -94,8 +95,13 @@ class SocialActivity : Fragment() {
                 tv =v.helped_text_social_3
             }
 
-            
-            if(Design == "Egypt"){
+            if(Design == "Normal")
+            {
+                tv.setTextColor(Color.BLACK)   //цвет
+                tabLayout!!.getTabAt(i)?.customView = tv;
+
+            }
+            else if(Design == "Egypt"){
                 fon.setBackgroundResource(R.drawable.background_egypt)
                 //tabLayout!!.setBackgroundResource(R.drawable.background_egypt)     //фон табов
                 v.toolbar_social.setBackgroundColor(rgb(255, 230, 163))// панель поиска
@@ -103,6 +109,8 @@ class SocialActivity : Fragment() {
                 tv.setTextColor(Color.BLACK)   //цвет
                 tv.typeface = ResourcesCompat.getFont(locale_context!!, R.font.egypt)  //шрифт
                 tabLayout!!.getTabAt(i)?.customView = tv;
+                v.textView5.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                v.textView5.setTextColor(Color.BLACK)
             }
             else if (Design == "Casino"){
                 fon.setBackgroundResource(R.drawable.background2_casino)
@@ -111,6 +119,9 @@ class SocialActivity : Fragment() {
                 tv.setTextColor(Color.YELLOW)   //цвет
                 tv.typeface = ResourcesCompat.getFont(locale_context!!, R.font.casino)  //шрифт
                 tabLayout!!.getTabAt(i)?.customView = tv;
+                v.search_social.setBackgroundResource(R.drawable.search_3)
+                v.textView5.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                v.textView5.setTextColor(Color.YELLOW)
             }
             else if (Design == "Rome"){
                 fon.setBackgroundResource(R.drawable.background_rome)
@@ -119,6 +130,9 @@ class SocialActivity : Fragment() {
                 tv.setTextColor(rgb(193, 150, 63))   //цвет
                 tv.typeface = ResourcesCompat.getFont(locale_context!!, R.font.rome)  //шрифт
                 tabLayout!!.getTabAt(i)?.customView = tv;
+                v.search_social.setBackgroundResource(R.drawable.search_2)
+                v.textView5.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                v.textView5.setTextColor(rgb(193, 150, 63))
             }
             else if (Design == "Gothic"){
                 fon.setBackgroundResource(R.drawable.background_gothic)
@@ -127,6 +141,9 @@ class SocialActivity : Fragment() {
                 tv.setTextColor(Color.WHITE)   //цвет
                 tv.typeface = ResourcesCompat.getFont(locale_context!!, R.font.gothic)  //шрифт
                 tabLayout!!.getTabAt(i)?.customView = tv;
+                v.search_social.setBackgroundResource(R.drawable.search_1)
+                v.textView5.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                v.textView5.setTextColor(Color.WHITE)
             }
             else if (Design == "Japan"){
                 fon.setBackgroundResource(R.drawable.background_japan)
@@ -135,6 +152,8 @@ class SocialActivity : Fragment() {
                 tv.setTextColor(Color.BLACK)   //цвет
                 tv.typeface = ResourcesCompat.getFont(locale_context!!, R.font.japan)  //шрифт
                 tabLayout!!.getTabAt(i)?.customView = tv;
+                v.textView5.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                v.textView5.setTextColor(Color.BLACK)
             }
             else if (Design == "Noir"){
                 fon.setBackgroundResource(R.drawable.background_noir)
@@ -143,15 +162,12 @@ class SocialActivity : Fragment() {
                 tv.setTextColor(Color.WHITE)   //цвет
                 tv.typeface = ResourcesCompat.getFont(locale_context!!, R.font.noir)  //шрифт
                 tabLayout!!.getTabAt(i)?.customView = tv;
+                v.search_social.setBackgroundResource(R.drawable.search_1)
+                v.textView5.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                v.textView5.setTextColor(Color.WHITE)
             }
 
         }
-
-
-
-
-
-
         return v
     }
 

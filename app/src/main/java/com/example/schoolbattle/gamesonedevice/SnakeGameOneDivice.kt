@@ -696,7 +696,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
        // canvas?.drawColor(Color.WHITE)
 
 
-        if(red_or_blue != "red")
+        if(red_or_blue == "red")
         {
             t1.text = "Игрок 1 думает"
             t2.text = "Игрок 2"

@@ -49,7 +49,7 @@ class Specially : Fragment(), RewardedVideoAdListener {
         mRewardedVideoAd.rewardedVideoAdListener = this
 
         Vidos = mRewardedVideoAd
-        loadRewardedVideoAd()
+            //loadRewardedVideoAd()
             // mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(locale_context)
      //   mRewardedVideoAd.rewardedVideoAdListener = this
 

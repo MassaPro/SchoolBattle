@@ -30,10 +30,11 @@
 
             <TextView
                 android:id="@+id/id_text_design_shop"
-                android:layout_width="wrap_content"
-                android:layout_height="57dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="3dp"
                 android:textAppearance="?attr/textAppearanceListItem"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/img_ava_shop"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,8 +60,10 @@
 
             <Button
                 android:id="@+id/item_button_shop_design"
-                android:layout_width="169dp"
+                android:layout_width="150dp"
                 android:layout_height="47dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 android:text="купить"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

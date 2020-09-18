@@ -120,8 +120,7 @@ class SettingsFragmentActivity : Fragment() {
 
         else if (Design == "Rome") {
             settings_menu.setBackgroundResource(R.drawable.background_rome)
-            tb1.setBackgroundColor(argb(0,0,0,0))
-
+            tb1.setBackgroundResource(R.drawable.bottom_navigation_rome)
             choose_design.setBackgroundColor(argb(0,0,0,0))
             choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
             choose_design.setTextColor(rgb(193,150,63))
@@ -168,6 +167,8 @@ class SettingsFragmentActivity : Fragment() {
             vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
             vibrationSwitch.setTextSize(24f)
             vibrationSwitch.setTextColor(Color.BLACK)
+          //  tb1.setBackgroundColor(Color.WHITE)
+            tb1.setBackgroundColor(Color.WHITE)
         }
         else if (Design == "Noir") {
             settings_menu.setBackgroundResource(R.drawable.background_noir)
