@@ -30,10 +30,31 @@ fun initMenuFunctions(activity: Activity,
         override var flag = true
     }
     emotions.init()
+    var dialog_rules: Show_rules? = null
     bottom_navigation_xog_online.setOnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.page_online_1 ->{
-
+                dialog_rules = Show_rules(activity)
+                if (activity.toString().contains ("XOGameActivity"))
+                {
+                    dialog_rules?.show("XOGame")
+                }
+                if (activity.toString().contains ("BoxGameActivity"))
+                {
+                    dialog_rules?.show("BoxGame")
+                }
+                if (activity.toString().contains ("DotGameActivity"))
+                {
+                    dialog_rules?.show("DotGame")
+                }
+                if (activity.toString().contains ("ReversiGameActivity"))
+                {
+                    dialog_rules?.show("ReversiGame")
+                }
+                if (activity.toString().contains ("SnakeGameActivity"))
+                {
+                    dialog_rules?.show("SnakeGame")
+                }
             }
             R.id.page_online_2 ->{
                 loseDialog.setContentView(R.layout.dialog_for_losers)
