@@ -12,6 +12,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
 import com.example.schoolbattle.engine.BlitzGameEngine
 import com.example.schoolbattle.engine.LongGameEngine
@@ -128,26 +129,90 @@ class BoxGameActivity : AppCompatActivity() {
 
         }
         signature_canvas_box.username = yourName
-        if(Design == "Egypt" ) {
-            button_player_1_online_box.setTextColor(Color.BLACK)
-            button_player_2_online_box.setTextColor(Color.BLACK)
-            button_player_1_online_box.setTextSize(20f)
-            button_player_2_online_box.setTextSize(20f)
-            timer_box_online.setTextSize(15f)
-            timer_box_online.setTextColor(Color.GREEN)
-            timer2_box_online.setTextSize(15f)
-            timer2_box_online.setTextColor(Color.GREEN)
 
-            icon_player_1_box_online.setBackgroundResource(R.drawable.player1_egypt);
-            icon_player_2_box_online.setBackgroundResource(R.drawable.player2_egypt);
-            player_1_icon_box_online.setBackgroundResource(R.drawable.cross_egypt);
-            player_2_icon_box_online.setBackgroundResource(R.drawable.circle_egypt);
-            label_online_box.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_box_online.setBackgroundColor(rgb(255, 230, 163))
-            to_back_box_online.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_box_online.setBackgroundColor(argb(0,0,0,0))
-            toolbar2_box_online.setBackgroundColor(argb(0,0,0,0))
+        button_player_1_online_xog.textSize = 20f
+        button_player_2_online_xog.textSize = 20f
+        timer2_xog_online.textSize = 15f
+        timer_xog_online.textSize = 15f
+        PICTURE_AVATAR[AVATAR]?.let { your_avatar_in_game.setImageResource(it) }
+        PICTURE_AVATAR[AVATAR]?.let { avatar_of_protivnic.setImageResource(it) } //TODO заменить это на значения его аватарки
+        bottom_navigation_xog_online.itemIconTintList = generateColorStateList()
+        bottom_navigation_xog_online.itemTextColor = generateColorStateList()
+        if(Design == "Egypt" ) {
+            label_online.setBackgroundResource(R.drawable.background_egypt)
+            button_player_1_online_xog.setTextColor(Color.BLACK)
+            button_player_2_online_xog.setTextColor(Color.BLACK)
+            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+            timer_xog_online.setTextColor(Color.GREEN)
+            timer2_xog_online.setTextColor(Color.GREEN)
+            bottom_navigation_xog_online.setBackgroundColor(rgb(255, 230, 163))
+            toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
+            toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
         }
+        else if(Design == "Casino" ) {
+            label_online.setBackgroundResource(R.drawable.background2_casino)
+            button_player_1_online_xog.setTextColor(Color.YELLOW)
+            button_player_2_online_xog.setTextColor(Color.YELLOW)
+            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+            timer_xog_online.setTextColor(Color.GREEN)
+            timer2_xog_online.setTextColor(Color.GREEN)
+            bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_casino)
+            toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
+            toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+        }
+        else if(Design == "Rome" ) {
+            label_online.setBackgroundResource(R.drawable.background_rome)
+            button_player_1_online_xog.setTextColor(Color.rgb(224, 164, 103))
+            button_player_2_online_xog.setTextColor(Color.rgb(224, 164, 103))
+            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+            timer_xog_online.setTextColor(Color.GREEN)
+            timer2_xog_online.setTextColor(Color.GREEN)
+            bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_rome)
+            toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
+            toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+        }
+        else if(Design == "Japan" ) {
+            label_online.setBackgroundResource(R.drawable.background_japan)
+            button_player_1_online_xog.setTextColor(Color.BLACK)
+            button_player_2_online_xog.setTextColor(Color.BLACK)
+            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+            timer_xog_online.setTextColor(Color.GREEN)
+            timer2_xog_online.setTextColor(Color.GREEN)
+            bottom_navigation_xog_online.setBackgroundColor(Color.WHITE)
+            toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
+            toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+        }
+        else if(Design == "Gothic" ) {
+            label_online.setBackgroundResource(R.drawable.background_gothic)
+            button_player_1_online_xog.setTextColor(Color.WHITE)
+            button_player_2_online_xog.setTextColor(Color.WHITE)
+            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+            timer_xog_online.setTextColor(Color.GREEN)
+            timer2_xog_online.setTextColor(Color.GREEN)
+            bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
+            toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
+            toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+            button_player_1_online_xog.textSize = 16.5f
+            button_player_2_online_xog.textSize = 16.5f
+        }
+        else if(Design == "Noir") {
+            label_online.setBackgroundResource(R.drawable.background_noir)
+            button_player_1_online_xog.setTextColor(Color.WHITE)
+            button_player_2_online_xog.setTextColor(Color.WHITE)
+            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+            timer_xog_online.setTextColor(Color.GREEN)
+            timer2_xog_online.setTextColor(Color.GREEN)
+            bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
+            toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
+            toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+        }
+
         initMenuFunctions(this, bottom_navigation_xog_online, intent, yourName, opponentsName, gameData)
         gameData.addValueEventListener(object : ValueEventListener {
 

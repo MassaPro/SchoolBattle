@@ -138,12 +138,12 @@ fun generateColorStateList() :ColorStateList
             uncheckedColor = rgb(0,0,0)
         }
         "Casino" -> {
-            checkedColor = Color.YELLOW
-            uncheckedColor  = Color.YELLOW
+            checkedColor = Color.WHITE
+            uncheckedColor  = Color.WHITE
         }
         "Rome" -> {
-            checkedColor = Color.rgb(193, 150, 63)
-            uncheckedColor = Color.rgb(193, 150, 63)
+            checkedColor = Color.GRAY
+            uncheckedColor = Color.GRAY
         }
         "Gothic" -> {
             checkedColor = rgb(255,255,255)
