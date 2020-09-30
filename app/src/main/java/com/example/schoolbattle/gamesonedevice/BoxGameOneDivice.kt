@@ -137,7 +137,7 @@ class BoxGameOneDivice : AppCompatActivity() {
             button_player_2_one_divice.setBackgroundResource(R.drawable.tower2_casino);
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background_casino);
+            label_one_device.setBackgroundResource(R.drawable.background2_casino);
             bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
             to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
             toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))

@@ -94,7 +94,7 @@ class MainActivity : Fragment() {
             playWithComp.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             playWithComp.setBackgroundColor(argb(0,0,0,0))
             blitz.setBackgroundColor(argb(0,0,0,0))
-            blitz.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+            blitz.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
             money.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
             money.setTextColor(Color.BLACK)
         }

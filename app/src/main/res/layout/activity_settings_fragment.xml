@@ -108,33 +108,30 @@
 
 
     <Button
-        android:id="@+id/toolbarNameSettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:text=""
-        android:textAllCaps="false"
-
-
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/tb1"
-        app:layout_constraintStart_toStartOf="@+id/tb1"
-        app:layout_constraintTop_toTopOf="@+id/tb1"
-        app:layout_constraintBottom_toBottomOf="@+id/tb1"
-        />
-
-    <Button
         android:id="@+id/logOutSettings"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="10dp"
         android:background="@android:color/transparent"
         android:text="Выход"
         android:textAllCaps="false"
-        android:textColor="@android:color/holo_red_light"
 
+        android:textColor="@android:color/holo_red_light"
         app:layout_constraintBottom_toBottomOf="@+id/tb1"
         app:layout_constraintEnd_toEndOf="@+id/tb1"
-        app:layout_constraintStart_toEndOf="@+id/toolbarNameSettings"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/toolbarNameSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:background="@android:color/transparent"
+        android:text=""
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tb1"
+        app:layout_constraintStart_toStartOf="@+id/tb1"
         app:layout_constraintTop_toTopOf="parent" />
 
 

@@ -65,6 +65,8 @@ class XOGameActivity : AppCompatActivity() {
         bottom_navigation_xog_online.itemIconTintList = generateColorStateList()
         bottom_navigation_xog_online.itemTextColor = generateColorStateList()
 
+        button_player_1_online_xog.textSize = 20f
+        button_player_2_online_xog.textSize = 20f
         if(Design == "Normal")
         {
 
@@ -96,8 +98,8 @@ class XOGameActivity : AppCompatActivity() {
             label_online.setBackgroundResource(R.drawable.background_rome)
             toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
             toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
-            button_player_1_online_xog.setTextColor(Color.argb(0, 224, 164, 103))
-            button_player_2_online_xog.setTextColor(Color.argb(0, 224, 164, 103))
+            button_player_1_online_xog.setTextColor(Color.rgb(224, 164, 103))
+            button_player_2_online_xog.setTextColor(Color.rgb(224, 164, 103))
             button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
             button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
             bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_rome)
@@ -110,7 +112,9 @@ class XOGameActivity : AppCompatActivity() {
             button_player_2_online_xog.setTextColor(Color.WHITE)
             button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
             button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
-            bottom_navigation_xog_online.setBackgroundColor(Color.TRANSPARENT)
+            bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
+            button_player_1_online_xog.textSize = 16.5f
+            button_player_2_online_xog.textSize = 16.5f
         }
         else if(Design == "Japan" ) {
             label_online.setBackgroundResource(R.drawable.background_japan)

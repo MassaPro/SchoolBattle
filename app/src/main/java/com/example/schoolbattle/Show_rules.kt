@@ -36,11 +36,6 @@ class Show_rules(activity: Activity) {
             dialog_one_device.header_rules.setText("Змейка")
             dialog_one_device.text_rules.setText(R.string.rules_snake_Russia)
         }
-        if(Gametype == "GoGame")
-        {
-            dialog_one_device.header_rules.setText("ГО")
-            dialog_one_device.text_rules.setText(R.string.rules_go_Russia)
-        }
         if(Gametype == "BoxGame")
         {
             dialog_one_device.header_rules.setText("КОРОБКИ")
@@ -50,11 +45,6 @@ class Show_rules(activity: Activity) {
         {
             dialog_one_device.header_rules.setText("ВОЙНА ВИРУСОВ")
             dialog_one_device.text_rules.setText(R.string.rules_virus_Russia)
-        }
-        if(Gametype == "StupidGame")
-        {
-            dialog_one_device.header_rules.setText("КАМЕНЬ-НОЖНИЦЫ-БУМАГА")
-            dialog_one_device.text_rules.setText(R.string.rules_stupid_Russia)
         }
         if(Gametype == "ReversiGame")
         {
