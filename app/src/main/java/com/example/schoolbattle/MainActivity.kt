@@ -90,7 +90,7 @@ class MainActivity : Fragment() {
             blitz.width = 320
             newGameButton.width = 320
 
-
+            money.setTextColor(Color.BLACK)
         }
         else if (Design == "Egypt"){
             game_menu.setBackgroundResource(R.drawable.game_menu_egypt)
@@ -105,16 +105,20 @@ class MainActivity : Fragment() {
             playWithComp.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             playWithComp.setBackgroundColor(argb(0,0,0,0))
             blitz.setBackgroundColor(argb(0,0,0,0))
-            blitz.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+            blitz.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+            money.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+            money.setTextColor(Color.BLACK)
         }
         else if (Design == "Casino"){
+            blitz.width = 320
+            newGameButton.width = 320
             game_menu.setBackgroundResource(R.drawable.game_menu_casino)
             //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
             my_toolbar2.setBackgroundColor(argb(0,0,0,0))
 
             toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             toolbarName2.setTextColor(Color.YELLOW)
-            toolbarName2.setTextSize(20f)
+            toolbarName2.setTextSize(25f)
 
             newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             newGameButton.setTextColor(Color.YELLOW)
@@ -140,6 +144,9 @@ class MainActivity : Fragment() {
             searchButton.setTextColor(Color.YELLOW)
             searchButton.setTextSize(20f)
             searchButton.setBackgroundColor(argb(0,0,0,0))
+
+            money.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+            money.setTextColor(Color.YELLOW)
         }
         else if (Design == "Rome"){
             game_menu.setBackgroundResource(R.drawable.game_menu_rome)
@@ -148,7 +155,7 @@ class MainActivity : Fragment() {
 
             toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
             toolbarName2.setTextColor(rgb(193,150,63))
-            toolbarName2.setTextSize(20f)
+            toolbarName2.setTextSize(25f)
 
             newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
             newGameButton.setTextColor(rgb(193,150,63))
@@ -174,6 +181,9 @@ class MainActivity : Fragment() {
             searchButton.setTextColor(rgb(193,150,63))
             searchButton.setTextSize(20f)
             searchButton.setBackgroundColor(argb(0,0,0,0))
+
+            money.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+            money.setTextColor(rgb(193,150,63))
         }
         else if (Design == "Gothic"){
             game_menu.setBackgroundResource(R.drawable.game_menu_gothic)
@@ -182,7 +192,7 @@ class MainActivity : Fragment() {
 
             toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
             toolbarName2.setTextColor(Color.WHITE)
-            toolbarName2.setTextSize(20f)
+            toolbarName2.setTextSize(25f)
 
             newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
             newGameButton.setTextColor(Color.WHITE)
@@ -208,6 +218,9 @@ class MainActivity : Fragment() {
             searchButton.setTextColor(Color.WHITE)
             searchButton.setTextSize(20f)
             searchButton.setBackgroundColor(argb(0,0,0,0))
+
+            money.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+            money.setTextColor(Color.WHITE)
         }
         else if (Design == "Japan"){
             game_menu.setBackgroundResource(R.drawable.game_menu_japan)
@@ -216,7 +229,7 @@ class MainActivity : Fragment() {
 
             toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
             toolbarName2.setTextColor(Color.BLACK)
-            toolbarName2.setTextSize(20f)
+            toolbarName2.setTextSize(25f)
 
             newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
             newGameButton.setTextColor(Color.BLACK)
@@ -243,6 +256,9 @@ class MainActivity : Fragment() {
             searchButton.setTextSize(17f)
             searchButton.setBackgroundColor(argb(0,0,0,0))
 
+            money.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+            money.setTextColor(Color.BLACK)
+
         }
         else if (Design == "Noir"){
             game_menu.setBackgroundResource(R.drawable.game_menu_noir)
@@ -251,7 +267,7 @@ class MainActivity : Fragment() {
 
             toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
             toolbarName2.setTextColor(Color.WHITE)
-            toolbarName2.setTextSize(20f)
+            toolbarName2.setTextSize(25f)
 
             newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
             newGameButton.setTextColor(Color.WHITE)
@@ -278,6 +294,8 @@ class MainActivity : Fragment() {
             searchButton.setTextSize(17f)
             searchButton.setBackgroundColor(argb(0,0,0,0))
 
+            money.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+            money.setTextColor(Color.WHITE)
         }
 
        // (activity as AppCompatActivity).setSupportActionBar(findViewById(R.id.my_toolbar))

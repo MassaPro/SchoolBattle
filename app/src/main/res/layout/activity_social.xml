@@ -13,14 +13,13 @@
         android:id="@+id/toolbar_social"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorGrey"
+        android:background="?attr/colorPrimary"
         ads:layout_constraintBottom_toBottomOf="parent"
         ads:layout_constraintEnd_toEndOf="parent"
         ads:layout_constraintHorizontal_bias="0.0"
         ads:layout_constraintStart_toStartOf="parent"
         ads:layout_constraintTop_toTopOf="parent"
-        ads:layout_constraintVertical_bias="0.0">
-    </androidx.appcompat.widget.Toolbar>
+        ads:layout_constraintVertical_bias="0.0"></androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
@@ -37,6 +36,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tabs">
+
+        <TextView
+            android:id="@+id/helped_text_social_3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="Подписчики"></TextView>
     </androidx.viewpager.widget.ViewPager>
 
     <Button
@@ -78,14 +85,6 @@
         android:gravity="center"
         android:singleLine="true"
         android:text="Подписки">
-    </TextView>
-    <TextView
-        android:id = "@+id/helped_text_social_3"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:singleLine="true"
-        android:text="Подписчики">
     </TextView>
 
 </RelativeLayout>

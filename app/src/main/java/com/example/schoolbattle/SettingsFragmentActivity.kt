@@ -43,33 +43,56 @@ class SettingsFragmentActivity : Fragment() {
 
         fragment_activity = activity as AppCompatActivity
 
+        val prfs = fragment_activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        val username = prfs?.getString("username", "")
+        toolbarNameSettings.text = username
         if(Design == "Normal")
         {
             fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE);
+            toolbarNameSettings.setTextColor(Color.BLACK)
+            toolbarNameSettings.textSize = 25f
         }
         else if(Design == "Egypt")
         {
             fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(rgb(255, 230, 163))
+            toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+            toolbarNameSettings.setTextColor(Color.BLACK)
+            toolbarNameSettings.textSize = 25f
         }
         else if(Design == "Casino")
         {
             fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_casino)
+            toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+            toolbarNameSettings.setTextColor(Color.YELLOW)
+            toolbarNameSettings.textSize = 25f
         }
         else if(Design == "Rome")
         {
             fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_rome)
+            toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+            toolbarNameSettings.setTextColor(rgb(193,150,63))
+            toolbarNameSettings.textSize = 25f
         }
         else if(Design == "Gothic")
         {
-            fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_gothic)
+            fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.BLACK)
+            toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+            toolbarNameSettings.setTextColor(Color.WHITE)
+            toolbarNameSettings.textSize = 25f
         }
         else if(Design == "Japan")
         {
             fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE)
+            toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+            toolbarNameSettings.setTextColor(Color.BLACK)
+            toolbarNameSettings.textSize = 25f
         }
         else if(Design == "Noir")
         {
             fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.BLACK)
+            toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+            toolbarNameSettings.setTextColor(Color.WHITE)
+            toolbarNameSettings.textSize = 25f
         }
 
         locale_context = activity as AppCompatActivity
@@ -101,7 +124,7 @@ class SettingsFragmentActivity : Fragment() {
 
         if (Design == "Casino") {
             settings_menu.setBackgroundResource(R.drawable.background2_casino)
-            tb1.setBackgroundColor(argb(0,0,0,0))
+            tb1.setBackgroundResource(R.drawable.bottom_navigation_casino)
 
             choose_design.setBackgroundColor(argb(0,0,0,0))
             choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
@@ -119,8 +142,7 @@ class SettingsFragmentActivity : Fragment() {
 
         else if (Design == "Rome") {
             settings_menu.setBackgroundResource(R.drawable.background_rome)
-            tb1.setBackgroundColor(argb(0,0,0,0))
-
+            tb1.setBackgroundResource(R.drawable.bottom_navigation_rome)
             choose_design.setBackgroundColor(argb(0,0,0,0))
             choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
             choose_design.setTextColor(rgb(193,150,63))
@@ -136,7 +158,7 @@ class SettingsFragmentActivity : Fragment() {
         }
         else if (Design == "Gothic") {
             settings_menu.setBackgroundResource(R.drawable.background_gothic)
-            tb1.setBackgroundColor(argb(0,0,0,0))
+            tb1.setBackgroundColor(Color.BLACK)
 
             choose_design.setBackgroundColor(argb(0,0,0,0))
             choose_design.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
@@ -167,6 +189,8 @@ class SettingsFragmentActivity : Fragment() {
             vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
             vibrationSwitch.setTextSize(24f)
             vibrationSwitch.setTextColor(Color.BLACK)
+          //  tb1.setBackgroundColor(Color.WHITE)
+            tb1.setBackgroundColor(Color.WHITE)
         }
         else if (Design == "Noir") {
             settings_menu.setBackgroundResource(R.drawable.background_noir)

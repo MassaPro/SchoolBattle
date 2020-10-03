@@ -42,7 +42,7 @@ class Avatars : Fragment() {
         super.onActivityCreated(savedInstanceState)
         //     vasa = activity.setContentView(R.layout.activity_shop_fragment)
 
-        choose_design_shop.text = "Купленные аватары можно приобрести в профиле"
+        choose_design_shop.text = "Купленные аватары можно применить в профиле"
         HELPED_CONTEXT = activity
 
         locale_context = activity as AppCompatActivity

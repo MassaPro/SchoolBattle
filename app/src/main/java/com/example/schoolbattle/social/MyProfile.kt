@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Point
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -60,6 +63,53 @@ class MyProfile : Fragment() {
 
             dialog_find_ava.close_find_ava.setOnClickListener {
                 dialog_find_ava.dismiss()
+            }
+            val display = locale_context!!.windowManager.defaultDisplay
+            val size = Point()
+            display.getSize(size)
+            val width = size.x
+            val height = size.y
+            dialog_find_ava!!.window!!.setLayout(width*20/21, height*15/16);
+            if(Design == "Egypt") {
+                dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_egypt)
+                dialog_find_ava.choose_ava_text.setBackgroundColor(Color.rgb(255, 230, 163))
+                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                dialog_find_ava.choose_ava_text.setTextColor(Color.BLACK)
+            }
+            else if(Design == "Casino")
+            {
+                dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_egypt)
+                dialog_find_ava.choose_ava_text.setBackgroundResource(R.drawable.bottom_navigation_casino)
+                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                dialog_find_ava.choose_ava_text.setTextColor(Color.YELLOW)
+            }
+            else if(Design == "Rome")
+            {
+                dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_rome)
+                dialog_find_ava.choose_ava_text.setBackgroundResource(R.drawable.bottom_navigation_rome)
+                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                dialog_find_ava.choose_ava_text.setTextColor(Color.rgb(193, 150, 63))
+            }
+            else if(Design == "Gothic")
+            {
+                dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_gothic)
+                dialog_find_ava.choose_ava_text.setBackgroundColor(Color.BLACK)
+                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                dialog_find_ava.choose_ava_text.setTextColor(Color.WHITE)
+            }
+            else if(Design == "Japan")
+            {
+                dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_japan)
+                dialog_find_ava.choose_ava_text.setBackgroundColor(Color.WHITE)
+                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                dialog_find_ava.choose_ava_text.setTextColor(Color.BLACK)
+            }
+            else if(Design == "Noir")
+            {
+                dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_noir)
+                dialog_find_ava.choose_ava_text.setBackgroundColor(Color.BLACK)
+                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                dialog_find_ava.choose_ava_text.setTextColor(Color.WHITE)
             }
             dialog_find_ava.show()
             ProfileAvatarsetupRecyclerView(dialog_find_ava.item_profile_ava)

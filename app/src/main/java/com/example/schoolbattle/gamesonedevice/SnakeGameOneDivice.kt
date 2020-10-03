@@ -100,7 +100,12 @@ class SnakeGameOneDivice : AppCompatActivity() {
 
         signature_canvas_snake_one_device.t1 = findViewById(R.id.name_player1_one_divice) as TextView
         signature_canvas_snake_one_device.t2 = findViewById(R.id.name_player2_one_divice) as TextView
-        if(Design == "Egypt" ) {
+        if(Design == "Normal")
+        {
+            signature_canvas_snake_one_device.t1.setTextColor(Color.RED)
+            signature_canvas_snake_one_device.t2.setTextColor(Color.BLUE)
+        }
+        else if(Design == "Egypt" ) {
 
             name_player1_one_divice.setTextColor(Color.BLACK)
             name_player2_one_divice.setTextColor(Color.BLACK)
@@ -696,7 +701,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
        // canvas?.drawColor(Color.WHITE)
 
 
-        if(red_or_blue != "red")
+        if(red_or_blue == "red")
         {
             t1.text = "Игрок 1 думает"
             t2.text = "Игрок 2"

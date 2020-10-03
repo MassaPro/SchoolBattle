@@ -60,7 +60,8 @@ class ShopFragmentActivity : Fragment (){
             {tv = helped_text4}
             if(Design == "Normal")
             {
-                t_shop.setBackgroundColor(rgb(214,214,214))
+                tv?.setTextColor(Color.BLACK)
+                tabLayout!!.getTabAt(i)?.customView = tv;
             }
             else if(Design == "Egypt"){
                 tv?.textSize = 14f        //так задаешь размер
