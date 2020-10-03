@@ -2,11 +2,12 @@ package com.example.schoolbattle
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.Color.argb
 import android.graphics.Color.rgb
-import android.icu.text.Transliterator
 import android.os.Bundle
+import android.text.method.TextKeyListener.clear
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,10 +22,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolbattle.shop.locale_context
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_navigator.*
 import kotlinx.android.synthetic.main.activity_settings_fragment.*
 import kotlinx.android.synthetic.main.design_item.view.*
-
 
 
 var fragment_activity : AppCompatActivity? = null
@@ -140,16 +139,16 @@ class SettingsFragmentActivity : Fragment() {
             tb1.setBackgroundColor(argb(0,0,0,0))
 
             choose_design.setBackgroundColor(argb(0,0,0,0))
-            choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            choose_design.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
             choose_design.setTextColor(Color.WHITE)
-            choose_design.setTextSize(24f)
+            choose_design.textSize = 24f
 
-            soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            soundSwitch.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
             soundSwitch.setTextColor(Color.WHITE)
-            soundSwitch.setTextSize(24f)
+            soundSwitch.textSize = 24f
 
-            vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-            vibrationSwitch.setTextSize(24f)
+            vibrationSwitch.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+            vibrationSwitch.textSize = 24f
             vibrationSwitch.setTextColor(Color.WHITE)
         }
         else if (Design == "Japan") {
@@ -192,7 +191,10 @@ class SettingsFragmentActivity : Fragment() {
             val editor = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)?.edit()
             editor?.putString("username", "")
             editor?.apply()
+            editor?.clear()
+            editor?.apply()
             recyclerSet.clear()
+
             val intent = Intent(activity, NullActivity::class.java)
             startActivity(intent)
             activity?.finish()

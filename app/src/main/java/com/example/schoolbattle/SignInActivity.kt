@@ -141,12 +141,12 @@ class SignInActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            myRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            myRef.child("Users").child(name).addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
 
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.child("Users").hasChild(name)) {
-                        if (password == snapshot.child("Users").child(name).child("password").value) {
+                    if (snapshot.exists()) {
+                        if (password == snapshot.child("password").value) {
                             //globalName = name
                             startMainActivity()
                         } else {

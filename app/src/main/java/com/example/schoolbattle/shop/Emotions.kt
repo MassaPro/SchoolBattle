@@ -1,6 +1,7 @@
 package com.example.schoolbattle.shop
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
@@ -12,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.content.res.ResourcesCompat
@@ -42,7 +44,7 @@ class Emotions : Fragment()  {
 
         //  vasa = (activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(R.layout.activity_shop_fragment, null)
         //   (activity as AppCompatActivity?)!!.setSupportActionBar(tb1_shop_design)
-        ShopEMOTIONsetupRecyclerView(item_design_shop)
+        ShopEMOTIONsetupRecyclerView(item_design_shop, requireActivity())
         gamesRecycler = item_design_shop
         gamesRecycler.isNestedScrollingEnabled = false;
         item_design_shop.adapter?.notifyDataSetChanged()
@@ -94,13 +96,13 @@ class Emotions : Fragment()  {
 
 
 
-private fun ShopEMOTIONsetupRecyclerView(recyclerView: RecyclerView) {
-    recyclerView.adapter = ShopEMOTIONsItemRecyclerViewAdapter(ARRAY_OF_EMOTION_SHOP)
+private fun ShopEMOTIONsetupRecyclerView(recyclerView: RecyclerView, activity: Activity) {
+    recyclerView.adapter = ShopEMOTIONsItemRecyclerViewAdapter(ARRAY_OF_EMOTION_SHOP, activity)
 }
 
 
 
-class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
+class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>, val activity: Activity):
     RecyclerView.Adapter<ShopEMOTIONsItemRecyclerViewAdapter.ViewHolder>() {
 
     private val onClickListener: View.OnClickListener
@@ -249,25 +251,33 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
 
                     dialog_shop.show()
                     dialog_shop.buy_shop_dialog.setOnClickListener {
+                        val username = activity.getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "").toString()
                         MONEY -= holder.price.text.toString().toInt()
                         ARRAY_OF_EMOTION.add(ARRAY_OF_EMOTION_SHOP[position])
-                        //TODO MONEY передать в базу
-                        //TODO ARRAY_OF_EMOTION передать в базу
-                        holder.price.text = ""
-                        holder.icon.setImageResource(R.drawable.nulevoe)
-                        holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                        holder.button.text = "(КУПЛЕНО)"
-                        locale_context!!.findViewById<TextView>(R.id.money_shop_toolbar).text =
-                            MONEY.toString()
+                        val pushMap = mapOf(
+                            "Users/$username/money" to MONEY,
+                            "Users/$username/array_of_emotions" to CODE(ARRAY_OF_EMOTION)
+                        )
+                        myRef.updateChildren(pushMap).addOnSuccessListener {    
+                            Toast.makeText(activity, "failed to do operation", Toast.LENGTH_LONG).show()
+                            //TODO MONEY передать в базу ------- сделано в строках 256 - 262
+                            //TODO ARRAY_OF_EMOTION передать в базу ------- сделано в строках 256 - 262
+                            holder.price.text = ""
+                            holder.icon.setImageResource(R.drawable.nulevoe)
+                            holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                            holder.button.text = "(КУПЛЕНО)"
+                            locale_context!!.findViewById<TextView>(R.id.money_shop_toolbar).text =
+                                MONEY.toString()
 
-                        val editor =
-                            locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE)
-                                .edit()
-                        editor.putString("money", MONEY.toString())
-                        editor.putString("open_emotions", CODE(ARRAY_OF_EMOTION))
-                        editor.apply()
+                            val editor =
+                                locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                                    .edit()
+                            editor.putString("money", MONEY.toString())
+                            editor.putString("open_emotions", CODE(ARRAY_OF_EMOTION))
+                            editor.apply()
 
-                        dialog_shop.dismiss()
+                            dialog_shop.dismiss()
+                        }
                     }
                     dialog_shop.button_close_2_shop_dialog.setOnClickListener {
                         dialog_shop.dismiss()

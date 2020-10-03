@@ -14,8 +14,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolbattle.shop.locale_context
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_game_menu.*
 import kotlinx.android.synthetic.main.activity_navigator.*
+import java.time.temporal.ValueRange
 
 
 lateinit var gamesRecycler: RecyclerView
@@ -68,6 +72,13 @@ class MainActivity : Fragment() {
 
         AVATAR = prfs?.getString("avatar_number", 0.toString()).toString().toInt()
         MONEY = prfs?.getString("money", INITIAL_AMOUNT.toString()).toString().toInt()         //не забыть положить другую сумму если идет вход в аккаунт
+        myRef.child("Users").child(username!!).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.hasChild("money")) MONEY = snapshot.child("money").value.toString().toInt()
+                if (snapshot.hasChild("array_of_emotions")) ARRAY_OF_EMOTION = DECODE(snapshot.child("array_of_emotions").value.toString())
+            }
+        })
         money_icon.setBackgroundResource(R.drawable.money)
         money.text = MONEY.toString()
         Design = prfs?.getString("design", "Normal").toString()                 //дизайн
