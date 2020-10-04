@@ -233,7 +233,7 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
         }
 
         holder.button.setOnClickListener{
-            var dialog_internet = Dialog(locale_context!!)
+            val dialog_internet = Dialog(locale_context!!)
             dialog_internet.setContentView(R.layout.internet_dialog)
             fun buy_emotions(): Boolean
             {
@@ -251,17 +251,20 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
 
                     dialog_shop.show()
                     dialog_shop.buy_shop_dialog.setOnClickListener {
+                        dialog_shop.buy_shop_dialog.isClickable = false
                         val username = activity.getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "").toString()
                         MONEY -= holder.price.text.toString().toInt()
-                        ARRAY_OF_EMOTION.add(ARRAY_OF_EMOTION_SHOP[position])
+                        val ARRAY_OF_EMOTION_COPY = ARRAY_OF_EMOTION.toMutableList()
+                        ARRAY_OF_EMOTION_COPY.add(ARRAY_OF_EMOTION_SHOP[position])
                         val pushMap = mapOf(
                             "Users/$username/money" to MONEY,
-                            "Users/$username/array_of_emotions" to CODE(ARRAY_OF_EMOTION)
+                            "Users/$username/array_of_emotions" to CODE(ARRAY_OF_EMOTION_COPY)
                         )
-                        myRef.updateChildren(pushMap).addOnSuccessListener {    
-                            Toast.makeText(activity, "failed to do operation", Toast.LENGTH_LONG).show()
-                            //TODO MONEY передать в базу ------- сделано в строках 256 - 262
-                            //TODO ARRAY_OF_EMOTION передать в базу ------- сделано в строках 256 - 262
+                        myRef.updateChildren(pushMap).addOnSuccessListener {
+                            ARRAY_OF_EMOTION.add(ARRAY_OF_EMOTION_SHOP[position])
+                            Toast.makeText(activity, "Success to do operation", Toast.LENGTH_LONG).show()
+                            //TODO MONEY передать в базу ------- сделано
+                            //TODO ARRAY_OF_EMOTION передать в базу ------- сделано
                             holder.price.text = ""
                             holder.icon.setImageResource(R.drawable.nulevoe)
                             holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))

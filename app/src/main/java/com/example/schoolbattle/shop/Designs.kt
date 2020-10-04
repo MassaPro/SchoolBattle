@@ -1,6 +1,7 @@
 package com.example.schoolbattle.shop
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
@@ -47,7 +48,7 @@ class Designs  : Fragment() {
 
       //  vasa = (activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(R.layout.activity_shop_fragment, null)
      //   (activity as AppCompatActivity?)!!.setSupportActionBar(tb1_shop_design)
-        ShopDesignsetupRecyclerView(item_design_shop)
+        ShopDesignsetupRecyclerView(item_design_shop, requireActivity())
         gamesRecycler = item_design_shop
         gamesRecycler.isNestedScrollingEnabled = false;
         item_design_shop.adapter?.notifyDataSetChanged()
@@ -100,13 +101,13 @@ class Designs  : Fragment() {
 
 
 
-private fun ShopDesignsetupRecyclerView(recyclerView: RecyclerView) {
-    recyclerView.adapter = ShopDesignItemRecyclerViewAdapter(ARRAY_OF_DESIGN_SHOP)
+private fun ShopDesignsetupRecyclerView(recyclerView: RecyclerView, activity: Activity) {
+    recyclerView.adapter = ShopDesignItemRecyclerViewAdapter(ARRAY_OF_DESIGN_SHOP, activity)
 }
 
 
 
-class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
+class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>, val activity: Activity):
     RecyclerView.Adapter<ShopDesignItemRecyclerViewAdapter.ViewHolder>() {
 
     private val onClickListener: View.OnClickListener
@@ -241,12 +242,13 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
             dialog_internet.setContentView(R.layout.internet_dialog)
             fun buy_designs(): Boolean
             {
+
                 //TODO MONEY = MONEY from firebase
                 //TODO ARRAY_OF_DESIGN = ARRAY_OF_DESIGN from firebase
                 if(ARRAY_OF_DESIGN_SHOP[position] !in ARRAY_OF_DESIGN)          //если дизайн не куплен
                 {
 
-                    var dialog_shop = Dialog(HELPED_CONTEXT!!)
+                    val dialog_shop = Dialog(HELPED_CONTEXT!!)
                     dialog_shop.setContentView(R.layout.shop_dialog)
 
                     dialog_shop.price_shop.text = holder.price.text
@@ -255,25 +257,38 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
                     dialog_shop.show()
                     dialog_shop.buy_shop_dialog.setOnClickListener {
                         MONEY -= holder.price.text.toString().toInt()
-                        ARRAY_OF_DESIGN.add(ARRAY_OF_DESIGN_SHOP[position])
 
+                        val ARRAY_OF_DESIGN_COPY = ARRAY_OF_DESIGN.toMutableList()
+                        ARRAY_OF_DESIGN_COPY.add(ARRAY_OF_DESIGN_SHOP[position])
+                        dialog_shop.buy_shop_dialog.isClickable = false
+                        val username = activity.getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "").toString()
                         //TODO MONEY передать в базу
                         //TODO ARRAY_OF_DESIGN передать в базу
-                        holder.price.text = ""
-                        holder.icon.setImageResource(R.drawable.nulevoe)
-                        holder.button.setBackgroundColor(argb(0, 0, 0, 0))
-                        holder.button.text = "(КУПЛЕНО)"
-                        locale_context!!.findViewById<TextView>(R.id.money_shop_toolbar).text =
-                            MONEY.toString()
+                        val pushMap = mapOf(
+                            "Users/$username/money" to MONEY,
+                            "Users/$username/array_of_designs" to CODE(ARRAY_OF_DESIGN_COPY)
+                        )
+                        myRef.updateChildren(pushMap).addOnSuccessListener {
+                            ARRAY_OF_DESIGN.add(ARRAY_OF_DESIGN_SHOP[position])
+                            holder.price.text = ""
+                            holder.icon.setImageResource(R.drawable.nulevoe)
+                            holder.button.setBackgroundColor(argb(0, 0, 0, 0))
+                            holder.button.text = "(КУПЛЕНО)"
+                            locale_context!!.findViewById<TextView>(R.id.money_shop_toolbar).text =
+                                MONEY.toString()
 
-                        val editor =
-                            locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE)
-                                .edit()
-                        editor.putString("money", MONEY.toString())
-                        editor.putString("open_design", CODE(ARRAY_OF_DESIGN))
-                        editor.apply()
+                            val editor =
+                                locale_context!!.getSharedPreferences(
+                                    "UserData",
+                                    Context.MODE_PRIVATE
+                                )
+                                    .edit()
+                            editor.putString("money", MONEY.toString())
+                            editor.putString("open_design", CODE(ARRAY_OF_DESIGN))
+                            editor.apply()
 
-                        dialog_shop.dismiss()
+                            dialog_shop.dismiss()
+                        }
                     }
                     dialog_shop.button_close_2_shop_dialog.setOnClickListener {
                         dialog_shop.dismiss()

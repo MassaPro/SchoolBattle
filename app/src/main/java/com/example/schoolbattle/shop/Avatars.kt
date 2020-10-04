@@ -1,6 +1,7 @@
 package com.example.schoolbattle.shop
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
@@ -14,6 +15,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.content.res.ResourcesCompat
@@ -49,7 +51,7 @@ class Avatars : Fragment() {
 
         //  vasa = (activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(R.layout.activity_shop_fragment, null)
         //   (activity as AppCompatActivity?)!!.setSupportActionBar(tb1_shop_design)
-        ProfileAvatarsetupRecyclerView(item_design_shop)
+        ProfileAvatarsetupRecyclerView(item_design_shop, requireActivity())
         gamesRecycler = item_design_shop
         gamesRecycler.isNestedScrollingEnabled = false;
         item_design_shop.adapter?.notifyDataSetChanged()
@@ -101,13 +103,13 @@ class Avatars : Fragment() {
 
 
 
-private fun ProfileAvatarsetupRecyclerView(recyclerView: RecyclerView) {
-    recyclerView.adapter = ProfileAvatarsItemRecyclerViewAdapter(ARRAY_OF_DESIGN_SHOP)
+private fun ProfileAvatarsetupRecyclerView(recyclerView: RecyclerView, activity: Activity) {
+    recyclerView.adapter = ProfileAvatarsItemRecyclerViewAdapter(ARRAY_OF_DESIGN_SHOP, activity)
 }
 
 
 
-class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
+class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>, val activity: Activity):
     RecyclerView.Adapter<ProfileAvatarsItemRecyclerViewAdapter.ViewHolder>() {
 
     private val onClickListener: View.OnClickListener
@@ -250,7 +252,7 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
                 {
                     // dialog = Proof_of_purchase(HELPED_CONTEXT!!,locale_context!!,"Design",ARRAY_OF_DESIGN_SHOP[position].toString().toInt(), PRICE_OD_DESIGN[ARRAY_OF_DESIGN_SHOP[position].toString().toInt()]!!)
                     //   dialog?.showResult()
-                    var dialog_shop = Dialog(HELPED_CONTEXT!!)
+                    val dialog_shop = Dialog(HELPED_CONTEXT!!)
                     dialog_shop.setContentView(R.layout.shop_dialog)
 
                     dialog_shop.price_shop.text = holder.price.text
@@ -258,25 +260,42 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
 
                     dialog_shop.show()
                     dialog_shop.buy_shop_dialog.setOnClickListener {
+                        dialog_shop.buy_shop_dialog.isClickable = false
                         MONEY -= holder.price.text.toString().toInt()
-                        ARRAY_OF_AVATAR.add(ARRAY_OF_AVATAR_SHOP[position])
+                        val ARRAY_OF_AVATAR_COPY = ARRAY_OF_AVATAR.toMutableList()
+                        ARRAY_OF_AVATAR_COPY.add(ARRAY_OF_AVATAR_SHOP[position])
                         //TODO MONEY передать в файрбейс
                         //TODO ARRAY_OF_AVATAR передать в файербейс
-                        holder.price.text = ""
-                        holder.icon.setImageResource(R.drawable.nulevoe)
-                        holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                        holder.button.text = "(КУПЛЕНО)"
-                        locale_context!!.findViewById<TextView>(R.id.money_shop_toolbar).text =
-                            MONEY.toString()
+                        val username = activity.getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "").toString()
+                        val pushMap = mapOf(
+                            "Users/$username/money" to MONEY,
+                            "Users/$username/array_of_avatars" to CODE(ARRAY_OF_AVATAR_COPY)
+                        )
+                        myRef.updateChildren(pushMap).addOnSuccessListener {
+                            ARRAY_OF_AVATAR.add(ARRAY_OF_AVATAR_SHOP[position])
+                            Toast.makeText(activity, "Success to do operation", Toast.LENGTH_LONG)
+                                .show()
+                            //TODO MONEY передать в базу ------- сделано в строках 256 - 262
+                            //TODO ARRAY_OF_EMOTION передать в базу ------- сделано в строках 256 - 262
+                            holder.price.text = ""
+                            holder.icon.setImageResource(R.drawable.nulevoe)
+                            holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                            holder.button.text = "(КУПЛЕНО)"
+                            locale_context!!.findViewById<TextView>(R.id.money_shop_toolbar).text =
+                                MONEY.toString()
 
-                        val editor =
-                            locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE)
-                                .edit()
-                        editor.putString("money", MONEY.toString())
-                        editor.putString("open_avatars", CODE(ARRAY_OF_AVATAR))
-                        editor.apply()
+                            val editor =
+                                locale_context!!.getSharedPreferences(
+                                    "UserData",
+                                    Context.MODE_PRIVATE
+                                )
+                                    .edit()
+                            editor.putString("money", MONEY.toString())
+                            editor.putString("open_avatars", CODE(ARRAY_OF_AVATAR))
+                            editor.apply()
 
-                        dialog_shop.dismiss()
+                            dialog_shop.dismiss()
+                        }
                     }
                     dialog_shop.button_close_2_shop_dialog.setOnClickListener {
                         dialog_shop.dismiss()

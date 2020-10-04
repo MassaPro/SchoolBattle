@@ -72,15 +72,20 @@ class MainActivity : Fragment() {
 
         AVATAR = prfs?.getString("avatar_number", 0.toString()).toString().toInt()
         MONEY = prfs?.getString("money", INITIAL_AMOUNT.toString()).toString().toInt()         //не забыть положить другую сумму если идет вход в аккаунт
+        money.text = MONEY.toString()
         myRef.child("Users").child(username!!).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.hasChild("money")) MONEY = snapshot.child("money").value.toString().toInt()
                 if (snapshot.hasChild("array_of_emotions")) ARRAY_OF_EMOTION = DECODE(snapshot.child("array_of_emotions").value.toString())
+                if (snapshot.hasChild("array_of_avatars")) ARRAY_OF_AVATAR = DECODE(snapshot.child("array_of_avatars").value.toString())
+                if (snapshot.hasChild("array_of_designs")) ARRAY_OF_DESIGN = DECODE(snapshot.child("array_of_designs").value.toString())
+                money.text = MONEY.toString()
             }
+
         })
         money_icon.setBackgroundResource(R.drawable.money)
-        money.text = MONEY.toString()
+
         Design = prfs?.getString("design", "Normal").toString()                 //дизайн
         SOUND = prfs?.getString("sound", "").toString() == "true"
         VIBRATION = prfs?.getString("vibration", "").toString() == "true"       //получаем из памяти звук
