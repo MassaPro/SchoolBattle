@@ -185,3 +185,5 @@ fun verifyAvailableNetwork(activity: AppCompatActivity):Boolean{
     val networkInfo=connectivityManager.activeNetworkInfo
     return  networkInfo!=null && networkInfo.isConnected
 }
+
+var RATING = 1000

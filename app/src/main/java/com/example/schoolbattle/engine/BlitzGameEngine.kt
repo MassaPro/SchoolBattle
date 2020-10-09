@@ -24,9 +24,23 @@ interface BlitzGameEngine {
     var activity: Activity
     var type: String
     var isFinished: Boolean
+    var userRating: Int
+    var opponentRating: Int
 
     fun init() {
-        positionData.child("winner").onDisconnect().setValue(opponent)
+        val loseUpd = mapOf(
+            "winner" to opponent,
+            "loser" to user,
+            "winnerRating" to updateRating(opponentRating, userRating, 1.0).first,
+            "loserRating" to updateRating(opponentRating, userRating, 1.0).second
+        )
+        val winUpd = mapOf(
+            "loser" to opponent,
+            "winner" to user,
+            "winnerRating" to updateRating(userRating, opponentRating, 1.0).first,
+            "loserRating" to updateRating(userRating, opponentRating, 1.0).second
+        )
+        positionData.onDisconnect().updateChildren(loseUpd)
         //positionData.onDisconnect().removeValue()
         timer.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
@@ -39,11 +53,11 @@ interface BlitzGameEngine {
                     userT.text = cntUser.toString()
                     opponentT.text = cntOpponent.toString()
                     if (cntUser >= 500L) {
-                        positionData.child("winner").setValue(opponent)
+                        positionData.child("winner").setValue(loseUpd)
                         this.cancel()
                     }
                     if (cntOpponent >= 500L) {
-                        positionData.child("winner").setValue(user)
+                        positionData.child("winner").setValue(winUpd)
                         this.cancel()
                     }
                 }
@@ -65,13 +79,26 @@ interface BlitzGameEngine {
     }
 
     fun finish(res: String, activity: Activity, isActivityRunning: Boolean) {
+        val loseUpd = mapOf(
+            "winner" to opponent,
+            "loser" to user,
+            "winnerRating" to updateRating(opponentRating, userRating, 1.0).first,
+            "loserRating" to updateRating(opponentRating, userRating, 1.0).second
+        )
+        val winUpd = mapOf(
+            "loser" to opponent,
+            "winner" to user,
+            "winnerRating" to updateRating(userRating, opponentRating, 1.0).first,
+            "loserRating" to updateRating(userRating, opponentRating, 1.0).second
+        )
+
         if (!isFinished) {
             timer.cancel()
-            positionData.child("winner").onDisconnect().cancel()
+            positionData.onDisconnect().cancel()
             if (res == "Победа") {
-                positionData.child("winner").setValue(user)
+                positionData.updateChildren(winUpd)
             } else if (res == "Поражение") {
-                positionData.child("winner").setValue(opponent)
+                positionData.updateChildren(loseUpd)
             } else {
                 positionData.child("winner").setValue("0")
             }

@@ -110,6 +110,8 @@ class BoxGameActivity : AppCompatActivity() {
                 override var cnt = 0
                 override var type = "BoxGame"
                 override var isFinished = false
+                override var userRating = RATING
+                override var opponentRating = intent.getStringExtra("rating")!!.toInt()
             }
             engine?.init()
             signature_canvas_box.engine = engine

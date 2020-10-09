@@ -17,7 +17,7 @@ class BlitzActivity : AppCompatActivity() {
         val globalName = getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "")
         val gameName = intent?.getStringExtra("gameName").toString()
         myRef.child("blitz-wait-list").child(gameName).child(globalName!!).onDisconnect().removeValue()
-        myRef.child("blitz-wait-list").child(gameName).child(globalName).setValue(globalName)
+        myRef.child("blitz-wait-list").child(gameName).child(globalName).setValue(RATING)
     }
 
     override fun onResume() {

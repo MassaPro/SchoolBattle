@@ -80,9 +80,10 @@ class MainActivity : Fragment() {
                 if (snapshot.hasChild("array_of_emotions")) ARRAY_OF_EMOTION = DECODE(snapshot.child("array_of_emotions").value.toString())
                 if (snapshot.hasChild("array_of_avatars")) ARRAY_OF_AVATAR = DECODE(snapshot.child("array_of_avatars").value.toString())
                 if (snapshot.hasChild("array_of_designs")) ARRAY_OF_DESIGN = DECODE(snapshot.child("array_of_designs").value.toString())
-                money.text = MONEY.toString()
+                if (money != null) {
+                    money.text = MONEY.toString()
+                }
             }
-
         })
         money_icon.setBackgroundResource(R.drawable.money)
 
@@ -381,11 +382,18 @@ class MainActivity : Fragment() {
 
         }
         blitz.setOnClickListener {
-            val intent = Intent(activity, NewGameActivity::class.java)
-            //activity?.overridePendingTransition(0, 0)
-            intent.putExtra("playType", 0)
-            startActivity(intent)
-
+            myRef.child("Users/$username/rating").addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {}
+                override fun onDataChange(p0: DataSnapshot) {
+                    if (p0.exists()) {
+                        RATING = p0.value.toString().toInt()
+                    }
+                    val intent = Intent(activity, NewGameActivity::class.java)
+                    //activity?.overridePendingTransition(0, 0)
+                    intent.putExtra("playType", 0)
+                    startActivity(intent)
+                }
+            })
         }
         oneDevice.setOnClickListener {
             val intent = Intent(activity, NewGameActivity::class.java)

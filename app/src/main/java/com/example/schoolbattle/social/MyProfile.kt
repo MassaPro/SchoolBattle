@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.activity_ava__dialog.*
 import com.example.schoolbattle.CONTEXT
 import com.example.schoolbattle.Design
 import com.example.schoolbattle.R
+import com.example.schoolbattle.engine.RatingGraph
 import kotlinx.android.synthetic.main.activity_friends_list.*
 import kotlinx.android.synthetic.main.activity_my_profile.*
 import kotlinx.android.synthetic.main.ava_item_profile.view.*
@@ -45,11 +46,15 @@ class MyProfile : Fragment() {
         return inflater.inflate(R.layout.activity_my_profile, container, false)
     }
 
+    @ExperimentalStdlibApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         locale_context = activity as AppCompatActivity
         super.onViewCreated(view, savedInstanceState)
         var dialog_find_ava = Dialog(locale_context!!)
-
+        val ratingGraph = RatingGraph(requireActivity())
+        ratingGraph.buildGraph()
+        ratingGraph.updateRating(mutableListOf(1000, 2000, 3000))
+        ratingGraph.updateRating(mutableListOf(1000, 2200, 300, 3192))
         PICTURE_AVATAR[AVATAR]?.let { image_global_ava.setImageResource(it) }
 
         val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)

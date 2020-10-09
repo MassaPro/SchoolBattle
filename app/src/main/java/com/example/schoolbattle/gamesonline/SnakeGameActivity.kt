@@ -111,6 +111,8 @@ class SnakeGameActivity : AppCompatActivity() {
                 override var cnt = 0
                 override var type = "SnakeGame"
                 override var isFinished = false
+                override var userRating = RATING
+                override var opponentRating = intent.getStringExtra("rating")!!.toInt()
             }
             engine?.init()
             signature_canvas_snake_online.engine = engine

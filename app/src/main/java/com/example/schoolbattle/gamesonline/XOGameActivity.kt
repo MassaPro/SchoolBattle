@@ -193,6 +193,8 @@ class XOGameActivity : AppCompatActivity() {
                 override var cnt = 0
                 override var type = "XOGame"
                 override var isFinished = false
+                override var userRating = RATING
+                override var opponentRating = intent.getStringExtra("rating")!!.toInt()
             }
             engine?.init()
             signature_canvas.engine = engine

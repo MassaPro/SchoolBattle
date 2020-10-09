@@ -13,17 +13,23 @@ exports.addPlayersOfBlitz = functions.database.ref('/blitz-wait-list/{gameId}/{u
       let childCount = 0;
       let firstName = "";
       let secondName = "";
+      let firstRating = "";
+      let secondRating = "";
       const updates = {};
 
       snapshot.forEach((child) => {
         ++childCount;
         if (childCount === 1) {
-          firstName = child.key
+          firstName = child.key;
+          firstRating = child.val();
         } else if (childCount === 2) {
-          secondName = child.key
+          secondName = child.key;
+          secondRating = child.val();
           let currentDate = Date.now() % 2;
-          updates['Users/' + secondName + '/blitz/' + gameId + '/' + firstName] = currentDate;
-          updates['Users/' + firstName + '/blitz/' + gameId + '/' + secondName] = 1 - currentDate;
+          updates['Users/' + secondName + '/blitz/' + gameId + '/' + firstName + '/move'] = currentDate;
+          updates['Users/' + firstName + '/blitz/' + gameId + '/' + secondName + '/move'] = 1 - currentDate;
+          updates['Users/' + secondName + '/blitz/' + gameId + '/' + firstName + '/rating'] = firstRating;
+          updates['Users/' + firstName + '/blitz/' + gameId + '/' + secondName + '/rating'] = secondRating;
           updates['blitz-wait-list/' + gameId + '/' + firstName] = null;
           updates['blitz-wait-list/' + gameId + '/' + secondName] = null;
           if (firstName > secondName) {
@@ -42,14 +48,21 @@ exports.addPlayersOfBlitz = functions.database.ref('/blitz-wait-list/{gameId}/{u
 exports.clearTrashAndUpdateRatingBlitz = functions.database.ref('/blitz/{type}/{playersId}/winner').onCreate(async (change, context) => {
     const parentRef = change.ref.parent;
     const snapshot = await parentRef.child('true').once('value');
+    const nameWinner = await parentRef.child('winner').once('value');
+    const nameLoser = await parentRef.child("loser").once('value');
+    const ratingWinner = await parentRef.child('winnerRating').once('value');
+    const ratingLoser = await parentRef.child("loserRating").once('value');
     const type = context.params.type;
     const playersId = context.params.playersId;
     const upd = {};
-    upd[playersId] = null
+
+    upd['/blitz/' + type + '/' + playersId] = null;
+    upd['/Users/' + nameWinner.val() + '/rating'] = ratingWinner.val();
+    upd['/Users/' + nameLoser.val() + '/rating'] = ratingLoser.val();
     if (snapshot.val() === "") {
-      return parentRef.parent.update(upd);
+      return parentRef.parent.parent.parent.update(upd);
     }
-    return parentRef.parent.update(upd);
+    return parentRef.parent.parent.parent.update(upd);
   });
 
 exports.clearTrashBlitz = functions.database.ref('/blitz/{type}/{playersId}/winner').onUpdate(async (change, context) => {
@@ -57,7 +70,7 @@ exports.clearTrashBlitz = functions.database.ref('/blitz/{type}/{playersId}/winn
     const type = context.params.type;
     const playersId = context.params.playersId;
     const upd = {};
-    upd[playersId] = null
+    upd[playersId] = null;
     return parentRef.parent.update(upd);
   });
 

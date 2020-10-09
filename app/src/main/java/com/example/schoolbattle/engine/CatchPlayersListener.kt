@@ -36,10 +36,12 @@ fun initCatchPlayersListenerForBlitzGame(username: String, context: Context) {
             intent.putExtra("type", "blitz")
             for (i in p0.children) {
                 intent.putExtra("opponent", i.key.toString())
-                intent.putExtra("move", i.value.toString())
+                intent.putExtra("move", i.child("move").value.toString())
+                intent.putExtra("rating", i.child("rating").value.toString())
+                Toast.makeText(context, i.child("rating").toString(), Toast.LENGTH_LONG).show()
                 break
             }
-            Toast.makeText(context, p0.toString(), Toast.LENGTH_LONG).show()
+
             context.startActivity(intent)
         }
         override fun onCancelled(p0: DatabaseError) {}
