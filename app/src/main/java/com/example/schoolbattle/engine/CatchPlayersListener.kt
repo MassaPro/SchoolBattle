@@ -64,6 +64,14 @@ fun initCatchPlayersListenerForLongGame(username: String, context: Context) {
                 Log.w("asasa", s.toString())
                 for (j in i.children) {
                     for (k in j.children) {
+                        myRef.child("Users/" + k.key + "/image").addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onCancelled(p0: DatabaseError) {}
+                            override fun onDataChange(p0: DataSnapshot) {
+                                if (p0.exists()) {
+                                    USERAVAS[k.key!!] = p0.value.toString()
+                                }
+                            }
+                        })
                         CURRENTGAMES.add(LongGame(i.key!!, j.key!!, k.key!!, k.value.toString()))
                         currentGamesRecycler?.adapter?.notifyDataSetChanged()
                     }
@@ -79,6 +87,16 @@ fun initCatchPlayersListenerForLongGame(username: String, context: Context) {
                     lateinit var type: String
                     for (j in p0.children) {
                         for (k in j.children) {
+                            Log.w("USERAVAS", p0.value.toString())
+                            myRef.child("Users/" + k.key + "/image").addListenerForSingleValueEvent(object : ValueEventListener {
+                                override fun onCancelled(p0: DatabaseError) {}
+                                override fun onDataChange(p0: DataSnapshot) {
+                                    if (p0.exists()) {
+                                        USERAVAS[k.key!!] = p0.value.toString()
+
+                                    }
+                                }
+                            })
                             CURRENTGAMES.add(LongGame(p0.key!!, j.key!!, k.key!!, k.value.toString()))
                             opponent = k.key!!
                             type = j.key!!
@@ -87,18 +105,25 @@ fun initCatchPlayersListenerForLongGame(username: String, context: Context) {
                     }
                     var intent = Intent(context, TEST::class.java)
                     for (i in p0.children) {
-                        intent = if (i.key.toString() == "XOGame") {
-                            Intent(context, XOGameActivity::class.java)
-                        } else if (i.key.toString() == "DotGame") {
-                            Intent(context, DotGameActivity::class.java)
-                        } else if (i.key.toString() == "SnakeGame") {
-                            Intent(context, SnakeGameActivity::class.java)
-                        } else if (i.key.toString() == "BoxGame") {
-                            Intent(context, BoxGameActivity::class.java)
-                        } else if (i.key.toString() == "Reversi") {
-                            Intent(context, ReversiGameActivity::class.java)
-                        } else {
-                            Intent(context, TEST::class.java)
+                        intent = when {
+                            i.key.toString() == "XOGame" -> {
+                                Intent(context, XOGameActivity::class.java)
+                            }
+                            i.key.toString() == "DotGame" -> {
+                                Intent(context, DotGameActivity::class.java)
+                            }
+                            i.key.toString() == "SnakeGame" -> {
+                                Intent(context, SnakeGameActivity::class.java)
+                            }
+                            i.key.toString() == "BoxGame" -> {
+                                Intent(context, BoxGameActivity::class.java)
+                            }
+                            i.key.toString() == "Reversi" -> {
+                                Intent(context, ReversiGameActivity::class.java)
+                            }
+                            else -> {
+                                Intent(context, TEST::class.java)
+                            }
                         }
                         break
                     }
@@ -152,6 +177,14 @@ fun initCatchPlayersListenerForLongGame(username: String, context: Context) {
                             var data: LongGame? = null
                             for (i0 in p0.children) {
                                 for (j0 in i0.children) {
+                                    myRef.child("Users/" + j0.key + "/image").addListenerForSingleValueEvent(object : ValueEventListener {
+                                        override fun onCancelled(p00: DatabaseError) {}
+                                        override fun onDataChange(p00: DataSnapshot) {
+                                            if (p00.exists()) {
+                                                USERAVAS[j0.key!!] = p00.value.toString()
+                                            }
+                                        }
+                                    })
                                     data = LongGame(p0.key!!, i0.key!!, j0.key!!, j0.value.toString())
                                 }
                             }

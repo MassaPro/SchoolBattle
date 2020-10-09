@@ -1,5 +1,6 @@
 package com.example.schoolbattle
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -20,8 +21,10 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.schoolbattle.engine.colorByRating
 import com.example.schoolbattle.shop.locale_context
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_game_menu.*
 import kotlinx.android.synthetic.main.activity_settings_fragment.*
 import kotlinx.android.synthetic.main.design_item.view.*
 
@@ -36,6 +39,17 @@ class SettingsFragmentActivity : Fragment() {
     ): View? {
         CONTEXT = requireActivity()
         return inflater.inflate(R.layout.activity_settings_fragment, container, false)
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onResume() {
+        super.onResume()
+        if (RATING != -1) {
+            val prfs = fragment_activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+            val username = prfs?.getString("username", "")
+            toolbarNameSettings.text = "$username ($RATING)"
+            toolbarNameSettings.setTextColor(colorByRating(RATING))
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

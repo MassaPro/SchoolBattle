@@ -101,6 +101,7 @@ lateinit var CONTEXT: Activity
 //Текущие игры в долгой
 data class LongGame(val key: String, val type: String, val opponent: String, val move: String)
 var CURRENTGAMES: MutableList<LongGame> = mutableListOf()
+var USERAVAS = mutableMapOf<String, Any>()
 var currentGamesRecycler: RecyclerView? = null
 
   //__________________________________________________________________для пихания в память телефона
@@ -186,4 +187,4 @@ fun verifyAvailableNetwork(activity: AppCompatActivity):Boolean{
     return  networkInfo!=null && networkInfo.isConnected
 }
 
-var RATING = 1000
+var RATING = -1

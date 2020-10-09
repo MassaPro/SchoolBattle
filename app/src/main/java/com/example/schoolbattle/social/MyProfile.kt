@@ -26,8 +26,12 @@ import com.example.schoolbattle.CONTEXT
 import com.example.schoolbattle.Design
 import com.example.schoolbattle.R
 import com.example.schoolbattle.engine.RatingGraph
+import com.example.schoolbattle.engine.colorByRating
 import kotlinx.android.synthetic.main.activity_friends_list.*
 import kotlinx.android.synthetic.main.activity_my_profile.*
+import kotlinx.android.synthetic.main.activity_my_profile.image_global_ava
+import kotlinx.android.synthetic.main.activity_my_profile.profileMyName
+import kotlinx.android.synthetic.main.activity_profile_user.*
 import kotlinx.android.synthetic.main.ava_item_profile.view.*
 import kotlinx.android.synthetic.main.design_shop_item.view.*
 import kotlinx.android.synthetic.main.design_shop_item.view.img_ava_shop
@@ -36,6 +40,18 @@ import kotlinx.android.synthetic.main.design_shop_item.view.img_ava_shop
 
 var D : Dialog? = null
 class MyProfile : Fragment() {
+
+    @SuppressLint("SetTextI18n")
+    override fun onResume() {
+        super.onResume()
+        CONTEXT = requireActivity()
+        if (RATING != -1) {
+            val prfs = requireActivity().getSharedPreferences("UserData", Context.MODE_PRIVATE)
+            val username = prfs?.getString("username", "")
+            profileMyName.text = "$username ($RATING)"
+            profileMyName.setTextColor(colorByRating(RATING))
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -168,7 +184,7 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
                 val prefs = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE)
                 var username = prefs?.getString("username", "")
                 if (username != null) {
-                    myRef.child("users").child(username).child("image").setValue(ARRAY_OF_AVATAR[position].toString())
+                    myRef.child("Users").child(username).child("image").setValue(ARRAY_OF_AVATAR[position].toString())
                 }
 
                 D?.dismiss()

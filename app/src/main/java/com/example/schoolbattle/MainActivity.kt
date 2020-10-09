@@ -1,6 +1,7 @@
 package com.example.schoolbattle
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.schoolbattle.engine.colorByRating
 import com.example.schoolbattle.shop.locale_context
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DataSnapshot
@@ -32,9 +34,16 @@ class MainActivity : Fragment() {
         finishAffinity(ContextUtils.getActivity(this))
     }*/
 
+    @SuppressLint("SetTextI18n")
     override fun onResume() {
         super.onResume()
         CONTEXT = requireActivity()
+        if (RATING != -1) {
+            val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+            val username = prefs?.getString("username", "")
+            toolbarName2.text = "$username ($RATING)"
+            toolbarName2.setTextColor(colorByRating(RATING))
+        }
         //val navView: BottomNavigationView = findViewById(R.id.nav_view)
         //navView.selectedItemId = R.id.navigation_home
     }
@@ -49,6 +58,7 @@ class MainActivity : Fragment() {
 
 
 
+    @SuppressLint("SetTextI18n")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val prfs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)

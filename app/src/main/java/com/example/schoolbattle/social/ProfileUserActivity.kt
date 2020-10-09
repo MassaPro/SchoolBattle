@@ -1,19 +1,20 @@
 package com.example.schoolbattle.social
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.CheckBox
-import com.example.schoolbattle.NewGameActivity
-import com.example.schoolbattle.R
-import com.example.schoolbattle.myRef
+import com.example.schoolbattle.*
+import com.example.schoolbattle.engine.colorByRating
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ServerValue
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_profile_user.*
+import kotlinx.android.synthetic.main.activity_settings_fragment.*
 import java.util.*
 
 /**
@@ -23,6 +24,12 @@ import java.util.*
  * in a [ItemListActivity].
  */
 class ProfileUserActivity : AppCompatActivity() {
+
+    @SuppressLint("SetTextI18n")
+    override fun onResume() {
+        super.onResume()
+        CONTEXT = this
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

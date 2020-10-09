@@ -1,5 +1,6 @@
 package com.example.schoolbattle
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.app.Dialog
@@ -21,10 +22,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.schoolbattle.engine.initCatchPlayersListenerForBlitzGame
-import com.example.schoolbattle.engine.initCatchPlayersListenerForLongGame
-import com.example.schoolbattle.engine.updateRecycler
-import com.example.schoolbattle.engine.updateRecyclerBlitz
+import com.example.schoolbattle.engine.*
 import kotlinx.android.synthetic.main.activity_navigator.*
 
 
@@ -42,6 +40,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_navigator.*
 import kotlinx.android.synthetic.main.activity_friends_list.*
+import kotlinx.android.synthetic.main.activity_game_menu.*
+import kotlinx.android.synthetic.main.activity_profile_user.*
+import kotlinx.android.synthetic.main.activity_settings_fragment.*
 import kotlinx.android.synthetic.main.reward_dialog.*
 
 var now: Context? = null
@@ -163,6 +164,29 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
             updateRecyclerBlitz(username)
         }
 
+        myRef.child("Users/$username/rating").addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+            @SuppressLint("SetTextI18n")
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.exists()) {
+                    RATING = p0.value.toString().toInt()
+                    if (CONTEXT.toolbarName2 != null) {
+                        Toast.makeText(CONTEXT, "DUB", Toast.LENGTH_LONG).show()
+                        CONTEXT.toolbarName2.text = "$username ($RATING)"
+                        CONTEXT.toolbarName2.setTextColor(colorByRating(RATING))
+                    }
+                    if (CONTEXT.profileMyName != null) {
+                        CONTEXT.profileMyName.text = "$username ($RATING)"
+                        CONTEXT.profileMyName.setTextColor(colorByRating(RATING))
+                    }
+                    if (CONTEXT.toolbarNameSettings != null) {
+                        CONTEXT.toolbarNameSettings.text = "$username ($RATING)"
+                        CONTEXT.toolbarNameSettings.setTextColor(colorByRating(RATING))
+                    }
+                }
+            }
+        })
+
         initCatchPlayersListenerForBlitzGame(username!!, this)
         initCatchPlayersListenerForLongGame(username, this)
         myRef.child("Users").child(username.toString()).child("Revanches").addValueEventListener(
@@ -216,11 +240,13 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
             object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
 
+                @SuppressLint("SetTextI18n")
                 override fun onDataChange(p0: DataSnapshot) {
                     FRIENDS.clear()
                     for (i in p0.children) {
                         FRIENDS.add(i.key.toString())
                     }
+
                     //friends_list.adapter?.notifyDataSetChanged()
                 }
             })

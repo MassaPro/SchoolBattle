@@ -33,13 +33,9 @@ import org.w3c.dom.Text
 
 class SocialActivity : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        //CONTEXT = requireActivity()
-
-
-
-
+    override fun onResume() {
+        super.onResume()
+        CONTEXT = requireActivity()
     }
 
     @SuppressLint("WrongViewCast")
@@ -51,7 +47,7 @@ class SocialActivity : Fragment() {
         /**
          * Inflate tab_layout and setup Views.
          */
-        CONTEXT = requireActivity()
+
 
         val v: View = inflater.inflate(R.layout.activity_social, container, false)
         tabLayout = v.findViewById<View>(

@@ -17,6 +17,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolbattle.*
 import com.example.schoolbattle.gamesonline.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_game_item.view.*
 import kotlinx.android.synthetic.main.activity_list_of_current_games.*
 
@@ -173,7 +176,12 @@ class GameListActivity : Fragment() {
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.type.text = ITEMS[position].type
             holder.name.text = ITEMS[position].opponent
-            holder.avatar.setBackgroundResource(R.drawable.avatar1)
+            if (USERAVAS[ITEMS[position].opponent] == null) USERAVAS[ITEMS[position].opponent] = 0
+            PICTURE_AVATAR[ARRAY_OF_AVATAR_SHOP[USERAVAS[ITEMS[position].opponent].toString().toInt()]]?.let {
+                holder.avatar.setBackgroundResource(
+                    it
+                )
+            }
             with(holder.itemView) {
                 tag = ITEMS[position]
                 setOnClickListener(onClickListener)
