@@ -7,11 +7,13 @@ import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.schoolbattle.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DatabaseReference
+import kotlinx.android.synthetic.main.activity_online_games_temlate.*
 import kotlinx.android.synthetic.main.dialog_for_losers.*
 import kotlinx.android.synthetic.main.find_emotion.*
 
@@ -90,7 +92,25 @@ fun initMenuFunctions(activity: Activity,
 
             }
             R.id.page_online_4 -> {
-
+                if (activity.toString().contains ("DotGameActivity"))
+                {
+                    CONDITION_DOT++
+                    Log.d(CONDITION_DOT.toString(),"CONDITION_DOT")
+                    Toast.makeText(activity,CONDITION_DOT.toString(), Toast.LENGTH_SHORT).show()
+                    activity.signature_canvas3.invalidate()
+                }
+            }
+            R.id.page_online_5 -> {
+                if (activity.toString().contains ("DotGameActivity"))
+                {
+                    if(CONDITION_DOT>0)
+                    {
+                        CONDITION_DOT--
+                        Log.d(CONDITION_DOT.toString(),"CONDITION_DOT")
+                    }
+                    activity.signature_canvas3.invalidate()
+                    Toast.makeText(activity,CONDITION_DOT.toString(), Toast.LENGTH_SHORT).show()
+                }
             }
         }
         true
