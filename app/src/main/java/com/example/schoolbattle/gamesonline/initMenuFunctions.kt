@@ -95,8 +95,7 @@ fun initMenuFunctions(activity: Activity,
                 if (activity.toString().contains ("DotGameActivity"))
                 {
                     CONDITION_DOT++
-                    Log.d(CONDITION_DOT.toString(),"CONDITION_DOT")
-                    Toast.makeText(activity,CONDITION_DOT.toString(), Toast.LENGTH_SHORT).show()
+                    Log.d("CONDITION_DOT",activity.signature_canvas3.History.toString())
                     activity.signature_canvas3.invalidate()
                 }
             }
@@ -106,10 +105,9 @@ fun initMenuFunctions(activity: Activity,
                     if(CONDITION_DOT>0)
                     {
                         CONDITION_DOT--
-                        Log.d(CONDITION_DOT.toString(),"CONDITION_DOT")
+                        Log.d("CONDITION_DOT",activity.signature_canvas3.History.toString())
                     }
                     activity.signature_canvas3.invalidate()
-                    Toast.makeText(activity,CONDITION_DOT.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
         }
