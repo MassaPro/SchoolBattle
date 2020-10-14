@@ -750,10 +750,10 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
         height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)
 
 
-        step = if(getWidth()/(size_field_x+1) < height/(size_field_y+1/3)) {
-            getWidth().toFloat()/(size_field_x+1)
+        step = if(getWidth()/(size_field_x+1) < height/(size_field_y+1)) {
+            getWidth().toFloat()/(size_field_x+2)
         } else {
-            height/(size_field_y.toFloat()+1/3)
+            height/(size_field_y.toFloat()+1/2) - 2
         }
 
        // step = getWidth().toFloat()/(size_field_x+1)

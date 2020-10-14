@@ -60,169 +60,152 @@ class SettingsFragmentActivity : Fragment() {
         val prfs = fragment_activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val username = prfs?.getString("username", "")
         toolbarNameSettings.text = username
-        if(Design == "Normal")
-        {
-            fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE);
-            toolbarNameSettings.setTextColor(Color.BLACK)
-            toolbarNameSettings.textSize = 25f
-        }
-        else if(Design == "Egypt")
-        {
-            fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(rgb(255, 230, 163))
-            toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
-            toolbarNameSettings.setTextColor(Color.BLACK)
-            toolbarNameSettings.textSize = 25f
-        }
-        else if(Design == "Casino")
-        {
-            fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_casino)
-            toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
-            toolbarNameSettings.setTextColor(Color.YELLOW)
-            toolbarNameSettings.textSize = 25f
-        }
-        else if(Design == "Rome")
-        {
-            fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_rome)
-            toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
-            toolbarNameSettings.setTextColor(rgb(193,150,63))
-            toolbarNameSettings.textSize = 25f
-        }
-        else if(Design == "Gothic")
-        {
-            fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.BLACK)
-            toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
-            toolbarNameSettings.setTextColor(Color.WHITE)
-            toolbarNameSettings.textSize = 25f
-        }
-        else if(Design == "Japan")
-        {
-            fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE)
-            toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
-            toolbarNameSettings.setTextColor(Color.BLACK)
-            toolbarNameSettings.textSize = 25f
-        }
-        else if(Design == "Noir")
-        {
-            fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.BLACK)
-            toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
-            toolbarNameSettings.setTextColor(Color.WHITE)
-            toolbarNameSettings.textSize = 25f
+
+        when (Design) {
+            "Normal" -> {
+                settings_menu.setBackgroundColor(Color.WHITE)
+                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE);
+                toolbarNameSettings.setTextColor(Color.BLACK)
+                toolbarNameSettings.textSize = 25f
+            }
+            "Egypt" -> {
+
+                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(rgb(255, 230, 163))
+                toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                toolbarNameSettings.setTextColor(Color.BLACK)
+                toolbarNameSettings.textSize = 25f
+
+                settings_menu.setBackgroundResource(R.drawable.background_egypt)
+                tb1.setBackgroundColor(rgb(255, 230, 163));
+
+                choose_design.setBackgroundColor(argb(0,0,0,0))
+                choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                //choose_design.setTextColor(Color.YELLOW)
+                choose_design.setTextSize(24f)
+
+                soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                //soundSwitch.setSwitchColor(Color.YELLOW)
+                //soundSwitch.setBackgroundColor(Color.YELLOW)
+                soundSwitch.setTextSize(24f)
+                vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                vibrationSwitch.setTextSize(24f)
+            }
+            "Casino" -> {
+                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_casino)
+                toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                toolbarNameSettings.setTextColor(Color.YELLOW)
+                toolbarNameSettings.textSize = 25f
+                settings_menu.setBackgroundResource(R.drawable.background2_casino)
+                tb1.setBackgroundResource(R.drawable.bottom_navigation_casino)
+
+                choose_design.setBackgroundColor(argb(0,0,0,0))
+                choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                choose_design.setTextColor(Color.YELLOW)
+                choose_design.setTextSize(24f)
+
+                soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                soundSwitch.setTextColor(Color.YELLOW)
+                soundSwitch.setTextSize(24f)
+
+                vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                vibrationSwitch.setTextSize(24f)
+                vibrationSwitch.setTextColor(Color.YELLOW)
+            }
+            "Rome" -> {
+                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_rome)
+                toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                toolbarNameSettings.setTextColor(rgb(193,150,63))
+                toolbarNameSettings.textSize = 25f
+
+                settings_menu.setBackgroundResource(R.drawable.background_rome)
+                tb1.setBackgroundResource(R.drawable.bottom_navigation_rome)
+                choose_design.setBackgroundColor(argb(0,0,0,0))
+                choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                choose_design.setTextColor(rgb(193,150,63))
+                choose_design.setTextSize(24f)
+
+                soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                soundSwitch.setTextColor(rgb(193,150,63))
+                soundSwitch.setTextSize(24f)
+
+                vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                vibrationSwitch.setTextSize(24f)
+                vibrationSwitch.setTextColor(rgb(193,150,63))
+            }
+            "Gothic" -> {
+                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.BLACK)
+                toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                toolbarNameSettings.setTextColor(Color.WHITE)
+                toolbarNameSettings.textSize = 25f
+                settings_menu.setBackgroundResource(R.drawable.background_gothic)
+                tb1.setBackgroundColor(Color.BLACK)
+
+                choose_design.setBackgroundColor(argb(0,0,0,0))
+                choose_design.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                choose_design.setTextColor(Color.WHITE)
+                choose_design.textSize = 24f
+
+                soundSwitch.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                soundSwitch.setTextColor(Color.WHITE)
+                soundSwitch.textSize = 24f
+
+                vibrationSwitch.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                vibrationSwitch.textSize = 24f
+                vibrationSwitch.setTextColor(Color.WHITE)
+            }
+            "Japan" -> {
+                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE)
+                toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                toolbarNameSettings.setTextColor(Color.BLACK)
+                toolbarNameSettings.textSize = 25f
+                settings_menu.setBackgroundResource(R.drawable.background_japan)
+                tb1.setBackgroundColor(argb(0,0,0,0))
+
+                choose_design.setBackgroundColor(argb(0,0,0,0))
+                choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                choose_design.setTextColor(Color.BLACK)
+                choose_design.setTextSize(24f)
+
+                soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                soundSwitch.setTextColor(Color.BLACK)
+                soundSwitch.setTextSize(24f)
+
+                vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                vibrationSwitch.setTextSize(24f)
+                vibrationSwitch.setTextColor(Color.BLACK)
+                //  tb1.setBackgroundColor(Color.WHITE)
+                tb1.setBackgroundColor(Color.WHITE)
+            }
+            "Noir" -> {
+                fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.BLACK)
+                toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                toolbarNameSettings.setTextColor(Color.WHITE)
+                toolbarNameSettings.textSize = 25f
+                settings_menu.setBackgroundResource(R.drawable.background_noir)
+                tb1.setBackgroundColor(argb(0,0,0,0))
+
+                choose_design.setBackgroundColor(argb(0,0,0,0))
+                choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                choose_design.setTextColor(Color.WHITE)
+                choose_design.setTextSize(24f)
+
+                soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                soundSwitch.setTextColor(Color.WHITE)
+                soundSwitch.setTextSize(24f)
+
+                vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                vibrationSwitch.setTextSize(24f)
+                vibrationSwitch.setTextColor(Color.WHITE)
+            }
+            //настройка свитчера звука
+            //настройка свитчера звука
         }
 
         locale_context = activity as AppCompatActivity
         (activity as AppCompatActivity?)!!.setSupportActionBar(tb1)
-
         (activity as AppCompatActivity?)!!.findViewById<BottomNavigationView>(R.id.nav_view).itemIconTintList = generateColorStateList()
         (activity as AppCompatActivity?)!!.findViewById<BottomNavigationView>(R.id.nav_view).itemTextColor = generateColorStateList()
-        if (Design == "Normal") {
-            settings_menu.setBackgroundColor(Color.WHITE)
-        }
 
-        else if (Design == "Egypt") {
-
-            settings_menu.setBackgroundResource(R.drawable.background_egypt)
-            tb1.setBackgroundColor(rgb(255, 230, 163));
-
-            choose_design.setBackgroundColor(argb(0,0,0,0))
-            choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-            //choose_design.setTextColor(Color.YELLOW)
-            choose_design.setTextSize(24f)
-
-            soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-            //soundSwitch.setSwitchColor(Color.YELLOW)
-            //soundSwitch.setBackgroundColor(Color.YELLOW)
-            soundSwitch.setTextSize(24f)
-            vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-            vibrationSwitch.setTextSize(24f)
-        }
-
-        if (Design == "Casino") {
-            settings_menu.setBackgroundResource(R.drawable.background2_casino)
-            tb1.setBackgroundResource(R.drawable.bottom_navigation_casino)
-
-            choose_design.setBackgroundColor(argb(0,0,0,0))
-            choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            choose_design.setTextColor(Color.YELLOW)
-            choose_design.setTextSize(24f)
-
-            soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            soundSwitch.setTextColor(Color.YELLOW)
-            soundSwitch.setTextSize(24f)
-
-            vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            vibrationSwitch.setTextSize(24f)
-            vibrationSwitch.setTextColor(Color.YELLOW)
-        }
-
-        else if (Design == "Rome") {
-            settings_menu.setBackgroundResource(R.drawable.background_rome)
-            tb1.setBackgroundResource(R.drawable.bottom_navigation_rome)
-            choose_design.setBackgroundColor(argb(0,0,0,0))
-            choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-            choose_design.setTextColor(rgb(193,150,63))
-            choose_design.setTextSize(24f)
-
-            soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-            soundSwitch.setTextColor(rgb(193,150,63))
-            soundSwitch.setTextSize(24f)
-
-            vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-            vibrationSwitch.setTextSize(24f)
-            vibrationSwitch.setTextColor(rgb(193,150,63))
-        }
-        else if (Design == "Gothic") {
-            settings_menu.setBackgroundResource(R.drawable.background_gothic)
-            tb1.setBackgroundColor(Color.BLACK)
-
-            choose_design.setBackgroundColor(argb(0,0,0,0))
-            choose_design.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
-            choose_design.setTextColor(Color.WHITE)
-            choose_design.textSize = 24f
-
-            soundSwitch.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
-            soundSwitch.setTextColor(Color.WHITE)
-            soundSwitch.textSize = 24f
-
-            vibrationSwitch.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
-            vibrationSwitch.textSize = 24f
-            vibrationSwitch.setTextColor(Color.WHITE)
-        }
-        else if (Design == "Japan") {
-            settings_menu.setBackgroundResource(R.drawable.background_japan)
-            tb1.setBackgroundColor(argb(0,0,0,0))
-
-            choose_design.setBackgroundColor(argb(0,0,0,0))
-            choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-            choose_design.setTextColor(Color.BLACK)
-            choose_design.setTextSize(24f)
-
-            soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-            soundSwitch.setTextColor(Color.BLACK)
-            soundSwitch.setTextSize(24f)
-
-            vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-            vibrationSwitch.setTextSize(24f)
-            vibrationSwitch.setTextColor(Color.BLACK)
-          //  tb1.setBackgroundColor(Color.WHITE)
-            tb1.setBackgroundColor(Color.WHITE)
-        }
-        else if (Design == "Noir") {
-            settings_menu.setBackgroundResource(R.drawable.background_noir)
-            tb1.setBackgroundColor(argb(0,0,0,0))
-
-            choose_design.setBackgroundColor(argb(0,0,0,0))
-            choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
-            choose_design.setTextColor(Color.WHITE)
-            choose_design.setTextSize(24f)
-
-            soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
-            soundSwitch.setTextColor(Color.WHITE)
-            soundSwitch.setTextSize(24f)
-
-            vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
-            vibrationSwitch.setTextSize(24f)
-            vibrationSwitch.setTextColor(Color.WHITE)
-        }
 
 
         logOutSettings.setOnClickListener {
@@ -275,33 +258,12 @@ class SettingsFragmentActivity : Fragment() {
         })
 
 
-
-
-
-
-
-
-
-
-
         DesignsetupRecyclerView(item_design)
         gamesRecycler = item_design
         gamesRecycler.isNestedScrollingEnabled = false;
         item_design.adapter?.notifyDataSetChanged()
 
     }
-
-
-
-    /*override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        //(activity as AppCompatActivity?)!!.setSupportActionBar(my_toolbar)
-        //setSupportActionBar(my_toolbar)
-
-
-
-
-    }*/
 
 }
 
@@ -329,9 +291,7 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
             holder.button_prem.text = "(УСТАНОВЛЕНО)"
             holder.button_prem.isClickable = false
         }
-        //if(Design == "Egypt"){
-        //    holder.background_item.setBackgroundColor(rgb(224,164,103))
-        //}
+
         if(AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == "Egypt"){
             holder.background_item.setBackgroundColor(rgb(255, 230, 163))
             holder.button_prem.textSize = 15f        //так задаешь размер
@@ -460,9 +420,160 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                 editor.putString("design","Noir")
                 editor.apply()
             }
-            val t = fragment_activity?.supportFragmentManager?.beginTransaction()
-            val mFrag: Fragment= SettingsFragmentActivity()                    //ПРОСТО ПИЗДЕЦ
-            t?.replace(R.id.settings_menu,mFrag)?.commitNowAllowingStateLoss()
+        //    val t = fragment_activity?.supportFragmentManager?.beginTransaction()
+         //   val mFrag: Fragment= SettingsFragmentActivity()                    //ПРОСТО ПИЗДЕЦ
+        //    t?.replace(R.id.settings_menu,mFrag)?.commitNowAllowingStateLoss()
+
+
+            fragment_activity!!.findViewById<BottomNavigationView>(R.id.nav_view).itemIconTintList = generateColorStateList()
+            fragment_activity!!.findViewById<BottomNavigationView>(R.id.nav_view).itemTextColor = generateColorStateList()
+            when (Design) {
+                "Normal" -> {
+                    fragment_activity!!.soundSwitch.setTextColor(Color.BLACK)
+                    fragment_activity!!.soundSwitch.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.normal)
+                    fragment_activity!!.vibrationSwitch.setTextColor(Color.BLACK)
+                    fragment_activity!!.vibrationSwitch.typeface = ResourcesCompat.getFont(CONTEXT, R.font.normal)
+                    fragment_activity!!.choose_design.setTextColor(Color.BLACK)
+                    fragment_activity!!.choose_design.typeface = ResourcesCompat.getFont(CONTEXT, R.font.normal)
+
+                    fragment_activity!!.tb1.setBackgroundColor(rgb(245,245,245))
+                    fragment_activity!!.toolbarNameSettings.setTextColor(Color.BLACK)
+                    fragment_activity!!.toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.normal)
+
+                    fragment_activity!!.settings_menu.setBackgroundColor(Color.WHITE)
+                    fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE);
+                    fragment_activity!!.toolbarNameSettings.setTextColor(Color.BLACK)
+                    fragment_activity!!.toolbarNameSettings.textSize = 25f
+                }
+                "Egypt" -> {
+
+                    fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(rgb(255, 230, 163))
+                    fragment_activity!!.toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                    fragment_activity!!.toolbarNameSettings.setTextColor(Color.BLACK)
+                    fragment_activity!!.toolbarNameSettings.textSize = 25f
+
+                    fragment_activity!!.settings_menu.setBackgroundResource(R.drawable.background_egypt)
+                    fragment_activity!!.tb1.setBackgroundColor(rgb(255, 230, 163));
+
+                    fragment_activity!!.choose_design.setBackgroundColor(argb(0,0,0,0))
+                    fragment_activity!!.choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                    fragment_activity!!.choose_design.setTextSize(24f)
+
+                    fragment_activity!!.soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+
+                    fragment_activity!!.soundSwitch.setTextSize(24f)
+                    fragment_activity!!.vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                    fragment_activity!!.vibrationSwitch.setTextSize(24f)
+                }
+                "Casino" -> {
+                    fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_casino)
+                    fragment_activity!!.toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                    fragment_activity!!.toolbarNameSettings.setTextColor(Color.YELLOW)
+                    fragment_activity!!.toolbarNameSettings.textSize = 25f
+                    fragment_activity!!.settings_menu.setBackgroundResource(R.drawable.background2_casino)
+                    fragment_activity!!.tb1.setBackgroundResource(R.drawable.bottom_navigation_casino)
+
+                    fragment_activity!!.choose_design.setBackgroundColor(argb(0,0,0,0))
+                    fragment_activity!!.choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                    fragment_activity!!.choose_design.setTextColor(Color.YELLOW)
+                    fragment_activity!!.choose_design.setTextSize(24f)
+
+                    fragment_activity!!.soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                    fragment_activity!!.soundSwitch.setTextColor(Color.YELLOW)
+                    fragment_activity!!.soundSwitch.setTextSize(24f)
+
+                    fragment_activity!!.vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                    fragment_activity!!.vibrationSwitch.setTextSize(24f)
+                    fragment_activity!!.vibrationSwitch.setTextColor(Color.YELLOW)
+                }
+                "Rome" -> {
+                    fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_rome)
+                    fragment_activity!!.toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                    fragment_activity!!.toolbarNameSettings.setTextColor(rgb(193,150,63))
+                    fragment_activity!!.toolbarNameSettings.textSize = 25f
+
+                    fragment_activity!!.settings_menu.setBackgroundResource(R.drawable.background_rome)
+                    fragment_activity!!.tb1.setBackgroundResource(R.drawable.bottom_navigation_rome)
+                    fragment_activity!!.choose_design.setBackgroundColor(argb(0,0,0,0))
+                    fragment_activity!!.choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                    fragment_activity!!.choose_design.setTextColor(rgb(193,150,63))
+                    fragment_activity!!.choose_design.setTextSize(24f)
+
+                    fragment_activity!!.soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                    fragment_activity!!.soundSwitch.setTextColor(rgb(193,150,63))
+                    fragment_activity!!.soundSwitch.setTextSize(24f)
+
+                    fragment_activity!!.vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                    fragment_activity!!.vibrationSwitch.setTextSize(24f)
+                    fragment_activity!!.vibrationSwitch.setTextColor(rgb(193,150,63))
+                }
+                "Gothic" -> {
+                    fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.BLACK)
+                    fragment_activity!!.toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                    fragment_activity!!.toolbarNameSettings.setTextColor(Color.WHITE)
+                    fragment_activity!!.toolbarNameSettings.textSize = 25f
+                    fragment_activity!!.settings_menu.setBackgroundResource(R.drawable.background_gothic)
+                    fragment_activity!!.tb1.setBackgroundColor(Color.BLACK)
+
+                    fragment_activity!!.choose_design.setBackgroundColor(argb(0,0,0,0))
+                    fragment_activity!!.choose_design.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                    fragment_activity!!.choose_design.setTextColor(Color.WHITE)
+                    fragment_activity!!.choose_design.textSize = 24f
+
+                    fragment_activity!!.soundSwitch.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                    fragment_activity!!.soundSwitch.setTextColor(Color.WHITE)
+                    fragment_activity!!.soundSwitch.textSize = 24f
+
+                    fragment_activity!!.vibrationSwitch.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                    fragment_activity!!.vibrationSwitch.textSize = 24f
+                    fragment_activity!!.vibrationSwitch.setTextColor(Color.WHITE)
+                }
+                "Japan" -> {
+                    fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE)
+                    fragment_activity!!.toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                    fragment_activity!!.toolbarNameSettings.setTextColor(Color.BLACK)
+                    fragment_activity!!.toolbarNameSettings.textSize = 25f
+                    fragment_activity!!.settings_menu.setBackgroundResource(R.drawable.background_japan)
+                    fragment_activity!!.tb1.setBackgroundColor(argb(0,0,0,0))
+
+                    fragment_activity!!.choose_design.setBackgroundColor(argb(0,0,0,0))
+                    fragment_activity!!.choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                    fragment_activity!!.choose_design.setTextColor(Color.BLACK)
+                    fragment_activity!!.choose_design.setTextSize(24f)
+
+                    fragment_activity!!.soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                    fragment_activity!!.soundSwitch.setTextColor(Color.BLACK)
+                    fragment_activity!!.soundSwitch.setTextSize(24f)
+
+                    fragment_activity!!.vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                    fragment_activity!!.vibrationSwitch.setTextSize(24f)
+                    fragment_activity!!.vibrationSwitch.setTextColor(Color.BLACK)
+                    fragment_activity!!.tb1.setBackgroundColor(Color.WHITE)
+                }
+                "Noir" -> {
+                    fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.BLACK)
+                    fragment_activity!!.toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                    fragment_activity!!.toolbarNameSettings.setTextColor(Color.WHITE)
+                    fragment_activity!!.toolbarNameSettings.textSize = 25f
+                    fragment_activity!!.settings_menu.setBackgroundResource(R.drawable.background_noir)
+                    fragment_activity!!.tb1.setBackgroundColor(argb(0,0,0,0))
+
+                    fragment_activity!!.choose_design.setBackgroundColor(argb(0,0,0,0))
+                    fragment_activity!!.choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                    fragment_activity!!.choose_design.setTextColor(Color.WHITE)
+                    fragment_activity!!.choose_design.setTextSize(24f)
+
+                    fragment_activity!!.soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                    fragment_activity!!.soundSwitch.setTextColor(Color.WHITE)
+                    fragment_activity!!.soundSwitch.setTextSize(24f)
+
+                    fragment_activity!!.vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                    fragment_activity!!.vibrationSwitch.setTextSize(24f)
+                    fragment_activity!!.vibrationSwitch.setTextColor(Color.WHITE)
+                }
+                //настройка свитчера звука
+                //настройка свитчера звука
+            }
 
         }
     }
