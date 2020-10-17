@@ -37,7 +37,7 @@ import java.util.*
 
 
 //TODO , рисовать ребра только один раз до этого узнав, также можно не включать в цепочки вершины которые окружены 6 такими же вершинами
-var CONDITION_DOT : Int = 0;
+
 class DotGameActivity: AppCompatActivity() {
 
     fun encode(h: MutableList<Triple<Int,Int,Int>>):String
@@ -123,7 +123,6 @@ class DotGameActivity: AppCompatActivity() {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_online_games_temlate)
         signature_canvas3.visibility = (View.VISIBLE)
-        CONDITION_DOT = 0;
         CONTEXT = this
         currentContext = this
         isRun = true
@@ -432,6 +431,7 @@ class DotGameActivity: AppCompatActivity() {
 }
 
 class CanvasViewDot(context: Context, attrs: AttributeSet?) : View(context, attrs) {
+    var CONDITION_DOT : Int = 0;
 
     fun encode(h: MutableList<Triple<Int,Int,Int>>):String
     {

@@ -94,20 +94,35 @@ fun initMenuFunctions(activity: Activity,
             R.id.page_online_4 -> {
                 if (activity.toString().contains ("DotGameActivity"))
                 {
-                    CONDITION_DOT++
+                    activity.signature_canvas3.CONDITION_DOT++
                     Log.d("CONDITION_DOT",activity.signature_canvas3.History.toString())
                     activity.signature_canvas3.invalidate()
+                }
+                else if (activity.toString().contains ("XOGameActivity"))
+                {
+                    activity.signature_canvas.CONDITION_XOG++
+                    Log.d("CONDITION_XOG",activity.signature_canvas.History.toString())
+                    activity.signature_canvas.invalidate()
                 }
             }
             R.id.page_online_5 -> {
                 if (activity.toString().contains ("DotGameActivity"))
                 {
-                    if(CONDITION_DOT>0)
+                    if(activity.signature_canvas3.CONDITION_DOT>0)
                     {
-                        CONDITION_DOT--
+                        activity.signature_canvas3.CONDITION_DOT--
                         Log.d("CONDITION_DOT",activity.signature_canvas3.History.toString())
                     }
                     activity.signature_canvas3.invalidate()
+                }
+                else if (activity.toString().contains ("XOGameActivity"))
+                {
+                    if(activity.signature_canvas.CONDITION_XOG>0)
+                    {
+                        activity.signature_canvas.CONDITION_XOG--
+                        Log.d("CONDITION_XOG",activity.signature_canvas3.History.toString())
+                    }
+                    activity.signature_canvas.invalidate()
                 }
             }
         }

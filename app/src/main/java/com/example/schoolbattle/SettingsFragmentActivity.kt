@@ -31,6 +31,7 @@ import kotlinx.android.synthetic.main.design_item.view.*
 
 var fragment_activity : AppCompatActivity? = null
 
+
 class SettingsFragmentActivity : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -285,146 +286,159 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         PICTURE_STYLES[ARRAY_OF_DESIGN[position]]?.let { holder.img.setBackgroundResource(it) }     //картинка для стиля
+
+
+        when {
+            AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == "Normal" -> {
+                holder.background_item.setBackgroundColor(Color.WHITE)
+                holder.button_prem.textSize = 15f        //так задаешь размер
+                holder.button_prem.setTextColor(Color.BLACK)   //цвет
+                holder.button_prem.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                holder.button_prem.setBackgroundColor(rgb(243,243,243))
+
+                holder.contentView.textSize = 20f        //так задаешь размер
+                holder.contentView.setTextColor(Color.BLACK)   //цвет
+                holder.contentView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                holder.contentView.setBackgroundColor(argb(0,0,0,0))
+
+            }
+            AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == "Egypt" -> {
+                holder.background_item.setBackgroundColor(rgb(255, 230, 163))
+                holder.button_prem.textSize = 15f        //так задаешь размер
+                holder.button_prem.setTextColor(Color.BLACK)   //цвет
+                holder.button_prem.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                holder.button_prem.setBackgroundColor(argb(0,0,0,0))
+
+                holder.contentView.textSize = 20f        //так задаешь размер
+                holder.contentView.setTextColor(Color.BLACK)   //цвет
+                holder.contentView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                holder.contentView.setBackgroundColor(argb(0,0,0,0))
+
+            }
+            AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == "Casino" -> {
+                holder.background_item.setBackgroundResource(R.drawable.table)
+                holder.button_prem.textSize = 15f        //так задаешь размер
+                holder.button_prem.setTextColor(Color.YELLOW)   //цвет
+                holder.button_prem.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                holder.button_prem.setBackgroundColor(argb(0,0,0,0))
+
+                holder.contentView.textSize = 20f        //так задаешь размер
+                holder.contentView.setTextColor(Color.YELLOW)   //цвет
+                holder.contentView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                holder.contentView.setBackgroundColor(argb(0,0,0,0))
+            }
+            AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == "Rome" -> {
+                holder.background_item.setBackgroundResource(R.drawable.bottom_navigation_rome)
+                holder.button_prem.textSize = 15f        //так задаешь размер
+                holder.button_prem.setTextColor(rgb(193, 150, 63))   //цвет
+                holder.button_prem.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                holder.button_prem.setBackgroundColor(argb(0,0,0,0))
+
+                holder.contentView.textSize = 20f        //так задаешь размер
+                holder.contentView.setTextColor(rgb(193, 150, 63))   //цвет
+                holder.contentView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                holder.contentView.setBackgroundColor(argb(0,0,0,0))
+            }
+            AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == "Gothic" -> {
+                holder.background_item.setBackgroundColor(rgb(20,20,20))
+                holder.button_prem.textSize = 15f        //так задаешь размер
+                holder.button_prem.setTextColor(Color.WHITE)   //цвет
+                holder.button_prem.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                holder.button_prem.setBackgroundColor(rgb(30,30,30))
+
+                holder.contentView.textSize = 20f        //так задаешь размер
+                holder.contentView.setTextColor(Color.WHITE)   //цвет
+                holder.contentView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                //holder.contentView.setBackgroundColor(rgb(30,30,30))
+            }
+            AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == "Japan" -> {
+                holder.background_item.setBackgroundColor(Color.WHITE)
+                holder.button_prem.textSize = 15f        //так задаешь размер
+                holder.button_prem.setTextColor(Color.BLACK)   //цвет
+                holder.button_prem.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                holder.button_prem.setBackgroundColor(argb(0,0,0,0))
+
+                holder.contentView.textSize = 20f        //так задаешь размер
+                holder.contentView.setTextColor(Color.BLACK)   //цвет
+                holder.contentView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                holder.contentView.setBackgroundColor(argb(0,0,0,0))
+            }
+            AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == "Noir" -> {
+                holder.background_item.setBackgroundColor(rgb(20,20,20))
+                holder.button_prem.textSize = 15f        //так задаешь размер
+                holder.button_prem.setTextColor(Color.WHITE)   //цвет
+                holder.button_prem.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                holder.button_prem.setBackgroundColor(rgb(30,30,30))
+
+                holder.contentView.textSize = 20f        //так задаешь размер
+                holder.contentView.setTextColor(Color.WHITE)   //цвет
+                holder.contentView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                //holder.contentView.setBackgroundColor(rgb(30,30,30))
+            }
+            //название стиля
+        }
+
         if(AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == Design)
         {
-            holder.button_prem.setBackgroundResource(R.drawable.nulevoe)
+            holder.button_prem.setBackgroundColor(Color.TRANSPARENT)
             holder.button_prem.text = "(УСТАНОВЛЕНО)"
             holder.button_prem.isClickable = false
         }
-
-        if(AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == "Egypt"){
-            holder.background_item.setBackgroundColor(rgb(255, 230, 163))
-            holder.button_prem.textSize = 15f        //так задаешь размер
-            holder.button_prem.setTextColor(Color.BLACK)   //цвет
-            holder.button_prem.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
-            holder.button_prem.setBackgroundColor(argb(0,0,0,0))
-
-            holder.contentView.textSize = 20f        //так задаешь размер
-            holder.contentView.setTextColor(Color.BLACK)   //цвет
-            holder.contentView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
-            holder.contentView.setBackgroundColor(argb(0,0,0,0))
-
+        else
+        {
+            holder.button_prem.text = "ПРИМЕНИТЬ"
+            holder.button_prem.isClickable = false
         }
-        if(AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == "Casino"){
-            holder.background_item.setBackgroundResource(R.drawable.table)
-            holder.button_prem.textSize = 15f        //так задаешь размер
-            holder.button_prem.setTextColor(Color.YELLOW)   //цвет
-            holder.button_prem.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
-            holder.button_prem.setBackgroundColor(argb(0,0,0,0))
-
-            holder.contentView.textSize = 20f        //так задаешь размер
-            holder.contentView.setTextColor(Color.YELLOW)   //цвет
-            holder.contentView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
-            holder.contentView.setBackgroundColor(argb(0,0,0,0))
-        }
-        if(AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == "Rome"){
-            holder.background_item.setBackgroundResource(R.drawable.bottom_navigation_rome)
-            holder.button_prem.textSize = 15f        //так задаешь размер
-            holder.button_prem.setTextColor(rgb(193, 150, 63))   //цвет
-            holder.button_prem.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
-            holder.button_prem.setBackgroundColor(argb(0,0,0,0))
-
-            holder.contentView.textSize = 20f        //так задаешь размер
-            holder.contentView.setTextColor(rgb(193, 150, 63))   //цвет
-            holder.contentView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
-            holder.contentView.setBackgroundColor(argb(0,0,0,0))
-        }
-        if(AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == "Gothic"){
-            holder.background_item.setBackgroundColor(rgb(20,20,20))
-            holder.button_prem.textSize = 15f        //так задаешь размер
-            holder.button_prem.setTextColor(Color.WHITE)   //цвет
-            holder.button_prem.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
-            holder.button_prem.setBackgroundColor(rgb(30,30,30))
-
-            holder.contentView.textSize = 20f        //так задаешь размер
-            holder.contentView.setTextColor(Color.WHITE)   //цвет
-            holder.contentView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
-            //holder.contentView.setBackgroundColor(rgb(30,30,30))
-        }
-        if(AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == "Japan"){
-            holder.background_item.setBackgroundColor(Color.WHITE)
-            holder.button_prem.textSize = 15f        //так задаешь размер
-            holder.button_prem.setTextColor(Color.BLACK)   //цвет
-            holder.button_prem.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
-            holder.button_prem.setBackgroundColor(argb(0,0,0,0))
-
-            holder.contentView.textSize = 20f        //так задаешь размер
-            holder.contentView.setTextColor(Color.BLACK)   //цвет
-            holder.contentView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
-            holder.contentView.setBackgroundColor(argb(0,0,0,0))
-        }
-        if(AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == "Noir"){
-            holder.background_item.setBackgroundColor(rgb(20,20,20))
-            holder.button_prem.textSize = 15f        //так задаешь размер
-            holder.button_prem.setTextColor(Color.WHITE)   //цвет
-            holder.button_prem.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
-            holder.button_prem.setBackgroundColor(rgb(30,30,30))
-
-            holder.contentView.textSize = 20f        //так задаешь размер
-            holder.contentView.setTextColor(Color.WHITE)   //цвет
-            holder.contentView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
-            //holder.contentView.setBackgroundColor(rgb(30,30,30))
-        }
-
-        holder.contentView.setText(PICTURE_TEXT[ARRAY_OF_DESIGN[position]]) //название стиля
+        holder.contentView.text = PICTURE_TEXT[ARRAY_OF_DESIGN[position]] //название стиля
         with(holder.itemView) {
             tag = ARRAY_OF_DESIGN[position]
         }
         holder.button_prem.setOnClickListener {
-            if(ARRAY_OF_DESIGN[position] == 0)
-            {
-                Design = "Normal"
-                val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                editor.putString("design","Normal")
-                editor.apply()
-            }
-            if(ARRAY_OF_DESIGN[position] == 1)
-            {
-                Design = "Egypt"
-                val editor =  locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                editor.putString("design","Egypt")
-                editor.apply()
-            }
-            if(ARRAY_OF_DESIGN[position] == 2)
-            {
-                Design = "Casino"
-                val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                editor.putString("design","Casino")
-                editor.apply()
-            }
-            if(ARRAY_OF_DESIGN[position] == 3)
-            {
-                Design = "Rome"
-                val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                editor.putString("design","Rome")
-                editor.apply()
-            }
-            if(ARRAY_OF_DESIGN[position] == 4)
-            {
-                Design = "Gothic"
-                val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                editor.putString("design","Gothic")
-                editor.apply()
-            }
-            if(ARRAY_OF_DESIGN[position] == 5)
-            {
-                Design = "Japan"
-                val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                editor.putString("design","Japan")
-                editor.apply()
-            }
-            if(ARRAY_OF_DESIGN[position] == 6)
-            {
-                Design = "Noir"
-                val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                editor.putString("design","Noir")
-                editor.apply()
-            }
-        //    val t = fragment_activity?.supportFragmentManager?.beginTransaction()
-         //   val mFrag: Fragment= SettingsFragmentActivity()                    //ПРОСТО ПИЗДЕЦ
-        //    t?.replace(R.id.settings_menu,mFrag)?.commitNowAllowingStateLoss()
 
-
+            when {
+                ARRAY_OF_DESIGN[position] == 0 -> {
+                    Design = "Normal"
+                    val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                    editor.putString("design","Normal")
+                    editor.apply()
+                }
+                ARRAY_OF_DESIGN[position] == 1 -> {
+                    Design = "Egypt"
+                    val editor =  locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                    editor.putString("design","Egypt")
+                    editor.apply()
+                }
+                ARRAY_OF_DESIGN[position] == 2 -> {
+                    Design = "Casino"
+                    val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                    editor.putString("design","Casino")
+                    editor.apply()
+                }
+                ARRAY_OF_DESIGN[position] == 3 -> {
+                    Design = "Rome"
+                    val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                    editor.putString("design","Rome")
+                    editor.apply()
+                }
+                ARRAY_OF_DESIGN[position] == 4 -> {
+                    Design = "Gothic"
+                    val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                    editor.putString("design","Gothic")
+                    editor.apply()
+                }
+                ARRAY_OF_DESIGN[position] == 5 -> {
+                    Design = "Japan"
+                    val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                    editor.putString("design","Japan")
+                    editor.apply()
+                }
+                ARRAY_OF_DESIGN[position] == 6 -> {
+                    Design = "Noir"
+                    val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                    editor.putString("design","Noir")
+                    editor.apply()
+                }
+            }
             fragment_activity!!.findViewById<BottomNavigationView>(R.id.nav_view).itemIconTintList = generateColorStateList()
             fragment_activity!!.findViewById<BottomNavigationView>(R.id.nav_view).itemTextColor = generateColorStateList()
             when (Design) {
@@ -571,10 +585,8 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                     fragment_activity!!.vibrationSwitch.setTextSize(24f)
                     fragment_activity!!.vibrationSwitch.setTextColor(Color.WHITE)
                 }
-                //настройка свитчера звука
-                //настройка свитчера звука
             }
-
+            this.notifyDataSetChanged()
         }
     }
 
