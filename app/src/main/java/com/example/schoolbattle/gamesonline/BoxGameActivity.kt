@@ -33,6 +33,67 @@ import java.util.*
 
 class BoxGameActivity : AppCompatActivity() {
 
+    fun encode(h: MutableList<Triple<Int,Int,Int>>):String
+    {
+        var answer: String = ""
+        for(i in 0 until h.size)
+        {
+            answer = answer + h[i].first.toString() + 'a' + h[i].second.toString() + 'a' + h[i].third.toString() + 'a'
+        }
+        return answer
+    }
+    fun string_to_int(s: String): Int
+    {
+        var i : Int = 0
+        var k: Int = 1
+        var answer: Int = 0
+        while(i<s.length)
+        {
+            answer += (s[s.length-i-1].toInt() - '0'.toInt())*k
+            k= k*10
+            i++
+        }
+        return answer
+    }
+    fun decode(s : String) : MutableList<Triple<Int,Int,Int>>
+    {
+        var answer: MutableList<Triple<Int,Int,Int>> = mutableListOf()
+        var i : Int = 0
+        var a: Int = 0
+        var b: Int = 0
+        var c: Int = 0
+        var s1: String = ""
+        while(i<s.length)
+        {
+            s1 = ""
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            a = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            b = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            c = string_to_int(s1)
+            answer.add(Triple(a,b,c))
+            i++
+        }
+        return answer
+    }
+
     private var isRun = false
     private var dialog: ShowResult? = null
     private var opponentsName = ""
@@ -140,79 +201,81 @@ class BoxGameActivity : AppCompatActivity() {
         PICTURE_AVATAR[AVATAR]?.let { avatar_of_protivnic.setImageResource(it) } //TODO заменить это на значения его аватарки
         bottom_navigation_xog_online.itemIconTintList = generateColorStateList()
         bottom_navigation_xog_online.itemTextColor = generateColorStateList()
-        if(Design == "Egypt" ) {
-            label_online.setBackgroundResource(R.drawable.background_egypt)
-            button_player_1_online_xog.setTextColor(Color.BLACK)
-            button_player_2_online_xog.setTextColor(Color.BLACK)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundColor(rgb(255, 230, 163))
-            toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
-            toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
-        }
-        else if(Design == "Casino" ) {
-            label_online.setBackgroundResource(R.drawable.background2_casino)
-            button_player_1_online_xog.setTextColor(Color.YELLOW)
-            button_player_2_online_xog.setTextColor(Color.YELLOW)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_casino)
-            toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
-            toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
-        }
-        else if(Design == "Rome" ) {
-            label_online.setBackgroundResource(R.drawable.background_rome)
-            button_player_1_online_xog.setTextColor(Color.rgb(224, 164, 103))
-            button_player_2_online_xog.setTextColor(Color.rgb(224, 164, 103))
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_rome)
-            toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
-            toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
-        }
-        else if(Design == "Japan" ) {
-            label_online.setBackgroundResource(R.drawable.background_japan)
-            button_player_1_online_xog.setTextColor(Color.BLACK)
-            button_player_2_online_xog.setTextColor(Color.BLACK)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundColor(Color.WHITE)
-            toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
-            toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
-        }
-        else if(Design == "Gothic" ) {
-            label_online.setBackgroundResource(R.drawable.background_gothic)
-            button_player_1_online_xog.setTextColor(Color.WHITE)
-            button_player_2_online_xog.setTextColor(Color.WHITE)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
-            toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
-            toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
-            button_player_1_online_xog.textSize = 16.5f
-            button_player_2_online_xog.textSize = 16.5f
-        }
-        else if(Design == "Noir") {
-            label_online.setBackgroundResource(R.drawable.background_noir)
-            button_player_1_online_xog.setTextColor(Color.WHITE)
-            button_player_2_online_xog.setTextColor(Color.WHITE)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
-            toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
-            toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+        when (Design) {
+            "Egypt" -> {
+                label_online.setBackgroundResource(R.drawable.background_egypt)
+                button_player_1_online_xog.setTextColor(Color.BLACK)
+                button_player_2_online_xog.setTextColor(Color.BLACK)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
+                bottom_navigation_xog_online.setBackgroundColor(rgb(255, 230, 163))
+                toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
+                toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+            }
+            "Casino" -> {
+                label_online.setBackgroundResource(R.drawable.background2_casino)
+                button_player_1_online_xog.setTextColor(Color.YELLOW)
+                button_player_2_online_xog.setTextColor(Color.YELLOW)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
+                bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_casino)
+                toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
+                toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+            }
+            "Rome" -> {
+                label_online.setBackgroundResource(R.drawable.background_rome)
+                button_player_1_online_xog.setTextColor(Color.rgb(224, 164, 103))
+                button_player_2_online_xog.setTextColor(Color.rgb(224, 164, 103))
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
+                bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_rome)
+                toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
+                toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+            }
+            "Japan" -> {
+                label_online.setBackgroundResource(R.drawable.background_japan)
+                button_player_1_online_xog.setTextColor(Color.BLACK)
+                button_player_2_online_xog.setTextColor(Color.BLACK)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
+                bottom_navigation_xog_online.setBackgroundColor(Color.WHITE)
+                toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
+                toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+            }
+            "Gothic" -> {
+                label_online.setBackgroundResource(R.drawable.background_gothic)
+                button_player_1_online_xog.setTextColor(Color.WHITE)
+                button_player_2_online_xog.setTextColor(Color.WHITE)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
+                bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
+                toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
+                toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+                button_player_1_online_xog.textSize = 16.5f
+                button_player_2_online_xog.textSize = 16.5f
+            }
+            "Noir" -> {
+                label_online.setBackgroundResource(R.drawable.background_noir)
+                button_player_1_online_xog.setTextColor(Color.WHITE)
+                button_player_2_online_xog.setTextColor(Color.WHITE)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
+                bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
+                toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
+                toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+            }
         }
 
         initMenuFunctions(this, bottom_navigation_xog_online, intent, yourName, opponentsName, gameData)
@@ -231,13 +294,66 @@ class BoxGameActivity : AppCompatActivity() {
                 for (i in signature_canvas_box.VERTICAL_RIB.indices) {
                     for (j in signature_canvas_box.VERTICAL_RIB[i].indices) {
                         if (p0.child("VERTICAL_RIB").child("$i").hasChild("$j"))
+                        {
                             signature_canvas_box.VERTICAL_RIB[i][j] = p0.child("VERTICAL_RIB").child("$i").child("$j").value.toString().toInt()
+                            var flag :Boolean = true
+                            val prfs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                            if(prfs.getString(gameData.toString()+"box_game_history", "0")!="0")
+                            {
+                                signature_canvas_box.History = prfs?.getString(gameData.toString()+"box_game_history", "0")?.let { decode(it) }!!
+                            }
+                            for(kol in 0 until signature_canvas_box.History.size)
+                            {
+                                if(i==signature_canvas_box.History[kol].first && j == signature_canvas_box.History[kol].second && signature_canvas_box.History[kol].third == 1)
+                                {
+                                    flag = false
+                                }
+                            }
+                            if(flag)
+                            {
+                                signature_canvas_box.History.add(Triple(i,j, 1))
+                                var data_from_memory = encode(signature_canvas_box.History)
+                                val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                editor.putString(gameData.toString()+"box_game_history", data_from_memory)
+                                editor.apply()
+                            }
+                        }
                     }
                 }
                 for (i in signature_canvas_box.HORIZONTAL_RIB.indices) {
                     for (j in signature_canvas_box.HORIZONTAL_RIB[i].indices) {
-                        if (p0.child("HORIZONTAL_RIB").child("$i").hasChild("$j"))
-                            signature_canvas_box.HORIZONTAL_RIB[i][j] = p0.child("HORIZONTAL_RIB").child("$i").child("$j").value.toString().toInt()
+                        if (p0.child("HORIZONTAL_RIB").child("$i").hasChild("$j")) {
+                            signature_canvas_box.HORIZONTAL_RIB[i][j] =
+                                p0.child("HORIZONTAL_RIB").child("$i").child("$j").value.toString()
+                                    .toInt()
+                            var flag: Boolean = true
+                            val prfs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                            if (prfs.getString(
+                                    gameData.toString() + "box_game_history",
+                                    "0"
+                                ) != "0"
+                            ) {
+                                signature_canvas_box.History =
+                                    prfs?.getString(gameData.toString() + "box_game_history", "0")
+                                        ?.let { decode(it) }!!
+                            }
+                            for (kol in 0 until signature_canvas_box.History.size) {
+                                if (i == signature_canvas_box.History[kol].first && j == signature_canvas_box.History[kol].second && signature_canvas_box.History[kol].third == 2) {
+                                    flag = false
+                                }
+                            }
+                            if (flag) {
+                                signature_canvas_box.History.add(Triple(i, j, 2))
+                                var data_from_memory = encode(signature_canvas_box.History)
+                                val editor =
+                                    getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                editor.putString(
+                                    gameData.toString() + "box_game_history",
+                                    data_from_memory
+                                )
+                                editor.apply()
+                            }
+                        }
                     }
                 }
 
@@ -324,6 +440,70 @@ class BoxGameActivity : AppCompatActivity() {
 }
 
 class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(context, attrs) {
+
+    var CONDITION_BOX  = 0;
+
+    fun encode(h: MutableList<Triple<Int,Int,Int>>):String
+    {
+        var answer: String = ""
+        for(i in 0 until h.size)
+        {
+            answer = answer + h[i].first.toString() + 'a' + h[i].second.toString() + 'a' + h[i].third.toString() + 'a'
+        }
+        return answer
+    }
+    fun string_to_int(s: String): Int
+    {
+        var i : Int = 0
+        var k: Int = 1
+        var answer: Int = 0
+        while(i<s.length)
+        {
+            answer += (s[s.length-i-1].toInt() - '0'.toInt())*k
+            k= k*10
+            i++
+        }
+        return answer
+    }
+    fun decode(s : String) : MutableList<Triple<Int,Int,Int>>
+    {
+        var answer: MutableList<Triple<Int,Int,Int>> = mutableListOf()
+        var i : Int = 0
+        var a: Int = 0
+        var b: Int = 0
+        var c: Int = 0
+        var s1: String = ""
+        while(i<s.length)
+        {
+            s1 = ""
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            a = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            b = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            c = string_to_int(s1)
+            answer.add(Triple(a,b,c))
+            i++
+        }
+        return answer
+    }
+
     fun correction_touch (x: Float,y : Float) :  Boolean // если нажали примерно туда
     {
         if( (circlex-x)*(circlex-x) + (circley - y)*(circley - y) < (width/2f/size_field_x.toFloat())*(width/2f/size_field_x.toFloat())/2f)
@@ -353,6 +533,11 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
     var FIELD = Array(7){IntArray(7)}     //для фишеК
     var VERTICAL_RIB = Array(8){IntArray(7)}    //для ребер
     var HORIZONTAL_RIB = Array(7){IntArray(8)}
+
+    var History: MutableList<Triple<Int,Int,Int>> = mutableListOf()
+    var CLONE_FIELD = Array(7){IntArray(7)}     //для фишеК
+    var CLONE_VERTICAL_RIB = Array(8){IntArray(7)}    //для ребер
+    var CLONE_HORIZONTAL_RIB = Array(7){IntArray(8)}
 
     var radius_of_point: Float = 0f
     var width : Float = 0f
@@ -386,6 +571,7 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
         for( i in 0..6) {
             for(j in 0 ..6) {
                 FIELD[i][j] = 0  //не заполненный
+                CLONE_FIELD[i][j] = 0;
             }
         }
 
@@ -395,6 +581,8 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
             {
                 VERTICAL_RIB[i][j] = 0
                 HORIZONTAL_RIB[j][i] = 0
+                CLONE_VERTICAL_RIB[i][j] = 0
+                CLONE_HORIZONTAL_RIB[j][i] = 0
             }
         }
 
@@ -464,84 +652,239 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
             k = k + step
         }
 
-        var x: Float;
-        var y: Float
-        x = indent
-        y = height - advertising_line - width
-        for(i in 0..7)                    //вырисовка точек
-        {
-            for(j in 0..7)
-            {
-                canvas?.drawCircle(x,y,radius_of_point,paint_circle)
-                x += step
-            }
+        if(CONDITION_BOX == 0) {
+            var x: Float;
+            var y: Float
             x = indent
-            y += step
-        }
-
-        x = indent
-        y = height - advertising_line - width
-        for(i in 0..7)               //вырисовка вертикальных ребер
-        {
-            for(j in 0..6)
+            y = height - advertising_line - width
+            for (i in 0..7)                    //вырисовка точек
             {
-                if(VERTICAL_RIB[i][j] == 1)
-                {
-                    canvas?.drawLine(x,y+radius_of_point,x,y+step-radius_of_point,paint_rib_1)
+                for (j in 0..7) {
+                    canvas?.drawCircle(x, y, radius_of_point, paint_circle)
+                    x += step
                 }
-                if(VERTICAL_RIB[i][j] == 2)
-                {
-                    canvas?.drawLine(x,y+radius_of_point,x,y+step-radius_of_point,paint_rib_2)
-                }
+                x = indent
                 y += step
             }
-            x += step
-            y  = height - advertising_line - width
-        }
 
-        x = indent
-        y = height - advertising_line - width
-        for(i in 0..6)                 //вырисовка горизонтальных ребер
-        {
-            for(j in 0..7)
+            x = indent
+            y = height - advertising_line - width
+            for (i in 0..7)               //вырисовка вертикальных ребер
             {
-                if(HORIZONTAL_RIB[i][j] == 1)
-                {
-                    canvas?.drawLine(x + radius_of_point,y,x+step - radius_of_point,y,paint_rib_1)
+                for (j in 0..6) {
+                    if (VERTICAL_RIB[i][j] == 1) {
+                        canvas?.drawLine(
+                            x,
+                            y + radius_of_point,
+                            x,
+                            y + step - radius_of_point,
+                            paint_rib_1
+                        )
+                    }
+                    if (VERTICAL_RIB[i][j] == 2) {
+                        canvas?.drawLine(
+                            x,
+                            y + radius_of_point,
+                            x,
+                            y + step - radius_of_point,
+                            paint_rib_2
+                        )
+                    }
+                    y += step
                 }
-                if(HORIZONTAL_RIB[i][j] == 2)
-                {
-                    canvas?.drawLine(x + radius_of_point,y,x+step - radius_of_point,y,paint_rib_2)
-                }
-                y += step
+                x += step
+                y = height - advertising_line - width
             }
-            x += step
-            y =  height - advertising_line - width
-        }
 
-        x = indent
-        y = height - width - advertising_line
-        for(i in 0..6)
-        {
-            for(j in 0..6)
+            x = indent
+            y = height - advertising_line - width
+            for (i in 0..6)                 //вырисовка горизонтальных ребер
             {
-                if(FIELD[i][j] == 1)
-                {
-                    canvas?.drawBitmap(right_red, x ,y,paint_circle)
+                for (j in 0..7) {
+                    if (HORIZONTAL_RIB[i][j] == 1) {
+                        canvas?.drawLine(
+                            x + radius_of_point,
+                            y,
+                            x + step - radius_of_point,
+                            y,
+                            paint_rib_1
+                        )
+                    }
+                    if (HORIZONTAL_RIB[i][j] == 2) {
+                        canvas?.drawLine(
+                            x + radius_of_point,
+                            y,
+                            x + step - radius_of_point,
+                            y,
+                            paint_rib_2
+                        )
+                    }
+                    y += step
                 }
-                if(FIELD[i][j] == 2)
-                {
-                    canvas?.drawBitmap(right_blue, x ,y,paint_circle)
-                }
-                y += step
+                x += step
+                y = height - advertising_line - width
             }
-            x += step
+
+            x = indent
             y = height - width - advertising_line
+            for (i in 0..6) {
+                for (j in 0..6) {
+                    if (FIELD[i][j] == 1) {
+                        canvas?.drawBitmap(right_red, x, y, paint_circle)
+                    }
+                    if (FIELD[i][j] == 2) {
+                        canvas?.drawBitmap(right_blue, x, y, paint_circle)
+                    }
+                    y += step
+                }
+                x += step
+                y = height - width - advertising_line
+            }
         }
+        else
+        {
+            val prfs = context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+            History = prfs?.getString(positionData.toString()+"box_game_history", "0")?.let { decode(it) }!!
+            for(i in 0 until CLONE_FIELD.size)
+            {
+                for(j in 0 until CLONE_FIELD[0].size)
+                {
+                    CLONE_FIELD[i][j] = 0;
+                }
+            }
+            for(i in 0 until CLONE_VERTICAL_RIB.size)
+            {
+                for(j in 0 until CLONE_VERTICAL_RIB[0].size)
+                {
+                    CLONE_VERTICAL_RIB[i][j] = 0;
+                }
+            }
+            for(i in 0 until CLONE_HORIZONTAL_RIB.size)
+            {
+                for(j in 0 until CLONE_HORIZONTAL_RIB[0].size)
+                {
+                    CLONE_HORIZONTAL_RIB[i][j] = 0;
+                }
+            }
 
+            if(CONDITION_BOX>History.size)
+            {
+                CONDITION_BOX = History.size
+            }
 
+            for(p in 0 until History.size - CONDITION_BOX)
+            {
+                var i: Int  = History[p].first
+                var j: Int = History[p].second
+                if(History[p].third == 1)
+                {
+                    CLONE_VERTICAL_RIB[i][j] = VERTICAL_RIB[i][j]
+                }
+                else
+                {
+                    CLONE_HORIZONTAL_RIB[i][j] = HORIZONTAL_RIB[i][j]
+                }
+            }
 
+            for(i in 0..6)
+            {
+                for(j in 0..6)
+                {
+                    if(CLONE_VERTICAL_RIB[i][j]>0 && CLONE_HORIZONTAL_RIB[i][j]>0 && CLONE_HORIZONTAL_RIB[i][j+1]>0 && CLONE_VERTICAL_RIB[i+1][j]>0 && CLONE_FIELD[i][j]==0) //если образовался квадратик
+                    {
+                        CLONE_FIELD[i][j] = FIELD[i][j]
+                    }
+                }
+            }
 
+            var x: Float;
+            var y: Float
+            x = indent
+            y = height - advertising_line - width
+            for (i in 0..7)                    //вырисовка точек
+            {
+                for (j in 0..7) {
+                    canvas?.drawCircle(x, y, radius_of_point, paint_circle)
+                    x += step
+                }
+                x = indent
+                y += step
+            }
+
+            x = indent
+            y = height - advertising_line - width
+            for (i in 0..7)               //вырисовка вертикальных ребер
+            {
+                for (j in 0..6) {
+                    if (CLONE_VERTICAL_RIB[i][j] == 1) {
+                        canvas?.drawLine(
+                            x,
+                            y + radius_of_point,
+                            x,
+                            y + step - radius_of_point,
+                            paint_rib_1
+                        )
+                    }
+                    if (CLONE_VERTICAL_RIB[i][j] == 2) {
+                        canvas?.drawLine(
+                            x,
+                            y + radius_of_point,
+                            x,
+                            y + step - radius_of_point,
+                            paint_rib_2
+                        )
+                    }
+                    y += step
+                }
+                x += step
+                y = height - advertising_line - width
+            }
+
+            x = indent
+            y = height - advertising_line - width
+            for (i in 0..6)                 //вырисовка горизонтальных ребер
+            {
+                for (j in 0..7) {
+                    if (CLONE_HORIZONTAL_RIB[i][j] == 1) {
+                        canvas?.drawLine(
+                            x + radius_of_point,
+                            y,
+                            x + step - radius_of_point,
+                            y,
+                            paint_rib_1
+                        )
+                    }
+                    if (CLONE_HORIZONTAL_RIB[i][j] == 2) {
+                        canvas?.drawLine(
+                            x + radius_of_point,
+                            y,
+                            x + step - radius_of_point,
+                            y,
+                            paint_rib_2
+                        )
+                    }
+                    y += step
+                }
+                x += step
+                y = height - advertising_line - width
+            }
+
+            x = indent
+            y = height - width - advertising_line
+            for (i in 0..6) {
+                for (j in 0..6) {
+                    if (CLONE_FIELD[i][j] == 1) {
+                        canvas?.drawBitmap(right_red, x, y, paint_circle)
+                    }
+                    if (CLONE_FIELD[i][j] == 2) {
+                        canvas?.drawBitmap(right_blue, x, y, paint_circle)
+                    }
+                    y += step
+                }
+                x += step
+                y = height - width - advertising_line
+            }
+        }
     }
 
     var doMove = false
@@ -550,6 +893,11 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if (blocked) {
             return true
+        }
+
+        if(CONDITION_BOX!=0)
+        {
+            return false
         }
 
         var isCorrect = false
@@ -577,7 +925,27 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
                             //positionData.child("VERTICAL_RIB").child("$i").child("$j").setValue(VERTICAL_RIB[i][j])
                             red_or_blue = "blue"
                             isCorrect = true
-                            Log.d("DOPO","ЛОЛ")
+                            var flag :Boolean = true
+                            val prfs = context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                            if(prfs?.getString(positionData.toString()+"box_game_history", "0")!="0")
+                            {
+                                History = prfs?.getString(positionData.toString()+"box_game_history", "a")?.let { decode(it) }!!
+                            }
+                            for(kol in 0 until History.size)
+                            {
+                                if(i==History[kol].first && j == History[kol].second && History[kol].third == 1)
+                                {
+                                    flag = false
+                                }
+                            }
+                            if(flag)
+                            {
+                                History.add(Triple(i,j, 1))
+                                var data_from_memory = encode(History)
+                                val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                editor.putString(positionData.toString()+"box_game_history", data_from_memory)
+                                editor.apply()
+                            }
                         }
                     }
                     else
@@ -590,6 +958,27 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
                             red_or_blue = "red"
                             isCorrect = true
                             Log.d("DOPO","ЛОЛ")
+                            var flag :Boolean = true
+                            val prfs = context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                            if(prfs?.getString(positionData.toString()+"box_game_history", "0")!="0")
+                            {
+                                History = prfs?.getString(positionData.toString()+"box_game_history", "a")?.let { decode(it) }!!
+                            }
+                            for(kol in 0 until History.size)
+                            {
+                                if(i==History[kol].first && j == History[kol].second && History[kol].third == 1)
+                                {
+                                    flag = false
+                                }
+                            }
+                            if(flag)
+                            {
+                                History.add(Triple(i,j, 1))
+                                var data_from_memory = encode(History)
+                                val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                editor.putString(positionData.toString()+"box_game_history", data_from_memory)
+                                editor.apply()
+                            }
                         }
                     }
                 }
@@ -618,7 +1007,27 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
                             //positionData.child("HORIZONTAL_RIB").child("$i").child("$j").setValue(HORIZONTAL_RIB[i][j])
                             red_or_blue = "blue"
                             isCorrect = true
-                            Log.d("DOPO","ЛОЛ")
+                            var flag :Boolean = true
+                            val prfs = context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                            if(prfs?.getString(positionData.toString()+"box_game_history", "0")!="0")
+                            {
+                                History = prfs?.getString(positionData.toString()+"box_game_history", "0")?.let { decode(it) }!!
+                            }
+                            for(kol in 0 until History.size)
+                            {
+                                if(i==History[kol].first && j == History[kol].second && History[kol].third == 2)
+                                {
+                                    flag = false
+                                }
+                            }
+                            if(flag)
+                            {
+                                History.add(Triple(i,j, 2))
+                                var data_from_memory = encode(History)
+                                val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                editor.putString(positionData.toString()+"box_game_history", data_from_memory)
+                                editor.apply()
+                            }
                         }
                     }
                     else
@@ -630,7 +1039,27 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
                             //positionData.child("HORIZONTAL_RIB").child("$i").child("$j").setValue(HORIZONTAL_RIB[i][j])
                             red_or_blue = "red"
                             isCorrect = true
-                            Log.d("DOPO","ЛОЛ")
+                            var flag :Boolean = true
+                            val prfs = context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                            if(prfs?.getString(positionData.toString()+"box_game_history", "0")!="0")
+                            {
+                                History = prfs?.getString(positionData.toString()+"box_game_history", "0")?.let { decode(it) }!!
+                            }
+                            for(kol in 0 until History.size)
+                            {
+                                if(i==History[kol].first && j == History[kol].second && History[kol].third == 2)
+                                {
+                                    flag = false
+                                }
+                            }
+                            if(flag)
+                            {
+                                History.add(Triple(i,j, 2))
+                                var data_from_memory = encode(History)
+                                val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                editor.putString(positionData.toString()+"box_game_history", data_from_memory)
+                                editor.apply()
+                            }
                         }
                     }
                 }
@@ -662,13 +1091,13 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
                     {
                         FIELD[i][j] = 1
                         upd["FIELD/$i/$j"] = FIELD[i][j]
-                        //positionData.child("FIELD").child("$i").child("$j").setValue(FIELD[i][j])
+
                     }
                     else
                     {
                         FIELD[i][j] = 2
                         upd["FIELD/$i/$j"] = FIELD[i][j]
-                        //positionData.child("FIELD").child("$i").child("$j").setValue(FIELD[i][j])
+
                     }
                 }
             }
