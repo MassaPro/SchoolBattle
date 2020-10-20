@@ -109,6 +109,11 @@ fun initMenuFunctions(activity: Activity,
                         Log.d("CONDITION_BOX",activity.signature_canvas_box.History.toString())
                         activity.signature_canvas_box.invalidate()
                     }
+                    activity.toString().contains ("SnakeGameActivity") -> {
+                        activity.signature_canvas_snake_online.CONDITION_SNAKE++
+                        Log.d("CONDITION_BOX",activity.signature_canvas_snake_online.History.toString())
+                        activity.signature_canvas_snake_online.invalidate()
+                    }
                 }
             }
             R.id.page_online_5 -> {
@@ -141,6 +146,16 @@ fun initMenuFunctions(activity: Activity,
                             activity.button_see.visibility = View.GONE
                         }
                         activity.signature_canvas_box.invalidate()
+                    }
+                    activity.toString().contains ("SnakeGameActivity") -> {
+                        if(activity.signature_canvas_snake_online.CONDITION_SNAKE>0) {
+                            activity.signature_canvas_snake_online.CONDITION_SNAKE--
+                            Log.d("CONDITION_SNAKE",activity.signature_canvas_snake_online.History.toString())
+                        }
+                        if(activity.signature_canvas_snake_online.CONDITION_SNAKE==0) {
+                            activity.button_see.visibility = View.GONE
+                        }
+                        activity.signature_canvas_snake_online.invalidate()
                     }
                 }
             }
