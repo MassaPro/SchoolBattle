@@ -20,12 +20,23 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolbattle.*
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.reward.RewardItem
+import com.google.android.gms.ads.reward.RewardedVideoAd
+import com.google.android.gms.ads.reward.RewardedVideoAdListener
 import kotlinx.android.synthetic.main.activity_designs.*
 import kotlinx.android.synthetic.main.design_shop_item.view.*
+import kotlinx.android.synthetic.main.few_money_dialog.*
 import kotlinx.android.synthetic.main.internet_dialog.*
+import kotlinx.android.synthetic.main.internet_dialog.text_few_money
+import kotlinx.android.synthetic.main.reward_dialog.*
 import kotlinx.android.synthetic.main.shop_dialog.*
 
-class Emotions : Fragment()  {
+
+var Vidos_emotion : RewardedVideoAd? = null
+lateinit var mRewardedVideoAd_emotion: RewardedVideoAd
+class Emotions : Fragment(), RewardedVideoAdListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.activity_designs, container, false)
@@ -49,47 +60,93 @@ class Emotions : Fragment()  {
         gamesRecycler.isNestedScrollingEnabled = false;
         item_design_shop.adapter?.notifyDataSetChanged()
 
+        mRewardedVideoAd_emotion = MobileAds.getRewardedVideoAdInstance(locale_context)
+        mRewardedVideoAd_emotion.rewardedVideoAdListener = this
+        Vidos_emotion = mRewardedVideoAd
 
-        if(Design == "Egypt")
-        {
-            choose_design_shop.typeface =  locale_context?.let { ResourcesCompat.getFont(it, R.font.egypt) }
-            choose_design_shop.setTextColor(Color.BLACK)
-            choose_design_shop.textSize = 20f
-        }
-        else if(Design == "Casino")
-        {
-            choose_design_shop.typeface =  locale_context?.let { ResourcesCompat.getFont(it, R.font.casino) }
-            choose_design_shop.setTextColor(Color.YELLOW)
-            choose_design_shop.textSize = 20f
-        }
-        else if(Design == "Rome")
-        {
-            choose_design_shop.typeface =  locale_context?.let { ResourcesCompat.getFont(it, R.font.rome) }
-            choose_design_shop.setTextColor(rgb(193, 150, 63))
-            choose_design_shop.textSize = 25f
-        }
-        else if(Design == "Gothic")
-        {
-            choose_design_shop.typeface =  locale_context?.let { ResourcesCompat.getFont(it, R.font.gothic) }
-            choose_design_shop.setTextColor(Color.WHITE)
-            choose_design_shop.textSize = 25f
-        }
-        else if(Design == "Japan")
-        {
-            choose_design_shop.typeface =  locale_context?.let { ResourcesCompat.getFont(it, R.font.japan) }
-            choose_design_shop.setTextColor(Color.BLACK)
-            choose_design_shop.textSize = 20f
-        }
-        else if(Design == "Noir")
-        {
-            choose_design_shop.typeface =  locale_context?.let { ResourcesCompat.getFont(it, R.font.noir) }
-            choose_design_shop.setTextColor(Color.WHITE)
-            choose_design_shop.textSize = 20f
+
+        when (Design) {
+            "Egypt" -> {
+                choose_design_shop.typeface =  locale_context?.let { ResourcesCompat.getFont(it, R.font.egypt) }
+                choose_design_shop.setTextColor(Color.BLACK)
+                choose_design_shop.textSize = 20f
+            }
+            "Casino" -> {
+                choose_design_shop.typeface =  locale_context?.let { ResourcesCompat.getFont(it, R.font.casino) }
+                choose_design_shop.setTextColor(Color.YELLOW)
+                choose_design_shop.textSize = 20f
+            }
+            "Rome" -> {
+                choose_design_shop.typeface =  locale_context?.let { ResourcesCompat.getFont(it, R.font.rome) }
+                choose_design_shop.setTextColor(rgb(193, 150, 63))
+                choose_design_shop.textSize = 25f
+            }
+            "Gothic" -> {
+                choose_design_shop.typeface =  locale_context?.let { ResourcesCompat.getFont(it, R.font.gothic) }
+                choose_design_shop.setTextColor(Color.WHITE)
+                choose_design_shop.textSize = 25f
+            }
+            "Japan" -> {
+                choose_design_shop.typeface =  locale_context?.let { ResourcesCompat.getFont(it, R.font.japan) }
+                choose_design_shop.setTextColor(Color.BLACK)
+                choose_design_shop.textSize = 20f
+            }
+            "Noir" -> {
+                choose_design_shop.typeface =  locale_context?.let { ResourcesCompat.getFont(it, R.font.noir) }
+                choose_design_shop.setTextColor(Color.WHITE)
+                choose_design_shop.textSize = 20f
+            }
         }
 
     }
 
+    private fun loadRewardedVideoAd() {
+        mRewardedVideoAd_emotion.loadAd("ca-app-pub-3940256099942544/5224354917",          //TODO зменить на настоящий идентификатор
+            AdRequest.Builder().build())
+    }
+    override fun onRewarded(reward: RewardItem) {
 
+    }
+
+    override fun onRewardedVideoAdLeftApplication() {
+
+    }
+
+    override fun onRewardedVideoAdClosed() {
+        loadRewardedVideoAd()
+    }
+
+    override fun onRewardedVideoAdFailedToLoad(errorCode: Int) {
+
+    }
+
+    override fun onRewardedVideoAdLoaded() {
+
+    }
+
+    override fun onRewardedVideoAdOpened() {
+
+    }
+
+    override fun onRewardedVideoStarted() {
+
+    }
+
+    override fun onRewardedVideoCompleted() {
+        loadRewardedVideoAd()
+        var dialog_reward : Dialog = locale_context!!.let { Dialog(it) }
+        dialog_reward.setContentView(R.layout.reward_dialog)
+        dialog_reward.price_reward.text = "10" //TODO ОБЯЗАТЕЛЬНО НЕ ЗАБЫТЬ ПОМЕНЯТЬ ЗДЕСЬ ЦЕНУ
+        dialog_reward.close_reward.setOnClickListener {
+            dialog_reward.dismiss()
+        }
+        dialog_reward.ok_reward.setOnClickListener {
+            dialog_reward.dismiss()
+        }
+        dialog_reward.show()
+        MONEY += 10
+        locale_context?.findViewById<TextView>(R.id.money_shop_toolbar)?.text = MONEY.toString()
+    }
 
 }
 
@@ -137,95 +194,98 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
         {
             holder.icon.setImageResource(R.drawable.money)
         }
-        if(Design == "Egypt"){
-            holder.background_item.setBackgroundColor(Color.rgb(255, 230, 163))
 
-            holder.button.textSize = 20f        //так задаешь размер
-            holder.button.setTextColor(Color.BLACK)   //цвет
-            holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.egypt)
+        when (Design) {
+            "Egypt" -> {
+                holder.background_item.setBackgroundColor(Color.rgb(255, 230, 163))
 
-            holder.price.textSize = 20f        //так задаешь размер
-            holder.price.setTextColor(Color.BLACK)   //цвет
-            holder.price.typeface = ResourcesCompat.getFont(locale_context!!, R.font.egypt)
+                holder.button.textSize = 20f        //так задаешь размер
+                holder.button.setTextColor(Color.BLACK)   //цвет
+                holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.egypt)
 
-            holder.contentView.textSize = 20f        //так задаешь размер
-            holder.contentView.setTextColor(Color.BLACK)   //цвет
-            holder.contentView.typeface = ResourcesCompat.getFont(locale_context!!, R.font.egypt)
-        }
-        else if (Design == "Casino"){
-            holder.background_item.setBackgroundResource(R.drawable.table)
-            holder.button.textSize = 20f        //так задаешь размер
-            holder.button.setTextColor(Color.YELLOW)   //цвет
-            holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.casino)
+                holder.price.textSize = 20f        //так задаешь размер
+                holder.price.setTextColor(Color.BLACK)   //цвет
+                holder.price.typeface = ResourcesCompat.getFont(locale_context!!, R.font.egypt)
 
-            holder.price.textSize = 20f        //так задаешь размер
-            holder.price.setTextColor(Color.YELLOW)   //цвет
-            holder.price.typeface = ResourcesCompat.getFont(locale_context!!, R.font.casino)
+                holder.contentView.textSize = 20f        //так задаешь размер
+                holder.contentView.setTextColor(Color.BLACK)   //цвет
+                holder.contentView.typeface = ResourcesCompat.getFont(locale_context!!, R.font.egypt)
+            }
+            "Casino" -> {
+                holder.background_item.setBackgroundResource(R.drawable.table)
+                holder.button.textSize = 20f        //так задаешь размер
+                holder.button.setTextColor(Color.YELLOW)   //цвет
+                holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.casino)
 
-            holder.contentView.textSize = 20f        //так задаешь размер
-            holder.contentView.setTextColor(Color.YELLOW)   //цвет
-            holder.contentView.typeface = ResourcesCompat.getFont(locale_context!!, R.font.casino)
-        }
-        else if (Design == "Rome"){
-            holder.background_item.setBackgroundResource(R.drawable.bottom_navigation_rome)
-            holder.button.textSize = 20f        //так задаешь размер
-            holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            holder.button.setTextColor(rgb(193, 150, 63))   //цвет
-            holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.rome)
+                holder.price.textSize = 20f        //так задаешь размер
+                holder.price.setTextColor(Color.YELLOW)   //цвет
+                holder.price.typeface = ResourcesCompat.getFont(locale_context!!, R.font.casino)
 
-            holder.price.textSize = 20f        //так задаешь размер
-            holder.price.setTextColor(rgb(193, 150, 63))   //цвет
-            holder.price.typeface = ResourcesCompat.getFont(locale_context!!, R.font.rome)
+                holder.contentView.textSize = 20f        //так задаешь размер
+                holder.contentView.setTextColor(Color.YELLOW)   //цвет
+                holder.contentView.typeface = ResourcesCompat.getFont(locale_context!!, R.font.casino)
+            }
+            "Rome" -> {
+                holder.background_item.setBackgroundResource(R.drawable.bottom_navigation_rome)
+                holder.button.textSize = 20f        //так задаешь размер
+                holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                holder.button.setTextColor(rgb(193, 150, 63))   //цвет
+                holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.rome)
 
-            holder.contentView.textSize = 20f        //так задаешь размер
-            holder.contentView.setTextColor(rgb(193, 150, 63))   //цвет
-            holder.contentView.typeface = ResourcesCompat.getFont(locale_context!!, R.font.rome)
-        }
-        else if (Design == "Gothic"){
-            holder.background_item.setBackgroundColor(rgb(20,20,20))
-            holder.button.textSize = 16f        //так задаешь размер
-            holder.button.setBackgroundColor(rgb(30,30,30))
-            holder.button.setTextColor(Color.WHITE)   //цвет
-            holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.gothic)
+                holder.price.textSize = 20f        //так задаешь размер
+                holder.price.setTextColor(rgb(193, 150, 63))   //цвет
+                holder.price.typeface = ResourcesCompat.getFont(locale_context!!, R.font.rome)
 
-            holder.price.textSize = 20f        //так задаешь размер
-            holder.price.setTextColor(Color.WHITE)   //цвет
-            holder.price.typeface = ResourcesCompat.getFont(locale_context!!, R.font.gothic)
+                holder.contentView.textSize = 20f        //так задаешь размер
+                holder.contentView.setTextColor(rgb(193, 150, 63))   //цвет
+                holder.contentView.typeface = ResourcesCompat.getFont(locale_context!!, R.font.rome)
+            }
+            "Gothic" -> {
+                holder.background_item.setBackgroundColor(rgb(20,20,20))
+                holder.button.textSize = 16f        //так задаешь размер
+                holder.button.setBackgroundColor(rgb(30,30,30))
+                holder.button.setTextColor(Color.WHITE)   //цвет
+                holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.gothic)
 
-            holder.contentView.textSize = 20f        //так задаешь размер
-            holder.contentView.setTextColor(Color.WHITE)   //цвет
-            holder.contentView.typeface = ResourcesCompat.getFont(locale_context!!, R.font.gothic)
-        }
-        else if (Design == "Japan"){
-            holder.background_item.setBackgroundColor(Color.WHITE)
-            holder.button.textSize = 20f        //так задаешь размер
-            holder.button.setTextColor(Color.BLACK)   //цвет
-            holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.japan)
+                holder.price.textSize = 20f        //так задаешь размер
+                holder.price.setTextColor(Color.WHITE)   //цвет
+                holder.price.typeface = ResourcesCompat.getFont(locale_context!!, R.font.gothic)
 
-            holder.price.textSize = 20f        //так задаешь размер
-            holder.price.setTextColor(Color.BLACK)   //цвет
-            holder.price.typeface = ResourcesCompat.getFont(locale_context!!, R.font.japan)
+                holder.contentView.textSize = 20f        //так задаешь размер
+                holder.contentView.setTextColor(Color.WHITE)   //цвет
+                holder.contentView.typeface = ResourcesCompat.getFont(locale_context!!, R.font.gothic)
+            }
+            "Japan" -> {
+                holder.background_item.setBackgroundColor(Color.WHITE)
+                holder.button.textSize = 20f        //так задаешь размер
+                holder.button.setTextColor(Color.BLACK)   //цвет
+                holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.japan)
 
-            holder.contentView.textSize = 20f        //так задаешь размер
-            holder.contentView.setTextColor(Color.BLACK)   //цвет
-            holder.contentView.typeface = ResourcesCompat.getFont(locale_context!!, R.font.japan)
-        }
-        else if (Design == "Noir"){
-            holder.background_item.setBackgroundColor(rgb(20,20,20))
-            holder.button.textSize = 20f        //так задаешь размер
-            holder.button.setBackgroundColor(rgb(30,30,30))
-            holder.button.setTextColor(Color.WHITE)   //цвет
-            holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.noir)
+                holder.price.textSize = 20f        //так задаешь размер
+                holder.price.setTextColor(Color.BLACK)   //цвет
+                holder.price.typeface = ResourcesCompat.getFont(locale_context!!, R.font.japan)
 
-            holder.price.textSize = 20f        //так задаешь размер
-            holder.price.setTextColor(Color.WHITE)   //цвет
-            holder.price.typeface = ResourcesCompat.getFont(locale_context!!, R.font.noir)
+                holder.contentView.textSize = 20f        //так задаешь размер
+                holder.contentView.setTextColor(Color.BLACK)   //цвет
+                holder.contentView.typeface = ResourcesCompat.getFont(locale_context!!, R.font.japan)
+            }
+            "Noir" -> {
+                holder.background_item.setBackgroundColor(rgb(20,20,20))
+                holder.button.textSize = 20f        //так задаешь размер
+                holder.button.setBackgroundColor(rgb(30,30,30))
+                holder.button.setTextColor(Color.WHITE)   //цвет
+                holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.noir)
 
-            holder.contentView.textSize = 20f        //так задаешь размер
-            holder.contentView.setTextColor(Color.WHITE)   //цвет
-            holder.contentView.typeface = ResourcesCompat.getFont(locale_context!!, R.font.noir)
+                holder.price.textSize = 20f        //так задаешь размер
+                holder.price.setTextColor(Color.WHITE)   //цвет
+                holder.price.typeface = ResourcesCompat.getFont(locale_context!!, R.font.noir)
+
+                holder.contentView.textSize = 20f        //так задаешь размер
+                holder.contentView.setTextColor(Color.WHITE)   //цвет
+                holder.contentView.typeface = ResourcesCompat.getFont(locale_context!!, R.font.noir)
+            }
         }
 
         with(holder.itemView) {
@@ -239,7 +299,7 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
             {
                 //TODO MONEY = MONEY from firebase
                 //TODO ARRAY_OF_EMOTION = ARRAY_OF_EMOTION from firebase
-                if(ARRAY_OF_EMOTION_SHOP[position] !in ARRAY_OF_EMOTION)          //если дизайн не куплен
+                if(ARRAY_OF_EMOTION_SHOP[position] !in ARRAY_OF_EMOTION && MONEY >= PRICE_OD_EMOTION[ARRAY_OF_EMOTION_SHOP[position]]!!)          //если дизайн не куплен
                 {
                     // dialog = Proof_of_purchase(HELPED_CONTEXT!!,locale_context!!,"Design",ARRAY_OF_DESIGN_SHOP[position].toString().toInt(), PRICE_OD_DESIGN[ARRAY_OF_DESIGN_SHOP[position].toString().toInt()]!!)
                     //   dialog?.showResult()
@@ -289,6 +349,26 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
                         dialog_shop.dismiss()
                     }
 
+                }
+                if(ARRAY_OF_EMOTION_SHOP[position] !in ARRAY_OF_EMOTION && MONEY < PRICE_OD_EMOTION[ARRAY_OF_EMOTION_SHOP[position]]!!)
+                {
+                    val dialog_shop = Dialog(HELPED_CONTEXT!!)
+                    dialog_shop.setContentView(R.layout.few_money_dialog)
+                    dialog_shop.text_few_money.text = "Недостаточно средств"
+                    dialog_shop.show()
+                    dialog_shop.few_money_ok.setOnClickListener {
+                        dialog_shop.dismiss()
+                    }
+                    dialog_shop.get_money.setOnClickListener {
+                        if (Vidos_emotion?.isLoaded!!) {
+                            Vidos_emotion?.show()
+                            dialog_shop.dismiss()
+                        }
+                        else
+                        {
+                            Toast.makeText(locale_context, "Подождите,видео еще загружается/Проверьте подключение к интернету", Toast.LENGTH_LONG).show()
+                        }
+                    }
                 }
                 return true
             }
