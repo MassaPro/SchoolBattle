@@ -5,11 +5,13 @@ import android.content.Context
 import android.graphics.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Vibrator
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
+import androidx.core.app.NotificationCompatSideChannelService
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
 import com.example.schoolbattle.engine.BlitzGameEngine
@@ -28,7 +30,66 @@ import kotlinx.android.synthetic.main.activity_snake_game.*
 import java.util.*
 
 class ReversiGameActivity : AppCompatActivity() {
-
+    fun encode(h: MutableList<Triple<Int,Int,Int>>):String
+    {
+        var answer: String = ""
+        for(i in 0 until h.size)
+        {
+            answer = answer + h[i].first.toString() + 'a' + h[i].second.toString() + 'a' + h[i].third.toString() + 'a'
+        }
+        return answer
+    }
+    fun string_to_int(s: String): Int
+    {
+        var i : Int = 0
+        var k: Int = 1
+        var answer: Int = 0
+        while(i<s.length)
+        {
+            answer += (s[s.length-i-1].toInt() - '0'.toInt())*k
+            k= k*10
+            i++
+        }
+        return answer
+    }
+    fun decode(s : String) : MutableList<Triple<Int,Int,Int>>
+    {
+        var answer: MutableList<Triple<Int,Int,Int>> = mutableListOf()
+        var i : Int = 0
+        var a: Int = 0
+        var b: Int = 0
+        var c: Int = 0
+        var s1: String = ""
+        while(i<s.length)
+        {
+            s1 = ""
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            a = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            b = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            c = string_to_int(s1)
+            answer.add(Triple(a,b,c))
+            i++
+        }
+        return answer
+    }
     private var isRun = false
     private var opponent = ""
     private var user = ""
@@ -49,7 +110,8 @@ class ReversiGameActivity : AppCompatActivity() {
         signature_canvas_reversi.visibility = View.VISIBLE
 
 
-
+        mSound.load(this, R.raw.xlup, 1);
+        vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
         button_player_1_online_xog.textSize = 20f
         button_player_2_online_xog.textSize = 20f
@@ -203,7 +265,38 @@ class ReversiGameActivity : AppCompatActivity() {
                 for (i in signature_canvas_reversi.FIELD.indices) {
                     for (j in signature_canvas_reversi.FIELD[i].indices) {
                         if (p0.child("FIELD").child("$i").hasChild("$j"))
+                        {
                             signature_canvas_reversi.FIELD[i][j] = p0.child("FIELD").child("$i").child("$j").value.toString().toInt()
+                            if(SOUND)
+                            {
+                                mSound.play(1,1F,1F,1,0,1F)
+                            }
+                            if(VIBRATION)
+                            {
+                                vibratorService?.vibrate(70)
+                            }
+                            var flag :Boolean = true
+                            val prfs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                            if(prfs?.getString(gameData.toString()+"dot_game_history", "0")!="0")
+                            {
+                                signature_canvas_reversi.History = prfs?.getString(gameData.toString()+"dot_game_history", "a")?.let { decode(it) }!!
+                            }
+                            for(kol in 0 until signature_canvas_reversi.History.size)
+                            {
+                                if(i== signature_canvas_reversi.History[kol].first && j == signature_canvas_reversi.History[kol].second)
+                                {
+                                    flag = false
+                                }
+                            }
+                            if(flag)
+                            {
+                                signature_canvas_reversi.History.add(Triple(i,j,signature_canvas_reversi.FIELD[i][j]))
+                                var data_from_memory = encode(signature_canvas_reversi.History)
+                                val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                editor.putString(gameData.toString()+"reversi_game_history", data_from_memory)
+                                editor.apply()
+                            }
+                        }
                     }
                 }
 
@@ -253,6 +346,8 @@ class ReversiGameActivity : AppCompatActivity() {
 }
 
 class CanvasViewReversi(context: Context, attrs: AttributeSet?) : View(context, attrs) {
+    var CONDITION_REVERSI : Int = 0;
+
     lateinit var positionData: DatabaseReference
     var user = ""
     var isFirstMove = false
@@ -723,6 +818,128 @@ class CanvasViewReversi(context: Context, attrs: AttributeSet?) : View(context, 
         }
     }
 
+    fun CLONE_change_array(x: Int,y : Int)
+    {
+        var flag: Boolean = true
+        for(i in 0 until CLONE_FIELD.size)
+        {
+            for(j in 0 until CLONE_FIELD[0].size)
+            {
+                flag = true
+                if(CLONE_FIELD[i][j] == CLONE_FIELD[x][y]) {
+                    if (i == x) {
+                        if (j < y - 1) {
+                            for (p in j + 1 until y) {
+                                if (CLONE_FIELD[x][p] == 0 || CLONE_FIELD[x][p] == CLONE_FIELD[x][y]) {
+                                    flag = false
+                                }
+                            }
+                            if (flag) {
+                                for (p in j + 1 until y) {
+                                    CLONE_FIELD[x][p] = CLONE_FIELD[x][y]
+                                }
+                            }
+                        }
+                        if (j > y + 1) {
+                            for (p in y + 1 until j) {
+                                if (CLONE_FIELD[x][p] == 0 || CLONE_FIELD[x][p] == CLONE_FIELD[x][y]) {
+                                    flag = false
+                                }
+                            }
+                            if (flag) {
+                                for (p in y + 1 until j) {
+                                    CLONE_FIELD[x][p] = CLONE_FIELD[x][y]
+                                }
+                            }
+                        }
+                    }
+                    if (j == y) {
+                        if (i < x - 1) {
+                            for (p in i + 1 until x) {
+                                if (CLONE_FIELD[p][y] == 0 || CLONE_FIELD[p][y] == CLONE_FIELD[x][y]) {
+                                    flag = false
+                                }
+                            }
+                            if (flag) {
+                                for (p in i + 1 until x) {
+                                    CLONE_FIELD[p][y] = CLONE_FIELD[x][y]
+                                }
+                            }
+                        }
+                        if (i > x + 1) {
+                            Log.w("kokol","kokol")
+                            for (p in x + 1 until i) {
+                                if (CLONE_FIELD[p][y] == 0 || CLONE_FIELD[p][y] == CLONE_FIELD[x][y]) {
+                                    flag = false
+                                }
+                            }
+                            if (flag) {
+                                for (p in x + 1 until i) {
+                                    CLONE_FIELD[p][y] = CLONE_FIELD[x][y]
+                                }
+                            }
+                        }
+                    }
+                    if (i - x == j - y) {
+                        if (i > x + 1) {
+                            for (p in 1 until i - x) {
+                                if (CLONE_FIELD[x + p][y + p] == 0 || CLONE_FIELD[x + p][y + p] == CLONE_FIELD[x][y]) {
+                                    flag = false
+                                }
+                            }
+                            if (flag) {
+                                for (p in 1 until i - x) {
+                                    CLONE_FIELD[x + p][y + p] = CLONE_FIELD[x][y]
+                                }
+                            }
+                        }
+                        if (i + 1 < x) {
+                            for (p in 1 until x - i) {
+                                if (CLONE_FIELD[i + p][j + p] == 0 || CLONE_FIELD[i + p][j + p] == CLONE_FIELD[x][y]) {
+                                    flag = false
+                                }
+                            }
+                            if (flag) {
+                                for (p in 1 until x - i) {
+                                    CLONE_FIELD[i + p][j + p] = CLONE_FIELD[x][y]
+                                }
+                            }
+                        }
+                    }
+                    if (i - x == y - j)
+                    {
+                        if (i > x + 1) {
+                            for (p in 1 until i - x) {
+                                if (CLONE_FIELD[x + p][y - p] == 0 || CLONE_FIELD[x + p][y - p] == CLONE_FIELD[x][y]) {
+                                    flag = false
+                                }
+                            }
+                            if (flag) {
+                                for (p in 1 until i - x) {
+                                    CLONE_FIELD[x + p][y - p] = CLONE_FIELD[x][y]
+                                }
+                            }
+                        }
+                        if (i + 1 < x) {
+                            for (p in 1 until x - i) {
+                                if (CLONE_FIELD[x - p][y + p] == 0 || CLONE_FIELD[x - p][y + p] == CLONE_FIELD[x][y]) {
+                                    flag = false
+                                }
+                            }
+                            if (flag) {
+                                for (p in 1 until x - i) {
+                                    CLONE_FIELD[x - p][y + p] = CLONE_FIELD[x][y]
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+            }
+        }
+    }
+
     fun check_win() : Int
     {
         var flag = false
@@ -779,7 +996,7 @@ class CanvasViewReversi(context: Context, attrs: AttributeSet?) : View(context, 
 
     lateinit var activity: Activity
 
-    var History: MutableList<Triple<Int,Int,Int>> = mutableListOf()
+
     var EXODUS : Int = 0
     var indent : Float = 0f
     var circlex : Float = 0f   //координаты нажатия
@@ -792,6 +1009,9 @@ class CanvasViewReversi(context: Context, attrs: AttributeSet?) : View(context, 
     var Array_of_illumination = Array(8) { IntArray(8) }
 
 
+
+    var History: MutableList<Triple<Int,Int,Int>> = mutableListOf()
+    var CLONE_FIELD = Array(8){IntArray(8)}
 
     var width : Float = 0f
     var height : Float = 0f            //ширина и высота экрана (от ширины в основном все зависит)
@@ -910,14 +1130,7 @@ class CanvasViewReversi(context: Context, attrs: AttributeSet?) : View(context, 
 
 
 
-        if(Design == "Normal")
-        {
-            canvas?.drawColor(Color.WHITE)
-        }
-        else
-        {
 
-        }
 
 
 
@@ -939,60 +1152,107 @@ class CanvasViewReversi(context: Context, attrs: AttributeSet?) : View(context, 
 
         right_black_chip = Bitmap.createScaledBitmap(black_chip_normal,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
         right_grey_chip = Bitmap.createScaledBitmap(grey_chip_normal,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-        right_green = Bitmap.createScaledBitmap(green,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+        right_green = Bitmap.createScaledBitmap(green,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);//крестик
+        // расстановка фишек
+        //нолик
+        //крестик
 
-        if(Design == "Egypt")
-        {
-            right_black_chip = Bitmap.createScaledBitmap(black_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
-            right_grey_chip = Bitmap.createScaledBitmap(grey_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-        }
-        else if (Design == "Casino")
-        {
-            right_black_chip = Bitmap.createScaledBitmap(black_chip_casino,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
-            right_grey_chip = Bitmap.createScaledBitmap(grey_chip_casino,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-        }
-        else if (Design == "Rome")
-        {
-            right_black_chip = Bitmap.createScaledBitmap(black_chip_rome,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
-            right_grey_chip = Bitmap.createScaledBitmap(grey_chip_rome,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-            right_green = Bitmap.createScaledBitmap(romb2,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-        }
-        else if (Design == "Gothic")
-        {
-            right_black_chip = Bitmap.createScaledBitmap(black_chip_gothic,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
-            right_grey_chip = Bitmap.createScaledBitmap(grey_chip_gothic,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-            right_green = Bitmap.createScaledBitmap(romb1,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-        }
-        else if (Design == "Japan")
-        {
-            right_black_chip = Bitmap.createScaledBitmap(black_chip_japan,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
-            right_grey_chip = Bitmap.createScaledBitmap(grey_chip_japan,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-            right_green = Bitmap.createScaledBitmap(romb3,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-        }
-
-        for( i in 0..7) // расстановка фишек
-        {
-            for(j in 0..7) {
-                if (FIELD[i][j] == 1)  //крестик
-                {
-                    canvas?.drawBitmap(right_black_chip, translate_from_Array_to_Graphics_X(indent,i,step),
-                        translate_from_Array_to_Graphics_Y(indent,j,height,size_field_y,step,advertising_line),paint)
-                }
-                if (FIELD[i][j] == 2)  //нолик
-                {
-                    canvas?.drawBitmap(right_grey_chip, translate_from_Array_to_Graphics_X(indent,i,step),
-                        translate_from_Array_to_Graphics_Y(indent,j,height,size_field_y,step,advertising_line),paint)
-                }
+        // расстановка фишек
+        when (Design) {
+            "Normal" -> {
+                canvas?.drawColor(Color.WHITE)
+            }
+            "Egypt" -> {
+                right_black_chip = Bitmap.createScaledBitmap(black_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+                right_grey_chip = Bitmap.createScaledBitmap(grey_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            }
+            "Casino" -> {
+                right_black_chip = Bitmap.createScaledBitmap(black_chip_casino,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+                right_grey_chip = Bitmap.createScaledBitmap(grey_chip_casino,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            }
+            "Rome" -> {
+                right_black_chip = Bitmap.createScaledBitmap(black_chip_rome,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+                right_grey_chip = Bitmap.createScaledBitmap(grey_chip_rome,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+                right_green = Bitmap.createScaledBitmap(romb2,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            }
+            "Gothic" -> {
+                right_black_chip = Bitmap.createScaledBitmap(black_chip_gothic,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+                right_grey_chip = Bitmap.createScaledBitmap(grey_chip_gothic,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+                right_green = Bitmap.createScaledBitmap(romb1,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            }
+            "Japan" -> {
+                right_black_chip = Bitmap.createScaledBitmap(black_chip_japan,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+                right_grey_chip = Bitmap.createScaledBitmap(grey_chip_japan,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+                right_green = Bitmap.createScaledBitmap(romb3,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
             }
         }
 
-        for( i in 0..7) // расстановка фишек
+        if(CONDITION_REVERSI == 0)
         {
-            for(j in 0..7) {
-                if (!blocked && Array_of_illumination[i][j] == 1)  //крестик
+            for( i in 0..7) // расстановка фишек
+            {
+                for(j in 0..7) {
+                    if (FIELD[i][j] == 1)  //крестик
+                    {
+                        canvas?.drawBitmap(right_black_chip, translate_from_Array_to_Graphics_X(indent,i,step),
+                            translate_from_Array_to_Graphics_Y(indent,j,height,size_field_y,step,advertising_line),paint)
+                    }
+                    if (FIELD[i][j] == 2)  //нолик
+                    {
+                        canvas?.drawBitmap(right_grey_chip, translate_from_Array_to_Graphics_X(indent,i,step),
+                            translate_from_Array_to_Graphics_Y(indent,j,height,size_field_y,step,advertising_line),paint)
+                    }
+                }
+            }
+
+            for( i in 0..7) // расстановка фишек
+            {
+                for(j in 0..7) {
+                    if (!blocked && Array_of_illumination[i][j] == 1)  //крестик
+                    {
+                        canvas?.drawBitmap(right_green, translate_from_Array_to_Graphics_X(indent,i,step),
+                            translate_from_Array_to_Graphics_Y(indent,j,height,size_field_y,step,advertising_line),paint)
+                    }
+                }
+            }
+        }
+        else
+        {
+            val prfs = context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+            History = prfs?.getString(positionData.toString()+"reversi_game_history", "0")?.let { decode(it) }!!
+            for(i in 0 until CLONE_FIELD.size)
+            {
+                for(j in 0 until CLONE_FIELD[0].size)
                 {
-                    canvas?.drawBitmap(right_green, translate_from_Array_to_Graphics_X(indent,i,step),
-                        translate_from_Array_to_Graphics_Y(indent,j,height,size_field_y,step,advertising_line),paint)
+                    CLONE_FIELD[i][j] = 0;
+                }
+            }
+
+            if(CONDITION_REVERSI>History.size)
+            {
+                CONDITION_REVERSI = History.size
+            }
+
+            for(p in 0 until History.size - CONDITION_REVERSI)
+            {
+                var i = History[p].first
+                var j = History[p].second
+                CLONE_FIELD[i][j] = History[p].third
+                CLONE_change_array(i,j)
+            }
+            for( i in 0..7) // расстановка фишек
+            {
+                for(j in 0..7) {
+                    if (CLONE_FIELD[i][j] == 1)  //крестик
+                    {
+                        canvas?.drawBitmap(right_black_chip, translate_from_Array_to_Graphics_X(indent,i,step),
+                            translate_from_Array_to_Graphics_Y(indent,j,height,size_field_y,step,advertising_line),paint)
+                    }
+                    if (CLONE_FIELD[i][j] == 2)  //нолик
+                    {
+                        canvas?.drawBitmap(right_grey_chip, translate_from_Array_to_Graphics_X(indent,i,step),
+                            translate_from_Array_to_Graphics_Y(indent,j,height,size_field_y,step,advertising_line),paint)
+                    }
                 }
             }
         }
@@ -1011,36 +1271,6 @@ class CanvasViewReversi(context: Context, attrs: AttributeSet?) : View(context, 
         if (blocked) {
             return true
         }
-
-        /*if(check_win()<=0)
-        {
-            blocked = false
-        }
-        if(check_win() >0 && event!!.getAction() == MotionEvent.ACTION_UP && blocked)
-        {
-            blocked=!blocked
-            return true
-        }
-        var dialog: Show_Result_one_Device? = null
-
-        if(check_win()>0 && event!!.getAction()  == MotionEvent.ACTION_UP && !blocked) {
-            if (check_win() == 2) {3
-                dialog = Show_Result_one_Device(activity)
-                dialog?.showResult_one_device("Игрок 1 победил", "Reversi", activity)
-                return true
-            }
-            if (check_win() == 1) {
-                dialog = Show_Result_one_Device(activity)
-                dialog?.showResult_one_device("Игрок 2 победил", "Reversi", activity)
-                return true
-            }
-            if(check_win() == 3)
-            {
-                dialog = Show_Result_one_Device(activity)
-                dialog?.showResult_one_device("НИЧЬЯ", "Reversi", activity)
-                return true
-            }
-        }*/
 
         circlex = event!!.x
         circley = event!!.y
@@ -1061,21 +1291,51 @@ class CanvasViewReversi(context: Context, attrs: AttributeSet?) : View(context, 
             {
                 if (Black_or_grey_chip == "black") {
                     FIELD[X][Y] = 1
-                    //upd["FIELD/$X/$Y"] = 1
-                    //History.add(Triple(X,Y,1))
-                    //var data_from_memory = encode(History)
-                    //val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                    //editor.putString("reversi_one_divice", data_from_memory)
-                    //editor.apply()
+                    var flag :Boolean = true
+                    val prfs = context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                    if(prfs?.getString(positionData.toString()+"dot_game_history", "0")!="0")
+                    {
+                        History = prfs?.getString(positionData.toString()+"dot_game_history", "a")?.let { decode(it) }!!
+                    }
+                    for(kol in 0 until History.size)
+                    {
+                        if(X==History[kol].first && Y == History[kol].second)
+                        {
+                            flag = false
+                        }
+                    }
+                    if(flag)
+                    {
+                        History.add(Triple(X,Y, FIELD[X][Y]))
+                        var data_from_memory = encode(History)
+                        val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                        editor.putString(positionData.toString()+"reversi_game_history", data_from_memory)
+                        editor.apply()
+                    }
                     Black_or_grey_chip = "grey"
                 } else {
                     FIELD[X][Y] = 2
-                    //upd["FIELD/$X/$Y"] = 2
-                    //History.add(Triple(X,Y,2))
-                    //var data_from_memory = encode(History)
-                    //val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                    //editor.putString("reversi_one_divice", data_from_memory)
-                    //editor.apply()
+                    var flag :Boolean = true
+                    val prfs = context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                    if(prfs?.getString(positionData.toString()+"dot_game_history", "0")!="0")
+                    {
+                        History = prfs?.getString(positionData.toString()+"dot_game_history", "a")?.let { decode(it) }!!
+                    }
+                    for(kol in 0 until History.size)
+                    {
+                        if(X==History[kol].first && Y == History[kol].second)
+                        {
+                            flag = false
+                        }
+                    }
+                    if(flag)
+                    {
+                        History.add(Triple(X,Y, FIELD[X][Y]))
+                        var data_from_memory = encode(History)
+                        val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                        editor.putString(positionData.toString()+"reversi_game_history", data_from_memory)
+                        editor.apply()
+                    }
                     Black_or_grey_chip = "black"
                 }
                 for( i in 0..7) {

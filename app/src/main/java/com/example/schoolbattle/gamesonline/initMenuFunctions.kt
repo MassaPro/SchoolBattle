@@ -114,6 +114,11 @@ fun initMenuFunctions(activity: Activity,
                         Log.d("CONDITION_BOX",activity.signature_canvas_snake_online.History.toString())
                         activity.signature_canvas_snake_online.invalidate()
                     }
+                    activity.toString().contains ("ReversiGameActivity") -> {
+                        activity.signature_canvas_reversi.CONDITION_REVERSI++
+                        Log.d("CONDITION_REVERSI",activity.signature_canvas_reversi.History.toString())
+                        activity.signature_canvas_reversi.invalidate()
+                    }
                 }
             }
             R.id.page_online_5 -> {
@@ -156,6 +161,16 @@ fun initMenuFunctions(activity: Activity,
                             activity.button_see.visibility = View.GONE
                         }
                         activity.signature_canvas_snake_online.invalidate()
+                    }
+                    activity.toString().contains ("ReversiGameActivity") -> {
+                        if(activity.signature_canvas_reversi.CONDITION_REVERSI>0) {
+                            activity.signature_canvas_reversi.CONDITION_REVERSI--
+                            Log.d("CONDITION_REVERSI",activity.signature_canvas_reversi.History.toString())
+                        }
+                        if(activity.signature_canvas_reversi.CONDITION_REVERSI==0) {
+                            activity.button_see.visibility = View.GONE
+                        }
+                        activity.signature_canvas_reversi.invalidate()
                     }
                 }
             }
