@@ -190,4 +190,16 @@
         app:layout_constraintEnd_toEndOf="@+id/toolbar_xog_online"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/button_see"
+        android:visibility="gone"
+        android:background="@color/colorRed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="просмотр"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_xog_online"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar2_xog_online"
+        app:layout_constraintTop_toTopOf="@+id/button_player_1_online_xog" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

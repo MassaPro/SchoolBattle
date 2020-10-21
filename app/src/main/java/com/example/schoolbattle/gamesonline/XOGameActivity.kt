@@ -12,6 +12,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewStructure
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
@@ -37,6 +38,68 @@ import java.util.*
 import java.util.logging.Handler
 
 class XOGameActivity : AppCompatActivity() {
+
+    fun encode(h: MutableList<Triple<Int,Int,Int>>):String
+    {
+        var answer: String = ""
+        for(i in 0 until h.size)
+        {
+            answer = answer + h[i].first.toString() + 'a' + h[i].second.toString() + 'a' + h[i].third.toString() + 'a'
+        }
+        return answer
+    }
+    fun string_to_int(s: String): Int
+    {
+        var i : Int = 0
+        var k: Int = 1
+        var answer: Int = 0
+        while(i<s.length)
+        {
+            answer += (s[s.length-i-1].toInt() - '0'.toInt())*k
+            k= k*10
+            i++
+        }
+        return answer
+    }
+    fun decode(s : String) : MutableList<Triple<Int,Int,Int>>
+    {
+        var answer: MutableList<Triple<Int,Int,Int>> = mutableListOf()
+        var i : Int = 0
+        var a: Int = 0
+        var b: Int = 0
+        var c: Int = 0
+        var s1: String = ""
+        while(i<s.length)
+        {
+            s1 = ""
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            a = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            b = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            c = string_to_int(s1)
+            answer.add(Triple(a,b,c))
+            i++
+        }
+        return answer
+    }
+
     private var isRun = false
     private var engine: BlitzGameEngine? = null
     private var engineLong: LongGameEngine? = null
@@ -232,6 +295,34 @@ class XOGameActivity : AppCompatActivity() {
                         if (p.exists()) {
                             cnt++
                             signature_canvas.FIELD[i][j] = p.value.toString().toInt()
+                            var flag: Boolean = true
+                            val prfs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                            if (prfs?.getString(
+                                    gameData.toString() + "xog_game_history",
+                                    "0"
+                                ) != "0"
+                            ) {
+                                signature_canvas.History =
+                                    prfs?.getString(gameData.toString() + "xog_game_history", "a")
+                                        ?.let { decode(it) }!!
+                            }
+                            for (kol in 0 until signature_canvas.History.size) {
+                                if (i == signature_canvas.History[kol].first && j == signature_canvas.History[kol].second) {
+                                    flag = false
+                                }
+                            }
+                            if (flag) {
+                                signature_canvas. History.add(Triple(i, j,signature_canvas.FIELD[i][j]))
+                                var data_from_memory = encode(signature_canvas.History)
+                                val editor =
+                                    getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                                        .edit()
+                                editor.putString(
+                                    gameData.toString() + "xog_game_history",
+                                    data_from_memory
+                                )
+                                editor.apply()
+                            }
                         }
                     }
                 }
@@ -350,6 +441,68 @@ class XOGameActivity : AppCompatActivity() {
 
 
 class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
+    var CONDITION_XOG : Int = 0;
+
+    fun encode(h: MutableList<Triple<Int,Int,Int>>):String
+    {
+        var answer: String = ""
+        for(i in 0 until h.size)
+        {
+            answer = answer + h[i].first.toString() + 'a' + h[i].second.toString() + 'a' + h[i].third.toString() + 'a'
+        }
+        return answer
+    }
+    fun string_to_int(s: String): Int
+    {
+        var i : Int = 0
+        var k: Int = 1
+        var answer: Int = 0
+        while(i<s.length)
+        {
+            answer += (s[s.length-i-1].toInt() - '0'.toInt())*k
+            k= k*10
+            i++
+        }
+        return answer
+    }
+    fun decode(s : String) : MutableList<Triple<Int,Int,Int>>
+    {
+        var answer: MutableList<Triple<Int,Int,Int>> = mutableListOf()
+        var i : Int = 0
+        var a: Int = 0
+        var b: Int = 0
+        var c: Int = 0
+        var s1: String = ""
+        while(i<s.length)
+        {
+            s1 = ""
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            a = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            b = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            c = string_to_int(s1)
+            answer.add(Triple(a,b,c))
+            i++
+        }
+        return answer
+    }
 
     var username: String = ""
 
@@ -466,6 +619,10 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
     var Line_paint_1: Paint = Paint()
     var line_who_do_move : Paint = Paint()
     var FIELD = Array(7){IntArray(6)}
+
+    var History: MutableList<Triple<Int,Int,Int>> = mutableListOf()
+    var CLONE_FIELD = Array(7){IntArray(6)}
+
     var cross_or_nul: String
     var step: Float = 0f
 
@@ -478,57 +635,55 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
 
         Line_paint_1.color = Color.BLACK          //ресур для линий (ширина и цвет)
         Line_paint_1.strokeWidth = 20f
-        line_who_do_move.strokeWidth = 7f
+        line_who_do_move.strokeWidth = 7f//не заполненный
 
-        if(Design == "Normal")
-        {
-            line_who_do_move.color =  Color.GREEN
-            line_who_do_move.strokeWidth = 14f
-            Line_paint.setColor(Color.rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(7f)
-        }
-        else if(Design == "Egypt")
-        {
-            Line_paint.color = Color.BLACK          //ресур для линий (ширина и цвет)
-            Line_paint.strokeWidth = 7f
-            line_who_do_move.color = Color.RED
+        //не заполненный
+        when (Design) {
+            "Normal" -> {
+                line_who_do_move.color =  Color.GREEN
+                line_who_do_move.strokeWidth = 14f
+                Line_paint.setColor(Color.rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
+                Line_paint.setStrokeWidth(7f)
+            }
+            "Egypt" -> {
+                Line_paint.color = Color.BLACK          //ресур для линий (ширина и цвет)
+                Line_paint.strokeWidth = 7f
+                line_who_do_move.color = Color.RED
 
-        }
-        else if (Design == "Casino")
-        {
-            Line_paint.color = Color.YELLOW          //ресур для линий (ширина и цвет)
-            Line_paint.strokeWidth = 7f
-            line_who_do_move.color = Color.RED              //
+            }
+            "Casino" -> {
+                Line_paint.color = Color.YELLOW          //ресур для линий (ширина и цвет)
+                Line_paint.strokeWidth = 7f
+                line_who_do_move.color = Color.RED              //
 
-        }
-        else if (Design == "Rome")
-        {
-            Line_paint.color = Color.rgb(193, 150, 63)    //ресур для линий (ширина и цвет)
-            Line_paint.strokeWidth = 7f
-            line_who_do_move.color = Color.rgb(193, 150, 63)             //
+            }
+            "Rome" -> {
+                Line_paint.color = Color.rgb(193, 150, 63)    //ресур для линий (ширина и цвет)
+                Line_paint.strokeWidth = 7f
+                line_who_do_move.color = Color.rgb(193, 150, 63)             //
 
-        }
-        else if (Design == "Gothic")
-        {
-            Line_paint.color = Color.rgb(100, 100, 100)   //ресур для линий (ширина и цвет)
-            Line_paint.strokeWidth = 7f
-            line_who_do_move.color = Color.WHITE              //
+            }
+            "Gothic" -> {
+                Line_paint.color = Color.rgb(100, 100, 100)   //ресур для линий (ширина и цвет)
+                Line_paint.strokeWidth = 7f
+                line_who_do_move.color = Color.WHITE              //
 
-        }
+            }
+            "Japan" -> {
+                Line_paint.color = Color.BLACK   //ресур для линий (ширина и цвет)
+                Line_paint.strokeWidth = 7f
+                line_who_do_move.color = Color.RED              //
 
-        else if (Design == "Japan")
-        {
-            Line_paint.color = Color.BLACK   //ресур для линий (ширина и цвет)
-            Line_paint.strokeWidth = 7f
-            line_who_do_move.color = Color.RED              //
+            }
+            "Noir" -> {
+                Line_paint.color = Color.rgb(100, 100, 100)   //ресур для линий (ширина и цвет)
+                Line_paint.strokeWidth = 7f
+                line_who_do_move.color = Color.RED              //
 
-        }
-        else if (Design == "Noir")
-        {
-            Line_paint.color = Color.rgb(100, 100, 100)   //ресур для линий (ширина и цвет)
-            Line_paint.strokeWidth = 7f
-            line_who_do_move.color = Color.RED              //
+            }
 
+
+            // TODO нужно взять из DataBase (статистика ходов)
         }
 
 
@@ -544,6 +699,7 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
         for( i in 0..6) {
             for(j in 0 ..5) {
                 FIELD[i][j] = 0 //не заполненный
+                CLONE_FIELD[i][j] = 0;
             }
         }
         cross_or_nul  = "cross"
@@ -651,90 +807,265 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
             right_null = Bitmap.createScaledBitmap(null_noir,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
         }
 
-
-        var cnt = 0
-        for( i in 0..6) //начальная расстановка крестиков и ноликов
-        {
-            for(j in 0..5) {
-                if (FIELD[i][j] == 1)  //крестик
-                {
-                    cnt++
-                    canvas?.drawBitmap(right_cross, translate_from_Array_to_Graphics_X(indent,i,step),
-                        translate_from_Array_to_Graphics_Y(indent,j,height,size_field_y,step,advertising_line),paint)
-                }
-                if (FIELD[i][j] == 2)  //нолик
-                {
-                    cnt--
-                    canvas?.drawBitmap(right_null, translate_from_Array_to_Graphics_X(indent,i,step),
-                        translate_from_Array_to_Graphics_Y(indent,j,height,size_field_y,step,advertising_line),paint)
-                }
-            }
-        }
-
-        cross_or_nul = if (cnt == 0) {
-            "cross"
-        } else {
-            "null"
-        }
-
-        if (touch_refinement_Y(indent,circley,height,size_field_y,step,advertising_line)>0)     //постановка нового обЪекта
-        {
-            val X: Int = touch_refinement_for_Array_X(indent,circlex,step)
-            val Y: Int = touch_refinement_for_Array_Y(indent,circley,height,size_field_y,step,advertising_line)    //координаты нажимаего для массива
-
-            if (moveChecker(X, Y, cnt) && FIELD[X][Y]==0)
+        if(CONDITION_XOG == 0) {
+            var cnt = 0
+            for (i in 0..6) //начальная расстановка крестиков и ноликов
             {
-                blocked = true
-                var a:Float = circlex
-                var b:Float = circley
-                if(cross_or_nul=="cross")
-                {
-                    canvas?.drawBitmap(right_cross,touch_refinement_X(indent,a,width,size_field_x),
-                        touch_refinement_Y(indent,b,height,size_field_y,step,advertising_line),paint)
-                    FIELD[X][Y] = 1
-                    val upd = mapOf(
-                        "/FIELD/$X/$Y" to 1,
-                        "/time/$username/" to engine?.cntUser.toString()
-                    )
-                    positionData.updateChildren(upd)
-                    cross_or_nul = "null"
-                    Exit = 1
-                }
-                else
-                {
-                    canvas?.drawBitmap(right_null,touch_refinement_X(indent,a,width,size_field_x),
-                        touch_refinement_Y(indent,b,height,size_field_y,step,advertising_line),paint)
-                    FIELD[X][Y] = 2
-                    val upd = mapOf(
-                        "/FIELD/$X/$Y" to 2,
-                        "/time/$username/" to engine?.cntUser.toString()
-                    )
-                    positionData.updateChildren(upd)
-                    cross_or_nul = "cross"
+                for (j in 0..5) {
+                    if (FIELD[i][j] == 1)  //крестик
+                    {
+                        cnt++
+                        canvas?.drawBitmap(
+                            right_cross, translate_from_Array_to_Graphics_X(indent, i, step),
+                            translate_from_Array_to_Graphics_Y(
+                                indent,
+                                j,
+                                height,
+                                size_field_y,
+                                step,
+                                advertising_line
+                            ), paint
+                        )
+                    }
+                    if (FIELD[i][j] == 2)  //нолик
+                    {
+                        cnt--
+                        canvas?.drawBitmap(
+                            right_null, translate_from_Array_to_Graphics_X(indent, i, step),
+                            translate_from_Array_to_Graphics_Y(
+                                indent,
+                                j,
+                                height,
+                                size_field_y,
+                                step,
+                                advertising_line
+                            ), paint
+                        )
+                    }
                 }
             }
-        }
 
-        if(checkForWin_another_fun().size==9)
-        {
-            var counter: Int = 1
-            while(counter<9)
+            cross_or_nul = if (cnt == 0) {
+                "cross"
+            } else {
+                "null"
+            }
+
+            if (touch_refinement_Y(
+                    indent,
+                    circley,
+                    height,
+                    size_field_y,
+                    step,
+                    advertising_line
+                ) > 0
+            )     //постановка нового обЪекта
             {
-                var a_1: Float =  translate_from_Array_to_Graphics_X(indent,checkForWin_another_fun()[counter],step)
+                val X: Int = touch_refinement_for_Array_X(indent, circlex, step)
+                val Y: Int = touch_refinement_for_Array_Y(
+                    indent,
+                    circley,
+                    height,
+                    size_field_y,
+                    step,
+                    advertising_line
+                )    //координаты нажимаего для массива
+
+                if (moveChecker(X, Y, cnt) && FIELD[X][Y] == 0) {
+                    blocked = true
+                    var a: Float = circlex
+                    var b: Float = circley
+                    if (cross_or_nul == "cross") {
+                        canvas?.drawBitmap(
+                            right_cross, touch_refinement_X(indent, a, width, size_field_x),
+                            touch_refinement_Y(
+                                indent,
+                                b,
+                                height,
+                                size_field_y,
+                                step,
+                                advertising_line
+                            ), paint
+                        )
+                        FIELD[X][Y] = 1
+                        var flag: Boolean = true
+                        val prfs = context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                        if (prfs?.getString(
+                                positionData.toString() + "xog_game_history",
+                                "0"
+                            ) != "0"
+                        ) {
+                            History =
+                                prfs?.getString(positionData.toString() + "xog_game_history", "a")
+                                    ?.let { decode(it) }!!
+                        }
+                        for (kol in 0 until History.size) {
+                            if (X == History[kol].first && Y == History[kol].second) {
+                                flag = false
+                            }
+                        }
+                        if (flag) {
+                            History.add(Triple(X, Y, FIELD[X][Y]))
+                            var data_from_memory = encode(History)
+                            val editor =
+                                context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                                    .edit()
+                            editor.putString(
+                                positionData.toString() + "xog_game_history",
+                                data_from_memory
+                            )
+                            editor.apply()
+                        }
+                        val upd = mapOf(
+                            "/FIELD/$X/$Y" to 1,
+                            "/time/$username/" to engine?.cntUser.toString()
+                        )
+                        positionData.updateChildren(upd)
+                        cross_or_nul = "null"
+                        Exit = 1
+                    } else {
+                        canvas?.drawBitmap(
+                            right_null, touch_refinement_X(indent, a, width, size_field_x),
+                            touch_refinement_Y(
+                                indent,
+                                b,
+                                height,
+                                size_field_y,
+                                step,
+                                advertising_line
+                            ), paint
+                        )
+                        FIELD[X][Y] = 2
+                        var flag: Boolean = true
+                        val prfs = context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                        if (prfs?.getString(
+                                positionData.toString() + "xog_game_history",
+                                "0"
+                            ) != "0"
+                        ) {
+                            History =
+                                prfs?.getString(positionData.toString() + "xog_game_history", "a")
+                                    ?.let { decode(it) }!!
+                        }
+                        for (kol in 0 until History.size) {
+                            if (X == History[kol].first && Y == History[kol].second) {
+                                flag = false
+                            }
+                        }
+                        if (flag) {
+                            History.add(Triple(X, Y, FIELD[X][Y]))
+                            var data_from_memory = encode(History)
+                            val editor =
+                                context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                                    .edit()
+                            editor.putString(
+                                positionData.toString() + "xog_game_history",
+                                data_from_memory
+                            )
+                            editor.apply()
+                        }
+                        val upd = mapOf(
+                            "/FIELD/$X/$Y" to 2,
+                            "/time/$username/" to engine?.cntUser.toString()
+                        )
+                        positionData.updateChildren(upd)
+                        cross_or_nul = "cross"
+                    }
+                }
+            }
+
+            if (checkForWin_another_fun().size == 9) {
+                var counter: Int = 1
+                while (counter < 9) {
+                    var a_1: Float = translate_from_Array_to_Graphics_X(
+                        indent,
+                        checkForWin_another_fun()[counter],
+                        step
+                    )
 
 
-                var a_2: Float = translate_from_Array_to_Graphics_Y(indent,
-                    checkForWin_another_fun()[counter+1], height,size_field_y, step, advertising_line)
-                canvas?.drawBitmap(right_green,a_1,a_2,paint)
-                counter += 2
+                    var a_2: Float = translate_from_Array_to_Graphics_Y(
+                        indent,
+                        checkForWin_another_fun()[counter + 1],
+                        height,
+                        size_field_y,
+                        step,
+                        advertising_line
+                    )
+                    canvas?.drawBitmap(right_green, a_1, a_2, paint)
+                    counter += 2
+                }
             }
         }
+        else
+        {
+            val prfs = context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+            History = prfs?.getString(positionData.toString()+"xog_game_history", "0")?.let { decode(it) }!!
+            for(i in 0 until CLONE_FIELD.size)
+            {
+                for(j in 0 until CLONE_FIELD[0].size)
+                {
+                    CLONE_FIELD[i][j] = 0;
+                }
+            }
 
+            if(CONDITION_XOG>History.size)
+            {
+                CONDITION_XOG = History.size
+            }
+            for(q in 0 until History.size - CONDITION_XOG)
+            {
+                var i = History[q].first
+                var j = History[q].second
+                CLONE_FIELD[i][j] = FIELD[i][j]
+            }
+
+            var cnt_clone= 0 ;
+            for (i in 0..6) //начальная расстановка крестиков и ноликов
+            {
+                for (j in 0..5) {
+                    if (CLONE_FIELD[i][j] == 1)  //крестик
+                    {
+                        cnt_clone++
+                        canvas?.drawBitmap(
+                            right_cross, translate_from_Array_to_Graphics_X(indent, i, step),
+                            translate_from_Array_to_Graphics_Y(
+                                indent,
+                                j,
+                                height,
+                                size_field_y,
+                                step,
+                                advertising_line
+                            ), paint
+                        )
+                    }
+                    if (CLONE_FIELD[i][j] == 2)  //нолик
+                    {
+                        cnt_clone--
+                        canvas?.drawBitmap(
+                            right_null, translate_from_Array_to_Graphics_X(indent, i, step),
+                            translate_from_Array_to_Graphics_Y(
+                                indent,
+                                j,
+                                height,
+                                size_field_y,
+                                step,
+                                advertising_line
+                            ), paint
+                        )
+                    }
+                }
+            }
+        }
 
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if (blocked) {
+            return false
+        }
+        if(CONDITION_XOG!=0)
+        {
             return false
         }
         super.onTouchEvent(event)

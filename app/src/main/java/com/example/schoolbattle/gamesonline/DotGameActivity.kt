@@ -41,7 +41,7 @@ import java.util.*
 
 
 //TODO , рисовать ребра только один раз до этого узнав, также можно не включать в цепочки вершины которые окружены 6 такими же вершинами
-var CONDITION_DOT : Int = 0;
+
 class DotGameActivity: AppCompatActivity() {
 
     fun encode(h: MutableList<Triple<Int,Int,Int>>):String
@@ -115,11 +115,6 @@ class DotGameActivity: AppCompatActivity() {
     var type = ""
     lateinit var gameData: DatabaseReference
 
-    var Finish_time: Long  = 0
-    var timeBegin: Long = 0
-
-    var Finish_time_1: Long  = 0
-    var timeBegin_1: Long =0
 
     override fun onResume() {
         super.onResume()
@@ -316,7 +311,28 @@ class DotGameActivity: AppCompatActivity() {
                             cnt++
                             if(signature_canvas3.FIELD[i][j]==0)
                             {
-                                signature_canvas3.History.add(Triple(i,j, p0.child("FIELD").child("$i").child("$j").value.toString().toInt()))
+                                val prfs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                                if(prfs?.getString(gameData.toString()+"dot_game_history", "0")!="0")
+                                {
+                                    signature_canvas3.History = prfs?.getString(gameData.toString()+"dot_game_history", "0")?.let { decode(it) }!!
+                                }
+                                var flag :Boolean = true
+                                for(kol in 0 until signature_canvas3.History.size)
+                                {
+                                    if(i==signature_canvas3.History[kol].first && j ==signature_canvas3.History[kol].second)
+                                    {
+                                        flag = false
+                                    }
+                                }
+                                if(flag)
+                                {
+                                    signature_canvas3.History.add(Triple(i,j, p0.child("FIELD").child("$i").child("$j").value.toString().toInt()))
+                                    var data_from_memory = encode(signature_canvas3.History)
+                                    val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                    editor.putString(gameData.toString()+"dot_game_history", data_from_memory)
+                                    editor.apply()
+                                }
+
                             }
                             signature_canvas3.FIELD[i][j] =
                                 p0.child("FIELD").child("$i").child("$j").value.toString().toInt()
@@ -421,6 +437,7 @@ class DotGameActivity: AppCompatActivity() {
 }
 
 class CanvasViewDot(context: Context, attrs: AttributeSet?) : View(context, attrs) {
+    var CONDITION_DOT : Int = 0;
 
     fun encode(h: MutableList<Triple<Int,Int,Int>>):String
     {
@@ -577,6 +594,7 @@ class CanvasViewDot(context: Context, attrs: AttributeSet?) : View(context, attr
     val a_CLONE: MutableList<MutableList<Int>> = mutableListOf()     // для псевдо фишек
     var p_CLONE: MutableList<Pair<Int,Int>> = mutableListOf()
     var red_or_blue_CLONE = 1
+
 
 
 
@@ -1094,6 +1112,8 @@ class CanvasViewDot(context: Context, attrs: AttributeSet?) : View(context, attr
         }
         else
         {
+            val prfs = context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+            History = prfs?.getString(positionData.toString()+"dot_game_history", "0")?.let { decode(it) }!!
             for(i in 0 until FIELD_CLONE.size)
             {
                 for(j in 0 until FIELD_CLONE[0].size)
@@ -1110,28 +1130,40 @@ class CanvasViewDot(context: Context, attrs: AttributeSet?) : View(context, attr
                     a_CLONE[i].add(0)
                 }
             }
-            red_or_blue_CLONE = 1
+
             if(CONDITION_DOT>History.size)
             {
                 CONDITION_DOT = History.size
             }
-            for(q in 0 until History.size - CONDITION_DOT) {
-                var i  = History[q].first
-                var j =  History[q].second
-                if (FIELD_CLONE[i][j] == 0 && a_CLONE[j][i] == 0)
-                {
-                    red_or_blue_CLONE = 3 - red_or_blue_CLONE
-                    if (red_or_blue_CLONE == 1) {
-                        FIELD_CLONE[i][j] = 1
-                        a_CLONE[j][i] = 1
-                        p_CLONE = find(1, a_CLONE, 16, 11)
-                    } else {
-                        FIELD_CLONE[i][j] = 2
-                        a_CLONE[j][i] = 2
-                        p_CLONE = find(2, a_CLONE, 16, 11)
-                    }
-                }
+
+
+            if(isFirstMove)
+            {
+                red_or_blue_CLONE = 2
             }
+            else
+            {
+                red_or_blue_CLONE = 1
+            }
+            for(q in 0 until History.size - CONDITION_DOT)
+            {
+                var i = History[q].first
+                var j = History[q].second
+                FIELD_CLONE[i][j] = FIELD[i][j]
+                if (FIELD[i][j]==1) {
+                    FIELD_CLONE[i][j] = 1
+                    a_CLONE[j][i] = 1
+                    p_CLONE = find(1, a_CLONE, 16, 11)
+                }
+                else
+                {
+                    FIELD_CLONE[i][j] = 2
+                    a_CLONE[j][i] = 2
+                    p_CLONE = find(2, a_CLONE, 16, 11)
+                }
+                red_or_blue_CLONE = 3 - red_or_blue_CLONE
+            }
+
 
             radius_of_point = 8f
             size_field_x = 10
@@ -1575,6 +1607,7 @@ class CanvasViewDot(context: Context, attrs: AttributeSet?) : View(context, attr
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
 
+
         if (blocked) {
             return true
         }
@@ -1588,6 +1621,7 @@ class CanvasViewDot(context: Context, attrs: AttributeSet?) : View(context, attr
         circley = event.y
 
         if(true || event!!.action == MotionEvent.ACTION_UP) {
+            Log.d("History",History.toString())
             var fl = false
             var x1: Float = indent
             var y1: Float =
@@ -1616,11 +1650,27 @@ class CanvasViewDot(context: Context, attrs: AttributeSet?) : View(context, attr
                             }
                             fl = true
                             upd["time/$username/"] = engine?.cntUser.toString()
-                            History.add(Triple(i,j,FIELD[i][j]))
-                        //    var data_from_memory = encode(History)
-                        //    val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                     //       editor.putString("dot_online", data_from_memory)
-                     //       editor.apply()
+                            var flag :Boolean = true
+                            val prfs = context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                            if(prfs?.getString(positionData.toString()+"dot_game_history", "0")!="0")
+                            {
+                                History = prfs?.getString(positionData.toString()+"dot_game_history", "a")?.let { decode(it) }!!
+                            }
+                            for(kol in 0 until History.size)
+                            {
+                                if(i==History[kol].first && j == History[kol].second)
+                                {
+                                    flag = false
+                                }
+                            }
+                            if(flag)
+                            {
+                                History.add(Triple(i,j, FIELD[i][j]))
+                                var data_from_memory = encode(History)
+                                val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                editor.putString(positionData.toString()+"dot_game_history", data_from_memory)
+                                editor.apply()
+                            }
                             invalidate()
                             break
                         }

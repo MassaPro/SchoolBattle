@@ -36,6 +36,66 @@ import kotlinx.android.synthetic.main.activity_x_o_game.*
 import java.util.*
 
 class SnakeGameActivity : AppCompatActivity() {
+    fun encode(h: MutableList<Triple<Int,Int,Int>>):String
+    {
+        var answer: String = ""
+        for(i in 0 until h.size)
+        {
+            answer = answer + h[i].first.toString() + 'a' + h[i].second.toString() + 'a' + h[i].third.toString() + 'a'
+        }
+        return answer
+    }
+    fun string_to_int(s: String): Int
+    {
+        var i : Int = 0
+        var k: Int = 1
+        var answer: Int = 0
+        while(i<s.length)
+        {
+            answer += (s[s.length-i-1].toInt() - '0'.toInt())*k
+            k= k*10
+            i++
+        }
+        return answer
+    }
+    fun decode(s : String) : MutableList<Triple<Int,Int,Int>>
+    {
+        var answer: MutableList<Triple<Int,Int,Int>> = mutableListOf()
+        var i : Int = 0
+        var a: Int = 0
+        var b: Int = 0
+        var c: Int = 0
+        var s1: String = ""
+        while(i<s.length)
+        {
+            s1 = ""
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            a = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            b = string_to_int(s1)
+            s1 = ""
+            i++
+            while(s[i]!='a')
+            {
+                s1+=s[i]
+                i++
+            }
+            c = string_to_int(s1)
+            answer.add(Triple(a,b,c))
+            i++
+        }
+        return answer
+    }
     private var isRun = false
     private var engine: BlitzGameEngine? = null
     var yourName = ""
@@ -146,79 +206,81 @@ class SnakeGameActivity : AppCompatActivity() {
 
         bottom_navigation_xog_online.itemIconTintList = generateColorStateList()
         bottom_navigation_xog_online.itemTextColor = generateColorStateList()
-        if(Design == "Egypt" ) {
-            label_online.setBackgroundResource(R.drawable.background_egypt)
-            button_player_1_online_xog.setTextColor(Color.BLACK)
-            button_player_2_online_xog.setTextColor(Color.BLACK)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundColor(rgb(255, 230, 163))
-            toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
-            toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
-        }
-        else if(Design == "Casino" ) {
-            label_online.setBackgroundResource(R.drawable.background2_casino)
-            button_player_1_online_xog.setTextColor(Color.YELLOW)
-            button_player_2_online_xog.setTextColor(Color.YELLOW)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_casino)
-            toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
-            toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
-        }
-        else if(Design == "Rome" ) {
-            label_online.setBackgroundResource(R.drawable.background_rome)
-            button_player_1_online_xog.setTextColor(Color.rgb(224, 164, 103))
-            button_player_2_online_xog.setTextColor(Color.rgb(224, 164, 103))
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_rome)
-            toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
-            toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
-        }
-        else if(Design == "Japan" ) {
-            label_online.setBackgroundResource(R.drawable.background_japan)
-            button_player_1_online_xog.setTextColor(Color.BLACK)
-            button_player_2_online_xog.setTextColor(Color.BLACK)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundColor(Color.WHITE)
-            toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
-            toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
-        }
-        else if(Design == "Gothic" ) {
-            label_online.setBackgroundResource(R.drawable.background_gothic)
-            button_player_1_online_xog.setTextColor(Color.WHITE)
-            button_player_2_online_xog.setTextColor(Color.WHITE)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
-            toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
-            toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
-            button_player_1_online_xog.textSize = 16.5f
-            button_player_2_online_xog.textSize = 16.5f
-        }
-        else if(Design == "Noir") {
-            label_online.setBackgroundResource(R.drawable.background_noir)
-            button_player_1_online_xog.setTextColor(Color.WHITE)
-            button_player_2_online_xog.setTextColor(Color.WHITE)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
-            toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
-            toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+        when (Design) {
+            "Egypt" -> {
+                label_online.setBackgroundResource(R.drawable.background_egypt)
+                button_player_1_online_xog.setTextColor(Color.BLACK)
+                button_player_2_online_xog.setTextColor(Color.BLACK)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
+                bottom_navigation_xog_online.setBackgroundColor(rgb(255, 230, 163))
+                toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
+                toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+            }
+            "Casino" -> {
+                label_online.setBackgroundResource(R.drawable.background2_casino)
+                button_player_1_online_xog.setTextColor(Color.YELLOW)
+                button_player_2_online_xog.setTextColor(Color.YELLOW)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
+                bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_casino)
+                toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
+                toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+            }
+            "Rome" -> {
+                label_online.setBackgroundResource(R.drawable.background_rome)
+                button_player_1_online_xog.setTextColor(Color.rgb(224, 164, 103))
+                button_player_2_online_xog.setTextColor(Color.rgb(224, 164, 103))
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
+                bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_rome)
+                toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
+                toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+            }
+            "Japan" -> {
+                label_online.setBackgroundResource(R.drawable.background_japan)
+                button_player_1_online_xog.setTextColor(Color.BLACK)
+                button_player_2_online_xog.setTextColor(Color.BLACK)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
+                bottom_navigation_xog_online.setBackgroundColor(Color.WHITE)
+                toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
+                toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+            }
+            "Gothic" -> {
+                label_online.setBackgroundResource(R.drawable.background_gothic)
+                button_player_1_online_xog.setTextColor(Color.WHITE)
+                button_player_2_online_xog.setTextColor(Color.WHITE)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
+                bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
+                toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
+                toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+                button_player_1_online_xog.textSize = 16.5f
+                button_player_2_online_xog.textSize = 16.5f
+            }
+            "Noir" -> {
+                label_online.setBackgroundResource(R.drawable.background_noir)
+                button_player_1_online_xog.setTextColor(Color.WHITE)
+                button_player_2_online_xog.setTextColor(Color.WHITE)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
+                bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
+                toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
+                toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+            }
         }
         initMenuFunctions(this, bottom_navigation_xog_online, intent, yourName, opponentsName, gameData)
         gameData.addValueEventListener(object : ValueEventListener {
@@ -237,6 +299,27 @@ class SnakeGameActivity : AppCompatActivity() {
                             signature_canvas_snake_online.FIELD[i][j] =
                                 p0.child("FIELD").child("$i").child("$j").value.toString().toInt()
                             count++
+                            var flag :Boolean = true
+                            val prfs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                            if(prfs?.getString(gameData.toString()+"snake_game_history", "0")!="0")
+                            {
+                                signature_canvas_snake_online.History = prfs?.getString(gameData.toString()+"snake_game_history", "0")?.let { decode(it) }!!
+                            }
+                            for(kol in 0 until signature_canvas_snake_online.History.size)
+                            {
+                                if(i==signature_canvas_snake_online.History[kol].first && j == signature_canvas_snake_online.History[kol].second)
+                                {
+                                    flag = false
+                                }
+                            }
+                            if(flag)
+                            {
+                                signature_canvas_snake_online.History.add(Triple(i,j, 2))
+                                var data_from_memory = encode(signature_canvas_snake_online.History)
+                                val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                editor.putString(gameData.toString()+"snake_game_history", data_from_memory)
+                                editor.apply()
+                            }
                         }
                     }
                 }
@@ -311,6 +394,7 @@ class SnakeGameActivity : AppCompatActivity() {
 }
 
 class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(context, attrs) {
+    var CONDITION_SNAKE  = 0;
     fun encode(h: MutableList<Triple<Int,Int,Int>>):String
     {
         var answer: String = ""
@@ -516,7 +600,6 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
 
     var isFirstMove = false
     var username = ""
-    var History: MutableList<Triple<Int,Int,Int>> = mutableListOf()
     var Snake_1: MutableList<Pair<Int,Int>>  =  mutableListOf()
     var Snake_2: MutableList<Pair<Int,Int>>  =  mutableListOf()         //векторы координат путей
     var lastx: Int = 0
@@ -536,9 +619,11 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
     var engine: BlitzGameEngine? = null
 
     var FIELD = Array(11){IntArray(11)}     //для фишеК
-    var A: MutableList<Pair<Int,Int>> = mutableListOf()
-    var TREE_OF_WAYS: MutableList<MutableList<Pair<Int,Int>>> = mutableListOf()
-    var CELLS = Array(10){Array(15){IntArray(6)} }            //массив клеток в которых мы будем проводить ребра
+
+    var CLONE_FIELD = Array(11){IntArray(11)}
+    var CLONE_Snake_1: MutableList<Pair<Int,Int>>  =  mutableListOf()
+    var CLONE_Snake_2: MutableList<Pair<Int,Int>>  =  mutableListOf()         //векторы координат путей
+    var History: MutableList<Triple<Int,Int,Int>> = mutableListOf()
 
 
     var radius_of_point: Float = 0f
@@ -570,77 +655,78 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
         border_2.setColor(Color.GRAY)
         border_2.setStrokeWidth(20f)
 
-        if(Design == "Egypt"){
+        when (Design) {
+            "Egypt" -> {
 
-            Line_paint.setColor(Color.rgb(100, 100, 100))          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(5f)
+                Line_paint.setColor(Color.rgb(100, 100, 100))          //ресур для линий (ширина и цвет)
+                Line_paint.setStrokeWidth(5f)
 
-            paint_circle.setColor(Color.rgb(100, 100, 100))     //цвета для точек
+                paint_circle.setColor(Color.rgb(100, 100, 100))     //цвета для точек
 
-            paint_rib_1.setColor(Color.BLACK)          //цвета для ребер  и их ширина
-            paint_rib_1.setStrokeWidth(10f)
-            paint_rib_2.setColor(Color.WHITE)
-            paint_rib_2.setStrokeWidth(10f)
+                paint_rib_1.setColor(Color.BLACK)          //цвета для ребер  и их ширина
+                paint_rib_1.setStrokeWidth(10f)
+                paint_rib_2.setColor(Color.WHITE)
+                paint_rib_2.setStrokeWidth(10f)
 
-            border_1.setColor(Color.rgb(100, 100, 100))
-            border_1.setStrokeWidth(10f)
-        }
-        else if(Design == "Casino"){
+                border_1.setColor(Color.rgb(100, 100, 100))
+                border_1.setStrokeWidth(10f)
+            }
+            "Casino" -> {
 
-            Line_paint.setColor(Color.WHITE)          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(5f)
+                Line_paint.setColor(Color.WHITE)          //ресур для линий (ширина и цвет)
+                Line_paint.setStrokeWidth(5f)
 
-            paint_circle.setColor(Color.WHITE)     //цвета для точек
+                paint_circle.setColor(Color.WHITE)     //цвета для точек
 
-            paint_rib_1.setColor(Color.BLACK)          //цвета для ребер  и их ширина
-            paint_rib_1.setStrokeWidth(10f)
-            paint_rib_2.setColor(Color.RED)
-            paint_rib_2.setStrokeWidth(10f)
+                paint_rib_1.setColor(Color.BLACK)          //цвета для ребер  и их ширина
+                paint_rib_1.setStrokeWidth(10f)
+                paint_rib_2.setColor(Color.RED)
+                paint_rib_2.setStrokeWidth(10f)
 
-            border_1.setColor(Color.WHITE)
-            border_1.setStrokeWidth(10f)
-        }
+                border_1.setColor(Color.WHITE)
+                border_1.setStrokeWidth(10f)
+            }
+            "Rome" -> {
 
-        else if(Design == "Rome"){
+                Line_paint.setColor(Color.rgb(180, 180, 180))          //ресур для линий (ширина и цвет)
+                Line_paint.setStrokeWidth(5f)
 
-            Line_paint.setColor(Color.rgb(180, 180, 180))          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(5f)
+                paint_circle.setColor(Color.rgb(180, 180, 180))     //цвета для точек
 
-            paint_circle.setColor(Color.rgb(180, 180, 180))     //цвета для точек
+                paint_rib_2.setColor(Color.BLACK)          //цвета для ребер  и их ширина
+                paint_rib_1.setStrokeWidth(10f)
+                paint_rib_1.setColor(Color.rgb(193,150,63))
+                paint_rib_2.setStrokeWidth(10f)
 
-            paint_rib_2.setColor(Color.BLACK)          //цвета для ребер  и их ширина
-            paint_rib_1.setStrokeWidth(10f)
-            paint_rib_1.setColor(Color.rgb(193,150,63))
-            paint_rib_2.setStrokeWidth(10f)
+                border_1.setColor(Color.rgb(180, 180, 180))
+                border_1.setStrokeWidth(10f)
+            }
+            "Gothic" -> {
 
-            border_1.setColor(Color.rgb(180, 180, 180))
-            border_1.setStrokeWidth(10f)
-        }
-        else if(Design == "Gothic") {
+                Line_paint.setColor(Color.rgb(100, 100, 100))          //ресур для линий (ширина и цвет)
+                Line_paint.setStrokeWidth(5f)
 
-            Line_paint.setColor(Color.rgb(100, 100, 100))          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(5f)
+                paint_circle.setColor(Color.rgb(180, 180, 180))     //цвета для точек
 
-            paint_circle.setColor(Color.rgb(180, 180, 180))     //цвета для точек
+                paint_rib_2.setColor(Color.WHITE)          //цвета для ребер  и их ширина
+                paint_rib_1.setStrokeWidth(10f)
+                paint_rib_1.setColor(Color.YELLOW)
+                paint_rib_2.setStrokeWidth(10f)
 
-            paint_rib_2.setColor(Color.WHITE)          //цвета для ребер  и их ширина
-            paint_rib_1.setStrokeWidth(10f)
-            paint_rib_1.setColor(Color.YELLOW)
-            paint_rib_2.setStrokeWidth(10f)
+            }
+            "Japan" -> {
 
-        }
-        else if(Design == "Japan") {
+                Line_paint.setColor(Color.rgb(160,160,160))          //ресур для линий (ширина и цвет)
+                Line_paint.setStrokeWidth(5f)
 
-            Line_paint.setColor(Color.rgb(160,160,160))          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(5f)
+                paint_circle.setColor(Color.rgb(160,160,160))     //цвета для точек
 
-            paint_circle.setColor(Color.rgb(160,160,160))     //цвета для точек
+                paint_rib_2.setColor(Color.RED)          //цвета для ребер  и их ширина
+                paint_rib_1.setStrokeWidth(10f)
+                paint_rib_1.setColor(Color.rgb(37,103,28))
+                paint_rib_2.setStrokeWidth(10f)
 
-            paint_rib_2.setColor(Color.RED)          //цвета для ребер  и их ширина
-            paint_rib_1.setStrokeWidth(10f)
-            paint_rib_1.setColor(Color.rgb(37,103,28))
-            paint_rib_2.setStrokeWidth(10f)
-
+            }
         }
 
         for(i in 0 until FIELD.size)
@@ -648,6 +734,7 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
             for(j in 0 until FIELD[i].size)
             {
                 FIELD[i][j] = 0
+                CLONE_FIELD[i][j] = 0;
             }
         }
 
@@ -713,96 +800,193 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
             y  = height - advertising_line - width*(size_field_y.toFloat()/size_field_x.toFloat())
         }
 
-        for(i in 0 until Snake_1.size - 1)     //вырисовка ребер змеи
-        {
-            var X: Float = indent + step*Snake_1[i].first
-            var Y: Float =  height - advertising_line - width + step*Snake_1[i].second
-            var X1: Float = indent + step*Snake_1[i+1].first
-            var Y1: Float =  height - advertising_line - width + step*Snake_1[i+1].second
-            if(Math.abs(Snake_1[i].first - Snake_1[i + 1].first) + Math.abs(Snake_1[i].second - Snake_1[i + 1].second) <= 2)
+        if(CONDITION_SNAKE==0) {
+            for (i in 0 until Snake_1.size - 1)     //вырисовка ребер змеи
             {
-                canvas?.drawLine(X,Y,X1,Y1,paint_rib_1)
-            }
+                var X: Float = indent + step * Snake_1[i].first
+                var Y: Float = height - advertising_line - width + step * Snake_1[i].second
+                var X1: Float = indent + step * Snake_1[i + 1].first
+                var Y1: Float = height - advertising_line - width + step * Snake_1[i + 1].second
+                if (Math.abs(Snake_1[i].first - Snake_1[i + 1].first) + Math.abs(Snake_1[i].second - Snake_1[i + 1].second) <= 2) {
+                    canvas?.drawLine(X, Y, X1, Y1, paint_rib_1)
+                }
 
-            if(Snake_1[i].second == Snake_1[i+1].second &&Snake_1[i].first < Snake_1[i+1].first )
-            {
-                if(Math.abs(Snake_1[i].first - Snake_1[i + 1].first) + Math.abs(Snake_1[i].second - Snake_1[i + 1].second) <= 2)
-                {
-                    canvas?.drawLine(X - 5, Y, X1 + 5, Y1, paint_rib_1)
+                if (Snake_1[i].second == Snake_1[i + 1].second && Snake_1[i].first < Snake_1[i + 1].first) {
+                    if (Math.abs(Snake_1[i].first - Snake_1[i + 1].first) + Math.abs(Snake_1[i].second - Snake_1[i + 1].second) <= 2) {
+                        canvas?.drawLine(X - 5, Y, X1 + 5, Y1, paint_rib_1)
+                    }
+                }
+                if (Snake_1[i].second == Snake_1[i + 1].second && Snake_1[i].first > Snake_1[i + 1].first) {
+                    if (Math.abs(Snake_1[i].first - Snake_1[i + 1].first) + Math.abs(Snake_1[i].second - Snake_1[i + 1].second) <= 2) {
+                        canvas?.drawLine(X + 5, Y, X1 - 5, Y1, paint_rib_1)
+                    }
                 }
             }
-            if(Snake_1[i].second == Snake_1[i+1].second &&Snake_1[i].first > Snake_1[i+1].first )
+            for (i in 0 until Snake_2.size - 1)      //вырисовка ребер змеи
             {
-                if(Math.abs(Snake_1[i].first - Snake_1[i + 1].first) + Math.abs(Snake_1[i].second - Snake_1[i + 1].second) <= 2)
-                {
-                    canvas?.drawLine(X+5,Y,X1-5,Y1,paint_rib_1)
+                var X: Float = indent + step * Snake_2[i].first
+                var Y: Float = height - advertising_line - width + step * Snake_2[i].second
+                var X1: Float = indent + step * Snake_2[i + 1].first
+                var Y1: Float = height - advertising_line - width + step * Snake_2[i + 1].second
+                if (Math.abs(Snake_2[i].first - Snake_2[i + 1].first) + Math.abs(Snake_2[i].second - Snake_2[i + 1].second) <= 2) {
+                    canvas?.drawLine(X, Y, X1, Y1, paint_rib_2)
+                }
+                if (Snake_2[i].second == Snake_2[i + 1].second && Snake_2[i].first < Snake_2[i + 1].first) {
+                    if (Math.abs(Snake_2[i].first - Snake_2[i + 1].first) + Math.abs(Snake_2[i].second - Snake_2[i + 1].second) <= 2) {
+                        canvas?.drawLine(X - 5, Y, X1 + 5, Y1, paint_rib_2)
+                    }
+                }
+                if (Snake_2[i].second == Snake_2[i + 1].second && Snake_2[i].first > Snake_2[i + 1].first) {
+                    if (Math.abs(Snake_2[i].first - Snake_2[i + 1].first) + Math.abs(Snake_2[i].second - Snake_2[i + 1].second) <= 2) {
+                        canvas?.drawLine(X + 5, Y, X1 - 5, Y1, paint_rib_2)
+                    }
                 }
             }
-        }
-        for(i in 0 until Snake_2.size - 1)      //вырисовка ребер змеи
-        {
-            var X: Float = indent + step*Snake_2[i].first
-            var Y: Float =  height - advertising_line - width + step*Snake_2[i].second
-            var X1: Float = indent + step*Snake_2[i+1].first
-            var Y1: Float =  height - advertising_line - width + step*Snake_2[i+1].second
-            if(Math.abs(Snake_2[i].first - Snake_2[i + 1].first) + Math.abs(Snake_2[i].second - Snake_2[i + 1].second) <= 2)
-            {
-                canvas?.drawLine(X,Y,X1,Y1,paint_rib_2)
+
+            if (Snake_1.size > 0) {
+                var X: Float = indent + step * Snake_1[0].first - step / 5f
+                var X1: Float = indent + step * Snake_1[0].first + step / 5f
+                var Y: Float =
+                    height - advertising_line - width + step * Snake_1[0].second - step / 5f
+                var Y1: Float =
+                    height - advertising_line - width + step * Snake_1[0].second + step / 5f
+                canvas?.drawLine(X, Y, X1, Y1, paint_rib_1)
+                canvas?.drawLine(X, Y1, X1, Y, paint_rib_1)
             }
-            if(Snake_2[i].second == Snake_2[i+1].second &&Snake_2[i].first < Snake_2[i+1].first )
+
+            if (Snake_2.size > 0) {
+                var _X: Float = indent + step * Snake_2[0].first - step / 5f
+                var _X1: Float = indent + step * Snake_2[0].first + step / 5f
+                var _Y: Float =
+                    height - advertising_line - width + step * Snake_2[0].second - step / 5f
+                var _Y1: Float =
+                    height - advertising_line - width + step * Snake_2[0].second + step / 5f
+                canvas?.drawLine(_X, _Y, _X1, _Y1, paint_rib_2)
+                canvas?.drawLine(_X, _Y1, _X1, _Y, paint_rib_2)
+            }
+
+            if (Snake_1.size > 1) {
+                var X: Float = indent + step * Snake_1.last().first
+                var Y: Float = height - width - advertising_line + step * Snake_1.last().second
+                canvas?.drawCircle(X, Y, radius_of_point * 2, paint_rib_1)
+            }
+            if (Snake_2.size > 1) {
+                var X: Float = indent + step * Snake_2.last().first
+                var Y: Float = height - width - advertising_line + step * Snake_2.last().second
+                canvas?.drawCircle(X, Y, radius_of_point * 2, paint_rib_2)
+            }
+        }
+        else
+        {
+            val prfs = context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+
+            History = prfs?.getString(positionData.toString()+"snake_game_history", "a")?.let { decode(it) }!!
+            for(i in 0 until CLONE_FIELD.size)
             {
-                if(Math.abs(Snake_2[i].first - Snake_2[i + 1].first) + Math.abs(Snake_2[i].second - Snake_2[i + 1].second) <= 2)
+                for(j in 0 until CLONE_FIELD[0].size)
                 {
-                    canvas?.drawLine(X - 5, Y, X1 + 5, Y1, paint_rib_2)
+                    CLONE_FIELD[i][j] = 0;
                 }
             }
-            if(Snake_2[i].second == Snake_2[i+1].second &&Snake_2[i].first > Snake_2[i+1].first )
+            CLONE_Snake_1.clear()
+            CLONE_Snake_2.clear()
+
+            if(CONDITION_SNAKE>History.size)
             {
-                if(Math.abs(Snake_2[i].first - Snake_2[i + 1].first) + Math.abs(Snake_2[i].second - Snake_2[i + 1].second) <= 2)
+                CONDITION_SNAKE = History.size
+            }
+
+            for(p in 0 until History.size - CONDITION_SNAKE)
+            {
+                var i = History[p].first;
+                var j = History[p].second;
+                CLONE_FIELD[i][j] = FIELD[i][j];
+                if(FIELD[i][j]==1)
                 {
-                    canvas?.drawLine(X+5,Y,X1-5,Y1,paint_rib_2)
+                    CLONE_Snake_1.add(Pair(i,j))
+                }
+                else
+                {
+                    CLONE_Snake_2.add(Pair(i,j))
                 }
             }
-        }
 
-        if(Snake_1.size>0)
-        {
-            var X: Float = indent + step * Snake_1[0].first  - step / 5f
-            var X1: Float = indent + step * Snake_1[0].first  + step / 5f
-            var Y: Float =
-                height - advertising_line - width + step * Snake_1[0].second  - step / 5f
-            var Y1: Float =
-                height - advertising_line - width + step * Snake_1[0].second  + step / 5f
-            canvas?.drawLine(X, Y, X1, Y1, paint_rib_1)
-            canvas?.drawLine(X, Y1, X1, Y, paint_rib_1)
-        }
+            for (i in 0 until CLONE_Snake_1.size - 1)     //вырисовка ребер змеи
+            {
+                var X: Float = indent + step * CLONE_Snake_1[i].first
+                var Y: Float = height - advertising_line - width + step * CLONE_Snake_1[i].second
+                var X1: Float = indent + step * CLONE_Snake_1[i + 1].first
+                var Y1: Float = height - advertising_line - width + step * CLONE_Snake_1[i + 1].second
+                if (Math.abs(CLONE_Snake_1[i].first - CLONE_Snake_1[i + 1].first) + Math.abs(CLONE_Snake_1[i].second - CLONE_Snake_1[i + 1].second) <= 2) {
+                    canvas?.drawLine(X, Y, X1, Y1, paint_rib_1)
+                }
 
-        if(Snake_2.size>0)
-        {
-            var _X: Float = indent + step * Snake_2[0].first - step / 5f
-            var _X1: Float = indent + step * Snake_2[0].first + step / 5f
-            var _Y: Float =
-                height - advertising_line - width + step * Snake_2[0].second  - step / 5f
-            var _Y1: Float =
-                height - advertising_line - width + step * Snake_2[0].second  + step / 5f
-            canvas?.drawLine(_X, _Y, _X1, _Y1, paint_rib_2)
-            canvas?.drawLine(_X, _Y1, _X1, _Y, paint_rib_2)
-        }
+                if (CLONE_Snake_1[i].second == CLONE_Snake_1[i + 1].second && CLONE_Snake_1[i].first < CLONE_Snake_1[i + 1].first) {
+                    if (Math.abs(CLONE_Snake_1[i].first - CLONE_Snake_1[i + 1].first) + Math.abs(CLONE_Snake_1[i].second - CLONE_Snake_1[i + 1].second) <= 2) {
+                        canvas?.drawLine(X - 5, Y, X1 + 5, Y1, paint_rib_1)
+                    }
+                }
+                if (CLONE_Snake_1[i].second == CLONE_Snake_1[i + 1].second && CLONE_Snake_1[i].first > CLONE_Snake_1[i + 1].first) {
+                    if (Math.abs(CLONE_Snake_1[i].first - CLONE_Snake_1[i + 1].first) + Math.abs(CLONE_Snake_1[i].second - CLONE_Snake_1[i + 1].second) <= 2) {
+                        canvas?.drawLine(X + 5, Y, X1 - 5, Y1, paint_rib_1)
+                    }
+                }
+            }
+            for (i in 0 until CLONE_Snake_2.size - 1)      //вырисовка ребер змеи
+            {
+                var X: Float = indent + step * CLONE_Snake_2[i].first
+                var Y: Float = height - advertising_line - width + step * CLONE_Snake_2[i].second
+                var X1: Float = indent + step * CLONE_Snake_2[i + 1].first
+                var Y1: Float = height - advertising_line - width + step * CLONE_Snake_2[i + 1].second
+                if (Math.abs(CLONE_Snake_2[i].first - CLONE_Snake_2[i + 1].first) + Math.abs(CLONE_Snake_2[i].second - CLONE_Snake_2[i + 1].second) <= 2) {
+                    canvas?.drawLine(X, Y, X1, Y1, paint_rib_2)
+                }
+                if (CLONE_Snake_2[i].second == CLONE_Snake_2[i + 1].second && CLONE_Snake_2[i].first < CLONE_Snake_2[i + 1].first) {
+                    if (Math.abs(CLONE_Snake_2[i].first - CLONE_Snake_2[i + 1].first) + Math.abs(CLONE_Snake_2[i].second - CLONE_Snake_2[i + 1].second) <= 2) {
+                        canvas?.drawLine(X - 5, Y, X1 + 5, Y1, paint_rib_2)
+                    }
+                }
+                if (CLONE_Snake_2[i].second == CLONE_Snake_2[i + 1].second && CLONE_Snake_2[i].first > CLONE_Snake_2[i + 1].first) {
+                    if (Math.abs(CLONE_Snake_2[i].first - CLONE_Snake_2[i + 1].first) + Math.abs(CLONE_Snake_2[i].second - CLONE_Snake_2[i + 1].second) <= 2) {
+                        canvas?.drawLine(X + 5, Y, X1 - 5, Y1, paint_rib_2)
+                    }
+                }
+            }
 
-        if(Snake_1.size > 1)
-        {
-            var X: Float = indent + step*Snake_1.last().first
-            var Y: Float = height - width - advertising_line + step*Snake_1.last().second
-            canvas?.drawCircle(X,Y,radius_of_point*2,paint_rib_1)
-        }
-        if(Snake_2.size > 1)
-        {
-            var X: Float = indent + step*Snake_2.last().first
-            var Y: Float = height - width - advertising_line + step*Snake_2.last().second
-            canvas?.drawCircle(X,Y,radius_of_point*2,paint_rib_2)
-        }
+            if (CLONE_Snake_1.size > 0) {
+                var X: Float = indent + step * CLONE_Snake_1[0].first - step / 5f
+                var X1: Float = indent + step * CLONE_Snake_1[0].first + step / 5f
+                var Y: Float =
+                    height - advertising_line - width + step * CLONE_Snake_1[0].second - step / 5f
+                var Y1: Float =
+                    height - advertising_line - width + step * CLONE_Snake_1[0].second + step / 5f
+                canvas?.drawLine(X, Y, X1, Y1, paint_rib_1)
+                canvas?.drawLine(X, Y1, X1, Y, paint_rib_1)
+            }
 
+            if (CLONE_Snake_2.size > 0) {
+                var _X: Float = indent + step * CLONE_Snake_2[0].first - step / 5f
+                var _X1: Float = indent + step * CLONE_Snake_2[0].first + step / 5f
+                var _Y: Float =
+                    height - advertising_line - width + step * CLONE_Snake_2[0].second - step / 5f
+                var _Y1: Float =
+                    height - advertising_line - width + step * CLONE_Snake_2[0].second + step / 5f
+                canvas?.drawLine(_X, _Y, _X1, _Y1, paint_rib_2)
+                canvas?.drawLine(_X, _Y1, _X1, _Y, paint_rib_2)
+            }
 
+            if (CLONE_Snake_1.size > 1) {
+                var X: Float = indent + step * CLONE_Snake_1.last().first
+                var Y: Float = height - width - advertising_line + step * CLONE_Snake_1.last().second
+                canvas?.drawCircle(X, Y, radius_of_point * 2, paint_rib_1)
+            }
+            if (CLONE_Snake_2.size > 1) {
+                var X: Float = indent + step * CLONE_Snake_2.last().first
+                var Y: Float = height - width - advertising_line + step * CLONE_Snake_2.last().second
+                canvas?.drawCircle(X, Y, radius_of_point * 2, paint_rib_2)
+            }
+
+        }
 
     }
 
@@ -833,6 +1017,27 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
                             {
                                 Snake_1.add(Pair(i,j))
                                 FIELD[i][j] = 1
+                                var flag :Boolean = true
+                                val prfs = context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                                if(prfs?.getString(positionData.toString()+"snake_game_history", "0")!="0")
+                                {
+                                    History = prfs?.getString(positionData.toString()+"snake_game_history", "0")?.let { decode(it) }!!
+                                }
+                                for(kol in 0 until History.size)
+                                {
+                                    if(i==History[kol].first && j == History[kol].second)
+                                    {
+                                        flag = false
+                                    }
+                                }
+                                if(flag)
+                                {
+                                    History.add(Triple(i,j, 1))
+                                    var data_from_memory = encode(History)
+                                    val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                    editor.putString(positionData.toString()+"dot_game_history", data_from_memory)
+                                    editor.apply()
+                                }
                                 red_or_blue = "blue"
                                 upd["red_or_blue"] = red_or_blue
                                 upd["FIELD/$i/$j"] = FIELD[i][j]
@@ -856,6 +1061,27 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
                                 {
                                     Snake_1.add(Pair(i,j))
                                     FIELD[i][j] = 1
+                                    var flag :Boolean = true
+                                    val prfs = context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                                    if(prfs?.getString(positionData.toString()+"snake_game_history", "0")!="0")
+                                    {
+                                        History = prfs?.getString(positionData.toString()+"snake_game_history", "0")?.let { decode(it) }!!
+                                    }
+                                    for(kol in 0 until History.size)
+                                    {
+                                        if(i==History[kol].first && j == History[kol].second)
+                                        {
+                                            flag = false
+                                        }
+                                    }
+                                    if(flag)
+                                    {
+                                        History.add(Triple(i,j, 1))
+                                        var data_from_memory = encode(History)
+                                        val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                        editor.putString(positionData.toString()+"dot_game_history", data_from_memory)
+                                        editor.apply()
+                                    }
                                     red_or_blue = "blue"
                                     upd["red_or_blue"] = red_or_blue
                                     upd["FIELD/$i/$j"] = FIELD[i][j]
@@ -879,6 +1105,27 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
                             {
                                 Snake_2.add(Pair(i,j))
                                 FIELD[i][j] = 2
+                                var flag :Boolean = true
+                                val prfs = context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                                if(prfs?.getString(positionData.toString()+"snake_game_history", "0")!="0")
+                                {
+                                    History = prfs?.getString(positionData.toString()+"snake_game_history", "0")?.let { decode(it) }!!
+                                }
+                                for(kol in 0 until History.size)
+                                {
+                                    if(i==History[kol].first && j == History[kol].second)
+                                    {
+                                        flag = false
+                                    }
+                                }
+                                if(flag)
+                                {
+                                    History.add(Triple(i,j, 2))
+                                    var data_from_memory = encode(History)
+                                    val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                    editor.putString(positionData.toString()+"snake_game_history", data_from_memory)
+                                    editor.apply()
+                                }
                                 red_or_blue = "red"
                                 upd["red_or_blue"] = red_or_blue
                                 upd["FIELD/$i/$j"] = FIELD[i][j]
@@ -903,6 +1150,27 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
                                 {
                                     Snake_2.add(Pair(i,j))
                                     FIELD[i][j] = 2
+                                    var flag :Boolean = true
+                                    val prfs = context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                                    if(prfs?.getString(positionData.toString()+"snake_game_history", "0")!="0")
+                                    {
+                                        History = prfs?.getString(positionData.toString()+"snake_game_history", "0")?.let { decode(it) }!!
+                                    }
+                                    for(kol in 0 until History.size)
+                                    {
+                                        if(i==History[kol].first && j == History[kol].second)
+                                        {
+                                            flag = false
+                                        }
+                                    }
+                                    if(flag)
+                                    {
+                                        History.add(Triple(i,j, 2))
+                                        var data_from_memory = encode(History)
+                                        val editor = context.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                                        editor.putString(positionData.toString()+"snake_game_history", data_from_memory)
+                                        editor.apply()
+                                    }
                                     red_or_blue = "red"
                                     upd["red_or_blue"] = red_or_blue
                                     upd["FIELD/$i/$j"] = FIELD[i][j]
