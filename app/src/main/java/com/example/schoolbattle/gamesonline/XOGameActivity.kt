@@ -8,6 +8,7 @@ import android.graphics.Color.RED
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.os.Vibrator
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
@@ -120,6 +121,11 @@ class XOGameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
+
+        var helpend_var = 0
+        mSound.load(this, R.raw.xlup, 1);
+        vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
+
         setContentView(R.layout.activity_online_games_temlate)
         signature_canvas.visibility = View.VISIBLE
         PICTURE_AVATAR[AVATAR]?.let { your_avatar_in_game.setImageResource(it) }
@@ -130,73 +136,78 @@ class XOGameActivity : AppCompatActivity() {
 
         button_player_1_online_xog.textSize = 20f
         button_player_2_online_xog.textSize = 20f
-        if(Design == "Normal")
-        {
+        //                    Toast.makeText(applicationContext,"${signature_canvas.FIELD[checkList[1]][checkList[2]]}", Toast.LENGTH_LONG).show()
+        when (Design) {
+            "Normal" -> {
 
-        }
-        else if(Design == "Egypt")
-        {
-            label_online.setBackgroundResource(R.drawable.background_egypt)
-            toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
-            toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
-            button_player_1_online_xog.setTextColor(Color.BLACK)
-            button_player_2_online_xog.setTextColor(Color.BLACK)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
-            bottom_navigation_xog_online.setBackgroundColor(Color.rgb(255, 230, 163))
-        }
-        else if(Design == "Casino")
-        {
-            label_online.setBackgroundResource(R.drawable.background2_casino)
-            toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
-            toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
-            button_player_1_online_xog.setTextColor(Color.YELLOW)
-            button_player_2_online_xog.setTextColor(Color.YELLOW)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
-            bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_casino)
-        }
-        else if(Design == "Rome")
-        {
-            label_online.setBackgroundResource(R.drawable.background_rome)
-            toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
-            toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
-            button_player_1_online_xog.setTextColor(Color.rgb(224, 164, 103))
-            button_player_2_online_xog.setTextColor(Color.rgb(224, 164, 103))
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
-            bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_rome)
-        }
-        else if(Design == "Gothic" ) {
-            label_online.setBackgroundResource(R.drawable.background_gothic)
-            toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
-            toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
-            button_player_1_online_xog.setTextColor(Color.WHITE)
-            button_player_2_online_xog.setTextColor(Color.WHITE)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
-            bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
-            button_player_1_online_xog.textSize = 16.5f
-            button_player_2_online_xog.textSize = 16.5f
-        }
-        else if(Design == "Japan" ) {
-            label_online.setBackgroundResource(R.drawable.background_japan)
-            toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
-            toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
-            button_player_1_online_xog.setTextColor(Color.BLACK)
-            button_player_2_online_xog.setTextColor(Color.BLACK)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
-            bottom_navigation_xog_online.setBackgroundColor(Color.WHITE)
-        }
-        else if(Design == "Noir" ) {
-            label_online.setBackgroundResource(R.drawable.background_noir)
-            toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
-            toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
-            button_player_1_online_xog.setTextColor(Color.WHITE)
-            button_player_2_online_xog.setTextColor(Color.WHITE)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+            }
+            "Egypt" -> {
+                label_online.setBackgroundResource(R.drawable.background_egypt)
+                toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                button_player_1_online_xog.setTextColor(Color.BLACK)
+                button_player_2_online_xog.setTextColor(Color.BLACK)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                bottom_navigation_xog_online.setBackgroundColor(Color.rgb(255, 230, 163))
+            }
+            "Casino" -> {
+                label_online.setBackgroundResource(R.drawable.background2_casino)
+                toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                button_player_1_online_xog.setTextColor(Color.YELLOW)
+                button_player_2_online_xog.setTextColor(Color.YELLOW)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_casino)
+            }
+            "Rome" -> {
+                label_online.setBackgroundResource(R.drawable.background_rome)
+                toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                button_player_1_online_xog.setTextColor(Color.rgb(224, 164, 103))
+                button_player_2_online_xog.setTextColor(Color.rgb(224, 164, 103))
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_rome)
+            }
+            "Gothic" -> {
+                label_online.setBackgroundResource(R.drawable.background_gothic)
+                toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                button_player_1_online_xog.setTextColor(Color.WHITE)
+                button_player_2_online_xog.setTextColor(Color.WHITE)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
+                button_player_1_online_xog.textSize = 16.5f
+                button_player_2_online_xog.textSize = 16.5f
+            }
+            "Japan" -> {
+                label_online.setBackgroundResource(R.drawable.background_japan)
+                toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                button_player_1_online_xog.setTextColor(Color.BLACK)
+                button_player_2_online_xog.setTextColor(Color.BLACK)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                bottom_navigation_xog_online.setBackgroundColor(Color.WHITE)
+            }
+            "Noir" -> {
+                label_online.setBackgroundResource(R.drawable.background_noir)
+                toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                button_player_1_online_xog.setTextColor(Color.WHITE)
+                button_player_2_online_xog.setTextColor(Color.WHITE)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+            }
+            //Emotions начало--------------------------------------------------------------------------------------------
+            //Emotion конец-----------------------------------------------------------------------------------------------
+
+
+            // gameData.child("FIELDD").child("result").onDisconnect().setValue(yourName)
+            // gameData.onDisconnect().removeValue()
         }
         currentContext = this
         CONTEXT = this
@@ -295,6 +306,21 @@ class XOGameActivity : AppCompatActivity() {
                         if (p.exists()) {
                             cnt++
                             signature_canvas.FIELD[i][j] = p.value.toString().toInt()
+                            if(helpend_var != 0)
+                            {
+                                helpend_var++
+                            }
+                            else
+                            {
+                                if(SOUND)
+                                {
+                                    mSound.play(1,1F,1F,1,0,1F)
+                                }
+                                if(VIBRATION)
+                                {
+                                    vibratorService?.vibrate(70)
+                                }
+                            }
                             var flag: Boolean = true
                             val prfs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
                             if (prfs?.getString(
@@ -861,6 +887,14 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
                 ) > 0
             )     //постановка нового обЪекта
             {
+                if(SOUND)
+                {
+                    mSound.play(1,1F,1F,1,0,1F)
+                }
+                if(VIBRATION)
+                {
+                    vibratorService?.vibrate(70)
+                }
                 val X: Int = touch_refinement_for_Array_X(indent, circlex, step)
                 val Y: Int = touch_refinement_for_Array_Y(
                     indent,

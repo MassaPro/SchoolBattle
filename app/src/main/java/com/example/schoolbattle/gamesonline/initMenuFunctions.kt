@@ -2,6 +2,7 @@ package com.example.schoolbattle.gamesonline
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Point
@@ -9,6 +10,7 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.View
+import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.schoolbattle.*
@@ -19,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_online_games_temlate.*
 import kotlinx.android.synthetic.main.activity_online_games_temlate.signature_canvas_box
 import kotlinx.android.synthetic.main.dialog_for_losers.*
 import kotlinx.android.synthetic.main.find_emotion.*
+import kotlinx.android.synthetic.main.parametrs_one_divice.*
 
 fun initMenuFunctions(activity: Activity,
                       bottom_navigation_xog_online: BottomNavigationView,
@@ -64,6 +67,36 @@ fun initMenuFunctions(activity: Activity,
                     positionData.child("winner").setValue(opponent)
                     loseDialog.dismiss()
                 }
+                loseDialog.switch_parametrs_online_2.isChecked = SOUND
+                loseDialog.switch_parametrs_online_2.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { _, isChecked ->
+                    SOUND = isChecked
+                    val editor = activity.getSharedPreferences("UserData", Context.MODE_PRIVATE)?.edit()
+                    if(SOUND)
+                    {
+                        editor?.putString("sound","true")
+                    }
+                    else
+                    {
+                        editor?.putString("sound","false")
+                    }
+                    editor?.apply()
+                })
+
+                loseDialog.switch_parametrs_online_1.isChecked = VIBRATION
+                loseDialog.switch_parametrs_online_1.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { _, isChecked ->
+                    VIBRATION = isChecked
+                    val editor = activity.getSharedPreferences("UserData", Context.MODE_PRIVATE)?.edit()
+                    if(VIBRATION)
+                    {
+                        editor?.putString("sound","true")
+                    }
+                    else
+                    {
+                        editor?.putString("sound","false")
+                    }
+                    editor?.apply()
+                })
+
                 loseDialog.show()
             }
             R.id.page_online_3 ->{

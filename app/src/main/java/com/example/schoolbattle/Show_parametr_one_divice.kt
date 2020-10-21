@@ -21,98 +21,96 @@ class Show_parametr_one_divice_one_Device(activity: Activity) {
         dialog_one_device.setCanceledOnTouchOutside(true)
         dialog_one_device.setContentView(R.layout.parametrs_one_divice)
 
-        if(Design == "Egypt")
-        {
-            dialog_one_device.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_egypt)
+        when (Design) {
+            "Egypt" -> {
+                dialog_one_device.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_egypt)
 
-            dialog_one_device.parametrs_one_device_configuring.setTypeface(ResourcesCompat.getFont(c, R.font.egypt))
-            dialog_one_device.parametrs_one_device_configuring.setBackgroundColor(Color.argb(0, 0,0,0))
+                dialog_one_device.parametrs_one_device_configuring.setTypeface(ResourcesCompat.getFont(c, R.font.egypt))
+                dialog_one_device.parametrs_one_device_configuring.setBackgroundColor(Color.argb(0, 0,0,0))
 
-            dialog_one_device.switch_parametrs_one_device_1.setTypeface(ResourcesCompat.getFont(c, R.font.egypt))
-            dialog_one_device.switch_parametrs_one_device_1.setBackgroundColor(Color.argb(0, 0,0,0))
+                dialog_one_device.switch_parametrs_one_device_1.setTypeface(ResourcesCompat.getFont(c, R.font.egypt))
+                dialog_one_device.switch_parametrs_one_device_1.setBackgroundColor(Color.argb(0, 0,0,0))
 
-            dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.egypt))
-            dialog_one_device.switch_parametrs_one_device_1.setBackgroundColor(Color.argb(0, 0,0,0))
-        }
-        else if(Design == "Casino")
-        {
-            dialog_one_device.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background2_casino)
+                dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.egypt))
+                dialog_one_device.switch_parametrs_one_device_1.setBackgroundColor(Color.argb(0, 0,0,0))
+            }
+            "Casino" -> {
+                dialog_one_device.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background2_casino)
 
-            dialog_one_device.parametrs_one_device_configuring.setTypeface(ResourcesCompat.getFont(c, R.font.casino))
-            dialog_one_device.parametrs_one_device_configuring.setBackgroundColor(Color.argb(0, 0,0,0))
-            dialog_one_device.parametrs_one_device_configuring.setTextColor(Color.YELLOW)
+                dialog_one_device.parametrs_one_device_configuring.setTypeface(ResourcesCompat.getFont(c, R.font.casino))
+                dialog_one_device.parametrs_one_device_configuring.setBackgroundColor(Color.argb(0, 0,0,0))
+                dialog_one_device.parametrs_one_device_configuring.setTextColor(Color.YELLOW)
 
-            dialog_one_device.switch_parametrs_one_device_1.setTypeface(ResourcesCompat.getFont(c, R.font.casino))
-            dialog_one_device.switch_parametrs_one_device_1.setBackgroundColor(Color.argb(0, 0,0,0))
-            dialog_one_device.switch_parametrs_one_device_1.setTextColor(Color.YELLOW)
+                dialog_one_device.switch_parametrs_one_device_1.setTypeface(ResourcesCompat.getFont(c, R.font.casino))
+                dialog_one_device.switch_parametrs_one_device_1.setBackgroundColor(Color.argb(0, 0,0,0))
+                dialog_one_device.switch_parametrs_one_device_1.setTextColor(Color.YELLOW)
 
-            dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.casino))
-            dialog_one_device.switch_parametrs_one_device_2.setBackgroundColor(Color.argb(0, 0,0,0))
-            dialog_one_device.switch_parametrs_one_device_2.setTextColor(Color.YELLOW)
-        }
-        else if(Design == "Rome")
-        {
-            dialog_one_device.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_rome)
+                dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.casino))
+                dialog_one_device.switch_parametrs_one_device_2.setBackgroundColor(Color.argb(0, 0,0,0))
+                dialog_one_device.switch_parametrs_one_device_2.setTextColor(Color.YELLOW)
+            }
+            "Rome" -> {
+                dialog_one_device.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_rome)
 
-            dialog_one_device.parametrs_one_device_configuring.setTypeface(ResourcesCompat.getFont(c, R.font.rome))
-            dialog_one_device.parametrs_one_device_configuring.setBackgroundColor(Color.argb(0, 0,0,0))
-            dialog_one_device.parametrs_one_device_configuring.setTextColor(Color.rgb(193, 150, 63))
+                dialog_one_device.parametrs_one_device_configuring.setTypeface(ResourcesCompat.getFont(c, R.font.rome))
+                dialog_one_device.parametrs_one_device_configuring.setBackgroundColor(Color.argb(0, 0,0,0))
+                dialog_one_device.parametrs_one_device_configuring.setTextColor(Color.rgb(193, 150, 63))
 
-            dialog_one_device.switch_parametrs_one_device_1.typeface = ResourcesCompat.getFont(c, R.font.casino)
-            dialog_one_device.switch_parametrs_one_device_1.setBackgroundColor(Color.argb(0, 0,0,0))
-            dialog_one_device.switch_parametrs_one_device_1.setTextColor(Color.rgb(193, 150, 63))
+                dialog_one_device.switch_parametrs_one_device_1.typeface = ResourcesCompat.getFont(c, R.font.casino)
+                dialog_one_device.switch_parametrs_one_device_1.setBackgroundColor(Color.argb(0, 0,0,0))
+                dialog_one_device.switch_parametrs_one_device_1.setTextColor(Color.rgb(193, 150, 63))
 
-            dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.casino))
-            dialog_one_device.switch_parametrs_one_device_2.setBackgroundColor(Color.argb(0, 0,0,0))
-            dialog_one_device.switch_parametrs_one_device_2.setTextColor(Color.rgb(193, 150, 63))
-        }
-        else if(Design == "Gothic")
-        {
-            dialog_one_device.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_gothic)
+                dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.casino))
+                dialog_one_device.switch_parametrs_one_device_2.setBackgroundColor(Color.argb(0, 0,0,0))
+                dialog_one_device.switch_parametrs_one_device_2.setTextColor(Color.rgb(193, 150, 63))
+            }
+            "Gothic" -> {
+                dialog_one_device.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_gothic)
 
-            dialog_one_device.parametrs_one_device_configuring.setTypeface(ResourcesCompat.getFont(c, R.font.gothic))
-            dialog_one_device.parametrs_one_device_configuring.setBackgroundColor(Color.argb(0, 0,0,0))
-            dialog_one_device.parametrs_one_device_configuring.setTextColor(Color.WHITE)
+                dialog_one_device.parametrs_one_device_configuring.setTypeface(ResourcesCompat.getFont(c, R.font.gothic))
+                dialog_one_device.parametrs_one_device_configuring.setBackgroundColor(Color.argb(0, 0,0,0))
+                dialog_one_device.parametrs_one_device_configuring.setTextColor(Color.WHITE)
 
-            dialog_one_device.switch_parametrs_one_device_1.setTypeface(ResourcesCompat.getFont(c, R.font.gothic))
-            dialog_one_device.switch_parametrs_one_device_1.setBackgroundColor(Color.argb(0, 0,0,0))
-            dialog_one_device.switch_parametrs_one_device_1.setTextColor(Color.WHITE)
+                dialog_one_device.switch_parametrs_one_device_1.setTypeface(ResourcesCompat.getFont(c, R.font.gothic))
+                dialog_one_device.switch_parametrs_one_device_1.setBackgroundColor(Color.argb(0, 0,0,0))
+                dialog_one_device.switch_parametrs_one_device_1.setTextColor(Color.WHITE)
 
-            dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.gothic))
-            dialog_one_device.switch_parametrs_one_device_2.setBackgroundColor(Color.argb(0, 0,0,0))
-            dialog_one_device.switch_parametrs_one_device_2.setTextColor(Color.WHITE)
-        }
-        else if(Design == "Japan")
-        {
-            dialog_one_device.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_japan)
+                dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.gothic))
+                dialog_one_device.switch_parametrs_one_device_2.setBackgroundColor(Color.argb(0, 0,0,0))
+                dialog_one_device.switch_parametrs_one_device_2.setTextColor(Color.WHITE)
+            }
+            "Japan" -> {
+                dialog_one_device.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_japan)
 
-            dialog_one_device.parametrs_one_device_configuring.setTypeface(ResourcesCompat.getFont(c, R.font.japan))
-            dialog_one_device.parametrs_one_device_configuring.setBackgroundColor(Color.argb(0, 0,0,0))
-            dialog_one_device.parametrs_one_device_configuring.setTextColor(Color.BLACK)
+                dialog_one_device.parametrs_one_device_configuring.setTypeface(ResourcesCompat.getFont(c, R.font.japan))
+                dialog_one_device.parametrs_one_device_configuring.setBackgroundColor(Color.argb(0, 0,0,0))
+                dialog_one_device.parametrs_one_device_configuring.setTextColor(Color.BLACK)
 
-            dialog_one_device.switch_parametrs_one_device_1.setTypeface(ResourcesCompat.getFont(c, R.font.japan))
-            dialog_one_device.switch_parametrs_one_device_1.setBackgroundColor(Color.argb(0, 0,0,0))
-            dialog_one_device.switch_parametrs_one_device_1.setTextColor(Color.BLACK)
+                dialog_one_device.switch_parametrs_one_device_1.setTypeface(ResourcesCompat.getFont(c, R.font.japan))
+                dialog_one_device.switch_parametrs_one_device_1.setBackgroundColor(Color.argb(0, 0,0,0))
+                dialog_one_device.switch_parametrs_one_device_1.setTextColor(Color.BLACK)
 
-            dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.japan))
-            dialog_one_device.switch_parametrs_one_device_2.setBackgroundColor(Color.argb(0, 0,0,0))
-            dialog_one_device.switch_parametrs_one_device_2.setTextColor(Color.BLACK)
-        }
-        else if(Design == "Noir")
-        {
-            dialog_one_device.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_noir)
+                dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.japan))
+                dialog_one_device.switch_parametrs_one_device_2.setBackgroundColor(Color.argb(0, 0,0,0))
+                dialog_one_device.switch_parametrs_one_device_2.setTextColor(Color.BLACK)
+            }
+            "Noir" -> {
+                dialog_one_device.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_noir)
 
-            dialog_one_device.parametrs_one_device_configuring.setTypeface(ResourcesCompat.getFont(c, R.font.noir))
-            dialog_one_device.parametrs_one_device_configuring.setBackgroundColor(Color.argb(0, 0,0,0))
-            dialog_one_device.parametrs_one_device_configuring.setTextColor(Color.WHITE)
+                dialog_one_device.parametrs_one_device_configuring.setTypeface(ResourcesCompat.getFont(c, R.font.noir))
+                dialog_one_device.parametrs_one_device_configuring.setBackgroundColor(Color.argb(0, 0,0,0))
+                dialog_one_device.parametrs_one_device_configuring.setTextColor(Color.WHITE)
 
-            dialog_one_device.switch_parametrs_one_device_1.setTypeface(ResourcesCompat.getFont(c, R.font.noir))
-            dialog_one_device.switch_parametrs_one_device_1.setBackgroundColor(Color.argb(0, 0,0,0))
-            dialog_one_device.switch_parametrs_one_device_1.setTextColor(Color.WHITE)
+                dialog_one_device.switch_parametrs_one_device_1.setTypeface(ResourcesCompat.getFont(c, R.font.noir))
+                dialog_one_device.switch_parametrs_one_device_1.setBackgroundColor(Color.argb(0, 0,0,0))
+                dialog_one_device.switch_parametrs_one_device_1.setTextColor(Color.WHITE)
 
-            dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.noir))
-            dialog_one_device.switch_parametrs_one_device_2.setBackgroundColor(Color.argb(0, 0,0,0))
-            dialog_one_device.switch_parametrs_one_device_2.setTextColor(Color.WHITE)
+                dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.noir))
+                dialog_one_device.switch_parametrs_one_device_2.setBackgroundColor(Color.argb(0, 0,0,0))
+                dialog_one_device.switch_parametrs_one_device_2.setTextColor(Color.WHITE)
+            }
+            //настройка свитчера звука
+            //настройка свитчера звука
         }
 
 
