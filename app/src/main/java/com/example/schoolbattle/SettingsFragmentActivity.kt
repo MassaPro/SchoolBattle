@@ -238,6 +238,7 @@ class SettingsFragmentActivity : Fragment() {
             ARRAY_OF_AVATAR = mutableListOf(0,1,4,18,19)
             ARRAY_OF_EMOTION.clear()
             ARRAY_OF_EMOTION = mutableListOf(0,1)
+            RATING = -1
             val intent = Intent(activity, NullActivity::class.java)
             startActivity(intent)
             activity?.finish()

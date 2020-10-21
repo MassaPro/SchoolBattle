@@ -19,12 +19,16 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_online_games_temlate.*
+import kotlinx.android.synthetic.main.activity_online_games_temlate.bottom_navigation_xog_online
 import kotlinx.android.synthetic.main.activity_online_games_temlate.button_player_1_online_xog
 import kotlinx.android.synthetic.main.activity_online_games_temlate.button_player_2_online_xog
 import kotlinx.android.synthetic.main.activity_online_games_temlate.signature_canvas_snake_online
 import kotlinx.android.synthetic.main.activity_online_games_temlate.timer2_xog_online
 import kotlinx.android.synthetic.main.activity_online_games_temlate.timer_xog_online
+import kotlinx.android.synthetic.main.activity_online_games_temlate.toolbar2_xog_online
+import kotlinx.android.synthetic.main.activity_online_games_temlate.toolbar_xog_online
 import kotlinx.android.synthetic.main.activity_snake_game.*
+import kotlinx.android.synthetic.main.activity_x_o_game.*
 import java.util.*
 
 class ReversiGameActivity : AppCompatActivity() {
@@ -176,6 +180,8 @@ class ReversiGameActivity : AppCompatActivity() {
                 override var userRating = RATING
                 override var opponentRating = intent.getStringExtra("rating")!!.toInt()
             }
+            button_player_1_online_xog.text = "$user (${engine?.userRating})"
+            button_player_2_online_xog.text = "$opponent (${engine?.opponentRating})"
             engine?.init()
             signature_canvas_reversi.engine = engine
         } else {

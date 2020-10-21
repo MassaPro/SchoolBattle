@@ -27,6 +27,10 @@ import com.example.schoolbattle.Design
 import com.example.schoolbattle.R
 import com.example.schoolbattle.engine.RatingGraph
 import com.example.schoolbattle.engine.colorByRating
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_friends_list.*
 import kotlinx.android.synthetic.main.activity_my_profile.*
 import kotlinx.android.synthetic.main.activity_my_profile.image_global_ava
@@ -41,18 +45,17 @@ import kotlinx.android.synthetic.main.design_shop_item.view.img_ava_shop
 var D : Dialog? = null
 class MyProfile : Fragment() {
 
-    @SuppressLint("SetTextI18n")
+    var ratingGraph: RatingGraph? = null
+    val buildRating = mutableListOf<Int>()
+
     override fun onResume() {
         super.onResume()
         CONTEXT = requireActivity()
-        if (RATING != -1) {
-            val prfs = requireActivity().getSharedPreferences("UserData", Context.MODE_PRIVATE)
-            val username = prfs?.getString("username", "")
-            profileMyName.text = "$username ($RATING)"
-            profileMyName.setTextColor(colorByRating(RATING))
-        }
+
     }
 
+    @SuppressLint("SetTextI18n")
+    @ExperimentalStdlibApi
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -66,17 +69,34 @@ class MyProfile : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         locale_context = activity as AppCompatActivity
         super.onViewCreated(view, savedInstanceState)
+        if (RATING != -1) {
+            val prfs = requireActivity().getSharedPreferences("UserData", Context.MODE_PRIVATE)
+            val username = prfs?.getString("username", "")
+            profileMyName.text = "$username ($RATING)"
+            profileMyName.setTextColor(colorByRating(RATING))
+        }
+        ratingGraph?.updateRating(buildRating)
         var dialog_find_ava = Dialog(locale_context!!)
-        val ratingGraph = RatingGraph(requireActivity())
-        ratingGraph.buildGraph()
-        ratingGraph.updateRating(mutableListOf(1000, 2000, 3000))
-        ratingGraph.updateRating(mutableListOf(1000, 2200, 300, 3192))
+        ratingGraph = RatingGraph(requireActivity())
+        ratingGraph?.buildGraph()
+
         PICTURE_AVATAR[AVATAR]?.let { image_global_ava.setImageResource(it) }
 
         val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val username = prefs?.getString("username", "")
-        profileMyName.text = username
-
+        profileMyName.text = (username + if (RATING != -1) " ($RATING)" else "")
+        myRef.child("Users/$username/rating_history").addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onDataChange(p0: DataSnapshot) {
+                buildRating.clear()
+                for (i in p0.children) {
+                    buildRating.add(i.value.toString().toInt())
+                    if (ratingGraph != null) {
+                        ratingGraph?.updateRating(buildRating)
+                    }
+                }
+            }
+        })
 
         image_global_ava.setOnClickListener {
             D = dialog_find_ava

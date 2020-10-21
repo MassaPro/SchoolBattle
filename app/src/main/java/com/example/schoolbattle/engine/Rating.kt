@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.widget.TextView
 import com.example.schoolbattle.R
+import com.example.schoolbattle.RATING
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
@@ -15,7 +16,6 @@ import kotlin.math.pow
 import kotlin.math.roundToInt
 
 // Константы рейтинга_______________________________________________________________________________
-var RATING = 1000 // Rating
 var colorsRating: List<Int> = listOf(
     Color.rgb(0, 0, 0),
     Color.rgb(200, 200, 200),
@@ -98,47 +98,51 @@ fun updateRating(u0: Int, u1: Int, result: Double) : Pair<Int, Int> { //Rating C
     return Pair((r0 * (u0 + u1) / (r0 + r1)).roundToInt(), (r1 * (u0 + u1) / (r0 + r1)).roundToInt())
 }
 
-class RatingGraph(val activity: Activity) {
+class RatingGraph(val activity: Activity?) {
     @ExperimentalStdlibApi
     fun buildGraph() {
-        activity.window.statusBarColor = colorByRating(Color.BLACK)
+        activity?.window?.statusBarColor = colorByRating(Color.BLACK)
         var series: PointsGraphSeries<DataPoint> = PointsGraphSeries(arrayOf())
         var series2: LineGraphSeries<DataPoint> = LineGraphSeries(arrayOf())
-        val graph = activity.findViewById<GraphView>(R.id.graph)
-        graph.viewport.setMinX(0.0)
-        graph.viewport.setMaxX(8.0)
-        graph.viewport.setMinY(0.0)
-        graph.viewport.setMaxY(1600.0)
-        graph.viewport.isYAxisBoundsManual = true
-        graph.viewport.isXAxisBoundsManual = true
-        updateGraphColors(graph, 8.0, 1600.0)
-        graph.addSeries(series2)
-        graph.addSeries(series)
-        graph.getGridLabelRenderer().setVerticalLabelsColor(Color.WHITE);
-        graph.getGridLabelRenderer().setHorizontalLabelsColor(Color.WHITE);
+        val graph = activity?.findViewById<GraphView>(R.id.graph)
+        graph?.viewport?.setMinX(0.0)
+        graph?.viewport?.setMaxX(8.0)
+        graph?.viewport?.setMinY(0.0)
+        graph?.viewport?.setMaxY(1600.0)
+        graph?.viewport?.isYAxisBoundsManual = true
+        graph?.viewport?.isXAxisBoundsManual = true
+        if (graph != null) {
+            updateGraphColors(graph, 8.0, 1600.0)
+        }
+        graph?.addSeries(series2)
+        graph?.addSeries(series)
+        graph?.getGridLabelRenderer()?.setVerticalLabelsColor(Color.WHITE);
+        graph?.getGridLabelRenderer()?.setHorizontalLabelsColor(Color.WHITE);
 
     }
 
     @ExperimentalStdlibApi
     fun updateRating(HISTORY: MutableList<Int>) {
         val data: Array<DataPoint> = Array(HISTORY.size) {i -> DataPoint(i.toDouble(), HISTORY[i].toDouble())}
-        val graph = activity.findViewById<GraphView>(R.id.graph)
+        val graph = activity?.findViewById<GraphView>(R.id.graph)
         val series = PointsGraphSeries(data)
         val series2 = LineGraphSeries(data)
         series.size = 10f
         series.color = Color.BLACK
         series2.color = Color.BLACK
-        graph.clearFocus()
-        graph.viewport.setMinX(0.0)
-        graph.viewport.setMaxX(max(4.0, HISTORY.size.toDouble()))
-        graph.viewport.setMinY(0.0)
+        graph?.clearFocus()
+        graph?.viewport?.setMinX(0.0)
+        graph?.viewport?.setMaxX(max(4.0, HISTORY.size.toDouble()))
+        graph?.viewport?.setMinY(0.0)
         var mxY = 0
         for (i in HISTORY) mxY = max(mxY, i)
-        updateGraphColors(graph, max(4.0, HISTORY.size.toDouble()), mxY.toDouble() + 300.0)
-        graph.addSeries(series2)
-        graph.addSeries(series)
-        mxY.toDouble().let { graph.viewport.setMaxY(it + 300.0) }
-        graph.viewport.isYAxisBoundsManual = true
-        graph.viewport.isXAxisBoundsManual = true
+        if (graph != null) {
+            updateGraphColors(graph, max(4.0, HISTORY.size.toDouble()), mxY.toDouble() + 300.0)
+        }
+        graph?.addSeries(series2)
+        graph?.addSeries(series)
+        mxY.toDouble().let { graph?.viewport?.setMaxY(it + 300.0) }
+        graph?.viewport?.isYAxisBoundsManual = true
+        graph?.viewport?.isXAxisBoundsManual = true
     }
 }

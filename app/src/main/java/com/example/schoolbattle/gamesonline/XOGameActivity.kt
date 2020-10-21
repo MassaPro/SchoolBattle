@@ -196,6 +196,8 @@ class XOGameActivity : AppCompatActivity() {
                 override var userRating = RATING
                 override var opponentRating = intent.getStringExtra("rating")!!.toInt()
             }
+            button_player_1_online_xog.text = "$yourName (${engine?.userRating})"
+            button_player_2_online_xog.text = "$opponentsName (${engine?.opponentRating})"
             engine?.init()
             signature_canvas.engine = engine
             signature_canvas.username = yourName

@@ -1,5 +1,6 @@
 package com.example.schoolbattle.gamesonline
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -49,6 +50,7 @@ class BoxGameActivity : AppCompatActivity() {
         isRun = true
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
 
@@ -96,6 +98,7 @@ class BoxGameActivity : AppCompatActivity() {
         button_player_2_online_xog.text = opponentsName
 
         if (type == "blitz") {
+
             engine = object : BlitzGameEngine {
                 override var timer = Timer(true)
                 override var cntUser = 0
@@ -113,6 +116,8 @@ class BoxGameActivity : AppCompatActivity() {
                 override var userRating = RATING
                 override var opponentRating = intent.getStringExtra("rating")!!.toInt()
             }
+            button_player_1_online_xog.text = "$yourName (${engine?.userRating})"
+            button_player_2_online_xog.text = "$opponentsName (${engine?.opponentRating})"
             engine?.init()
             signature_canvas_box.engine = engine
         } else {

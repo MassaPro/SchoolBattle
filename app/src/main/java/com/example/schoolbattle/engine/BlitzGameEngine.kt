@@ -1,5 +1,6 @@
 package com.example.schoolbattle.engine
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
@@ -8,6 +9,7 @@ import android.widget.Toast
 import androidx.constraintlayout.solver.widgets.Snapshot
 import com.example.schoolbattle.myRef
 import com.google.firebase.database.*
+import java.sql.Timestamp
 import java.util.*
 
 interface BlitzGameEngine {
@@ -43,6 +45,7 @@ interface BlitzGameEngine {
         positionData.onDisconnect().updateChildren(loseUpd)
         //positionData.onDisconnect().removeValue()
         timer.scheduleAtFixedRate(object : TimerTask() {
+            @SuppressLint("SetTextI18n")
             override fun run() {
                 activity.runOnUiThread {
                     if (move) {
@@ -97,10 +100,15 @@ interface BlitzGameEngine {
             positionData.onDisconnect().cancel()
             if (res == "Победа") {
                 positionData.updateChildren(winUpd)
+                myRef.child("Users/$user/rating_history").push().setValue(updateRating(userRating, opponentRating, 1.0).first)
             } else if (res == "Поражение") {
                 positionData.updateChildren(loseUpd)
+                myRef.child("Users/$user/rating_history").push().setValue(updateRating(userRating, opponentRating, 0.0).first)
+
             } else {
                 positionData.child("winner").setValue("0")
+                myRef.child("Users/$user/rating_history").push().setValue(updateRating(userRating, opponentRating, 0.5).first)
+
             }
             if (isActivityRunning) {
                 val dialog = ShowResult(activity)
