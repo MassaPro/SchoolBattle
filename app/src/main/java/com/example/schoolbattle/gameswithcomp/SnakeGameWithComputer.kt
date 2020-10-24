@@ -608,10 +608,10 @@ class CanvasView_SNAKE_COMPUTER(context: Context, attrs: AttributeSet?) : View(c
     var border_1: Paint = Paint()
     var border_2: Paint = Paint()
 
-    var FIELD = Array(11){IntArray(11)}     //для фишеК
+    var FIELD : MutableList<MutableList<Int>> = mutableListOf()    //для фишеК
     var A: MutableList<Pair<Int,Int>> = mutableListOf()
     var TREE_OF_WAYS: MutableList<MutableList<Pair<Int,Int>>> = mutableListOf()
-    var CELLS = Array(10){Array(15){IntArray(6)} }            //массив клеток в которых мы будем проводить ребра
+//    var CELLS : MutableList<MutableList<Int> = mutableListOf()         //массив клеток в которых мы будем проводить ребра
 
 
     var radius_of_point: Float = 0f
@@ -712,11 +712,12 @@ class CanvasView_SNAKE_COMPUTER(context: Context, attrs: AttributeSet?) : View(c
             }
         }
 
-        for(i in 0 until FIELD.size)
+        for(i in 0 until 11)
         {
-            for(j in 0 until FIELD[i].size)
+            FIELD.add(mutableListOf())
+            for(j in 0 until 11)
             {
-                FIELD[i][j] = 0
+                FIELD.last().add(0)
             }
         }
 
