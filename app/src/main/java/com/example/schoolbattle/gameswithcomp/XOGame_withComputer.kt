@@ -126,15 +126,15 @@ class XOGame_withComputer : AppCompatActivity() {
             name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             name_player2_with_computer_template.setTextSize(20f)
             name_player1_with_computer_template.setTextSize(20f)
-            button_player_1_template_with_computer.setBackgroundResource(R.drawable.player1_egypt);
-            button_player_2_template_with_computer.setBackgroundResource(R.drawable.player2_egypt);
+            button_player_1_with_computer_template.setBackgroundResource(R.drawable.player1_egypt);
+            button_player_2_with_computer_template.setBackgroundResource(R.drawable.player2_egypt);
             player_1_icon_template_with_computer.setBackgroundResource(R.drawable.cross_egypt);
             player_2_icon_template_with_computer.setBackgroundResource(R.drawable.circle_egypt);
             label_with_computer.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_template_with_computer.setBackgroundColor(rgb(255, 230, 163))
-            to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_template_with_computer.setBackgroundColor(argb(0,0,0,0))
-            toolbar2_template_with_computer.setBackgroundColor(argb(0,0,0,0))
+            bottom_navigation_with_computer_template.setBackgroundColor(rgb(255, 230, 163))
+            to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_with_computer_template.setBackgroundColor(argb(0,0,0,0))
+            toolbar2_with_computer_template.setBackgroundColor(argb(0,0,0,0))
         }
         else if(Design == "Casino" ) {
             name_player1_with_computer_template.setTextColor(Color.YELLOW)
@@ -143,14 +143,14 @@ class XOGame_withComputer : AppCompatActivity() {
             name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             name_player2_with_computer_template.setTextSize(20f)
             name_player1_with_computer_template.setTextSize(20f)
-            button_player_1_template_with_computer.setBackgroundResource(R.drawable.tower1_casino);
-            button_player_2_template_with_computer.setBackgroundResource(R.drawable.tower2_casino);
-            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            button_player_1_with_computer_template.setBackgroundResource(R.drawable.tower1_casino);
+            button_player_2_with_computer_template.setBackgroundResource(R.drawable.tower2_casino);
+            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             label_with_computer.setBackgroundResource(R.drawable.background_casino);
-            bottom_navigation_template_with_computer.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            bottom_navigation_with_computer_template.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
         }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
@@ -178,7 +178,7 @@ class XOGame_withComputer : AppCompatActivity() {
         }
         signature_canvas_xog_with_computer.invalidate()
 
-        to_back_template_with_computer.setOnClickListener {
+        to_back_with_computer_template.setOnClickListener {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 3)
@@ -195,7 +195,8 @@ class XOGame_withComputer : AppCompatActivity() {
             var list_y: MutableList<Int> = mutableListOf(-1, 0, 1, 1, 1, 0, -1, -1)
 
             val handler = android.os.Handler()
-            handler.postDelayed({
+            handler.postDelayed(
+                {
 
                 for (j in 5 downTo 0) {
                     for (i in 0..6) {
@@ -297,7 +298,7 @@ class XOGame_withComputer : AppCompatActivity() {
             }, delayTime)
         }
 
-        bottom_navigation_template_with_computer.setOnNavigationItemSelectedListener { item ->
+        bottom_navigation_with_computer_template.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
                     dialog_rules =

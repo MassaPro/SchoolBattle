@@ -14,10 +14,10 @@
         android:layout_height="577dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/toolbar2_template_with_computer"
+        app:layout_constraintBottom_toTopOf="@+id/toolbar2_with_computer_template"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_template_with_computer">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_with_computer_template">
 
         <com.example.schoolbattle.gameswithcomp.CanvasView_Boxs_with_computer
             android:id="@+id/signature_canvas_box_with_computer"
@@ -67,6 +67,12 @@
             android:layout_height="match_parent"
             android:textColor="#FFFFFF"
             android:visibility="gone"  />
+        <com.example.schoolbattle.gameswithcomp.CanvasView_SNAKE_COMPUTER
+            android:id="@+id/signature_canvas_snake_with_computer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF"
+            android:visibility="gone"  />
 
 
 
@@ -75,7 +81,7 @@
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation_template_with_computer"
+        android:id="@+id/bottom_navigation_with_computer_template"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:backgroundTint = "#e6e6e6"
@@ -89,24 +95,24 @@
 
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_template_with_computer"
+        android:id="@+id/toolbar_with_computer_template"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_template_with_computer"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_with_computer_template"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0" />
 
     <Button
-        android:id="@+id/to_back_template_with_computer"
+        android:id="@+id/to_back_with_computer_template"
         android:layout_width="82dp"
         android:layout_height="50dp"
         android:background="@drawable/arrow_back"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar_template_with_computer"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_with_computer_template"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -114,28 +120,28 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar2_template_with_computer"
+        android:id="@+id/toolbar2_with_computer_template"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_template_with_computer"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_with_computer_template"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
     <Button
-        android:id="@+id/button_player_2_template_with_computer"
+        android:id="@+id/button_player_2_with_computer_template"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar_template_with_computer"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar_template_with_computer"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_with_computer_template"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar_with_computer_template"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar_template_with_computer"
+        app:layout_constraintTop_toTopOf="@+id/toolbar_with_computer_template"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
@@ -143,60 +149,62 @@
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:layout_marginEnd="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/button_player_2_template_with_computer"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar_template_with_computer"
+        app:layout_constraintBottom_toBottomOf="@+id/button_player_2_with_computer_template"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar_with_computer_template"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/button_player_2_template_with_computer"
-        app:layout_constraintTop_toTopOf="@+id/button_player_2_template_with_computer"
+        app:layout_constraintStart_toStartOf="@+id/button_player_2_with_computer_template"
+        app:layout_constraintTop_toTopOf="@+id/button_player_2_with_computer_template"
         app:layout_constraintVertical_bias="0.25" />
 
     <TextView
         android:id="@+id/name_player2_with_computer_template"
-        android:layout_width="143dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:gravity="center"
-        android:text="Игрок 2"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar_template_with_computer"
-        app:layout_constraintEnd_toStartOf="@+id/button_player_2_template_with_computer"
+        android:singleLine="true"
+        android:text="Компьютер"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_with_computer_template"
+        app:layout_constraintEnd_toStartOf="@+id/button_player_2_with_computer_template"
         app:layout_constraintHorizontal_bias="0.379"
-        app:layout_constraintStart_toEndOf="@+id/to_back_template_with_computer"
-        app:layout_constraintTop_toTopOf="@+id/toolbar_template_with_computer"
+        app:layout_constraintStart_toEndOf="@+id/to_back_with_computer_template"
+        app:layout_constraintTop_toTopOf="@+id/toolbar_with_computer_template"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/button_player_1_template_with_computer"
+        android:id="@+id/button_player_1_with_computer_template"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar2_template_with_computer"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar2_template_with_computer"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar2_with_computer_template"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar2_with_computer_template"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar2_template_with_computer"
+        app:layout_constraintTop_toTopOf="@+id/toolbar2_with_computer_template"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/name_player1_with_computer_template"
-        android:layout_width="140dp"
+        android:layout_width="wrap_content"
         android:layout_height="51dp"
         android:gravity="center"
+        android:singleLine="true"
         android:text="Игрок 1"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar2_template_with_computer"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar2_template_with_computer"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar2_with_computer_template"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar2_with_computer_template"
         app:layout_constraintHorizontal_bias="0.403"
-        app:layout_constraintStart_toEndOf="@+id/button_player_1_template_with_computer"
-        app:layout_constraintTop_toTopOf="@+id/toolbar2_template_with_computer"
+        app:layout_constraintStart_toEndOf="@+id/button_player_1_with_computer_template"
+        app:layout_constraintTop_toTopOf="@+id/toolbar2_with_computer_template"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/player_1_icon_template_with_computer"
         android:layout_width="22dp"
         android:layout_height="22dp"
-        app:layout_constraintBottom_toBottomOf="@+id/button_player_1_template_with_computer"
-        app:layout_constraintEnd_toEndOf="@+id/button_player_1_template_with_computer"
+        app:layout_constraintBottom_toBottomOf="@+id/button_player_1_with_computer_template"
+        app:layout_constraintEnd_toEndOf="@+id/button_player_1_with_computer_template"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/button_player_1_template_with_computer"
+        app:layout_constraintTop_toTopOf="@+id/button_player_1_with_computer_template"
         app:layout_constraintVertical_bias="0.285" />
 
 

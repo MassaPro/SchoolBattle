@@ -118,16 +118,16 @@ class ReversiWithComputer : AppCompatActivity() {
             name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             name_player2_with_computer_template.setTextSize(20f)
             name_player1_with_computer_template.setTextSize(20f)
-            button_player_1_template_with_computer.setBackgroundResource(R.drawable.player1_egypt)
-            button_player_2_template_with_computer.setBackgroundResource(R.drawable.player2_egypt)
+            button_player_1_with_computer_template.setBackgroundResource(R.drawable.player1_egypt)
+            button_player_2_with_computer_template.setBackgroundResource(R.drawable.player2_egypt)
             player_1_icon_template_with_computer.setBackgroundResource(R.drawable.chip1_egypt)
             player_2_icon_template_with_computer.setBackgroundResource(R.drawable.chip2_egypt)
-            toolbar_template_with_computer.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_template_with_computer.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            toolbar_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            toolbar2_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
             label_with_computer.setBackgroundResource(R.drawable.background_egypt)
-            bottom_navigation_template_with_computer.setBackgroundColor(Color.rgb(255, 230, 163))
-            to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_template_with_computer.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            bottom_navigation_with_computer_template.setBackgroundColor(Color.rgb(255, 230, 163))
+            to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
         }
         else if(Design == "Casino" ) {
             name_player1_with_computer_template.setTextColor(Color.YELLOW)
@@ -136,14 +136,14 @@ class ReversiWithComputer : AppCompatActivity() {
             name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             name_player2_with_computer_template.setTextSize(20f)
             name_player1_with_computer_template.setTextSize(20f)
-            button_player_1_template_with_computer.setBackgroundResource(R.drawable.tower1_casino)
-            button_player_2_template_with_computer.setBackgroundResource(R.drawable.tower2_casino)
-            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            button_player_1_with_computer_template.setBackgroundResource(R.drawable.tower1_casino)
+            button_player_2_with_computer_template.setBackgroundResource(R.drawable.tower2_casino)
+            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             label_with_computer.setBackgroundResource(R.drawable.background_casino)
-            bottom_navigation_template_with_computer.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            bottom_navigation_with_computer_template.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
         }
 
 
@@ -400,14 +400,14 @@ class ReversiWithComputer : AppCompatActivity() {
 
 
 
-        to_back_template_with_computer.setOnClickListener {
+        to_back_with_computer_template.setOnClickListener {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 3)
             startActivity(intent)
         }
 
-        bottom_navigation_template_with_computer.setOnNavigationItemSelectedListener { item ->
+        bottom_navigation_with_computer_template.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
                     dialog_rules =

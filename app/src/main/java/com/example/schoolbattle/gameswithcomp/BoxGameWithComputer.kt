@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_computer_games_template.*
-import kotlinx.android.synthetic.main.activity_online_games_temlate.*
 
 var BoxMode = 0
 
@@ -127,16 +126,16 @@ class BoxGameWithComputer : AppCompatActivity() {
             name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             name_player2_with_computer_template.setTextSize(20f)
             name_player1_with_computer_template.setTextSize(20f)
-            button_player_1_template_with_computer.setBackgroundResource(R.drawable.player1_egypt);
-            button_player_2_template_with_computer.setBackgroundResource(R.drawable.player2_egypt);
+            button_player_1_with_computer_template.setBackgroundResource(R.drawable.player1_egypt);
+            button_player_2_with_computer_template.setBackgroundResource(R.drawable.player2_egypt);
             //player_1_icon_template_with_computer.setBackgroundResource(R.drawable.template2_egypt);
             //player_2_icon_template_with_computer.setBackgroundResource(R.drawable.template1_egypt)
-            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             label_with_computer.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_template_with_computer.setBackgroundColor(Color.rgb(255, 230, 163))
-            to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            bottom_navigation_with_computer_template.setBackgroundColor(Color.rgb(255, 230, 163))
+            to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
         }
         else if(Design == "Casino" ) {
             name_player1_with_computer_template.setTextColor(Color.YELLOW)
@@ -145,17 +144,17 @@ class BoxGameWithComputer : AppCompatActivity() {
             name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             name_player2_with_computer_template.setTextSize(20f)
             name_player1_with_computer_template.setTextSize(20f)
-            button_player_1_template_with_computer.setBackgroundResource(R.drawable.tower1_casino);
-            button_player_2_template_with_computer.setBackgroundResource(R.drawable.tower2_casino);
-            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            button_player_1_with_computer_template.setBackgroundResource(R.drawable.tower1_casino);
+            button_player_2_with_computer_template.setBackgroundResource(R.drawable.tower2_casino);
+            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             label_with_computer.setBackgroundResource(R.drawable.background_casino);
-            bottom_navigation_template_with_computer.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            bottom_navigation_with_computer_template.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
         }
 
-        to_back_template_with_computer.setOnClickListener {
+        to_back_with_computer_template.setOnClickListener {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 3)
@@ -298,291 +297,6 @@ class BoxGameWithComputer : AppCompatActivity() {
                     }
 
 
-
-
-                    /*var fla2 = false
-
-                    for(i in 0..6) {         // очевидно
-                        for(j in 0..6) {
-                            var a1 = 0
-                            var a2 = 0
-                            var a3 = 0
-                            var a4 = 0
-                            if (signature_canvas_box_with_computer.VERTICAL_RIB[i][j]>0)
-                                a1 = 1
-                            if (signature_canvas_box_with_computer.HORIZONTAL_RIB[i][j]>0)
-                                a2 = 1
-                            if (signature_canvas_box_with_computer.HORIZONTAL_RIB[i][j+1]>0)
-                                a3 = 1
-                            if (signature_canvas_box_with_computer.VERTICAL_RIB[i+1][j]>0)
-                                a4 = 1
-                            if (a1 + a2 + a3 + a4 == 3 && signature_canvas_box_with_computer.FIELD[i][j] == 0) {
-                                if (signature_canvas_box_with_computer.VERTICAL_RIB[i][j] == 0) {
-                                    if(signature_canvas_box_with_computer.red_or_blue == "red" && BoxMode == 2) {
-                                        signature_canvas_box_with_computer.VERTICAL_RIB[i][j] = 1
-                                        signature_canvas_box_with_computer.History.add(mutableListOf(1,1,i,j))
-                                        var data_from_memory = encode(signature_canvas_box_with_computer.History)
-                                        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                        editor.putString("box_with_computer", data_from_memory)
-                                        editor.apply()
-                                        signature_canvas_box_with_computer.red_or_blue = "blue"
-                                    } else if (signature_canvas_box_with_computer.red_or_blue == "blue" && BoxMode == 1) {
-                                        signature_canvas_box_with_computer.VERTICAL_RIB[i][j] = 2
-                                        signature_canvas_box_with_computer.History.add(mutableListOf(2,1,i,j))
-                                        var data_from_memory = encode(signature_canvas_box_with_computer.History)
-                                        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                        editor.putString("box_with_computer", data_from_memory)
-                                        editor.apply()
-                                        signature_canvas_box_with_computer.red_or_blue = "red"
-                                    }
-                                    fla2 = true
-                                } else if (signature_canvas_box_with_computer.HORIZONTAL_RIB[i][j] == 0) {
-                                    if(signature_canvas_box_with_computer.red_or_blue == "red" && BoxMode == 2) {
-                                        signature_canvas_box_with_computer.HORIZONTAL_RIB[i][j] = 1
-                                        signature_canvas_box_with_computer.History.add(mutableListOf(1,2,i,j))
-                                        var data_from_memory = encode(signature_canvas_box_with_computer.History)
-                                        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                        editor.putString("box_with_computer", data_from_memory)
-                                        editor.apply()
-                                        signature_canvas_box_with_computer.red_or_blue = "blue"
-                                    } else if (signature_canvas_box_with_computer.red_or_blue == "blue" && BoxMode == 1) {
-                                        signature_canvas_box_with_computer.HORIZONTAL_RIB[i][j] = 2
-                                        signature_canvas_box_with_computer.History.add(mutableListOf(2,2,i,j))
-                                        var data_from_memory = encode(signature_canvas_box_with_computer.History)
-                                        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                        editor.putString("box_with_computer", data_from_memory)
-                                        editor.apply()
-                                        signature_canvas_box_with_computer.red_or_blue = "red"
-                                    }
-                                    fla2 = true
-                                } else if (signature_canvas_box_with_computer.HORIZONTAL_RIB[i][j+1] == 0) {
-                                    if(signature_canvas_box_with_computer.red_or_blue == "red" && BoxMode == 2) {
-                                        signature_canvas_box_with_computer.HORIZONTAL_RIB[i][j + 1] = 1
-                                        signature_canvas_box_with_computer.History.add(mutableListOf(1,2,i,j + 1))
-                                        var data_from_memory = encode(signature_canvas_box_with_computer.History)
-                                        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                        editor.putString("box_with_computer", data_from_memory)
-                                        editor.apply()
-                                        signature_canvas_box_with_computer.red_or_blue = "blue"
-                                    } else if (signature_canvas_box_with_computer.red_or_blue == "blue" && BoxMode == 1) {
-                                        signature_canvas_box_with_computer.HORIZONTAL_RIB[i][j + 1] = 2
-                                        signature_canvas_box_with_computer.History.add(mutableListOf(2,2,i,j + 1))
-                                        var data_from_memory = encode(signature_canvas_box_with_computer.History)
-                                        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                        editor.putString("box_with_computer", data_from_memory)
-                                        editor.apply()
-                                        signature_canvas_box_with_computer.red_or_blue = "red"
-                                    }
-                                    fla2 = true
-                                } else if (signature_canvas_box_with_computer.VERTICAL_RIB[i+1][j] == 0) {
-                                    if(signature_canvas_box_with_computer.red_or_blue == "red" && BoxMode == 2) {
-                                        signature_canvas_box_with_computer.VERTICAL_RIB[i + 1][j] = 1
-                                        signature_canvas_box_with_computer.History.add(mutableListOf(1,1,i + 1,j))
-                                        var data_from_memory = encode(signature_canvas_box_with_computer.History)
-                                        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                        editor.putString("box_with_computer", data_from_memory)
-                                        editor.apply()
-                                        signature_canvas_box_with_computer.red_or_blue = "blue"
-                                    } else if (signature_canvas_box_with_computer.red_or_blue == "blue" && BoxMode == 1) {
-                                        signature_canvas_box_with_computer.VERTICAL_RIB[i + 1][j] = 2
-                                        signature_canvas_box_with_computer.History.add(mutableListOf(2,1,i + 1,j))
-                                        var data_from_memory = encode(signature_canvas_box_with_computer.History)
-                                        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                        editor.putString("box_with_computer", data_from_memory)
-                                        editor.apply()
-                                        signature_canvas_box_with_computer.red_or_blue = "red"
-                                    }
-                                    fla2 = true
-
-
-                                }
-                                if (fla2)
-                                    break
-
-                            }
-                        }
-                        if (fla2)
-                            break
-                    }    // очевидно
-
-                    if (!fla2) {
-                        var list_x2: MutableList<Int> = mutableListOf(0, 1, 2, 3, 4, 5, 6, 7)
-                        var list_y2: MutableList<Int> = mutableListOf(0, 1, 2, 3, 4, 5, 6)
-                        list_x2.shuffle()
-                        list_y2.shuffle()
-                        if (Math.random() < 0.5) {
-                            for (i in list_x2) {
-                                for (j in list_y2) {
-                                    if (signature_canvas_box_with_computer.VERTICAL_RIB[i][j] == 0 && ((i > 0 && j <= 6 && signature_canvas_box_with_computer.VERTICAL_RIB[i - 1][j] > 0) || (j > 0 && i <= 7 && signature_canvas_box_with_computer.VERTICAL_RIB[i][j - 1] > 0) || (i < 7 && j <= 6 && signature_canvas_box_with_computer.VERTICAL_RIB[i + 1][j] > 0) || (j < 6 && i <= 7 && signature_canvas_box_with_computer.VERTICAL_RIB[i][j + 1] > 0) || (i > 0 && j <= 7 && signature_canvas_box_with_computer.HORIZONTAL_RIB[i - 1][j] > 0) || (j > 0 && i <= 6 && signature_canvas_box_with_computer.HORIZONTAL_RIB[i][j - 1] > 0) || (i < 6 && j <= 7 && signature_canvas_box_with_computer.HORIZONTAL_RIB[i + 1][j] > 0) || (j < 7 && i <= 6 && signature_canvas_box_with_computer.HORIZONTAL_RIB[i][j + 1] > 0))) {
-
-                                        if(signature_canvas_box_with_computer.red_or_blue == "red" && BoxMode == 2) {
-
-                                            signature_canvas_box_with_computer.VERTICAL_RIB[i][j] = 1
-                                            signature_canvas_box_with_computer.History.add(mutableListOf(1,1,i,j))
-                                            var data_from_memory = encode(signature_canvas_box_with_computer.History)
-                                            val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                            editor.putString("box_with_computer", data_from_memory)
-                                            editor.apply()
-                                            signature_canvas_box_with_computer.red_or_blue = "blue"
-                                        } else if (signature_canvas_box_with_computer.red_or_blue == "blue" && BoxMode == 1) {
-
-                                            signature_canvas_box_with_computer.VERTICAL_RIB[i][j] = 2
-                                            signature_canvas_box_with_computer.History.add(mutableListOf(2,1,i,j))
-                                            var data_from_memory = encode(signature_canvas_box_with_computer.History)
-                                            val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                            editor.putString("box_with_computer", data_from_memory)
-                                            editor.apply()
-                                            signature_canvas_box_with_computer.red_or_blue = "red"
-                                        }
-
-                                        fla2 = true
-                                        break
-                                    }
-                                }
-                                if (fla2) {
-                                    break
-                                }
-                            }
-                        } else {
-                            for (i in list_y2) {
-                                for (j in list_x2) {
-                                    if (signature_canvas_box_with_computer.HORIZONTAL_RIB[i][j] == 0 && ((i > 0 && j <= 6 && signature_canvas_box_with_computer.VERTICAL_RIB[i - 1][j] > 0) || (j > 0 && i <= 7 && signature_canvas_box_with_computer.VERTICAL_RIB[i][j - 1] > 0) || (i < 7 && j <= 6 && signature_canvas_box_with_computer.VERTICAL_RIB[i + 1][j] > 0) || (j < 6 && i <= 7 && signature_canvas_box_with_computer.VERTICAL_RIB[i][j + 1] > 0) || (i > 0 && j <= 7 && signature_canvas_box_with_computer.HORIZONTAL_RIB[i - 1][j] > 0) || (j > 0 && i <= 6 && signature_canvas_box_with_computer.HORIZONTAL_RIB[i][j - 1] > 0) || (i < 6 && j <= 7 && signature_canvas_box_with_computer.HORIZONTAL_RIB[i + 1][j] > 0) || (j < 7 && i <= 6 && signature_canvas_box_with_computer.HORIZONTAL_RIB[i][j + 1] > 0))) {
-                                        if(signature_canvas_box_with_computer.red_or_blue == "red" && BoxMode == 2) {
-                                            signature_canvas_box_with_computer.HORIZONTAL_RIB[i][j] = 1
-                                            signature_canvas_box_with_computer.History.add(mutableListOf(1,2,i,j))
-                                            var data_from_memory = encode(signature_canvas_box_with_computer.History)
-                                            val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                            editor.putString("box_with_computer", data_from_memory)
-                                            editor.apply()
-                                            signature_canvas_box_with_computer.red_or_blue = "blue"
-                                        } else if (signature_canvas_box_with_computer.red_or_blue == "blue" && BoxMode == 1) {
-                                            signature_canvas_box_with_computer.HORIZONTAL_RIB[i][j] = 2
-                                            signature_canvas_box_with_computer.History.add(mutableListOf(2,2,i,j))
-                                            var data_from_memory = encode(signature_canvas_box_with_computer.History)
-                                            val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                            editor.putString("box_with_computer", data_from_memory)
-                                            editor.apply()
-                                            signature_canvas_box_with_computer.red_or_blue = "red"
-                                        }
-
-                                        fla2 = true
-                                        break
-                                    }
-                                }
-                                if (fla2) {
-                                    break
-                                }
-                            }
-                        }
-                    }   // рядом
-
-
-                    if (!fla2) {
-                        var list_x2: MutableList<Int> = mutableListOf(0, 1, 2, 3, 4, 5, 6, 7)
-                        var list_y2: MutableList<Int> = mutableListOf(0, 1, 2, 3, 4, 5, 6)
-                        list_x2.shuffle()
-                        list_y2.shuffle()
-                        for (i in list_x2) {
-                            for (j in list_y2) {
-                                if (signature_canvas_box_with_computer.VERTICAL_RIB[i][j] == 0) {
-
-                                    if(signature_canvas_box_with_computer.red_or_blue == "red" && BoxMode == 2) {
-
-                                        signature_canvas_box_with_computer.VERTICAL_RIB[i][j] = 1
-                                        signature_canvas_box_with_computer.History.add(mutableListOf(1,1,i,j))
-                                        var data_from_memory = encode(signature_canvas_box_with_computer.History)
-                                        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                        editor.putString("box_with_computer", data_from_memory)
-                                        editor.apply()
-                                        signature_canvas_box_with_computer.red_or_blue = "blue"
-                                    } else if (signature_canvas_box_with_computer.red_or_blue == "blue" && BoxMode == 1) {
-
-                                        signature_canvas_box_with_computer.VERTICAL_RIB[i][j] = 2
-                                        signature_canvas_box_with_computer.History.add(mutableListOf(2,1,i,j))
-                                        var data_from_memory = encode(signature_canvas_box_with_computer.History)
-                                        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                        editor.putString("box_with_computer", data_from_memory)
-                                        editor.apply()
-                                        signature_canvas_box_with_computer.red_or_blue = "red"
-                                    }
-
-                                    fla2 = true
-                                    break
-                                }
-                            }
-                            if (fla2) {
-                                break
-                            }
-                        }
-                    }  //  оставшиеся
-
-                    if (!fla2) {
-                        var list_x2: MutableList<Int> = mutableListOf(0, 1, 2, 3, 4, 5, 6, 7)
-                        var list_y2: MutableList<Int> = mutableListOf(0, 1, 2, 3, 4, 5, 6)
-                        list_x2.shuffle()
-                        list_y2.shuffle()
-                        for (i in list_y2) {
-                            for (j in list_x2) {
-                                if (signature_canvas_box_with_computer.HORIZONTAL_RIB[i][j] == 0) {
-                                    if(signature_canvas_box_with_computer.red_or_blue == "red" && BoxMode == 2) {
-                                        signature_canvas_box_with_computer.HORIZONTAL_RIB[i][j] = 1
-                                        signature_canvas_box_with_computer.History.add(mutableListOf(1,2,i,j))
-                                        var data_from_memory = encode(signature_canvas_box_with_computer.History)
-                                        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                        editor.putString("box_with_computer", data_from_memory)
-                                        editor.apply()
-                                        signature_canvas_box_with_computer.red_or_blue = "blue"
-                                    } else if (signature_canvas_box_with_computer.red_or_blue == "blue" && BoxMode == 1) {
-                                        signature_canvas_box_with_computer.HORIZONTAL_RIB[i][j] = 2
-                                        signature_canvas_box_with_computer.History.add(mutableListOf(2,2,i,j))
-                                        var data_from_memory = encode(signature_canvas_box_with_computer.History)
-                                        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                                        editor.putString("box_with_computer", data_from_memory)
-                                        editor.apply()
-                                        signature_canvas_box_with_computer.red_or_blue = "red"
-                                    }
-
-                                    fla2 = true
-                                    break
-                                }
-                            }
-                            if (fla2) {
-                                break
-                            }
-                        }
-                    }   //   оставшиеся
-
-
-                    var flag = false
-                    for(i in 0..6) {
-                        for(j in 0..6)
-                        {
-                            if(signature_canvas_box_with_computer.VERTICAL_RIB[i][j]>0 && signature_canvas_box_with_computer.HORIZONTAL_RIB[i][j]>0 && signature_canvas_box_with_computer.HORIZONTAL_RIB[i][j+1]>0 && signature_canvas_box_with_computer.VERTICAL_RIB[i+1][j]>0 && signature_canvas_box_with_computer.FIELD[i][j]==0) //если образовался квадратик
-                            {
-                                if(flag == false)
-                                {
-                                    flag = true
-                                    if(signature_canvas_box_with_computer.red_or_blue == "red")            //снова ходит тот же игрок
-                                    {
-                                        signature_canvas_box_with_computer.red_or_blue = "blue"
-                                    }
-                                    else
-                                    {
-                                        signature_canvas_box_with_computer.red_or_blue = "red"
-                                    }
-                                }
-                                if(signature_canvas_box_with_computer.red_or_blue == "red")
-                                {
-                                    signature_canvas_box_with_computer.FIELD[i][j] = 1
-                                }
-                                else
-                                {
-                                    signature_canvas_box_with_computer.FIELD[i][j] = 2
-                                }
-                            }
-                        }
-                    }*/
-
                     signature_canvas_box_with_computer.blockedOnTouch = false
                     signature_canvas_box_with_computer.invalidate()
 
@@ -592,7 +306,7 @@ class BoxGameWithComputer : AppCompatActivity() {
 
 
 
-        bottom_navigation_template_with_computer.setOnNavigationItemSelectedListener { item ->
+        bottom_navigation_with_computer_template.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
                     dialog_rules =

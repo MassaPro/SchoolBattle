@@ -15,7 +15,6 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
-import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_computer_games_template.*
 
 var VirusGameMode = 0
@@ -124,15 +123,15 @@ class VirusWithComputer : AppCompatActivity() {
             name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
             name_player2_with_computer_template.setTextSize(20f)
             name_player1_with_computer_template.setTextSize(20f)
-            button_player_1_template_with_computer.setBackgroundResource(R.drawable.player1_egypt);
-            button_player_2_template_with_computer.setBackgroundResource(R.drawable.player2_egypt);
+            button_player_1_with_computer_template.setBackgroundResource(R.drawable.player1_egypt);
+            button_player_2_with_computer_template.setBackgroundResource(R.drawable.player2_egypt);
             player_1_icon_template_with_computer.setBackgroundResource(R.drawable.virus1_egypt);
             player_2_icon_template_with_computer.setBackgroundResource(R.drawable.virus2_egypt);
             label_with_computer.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_template_with_computer.setBackgroundColor(rgb(255, 230, 163))
-            to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_template_with_computer.setBackgroundColor(argb(0,0,0,0))
-            toolbar2_template_with_computer.setBackgroundColor(argb(0,0,0,0))
+            bottom_navigation_with_computer_template.setBackgroundColor(rgb(255, 230, 163))
+            to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_with_computer_template.setBackgroundColor(argb(0,0,0,0))
+            toolbar2_with_computer_template.setBackgroundColor(argb(0,0,0,0))
         }
         else if(Design == "Casino" ) {
             name_player1_with_computer_template.setTextColor(Color.YELLOW)
@@ -141,14 +140,14 @@ class VirusWithComputer : AppCompatActivity() {
             name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             name_player2_with_computer_template.setTextSize(20f)
             name_player1_with_computer_template.setTextSize(20f)
-            button_player_1_template_with_computer.setBackgroundResource(R.drawable.tower1_casino);
-            button_player_2_template_with_computer.setBackgroundResource(R.drawable.tower2_casino);
-            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            button_player_1_with_computer_template.setBackgroundResource(R.drawable.tower1_casino);
+            button_player_2_with_computer_template.setBackgroundResource(R.drawable.tower2_casino);
+            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             label_with_computer.setBackgroundResource(R.drawable.background_casino);
-            bottom_navigation_template_with_computer.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            bottom_navigation_with_computer_template.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
         }
         else if(Design == "Rome" ) {
             name_player1_with_computer_template.setTextColor(rgb(193,150,63))
@@ -157,14 +156,14 @@ class VirusWithComputer : AppCompatActivity() {
             name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
             name_player2_with_computer_template.setTextSize(20f)
             name_player1_with_computer_template.setTextSize(20f)
-            button_player_1_template_with_computer.setBackgroundResource(R.drawable.tower1_rome);
-            button_player_2_template_with_computer.setBackgroundResource(R.drawable.tower2_rome);
-            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            button_player_1_with_computer_template.setBackgroundResource(R.drawable.tower1_rome);
+            button_player_2_with_computer_template.setBackgroundResource(R.drawable.tower2_rome);
+            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             label_with_computer.setBackgroundResource(R.drawable.background_rome);
-            bottom_navigation_template_with_computer.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            bottom_navigation_with_computer_template.setBackgroundColor(argb(0,224, 164, 103))
+            to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
         }
         else if(Design == "Gothic" ) {
             name_player1_with_computer_template.setTextColor(Color.WHITE)
@@ -175,12 +174,12 @@ class VirusWithComputer : AppCompatActivity() {
             name_player1_with_computer_template.setTextSize(20f)
             //button_player_1_template_with_computer.setBackgroundResource(R.drawable.tower1_gothic);
             //button_player_2_template_with_computer.setBackgroundResource(R.drawable.tower2_gothic);
-            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             //label_with_computer.setBackgroundResource(R.drawable.background_gothic);
-            bottom_navigation_template_with_computer.setBackgroundColor(argb(0,0,0,0))
-            to_back_template_with_computer.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_template_with_computer.setBackgroundColor(argb(0, 0, 0, 0))
+            bottom_navigation_with_computer_template.setBackgroundColor(argb(0,0,0,0))
+            to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
         }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
@@ -217,7 +216,7 @@ class VirusWithComputer : AppCompatActivity() {
 
 
 
-        bottom_navigation_template_with_computer.setOnNavigationItemSelectedListener { item ->
+        bottom_navigation_with_computer_template.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
                     dialog_rules =
@@ -277,7 +276,7 @@ class VirusWithComputer : AppCompatActivity() {
             }
             true
         }
-        to_back_template_with_computer.setOnClickListener {
+        to_back_with_computer_template.setOnClickListener {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 3)
