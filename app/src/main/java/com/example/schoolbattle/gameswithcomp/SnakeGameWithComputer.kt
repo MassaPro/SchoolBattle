@@ -586,6 +586,174 @@ class CanvasView_SNAKE_COMPUTER(context: Context, attrs: AttributeSet?) : View(c
             "red"
         }
     }
+    @ExperimentalStdlibApi
+    fun CRAZY_COMPUTER_ALGORITHM_SNAKE(depth: Int,who_move:String): Triple<Int,Int,Int>
+    {
+        if(who_move == "blue")
+        {
+            var i = 0
+            var j = 0
+            if(depth == 0)
+            {
+                return Triple(0,0,0)
+            }
+            if(FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] == 0)
+            {
+                FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] = 2;
+                Snake_2.add(Pair(abs(Snake_2.last().first-1+11)%11,Snake_2.last().second))
+                i = Snake_2.last().first
+                j = Snake_2.last().second
+                if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red").first==0)
+                {
+                    Snake_2.removeLast()
+                    FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
+                    return Triple(1,i,j)
+                }
+                else
+                {
+                    Snake_2.removeLast()
+                    FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
+                }
+            }
+            if(FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] == 0)
+            {
+                FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] = 2
+                Snake_2.add(Pair(abs(Snake_2.last().first+1+11)%11,Snake_2.last().second))
+                i = Snake_2.last().first
+                j = Snake_2.last().second
+                if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red").first==0)
+                {
+                    Snake_2.removeLast()
+                    FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
+                    return Triple(1,i,j)
+                }
+                else
+                {
+                    Snake_2.removeLast()
+                    FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
+                }
+            }
+            if(FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] == 0)
+            {
+                FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] = 2;
+                Snake_2.add(Pair(Snake_2.last().first,abs(Snake_2.last().second+1+11)%11))
+                i = Snake_2.last().first
+                j = Snake_2.last().second
+                if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red").first==0)
+                {
+                    Snake_2.removeLast()
+                    FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] = 0 //возрат к нормальному массиву
+                    return Triple(1,i,j)
+                }
+                else
+                {
+                    Snake_2.removeLast()
+                    FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] = 0; //возрат к нормальному массиву
+                }
+            }
+            if(FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] == 0)
+            {
+                FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] = 2;
+                Snake_2.add(Pair(Snake_2.last().first,abs(Snake_2.last().second-1+11)%11))
+                i = Snake_2.last().first
+                j = Snake_2.last().second
+                if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red").first==0)
+                {
+                    Snake_2.removeLast()
+                    FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] = 0; //возрат к нормальному массиву
+                    return Triple(1,i,j)
+                }
+                else
+                {
+                    Snake_2.removeLast()
+                    FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] = 0
+                }
+            }
+            return Triple(0,i,j)
+        }
+        else
+        {
+            var i = 0
+            var j = 0
+            if(depth == 0)
+            {
+                return Triple(0,0,0)
+            }
+            if(FIELD[abs(Snake_1.last().first-1+11)%11][Snake_1.last().second] == 0)
+            {
+                FIELD[abs(Snake_1.last().first-1+11)%11][Snake_1.last().second] = 1
+                Snake_1.add(Pair(abs(Snake_1.last().first-1+11)%11,Snake_1.last().second))
+                i = Snake_1.last().first
+                j = Snake_1.last().second
+                if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"blue").first==0)
+                {
+                    Snake_1.removeLast()
+                    FIELD[abs(Snake_1.last().first-1+11)%11][Snake_1.last().second] = 0; //возрат к нормальному массиву
+                    return Triple(1,i,j)
+                }
+                else
+                {
+                    Snake_1.removeLast()
+                    FIELD[abs(Snake_1.last().first-1+11)%11][Snake_1.last().second] = 0; //возрат к нормальному массиву
+                }
+            }
+            if(FIELD[abs(Snake_1.last().first+1+11)%11][Snake_1.last().second] == 0)
+            {
+                FIELD[abs(Snake_1.last().first+1+11)%11][Snake_1.last().second] = 1
+                Snake_1.add(Pair(abs(Snake_1.last().first+1+11)%11,Snake_1.last().second))
+                i = Snake_1.last().first
+                j = Snake_1.last().second
+                if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"blue").first==0)
+                {
+                    Snake_1.removeLast()
+                    FIELD[abs(Snake_1.last().first+1+11)%11][Snake_1.last().second] = 0; //возрат к нормальному массиву
+                    return Triple(1,i,j)
+                }
+                else
+                {
+                    Snake_1.removeLast()
+                    FIELD[abs(Snake_1.last().first+1+11)%11][Snake_1.last().second] = 0; //возрат к нормальному массиву
+                }
+            }
+            if(FIELD[Snake_1.last().first][abs(Snake_1.last().second+1+11)%11] == 0)
+            {
+                FIELD[Snake_1.last().first][abs(Snake_1.last().second+1+11)%11] = 1;
+                Snake_1.add(Pair(Snake_1.last().first,abs(Snake_1.last().second+1+11)%11))
+                i = Snake_1.last().first
+                j = Snake_1.last().second
+                if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"blue").first==0)
+                {
+                    Snake_1.removeLast()
+                    FIELD[Snake_1.last().first][abs(Snake_1.last().second+1+11)%11] = 0; //возрат к нормальному массиву
+                    return Triple(1,i,j)
+                }
+                else
+                {
+                    Snake_1.removeLast()
+                    FIELD[Snake_1.last().first][abs(Snake_1.last().second+1+11)%11] = 0; //возрат к нормальному массиву
+                }
+            }
+            if(FIELD[Snake_1.last().first][abs(Snake_1.last().second-1+11)%11] == 0)
+            {
+                FIELD[Snake_1.last().first][abs(Snake_1.last().second-1+11)%11] = 1
+                Snake_1.add(Pair(Snake_1.last().first,abs(Snake_1.last().second-1+11)%11))
+                i = Snake_1.last().first
+                j = Snake_1.last().second
+                if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"blue").first==0)
+                {
+                    Snake_1.removeLast()
+                    FIELD[Snake_1.last().first][abs(Snake_1.last().second-1+11)%11] = 0 //возрат к нормальному массиву
+                    return Triple(1,i,j)
+                }
+                else
+                {
+                    Snake_1.removeLast()
+                    FIELD[Snake_1.last().first][abs(Snake_1.last().second-1+11)%11] = 0;
+                }
+            }
+            return Triple(0,i,j)
+        }
+    }
     lateinit var activity: Activity
 
     lateinit var t1: TextView
@@ -892,8 +1060,9 @@ class CanvasView_SNAKE_COMPUTER(context: Context, attrs: AttributeSet?) : View(c
     }
 
     var blocked : Boolean = false
+    @ExperimentalStdlibApi
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        Log.d("HISTORY",History.toString())
+        Log.d("HISTORY",FIELD.toString())
             indent = 20f //оступ, чтобы можно было тыкнуть в границу
             advertising_line = (height - 10 * step) / 2
             if (check_win() <= 0) {
@@ -980,14 +1149,8 @@ class CanvasView_SNAKE_COMPUTER(context: Context, attrs: AttributeSet?) : View(c
                                             vibratorService?.vibrate(70)
                                         }
                                         invalidate()
-                                        if (check_win() <= 0) {
-                                            blocked = false
-                                        }
-                                        if (check_win() > 0 ) {
-                                            blocked = !blocked
-                                        }
                                         if (check_win() > 0) {
-                                            blocked = !blocked
+
                                             var dialog: Show_Result_with_Computer? = null
                                             dialog = Show_Result_with_Computer(activity)
                                             if (check_win() == 1) {
@@ -1007,7 +1170,13 @@ class CanvasView_SNAKE_COMPUTER(context: Context, attrs: AttributeSet?) : View(c
                                         {
                                             val handler = android.os.Handler()
                                             handler.postDelayed({
-                                                computer_algorithm("blue")
+                                                var trip: Triple<Int,Int,Int> = CRAZY_COMPUTER_ALGORITHM_SNAKE(17,"blue")
+                                                Log.d("ALGOR",trip.toString())
+                                                FIELD[trip.second][trip.third] = 2
+                                                History.add(Triple(trip.second,trip.third,2))
+                                                Snake_2.add(Pair(History.last().first,History.last().second))
+                                                red_or_blue = "red"
+                                                invalidate()
                                             },Random.nextLong(500, 700))
                                         }
                                     }
