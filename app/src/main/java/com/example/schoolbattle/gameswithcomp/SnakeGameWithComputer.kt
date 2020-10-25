@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Vibrator
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
@@ -92,7 +93,9 @@ class SnakeGameWithComputer : AppCompatActivity() {
         signature_canvas_snake_with_computer.t1 = findViewById<TextView>(R.id.name_player1_with_computer_template)
         signature_canvas_snake_with_computer.t2 = findViewById<TextView>(R.id.name_player2_with_computer_template)
 
-
+        mSound.load(this, R.raw.xlup, 1);
+        vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
+        
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
         if (usedToClear == "clear") {
             val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
@@ -1170,14 +1173,37 @@ class CanvasView_SNAKE_COMPUTER(context: Context, attrs: AttributeSet?) : View(c
                                         {
                                             val handler = android.os.Handler()
                                             handler.postDelayed({
-                                                var trip: Triple<Int,Int,Int> = CRAZY_COMPUTER_ALGORITHM_SNAKE(17,"blue")
+                                                var trip: Triple<Int,Int,Int> = CRAZY_COMPUTER_ALGORITHM_SNAKE(23,"blue")
                                                 Log.d("ALGOR",trip.toString())
                                                 FIELD[trip.second][trip.third] = 2
                                                 History.add(Triple(trip.second,trip.third,2))
                                                 Snake_2.add(Pair(History.last().first,History.last().second))
                                                 red_or_blue = "red"
+                                                var data_from_memory = encode(History)
+                                                val editor = context.getSharedPreferences(
+                                                    "UserData",
+                                                    Context.MODE_PRIVATE
+                                                ).edit()
+                                                editor.putString(
+                                                    "snake_with_computer_template",
+                                                    data_from_memory
+                                                )
+                                                editor.apply()
                                                 invalidate()
-                                            },Random.nextLong(500, 700))
+
+                                                if (check_win() > 0 && event!!.getAction() == MotionEvent.ACTION_UP && !blocked) {
+                                                    var dialog: Show_Result_with_Computer? = null
+                                                    dialog = Show_Result_with_Computer(activity)
+                                                    if (check_win() == 1) {
+                                                        dialog?.showResult_with_Computer("Игрок 1 победил", "SnakeGame", activity)
+
+                                                    }
+                                                    if (check_win() == 2) {
+                                                        dialog?.showResult_with_Computer("Компьютер победил", "SnakeGame", activity)
+
+                                                    }
+                                                }
+                                            },Random.nextLong(50, 70))
                                         }
                                     }
                                 }
