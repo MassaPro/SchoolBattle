@@ -532,6 +532,8 @@ class CanvasView_Dots_with_computer(context: Context, attrs: AttributeSet?) : Vi
         return res
     }
 
+   
+
 
 
     var global_cnt1: Int = 0

@@ -16,11 +16,12 @@ import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_computer_games_template.*
-import kotlinx.android.synthetic.main.activity_one_device_games_template.*
-import kotlinx.android.synthetic.main.activity_online_games_temlate.*
-import kotlinx.coroutines.delay
 import kotlin.math.abs
 import kotlin.random.Random
+import kotlin.random.Random.Default.nextInt
+
+
+fun IntRange.random() = nextInt((endInclusive + 1) - start) +  start    //расширение функции рандома
 
 class SnakeGameWithComputer : AppCompatActivity() {
     fun encode(h: MutableList<Triple<Int,Int,Int>>):String
@@ -590,8 +591,9 @@ class CanvasView_SNAKE_COMPUTER(context: Context, attrs: AttributeSet?) : View(c
         }
     }
     @ExperimentalStdlibApi
-    fun CRAZY_COMPUTER_ALGORITHM_SNAKE(depth: Int,who_move:String): Triple<Int,Int,Int>
+    fun CRAZY_COMPUTER_ALGORITHM_SNAKE(depth: Int, who_move:String, t1: Int): Triple<Int,Int,Int>
     {
+        var t = t1%4;
         if(who_move == "blue")
         {
             var i = 0
@@ -600,78 +602,308 @@ class CanvasView_SNAKE_COMPUTER(context: Context, attrs: AttributeSet?) : View(c
             {
                 return Triple(0,0,0)
             }
-            if(FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] == 0)
+
+            if(t==0)
             {
-                FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] = 2;
-                Snake_2.add(Pair(abs(Snake_2.last().first-1+11)%11,Snake_2.last().second))
-                i = Snake_2.last().first
-                j = Snake_2.last().second
-                if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red").first==0)
+                if(FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] == 0)
                 {
-                    Snake_2.removeLast()
-                    FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
-                    return Triple(1,i,j)
+                    FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] = 2;
+                    Snake_2.add(Pair(abs(Snake_2.last().first-1+11)%11,Snake_2.last().second))
+                    i = Snake_2.last().first
+                    j = Snake_2.last().second
+                    if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red",t).first==0)
+                    {
+                        Snake_2.removeLast()
+                        FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
+                        return Triple(1,i,j)
+                    }
+                    else
+                    {
+                        Snake_2.removeLast()
+                        FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
+                    }
                 }
-                else
+                if(FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] == 0)
                 {
-                    Snake_2.removeLast()
-                    FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
+                    FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] = 2
+                    Snake_2.add(Pair(abs(Snake_2.last().first+1+11)%11,Snake_2.last().second))
+                    i = Snake_2.last().first
+                    j = Snake_2.last().second
+                    if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red",t).first==0)
+                    {
+                        Snake_2.removeLast()
+                        FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
+                        return Triple(1,i,j)
+                    }
+                    else
+                    {
+                        Snake_2.removeLast()
+                        FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
+                    }
+                }
+                if(FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] == 0)
+                {
+                    FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] = 2;
+                    Snake_2.add(Pair(Snake_2.last().first,abs(Snake_2.last().second+1+11)%11))
+                    i = Snake_2.last().first
+                    j = Snake_2.last().second
+                    if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red",t).first==0)
+                    {
+                        Snake_2.removeLast()
+                        FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] = 0 //возрат к нормальному массиву
+                        return Triple(1,i,j)
+                    }
+                    else
+                    {
+                        Snake_2.removeLast()
+                        FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] = 0; //возрат к нормальному массиву
+                    }
+                }
+                if(FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] == 0)
+                {
+                    FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] = 2;
+                    Snake_2.add(Pair(Snake_2.last().first,abs(Snake_2.last().second-1+11)%11))
+                    i = Snake_2.last().first
+                    j = Snake_2.last().second
+                    if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red",t).first==0)
+                    {
+                        Snake_2.removeLast()
+                        FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] = 0; //возрат к нормальному массиву
+                        return Triple(1,i,j)
+                    }
+                    else
+                    {
+                        Snake_2.removeLast()
+                        FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] = 0
+                    }
                 }
             }
-            if(FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] == 0)
+            else if(t==1)
             {
-                FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] = 2
-                Snake_2.add(Pair(abs(Snake_2.last().first+1+11)%11,Snake_2.last().second))
-                i = Snake_2.last().first
-                j = Snake_2.last().second
-                if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red").first==0)
+                if(FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] == 0)
                 {
-                    Snake_2.removeLast()
-                    FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
-                    return Triple(1,i,j)
+                    FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] = 2
+                    Snake_2.add(Pair(abs(Snake_2.last().first+1+11)%11,Snake_2.last().second))
+                    i = Snake_2.last().first
+                    j = Snake_2.last().second
+                    if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red",t).first==0)
+                    {
+                        Snake_2.removeLast()
+                        FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
+                        return Triple(1,i,j)
+                    }
+                    else
+                    {
+                        Snake_2.removeLast()
+                        FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
+                    }
                 }
-                else
+                if(FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] == 0)
                 {
-                    Snake_2.removeLast()
-                    FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
+                    FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] = 2;
+                    Snake_2.add(Pair(Snake_2.last().first,abs(Snake_2.last().second+1+11)%11))
+                    i = Snake_2.last().first
+                    j = Snake_2.last().second
+                    if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red",t).first==0)
+                    {
+                        Snake_2.removeLast()
+                        FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] = 0 //возрат к нормальному массиву
+                        return Triple(1,i,j)
+                    }
+                    else
+                    {
+                        Snake_2.removeLast()
+                        FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] = 0; //возрат к нормальному массиву
+                    }
+                }
+                if(FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] == 0)
+                {
+                    FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] = 2;
+                    Snake_2.add(Pair(Snake_2.last().first,abs(Snake_2.last().second-1+11)%11))
+                    i = Snake_2.last().first
+                    j = Snake_2.last().second
+                    if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red",t).first==0)
+                    {
+                        Snake_2.removeLast()
+                        FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] = 0; //возрат к нормальному массиву
+                        return Triple(1,i,j)
+                    }
+                    else
+                    {
+                        Snake_2.removeLast()
+                        FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] = 0
+                    }
+                }
+                if(FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] == 0)
+                {
+                    FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] = 2;
+                    Snake_2.add(Pair(abs(Snake_2.last().first-1+11)%11,Snake_2.last().second))
+                    i = Snake_2.last().first
+                    j = Snake_2.last().second
+                    if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red",t).first==0)
+                    {
+                        Snake_2.removeLast()
+                        FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
+                        return Triple(1,i,j)
+                    }
+                    else
+                    {
+                        Snake_2.removeLast()
+                        FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
+                    }
                 }
             }
-            if(FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] == 0)
+            else if(t==2)
             {
-                FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] = 2;
-                Snake_2.add(Pair(Snake_2.last().first,abs(Snake_2.last().second+1+11)%11))
-                i = Snake_2.last().first
-                j = Snake_2.last().second
-                if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red").first==0)
+                if(FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] == 0)
                 {
-                    Snake_2.removeLast()
-                    FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] = 0 //возрат к нормальному массиву
-                    return Triple(1,i,j)
+                    FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] = 2;
+                    Snake_2.add(Pair(Snake_2.last().first,abs(Snake_2.last().second+1+11)%11))
+                    i = Snake_2.last().first
+                    j = Snake_2.last().second
+                    if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red",t).first==0)
+                    {
+                        Snake_2.removeLast()
+                        FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] = 0 //возрат к нормальному массиву
+                        return Triple(1,i,j)
+                    }
+                    else
+                    {
+                        Snake_2.removeLast()
+                        FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] = 0; //возрат к нормальному массиву
+                    }
                 }
-                else
+                if(FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] == 0)
                 {
-                    Snake_2.removeLast()
-                    FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] = 0; //возрат к нормальному массиву
+                    FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] = 2;
+                    Snake_2.add(Pair(Snake_2.last().first,abs(Snake_2.last().second-1+11)%11))
+                    i = Snake_2.last().first
+                    j = Snake_2.last().second
+                    if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red",t).first==0)
+                    {
+                        Snake_2.removeLast()
+                        FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] = 0; //возрат к нормальному массиву
+                        return Triple(1,i,j)
+                    }
+                    else
+                    {
+                        Snake_2.removeLast()
+                        FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] = 0
+                    }
+                }
+                if(FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] == 0)
+                {
+                    FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] = 2;
+                    Snake_2.add(Pair(abs(Snake_2.last().first-1+11)%11,Snake_2.last().second))
+                    i = Snake_2.last().first
+                    j = Snake_2.last().second
+                    if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red",t).first==0)
+                    {
+                        Snake_2.removeLast()
+                        FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
+                        return Triple(1,i,j)
+                    }
+                    else
+                    {
+                        Snake_2.removeLast()
+                        FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
+                    }
+                }
+                if(FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] == 0)
+                {
+                    FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] = 2
+                    Snake_2.add(Pair(abs(Snake_2.last().first+1+11)%11,Snake_2.last().second))
+                    i = Snake_2.last().first
+                    j = Snake_2.last().second
+                    if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red",t).first==0)
+                    {
+                        Snake_2.removeLast()
+                        FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
+                        return Triple(1,i,j)
+                    }
+                    else
+                    {
+                        Snake_2.removeLast()
+                        FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
+                    }
                 }
             }
-            if(FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] == 0)
+            else if(t==3)
             {
-                FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] = 2;
-                Snake_2.add(Pair(Snake_2.last().first,abs(Snake_2.last().second-1+11)%11))
-                i = Snake_2.last().first
-                j = Snake_2.last().second
-                if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red").first==0)
+                if(FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] == 0)
                 {
-                    Snake_2.removeLast()
-                    FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] = 0; //возрат к нормальному массиву
-                    return Triple(1,i,j)
+                    FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] = 2;
+                    Snake_2.add(Pair(Snake_2.last().first,abs(Snake_2.last().second-1+11)%11))
+                    i = Snake_2.last().first
+                    j = Snake_2.last().second
+                    if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red",t).first==0)
+                    {
+                        Snake_2.removeLast()
+                        FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] = 0; //возрат к нормальному массиву
+                        return Triple(1,i,j)
+                    }
+                    else
+                    {
+                        Snake_2.removeLast()
+                        FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] = 0
+                    }
                 }
-                else
+                if(FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] == 0)
                 {
-                    Snake_2.removeLast()
-                    FIELD[Snake_2.last().first][abs(Snake_2.last().second-1+11)%11] = 0
+                    FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] = 2;
+                    Snake_2.add(Pair(abs(Snake_2.last().first-1+11)%11,Snake_2.last().second))
+                    i = Snake_2.last().first
+                    j = Snake_2.last().second
+                    if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red",t).first==0)
+                    {
+                        Snake_2.removeLast()
+                        FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
+                        return Triple(1,i,j)
+                    }
+                    else
+                    {
+                        Snake_2.removeLast()
+                        FIELD[abs(Snake_2.last().first-1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
+                    }
+                }
+                if(FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] == 0)
+                {
+                    FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] = 2
+                    Snake_2.add(Pair(abs(Snake_2.last().first+1+11)%11,Snake_2.last().second))
+                    i = Snake_2.last().first
+                    j = Snake_2.last().second
+                    if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red",t).first==0)
+                    {
+                        Snake_2.removeLast()
+                        FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
+                        return Triple(1,i,j)
+                    }
+                    else
+                    {
+                        Snake_2.removeLast()
+                        FIELD[abs(Snake_2.last().first+1+11)%11][Snake_2.last().second] = 0; //возрат к нормальному массиву
+                    }
+                }
+                if(FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] == 0)
+                {
+                    FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] = 2;
+                    Snake_2.add(Pair(Snake_2.last().first,abs(Snake_2.last().second+1+11)%11))
+                    i = Snake_2.last().first
+                    j = Snake_2.last().second
+                    if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"red",t).first==0)
+                    {
+                        Snake_2.removeLast()
+                        FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] = 0 //возрат к нормальному массиву
+                        return Triple(1,i,j)
+                    }
+                    else
+                    {
+                        Snake_2.removeLast()
+                        FIELD[Snake_2.last().first][abs(Snake_2.last().second+1+11)%11] = 0; //возрат к нормальному массиву
+                    }
                 }
             }
+
             return Triple(0,i,j)
         }
         else
@@ -688,7 +920,7 @@ class CanvasView_SNAKE_COMPUTER(context: Context, attrs: AttributeSet?) : View(c
                 Snake_1.add(Pair(abs(Snake_1.last().first-1+11)%11,Snake_1.last().second))
                 i = Snake_1.last().first
                 j = Snake_1.last().second
-                if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"blue").first==0)
+                if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"blue",t).first==0)
                 {
                     Snake_1.removeLast()
                     FIELD[abs(Snake_1.last().first-1+11)%11][Snake_1.last().second] = 0; //возрат к нормальному массиву
@@ -706,7 +938,7 @@ class CanvasView_SNAKE_COMPUTER(context: Context, attrs: AttributeSet?) : View(c
                 Snake_1.add(Pair(abs(Snake_1.last().first+1+11)%11,Snake_1.last().second))
                 i = Snake_1.last().first
                 j = Snake_1.last().second
-                if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"blue").first==0)
+                if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"blue",t).first==0)
                 {
                     Snake_1.removeLast()
                     FIELD[abs(Snake_1.last().first+1+11)%11][Snake_1.last().second] = 0; //возрат к нормальному массиву
@@ -724,7 +956,7 @@ class CanvasView_SNAKE_COMPUTER(context: Context, attrs: AttributeSet?) : View(c
                 Snake_1.add(Pair(Snake_1.last().first,abs(Snake_1.last().second+1+11)%11))
                 i = Snake_1.last().first
                 j = Snake_1.last().second
-                if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"blue").first==0)
+                if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"blue",t).first==0)
                 {
                     Snake_1.removeLast()
                     FIELD[Snake_1.last().first][abs(Snake_1.last().second+1+11)%11] = 0; //возрат к нормальному массиву
@@ -742,7 +974,7 @@ class CanvasView_SNAKE_COMPUTER(context: Context, attrs: AttributeSet?) : View(c
                 Snake_1.add(Pair(Snake_1.last().first,abs(Snake_1.last().second-1+11)%11))
                 i = Snake_1.last().first
                 j = Snake_1.last().second
-                if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"blue").first==0)
+                if(CRAZY_COMPUTER_ALGORITHM_SNAKE(depth-1,"blue",t).first==0)
                 {
                     Snake_1.removeLast()
                     FIELD[Snake_1.last().first][abs(Snake_1.last().second-1+11)%11] = 0 //возрат к нормальному массиву
@@ -1173,7 +1405,7 @@ class CanvasView_SNAKE_COMPUTER(context: Context, attrs: AttributeSet?) : View(c
                                         {
                                             val handler = android.os.Handler()
                                             handler.postDelayed({
-                                                var trip: Triple<Int,Int,Int> = CRAZY_COMPUTER_ALGORITHM_SNAKE(23,"blue")
+                                                var trip: Triple<Int,Int,Int> = CRAZY_COMPUTER_ALGORITHM_SNAKE(22,"blue",IntRange(0,10).random())
                                                 Log.d("ALGOR",trip.toString())
                                                 FIELD[trip.second][trip.third] = 2
                                                 History.add(Triple(trip.second,trip.third,2))
