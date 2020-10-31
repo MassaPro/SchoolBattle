@@ -56,11 +56,11 @@ class Show_parametr_one_divice_one_Device(activity: Activity) {
                 dialog_one_device.parametrs_one_device_configuring.setBackgroundColor(Color.argb(0, 0,0,0))
                 dialog_one_device.parametrs_one_device_configuring.setTextColor(Color.rgb(193, 150, 63))
 
-                dialog_one_device.switch_parametrs_one_device_1.typeface = ResourcesCompat.getFont(c, R.font.casino)
+                dialog_one_device.switch_parametrs_one_device_1.typeface = ResourcesCompat.getFont(c, R.font.rome)
                 dialog_one_device.switch_parametrs_one_device_1.setBackgroundColor(Color.argb(0, 0,0,0))
                 dialog_one_device.switch_parametrs_one_device_1.setTextColor(Color.rgb(193, 150, 63))
 
-                dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.casino))
+                dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.rome))
                 dialog_one_device.switch_parametrs_one_device_2.setBackgroundColor(Color.argb(0, 0,0,0))
                 dialog_one_device.switch_parametrs_one_device_2.setTextColor(Color.rgb(193, 150, 63))
             }

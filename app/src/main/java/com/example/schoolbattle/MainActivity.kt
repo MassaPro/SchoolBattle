@@ -106,6 +106,8 @@ class MainActivity : Fragment() {
             blitz.width = 320
             newGameButton.width = 320
 
+            game_menu.setBackgroundResource(R.drawable.game_menu_normal)
+
             money.setTextColor(Color.BLACK)
         }
         else if (Design == "Egypt"){

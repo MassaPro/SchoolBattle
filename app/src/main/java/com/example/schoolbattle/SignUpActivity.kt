@@ -3,6 +3,7 @@ package com.example.schoolbattle
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Color.rgb
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -26,15 +27,22 @@ class SignUpActivity : AppCompatActivity() {
             signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
         }
         else if (Design == "Casino"){
-            sign_up_menu.setBackgroundResource(R.drawable.sign_up_egypt);
+            sign_up_menu.setBackgroundResource(R.drawable.game_menu_casino);
             signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            signUpButton.setTextColor(Color.YELLOW)
+            nameTextInit.setTextColor(Color.YELLOW)
+            passwordTextInit.setTextColor(Color.YELLOW)
+            repeatPassword.setTextColor(Color.YELLOW)
         }
         else if (Design == "Rome"){
             sign_up_menu.setBackgroundResource(R.drawable.sign_in_rome);
             signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
             signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            signUpButton.setTextColor(Color.rgb(193, 150, 63))
+            signUpButton.setTextColor(rgb(193, 150, 63))
+            nameTextInit.setTextColor(rgb(193, 150, 63))
+            passwordTextInit.setTextColor(rgb(193, 150, 63))
+            repeatPassword.setTextColor(rgb(193, 150, 63))
         }
         else if (Design == "Gothic"){
             sign_up_menu.setBackgroundResource(R.drawable.sign_in_gothic);

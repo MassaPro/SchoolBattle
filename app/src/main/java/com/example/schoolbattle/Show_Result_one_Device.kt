@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.gamesonedevice.*
 import kotlinx.android.synthetic.main.activity_game_over_one_device.*
+import kotlinx.android.synthetic.main.activity_new_game.*
 
 class Show_Result_one_Device(activity: Activity) {
     var dialog_one_device = Dialog(activity)
@@ -146,17 +147,37 @@ class Show_Result_one_Device(activity: Activity) {
             //dialog_one_device.resultText_one_device.setTextColor(Color.WHITE)
             button_close.setBackgroundResource(R.drawable.close_cross)
         }
-        if (Design == "Casino"){
+        else if (Design == "Casino"){
             dialog_one_device.linearLayout_one_device.setBackgroundResource(R.drawable.win_casino);
             dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             dialog_one_device.resultText_one_device.setTextColor(Color.YELLOW)
-            button_close.setBackgroundResource(R.drawable.close_cross)
+            button_close.setBackgroundResource(R.drawable.close_cross3)
         }
-        if (Design == "Rome"){
+        else if (Design == "Rome"){
             dialog_one_device.linearLayout_one_device.setBackgroundResource(R.drawable.win_rome);
             dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
             dialog_one_device.resultText_one_device.setTextColor(rgb(193, 150, 63))
+            button_close.setBackgroundResource(R.drawable.close_cross3)
+        }
+
+        else if (Design == "Gothic"){
+            dialog_one_device.linearLayout_one_device.setBackgroundResource(R.drawable.background_gothic);
+            dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+            dialog_one_device.resultText_one_device.setTextColor(Color.WHITE)
+            button_close.setBackgroundResource(R.drawable.close_cross2)
+        }
+
+        else if (Design == "Japan"){
+            dialog_one_device.linearLayout_one_device.setBackgroundResource(R.drawable.background_japan);
+            dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            //dialog_one_device.resultText_one_device.setTextColor(rgb(193, 150, 63))
             button_close.setBackgroundResource(R.drawable.close_cross)
+        }
+        else if (Design == "Noir"){
+            dialog_one_device.linearLayout_one_device.setBackgroundResource(R.drawable.background_noir);
+            dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+            dialog_one_device.resultText_one_device.setTextColor(Color.WHITE)
+            button_close.setBackgroundResource(R.drawable.close_cross2)
         }
         
         button_close.setOnClickListener {

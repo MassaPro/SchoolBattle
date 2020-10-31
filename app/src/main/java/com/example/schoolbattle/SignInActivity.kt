@@ -34,11 +34,18 @@ class SignInActivity : AppCompatActivity() {
             signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
         }
         else if (Design == "Casino"){
-            sign_in_menu.setBackgroundResource(R.drawable.sign_in_egypt);
+            sign_in_menu.setBackgroundResource(R.drawable.game_menu_casino);
             signInButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             signInButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            signInButton.setTextColor(Color.YELLOW)
+
             signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
             signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            signUpButton.setTextColor(Color.YELLOW)
+
+            nameText.setTextColor(Color.YELLOW)
+
+            passwordText.setTextColor(Color.YELLOW)
         }
         if (Design == "Rome"){
             sign_in_menu.setBackgroundResource(R.drawable.sign_in_rome);
@@ -49,6 +56,10 @@ class SignInActivity : AppCompatActivity() {
             signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
             signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
             signUpButton.setTextColor(Color.rgb(193, 150, 63))
+
+            nameText.setTextColor(Color.rgb(193, 150, 63))
+
+            passwordText.setTextColor(Color.rgb(193, 150, 63))
         }
         if (Design == "Gothic"){
             sign_in_menu.setBackgroundResource(R.drawable.sign_in_gothic);
