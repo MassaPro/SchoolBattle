@@ -99,6 +99,7 @@ class XOGame_oneDivice : AppCompatActivity() {
         mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
 
         mSound.load(this, R.raw.xlup, 1);
+        mSound2.load(this, R.raw.win, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
         CONTEXT = this
@@ -773,6 +774,10 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
         var advertising_line: Float = (height - step * 6) / 2
         if(checkForWin_another_fun().size==9)
         {
+            if(SOUND)
+            {
+                mSound2.play(1, 1F, 1F, 1, 0, 1F)
+            }
             var counter: Int = 1
             blocked = true
             if(FIELD[checkForWin_another_fun()[counter]][checkForWin_another_fun()[counter+1]] == 1)

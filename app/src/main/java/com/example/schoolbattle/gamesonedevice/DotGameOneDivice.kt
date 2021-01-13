@@ -97,6 +97,7 @@ class DotGameOneDivice : AppCompatActivity() {
         CONTEXT = this
 
         mSound.load(this, R.raw.xlup, 1);
+        mSound2.load(this, R.raw.win, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
         signature_canvas_dots_one_divice.t1 = findViewById(R.id.name_player1_one_divice) as TextView
@@ -1239,6 +1240,10 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
         }
         if(check_win() >0 && event!!.getAction()  == MotionEvent.ACTION_UP && !blocked)
         {
+            if(SOUND)
+            {
+                mSound2.play(1, 1F, 1F, 1, 0, 1F)
+            }
             blocked = !blocked
             var dialog: Show_Result_one_Device? = null
             dialog = Show_Result_one_Device(activity)

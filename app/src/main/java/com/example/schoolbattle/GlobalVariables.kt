@@ -13,6 +13,7 @@ import android.os.Handler
 import android.os.Vibrator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolbattle.engine.Game
 import com.example.schoolbattle.engine.RecyclerSet
@@ -23,6 +24,9 @@ var handler_for_emotion : Handler = Handler()
 
 //      инициализация звука
 var mSound : SoundPool = SoundPool(1, AudioManager.STREAM_SYSTEM,0);
+var mSound1 : SoundPool = SoundPool(1, AudioManager.STREAM_SYSTEM,0);
+var mSound2 : SoundPool = SoundPool(1, AudioManager.STREAM_SYSTEM,0);
+
 var vibratorService : Vibrator? = null
 //
 

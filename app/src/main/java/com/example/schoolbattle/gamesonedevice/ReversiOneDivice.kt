@@ -96,6 +96,7 @@ class ReversiOneDivice : AppCompatActivity() {
         CONTEXT = this
 
         mSound.load(this, R.raw.xlup, 1);
+        mSound2.load(this, R.raw.win, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
         if(Design == "Egypt" ) {
@@ -1158,6 +1159,10 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
         var dialog: Show_Result_one_Device? = null
 
         if(check_win()>0 && event!!.getAction()  == MotionEvent.ACTION_UP && !blocked) {
+            if(SOUND)
+            {
+                mSound2.play(1, 1F, 1F, 1, 0, 1F)
+            }
             if (check_win() == 2) {3
                 dialog = Show_Result_one_Device(activity)
                 dialog?.showResult_one_device("Игрок 1 победил", "Reversi", activity)

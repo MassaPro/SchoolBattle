@@ -47,7 +47,7 @@ class Avatars : Fragment() , RewardedVideoAdListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         //     vasa = activity.setContentView(R.layout.activity_shop_fragment)
-
+        mSound1.load(locale_context, R.raw.money, 1);
         choose_design_shop.text = "Купленные аватары можно применить в профиле"
         HELPED_CONTEXT = activity
 
@@ -321,6 +321,10 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
 
                     dialog_shop.show()
                     dialog_shop.buy_shop_dialog.setOnClickListener {
+                        if(SOUND)
+                        {
+                            mSound1.play(1, 1F, 1F, 1, 0, 1F)
+                        }
                         dialog_shop.buy_shop_dialog.isClickable = false
                         MONEY -= holder.price.text.toString().toInt()
                         val ARRAY_OF_AVATAR_COPY = ARRAY_OF_AVATAR.toMutableList()

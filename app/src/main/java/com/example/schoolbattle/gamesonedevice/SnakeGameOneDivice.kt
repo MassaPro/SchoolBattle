@@ -94,6 +94,7 @@ class SnakeGameOneDivice : AppCompatActivity() {
         CONTEXT = this
 
         mSound.load(this, R.raw.xlup, 1);
+        mSound2.load(this, R.raw.win, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
         signature_canvas_snake_one_device.activity = this
@@ -852,6 +853,10 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
             blocked=!blocked
         }
         if(check_win()>0 && event!!.getAction()  == MotionEvent.ACTION_UP && !blocked) {
+            if(SOUND)
+            {
+                mSound2.play(1, 1F, 1F, 1, 0, 1F)
+            }
             blocked = !blocked
             var dialog: Show_Result_one_Device? = null
             dialog = Show_Result_one_Device(activity)

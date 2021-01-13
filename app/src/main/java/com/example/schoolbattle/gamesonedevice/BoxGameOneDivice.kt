@@ -16,6 +16,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
+import com.example.schoolbattle.shop.locale_context
 import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
 
@@ -105,106 +106,109 @@ class BoxGameOneDivice : AppCompatActivity() {
 
         CONTEXT = this
 
-        mSound.load(this, R.raw.xlup, 1);
+        mSound.load(this, R.raw.xlup, 1)
+        mSound2.load(this, R.raw.win, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
-        if(Design == "Egypt" ) {
-            name_player1_one_divice.setTextColor(Color.BLACK)
-            name_player2_one_divice.setTextColor(Color.BLACK)
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-            name_player2_one_divice.setTextSize(20f)
-            name_player1_one_divice.setTextSize(20f)
-            button_player_1_one_divice.setBackgroundResource(R.drawable.player1_egypt);
-            button_player_2_one_divice.setBackgroundResource(R.drawable.player2_egypt);
-            player_1_icon_one_divice.setBackgroundResource(R.drawable.box2_egypt);
-            player_2_icon_one_divice.setBackgroundResource(R.drawable.box1_egypt)
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_one_divice.setBackgroundColor(Color.rgb(255, 230, 163))
-            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-        }
-        else if(Design == "Casino" ) {
-            name_player1_one_divice.setTextColor(Color.YELLOW)
-            name_player2_one_divice.setTextColor(Color.YELLOW)
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_one_divice.setTextSize(20f)
-            name_player1_one_divice.setTextSize(20f)
-            button_player_1_one_divice.setBackgroundResource(R.drawable.tower1_casino);
-            button_player_2_one_divice.setBackgroundResource(R.drawable.tower2_casino);
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background2_casino);
-            bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-        }
-        else if(Design == "Rome" ) {
-            name_player1_one_divice.setTextColor(Color.rgb(193, 150, 63))
-            name_player2_one_divice.setTextColor(Color.rgb(193, 150, 63))
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-            name_player2_one_divice.setTextSize(20f)
-            name_player1_one_divice.setTextSize(20f)
-            button_player_1_one_divice.setBackgroundResource(R.drawable.box1_rome);
-            button_player_2_one_divice.setBackgroundResource(R.drawable.box2_rome);
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background_rome);
-            bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-        }
-        else if(Design == "Gothic" ) {
-            name_player1_one_divice.setTextColor(Color.WHITE)
-            name_player2_one_divice.setTextColor(Color.WHITE)
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-            name_player2_one_divice.setTextSize(20f)
-            name_player1_one_divice.setTextSize(20f)
-            button_player_1_one_divice.setBackgroundResource(R.drawable.box1_gothic);
-            button_player_2_one_divice.setBackgroundResource(R.drawable.box2_gothic);
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background_gothic);
-            bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
-            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-        }
-        else if(Design == "Japan" ) {
-            name_player1_one_divice.setTextColor(Color.BLACK)
-            name_player2_one_divice.setTextColor(Color.BLACK)
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-            name_player2_one_divice.setTextSize(20f)
-            name_player1_one_divice.setTextSize(20f)
-            button_player_1_one_divice.setBackgroundResource(R.drawable.box1_japan);
-            button_player_2_one_divice.setBackgroundResource(R.drawable.box2_japan);
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background_japan);
-            bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
-            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-        }
-        else if(Design == "Noir" ) {
-            name_player1_one_divice.setTextColor(Color.WHITE)
-            name_player2_one_divice.setTextColor(Color.WHITE)
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
-            name_player2_one_divice.setTextSize(20f)
-            name_player1_one_divice.setTextSize(20f)
-            button_player_1_one_divice.setBackgroundResource(R.drawable.box1_noir);
-            button_player_2_one_divice.setBackgroundResource(R.drawable.box2_noir);
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background_noir);
-            bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
-            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+        when (Design) {
+            "Egypt" -> {
+                name_player1_one_divice.setTextColor(Color.BLACK)
+                name_player2_one_divice.setTextColor(Color.BLACK)
+                name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                name_player2_one_divice.setTextSize(20f)
+                name_player1_one_divice.setTextSize(20f)
+                button_player_1_one_divice.setBackgroundResource(R.drawable.player1_egypt);
+                button_player_2_one_divice.setBackgroundResource(R.drawable.player2_egypt);
+                player_1_icon_one_divice.setBackgroundResource(R.drawable.box2_egypt);
+                player_2_icon_one_divice.setBackgroundResource(R.drawable.box1_egypt)
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                label_one_device.setBackgroundResource(R.drawable.background_egypt);
+                bottom_navigation_one_divice.setBackgroundColor(Color.rgb(255, 230, 163))
+                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            }
+            "Casino" -> {
+                name_player1_one_divice.setTextColor(Color.YELLOW)
+                name_player2_one_divice.setTextColor(Color.YELLOW)
+                name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                name_player2_one_divice.setTextSize(20f)
+                name_player1_one_divice.setTextSize(20f)
+                button_player_1_one_divice.setBackgroundResource(R.drawable.tower1_casino);
+                button_player_2_one_divice.setBackgroundResource(R.drawable.tower2_casino);
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                label_one_device.setBackgroundResource(R.drawable.background2_casino);
+                bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
+                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            }
+            "Rome" -> {
+                name_player1_one_divice.setTextColor(Color.rgb(193, 150, 63))
+                name_player2_one_divice.setTextColor(Color.rgb(193, 150, 63))
+                name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                name_player2_one_divice.setTextSize(20f)
+                name_player1_one_divice.setTextSize(20f)
+                button_player_1_one_divice.setBackgroundResource(R.drawable.box1_rome);
+                button_player_2_one_divice.setBackgroundResource(R.drawable.box2_rome);
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                label_one_device.setBackgroundResource(R.drawable.background_rome);
+                bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
+                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            }
+            "Gothic" -> {
+                name_player1_one_divice.setTextColor(Color.WHITE)
+                name_player2_one_divice.setTextColor(Color.WHITE)
+                name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                name_player2_one_divice.setTextSize(20f)
+                name_player1_one_divice.setTextSize(20f)
+                button_player_1_one_divice.setBackgroundResource(R.drawable.box1_gothic);
+                button_player_2_one_divice.setBackgroundResource(R.drawable.box2_gothic);
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                label_one_device.setBackgroundResource(R.drawable.background_gothic);
+                bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
+                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            }
+            "Japan" -> {
+                name_player1_one_divice.setTextColor(Color.BLACK)
+                name_player2_one_divice.setTextColor(Color.BLACK)
+                name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                name_player2_one_divice.setTextSize(20f)
+                name_player1_one_divice.setTextSize(20f)
+                button_player_1_one_divice.setBackgroundResource(R.drawable.box1_japan);
+                button_player_2_one_divice.setBackgroundResource(R.drawable.box2_japan);
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                label_one_device.setBackgroundResource(R.drawable.background_japan);
+                bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
+                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            }
+            "Noir" -> {
+                name_player1_one_divice.setTextColor(Color.WHITE)
+                name_player2_one_divice.setTextColor(Color.WHITE)
+                name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                name_player2_one_divice.setTextSize(20f)
+                name_player1_one_divice.setTextSize(20f)
+                button_player_1_one_divice.setBackgroundResource(R.drawable.box1_noir);
+                button_player_2_one_divice.setBackgroundResource(R.drawable.box2_noir);
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                label_one_device.setBackgroundResource(R.drawable.background_noir);
+                bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
+                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            }
         }
 
         to_back_one_divice.setOnClickListener {
@@ -606,48 +610,49 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
 
         line_who_do_move.strokeWidth = 7f
 
-        if(Design == "Normal")
-        {
-            line_who_do_move.strokeWidth = 14f
-            line_who_do_move.color = Color.GREEN
-        }
-        else if (Design == "Casino"){
+        when (Design) {
+            "Normal" -> {
+                line_who_do_move.strokeWidth = 14f
+                line_who_do_move.color = Color.GREEN
+            }
+            "Casino" -> {
 
-            paint_circle.setColor(Color.WHITE)     //цвета для точек
-            paint_rib_1.setColor(Color.RED)          //цвета для ребер  и их ширина
-            paint_rib_2.setColor(Color.BLACK)
-            line_who_do_move.color = Color.YELLOW
-        }
-        else if (Design == "Egypt"){
-            Line_paint.setColor(Color.argb(0, 0,0,0))          //ресур для линий (ширина и цвет)
-            line_who_do_move.color = Color.RED
-        }
-        else if (Design == "Rome"){
+                paint_circle.setColor(Color.WHITE)     //цвета для точек
+                paint_rib_1.setColor(Color.RED)          //цвета для ребер  и их ширина
+                paint_rib_2.setColor(Color.BLACK)
+                line_who_do_move.color = Color.YELLOW
+            }
+            "Egypt" -> {
+                Line_paint.setColor(Color.argb(0, 0,0,0))          //ресур для линий (ширина и цвет)
+                line_who_do_move.color = Color.RED
+            }
+            "Rome" -> {
 
-            paint_circle.setColor(Color.BLACK)     //цвета для точек
-            paint_rib_2.setColor(Color.rgb(193,150,63))          //цвета для ребер  и их ширина
-            paint_rib_1.setColor(Color.BLACK)
-            line_who_do_move.color = rgb(193,150,63)
-        }
-        else if (Design == "Gothic"){
+                paint_circle.setColor(Color.BLACK)     //цвета для точек
+                paint_rib_2.setColor(Color.rgb(193,150,63))          //цвета для ребер  и их ширина
+                paint_rib_1.setColor(Color.BLACK)
+                line_who_do_move.color = rgb(193,150,63)
+            }
+            "Gothic" -> {
 
-            paint_circle.setColor(Color.WHITE)     //цвета для точек
-            paint_rib_2.setColor(Color.RED)          //цвета для ребер  и их ширина
-            paint_rib_1.setColor(Color.BLUE)
-            line_who_do_move.color = Color.RED
-        }
-        else if (Design == "Japan"){
-            paint_circle.setColor(Color.BLACK)     //цвета для точек
-            paint_rib_2.setColor(Color.RED)          //цвета для ребер  и их ширина
-            paint_rib_1.setColor(Color.rgb(37,103,28))
-            line_who_do_move.color = Color.RED
-        }
-        else if (Design == "Noir"){
+                paint_circle.setColor(Color.WHITE)     //цвета для точек
+                paint_rib_2.setColor(Color.RED)          //цвета для ребер  и их ширина
+                paint_rib_1.setColor(Color.BLUE)
+                line_who_do_move.color = Color.RED
+            }
+            "Japan" -> {
+                paint_circle.setColor(Color.BLACK)     //цвета для точек
+                paint_rib_2.setColor(Color.RED)          //цвета для ребер  и их ширина
+                paint_rib_1.setColor(Color.rgb(37,103,28))
+                line_who_do_move.color = Color.RED
+            }
+            "Noir" -> {
 
-            paint_circle.setColor(rgb(100,100,100))     //цвета для точек
-            paint_rib_2.setColor(rgb(193, 150, 63))          //цвета для ребер  и их ширина
-            paint_rib_1.setColor(Color.WHITE)
-            line_who_do_move.color = Color.RED
+                paint_circle.setColor(rgb(100,100,100))     //цвета для точек
+                paint_rib_2.setColor(rgb(193, 150, 63))          //цвета для ребер  и их ширина
+                paint_rib_1.setColor(Color.WHITE)
+                line_who_do_move.color = Color.RED
+            }
         }
 
         // TODO нужно взять из DataBase (статистика ходов)
@@ -737,47 +742,43 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
         right_red = Bitmap.createScaledBitmap(red,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
         right_blue = Bitmap.createScaledBitmap(blue,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
 
-        if(Design == "Egypt")
-        {
-            right_red = Bitmap.createScaledBitmap(box1_egypt,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
-            right_blue = Bitmap.createScaledBitmap(box2_egypt,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
-        }
-        else if (Design == "Casino")
-        {
-            right_red = Bitmap.createScaledBitmap(box1_casino,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
-            right_blue = Bitmap.createScaledBitmap(box2_casino,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
-        }
-        else if (Design == "Rome")
-        {
-            right_red = Bitmap.createScaledBitmap(box1_rome,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
-            right_blue = Bitmap.createScaledBitmap(box2_rome,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
-        }
-        else if (Design == "Gothic")
-        {
-            right_red = Bitmap.createScaledBitmap(box1_gothic,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
-            right_blue = Bitmap.createScaledBitmap(box2_gothic,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
-        }
-        else if (Design == "Japan")
-        {
-            right_red = Bitmap.createScaledBitmap(box1_japan,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
-            right_blue = Bitmap.createScaledBitmap(box2_japan,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
-        }
-        else if (Design == "Noir")
-        {
-            right_red = Bitmap.createScaledBitmap(box1_noir,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
-            right_blue = Bitmap.createScaledBitmap(box2_noir,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+        when (Design) {
+            "Egypt" -> {
+                right_red = Bitmap.createScaledBitmap(box1_egypt,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+                right_blue = Bitmap.createScaledBitmap(box2_egypt,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+            }
+            "Casino" -> {
+                right_red = Bitmap.createScaledBitmap(box1_casino,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+                right_blue = Bitmap.createScaledBitmap(box2_casino,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+            }
+            "Rome" -> {
+                right_red = Bitmap.createScaledBitmap(box1_rome,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+                right_blue = Bitmap.createScaledBitmap(box2_rome,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+            }
+            "Gothic" -> {
+                right_red = Bitmap.createScaledBitmap(box1_gothic,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+                right_blue = Bitmap.createScaledBitmap(box2_gothic,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+            }
+            "Japan" -> {
+                right_red = Bitmap.createScaledBitmap(box1_japan,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+                right_blue = Bitmap.createScaledBitmap(box2_japan,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+            }
+            "Noir" -> {
+                right_red = Bitmap.createScaledBitmap(box1_noir,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+                right_blue = Bitmap.createScaledBitmap(box2_noir,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+            }
         }
 
         for(i in 0 until size_field_x+1)          //вырисовка горизонтальных линий
         {
             canvas?.drawLine(indent,k,width+indent,k,Line_paint)
-            k = k + step
+            k += step
         }
         k = indent
         for(i in 0 until size_field_y+2)         //вырисовка вертикальных линий
         {
             canvas?.drawLine(k,height-advertising_line-width,k,height-advertising_line,Line_paint)
-            k = k + step
+            k += step
         }
 
         var x: Float;
@@ -875,6 +876,10 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
         }
         if(check_win()>0 && event!!.getAction()  == MotionEvent.ACTION_UP && !blocked)
         {
+            if(SOUND)
+            {
+                mSound2.play(1, 1F, 1F, 1, 0, 1F)
+            }
             blocked = !blocked
             var dialog: Show_Result_one_Device? = null
             dialog = Show_Result_one_Device(activity)

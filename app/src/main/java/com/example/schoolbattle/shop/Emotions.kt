@@ -52,7 +52,7 @@ class Emotions : Fragment(), RewardedVideoAdListener {
         HELPED_CONTEXT = activity
 
         locale_context = activity as AppCompatActivity
-
+        mSound1.load(locale_context, R.raw.money, 1);
         //  vasa = (activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(R.layout.activity_shop_fragment, null)
         //   (activity as AppCompatActivity?)!!.setSupportActionBar(tb1_shop_design)
         ShopEMOTIONsetupRecyclerView(item_design_shop, requireActivity())
@@ -302,7 +302,8 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
                 if(ARRAY_OF_EMOTION_SHOP[position] !in ARRAY_OF_EMOTION && MONEY >= PRICE_OD_EMOTION[ARRAY_OF_EMOTION_SHOP[position]]!!)          //если дизайн не куплен
                 {
                     // dialog = Proof_of_purchase(HELPED_CONTEXT!!,locale_context!!,"Design",ARRAY_OF_DESIGN_SHOP[position].toString().toInt(), PRICE_OD_DESIGN[ARRAY_OF_DESIGN_SHOP[position].toString().toInt()]!!)
-                    //   dialog?.showResult()
+                    //   dialog?.showResult
+
                     var dialog_shop = Dialog(HELPED_CONTEXT!!)
                     dialog_shop.setContentView(R.layout.shop_dialog)
 
@@ -311,6 +312,10 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
 
                     dialog_shop.show()
                     dialog_shop.buy_shop_dialog.setOnClickListener {
+                        if(SOUND)
+                        {
+                            mSound1.play(1, 1F, 1F, 1, 0, 1F)
+                        }
                         dialog_shop.buy_shop_dialog.isClickable = false
                         val username = activity.getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "").toString()
                         MONEY -= holder.price.text.toString().toInt()

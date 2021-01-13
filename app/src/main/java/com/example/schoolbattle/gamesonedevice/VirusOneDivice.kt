@@ -95,6 +95,7 @@ class VirusOneDivice : AppCompatActivity() {
         CONTEXT = this
 
         mSound.load(this, R.raw.xlup, 1);
+        mSound2.load(this, R.raw.win, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
         setContentView(R.layout.activity_one_device_games_template)
@@ -1145,16 +1146,28 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
                 dialog = Show_Result_one_Device(activity)
                 if(ch==1)
                 {
+                    if(SOUND)
+                    {
+                        mSound2.play(1, 1F, 1F, 1, 0, 1F)
+                    }
                     dialog?.showResult_one_device("Игрок 1 победил","VirusGame",activity)
                     return true
                 }
                 if(ch==2)
                 {
+                    if(SOUND)
+                    {
+                        mSound2.play(1, 1F, 1F, 1, 0, 1F)
+                    }
                     dialog?.showResult_one_device("Игрок 2 победил","VirusGame",activity)
                     return true
                 }
                 if(ch==3)
                 {
+                    if(SOUND)
+                    {
+                        mSound2.play(1, 1F, 1F, 1, 0, 1F)
+                    }
                     dialog?.showResult_one_device("НИЧЬЯ","VirusGame",activity)
                     return true
                 }
