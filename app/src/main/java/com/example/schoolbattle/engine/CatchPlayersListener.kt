@@ -20,18 +20,25 @@ fun initCatchPlayersListenerForBlitzGame(username: String, context: Context) {
     myRef.child("Users").child(username).child("blitz").addChildEventListener(object : ChildEventListener {
         override fun onChildAdded(p0: DataSnapshot, p1: String?) {
             myRef.child("Users").child(username).child("blitz").removeValue()
-            val intent = if (p0.key.toString() == "XOGame") {
-                Intent(context, XOGameActivity::class.java)
-            } else if (p0.key.toString() == "DotGame") {
-                Intent(context, DotGameActivity::class.java)
-            } else if (p0.key.toString() == "SnakeGame") {
-                Intent(context, SnakeGameActivity::class.java)
-            } else if (p0.key.toString() == "BoxGame") {
-                Intent(context, BoxGameActivity::class.java)
-            }  else if (p0.key.toString() == "Reversi") {
-                Intent(context, ReversiGameActivity::class.java)
-            } else {
-                Intent(context, TEST::class.java)
+            val intent = when {
+                p0.key.toString() == "XOGame" -> {
+                    Intent(context, XOGameActivity::class.java)
+                }
+                p0.key.toString() == "DotGame" -> {
+                    Intent(context, DotGameActivity::class.java)
+                }
+                p0.key.toString() == "SnakeGame" -> {
+                    Intent(context, SnakeGameActivity::class.java)
+                }
+                p0.key.toString() == "BoxGame" -> {
+                    Intent(context, BoxGameActivity::class.java)
+                }
+                p0.key.toString() == "Reversi" -> {
+                    Intent(context, ReversiGameActivity::class.java)
+                }
+                else -> {
+                    Intent(context, TEST::class.java)
+                }
             }
             intent.putExtra("type", "blitz")
             for (i in p0.children) {

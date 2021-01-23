@@ -21,73 +21,75 @@ class SignUpActivity : AppCompatActivity() {
         CONTEXT = this
 
 
-        if (Design == "Egypt"){
-            sign_up_menu.setBackgroundResource(R.drawable.sign_up_egypt);
-            signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-            signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
-        }
-        else if (Design == "Casino"){
-            sign_up_menu.setBackgroundResource(R.drawable.game_menu_casino);
-            signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            signUpButton.setTextColor(Color.YELLOW)
-            nameTextInit.setTextColor(Color.YELLOW)
-            passwordTextInit.setTextColor(Color.YELLOW)
-            repeatPassword.setTextColor(Color.YELLOW)
-        }
-        else if (Design == "Rome"){
-            sign_up_menu.setBackgroundResource(R.drawable.sign_in_rome);
-            signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-            signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            signUpButton.setTextColor(rgb(193, 150, 63))
-            nameTextInit.setTextColor(rgb(193, 150, 63))
-            passwordTextInit.setTextColor(rgb(193, 150, 63))
-            repeatPassword.setTextColor(rgb(193, 150, 63))
-        }
-        else if (Design == "Gothic"){
-            sign_up_menu.setBackgroundResource(R.drawable.sign_in_gothic);
-            signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-            signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            signUpButton.setTextColor(Color.WHITE)
+        when (Design) {
+            "Egypt" -> {
+                sign_up_menu.setBackgroundResource(R.drawable.sign_up_egypt);
+                signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            }
+            "Casino" -> {
+                sign_up_menu.setBackgroundResource(R.drawable.game_menu_casino);
+                signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                signUpButton.setTextColor(Color.YELLOW)
+                nameTextInit.setTextColor(Color.YELLOW)
+                passwordTextInit.setTextColor(Color.YELLOW)
+                repeatPassword.setTextColor(Color.YELLOW)
+            }
+            "Rome" -> {
+                sign_up_menu.setBackgroundResource(R.drawable.sign_in_rome);
+                signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                signUpButton.setTextColor(rgb(193, 150, 63))
+                nameTextInit.setTextColor(rgb(193, 150, 63))
+                passwordTextInit.setTextColor(rgb(193, 150, 63))
+                repeatPassword.setTextColor(rgb(193, 150, 63))
+            }
+            "Gothic" -> {
+                sign_up_menu.setBackgroundResource(R.drawable.sign_in_gothic);
+                signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                signUpButton.setTextColor(Color.WHITE)
 
-            nameTextInit.setTextColor(Color.WHITE)
-            nameTextInit.setBackgroundColor(Color.rgb(30, 30, 30))
+                nameTextInit.setTextColor(Color.WHITE)
+                nameTextInit.setBackgroundColor(Color.rgb(30, 30, 30))
 
-            passwordTextInit.setTextColor(Color.WHITE)
-            passwordTextInit.setBackgroundColor(Color.rgb(30, 30, 30))
+                passwordTextInit.setTextColor(Color.WHITE)
+                passwordTextInit.setBackgroundColor(Color.rgb(30, 30, 30))
 
-            repeatPassword.setTextColor(Color.WHITE)
-            repeatPassword.setBackgroundColor(Color.rgb(30, 30, 30))
-        }
-        else if (Design == "Japan"){
-            sign_up_menu.setBackgroundResource(R.drawable.sign_in_japan);
-            signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-            signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            signUpButton.setTextColor(Color.BLACK)
+                repeatPassword.setTextColor(Color.WHITE)
+                repeatPassword.setBackgroundColor(Color.rgb(30, 30, 30))
+            }
+            "Japan" -> {
+                sign_up_menu.setBackgroundResource(R.drawable.sign_in_japan);
+                signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                signUpButton.setTextColor(Color.BLACK)
 
-            nameTextInit.setTextColor(Color.BLACK)
-            nameTextInit.setBackgroundColor(Color.WHITE)
+                nameTextInit.setTextColor(Color.BLACK)
+                nameTextInit.setBackgroundColor(Color.WHITE)
 
-            passwordTextInit.setTextColor(Color.BLACK)
-            passwordTextInit.setBackgroundColor(Color.WHITE)
+                passwordTextInit.setTextColor(Color.BLACK)
+                passwordTextInit.setBackgroundColor(Color.WHITE)
 
-            repeatPassword.setTextColor(Color.BLACK)
-            repeatPassword.setBackgroundColor(Color.WHITE)
-        }
-        else if (Design == "Noir"){
-            sign_up_menu.setBackgroundResource(R.drawable.sign_in_noir);
-            signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
-            signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            signUpButton.setTextColor(Color.WHITE)
+                repeatPassword.setTextColor(Color.BLACK)
+                repeatPassword.setBackgroundColor(Color.WHITE)
+            }
+            "Noir" -> {
+                sign_up_menu.setBackgroundResource(R.drawable.sign_in_noir);
+                signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                signUpButton.setTextColor(Color.WHITE)
 
-            nameTextInit.setTextColor(Color.WHITE)
-            nameTextInit.setBackgroundColor(Color.rgb(30, 30, 30))
+                nameTextInit.setTextColor(Color.WHITE)
+                nameTextInit.setBackgroundColor(Color.rgb(30, 30, 30))
 
-            passwordTextInit.setTextColor(Color.WHITE)
-            passwordTextInit.setBackgroundColor(Color.rgb(30, 30, 30))
+                passwordTextInit.setTextColor(Color.WHITE)
+                passwordTextInit.setBackgroundColor(Color.rgb(30, 30, 30))
 
-            repeatPassword.setTextColor(Color.WHITE)
-            repeatPassword.setBackgroundColor(Color.rgb(30, 30, 30))
+                repeatPassword.setTextColor(Color.WHITE)
+                repeatPassword.setBackgroundColor(Color.rgb(30, 30, 30))
+            }
         }
 
         fun noSpace() {
@@ -155,11 +157,11 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this,"Name $name already exists", Toast.LENGTH_LONG).show()
             }
 
-            myRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            myRef.child("Users").addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
 
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.child("Users").hasChild(name)) {
+                    if (snapshot.hasChild(name)) {
                         exists()
                     } else {
                         val newUser = UserClass(name, password)

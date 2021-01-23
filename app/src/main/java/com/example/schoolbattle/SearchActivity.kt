@@ -46,7 +46,7 @@ class SearchActivity : AppCompatActivity() {
                 //USERS.clear()
                 //rec?.adapter?.notifyDataSetChanged()
                 //Toast.makeText(this@SearchActivity, query, Toast.LENGTH_LONG).show()
-                val sorted = myRef.child("Users").orderByChild("name").startAt(query).limitToFirst(30)
+                val sorted = myRef.child("Users").orderByChild("name").startAt(query).limitToFirst(30)  //sorted - это имя запроса
                 var to = 0
                 while (to <= USERS.size - 1) {
                     if (!USERS[to].startsWith(query) ||!USERS[to].contains(query)) {
@@ -64,6 +64,7 @@ class SearchActivity : AppCompatActivity() {
                         for (i in p0.children) {
                             if (!blocked && i.key.toString().startsWith(query) && i.key.toString().contains(query)) {
                                 USERS.add(i.key.toString())
+                                //Photos.add(i.child("photo")).value
                                 rec?.adapter?.notifyDataSetChanged()
                             }
                         }
