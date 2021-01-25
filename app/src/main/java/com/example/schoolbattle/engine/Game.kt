@@ -23,7 +23,14 @@ class ShowResult(activity: Activity) {
     private var state = false
     private var con = activity
 
-    fun showResult(result: String, gameType: String, globalName: String, oppName: String) {
+    fun showResult(
+        result: String,
+        gameType: String,
+        globalName: String,
+        oppName: String,
+        userRating: Int,
+        newRating: Int
+    ) {
         now = con
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
@@ -36,56 +43,11 @@ class ShowResult(activity: Activity) {
         is_pressed = true
 
         rv.setOnClickListener {
-            myRef.child("Users").child(oppName).child("Revanches").child(globalName).child("gameName").setValue(gameType)
+
         }
 
         ng.setOnClickListener {
-            ng.isEnabled = false
-            state = true
 
-            eventListener = myRef.addValueEventListener(object : ValueEventListener {
-                override fun onCancelled(p0: DatabaseError) {}
-
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    var flag = true
-                    if (snapshot.child(gameType + "Users").hasChildren()) {
-                        for (i in snapshot.child(gameType + "Users").children) {
-                            if (i.key.toString() == globalName.toString() || snapshot.child("Users")
-                                    .child(globalName.toString()).child("Games")
-                                    .hasChild(i.key.toString() + ' ' + gameType)
-                            ) {
-                                continue
-                            }
-                            //delete user from wait-list
-                            myRef.child(gameType + "Users").child(i.key.toString()).removeValue()
-                            myRef.child(gameType + "Users").child(globalName.toString())
-                                .removeValue()
-
-                            //add current user to opponents games list
-                            myRef.child("Users").child(i.key.toString()).child("Games")
-                                .child(globalName.toString() + ' ' + gameType)
-                                .setValue("StupidGame")
-
-                            //add opponent to current user games list
-                            myRef.child("Users").child(globalName.toString()).child("Games")
-                                .child(i.key.toString() + ' ' + gameType).setValue("StupidGame")
-
-                            //add game to games
-                            myRef.child(gameType + "s").child(
-                                if (i.key.toString() < globalName.toString())
-                                    i.key + '_' + globalName else globalName + '_' + i.key
-                            ).child("Move").setValue((0..1).random().toString())
-
-                            myRef.removeEventListener(this)
-                            flag = false
-                            break
-                        }
-                    }
-                    if (flag && state) {
-                        myRef.child(gameType + "Users").child(globalName).setValue(globalName)
-                    }
-                }
-            })
         }
 
         dialog.setOnDismissListener {
@@ -96,6 +58,10 @@ class ShowResult(activity: Activity) {
         }
         val body = dialog.findViewById(R.id.resultText) as TextView
         body.text = result
+        if (userRating != -100000) {
+            val changeRating = dialog.findViewById(R.id.ratingChange) as TextView
+            changeRating.text = (if (newRating > userRating) "+" else "") + (newRating - userRating).toString()
+        }
         dialog.show()
     }
 

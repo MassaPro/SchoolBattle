@@ -66,9 +66,10 @@ class MyProfile : Fragment() {
     }
 
     @ExperimentalStdlibApi
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         locale_context = activity as AppCompatActivity
-        super.onViewCreated(view, savedInstanceState)
+        //super.onActivityCreated(savedInstanceState)
         if (RATING != -1) {
             val prfs = requireActivity().getSharedPreferences("UserData", Context.MODE_PRIVATE)
             val username = prfs?.getString("username", "")
@@ -85,18 +86,25 @@ class MyProfile : Fragment() {
         val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val username = prefs?.getString("username", "")
         profileMyName.text = (username + if (RATING != -1) " ($RATING)" else "")
-        myRef.child("Users/$username/rating_history").addValueEventListener(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {}
-            override fun onDataChange(p0: DataSnapshot) {
-                buildRating.clear()
-                for (i in p0.children) {
-                    buildRating.add(i.value.toString().toInt())
-                    if (ratingGraph != null) {
-                        ratingGraph?.updateRating(buildRating)
+        if (buildRating.isEmpty()) {
+            myRef.child("Users/$username/rating_history")
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {}
+                    override fun onDataChange(p0: DataSnapshot) {
+                        buildRating.clear()
+                        for (i in p0.children) {
+                            buildRating.add(i.value.toString().toInt())
+                            if (ratingGraph != null) {
+                                ratingGraph?.updateRating(buildRating)
+                            }
+                        }
                     }
-                }
+                })
+        } else {
+            if (ratingGraph != null) {
+                ratingGraph?.updateRating(buildRating)
             }
-        })
+        }
 
         image_global_ava.setOnClickListener {
             D = dialog_find_ava

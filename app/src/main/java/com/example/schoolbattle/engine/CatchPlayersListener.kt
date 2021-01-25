@@ -45,7 +45,7 @@ fun initCatchPlayersListenerForBlitzGame(username: String, context: Context) {
                 intent.putExtra("opponent", i.key.toString())
                 intent.putExtra("move", i.child("move").value.toString())
                 intent.putExtra("rating", i.child("rating").value.toString())
-                Toast.makeText(context, i.child("rating").toString(), Toast.LENGTH_LONG).show()
+                //Toast.makeText(context, i.child("rating").toString(), Toast.LENGTH_LONG).show()
                 break
             }
 

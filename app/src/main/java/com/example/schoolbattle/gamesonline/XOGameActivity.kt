@@ -270,6 +270,7 @@ class XOGameActivity : AppCompatActivity() {
                 override var userRating = RATING
                 override var opponentRating = intent.getStringExtra("rating")!!.toInt()
             }
+            Toast.makeText(this, engine?.opponentRating.toString(), Toast.LENGTH_LONG).show()
             button_player_1_online_xog.text = "$yourName (${engine?.userRating})"
             button_player_2_online_xog.text = "$opponentsName (${engine?.opponentRating})"
             engine?.init()

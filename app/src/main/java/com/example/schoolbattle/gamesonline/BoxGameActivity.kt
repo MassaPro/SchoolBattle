@@ -397,13 +397,13 @@ class BoxGameActivity : AppCompatActivity() {
                     }
                     if(cnt1>cnt2)
                     {
-                        return 1
+                        return 2
                     }
                     else
                     {
                         if(cnt2>cnt1)
                         {
-                            return 2
+                            return 1
                         }
                         else
                         {

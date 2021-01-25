@@ -1,11 +1,7 @@
 package com.example.schoolbattle.engine
 
 import android.app.Activity
-import android.content.Context
-import android.net.ConnectivityManager
 import android.widget.TextView
-import android.widget.Toast
-import androidx.constraintlayout.solver.widgets.Snapshot
 import com.example.schoolbattle.myRef
 import com.google.firebase.database.*
 import java.util.*
@@ -42,7 +38,7 @@ interface LongGameEngine {
         }
         if (isActivityRunning) {
             val dialog = ShowResult(activity)
-            dialog.showResult(res, type, user, opponent)
+            dialog.showResult(res, type, user, opponent, -100000, -100000)
         }
     }
 }

@@ -401,6 +401,8 @@ class MainActivity : Fragment() {
                 override fun onDataChange(p0: DataSnapshot) {
                     if (p0.exists()) {
                         RATING = p0.value.toString().toInt()
+                    } else {
+                        RATING = 1000
                     }
                     val intent = Intent(activity, NewGameActivity::class.java)
                     //activity?.overridePendingTransition(0, 0)

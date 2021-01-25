@@ -93,7 +93,13 @@ class StupidGameActivityTwoPlayers : AppCompatActivity() {
 
 
                     if (isRun) {
-                        dialog?.showResult(res, "StupidGame", yourName, opponentsName)
+                        dialog?.showResult(
+                            res,
+                            "StupidGame",
+                            yourName,
+                            opponentsName,
+                            -1,-1
+                        )
                     }
                     gameData.removeEventListener(this)
                 }
