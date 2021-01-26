@@ -15,6 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
+import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_computer_games_template.*
 import kotlin.math.abs
 import kotlin.random.Random
@@ -24,6 +25,7 @@ import kotlin.random.Random.Default.nextInt
 fun IntRange.random() = nextInt((endInclusive + 1) - start) +  start    //расширение функции рандома
 
 class SnakeGameWithComputer : AppCompatActivity() {
+    private var dialog_parametrs: Show_parametr_with_computer? = null
     fun encode(h: MutableList<Triple<Int,Int,Int>>):String
     {
         var answer: String = ""
@@ -94,6 +96,8 @@ class SnakeGameWithComputer : AppCompatActivity() {
         signature_canvas_snake_with_computer.t1 = findViewById<TextView>(R.id.name_player1_with_computer_template)
         signature_canvas_snake_with_computer.t2 = findViewById<TextView>(R.id.name_player2_with_computer_template)
 
+
+        //mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
         mSound.load(this, R.raw.xlup, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
         
@@ -111,8 +115,8 @@ class SnakeGameWithComputer : AppCompatActivity() {
 
                 }
                 R.id.page_2 ->{
-                    //dialog_parametrs = Show_parametr_with_computer(this@SnakeGameWithComputer)
-                    //dialog_parametrs?.showResult_with_computer(this)
+                    dialog_parametrs = Show_parametr_with_computer(this@SnakeGameWithComputer)
+                    dialog_parametrs?.showResult_with_computer(this,"SnakeGame")
                 }
                 R.id.page_3 ->{
                     this.finish()

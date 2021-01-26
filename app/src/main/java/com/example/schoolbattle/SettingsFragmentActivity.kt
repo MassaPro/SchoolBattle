@@ -160,7 +160,6 @@ class SettingsFragmentActivity : Fragment() {
                 toolbarNameSettings.setTextColor(Color.BLACK)
                 toolbarNameSettings.textSize = 25f
                 settings_menu.setBackgroundResource(R.drawable.background_japan)
-                tb1.setBackgroundColor(argb(0,0,0,0))
 
                 choose_design.setBackgroundColor(argb(0,0,0,0))
                 choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
@@ -183,7 +182,7 @@ class SettingsFragmentActivity : Fragment() {
                 toolbarNameSettings.setTextColor(Color.WHITE)
                 toolbarNameSettings.textSize = 25f
                 settings_menu.setBackgroundResource(R.drawable.background_noir)
-                tb1.setBackgroundColor(argb(0,0,0,0))
+
 
                 choose_design.setBackgroundColor(argb(0,0,0,0))
                 choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
@@ -197,6 +196,9 @@ class SettingsFragmentActivity : Fragment() {
                 vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
                 vibrationSwitch.setTextSize(24f)
                 vibrationSwitch.setTextColor(Color.WHITE)
+
+                tb1.setBackgroundColor(Color.BLACK)
+
             }
             //настройка свитчера звука
             //настройка свитчера звука
@@ -571,7 +573,7 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                     fragment_activity!!.toolbarNameSettings.setTextColor(Color.WHITE)
                     fragment_activity!!.toolbarNameSettings.textSize = 25f
                     fragment_activity!!.settings_menu.setBackgroundResource(R.drawable.background_noir)
-                    fragment_activity!!.tb1.setBackgroundColor(argb(0,0,0,0))
+                    fragment_activity!!.tb1.setBackgroundColor(Color.BLACK)
 
                     fragment_activity!!.choose_design.setBackgroundColor(argb(0,0,0,0))
                     fragment_activity!!.choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))

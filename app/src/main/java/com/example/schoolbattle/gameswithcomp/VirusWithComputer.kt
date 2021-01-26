@@ -15,6 +15,7 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
+import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_computer_games_template.*
 
 var VirusGameMode = 0
@@ -97,6 +98,7 @@ class VirusWithComputer : AppCompatActivity() {
         Log.d("VISIT","121212121")
         CONTEXT = this
 
+     //   mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
         mSound.load(this, R.raw.xlup, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
 

@@ -16,6 +16,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
+import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_computer_games_template.*
 
 var AngleGameMode = 0
@@ -102,6 +103,8 @@ class ConersWithComputer : AppCompatActivity() {
 
         signature_canvas_corners_with_computer.activity = this
         CONTEXT = this
+
+      //  mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
 
         mSound.load(this, R.raw.xlup, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator

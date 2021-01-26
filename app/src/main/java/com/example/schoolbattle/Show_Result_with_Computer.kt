@@ -26,67 +26,53 @@ class Show_Result_with_Computer(activity: Activity) {
         val button_revanshe = dialog_with_computer.findViewById(R.id.restart_with_computer) as Button
         button_revanshe.setOnClickListener{
 
-            if(Game_Type == "BoxGame") {
-                val intent = Intent(type_activity, BoxGameWithComputer::class.java).apply {
-                    putExtra("usedToClear", "clear")
+            when (Game_Type) {
+                "BoxGame" -> {
+                    intent = Intent(type_activity, BoxGameWithComputer::class.java).apply {
+                        putExtra("usedToClear", "clear")
+                    }
                 }
-                type_activity.finish()
-                type_activity.startActivity(intent)
+                "AngleGame" -> {
+                    intent = Intent(type_activity, ConersWithComputer::class.java).apply {
+                        putExtra("usedToClear", "clear")
+                    }
+                }
+                "DotGame" -> {
+                    intent = Intent(type_activity, DotGameWithComputer::class.java).apply {
+                        putExtra("usedToClear", "clear")
+                    }
+                }
+                "Reversi" -> {
+                    intent = Intent(type_activity, ReversiWithComputer::class.java).apply {
+                        putExtra("usedToClear", "clear")
+                    }
+                }
+                "SnakeGame" -> {
+                    intent = Intent(type_activity, SnakeGameWithComputer::class.java).apply {
+                        putExtra("usedToClear", "clear")
+                    }
+                }
+                "VirusGame" -> {
+                    intent = Intent(type_activity, VirusWithComputer::class.java).apply {
+                        putExtra("usedToClear", "clear")
+                    }
+                }
+                "XOGame" -> {
+                    intent = Intent(type_activity, XOGame_withComputer::class.java).apply {
+                        putExtra("usedToClear", "clear")
+                    }
+                }
             }
 
-            if(Game_Type == "AngleGame") {
-                val intent = Intent(type_activity, ConersWithComputer::class.java).apply {
-                    putExtra("usedToClear", "clear")
-                }
-                type_activity.finish()
-                type_activity.startActivity(intent)
-            }
+            type_activity.finish()
 
-            if(Game_Type == "DotGame") {
-                val intent = Intent(type_activity, DotGameWithComputer::class.java).apply {
-                    putExtra("usedToClear", "clear")
-                }
-                type_activity.finish()
-                type_activity.startActivity(intent)
+            if(mInterstitialAd_in_offline_games.isLoaded)
+            {
+                Intent_for_offline_games = intent
+                mInterstitialAd_in_offline_games.show()
             }
-
-            if(Game_Type == "GoGame") {
-                val intent = Intent(type_activity, GoGameWithComputer::class.java).apply {
-                    putExtra("usedToClear", "clear")
-                }
-                type_activity.finish()
-                type_activity.startActivity(intent)
-            }
-
-            if(Game_Type == "Reversi") {
-                val intent = Intent(type_activity, ReversiWithComputer::class.java).apply {
-                    putExtra("usedToClear", "clear")
-                }
-                type_activity.finish()
-                type_activity.startActivity(intent)
-            }
-
-            if(Game_Type == "SnakeGame") {
-                val intent = Intent(type_activity, SnakeGameWithComputer::class.java).apply {
-                    putExtra("usedToClear", "clear")
-                }
-                type_activity.finish()
-                type_activity.startActivity(intent)
-            }
-
-            if(Game_Type == "VirusGame") {
-                val intent = Intent(type_activity, VirusWithComputer::class.java).apply {
-                    putExtra("usedToClear", "clear")
-                }
-                type_activity.finish()
-                type_activity.startActivity(intent)
-            }
-
-            if(Game_Type == "XOGame") {
-                val intent = Intent(type_activity, XOGame_withComputer::class.java).apply {
-                    putExtra("usedToClear", "clear")
-                }
-                type_activity.finish()
+            else
+            {
                 type_activity.startActivity(intent)
             }
         }
