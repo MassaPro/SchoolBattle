@@ -51,11 +51,11 @@ val PICTURE_AVATAR = mapOf(0 to R.drawable.av0, 1 to R.drawable.av1, 2 to R.draw
     14 to R.drawable.av14, 15 to R.drawable.av15, 16 to R.drawable.av16,17 to R.drawable.av17,18 to R.drawable.av18,19 to R.drawable.av19,20 to R.drawable.av20,
     21 to R.drawable.av21, 22 to R.drawable.av22, 23 to R.drawable.av23,24 to R.drawable.av24,25 to R.drawable.av25,26 to R.drawable.av26,27 to R.drawable.av27,
     28 to R.drawable.av28, 29 to R.drawable.av29, 30 to R.drawable.av30)
-val AVATAR_TEXT = mapOf(0 to "Мир", 15 to "Звезда 1", 20 to "Золото",40 to "Корона",40 to "Инь-Янь",70 to "Солнце",110 to "Меркурий",
+val AVATAR_TEXT = mapOf(0 to "Мир", 1 to "Звезда 1", 2 to "Золото",3 to "Корона",4 to "Инь-Янь",5 to "Солнце",6 to "Меркурий",
     7 to "Венера", 8 to "Земля", 9 to "Луна",10 to "Марс",11 to "Юпитер",12 to "Сатурн",13 to "Уран",
     14 to "Нептун", 15 to "Плутон", 16 to "Пентакль",17 to "Треугольник",18 to "Крест",19 to "Звезда 2",20 to "Тигр",
-    21 to "Пентаграмма", 22 to "Змея", 23 to "Маска",24 to "Топоры",25 to "Череп",7800 to "Лилия",10000 to "Роза",
-    10000 to "Сердце", 10000 to "Солнце", 23900 to "Шут")
+    21 to "Пентаграмма", 22 to "Змея", 23 to "Маска",24 to "Топоры",25 to "Череп",26 to "Лилия",27 to "Роза",
+    28 to "Сердце", 29 to "Солнце", 30 to "Шут")
 val PRICE_OD_AVATAR = mapOf(0 to 0, 1 to 0, 2 to 20,3 to 100,4 to 0,5 to 10,6 to 10,
     7 to 10, 8 to 10, 9 to 10,10 to 10,11 to 20,12 to 20,13 to 20,
     14 to 20, 15 to 20, 16 to 30,17 to 30,18 to 0,19 to 10,20 to 50,

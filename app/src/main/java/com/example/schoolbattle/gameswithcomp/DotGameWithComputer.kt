@@ -15,7 +15,6 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.example.schoolbattle.*
-import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_computer_games_template.*
 
 
@@ -94,9 +93,6 @@ class DotGameWithComputer : AppCompatActivity() {
         signature_canvas_dots_with_computer.visibility = View.VISIBLE
         signature_canvas_dots_with_computer.activity = this
         CONTEXT = this
-
-
-    //    mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
 
         mSound.load(this, R.raw.xlup, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator

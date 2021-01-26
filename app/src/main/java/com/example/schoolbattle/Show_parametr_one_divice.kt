@@ -163,5 +163,7 @@ class Show_parametr_one_divice_one_Device(activity: Activity) {
         }
         dialog_one_device.show()
     }
-
+    fun delete() {
+        dialog_one_device.dismiss()
+    }
 }
