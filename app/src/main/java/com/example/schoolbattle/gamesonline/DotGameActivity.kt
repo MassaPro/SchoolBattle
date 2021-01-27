@@ -408,9 +408,7 @@ class DotGameActivity: AppCompatActivity() {
                     engine?.stopTimer()
                     signature_canvas3.blocked = true
                     var res: String
-                    if (ch != 1 && ch != 2) {
-                        res = "Ничья"
-                    }
+
                     if (!initialMove == (yourName < opponentsName_)) {
                         res = if (yu == '0') {
                             if (ch == 1) {
@@ -439,6 +437,9 @@ class DotGameActivity: AppCompatActivity() {
                                 "Поражение"
                             }
                         }
+                    }
+                    if (ch != 1 && ch != 2) {
+                        res = "Ничья"
                     }
                     //if (intent.getStringExtra("move") == "1") 
                     //var res = if (ch == 2 && yu == '0' || ch == 1 && yu == '1') {

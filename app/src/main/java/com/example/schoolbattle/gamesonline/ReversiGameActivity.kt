@@ -223,6 +223,8 @@ class ReversiGameActivity : AppCompatActivity() {
         signature_canvas_reversi.isFirstMove = intent.getStringExtra("move") == "1"
         button_player_1_online_xog.text = user
         button_player_2_online_xog.text = opponent
+        val yu = if (opponent < user) '1' else '0'
+        val op = if (opponent < user) '0' else '1'
 
         if (type == "blitz") {
             engine = object : BlitzGameEngine {
@@ -261,6 +263,7 @@ class ReversiGameActivity : AppCompatActivity() {
             Toast.makeText(this, engineLong?.key.toString(), Toast.LENGTH_LONG).show()
             engineLong?.init()
         }
+        val initialMove = intent.getStringExtra("move") == "1"
         signature_canvas_reversi.user = user
         initMenuFunctions(this, bottom_navigation_xog_online, intent, user, opponent, gameData)
         gameData.addValueEventListener(object : ValueEventListener {
@@ -327,8 +330,91 @@ class ReversiGameActivity : AppCompatActivity() {
                     signature_canvas_reversi.blocked = false
                 }
                 signature_canvas_reversi.invalidate()
-                if (p0.hasChild("winner")) {
+                fun check_win() : Int
+                {
+                    var flag = false
+                    for(i in 0 until signature_canvas_reversi.Array_of_illumination.size)
+                    {
+                        for(j in 0 until signature_canvas_reversi.Array_of_illumination[0].size)
+                        {
+                            if(signature_canvas_reversi.Array_of_illumination[i][j] != 0)
+                            {
+                                flag = true
+                            }
+                        }
+                    }
+                    var cnt1 : Int = 0
+                    var cnt2: Int = 0
+                    if(flag)
+                    {
+                        return 0
+                    }
+                    else
+                    {
+                        for(i in 0 until signature_canvas_reversi.FIELD.size)
+                        {
+                            for(j in 0 until  signature_canvas_reversi.FIELD[0].size)
+                            {
+                                if(signature_canvas_reversi.FIELD[i][j] == 1)
+                                {
+                                    cnt1++
+                                }
+                                if(signature_canvas_reversi.FIELD[i][j] == 2)
+                                {
+                                    cnt2++
+                                }
+                            }
+                        }
+                        if(cnt1>cnt2) {
+                            return 1
+                        }
+                        else
+                        {
+                            if(cnt1 == cnt2)
+                            {
+                                return 3
+                            }
+                            else
+                            {
+                                return 2
+                            }
+                        }
+
+                    }
+                }
+                val ch = check_win()
+                if (p0.hasChild("winner") || ch != 0) {
                     var res = ""
+                    if (initialMove == (user < opponent)) {
+                        res = if (yu == '0') {
+                            if (ch == 1) {
+                                "Победа"
+                            } else {
+                                "Поражение"
+                            }
+                        } else {
+                            if (ch == 2) {
+                                "Победа"
+                            } else {
+                                "Поражение"
+                            }
+                        }
+                    } else {
+                        res = if (yu == '1') {
+                            if (ch == 1) {
+                                "Победа"
+                            } else {
+                                "Поражение"
+                            }
+                        } else {
+                            if (ch == 2) {
+                                "Победа"
+                            } else {
+                                "Поражение"
+                            }
+                        }
+                    }
+                    if (ch != 2 && ch != 1) res = "Ничья"
                     if (p0.child("winner").value.toString() == user) {
                         res = "Победа"
                     }

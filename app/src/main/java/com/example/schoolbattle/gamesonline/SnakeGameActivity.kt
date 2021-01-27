@@ -193,6 +193,7 @@ class SnakeGameActivity : AppCompatActivity() {
             Toast.makeText(this, engineLong?.key.toString(), Toast.LENGTH_LONG).show()
             engineLong?.init()
         }
+        val initialMove = intent.getStringExtra("move") == "1"
         signature_canvas_snake_online.username = yourName
         //button_player_1_online_snake.text = yourName
         //button_player_2_online_snake.text = opponentsName
@@ -363,12 +364,38 @@ class SnakeGameActivity : AppCompatActivity() {
                 if (ch != -1 && ch != 0 || p0.hasChild("winner")) {
                     engine?.stopTimer()
                     signature_canvas_snake_online.blocked = true
-                    var res = if (ch == 2 && yu == '0' || ch == 1 && yu == '1') {
-                        "Победа"
-                    } else if (ch == 2 && yu == '1' || ch == 1 && yu == '0') {
-                        "Поражение"
+                    var res = ""
+                    if (initialMove == (yourName < opponentsName_)) {
+                        res = if (yu == '0') {
+                            if (ch == 1) {
+                                "Победа"
+                            } else {
+                                "Поражение"
+                            }
+                        } else {
+                            if (ch == 2) {
+                                "Победа"
+                            } else {
+                                "Поражение"
+                            }
+                        }
                     } else {
-                        "Ничья"
+                        res = if (yu == '1') {
+                            if (ch == 1) {
+                                "Победа"
+                            } else {
+                                "Поражение"
+                            }
+                        } else {
+                            if (ch == 2) {
+                                "Победа"
+                            } else {
+                                "Поражение"
+                            }
+                        }
+                    }
+                    if (ch != 2 && ch != 1) {
+                        res = "Ничья"
                     }
                     if (p0.child("winner").value.toString() == yourName) {
                         res = "Победа"

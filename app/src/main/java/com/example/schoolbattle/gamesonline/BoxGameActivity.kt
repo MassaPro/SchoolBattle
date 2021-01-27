@@ -416,7 +416,6 @@ class BoxGameActivity : AppCompatActivity() {
                 if (p0.hasChild("winner") || ch != 0) {
                     signature_canvas_box.blocked = true
                     var res = ""
-                    if (ch != 2 && ch != 1) res = "Ничья"
                     if (!initialMove == (yourName < opponentsName_)) {
                         res = if (yu == '0') {
                             if (ch == 1) {
@@ -446,6 +445,7 @@ class BoxGameActivity : AppCompatActivity() {
                             }
                         }
                     }
+                    if (ch != 2 && ch != 1) res = "Ничья"
                     if (p0.child("winner").value.toString() == yourName) {
                         res = "Победа"
                     }
