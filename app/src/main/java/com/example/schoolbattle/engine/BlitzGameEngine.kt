@@ -48,14 +48,18 @@ interface BlitzGameEngine {
                     } else {
                         cntOpponent++
                     }
-                    userT.text = cntUser.toString()
-                    opponentT.text = cntOpponent.toString()
-                    if (cntUser >= 500L) {
-                        positionData.child("winner").setValue(loseUpd)
+                    if (cntUser % 10 == 0) {
+                        userT.text = (100 - cntUser / 10).toString()
+                    }
+                    if (cntOpponent % 10 == 0) {
+                        opponentT.text = (100 - cntOpponent / 10).toString()
+                    }
+                    if (cntUser >= 1000L) {
+                        positionData.setValue(loseUpd)
                         this.cancel()
                     }
-                    if (cntOpponent >= 500L) {
-                        positionData.child("winner").setValue(winUpd)
+                    if (cntOpponent >= 1000L) {
+                        positionData.setValue(winUpd)
                         this.cancel()
                     }
                 }

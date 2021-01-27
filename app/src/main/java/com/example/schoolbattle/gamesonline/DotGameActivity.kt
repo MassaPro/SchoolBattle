@@ -294,6 +294,7 @@ class DotGameActivity: AppCompatActivity() {
             toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
         }
 
+        val initialMove = intent.getStringExtra("move") == "1"
         initMenuFunctions(this, bottom_navigation_xog_online, intent, yourName, opponentsName, gameData)
         gameData.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
@@ -406,13 +407,47 @@ class DotGameActivity: AppCompatActivity() {
                     Log.w("RES2", "$ch")
                     engine?.stopTimer()
                     signature_canvas3.blocked = true
-                    var res = if (ch == 2 && yu == '0' || ch == 1 && yu == '1') {
-                        "Победа"
-                    } else if (ch == 2 && yu == '1' || ch == 1 && yu == '0') {
-                        "Поражение"
-                    } else {
-                        "Ничья"
+                    var res: String
+                    if (ch != 1 && ch != 2) {
+                        res = "Ничья"
                     }
+                    if (!initialMove == (yourName < opponentsName_)) {
+                        res = if (yu == '0') {
+                            if (ch == 1) {
+                                "Победа"
+                            } else {
+                                "Поражение"
+                            }
+                        } else {
+                            if (ch == 2) {
+                                "Победа"
+                            } else {
+                                "Поражение"
+                            }
+                        }
+                    } else {
+                        res = if (yu == '1') {
+                            if (ch == 1) {
+                                "Победа"
+                            } else {
+                                "Поражение"
+                            }
+                        } else {
+                            if (ch == 2) {
+                                "Победа"
+                            } else {
+                                "Поражение"
+                            }
+                        }
+                    }
+                    //if (intent.getStringExtra("move") == "1") 
+                    //var res = if (ch == 2 && yu == '0' || ch == 1 && yu == '1') {
+                      //  "Победа"
+                    //} else if (ch == 2 && yu == '1' || ch == 1 && yu == '0') {
+                     //   "Поражение"
+                    //} else {
+                     //   "Ничья"
+                    //}
                     if (p0.child("winner").value == yourName) {
                         res = "Победа"
                     }

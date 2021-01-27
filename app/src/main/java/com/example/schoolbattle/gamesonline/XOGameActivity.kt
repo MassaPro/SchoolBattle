@@ -291,6 +291,7 @@ class XOGameActivity : AppCompatActivity() {
             Toast.makeText(this, engineLong?.key.toString(), Toast.LENGTH_LONG).show()
             engineLong?.init()
         }
+        var initialMove = intent.getStringExtra("move") == "1"
         signature_canvas.username = yourName
         signature_canvas.isFirstMove = intent.getStringExtra("move") == "1"
         gameData.addValueEventListener(object : ValueEventListener {
@@ -387,12 +388,13 @@ class XOGameActivity : AppCompatActivity() {
                 if (signature_canvas.isFirstMove == (cnt % 2 == 0)) signature_canvas.blocked = false
                 signature_canvas.invalidate()
                 val checkList = checkForWin()
+                Toast.makeText(this@XOGameActivity, engine?.move.toString(), Toast.LENGTH_LONG).show()
                 if (p0.hasChild("winner") || checkList.size > 1 || (checkList.size == 1 && cnt == 42)) {
-                    gameData.child("FIELDD").child("result").onDisconnect().cancel()
+                    gameData.child("FIELD").child("result").onDisconnect().cancel()
                     engine?.stopTimer()
                     signature_canvas.blocked = true
                     var whoWins = 0
-                    if (!p0.child("FIELDD").hasChild("result")) {
+                    if (!p0.child("FIELD").hasChild("result")) {
 //                    Toast.makeText(applicationContext,"${signature_canvas.FIELD[checkList[1]][checkList[2]]}", Toast.LENGTH_LONG).show()
                         if (checkList.size > 1) {
                             for (i2 in 0..8) {
@@ -408,7 +410,7 @@ class XOGameActivity : AppCompatActivity() {
                     if (checkList.size == 1) {
                         res = "Ничья"
                     } else {
-                        if (p0.child("Move").value.toString() == "0") {
+                        if (initialMove == (yourName < opponentsName_)) {
                             res = if (yu == '0') {
                                 if (whoWins == 1) {
                                     "Победа"

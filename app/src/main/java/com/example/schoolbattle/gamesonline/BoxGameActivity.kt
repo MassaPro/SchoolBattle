@@ -283,6 +283,7 @@ class BoxGameActivity : AppCompatActivity() {
             }
         }
 
+        var initialMove = intent.getStringExtra("move") == "1"
         initMenuFunctions(this, bottom_navigation_xog_online, intent, yourName, opponentsName, gameData)
         gameData.addValueEventListener(object : ValueEventListener {
 
@@ -414,13 +415,37 @@ class BoxGameActivity : AppCompatActivity() {
                 val ch = check_win()
                 if (p0.hasChild("winner") || ch != 0) {
                     signature_canvas_box.blocked = true
-                    var res = if (ch == 2 && yu == '0' || ch == 1 && yu == '1') {
-                            "Победа"
-                        } else if (ch == 2 && yu == '1' || ch == 1 && yu == '0') {
-                            "Поражение"
+                    var res = ""
+                    if (ch != 2 && ch != 1) res = "Ничья"
+                    if (!initialMove == (yourName < opponentsName_)) {
+                        res = if (yu == '0') {
+                            if (ch == 1) {
+                                "Победа"
+                            } else {
+                                "Поражение"
+                            }
                         } else {
-                            "Ничья"
+                            if (ch == 2) {
+                                "Победа"
+                            } else {
+                                "Поражение"
+                            }
                         }
+                    } else {
+                        res = if (yu == '1') {
+                            if (ch == 1) {
+                                "Победа"
+                            } else {
+                                "Поражение"
+                            }
+                        } else {
+                            if (ch == 2) {
+                                "Победа"
+                            } else {
+                                "Поражение"
+                            }
+                        }
+                    }
                     if (p0.child("winner").value.toString() == yourName) {
                         res = "Победа"
                     }
