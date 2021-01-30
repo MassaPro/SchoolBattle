@@ -406,39 +406,39 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                     editor.apply()
                 }
                 ARRAY_OF_DESIGN[position] == 1 -> {
-                    Design = "Egypt"
+                    Design = "Noir"
                     val editor =  locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                    editor.putString("design","Egypt")
+                    editor.putString("design","Noir")
                     editor.apply()
                 }
                 ARRAY_OF_DESIGN[position] == 2 -> {
-                    Design = "Casino"
-                    val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                    editor.putString("design","Casino")
-                    editor.apply()
-                }
-                ARRAY_OF_DESIGN[position] == 3 -> {
                     Design = "Rome"
                     val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
                     editor.putString("design","Rome")
                     editor.apply()
                 }
+                ARRAY_OF_DESIGN[position] == 3 -> {
+                    Design = "Casino"
+                    val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                    editor.putString("design","Casino")
+                    editor.apply()
+                }
                 ARRAY_OF_DESIGN[position] == 4 -> {
+                    Design = "Egypt"
+                    val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                    editor.putString("design","Egypt")
+                    editor.apply()
+                }
+                ARRAY_OF_DESIGN[position] == 5 -> {
                     Design = "Gothic"
                     val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
                     editor.putString("design","Gothic")
                     editor.apply()
                 }
-                ARRAY_OF_DESIGN[position] == 5 -> {
+                ARRAY_OF_DESIGN[position] == 6 -> {
                     Design = "Japan"
                     val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
                     editor.putString("design","Japan")
-                    editor.apply()
-                }
-                ARRAY_OF_DESIGN[position] == 6 -> {
-                    Design = "Noir"
-                    val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                    editor.putString("design","Noir")
                     editor.apply()
                 }
             }
