@@ -338,6 +338,7 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
                 .edit()
         editor.putString("money", MONEY.toString())
         editor.apply()
+        syncMoneyWithDataBase(this)
     }
 
     fun loadRewardedVideoAd() {
