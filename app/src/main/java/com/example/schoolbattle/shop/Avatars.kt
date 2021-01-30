@@ -21,6 +21,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolbattle.*
+import com.example.schoolbattle.engine.updateEconomyParams
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.reward.RewardItem
@@ -135,7 +136,7 @@ class Avatars : Fragment() , RewardedVideoAdListener {
         loadRewardedVideoAd()
         var dialog_reward : Dialog = locale_context!!.let { Dialog(it) }
         dialog_reward.setContentView(R.layout.reward_dialog)
-        dialog_reward.price_reward.text = "10" //TODO ОБЯЗАТЕЛЬНО НЕ ЗАБЫТЬ ПОМЕНЯТЬ ЗДЕСЬ ЦЕНУ
+        dialog_reward.price_reward.text = updateEconomyParams(requireActivity(), "award").toString() //TODO ОБЯЗАТЕЛЬНО НЕ ЗАБЫТЬ ПОМЕНЯТЬ ЗДЕСЬ ЦЕНУ
         dialog_reward.close_reward.setOnClickListener {
             dialog_reward.dismiss()
         }
@@ -143,7 +144,6 @@ class Avatars : Fragment() , RewardedVideoAdListener {
             dialog_reward.dismiss()
         }
         dialog_reward.show()
-        MONEY += 10
         locale_context?.findViewById<TextView>(R.id.money_shop_toolbar)?.text = MONEY.toString()
     }
 

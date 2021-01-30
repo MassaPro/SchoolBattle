@@ -88,7 +88,7 @@ var ARRAY_OF_SPECIALLY: MutableList<Int>  = mutableListOf()
 var AUXILIARY_MAP_OF_SPECIALLY = mapOf(0 to "specially1", 1 to "specially2", 2 to "specially3",3 to "specially4")
 //__________________________________________________________________________________________________________________________________
 
-var INITIAL_AMOUNT: Int = 100          //начальная сумма
+var INITIAL_AMOUNT: Int = 250          //начальная сумма
 var MONEY: Int = 200                  //ДЕНЬГИ
 
 

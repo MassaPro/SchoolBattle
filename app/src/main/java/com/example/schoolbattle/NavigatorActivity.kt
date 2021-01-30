@@ -323,22 +323,16 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
         loadRewardedVideoAd()
         var dialog_reward : Dialog = locale_context!!.let { Dialog(it) }
         dialog_reward.setContentView(R.layout.reward_dialog)
-        dialog_reward.price_reward.text = "10" //TODO ОБЯЗАТЕЛЬНО НЕ ЗАБЫТЬ ПОМЕНЯТЬ ЗДЕСЬ ЦЕНУ
+        dialog_reward.price_reward.text = updateEconomyParams(this, "award").toString() //TODO ОБЯЗАТЕЛЬНО НЕ ЗАБЫТЬ ПОМЕНЯТЬ ЗДЕСЬ ЦЕНУ
         dialog_reward.close_reward.setOnClickListener {
             dialog_reward.dismiss()
         }
         dialog_reward.ok_reward.setOnClickListener {
             dialog_reward.dismiss()
         }
+        Toast.makeText(this, "NIK", Toast.LENGTH_LONG).show()
         dialog_reward.show()
-        MONEY += 10
         locale_context?.findViewById<TextView>(R.id.money_shop_toolbar)?.text = MONEY.toString()
-        val editor =
-            locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE)
-                .edit()
-        editor.putString("money", MONEY.toString())
-        editor.apply()
-        syncMoneyWithDataBase(this)
     }
 
     fun loadRewardedVideoAd() {

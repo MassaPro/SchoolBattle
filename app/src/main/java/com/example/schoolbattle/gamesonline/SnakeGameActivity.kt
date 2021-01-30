@@ -69,7 +69,7 @@ class SnakeGameActivity : AppCompatActivity() {
         while(i<s.length)
         {
             s1 = ""
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++
@@ -77,7 +77,7 @@ class SnakeGameActivity : AppCompatActivity() {
             a = string_to_int(s1)
             s1 = ""
             i++
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++
@@ -85,7 +85,7 @@ class SnakeGameActivity : AppCompatActivity() {
             b = string_to_int(s1)
             s1 = ""
             i++
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++
@@ -455,7 +455,7 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
         while(i<s.length)
         {
             s1 = ""
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++
@@ -463,7 +463,7 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
             a = string_to_int(s1)
             s1 = ""
             i++
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++
@@ -471,7 +471,7 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
             b = string_to_int(s1)
             s1 = ""
             i++
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++

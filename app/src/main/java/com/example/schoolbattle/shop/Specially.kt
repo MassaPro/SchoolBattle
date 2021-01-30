@@ -21,6 +21,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolbattle.*
+import com.example.schoolbattle.engine.updateEconomyParams
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.reward.RewardItem
@@ -29,6 +30,7 @@ import com.google.android.gms.ads.reward.RewardedVideoAdListener
 import kotlinx.android.synthetic.main.activity_designs.*
 import kotlinx.android.synthetic.main.design_shop_item.view.*
 import kotlinx.android.synthetic.main.reward_dialog.*
+import kotlin.math.min
 
 var Vidos : RewardedVideoAd? = null
 
@@ -178,7 +180,7 @@ class Specially : Fragment(), RewardedVideoAdListener {
 
         var dialog_reward : Dialog = Dialog(locale_context!!)
         dialog_reward.setContentView(R.layout.reward_dialog)
-        dialog_reward.price_reward.text = "10" //TODO ОБЯЗАТЕЛЬНО НЕ ЗАБЫТЬ ПОМЕНЯТЬ ЗДЕСЬ ЦЕНУ
+        dialog_reward.price_reward.text = updateEconomyParams(requireActivity(), "award").toString() //TODO ОБЯЗАТЕЛЬНО НЕ ЗАБЫТЬ ПОМЕНЯТЬ ЗДЕСЬ ЦЕНУ
         dialog_reward.close_reward.setOnClickListener {
             dialog_reward.dismiss()
         }
@@ -194,9 +196,7 @@ class Specially : Fragment(), RewardedVideoAdListener {
         }
 
 
-
-
-        MONEY += 10
+        Toast.makeText(requireContext(), "FAIL", Toast.LENGTH_LONG).show()
         locale_context?.findViewById<TextView>(R.id.money_shop_toolbar)?.text = MONEY.toString()
     }
 
@@ -241,7 +241,9 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
         if(ARRAY_OF_SPECIALLY_SHOP[position] == 0)
         {
             holder.icon.setImageResource(R.drawable.money)
-            holder.price.text  = "Посмотри видео и получи " + PRICE_OD_SPECIALLY[ARRAY_OF_SPECIALLY_SHOP[position]].toString()
+            val getter = locale_context?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+            val capital = getter?.getString("number_capital", "500").toString().toInt()
+            holder.price.text  = "Посмотри видео и получи ${min(capital / 100 * 4, 5000)}"
             holder.button.text  =  "смотреть"
         }
         holder.icon.setImageResource(R.drawable.money)

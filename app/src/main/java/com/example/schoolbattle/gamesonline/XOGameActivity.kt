@@ -73,7 +73,7 @@ class XOGameActivity : AppCompatActivity() {
         while(i<s.length)
         {
             s1 = ""
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++
@@ -81,7 +81,7 @@ class XOGameActivity : AppCompatActivity() {
             a = string_to_int(s1)
             s1 = ""
             i++
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++
@@ -89,7 +89,7 @@ class XOGameActivity : AppCompatActivity() {
             b = string_to_int(s1)
             s1 = ""
             i++
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++
@@ -505,7 +505,7 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
         while(i<s.length)
         {
             s1 = ""
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++
@@ -513,7 +513,7 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
             a = string_to_int(s1)
             s1 = ""
             i++
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++
@@ -521,7 +521,7 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
             b = string_to_int(s1)
             s1 = ""
             i++
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++

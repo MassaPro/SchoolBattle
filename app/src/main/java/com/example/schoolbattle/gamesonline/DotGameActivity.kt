@@ -77,7 +77,7 @@ class DotGameActivity: AppCompatActivity() {
         while(i<s.length)
         {
             s1 = ""
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++
@@ -85,7 +85,7 @@ class DotGameActivity: AppCompatActivity() {
             a = string_to_int(s1)
             s1 = ""
             i++
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++
@@ -93,7 +93,7 @@ class DotGameActivity: AppCompatActivity() {
             b = string_to_int(s1)
             s1 = ""
             i++
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++
@@ -508,7 +508,7 @@ class CanvasViewDot(context: Context, attrs: AttributeSet?) : View(context, attr
         while(i<s.length)
         {
             s1 = ""
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++
@@ -516,7 +516,7 @@ class CanvasViewDot(context: Context, attrs: AttributeSet?) : View(context, attr
             a = string_to_int(s1)
             s1 = ""
             i++
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++
@@ -524,7 +524,7 @@ class CanvasViewDot(context: Context, attrs: AttributeSet?) : View(context, attr
             b = string_to_int(s1)
             s1 = ""
             i++
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++

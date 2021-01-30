@@ -10,6 +10,7 @@ import android.text.TextWatcher
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import com.example.schoolbattle.engine.initEconomyParams
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
@@ -143,12 +144,13 @@ class SignUpActivity : AppCompatActivity() {
             }
 
             fun nextActivity() {
-                val intent = Intent(this, NavigatorActivity::class.java)
-                startActivity(intent)
                 val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
                 val editor = prefs.edit()
                 editor.putString("username", name)
                 editor.apply()
+                initEconomyParams(this)
+                val intent = Intent(this, NavigatorActivity::class.java)
+                startActivity(intent)
                 SignIn.finish()
                 finish()
             }

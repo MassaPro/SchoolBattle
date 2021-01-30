@@ -67,7 +67,7 @@ class ReversiGameActivity : AppCompatActivity() {
         while(i<s.length)
         {
             s1 = ""
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++
@@ -75,7 +75,7 @@ class ReversiGameActivity : AppCompatActivity() {
             a = string_to_int(s1)
             s1 = ""
             i++
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++
@@ -83,7 +83,7 @@ class ReversiGameActivity : AppCompatActivity() {
             b = string_to_int(s1)
             s1 = ""
             i++
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++
@@ -286,9 +286,9 @@ class ReversiGameActivity : AppCompatActivity() {
                             }
                             var flag :Boolean = true
                             val prfs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
-                            if(prfs?.getString(gameData.toString()+"dot_game_history", "0")!="0")
+                            if(prfs?.getString(gameData.toString()+"reversi_game_history", "0")!="0")
                             {
-                                signature_canvas_reversi.History = prfs?.getString(gameData.toString()+"dot_game_history", "a")?.let { decode(it) }!!
+                                signature_canvas_reversi.History = prfs?.getString(gameData.toString()+"reversi_game_history", "a")?.let { decode(it) }!!
                             }
                             for(kol in 0 until signature_canvas_reversi.History.size)
                             {
@@ -478,7 +478,7 @@ class CanvasViewReversi(context: Context, attrs: AttributeSet?) : View(context, 
         while(i<s.length)
         {
             s1 = ""
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++
@@ -486,7 +486,7 @@ class CanvasViewReversi(context: Context, attrs: AttributeSet?) : View(context, 
             a = string_to_int(s1)
             s1 = ""
             i++
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++
@@ -494,7 +494,7 @@ class CanvasViewReversi(context: Context, attrs: AttributeSet?) : View(context, 
             b = string_to_int(s1)
             s1 = ""
             i++
-            while(s[i]!='a')
+            while(i < s.length && s[i]!='a')
             {
                 s1+=s[i]
                 i++
@@ -1385,9 +1385,9 @@ class CanvasViewReversi(context: Context, attrs: AttributeSet?) : View(context, 
                     FIELD[X][Y] = 1
                     var flag :Boolean = true
                     val prfs = context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
-                    if(prfs?.getString(positionData.toString()+"dot_game_history", "0")!="0")
+                    if(prfs?.getString(positionData.toString()+"reversi_game_history", "0")!="0")
                     {
-                        History = prfs?.getString(positionData.toString()+"dot_game_history", "a")?.let { decode(it) }!!
+                        History = prfs?.getString(positionData.toString()+"reversi_game_history", "a")?.let { decode(it) }!!
                     }
                     for(kol in 0 until History.size)
                     {
@@ -1409,9 +1409,9 @@ class CanvasViewReversi(context: Context, attrs: AttributeSet?) : View(context, 
                     FIELD[X][Y] = 2
                     var flag :Boolean = true
                     val prfs = context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
-                    if(prfs?.getString(positionData.toString()+"dot_game_history", "0")!="0")
+                    if(prfs?.getString(positionData.toString()+"reversi_game_history", "0")!="0")
                     {
-                        History = prfs?.getString(positionData.toString()+"dot_game_history", "a")?.let { decode(it) }!!
+                        History = prfs?.getString(positionData.toString()+"reversi_game_history", "a")?.let { decode(it) }!!
                     }
                     for(kol in 0 until History.size)
                     {
