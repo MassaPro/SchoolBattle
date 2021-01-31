@@ -20,56 +20,49 @@ class OneDevicePlayActivity : AppCompatActivity() {
         val yourName = prefs.getString("username", "") // имя пользователя
         val gameType = intent.getStringExtra("gameName") // тип игры
 
-        if(gameType == "XOGame")
-        {
-            val intent = Intent(this,
-                XOGame_oneDivice::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        if(gameType == "AngleGame")
-        {
-            val intent = Intent(this,
-                ConersOneDevice::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        if(gameType == "DotGame")
-        {
-            val intent = Intent(this,
-                DotGameOneDivice::class.java)
-            startActivity(intent)
-            finish()
-        }
-        if(gameType == "SnakeGame")
-        {
-            val intent = Intent(this,
-                SnakeGameOneDivice::class.java)
-            startActivity(intent)
-            finish()
-        }
-        if(gameType == "BoxGame")
-        {
-            val intent = Intent(this,
-                BoxGameOneDivice::class.java)
-            startActivity(intent)
-            finish()
-        }
-        if(gameType == "VirusGame")
-        {
-            val intent = Intent(this,
-                VirusOneDivice::class.java)
-            startActivity(intent)
-            finish()
-        }
-        if(gameType == "Reversi")
-        {
-            val intent = Intent(this,
-                ReversiOneDivice::class.java)
-            startActivity(intent)
-            finish()
+        when (gameType) {
+            "XOGame" -> {
+                val intent = Intent(this,
+                    XOGame_oneDivice::class.java)
+                startActivity(intent)
+                finish()
+            }
+            "AngleGame" -> {
+                val intent = Intent(this,
+                    ConersOneDevice::class.java)
+                startActivity(intent)
+                finish()
+            }
+            "DotGame" -> {
+                val intent = Intent(this,
+                    DotGameOneDivice::class.java)
+                startActivity(intent)
+                finish()
+            }
+            "SnakeGame" -> {
+                val intent = Intent(this,
+                    SnakeGameOneDivice::class.java)
+                startActivity(intent)
+                finish()
+            }
+            "BoxGame" -> {
+                val intent = Intent(this,
+                    BoxGameOneDivice::class.java)
+                startActivity(intent)
+                finish()
+            }
+            "VirusGame" -> {
+                val intent = Intent(this,
+                    VirusOneDivice::class.java)
+                startActivity(intent)
+                finish()
+            }
+            "Reversi" -> {
+                val intent = Intent(this,
+                    ReversiOneDivice::class.java)
+                startActivity(intent)
+                finish()
+            }
         }
 
 

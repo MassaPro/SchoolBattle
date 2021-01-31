@@ -5,12 +5,14 @@ import android.app.Dialog
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
+import com.example.schoolbattle.PICTURE_AVATAR
 import com.example.schoolbattle.R
 import com.example.schoolbattle.myRef
 import com.example.schoolbattle.now
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_game_over.*
 
 class Game(val name: String = "", val type: String = "StupidGame", val text: String = "you VS") {
     override fun toString(): String {
@@ -36,6 +38,9 @@ class ShowResult(activity: Activity) {
         dialog.setCancelable(false)
         dialog.setCanceledOnTouchOutside(true)
         dialog.setContentView(R.layout.activity_game_over)
+
+  //      PICTURE_AVATAR[picture1]?.let { dialog.icon_for_you.setBackgroundResource(it) } TODO заменить
+  //      PICTURE_AVATAR[picture1]?.let { dialog.icon_for_you.setBackgroundResource(it) } TODO заменить
 
         val ng = dialog.findViewById(R.id.restart) as Button
         val rv = dialog.findViewById(R.id.revanche) as Button

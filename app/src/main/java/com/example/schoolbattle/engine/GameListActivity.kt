@@ -51,61 +51,62 @@ class GameListActivity : Fragment() {
         currentGamesRecycler = item_list
         setupRecyclerView(item_list)
         Toast.makeText(requireContext(), CURRENTGAMES.size.toString(), Toast.LENGTH_LONG).show()
-        if (Design == "Egypt"){
-            game_list_playing.setBackgroundResource(R.drawable.game_list_menu_egypt);
-            my_toolbar2.setBackgroundColor(rgb(255, 230, 163))
-            toolbarName2.setTypeface(ResourcesCompat.getFont(
-                CONTEXT,
-                R.font.s
-            ))
-            //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-        }
-
-        else if (Design == "Casino"){
-            game_list_playing.setBackgroundResource(R.drawable.background2_casino);
-            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
-            toolbarName2.setTypeface(ResourcesCompat.getFont(
-                CONTEXT,
-                R.font.casino
-            ))
-            toolbarName2.setTextColor(Color.YELLOW)
-            toolbarName2.setTextSize(20f)
-            //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-        }
-        else if (Design == "Rome"){
-            game_list_playing.setBackgroundResource(R.drawable.background_rome);
-            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
-            toolbarName2.setTypeface(ResourcesCompat.getFont(
-                CONTEXT,
-                R.font.rome
-            ))
-            toolbarName2.setTextColor(rgb(193,150,63))
-            toolbarName2.setTextSize(20f)
-            //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-        }
-        else if (Design == "Gothic"){
-            game_list_playing.setBackgroundResource(R.drawable.background_gothic);
-            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
-            toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-            toolbarName2.setTextColor(Color.WHITE)
-            toolbarName2.setTextSize(20f)
-            //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-        }
-        else if (Design == "Japan"){
-            game_list_playing.setBackgroundResource(R.drawable.sign_in_japan);
-            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
-            toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-            toolbarName2.setTextColor(Color.BLACK)
-            toolbarName2.setTextSize(20f)
-            //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-        }
-        else if (Design == "Noir"){
-            game_list_playing.setBackgroundResource(R.drawable.sign_in_noir);
-            my_toolbar2.setBackgroundColor(argb(0,0,0,0))
-            toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
-            toolbarName2.setTextColor(Color.WHITE)
-            toolbarName2.setTextSize(20f)
-            //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+        when (Design) {
+            "Egypt" -> {
+                game_list_playing.setBackgroundResource(R.drawable.game_list_menu_egypt);
+                my_toolbar2.setBackgroundColor(rgb(255, 230, 163))
+                toolbarName2.setTypeface(ResourcesCompat.getFont(
+                    CONTEXT,
+                    R.font.s
+                ))
+                //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            }
+            "Casino" -> {
+                game_list_playing.setBackgroundResource(R.drawable.background2_casino);
+                my_toolbar2.setBackgroundColor(argb(0,0,0,0))
+                toolbarName2.setTypeface(ResourcesCompat.getFont(
+                    CONTEXT,
+                    R.font.casino
+                ))
+                toolbarName2.setTextColor(Color.YELLOW)
+                toolbarName2.setTextSize(20f)
+                //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            }
+            "Rome" -> {
+                game_list_playing.setBackgroundResource(R.drawable.background_rome);
+                my_toolbar2.setBackgroundColor(argb(0,0,0,0))
+                toolbarName2.setTypeface(ResourcesCompat.getFont(
+                    CONTEXT,
+                    R.font.rome
+                ))
+                toolbarName2.setTextColor(rgb(193,150,63))
+                toolbarName2.setTextSize(20f)
+                //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            }
+            "Gothic" -> {
+                game_list_playing.setBackgroundResource(R.drawable.background_gothic);
+                my_toolbar2.setBackgroundColor(argb(0,0,0,0))
+                toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                toolbarName2.setTextColor(Color.WHITE)
+                toolbarName2.setTextSize(20f)
+                //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            }
+            "Japan" -> {
+                game_list_playing.setBackgroundResource(R.drawable.sign_in_japan);
+                my_toolbar2.setBackgroundColor(argb(0,0,0,0))
+                toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                toolbarName2.setTextColor(Color.BLACK)
+                toolbarName2.setTextSize(20f)
+                //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            }
+            "Noir" -> {
+                game_list_playing.setBackgroundResource(R.drawable.sign_in_noir);
+                my_toolbar2.setBackgroundColor(argb(0,0,0,0))
+                toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                toolbarName2.setTextColor(Color.WHITE)
+                toolbarName2.setTextSize(20f)
+                //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            }
         }
 
         // (activity as AppCompatActivity).setSupportActionBar(findViewById(R.id.my_toolbar))
@@ -134,29 +135,36 @@ class GameListActivity : Fragment() {
         init {
             onClickListener = View.OnClickListener { v ->
                 val item = v.tag as LongGame
-                val intent = if (item.type.contains("XOGame")) {
-                    Intent(v.context, XOGameActivity::class
-                        .java).apply {
+                val intent = when {
+                    item.type.contains("XOGame") -> {
+                        Intent(v.context, XOGameActivity::class
+                            .java).apply {
+                        }
                     }
-                } else if (item.type.contains("DotGame")){
-                    Intent(v.context, DotGameActivity::class
-                        .java).apply {
+                    item.type.contains("DotGame") -> {
+                        Intent(v.context, DotGameActivity::class
+                            .java).apply {
+                        }
                     }
-                } else if (item.type.contains("BoxGame")){
-                    Intent(v.context, BoxGameActivity::class
-                        .java).apply {
+                    item.type.contains("BoxGame") -> {
+                        Intent(v.context, BoxGameActivity::class
+                            .java).apply {
+                        }
                     }
-                } else if (item.type.contains("SnakeGame")){
-                    Intent(v.context, SnakeGameActivity::class
-                        .java).apply {
+                    item.type.contains("SnakeGame") -> {
+                        Intent(v.context, SnakeGameActivity::class
+                            .java).apply {
+                        }
                     }
-                } else if (item.type.contains("Reversi")){
-                    Intent(v.context, ReversiGameActivity::class
-                        .java).apply {
+                    item.type.contains("Reversi") -> {
+                        Intent(v.context, ReversiGameActivity::class
+                            .java).apply {
+                        }
                     }
-                } else {
-                    Intent(v.context, TEST::class
-                        .java).apply {
+                    else -> {
+                        Intent(v.context, TEST::class
+                            .java).apply {
+                        }
                     }
                 }
                 intent.putExtra("opponent", item.opponent)

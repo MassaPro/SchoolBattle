@@ -109,78 +109,80 @@ class NewGameActivity : AppCompatActivity() {
             onClickListener = View.OnClickListener { v ->
                 val item = v.tag as String
 
-                if (type == 1) {
-                    val intent = Intent(v.context, LongActivity::class.java).apply {
-                        putExtra("gameName", item)
-                    }
-                    v.context.startActivity(intent)
-                    activity.overridePendingTransition(0 , 0)
-                }
-                if (type == 2) {
-                    val intent = Intent(v.context, OneDevicePlayActivity::class.java).apply {
-                        putExtra("gameName", item)
-                    }
-                    v.context.startActivity(intent)
-                    activity.overridePendingTransition(0 , 0)
-
-                }
-                if (type == 3) {
-                    val intent = Intent(v.context, PlayWithComputerActivity::class.java).apply {
-                        putExtra("gameName", item)
-                    }
-                    v.context.startActivity(intent)
-                    activity.overridePendingTransition(0 , 0)
-                }
-                if (type == 0) {
-                    val intent = Intent(v.context, BlitzActivity::class.java).apply {
-                        putExtra("gameName", item)
-                    }
-                    v.context.startActivity(intent)
-                    activity.overridePendingTransition(0 , 0)
-                }
-                if (type == 5) {
-                    val systemTime = System.currentTimeMillis()
-                    val username = v.context.getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "")!!
-                    myRef.child("Users").child(opponent!!).child("calls")
-                        .child("9$systemTime").child(item)
-                        .child(username).setValue(systemTime % 2).addOnSuccessListener {
-                            Toast.makeText(v.context, "Вызов отправлен!", Toast.LENGTH_LONG).show()
+                when (type) {
+                    1 -> {
+                        val intent = Intent(v.context, LongActivity::class.java).apply {
+                            putExtra("gameName", item)
                         }
+                        v.context.startActivity(intent)
+                        activity.overridePendingTransition(0 , 0)
+                    }
+                    2 -> {
+                        val intent = Intent(v.context, OneDevicePlayActivity::class.java).apply {
+                            putExtra("gameName", item)
+                        }
+                        v.context.startActivity(intent)
+                        activity.overridePendingTransition(0 , 0)
+
+                    }
+                    3 -> {
+                        val intent = Intent(v.context, PlayWithComputerActivity::class.java).apply {
+                            putExtra("gameName", item)
+                        }
+                        v.context.startActivity(intent)
+                        activity.overridePendingTransition(0 , 0)
+                    }
+                    0 -> {
+                        val intent = Intent(v.context, BlitzActivity::class.java).apply {
+                            putExtra("gameName", item)
+                        }
+                        v.context.startActivity(intent)
+                        activity.overridePendingTransition(0 , 0)
+                    }
+                    5 -> {
+                        val systemTime = System.currentTimeMillis()
+                        val username = v.context.getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "")!!
+                        myRef.child("Users").child(opponent!!).child("calls")
+                            .child("9$systemTime").child(item)
+                            .child(username).setValue(systemTime % 2).addOnSuccessListener {
+                                Toast.makeText(v.context, "Вызов отправлен!", Toast.LENGTH_LONG).show()
+                            }
+                    }
                 }
             }
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_new_game_item, parent, false)
-            if (Design == "Egypt"){
-                view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.background_egypt)
-                view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-            }
-            else if (Design == "Casino"){
-                view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.new_game_item_casino)
-                view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-                view.findViewById<TextView>(R.id.textView2).setTextColor(Color.YELLOW)
-            }
-            else if (Design == "Rome"){
-                view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.new_game_item_rome)
-                view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-                view.findViewById<TextView>(R.id.textView2).setTextColor(Color.rgb(193, 150, 63))
-            }
-
-            else if (Design == "Gothic"){
-                view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.new_game_item_gothic)
-                view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-                view.findViewById<TextView>(R.id.textView2).setTextColor(Color.WHITE)
-            }
-
-            else if (Design == "Japan"){
-                view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.new_game_item_japan)
-                view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-            }
-            else if (Design == "Noir"){
-                view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.new_game_item_noir)
-                view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
-                view.findViewById<TextView>(R.id.textView2).setTextColor(Color.WHITE)
+            when (Design) {
+                "Egypt" -> {
+                    view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.background_egypt)
+                    view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                }
+                "Casino" -> {
+                    view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.new_game_item_casino)
+                    view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                    view.findViewById<TextView>(R.id.textView2).setTextColor(Color.YELLOW)
+                }
+                "Rome" -> {
+                    view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.new_game_item_rome)
+                    view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                    view.findViewById<TextView>(R.id.textView2).setTextColor(Color.rgb(193, 150, 63))
+                }
+                "Gothic" -> {
+                    view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.new_game_item_gothic)
+                    view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                    view.findViewById<TextView>(R.id.textView2).setTextColor(Color.WHITE)
+                }
+                "Japan" -> {
+                    view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.new_game_item_japan)
+                    view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                }
+                "Noir" -> {
+                    view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.new_game_item_noir)
+                    view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                    view.findViewById<TextView>(R.id.textView2).setTextColor(Color.WHITE)
+                }
             }
 
             //card2.setBackgroundResource(R.drawable.background_egypt)

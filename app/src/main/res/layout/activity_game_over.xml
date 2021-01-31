@@ -8,27 +8,28 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
-        android:layout_width="283dp"
-        android:layout_height="323dp"
+        android:layout_width="312dp"
+        android:layout_height="634dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.225">
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/revanche"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:background="#FFEB3B"
             android:text="в меню"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/restart"
-            app:layout_constraintHorizontal_bias="0.326"
+            app:layout_constraintHorizontal_bias="0.052"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.934" />
+            app:layout_constraintVertical_bias="0.402" />
 
         <TextView
             android:id="@+id/resultText"
@@ -37,21 +38,22 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.508"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.271" />
+            app:layout_constraintVertical_bias="0.254" />
 
         <Button
             android:id="@+id/restart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="20dp"
             android:background="#FFC107"
             android:text="Закрыть"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.934" />
+            app:layout_constraintVertical_bias="0.402" />
 
         <TextView
             android:id="@+id/ratingChange"
@@ -59,8 +61,45 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/revanche"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/resultText" />
+            app:layout_constraintTop_toBottomOf="@+id/resultText"
+            app:layout_constraintVertical_bias="0.085" />
+
+        <Button
+            android:id="@+id/icon_for_you"
+            android:layout_width="115dp"
+            android:layout_height="115dp"
+            android:layout_marginStart="16dp"
+            android:text="Button"
+            app:layout_constraintBottom_toTopOf="@+id/resultText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.4" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="51dp"
+            android:layout_height="31dp"
+            android:src="@drawable/av1"
+            app:layout_constraintBottom_toBottomOf="@+id/icon_for_you"
+            app:layout_constraintStart_toEndOf="@+id/icon_for_you"
+            app:layout_constraintTop_toTopOf="@+id/icon_for_you" />
+
+        <Button
+            android:id="@+id/icon_for_two"
+            android:layout_width="115dp"
+            android:layout_height="115dp"
+            android:layout_marginEnd="15dp"
+            android:text="Button"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.888"
+            app:layout_constraintStart_toEndOf="@+id/imageView6"
+            app:layout_constraintTop_toTopOf="@+id/imageView6" />
+
+       
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
