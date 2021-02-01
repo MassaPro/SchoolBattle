@@ -66,7 +66,7 @@ class ShopFragmentActivity : Fragment (){
                 tv?.typeface = locale_context?.let { ResourcesCompat.getFont(it, R.font.egypt) } //шрифт
                 tabLayout!!.getTabAt(i)?.customView = tv;
                 t_shop.setBackgroundColor(rgb(255, 230, 163))
-                fon.setBackgroundResource(R.drawable.background_egypt)
+                fon.setBackgroundResource(R.drawable.sign_in_egypt)
                 button_shop_name.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
                 button_shop_name.textSize = 25f
                 money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
@@ -174,7 +174,7 @@ class ShopFragmentActivity : Fragment (){
 
         if(Design == "Egypt")
         {
-            fon.setBackgroundResource(R.drawable.background_egypt)
+            fon.setBackgroundResource(R.drawable.sign_in_egypt)
             t_shop.setBackgroundColor(rgb(255, 230, 163))
         }
         else if(Design == "Casino")

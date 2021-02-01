@@ -70,7 +70,7 @@ class GameListActivity : Fragment() {
                 //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
             }
             "Rome" -> {
-                game_list_playing.setBackgroundResource(R.drawable.background_rome);
+                game_list_playing.setBackgroundResource(R.drawable.sign_in_rome);
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
                 toolbarName2.setTypeface(ResourcesCompat.getFont(
                     CONTEXT,

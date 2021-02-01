@@ -47,18 +47,19 @@ val PICTURE_AVATAR = mapOf(0 to R.drawable.av0, 1 to R.drawable.av1, 2 to R.draw
     7 to R.drawable.av7, 8 to R.drawable.av8, 9 to R.drawable.av9,10 to R.drawable.av10,11 to R.drawable.av11,12 to R.drawable.av12,13 to R.drawable.av13,
     14 to R.drawable.av14, 15 to R.drawable.av15, 16 to R.drawable.av16,17 to R.drawable.av17,18 to R.drawable.av18,19 to R.drawable.av19,20 to R.drawable.av20,
     21 to R.drawable.av21, 22 to R.drawable.av22, 23 to R.drawable.av23,24 to R.drawable.av24,25 to R.drawable.av25,26 to R.drawable.av26,27 to R.drawable.av27,
-    28 to R.drawable.av28, 29 to R.drawable.av29, 30 to R.drawable.av30)
-val AVATAR_TEXT = mapOf(0 to "Мир", 1 to "Звезда 1", 2 to "Золото",3 to "Корона",4 to "Инь-Янь",5 to "Солнце",6 to "Меркурий",
-    7 to "Венера", 8 to "Земля", 9 to "Луна",10 to "Марс",11 to "Юпитер",12 to "Сатурн",13 to "Уран",
-    14 to "Нептун", 15 to "Плутон", 16 to "Пентакль",17 to "Треугольник",18 to "Крест",19 to "Звезда 2",20 to "Тигр",
-    21 to "Пентаграмма", 22 to "Змея", 23 to "Маска",24 to "Топоры",25 to "Череп",26 to "Лилия",27 to "Роза",
-    28 to "Сердце", 29 to "Солнце", 30 to "Шут")
-val PRICE_OD_AVATAR = mapOf(0 to 0, 1 to 70000, 2 to 100000,3 to 200000,4 to 40000,5 to 80,6 to 100,
-    7 to 120, 8 to 140, 9 to 160,10 to 180,11 to 200,12 to 220,13 to 240,
-    14 to 260, 15 to 400, 16 to 800,17 to 900,18 to 800,19 to 1000,20 to 3000,
-    21 to 2000, 22 to 2500, 23 to 5000,24 to 6000,25 to 10000,26 to 30000,27 to 15000,
-    28 to 20000, 29 to 50000, 30 to 1000000)
-var ARRAY_OF_AVATAR_SHOP: MutableList<Int>  = mutableListOf(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30)             //номера  дизайнов в магазине
+    28 to R.drawable.av28, 29 to R.drawable.av29, 30 to R.drawable.av30,31 to R.drawable.av31,32 to R.drawable.av32)
+val AVATAR_TEXT = mapOf(0 to "Мир",1 to "Солнце",2 to "Меркурий", 3 to "Венера", 4 to "Земля",
+    5 to "Луна",6 to "Марс",7 to "Юпитер",8 to "Сатурн",9 to "Уран", 10 to "Нептун", 11 to "Плутон",
+    12 to "Пентакль",13 to "Треугольник",14 to "Крест",15 to "Звезда", 16 to "Пентаграмма",
+    17 to "Змея",18 to "Тигр", 19 to "Маска",20 to "Топоры",21 to "Череп",22 to "Инь-Янь",23 to "Сердце",
+    24 to "Орхидея",25 to "Фиалка", 26 to "Роза",27 to "Лилия", 28 to "Солнце",
+    29 to "Звезда 2", 30 to "Золото",31 to "Корона",32 to "Шут")
+val PRICE_OD_AVATAR = mapOf(0 to 0, 1 to 80,2 to 100, 3 to 120, 4 to 140,
+    5 to 160,6 to 180,7 to 200,8 to 220,9 to 240, 10 to 260, 11 to 400, 12 to 800,
+    13 to 900,14 to 950,15 to 1000,16 to 1500, 17 to 2000, 18 to 3000, 19 to 5000,
+    20 to 6000,21 to 10000,22 to 12500,23 to 15000, 24 to 20000, 25 to 25000,
+    26 to 30000,27 to 40000, 28 to 50000, 29 to 70000, 30 to 100000, 31 to 200000, 32 to 1000000)
+var ARRAY_OF_AVATAR_SHOP: MutableList<Int>  = mutableListOf(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32)             //номера  дизайнов в магазине
 var ARRAY_OF_AVATAR: MutableList<Int>  = mutableListOf(0,1,4,18,19)             //номера открытых дизайнов
 var AUXILIARY_MAP_OF_AVATAR = mapOf(0 to "ava1", 1 to "ava2", 2 to "ava3",3 to "ava4")
 //__________________________________________________________________________________________________________________________________

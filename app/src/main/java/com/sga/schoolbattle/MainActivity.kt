@@ -100,10 +100,16 @@ class MainActivity : Fragment() {
 
         when (Design) {
             "Normal" -> {
-                blitz.width = 320
-                newGameButton.width = 320
+
 
                 game_menu.setBackgroundResource(R.drawable.game_menu_normal)
+
+                searchButton.setBackgroundResource(R.drawable.button)
+                newGameButton.setBackgroundResource(R.drawable.button)
+                oneDevice.setBackgroundResource(R.drawable.button)
+                playWithComp.setBackgroundResource(R.drawable.button)
+                blitz.setBackgroundResource(R.drawable.button)
+
 
                 money.setTextColor(Color.BLACK)
             }
@@ -125,8 +131,8 @@ class MainActivity : Fragment() {
                 money.setTextColor(Color.BLACK)
             }
             "Casino" -> {
-                blitz.width = 320
-                newGameButton.width = 320
+
+                oneDevice.width = 330
                 game_menu.setBackgroundResource(R.drawable.game_menu_casino)
                 //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
@@ -147,7 +153,7 @@ class MainActivity : Fragment() {
 
                 oneDevice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 oneDevice.setTextColor(Color.YELLOW)
-                oneDevice.setTextSize(20f)
+                oneDevice.setTextSize(19f)
                 oneDevice.setBackgroundColor(argb(0,0,0,0))
 
                 playWithComp.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
@@ -164,6 +170,7 @@ class MainActivity : Fragment() {
                 money.setTextColor(Color.YELLOW)
             }
             "Rome" -> {
+                oneDevice.width = 330
                 game_menu.setBackgroundResource(R.drawable.game_menu_rome)
                 //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
@@ -184,7 +191,7 @@ class MainActivity : Fragment() {
 
                 oneDevice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                 oneDevice.setTextColor(rgb(193,150,63))
-                oneDevice.setTextSize(20f)
+                oneDevice.setTextSize(19f)
                 oneDevice.setBackgroundColor(argb(0,0,0,0))
 
                 playWithComp.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
@@ -238,6 +245,7 @@ class MainActivity : Fragment() {
                 money.setTextColor(Color.WHITE)
             }
             "Japan" -> {
+                oneDevice.width = 330
                 game_menu.setBackgroundResource(R.drawable.game_menu_japan)
                 //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
@@ -258,7 +266,7 @@ class MainActivity : Fragment() {
 
                 oneDevice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
                 oneDevice.setTextColor(Color.BLACK)
-                oneDevice.setTextSize(16f)
+                oneDevice.setTextSize(15f)
                 oneDevice.setBackgroundColor(argb(0,0,0,0))
 
                 playWithComp.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))

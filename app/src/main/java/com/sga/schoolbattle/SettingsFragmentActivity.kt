@@ -293,12 +293,10 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                 holder.background_item.setBackgroundColor(Color.WHITE)
                 holder.button_prem.textSize = 15f        //так задаешь размер
                 holder.button_prem.setTextColor(Color.BLACK)   //цвет
-                holder.button_prem.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
                 holder.button_prem.setBackgroundColor(rgb(243,243,243))
 
                 holder.contentView.textSize = 20f        //так задаешь размер
                 holder.contentView.setTextColor(Color.BLACK)   //цвет
-                holder.contentView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
                 holder.contentView.setBackgroundColor(argb(0,0,0,0))
 
             }

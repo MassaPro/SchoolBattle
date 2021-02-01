@@ -25,14 +25,14 @@
 
     <Button
         android:id="@+id/newGameButton"
-        android:layout_width="wrap_content"
-        android:layout_height="78dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="долгая-онлайн"
+        android:text="долгая&#10;онлайн"
         app:layout_constraintBottom_toTopOf="@+id/oneDevice"
         app:layout_constraintEnd_toEndOf="@+id/oneDevice"
         app:layout_constraintTop_toBottomOf="@+id/toolbarName2"
-        app:layout_constraintVertical_bias="0.961" />
+        app:layout_constraintVertical_bias="0.707" />
 
     <Button
         android:id="@+id/toolbarName2"
@@ -41,7 +41,6 @@
         android:layout_marginStart="10dp"
         android:background="@android:color/transparent"
         android:text="Button"
-
 
         android:textAllCaps="false"
         android:textSize="25sp"
@@ -54,7 +53,7 @@
 
     <TextView
         android:id="@+id/money"
-        android:layout_width="78dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginEnd="5dp"
         android:background="@android:color/transparent"
@@ -63,22 +62,23 @@
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/money_icon"
         app:layout_constraintEnd_toStartOf="@+id/money_icon"
-        app:layout_constraintTop_toTopOf="@+id/money_icon" />
+        app:layout_constraintTop_toTopOf="@+id/money_icon"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/oneDevice"
-        android:layout_width="330dp"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="112dp"
         android:text="Игра на одном устройстве"
         app:layout_constraintEnd_toEndOf="@+id/playWithComp"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="@+id/playWithComp"
         app:layout_constraintTop_toBottomOf="@+id/toolbarName2" />
 
     <Button
         android:id="@+id/playWithComp"
-        android:layout_width="330dp"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="игра с компьютером"
@@ -89,27 +89,27 @@
 
     <Button
         android:id="@+id/searchButton"
-        android:layout_width="330dp"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Поиск Соперника"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playWithComp" />
 
     <Button
         android:id="@+id/blitz"
-        android:layout_width="wrap_content"
-        android:layout_height="78dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="блиц-онлайн"
+        android:text="блиц&#10;онлайн"
         app:layout_constraintBottom_toTopOf="@+id/oneDevice"
         app:layout_constraintEnd_toStartOf="@+id/newGameButton"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/oneDevice"
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar2"
-        app:layout_constraintVertical_bias="0.609" />
+        app:layout_constraintVertical_bias="0.508" />
 
     <ImageButton
         android:id="@+id/money_icon"
