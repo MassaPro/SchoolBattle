@@ -7,11 +7,21 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+    aaptOptions { cruncherEnabled = false }
+
     defaultConfig {
-        applicationId "com.example.schoolbattle"
+        applicationId "com.sga.schoolbattle"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 1
+        versionCode 12
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -19,10 +29,14 @@ android {
 
     buildTypes {
         release {
+            shrinkResources false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+
+
 
 // To inline the bytecode built with JVM target 1.8 into
 // bytecode that is being built with JVM target 1.6. (e.g. navArgs)
@@ -35,6 +49,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
 
 }
 
@@ -70,5 +85,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-ads:19.2.0'
     implementation 'com.jjoe64:graphview:4.2.2' //NVM added
 
-    implementation project(':nativetemplates')
+
 }

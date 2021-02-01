@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_xog_with_computer">
 
-        <com.example.schoolbattle.gameswithcomp.CanvasView_xog_with_computer
+        <com.sga.schoolbattle.gameswithcomp.CanvasView_xog_with_computer
             android:id="@+id/signature_canvas_xog_with_computer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

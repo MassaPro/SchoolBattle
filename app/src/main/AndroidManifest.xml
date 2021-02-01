@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.schoolbattle">
+    package="com.sga.schoolbattle">
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -18,13 +18,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".gameswithcomp.VirusWithComputer"
+            android:name="com.sga.schoolbattle.gameswithcomp.VirusWithComputer"
             android:hardwareAccelerated="true">
         </activity>
-        <activity android:name=".engine.LongActivity"
+        <activity android:name="com.sga.schoolbattle.engine.LongActivity"
             android:hardwareAccelerated="true">
         </activity>
-        <activity android:name=".gamesonline.ReversiGameActivity"
+        <activity android:name="com.sga.schoolbattle.gamesonline.ReversiGameActivity"
             android:hardwareAccelerated="true"/>
 
         <meta-data
@@ -32,84 +32,84 @@
             android:value="ca-app-pub-8137188857901546~1022017686" />
 
 
-        <activity android:name=".gamesonline.TEST"
+        <activity android:name="com.sga.schoolbattle.gamesonline.TEST"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".social.ProfileUserActivity"
+        <activity android:name="com.sga.schoolbattle.social.ProfileUserActivity"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".engine.BlitzActivity"
+        <activity android:name="com.sga.schoolbattle.engine.BlitzActivity"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".SearchActivity"
+        <activity android:name="com.sga.schoolbattle.SearchActivity"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".gameswithcomp.SnakeGameWithComputer"
+        <activity android:name="com.sga.schoolbattle.gameswithcomp.SnakeGameWithComputer"
             android:theme="@style/FullScreenTheme"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".gameswithcomp.ReversiWithComputer"
+        <activity android:name="com.sga.schoolbattle.gameswithcomp.ReversiWithComputer"
             android:theme="@style/FullScreenTheme"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".gameswithcomp.DotGameWithComputer"
+        <activity android:name="com.sga.schoolbattle.gameswithcomp.DotGameWithComputer"
             android:theme="@style/FullScreenTheme"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".gameswithcomp.ConersWithComputer"
+        <activity android:name="com.sga.schoolbattle.gameswithcomp.ConersWithComputer"
             android:theme="@style/FullScreenTheme"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".gameswithcomp.BoxGameWithComputer"
+        <activity android:name="com.sga.schoolbattle.gameswithcomp.BoxGameWithComputer"
             android:theme="@style/FullScreenTheme"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".gamesonline.SnakeGameActivity"
+        <activity android:name="com.sga.schoolbattle.gamesonline.SnakeGameActivity"
             android:theme="@style/FullScreenTheme"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".gamesonedevice.ReversiOneDivice"
+        <activity android:name="com.sga.schoolbattle.gamesonedevice.ReversiOneDivice"
             android:theme="@style/FullScreenTheme"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".gamesonline.BoxGameActivity"
+        <activity android:name="com.sga.schoolbattle.gamesonline.BoxGameActivity"
             android:theme="@style/FullScreenTheme"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".gamesonedevice.VirusOneDivice"
+        <activity android:name="com.sga.schoolbattle.gamesonedevice.VirusOneDivice"
             android:theme="@style/FullScreenTheme"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".gamesonedevice.BoxGameOneDivice"
+        <activity android:name="com.sga.schoolbattle.gamesonedevice.BoxGameOneDivice"
             android:theme="@style/FullScreenTheme"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".gamesonedevice.SnakeGameOneDivice"
+        <activity android:name="com.sga.schoolbattle.gamesonedevice.SnakeGameOneDivice"
             android:theme="@style/FullScreenTheme"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".gamesonedevice.DotGameOneDivice"
+        <activity android:name="com.sga.schoolbattle.gamesonedevice.DotGameOneDivice"
             android:theme="@style/FullScreenTheme"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".gamesonedevice.ConersOneDevice"
+        <activity android:name="com.sga.schoolbattle.gamesonedevice.ConersOneDevice"
             android:theme="@style/FullScreenTheme"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".gameswithcomp.XOGame_withComputer"
+        <activity android:name="com.sga.schoolbattle.gameswithcomp.XOGame_withComputer"
             android:theme="@style/FullScreenTheme"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".gamesonedevice.XOGame_oneDivice"
+        <activity android:name="com.sga.schoolbattle.gamesonedevice.XOGame_oneDivice"
         android:theme="@style/FullScreenTheme"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".PlayWithComputerActivity"
+        <activity android:name="com.sga.schoolbattle.PlayWithComputerActivity"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".OneDevicePlayActivity"
+        <activity android:name="com.sga.schoolbattle.OneDevicePlayActivity"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".gamesonline.DotGameActivity"
+        <activity android:name="com.sga.schoolbattle.gamesonline.DotGameActivity"
             android:theme="@style/FullScreenTheme"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".NavigatorActivity"
+        <activity android:name="com.sga.schoolbattle.NavigatorActivity"
             android:label=""/>
-        <activity android:name=".engine.GameListActivity" />
-        <activity android:name=".gamesonline.XOGameActivity"
+        <activity android:name="com.sga.schoolbattle.engine.GameListActivity" />
+        <activity android:name="com.sga.schoolbattle.gamesonline.XOGameActivity"
             android:hardwareAccelerated="true"
             android:theme="@style/FullScreenTheme"/>
-        <activity android:name=".SignInActivity"
+        <activity android:name="com.sga.schoolbattle.SignInActivity"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".gamesonline.StupidGameActivityTwoPlayers"
+        <activity android:name="com.sga.schoolbattle.gamesonline.StupidGameActivityTwoPlayers"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".engine.StupidGameActivity"
+        <activity android:name="com.sga.schoolbattle.engine.StupidGameActivity"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".NewGameActivity"
+        <activity android:name="com.sga.schoolbattle.NewGameActivity"
             android:hardwareAccelerated="true"/>
-        <activity android:name=".SignUpActivity"
+        <activity android:name="com.sga.schoolbattle.SignUpActivity"
             android:hardwareAccelerated="true"/>
         <activity
-            android:name=".NullActivity"
+            android:name="com.sga.schoolbattle.NullActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

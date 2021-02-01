@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:654477563598:android:4f018b0332ed476e6b229f",
         "android_client_info": {
-          "package_name": "com.example.schoolbattle"
+          "package_name": "com.sga.schoolbattle"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "654477563598-acl4te49rbela4lbs51pdu4jgun4sqep.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.schoolbattle",
+            "package_name": "com.sga.schoolbattle",
             "certificate_hash": "3992c03df91a0843881abb152af79f11a3a0bdd2"
           }
         },

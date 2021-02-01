@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_snake_online">
 
-        <com.example.schoolbattle.gamesonline.CanvasView_SNAKE_online
+        <com.sga.schoolbattle.gamesonline.CanvasView_SNAKE_online
             android:id="@+id/signature_canvas_snake_online"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

@@ -16,35 +16,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_xog_online">
 
-        <com.example.schoolbattle.gamesonline.CanvasView
+        <com.sga.schoolbattle.gamesonline.CanvasView
             android:id="@+id/signature_canvas"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="#FFFFFF"
             android:visibility="gone" />
 
-        <com.example.schoolbattle.gamesonline.CanvasViewDot
+        <com.sga.schoolbattle.gamesonline.CanvasViewDot
             android:id="@+id/signature_canvas3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="#FFFFFF"
             android:visibility="gone" />
 
-        <com.example.schoolbattle.gamesonline.CanvasViewReversi
+        <com.sga.schoolbattle.gamesonline.CanvasViewReversi
             android:id="@+id/signature_canvas_reversi"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="#FFFFFF"
             android:visibility="gone" />
 
-        <com.example.schoolbattle.gamesonline.CanvasView_Boxs_online
+        <com.sga.schoolbattle.gamesonline.CanvasView_Boxs_online
             android:id="@+id/signature_canvas_box"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="#FFFFFF"
             android:visibility="gone" />
 
-        <com.example.schoolbattle.gamesonline.CanvasView_SNAKE_online
+        <com.sga.schoolbattle.gamesonline.CanvasView_SNAKE_online
             android:id="@+id/signature_canvas_snake_online"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

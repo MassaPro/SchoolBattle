@@ -7,29 +7,29 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.schoolbattle.MainActivity"
+        android:name="com.sga.schoolbattle.MainActivity"
         android:label="@string/title_home"
         tools:layout="@layout/activity_game_menu" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.schoolbattle.engine.GameListActivity"
+        android:name="com.sga.schoolbattle.engine.GameListActivity"
         android:label="@string/title_dashboard"
         tools:layout="@layout/activity_list_of_current_games" />
 
     <fragment
         android:id="@+id/navigation_social"
-        android:name="com.example.schoolbattle.social.SocialActivity"
+        android:name="com.sga.schoolbattle.social.SocialActivity"
         android:label="@string/title_activity_social"
         tools:layout="@layout/activity_social" />
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="com.example.schoolbattle.SettingsFragmentActivity"
+        android:name="com.sga.schoolbattle.SettingsFragmentActivity"
         android:label="@string/title_notifications"
         tools:layout="@layout/activity_settings_fragment" />
     <fragment
         android:id="@+id/navigation_shop"
-        android:name="com.example.schoolbattle.shop.ShopFragmentActivity"
+        android:name="com.sga.schoolbattle.shop.ShopFragmentActivity"
         android:label="@string/title_notifications"
         tools:layout="@layout/activity_settings_fragment" />
     <fragment

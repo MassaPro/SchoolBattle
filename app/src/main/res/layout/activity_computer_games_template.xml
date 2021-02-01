@@ -19,35 +19,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_with_computer_template">
 
-        <com.example.schoolbattle.gameswithcomp.CanvasView_Boxs_with_computer
+        <com.sga.schoolbattle.gameswithcomp.CanvasView_Boxs_with_computer
             android:id="@+id/signature_canvas_box_with_computer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="#FFFFFF"
             android:visibility="gone" />
 
-        <com.example.schoolbattle.gameswithcomp.CanvasView_corners_with_computer
+        <com.sga.schoolbattle.gameswithcomp.CanvasView_corners_with_computer
             android:id="@+id/signature_canvas_corners_with_computer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="#FFFFFF"
             android:visibility="gone" />
 
-        <com.example.schoolbattle.gameswithcomp.CanvasView_reversi_with_computer
+        <com.sga.schoolbattle.gameswithcomp.CanvasView_reversi_with_computer
             android:id="@+id/signature_canvas_reversi_with_computer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="#FFFFFF"
             android:visibility="gone" />
 
-        <com.example.schoolbattle.gameswithcomp.CanvasView_xog_with_computer
+        <com.sga.schoolbattle.gameswithcomp.CanvasView_xog_with_computer
             android:id="@+id/signature_canvas_xog_with_computer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="#FFFFFF"
             android:visibility="gone"  />
 
-        <com.example.schoolbattle.gameswithcomp.CanvasView_Dots_with_computer
+        <com.sga.schoolbattle.gameswithcomp.CanvasView_Dots_with_computer
             android:id="@+id/signature_canvas_dots_with_computer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -55,13 +55,13 @@
             android:visibility="gone"  />
 
 
-        <com.example.schoolbattle.gameswithcomp.CanvasView_virus_with_computer
+        <com.sga.schoolbattle.gameswithcomp.CanvasView_virus_with_computer
             android:id="@+id/signature_canvas_virus_with_computer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="#FFFFFF"
             android:visibility="gone"  />
-        <com.example.schoolbattle.gameswithcomp.CanvasView_SNAKE_COMPUTER
+        <com.sga.schoolbattle.gameswithcomp.CanvasView_SNAKE_COMPUTER
             android:id="@+id/signature_canvas_snake_with_computer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
