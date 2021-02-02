@@ -1,6 +1,7 @@
 package com.sga.schoolbattle
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -10,12 +11,18 @@ import android.media.SoundPool
 import android.net.ConnectivityManager
 import android.os.Handler
 import android.os.Vibrator
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdLoader
+import com.google.android.gms.ads.formats.MediaView
+import com.google.android.gms.ads.formats.UnifiedNativeAd
+import com.google.android.gms.ads.formats.UnifiedNativeAdView
 import com.sga.schoolbattle.engine.Game
 import com.sga.schoolbattle.engine.RecyclerSet
 import com.sga.schoolbattle.engine.RecyclerSetBlitz
 import com.google.firebase.database.ChildEventListener
+import kotlinx.android.synthetic.main.activity_game_over.*
 
 var handler_for_emotion : Handler = Handler()
 
@@ -190,3 +197,30 @@ fun verifyAvailableNetwork(activity: AppCompatActivity):Boolean{
 }
 
 var RATING = -1
+
+lateinit var adLoader: AdLoader
+
+
+
+lateinit var DDD: Dialog
+
+fun populateUnifiedNativeAdView(unifiedNativeAd: UnifiedNativeAd, adView: UnifiedNativeAdView) {
+    // Locate the view that will hold the headline, set its text, and use the
+    // UnifiedNativeAdView's headlineView property to register it.
+    val headlineView = adView.findViewById<TextView>(R.id.ad_headline)
+    headlineView.text = unifiedNativeAd.headline
+    adView.headlineView = headlineView
+
+    val mediaView = adView.findViewById<MediaView>(R.id.ad_app_icon)
+    adView.mediaView = mediaView
+
+    // Call the UnifiedNativeAdView's setNativeAd method to register the
+    // NativeAdObject.
+    adView.setNativeAd(unifiedNativeAd)
+
+    // Ensure that the parent view doesn't already contain an ad view.
+    DDD.add_frame.removeAllViews()
+
+    // Place the AdView into the parent.
+    DDD.add_frame.addView(adView)
+}

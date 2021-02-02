@@ -1,6 +1,7 @@
 package com.sga.schoolbattle.gamesonline
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.graphics.*
 import android.graphics.Color.argb
@@ -13,6 +14,12 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdLoader
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.formats.NativeAdOptions
+import com.google.android.gms.ads.formats.UnifiedNativeAd
+import com.google.android.gms.ads.formats.UnifiedNativeAdView
 import com.sga.schoolbattle.*
 import com.sga.schoolbattle.engine.BlitzGameEngine
 import com.sga.schoolbattle.engine.LongGameEngine
@@ -406,6 +413,34 @@ class SnakeGameActivity : AppCompatActivity() {
                 }
             }
         })
+        DDD = Dialog(this)
+        DDD.setContentView(R.layout.activity_game_over)
+        adLoader = AdLoader.Builder(this, "ca-app-pub-3940256099942544/2247696110")
+            .forUnifiedNativeAd { unifiedNativeAd : UnifiedNativeAd ->
+                // Show the ad.
+
+                val adView = this.layoutInflater
+                    .inflate(R.layout.natative_ads, null) as UnifiedNativeAdView
+                populateUnifiedNativeAdView(unifiedNativeAd, adView)
+                if (this.isDestroyed) {
+                    unifiedNativeAd.destroy()
+                    return@forUnifiedNativeAd
+                }
+
+            }
+            .withAdListener(object : AdListener() {
+                override fun onAdFailedToLoad(errorCode: Int) {
+                    // Handle the failure by logging, altering the UI, and so on.
+                }
+            })
+            .withNativeAdOptions(
+                NativeAdOptions.Builder()
+                    // Methods in the NativeAdOptions.Builder class can be
+                    // used here to specify individual options settings.
+                    .build())
+            .build()
+
+        adLoader.loadAd(AdRequest.Builder().build())
     }
 
     override fun onPause() {

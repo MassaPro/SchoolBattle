@@ -155,6 +155,9 @@ class NewGameActivity : AppCompatActivity() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_new_game_item, parent, false)
             when (Design) {
+                "Normal" -> {
+               //   view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.button)
+                }
                 "Egypt" -> {
                     view.findViewById<CardView>(R.id.card2).setBackgroundResource(R.drawable.background_egypt)
                     view.findViewById<TextView>(R.id.textView2).setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))

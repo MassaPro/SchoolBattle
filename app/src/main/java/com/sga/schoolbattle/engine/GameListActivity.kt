@@ -49,6 +49,9 @@ class GameListActivity : Fragment() {
         setupRecyclerView(item_list)
         Toast.makeText(requireContext(), CURRENTGAMES.size.toString(), Toast.LENGTH_LONG).show()
         when (Design) {
+            "Normal" ->{
+
+            }
             "Egypt" -> {
                 game_list_playing.setBackgroundResource(R.drawable.game_list_menu_egypt);
                 my_toolbar2.setBackgroundColor(rgb(255, 230, 163))

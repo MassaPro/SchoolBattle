@@ -1,6 +1,7 @@
 package com.sga.schoolbattle.gamesonline
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.graphics.*
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,12 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdLoader
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.formats.NativeAdOptions
+import com.google.android.gms.ads.formats.UnifiedNativeAd
+import com.google.android.gms.ads.formats.UnifiedNativeAdView
 import com.sga.schoolbattle.*
 import com.sga.schoolbattle.engine.BlitzGameEngine
 import com.sga.schoolbattle.engine.LongGameEngine
@@ -121,79 +128,81 @@ class ReversiGameActivity : AppCompatActivity() {
         PICTURE_AVATAR[AVATAR]?.let { avatar_of_protivnic.setImageResource(it) } //TODO заменить это на значения его аватарки
         bottom_navigation_xog_online.itemIconTintList = generateColorStateList()
         bottom_navigation_xog_online.itemTextColor = generateColorStateList()
-        if(Design == "Egypt" ) {
-            label_online.setBackgroundResource(R.drawable.background_egypt)
-            button_player_1_online_xog.setTextColor(Color.BLACK)
-            button_player_2_online_xog.setTextColor(Color.BLACK)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundColor(Color.rgb(255, 230, 163))
-            toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-        }
-        else if(Design == "Casino" ) {
-            label_online.setBackgroundResource(R.drawable.background2_casino)
-            button_player_1_online_xog.setTextColor(Color.YELLOW)
-            button_player_2_online_xog.setTextColor(Color.YELLOW)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_casino)
-            toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-        }
-        else if(Design == "Rome" ) {
-            label_online.setBackgroundResource(R.drawable.background_rome)
-            button_player_1_online_xog.setTextColor(Color.rgb(224, 164, 103))
-            button_player_2_online_xog.setTextColor(Color.rgb(224, 164, 103))
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_rome)
-            toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-        }
-        else if(Design == "Japan" ) {
-            label_online.setBackgroundResource(R.drawable.background_japan)
-            button_player_1_online_xog.setTextColor(Color.BLACK)
-            button_player_2_online_xog.setTextColor(Color.BLACK)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundColor(Color.WHITE)
-            toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-        }
-        else if(Design == "Gothic" ) {
-            label_online.setBackgroundResource(R.drawable.background_gothic)
-            button_player_1_online_xog.setTextColor(Color.WHITE)
-            button_player_2_online_xog.setTextColor(Color.WHITE)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
-            toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            button_player_1_online_xog.textSize = 16.5f
-            button_player_2_online_xog.textSize = 16.5f
-        }
-        else if(Design == "Noir") {
-            label_online.setBackgroundResource(R.drawable.background_noir)
-            button_player_1_online_xog.setTextColor(Color.WHITE)
-            button_player_2_online_xog.setTextColor(Color.WHITE)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
-            toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
+        when (Design) {
+            "Egypt" -> {
+                label_online.setBackgroundResource(R.drawable.background_egypt)
+                button_player_1_online_xog.setTextColor(Color.BLACK)
+                button_player_2_online_xog.setTextColor(Color.BLACK)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
+                bottom_navigation_xog_online.setBackgroundColor(Color.rgb(255, 230, 163))
+                toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            }
+            "Casino" -> {
+                label_online.setBackgroundResource(R.drawable.background2_casino)
+                button_player_1_online_xog.setTextColor(Color.YELLOW)
+                button_player_2_online_xog.setTextColor(Color.YELLOW)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
+                bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_casino)
+                toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            }
+            "Rome" -> {
+                label_online.setBackgroundResource(R.drawable.background_rome)
+                button_player_1_online_xog.setTextColor(Color.rgb(224, 164, 103))
+                button_player_2_online_xog.setTextColor(Color.rgb(224, 164, 103))
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
+                bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_rome)
+                toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            }
+            "Japan" -> {
+                label_online.setBackgroundResource(R.drawable.background_japan)
+                button_player_1_online_xog.setTextColor(Color.BLACK)
+                button_player_2_online_xog.setTextColor(Color.BLACK)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
+                bottom_navigation_xog_online.setBackgroundColor(Color.WHITE)
+                toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            }
+            "Gothic" -> {
+                label_online.setBackgroundResource(R.drawable.background_gothic)
+                button_player_1_online_xog.setTextColor(Color.WHITE)
+                button_player_2_online_xog.setTextColor(Color.WHITE)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
+                bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
+                toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                button_player_1_online_xog.textSize = 16.5f
+                button_player_2_online_xog.textSize = 16.5f
+            }
+            "Noir" -> {
+                label_online.setBackgroundResource(R.drawable.background_noir)
+                button_player_1_online_xog.setTextColor(Color.WHITE)
+                button_player_2_online_xog.setTextColor(Color.WHITE)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
+                bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
+                toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            }
         }
 
         CONTEXT = this
@@ -423,6 +432,35 @@ class ReversiGameActivity : AppCompatActivity() {
                 }
             }
         })
+
+        DDD = Dialog(this)
+        DDD.setContentView(R.layout.activity_game_over)
+        adLoader = AdLoader.Builder(this, "ca-app-pub-3940256099942544/2247696110")
+            .forUnifiedNativeAd { unifiedNativeAd : UnifiedNativeAd ->
+                // Show the ad.
+
+                val adView = this.layoutInflater
+                    .inflate(R.layout.natative_ads, null) as UnifiedNativeAdView
+                populateUnifiedNativeAdView(unifiedNativeAd, adView)
+                if (this.isDestroyed) {
+                    unifiedNativeAd.destroy()
+                    return@forUnifiedNativeAd
+                }
+
+            }
+            .withAdListener(object : AdListener() {
+                override fun onAdFailedToLoad(errorCode: Int) {
+                    // Handle the failure by logging, altering the UI, and so on.
+                }
+            })
+            .withNativeAdOptions(
+                NativeAdOptions.Builder()
+                    // Methods in the NativeAdOptions.Builder class can be
+                    // used here to specify individual options settings.
+                    .build())
+            .build()
+
+        adLoader.loadAd(AdRequest.Builder().build())
     }
 
     override fun onPause() {

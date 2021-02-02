@@ -1,14 +1,12 @@
 package com.sga.schoolbattle.engine
 
 import android.app.Activity
-import android.app.Dialog
-import android.view.Window
 import android.widget.Button
 import android.widget.TextView
-import com.sga.schoolbattle.R
-import com.sga.schoolbattle.myRef
-import com.sga.schoolbattle.now
 import com.google.firebase.database.ValueEventListener
+import com.sga.schoolbattle.*
+import kotlinx.android.synthetic.main.activity_game_over.*
+
 
 class Game(val name: String = "", val type: String = "StupidGame", val text: String = "you VS") {
     override fun toString(): String {
@@ -17,9 +15,12 @@ class Game(val name: String = "", val type: String = "StupidGame", val text: Str
 }
 
 class ShowResult(activity: Activity) {
-    private val dialog = Dialog(activity)
+
+    private val dialog = DDD
     private var state = false
     private var con = activity
+
+
 
     fun showResult(
         result: String,
@@ -30,16 +31,42 @@ class ShowResult(activity: Activity) {
         newRating: Int
     ) {
         now = con
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setCanceledOnTouchOutside(true)
-        dialog.setContentView(R.layout.activity_game_over)
+
 
   //      PICTURE_AVATAR[picture1]?.let { dialog.icon_for_you.setBackgroundResource(it) } TODO заменить
   //      PICTURE_AVATAR[picture1]?.let { dialog.icon_for_you.setBackgroundResource(it) } TODO заменить
+
+        when (Design) {
+            "Normal" -> {
+                dialog.close_button_online.setBackgroundResource(R.drawable.close_cross)
+            }
+            "Egypt" -> {
+                dialog.close_button_online.setBackgroundResource(R.drawable.close_cross)
+            }
+            "Casino" -> {
+                dialog.close_button_online.setBackgroundResource(R.drawable.close_cross2)
+            }
+            "Rome" -> {
+                dialog.close_button_online.setBackgroundResource(R.drawable.close_cross3)
+            }
+            "Gothic" -> {
+                dialog.close_button_online.setBackgroundResource(R.drawable.close_cross2)
+            }
+            "Japan" -> {
+                dialog.close_button_online.setBackgroundResource(R.drawable.close_cross)
+            }
+            "Noir" -> {
+                dialog.close_button_online.setBackgroundResource(R.drawable.close_cross2)
+            }
+        }
+
+        dialog.close_button_online.setOnClickListener {
+            dialog.dismiss()
+        }
 
         val ng = dialog.findViewById(R.id.restart) as Button
         val rv = dialog.findViewById(R.id.revanche) as Button
+
         var eventListener: ValueEventListener? = null
         is_pressed = true
 
@@ -64,9 +91,21 @@ class ShowResult(activity: Activity) {
             changeRating.text = (if (newRating > userRating) "+" else "") + (newRating - userRating).toString()
         }
         dialog.show()
+
+
+
+        if(Design == "Normal")
+        {
+            dialog.close_button_online.setBackgroundResource(R.drawable.close_cross)
+        }
+        if(Design == "")
+        {
+            dialog.close_button_online.setBackgroundResource(R.drawable.close_cross)
+        }
     }
 
     fun delete() {
         dialog.dismiss()
     }
+
 }
