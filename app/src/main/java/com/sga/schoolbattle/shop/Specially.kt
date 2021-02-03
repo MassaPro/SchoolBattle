@@ -3,8 +3,10 @@ package com.sga.schoolbattle.shop
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,13 +19,15 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.sga.schoolbattle.*
-import com.sga.schoolbattle.engine.updateEconomyParams
+import com.anjlab.android.iab.v3.BillingProcessor
+import com.anjlab.android.iab.v3.TransactionDetails
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.reward.RewardItem
 import com.google.android.gms.ads.reward.RewardedVideoAd
 import com.google.android.gms.ads.reward.RewardedVideoAdListener
+import com.sga.schoolbattle.*
+import com.sga.schoolbattle.engine.updateEconomyParams
 import kotlinx.android.synthetic.main.activity_designs.*
 import kotlinx.android.synthetic.main.design_shop_item.view.*
 import kotlinx.android.synthetic.main.reward_dialog.*
@@ -31,10 +35,11 @@ import kotlin.math.min
 
 var Vidos : RewardedVideoAd? = null
 
+var bp : BillingProcessor?  = null
 
 lateinit var mRewardedVideoAd: RewardedVideoAd
 
-class Specially : Fragment(), RewardedVideoAdListener {
+class Specially : Fragment(), RewardedVideoAdListener , BillingProcessor.IBillingHandler{
 
 
     override fun onCreateView(
@@ -56,7 +61,17 @@ class Specially : Fragment(), RewardedVideoAdListener {
 
         Vidos = mRewardedVideoAd
 
+
+        bp = BillingProcessor.newBillingProcessor(
+            locale_context,
+            "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkher/MRJftx38FWROGozlffv10zjmTwcOKhTTXoeqo/uHogVVVJbmbR65NNCFegHvJp+GC1sGai+VQ+nc2m7b5D3rtBe6LJuayhBEuq7tvCrINzoswB1Z9O1pJNwJFie3IPHe7GY6zP4wCeCSL05ZcPkogMGH/B/+qBS0ZWvXS3rlqpBxwu36kKMkQcU27RuMaFTc6lJ5WocDt1ruGHfmAAMEvrr2HcJfnUbceJPUBuJLAMUd6WZif0qlIe3Tl9rkZD50RVRgG6TVpNnHcw3A4+A+z4m2CSq3wMtvRUsT/pl/L83eSqltKLgrPSCvA4OjksPm4G9cqfw63BkmtUc7QIDAQAB",
+            this
+        )
+        bp?.initialize()
+
+
         choose_design_shop.text = "Разное    "
+
 
 
 
@@ -133,8 +148,25 @@ class Specially : Fragment(), RewardedVideoAdListener {
                 choose_design_shop.setTextColor(Color.WHITE)
                 choose_design_shop.textSize = 20f
             }
+
+
         }
+
+
+        choose_design_shop.setOnClickListener {
+            bp?.purchase(activity,"android.test.purchased")
+        }
+
+
+        
+
     }
+
+
+
+
+
+
 
     private fun loadRewardedVideoAd() {
         mRewardedVideoAd.loadAd(
@@ -197,7 +229,47 @@ class Specially : Fragment(), RewardedVideoAdListener {
         locale_context?.findViewById<TextView>(R.id.money_shop_toolbar)?.text = MONEY.toString()
     }
 
+    override fun onBillingInitialized() {
+        Toast.makeText(locale_context, "гавно", Toast.LENGTH_LONG).show()
+    }
 
+
+    override fun onProductPurchased(productId: String, details: TransactionDetails?) {
+        Log.d("FOPOR", productId)
+        if(productId == "android.test.purchased") // потом заменить на настоящий идентификтор
+        {
+            PREMIUM = true;
+            val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+            editor.putString("premium", "1")
+            editor.apply()
+        }
+        Toast.makeText(locale_context, "гавно", Toast.LENGTH_LONG).show()
+        item_design_shop.adapter?.notifyDataSetChanged()
+    }
+
+    override fun onBillingError(errorCode: Int, error: Throwable?) {
+        Log.d("FOPOR", error?.message)
+    }
+
+    override fun onPurchaseHistoryRestored() {
+        /*
+    * Called when purchase history was restored and the list of all owned PRODUCT ID's
+    * was loaded from Google Play
+    */
+    }
+
+    override fun onDestroy() {
+        bp?.release()
+        super.onDestroy()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (bp!!.handleActivityResult(requestCode, resultCode, data)) super.onActivityResult(
+            requestCode,
+            resultCode,
+            data
+        )
+    }
 }
 
 
@@ -247,7 +319,11 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
         with(holder.itemView) {
             tag = ARRAY_OF_SPECIALLY_SHOP[position]
         }
+
         when (Design) {
+            "Normal" -> {
+                holder.button.setBackgroundResource(R.drawable.button)
+            }
             "Egypt" -> {
                 holder.background_item.setBackgroundColor(Color.rgb(255, 230, 163))
 
@@ -351,7 +427,11 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
                 holder.contentView.typeface = ResourcesCompat.getFont(locale_context!!, R.font.noir)
             }
         }
-
+        if(PREMIUM && position==1)
+        {
+            holder.button.background = null
+            holder.button.text = "(КУПЛЕНО)"
+        }
         holder.button.setOnClickListener {
             if(ARRAY_OF_SPECIALLY_SHOP[position] == 0)           // если это видос
             {
@@ -369,6 +449,18 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
                     ).show()
                 }
             }
+            else if(ARRAY_OF_SPECIALLY_SHOP[position] == 1)           // если это премиум
+            {
+               // bp!!.consumePurchase("android.test.purchased")  // для повторных покупо
+
+
+
+                bp?.purchase(locale_context, "android.test.purchased")
+
+                Log.d("FOPOR", bp?.getPurchaseListingDetails("android.test.purchased").toString())
+                
+            }
+
         }
     }
 

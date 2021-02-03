@@ -185,26 +185,11 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
         holder.price.text = PRICE_OD_AVATAR[ARRAY_OF_AVATAR_SHOP[position]].toString()             //цена стиля
         holder.contentView.text = AVATAR_TEXT[ARRAY_OF_AVATAR_SHOP[position]]          //название стиля
 
-        if(ARRAY_OF_AVATAR_SHOP[position] in  ARRAY_OF_AVATAR)         //если дизайн уже куплен
-        {
-            holder.button.text = "(КУПЛЕНО)"
-            holder.button.background = null
-            holder.price.text = ""
-        }
-        else
-        {
-            holder.icon.setImageResource(R.drawable.money)
-        }//TODO MONEY передать в базу ------- сделано в строках 256 - 262
-        //TODO ARRAY_OF_EMOTION передать в базу ------- сделано в строках 256 - 262
-//TODO MONEY передать в файрбейс
-        //TODO ARRAY_OF_AVATAR передать в файербейс
-// dialog = Proof_of_purchase(HELPED_CONTEXT!!,locale_context!!,"Design",ARRAY_OF_DESIGN_SHOP[position].toString().toInt(), PRICE_OD_DESIGN[ARRAY_OF_DESIGN_SHOP[position].toString().toInt()]!!)
-        //   dialog?.showResult()
-//если дизайн не куплен
 
-        //TODO MONEY = MONEY from firebase
-        //TODO ARRAY_OF_AVATAR = ARRAY_OF_AVATAR from firebase
         when (Design) {
+            "Normal" -> {
+                holder.button.setBackgroundResource(R.drawable.button)
+            }
             "Egypt" -> {
                 holder.background_item.setBackgroundColor(rgb(255, 230, 163))
 
@@ -296,6 +281,28 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
                 holder.contentView.typeface = ResourcesCompat.getFont(locale_context!!, R.font.noir)
             }
         }
+
+        if(ARRAY_OF_AVATAR_SHOP[position] in  ARRAY_OF_AVATAR)         //если дизайн уже куплен
+        {
+            holder.button.text = "(КУПЛЕНО)"
+            holder.button.background = null
+            holder.price.text = ""
+        }
+        else
+        {
+            holder.icon.setImageResource(R.drawable.money)
+        }
+        //TODO MONEY передать в базу ------- сделано в строках 256 - 262
+        //TODO ARRAY_OF_EMOTION передать в базу ------- сделано в строках 256 - 262
+//TODO MONEY передать в файрбейс
+        //TODO ARRAY_OF_AVATAR передать в файербейс
+// dialog = Proof_of_purchase(HELPED_CONTEXT!!,locale_context!!,"Design",ARRAY_OF_DESIGN_SHOP[position].toString().toInt(), PRICE_OD_DESIGN[ARRAY_OF_DESIGN_SHOP[position].toString().toInt()]!!)
+        //   dialog?.showResult()
+//если дизайн не куплен
+
+        //TODO MONEY = MONEY from firebase
+        //TODO ARRAY_OF_AVATAR = ARRAY_OF_AVATAR from firebase
+
 
         with(holder.itemView) {
             tag = ARRAY_OF_AVATAR_SHOP[position]

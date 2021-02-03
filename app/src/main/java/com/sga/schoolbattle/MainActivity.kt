@@ -75,6 +75,10 @@ class MainActivity : Fragment() {
         {
             ARRAY_OF_EMOTION =  DECODE(prfs?.getString("open_emotions", 0.toString()).toString())
         }
+        if(prfs?.getString("premium","0")=="1")
+        {
+            PREMIUM = true;
+        }
 
 
         AVATAR = prfs?.getString("avatar_number", 0.toString()).toString().toInt()

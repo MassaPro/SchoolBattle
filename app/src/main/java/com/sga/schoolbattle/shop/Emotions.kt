@@ -196,6 +196,9 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
         }
 
         when (Design) {
+            "Normal" -> {
+                holder.button.setBackgroundResource(R.drawable.button)
+            }
             "Egypt" -> {
                 holder.background_item.setBackgroundColor(Color.rgb(255, 230, 163))
 

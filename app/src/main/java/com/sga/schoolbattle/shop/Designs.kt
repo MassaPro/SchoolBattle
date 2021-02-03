@@ -188,17 +188,10 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
         holder.price.text = PRICE_OD_DESIGN[ARRAY_OF_DESIGN_SHOP[position]].toString()             //цена стиля
         holder.contentView.text = PICTURE_TEXT[ARRAY_OF_DESIGN_SHOP[position]]          //название стиля
 
-        if(ARRAY_OF_DESIGN_SHOP[position] in  ARRAY_OF_DESIGN)         //если дизайн уже куплен
-        {
-            holder.button.text = "(КУПЛЕНО)"
-            holder.button.background = null
-            holder.price.text = ""
-        }
-        else
-        {
-            holder.icon.setImageResource(R.drawable.money)
-        }
         when (Design) {
+            "Normal" -> {
+                holder.button.setBackgroundResource(R.drawable.button)
+            }
             "Egypt" -> {
                 holder.background_item.setBackgroundColor(Color.rgb(255, 230, 163))
 
@@ -290,6 +283,17 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
                 holder.contentView.typeface = ResourcesCompat.getFont(locale_context!!, R.font.noir)
             }
         }
+        if(ARRAY_OF_DESIGN_SHOP[position] in  ARRAY_OF_DESIGN)         //если дизайн уже куплен
+        {
+            holder.button.text = "(КУПЛЕНО)"
+            holder.button.background = null
+            holder.price.text = ""
+        }
+        else
+        {
+            holder.icon.setImageResource(R.drawable.money)
+        }
+
 
         with(holder.itemView) {
             tag = ARRAY_OF_DESIGN_SHOP[position]
