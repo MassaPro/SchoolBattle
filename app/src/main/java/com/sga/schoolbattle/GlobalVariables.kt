@@ -86,7 +86,7 @@ var AUXILIARY_MAP_OF_EMOTION = mapOf(0 to "e0", 1 to "e1", 2 to "e2",3 to "e3",4
 //____________________________________________________________________________________________________________________________
 var SPECIALLY: String = "ava1"               //СПЕЦИАЛЬНОЕ
 val PICTURE_SPECIALLY = mapOf(0 to R.drawable.video, 1 to R.drawable.vip, 2 to R.drawable.avatar1,3 to R.drawable.avatar1)
-val SPECIALLY_TEXT = mapOf(0 to "ВИДЕО С ВОЗНАГРАЖДЕНИЕМ", 1 to "ПРЕМИУМ АККАУНТ", 2 to "ШОШОШОШО",3 to "ДЛДДЛДЛДЛ")
+val SPECIALLY_TEXT = mapOf(0 to "ВИДЕО С ВОЗНАГРАЖДЕНИЕМ", 1 to "ПРЕМИУМ АККАУНТ", 2 to "КАРМАН",3 to "МЕШОК")
 val PRICE_OD_SPECIALLY = mapOf(0 to 10,1 to 20,2 to 30,3 to 90)
 var ARRAY_OF_SPECIALLY_SHOP: MutableList<Int>  = mutableListOf(0,1,2,3)
 var ARRAY_OF_SPECIALLY: MutableList<Int>  = mutableListOf()
@@ -94,8 +94,9 @@ var AUXILIARY_MAP_OF_SPECIALLY = mapOf(0 to "specially1", 1 to "specially2", 2 t
 
 var PREMIUM : Boolean = false
 
-var PRODUCT_ID = mapOf(0 to "premium",1 to "bag1",2 to "bag2")           //идентификаторы в Google Play
-var PURCHASE_KEY =      "premium"
+var PRODUCT_ID = "premium"
+var ARRAY_OF_PRODUCT_ID = mapOf(1 to "premium",2 to "android.test.purchased",3 to "android.test.purchased",4 to "android.test.purchased")           //идентификаторы в Google Play
+//var PURCHASE_KEY =      "premium"
 //__________________________________________________________________________________________________________________________________
 
 

@@ -247,14 +247,18 @@ class Specially : Fragment(), RewardedVideoAdListener, PurchasesUpdatedListener 
     fun handlePurchases(purchases: List<Purchase>) {
         for (purchase in purchases) {
             //if item is purchased
-            if (PRODUCT_ID == purchase.sku && purchase.purchaseState == Purchase.PurchaseState.PURCHASED && PRODUCT_ID!= "android.test.purchased") {
-                if (!verifyValidSignature(purchase.originalJson, purchase.signature)) {
+            if (PRODUCT_ID == purchase.sku && purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
+                if (!verifyValidSignature(purchase.originalJson, purchase.signature) || PRODUCT_ID!= "android.test.purchased") {
                     // Invalid purchase
                     // show error to user
                     Toast.makeText(locale_context, "Error : Invalid Purchase", Toast.LENGTH_SHORT).show()
                     return
                 }
-                
+                else
+                {
+                    Toast.makeText(locale_context, PRODUCT_ID, Toast.LENGTH_SHORT).show()
+                }
+
                 // else purchase is valid
 
 
@@ -314,18 +318,44 @@ class Specially : Fragment(), RewardedVideoAdListener, PurchasesUpdatedListener 
     companion object {
         const val PREF_FILE = "MyPref"
         const val PURCHASE_KEY = "premium"
-        const val PRODUCT_ID = "android.test.purchased"
+
     }
 
 }
 
+private fun initiatePurchase() {
+    val skuList: MutableList<String> = ArrayList()
+    skuList.add(PRODUCT_ID)
+    val params = SkuDetailsParams.newBuilder()
+    params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP)
 
+    billingClient!!.querySkuDetailsAsync(params.build()
+    )
+    {
+            billingResult, skuDetailsList ->
+        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+            if (skuDetailsList != null && skuDetailsList.size > 0) {
+                val flowParams = BillingFlowParams.newBuilder()
+                    .setSkuDetails(skuDetailsList[0])
+                    .build()
+                billingClient!!.launchBillingFlow(locale_context!!, flowParams)
+            }
+            else {
+                //try to add item/product id "consumable" inside managed product in google play console
+                Toast.makeText(locale_context, "Purchase Item not Found", Toast.LENGTH_SHORT).show()
+            }
+        }
+        else {
+            Toast.makeText(
+                locale_context,
+                " Error " + billingResult.debugMessage, Toast.LENGTH_SHORT).show()
+        }
+    }
+}
 
 private fun ShopSPECIALLYsetupRecyclerView(recyclerView: RecyclerView) {
     recyclerView.adapter = ShopSPECIALLYsItemRecyclerViewAdapter(ARRAY_OF_SPECIALLY_SHOP)
 }
-
-
 
 class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
     RecyclerView.Adapter<ShopSPECIALLYsItemRecyclerViewAdapter.ViewHolder>() {
@@ -496,8 +526,9 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
                     ).show()
                 }
             }
-            else if(ARRAY_OF_SPECIALLY_SHOP[position] == 1)           // если это премиум
+            else          // если это премиум
             {
+                PRODUCT_ID = ARRAY_OF_PRODUCT_ID[position].toString()
                 if (billingClient!!.isReady) {
                     initiatePurchase()
                 } else {
@@ -536,32 +567,3 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
     }
 }
 
-private fun initiatePurchase() {
-    val skuList: MutableList<String> = ArrayList()
-    skuList.add(Specially.PRODUCT_ID)
-    val params = SkuDetailsParams.newBuilder()
-    params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP)
-
-    billingClient!!.querySkuDetailsAsync(params.build()
-    )
-    {
-            billingResult, skuDetailsList ->
-        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-            if (skuDetailsList != null && skuDetailsList.size > 0) {
-                val flowParams = BillingFlowParams.newBuilder()
-                    .setSkuDetails(skuDetailsList[0])
-                    .build()
-                billingClient!!.launchBillingFlow(locale_context!!, flowParams)
-            }
-            else {
-                //try to add item/product id "consumable" inside managed product in google play console
-                Toast.makeText(locale_context, "Purchase Item not Found", Toast.LENGTH_SHORT).show()
-            }
-        }
-        else {
-            Toast.makeText(
-                locale_context,
-                " Error " + billingResult.debugMessage, Toast.LENGTH_SHORT).show()
-        }
-    }
-}
