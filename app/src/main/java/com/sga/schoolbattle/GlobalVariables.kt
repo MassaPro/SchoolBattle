@@ -93,6 +93,9 @@ var ARRAY_OF_SPECIALLY: MutableList<Int>  = mutableListOf()
 var AUXILIARY_MAP_OF_SPECIALLY = mapOf(0 to "specially1", 1 to "specially2", 2 to "specially3",3 to "specially4")
 
 var PREMIUM : Boolean = false
+
+var PRODUCT_ID = mapOf(0 to "premium",1 to "bag1",2 to "bag2")           //идентификаторы в Google Play
+var PURCHASE_KEY =      "premium"
 //__________________________________________________________________________________________________________________________________
 
 
