@@ -103,10 +103,13 @@ class DotGameOneDivice : AppCompatActivity() {
         signature_canvas_dots_one_divice.t1 = findViewById(R.id.name_player1_one_divice) as TextView
         signature_canvas_dots_one_divice.t2 = findViewById(R.id.name_player2_one_divice) as TextView
 
-        name_player1_one_divice.setTextColor(Color.BLUE)
-        name_player2_one_divice.setTextColor(Color.RED)
+
 
         when (Design) {
+            "Normal" ->{
+                name_player1_one_divice.setTextColor(Color.BLUE)
+                name_player2_one_divice.setTextColor(Color.RED)
+            }
             "Egypt" -> {
                 name_player1_one_divice.setTextColor(Color.WHITE)
                 name_player2_one_divice.setTextColor(Color.BLACK)
@@ -116,8 +119,8 @@ class DotGameOneDivice : AppCompatActivity() {
                 name_player1_one_divice.setTextSize(20f)
                 button_player_1_one_divice.setBackgroundResource(R.drawable.player1_egypt);
                 button_player_2_one_divice.setBackgroundResource(R.drawable.player2_egypt);
-                player_1_icon_one_divice.setBackgroundResource(R.drawable.cross_egypt);
-                player_2_icon_one_divice.setBackgroundResource(R.drawable.circle_egypt);
+                player_1_icon_one_divice.setBackgroundResource(R.drawable.chip1_egypt);
+                player_2_icon_one_divice.setBackgroundResource(R.drawable.chip2_egypt);
                 label_one_device.setBackgroundResource(R.drawable.background_egypt);
                 bottom_navigation_one_divice.setBackgroundColor(Color.rgb(255, 230, 163))
                 to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
@@ -131,8 +134,8 @@ class DotGameOneDivice : AppCompatActivity() {
                 name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 name_player2_one_divice.setTextSize(20f)
                 name_player1_one_divice.setTextSize(20f)
-                button_player_1_one_divice.setBackgroundResource(R.drawable.tower2_casino);
-                button_player_2_one_divice.setBackgroundResource(R.drawable.tower1_casino);
+                button_player_1_one_divice.setBackgroundResource(R.drawable.chip2_casino);
+                button_player_2_one_divice.setBackgroundResource(R.drawable.chip1_casino);
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background2_casino);
@@ -646,7 +649,7 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
                 shading_1.setColor(Color.RED)
                 shading_1.setStrokeWidth(2f)
                 shading_2.setStrokeWidth(2f)
-                line_who_do_move.color = Color.RED
+                line_who_do_move.color = Color.YELLOW
             }
             "Rome" -> {
                 Line_paint.setColor(Color.rgb(180, 180, 180))      //ресур для линий (ширина и цвет)
@@ -674,7 +677,7 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
                 shading_2.setColor(Color.YELLOW)
                 shading_1.setStrokeWidth(2f)
                 shading_2.setStrokeWidth(2f)
-                line_who_do_move.color = Color.RED
+                line_who_do_move.color = Color.WHITE
             }
             "Japan" -> {
                 Line_paint.setColor(Color.rgb(160,160,160))      //ресур для линий (ширина и цвет)

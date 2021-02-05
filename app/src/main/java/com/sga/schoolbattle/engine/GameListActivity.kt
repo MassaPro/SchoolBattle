@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.sga.schoolbattle.*
 import com.sga.schoolbattle.gamesonline.*
+import kotlinx.android.synthetic.main.activity_game_item.*
 import kotlinx.android.synthetic.main.activity_game_item.view.*
 import kotlinx.android.synthetic.main.activity_list_of_current_games.*
 
@@ -55,19 +56,13 @@ class GameListActivity : Fragment() {
             "Egypt" -> {
                 game_list_playing.setBackgroundResource(R.drawable.game_list_menu_egypt);
                 my_toolbar2.setBackgroundColor(rgb(255, 230, 163))
-                toolbarName2.setTypeface(ResourcesCompat.getFont(
-                    CONTEXT,
-                    R.font.s
-                ))
-                //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+                toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                //holder.game_list_item.setBackgroundResource(R.drawable.background_egypt);
             }
             "Casino" -> {
                 game_list_playing.setBackgroundResource(R.drawable.background2_casino);
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
-                toolbarName2.setTypeface(ResourcesCompat.getFont(
-                    CONTEXT,
-                    R.font.casino
-                ))
+                toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 toolbarName2.setTextColor(Color.YELLOW)
                 toolbarName2.setTextSize(20f)
                 //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
@@ -75,10 +70,7 @@ class GameListActivity : Fragment() {
             "Rome" -> {
                 game_list_playing.setBackgroundResource(R.drawable.sign_in_rome);
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
-                toolbarName2.setTypeface(ResourcesCompat.getFont(
-                    CONTEXT,
-                    R.font.rome
-                ))
+                toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                 toolbarName2.setTextColor(rgb(193,150,63))
                 toolbarName2.setTextSize(20f)
                 //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
@@ -184,6 +176,8 @@ class GameListActivity : Fragment() {
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.type.text = ITEMS[position].type
             holder.name.text = ITEMS[position].opponent
+
+
             if (USERAVAS[ITEMS[position].opponent] == null) USERAVAS[ITEMS[position].opponent] = 0
             PICTURE_AVATAR[ARRAY_OF_AVATAR_SHOP[USERAVAS[ITEMS[position].opponent].toString().toInt()]]?.let {
                 holder.avatar.setBackgroundResource(

@@ -87,7 +87,7 @@ class Specially : Fragment(), RewardedVideoAdListener, PurchasesUpdatedListener 
                         R.font.casino
                     )
                 }
-                choose_design_shop.setTextColor(Color.WHITE)
+                choose_design_shop.setTextColor(Color.YELLOW)
                 choose_design_shop.textSize = 20f
             }
             "Rome" -> {

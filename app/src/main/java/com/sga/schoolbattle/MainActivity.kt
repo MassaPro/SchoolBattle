@@ -133,6 +133,9 @@ class MainActivity : Fragment() {
                 blitz.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
                 money.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
                 money.setTextColor(Color.BLACK)
+
+                //id_shop_dialog.setBackgroundResource(R.drawable.game_menu_egypt)
+                //description.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             }
             "Casino" -> {
 

@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.sga.schoolbattle.*
 import com.google.android.gms.ads.AdRequest
+import kotlinx.android.synthetic.main.activity_list_of_current_games.*
 import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
 
@@ -116,6 +117,10 @@ class XOGame_oneDivice : AppCompatActivity() {
 
         // тип игры
         when (Design) {
+            "Normal" ->{
+                button_player_1_one_divice.setBackgroundResource(R.drawable.virus1_normal);
+                button_player_2_one_divice.setBackgroundResource(R.drawable.virus2_normal);
+            }
             "Egypt" -> {
                 name_player1_one_divice.setTextColor(Color.BLACK)
                 name_player2_one_divice.setTextColor(Color.BLACK)
@@ -140,8 +145,8 @@ class XOGame_oneDivice : AppCompatActivity() {
                 name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 name_player2_one_divice.setTextSize(20f)
                 name_player1_one_divice.setTextSize(20f)
-                button_player_1_one_divice.setBackgroundResource(R.drawable.tower1_casino);
-                button_player_2_one_divice.setBackgroundResource(R.drawable.tower2_casino);
+                button_player_1_one_divice.setBackgroundResource(R.drawable.cross_casino);
+                button_player_2_one_divice.setBackgroundResource(R.drawable.null_casino);
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background2_casino);
@@ -543,55 +548,43 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
         Line_paint_1.strokeWidth = 20f
         line_who_do_move.strokeWidth = 7f
 
-        if(Design == "Normal")
-        {
-            line_who_do_move.color =  Color.GREEN
-            line_who_do_move.strokeWidth = 14f
-            Line_paint.setColor(rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(7f)
-        }
-        else if(Design == "Egypt")
-        {
-            Line_paint.color = Color.BLACK          //ресур для линий (ширина и цвет)
-            Line_paint.strokeWidth = 7f
-            line_who_do_move.color = Color.RED
-
-        }
-        else if (Design == "Casino")
-        {
-            Line_paint.color = Color.YELLOW          //ресур для линий (ширина и цвет)
-            Line_paint.strokeWidth = 7f
-            line_who_do_move.color = Color.RED              //
-
-        }
-        else if (Design == "Rome")
-        {
-            Line_paint.color = rgb(193,150,63)    //ресур для линий (ширина и цвет)
-            Line_paint.strokeWidth = 7f
-            line_who_do_move.color = rgb(193,150,63)             //
-
-        }
-        else if (Design == "Gothic")
-        {
-            Line_paint.color = rgb(100,100,100)   //ресур для линий (ширина и цвет)
-            Line_paint.strokeWidth = 7f
-            line_who_do_move.color = Color.WHITE              //
-
-        }
-
-        else if (Design == "Japan")
-        {
-            Line_paint.color = Color.BLACK   //ресур для линий (ширина и цвет)
-            Line_paint.strokeWidth = 7f
-            line_who_do_move.color = Color.RED              //
-
-        }
-        else if (Design == "Noir")
-        {
-            Line_paint.color = rgb(100,100,100)   //ресур для линий (ширина и цвет)
-            Line_paint.strokeWidth = 7f
-            line_who_do_move.color = Color.RED              //
-
+        when (Design) {
+            "Normal" ->{
+                line_who_do_move.color =  Color.GREEN
+                line_who_do_move.strokeWidth = 14f
+                Line_paint.setColor(rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
+                Line_paint.setStrokeWidth(7f)
+            }
+            "Egypt" -> {
+                Line_paint.color = Color.BLACK          //ресур для линий (ширина и цвет)
+                Line_paint.strokeWidth = 7f
+                line_who_do_move.color = Color.RED
+            }
+            "Casino" -> {
+                Line_paint.color = Color.YELLOW          //ресур для линий (ширина и цвет)
+                Line_paint.strokeWidth = 7f
+                line_who_do_move.color = Color.YELLOW            //
+            }
+            "Rome" -> {
+                Line_paint.color = rgb(193,150,63)    //ресур для линий (ширина и цвет)
+                Line_paint.strokeWidth = 7f
+                line_who_do_move.color = rgb(193,150,63)
+            }
+            "Gothic" -> {
+                Line_paint.color = rgb(100,100,100)   //ресур для линий (ширина и цвет)
+                Line_paint.strokeWidth = 7f
+                line_who_do_move.color = Color.WHITE
+            }
+            "Japan" -> {
+                Line_paint.color = Color.BLACK   //ресур для линий (ширина и цвет)
+                Line_paint.strokeWidth = 7f
+                line_who_do_move.color = Color.RED              //
+            }
+            "Noir" -> {
+                Line_paint.color = rgb(100,100,100)   //ресур для линий (ширина и цвет)
+                Line_paint.strokeWidth = 7f
+                line_who_do_move.color = Color.RED              //
+            }
         }
 
 
