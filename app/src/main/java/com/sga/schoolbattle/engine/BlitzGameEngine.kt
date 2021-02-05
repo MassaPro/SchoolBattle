@@ -82,14 +82,7 @@ interface BlitzGameEngine {
     }
 
     fun finish(res: String, activity: Activity, isActivityRunning: Boolean) {
-        val editor =
-            activity.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-        editor.putString(positionData.toString() + "snake_game_history", null)
-        editor.putString(positionData.toString() + "xog_game_history", null)
-        editor.putString(positionData.toString() + "dot_game_history", null)
-        editor.putString(positionData.toString() + "reversi_game_history", null)
-        editor.putString(positionData.toString() + "box_game_history", null)
-        editor.apply()
+
         val loseUpd = mapOf(
             "winner" to opponent,
             "loser" to user,

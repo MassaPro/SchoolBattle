@@ -108,8 +108,17 @@ fun initMenuFunctions(activity: Activity,
                     }
                     editor?.apply()
                 })
-
+                loseDialog.close_parametrs_online.setOnClickListener {
+                    loseDialog.dismiss()
+                }
                 loseDialog.show()
+
+                if(Design =="Normal")
+                {
+                    loseDialog.dialog_for_losers_lose.setBackgroundResource(R.drawable.button)
+                    loseDialog.parametrs_online_configuring.setBackgroundResource(R.drawable.button)
+                    loseDialog.close_parametrs_online.setBackgroundResource(R.drawable.close_cross)
+                }
             }
             R.id.page_online_3 ->{
                 dialog_find_emotion!!.setContentView(R.layout.find_emotion)

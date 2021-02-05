@@ -78,7 +78,7 @@ class Designs  : Fragment(), RewardedVideoAdListener {
             }
             "Casino" -> {
                 choose_design_shop.typeface =  locale_context?.let { ResourcesCompat.getFont(it, R.font.casino) }
-                choose_design_shop.setTextColor(Color.YELLOW)
+                choose_design_shop.setTextColor(Color.WHITE)
                 choose_design_shop.textSize = 20f
             }
             "Rome" -> {
@@ -185,7 +185,7 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         PICTURE_STYLES[ARRAY_OF_DESIGN_SHOP[position]]?.let { holder.img.setBackgroundResource(it) }     //картинка для стиля
-        holder.price.text = PRICE_OD_DESIGN[ARRAY_OF_DESIGN_SHOP[position]].toString()             //цена стиля
+        holder.price.text = right_recording(PRICE_OD_DESIGN[ARRAY_OF_DESIGN_SHOP[position]].toString()  )           //цена стиля
         holder.contentView.text = PICTURE_TEXT[ARRAY_OF_DESIGN_SHOP[position]]          //название стиля
 
         when (Design) {
@@ -266,6 +266,7 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
                 holder.contentView.textSize = 20f        //так задаешь размер
                 holder.contentView.setTextColor(Color.BLACK)   //цвет
                 holder.contentView.typeface = ResourcesCompat.getFont(locale_context!!, R.font.japan)
+                holder.button.setBackgroundResource(R.drawable.button)
             }
             "Noir" -> {
                 holder.background_item.setBackgroundColor(Color.rgb(20, 20, 20))
@@ -322,7 +323,7 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
                         {
                             mSound1.play(1, 1F, 1F, 1, 0, 1F)
                         }
-                        MONEY -= holder.price.text.toString().toInt()
+                        MONEY -= holder.price.text.toString().replace(" ","").toInt()
 
                         val ARRAY_OF_DESIGN_COPY = ARRAY_OF_DESIGN.toMutableList()
                         ARRAY_OF_DESIGN_COPY.add(ARRAY_OF_DESIGN_SHOP[position])

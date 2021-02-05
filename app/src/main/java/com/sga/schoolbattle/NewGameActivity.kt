@@ -41,7 +41,7 @@ class NewGameActivity : AppCompatActivity() {
             "Egypt" -> {
                 game_list_menu.setBackgroundResource(R.drawable.background_egypt);
                 my_toolbar2.setBackgroundColor(rgb(255, 230, 163))
-                text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+                text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.s)
                 text.setTextColor(Color.BLACK)
             }
             "Casino" -> {

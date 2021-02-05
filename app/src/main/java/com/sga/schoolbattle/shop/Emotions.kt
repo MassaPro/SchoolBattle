@@ -74,7 +74,7 @@ class Emotions : Fragment(), RewardedVideoAdListener {
             }
             "Casino" -> {
                 choose_design_shop.typeface =  locale_context?.let { ResourcesCompat.getFont(it, R.font.casino) }
-                choose_design_shop.setTextColor(Color.YELLOW)
+                choose_design_shop.setTextColor(Color.WHITE)
                 choose_design_shop.textSize = 20f
             }
             "Rome" -> {
@@ -181,19 +181,10 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         PICTURE_EMOTION[ARRAY_OF_EMOTION_SHOP[position]]?.let { holder.img.setBackgroundResource(it) }     //картинка для стиля
-        holder.price.text = PRICE_OD_EMOTION[ARRAY_OF_EMOTION_SHOP[position]].toString()             //цена стиля
-        holder.contentView.text = EMOTION_TEXT[ARRAY_OF_EMOTION_SHOP[position]]          //название стиля
+        holder.price.text = right_recording(PRICE_OD_EMOTION[ARRAY_OF_EMOTION_SHOP[position]].toString()   )          //цена стиля
+        holder.contentView.text = EMOTION_TEXT[ARRAY_OF_EMOTION_SHOP[position]]         //название стиля
 
-        if(ARRAY_OF_EMOTION_SHOP[position] in  ARRAY_OF_EMOTION)         //если дизайн уже куплен
-        {
-            holder.button.text = "(КУПЛЕНО)"
-            holder.button.background = null
-            holder.price.text = ""
-        }
-        else
-        {
-            holder.icon.setImageResource(R.drawable.money)
-        }
+
 
         when (Design) {
             "Normal" -> {
@@ -273,6 +264,7 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
                 holder.contentView.textSize = 20f        //так задаешь размер
                 holder.contentView.setTextColor(Color.BLACK)   //цвет
                 holder.contentView.typeface = ResourcesCompat.getFont(locale_context!!, R.font.japan)
+                holder.button.setBackgroundResource(R.drawable.button)
             }
             "Noir" -> {
                 holder.background_item.setBackgroundColor(rgb(20,20,20))
@@ -289,6 +281,17 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
                 holder.contentView.setTextColor(Color.WHITE)   //цвет
                 holder.contentView.typeface = ResourcesCompat.getFont(locale_context!!, R.font.noir)
             }
+        }
+
+        if(ARRAY_OF_EMOTION_SHOP[position] in  ARRAY_OF_EMOTION)         //если дизайн уже куплен
+        {
+            holder.button.text = "(КУПЛЕНО)"
+            holder.button.background = null
+            holder.price.text = ""
+        }
+        else
+        {
+            holder.icon.setImageResource(R.drawable.money)
         }
 
         with(holder.itemView) {
@@ -321,7 +324,7 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
                         }
                         dialog_shop.buy_shop_dialog.isClickable = false
                         val username = activity.getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "").toString()
-                        MONEY -= holder.price.text.toString().toInt()
+                        MONEY -= holder.price.text.toString().replace(" ","").toInt()
                         val ARRAY_OF_EMOTION_COPY = ARRAY_OF_EMOTION.toMutableList()
                         ARRAY_OF_EMOTION_COPY.add(ARRAY_OF_EMOTION_SHOP[position])
                         val pushMap = mapOf(

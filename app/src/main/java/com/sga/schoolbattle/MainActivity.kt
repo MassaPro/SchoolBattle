@@ -141,7 +141,7 @@ class MainActivity : Fragment() {
                 //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
 
-                toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            //    toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 toolbarName2.setTextColor(Color.YELLOW)
                 toolbarName2.setTextSize(25f)
 
@@ -179,7 +179,7 @@ class MainActivity : Fragment() {
                 //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
 
-                toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+          //      toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                 toolbarName2.setTextColor(rgb(193,150,63))
                 toolbarName2.setTextSize(25f)
 
@@ -254,7 +254,7 @@ class MainActivity : Fragment() {
                 //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
 
-                toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+         //      toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
                 toolbarName2.setTextColor(Color.BLACK)
                 toolbarName2.setTextSize(25f)
 
@@ -283,7 +283,7 @@ class MainActivity : Fragment() {
                 searchButton.setTextSize(17f)
                 searchButton.setBackgroundColor(argb(0,0,0,0))
 
-                money.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+    //            money.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
                 money.setTextColor(Color.BLACK)
 
             }
@@ -292,7 +292,7 @@ class MainActivity : Fragment() {
                 //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
 
-                toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+       //         toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
                 toolbarName2.setTextColor(Color.WHITE)
                 toolbarName2.setTextSize(25f)
 
@@ -321,7 +321,7 @@ class MainActivity : Fragment() {
                 searchButton.setTextSize(17f)
                 searchButton.setBackgroundColor(argb(0,0,0,0))
 
-                money.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+               money.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
                 money.setTextColor(Color.WHITE)
             }
         }

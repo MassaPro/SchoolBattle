@@ -87,7 +87,7 @@ class Specially : Fragment(), RewardedVideoAdListener, PurchasesUpdatedListener 
                         R.font.casino
                     )
                 }
-                choose_design_shop.setTextColor(Color.YELLOW)
+                choose_design_shop.setTextColor(Color.WHITE)
                 choose_design_shop.textSize = 20f
             }
             "Rome" -> {
@@ -389,7 +389,7 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
             holder.icon.setImageResource(R.drawable.money)
             val getter = locale_context?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
             val capital = getter?.getString("number_capital", "500").toString().toInt()
-            holder.price.text  = "Посмотри видео и получи ${min(capital / 100 * 4, 5000)}"
+            holder.price.text  = "ПОЛУЧИ " +  right_recording(min(capital / 100 * 4, 5000).toString())
             holder.button.text  =  "смотреть"
         }
         holder.icon.setImageResource(R.drawable.money)
@@ -400,6 +400,8 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
         when (Design) {
             "Normal" -> {
                 holder.button.setBackgroundResource(R.drawable.button)
+                holder.price.setTextColor(Color.BLACK)
+
             }
             "Egypt" -> {
                 holder.background_item.setBackgroundColor(Color.rgb(255, 230, 163))
@@ -487,6 +489,7 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
                     locale_context!!,
                     R.font.japan
                 )
+                holder.button.setBackgroundResource(R.drawable.button)
             }
             "Noir" -> {
                 holder.background_item.setBackgroundColor(Color.rgb(20, 20, 20))

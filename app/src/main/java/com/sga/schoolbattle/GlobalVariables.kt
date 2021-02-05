@@ -233,3 +233,21 @@ fun populateUnifiedNativeAdView(unifiedNativeAd: UnifiedNativeAd, adView: Unifie
     // Place the AdView into the parent.
     DDD.add_frame.addView(adView)
 }
+
+fun right_recording(s : String): String
+{
+    var answer :String   = ""
+    if(s.toInt()>=10000)
+    {
+        for(i in s.indices)
+        {
+            answer = s[s.length - i - 1] + answer
+            if( (i)%3 == 2)
+            {
+                answer = " $answer"
+            }
+        }
+        return answer
+    }
+   return s
+}

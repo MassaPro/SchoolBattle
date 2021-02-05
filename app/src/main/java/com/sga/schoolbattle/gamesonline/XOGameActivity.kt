@@ -493,7 +493,17 @@ class XOGameActivity : AppCompatActivity() {
         finish()
     }
 
-
+    override fun onDestroy() {
+        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+        //editor.putString(gameData.toString() + "snake_game_history", null)
+        editor.putString(gameData.toString() + "xog_game_history", null)
+      //  editor.putString(gameData.toString() + "xog_game_history", null)
+     //   editor.putString(gameData.toString() + "dot_game_history", null)
+    //    editor.putString(gameData.toString() + "reversi_game_history", null)
+   //     editor.putString(gameData.toString() + "box_game_history", null)
+        editor.apply()
+        super.onDestroy()
+    }
 
 
 }

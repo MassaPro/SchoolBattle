@@ -72,7 +72,7 @@ class Avatars : Fragment() , RewardedVideoAdListener {
             }
             "Casino" -> {
                 choose_design_shop.typeface =  locale_context?.let { ResourcesCompat.getFont(it, R.font.casino) }
-                choose_design_shop.setTextColor(Color.YELLOW)
+                choose_design_shop.setTextColor(Color.WHITE)
                 choose_design_shop.textSize = 20f
             }
             "Rome" -> {
@@ -182,7 +182,7 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         PICTURE_AVATAR[ARRAY_OF_AVATAR_SHOP[position]]?.let { holder.img.setBackgroundResource(it) }     //картинка для стиля
-        holder.price.text = PRICE_OD_AVATAR[ARRAY_OF_AVATAR_SHOP[position]].toString()             //цена стиля
+        holder.price.text = right_recording(PRICE_OD_AVATAR[ARRAY_OF_AVATAR_SHOP[position]].toString()  )           //цена стиля
         holder.contentView.text = AVATAR_TEXT[ARRAY_OF_AVATAR_SHOP[position]]          //название стиля
 
 
@@ -264,6 +264,7 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
                 holder.contentView.textSize = 20f        //так задаешь размер
                 holder.contentView.setTextColor(Color.BLACK)   //цвет
                 holder.contentView.typeface = ResourcesCompat.getFont(locale_context!!, R.font.japan)
+                holder.button.setBackgroundResource(R.drawable.button)
             }
             "Noir" -> {
                 holder.background_item.setBackgroundColor(rgb(20,20,20))
@@ -333,7 +334,7 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
                             mSound1.play(1, 1F, 1F, 1, 0, 1F)
                         }
                         dialog_shop.buy_shop_dialog.isClickable = false
-                        MONEY -= holder.price.text.toString().toInt()
+                        MONEY -= holder.price.text.toString().replace(" ","").toInt()
                         val ARRAY_OF_AVATAR_COPY = ARRAY_OF_AVATAR.toMutableList()
                         ARRAY_OF_AVATAR_COPY.add(ARRAY_OF_AVATAR_SHOP[position])
                         //TODO MONEY передать в файрбейс
