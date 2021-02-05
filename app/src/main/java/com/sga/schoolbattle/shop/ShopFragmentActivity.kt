@@ -63,6 +63,7 @@ class ShopFragmentActivity : Fragment (){
              //       button_shop_name.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
                     button_shop_name.textSize = 25f
                    // money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+
                 }
                 "Casino" -> {
        //             tv?.textSize = 18f        //так задаешь размер

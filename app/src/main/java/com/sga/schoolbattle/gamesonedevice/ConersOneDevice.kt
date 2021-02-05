@@ -15,6 +15,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.sga.schoolbattle.*
+import kotlinx.android.synthetic.main.activity_list_of_current_games.*
 import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
 class ConersOneDevice : AppCompatActivity() {
@@ -106,6 +107,10 @@ class ConersOneDevice : AppCompatActivity() {
         signature_canvas_corners_one_device.t2 = findViewById(R.id.name_player2_one_divice) as TextView
 
         when (Design) {
+            "Normal" ->{
+                button_player_1_one_divice.setBackgroundResource(R.drawable.chip2_normal);
+                button_player_2_one_divice.setBackgroundResource(R.drawable.chip1_normal);
+            }
             "Egypt" -> {
                 name_player1_one_divice.setTextColor(Color.BLACK)
                 name_player2_one_divice.setTextColor(Color.BLACK)
@@ -617,43 +622,40 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
         Line_paint.setStrokeWidth(7f)
         line_who_do_move.strokeWidth = 7f
 
-        if(Design == "Normal")
-        {
-            line_who_do_move.color = Color.GREEN
-        }
-        else if(Design == "Egypt")
-        {
-            Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(7f)
-            line_who_do_move.color = Color.RED
-
-        }
-        else if(Design == "Casino")
-        {
-            Line_paint.setColor(Color.WHITE)          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(7f)
-            line_who_do_move.color = Color.RED
-        }
-        else if(Design == "Rome")
-        {
-            Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(7f)
-            line_who_do_move.color = Color.rgb(193, 150, 63)
-        }
-        else if(Design == "Gothic") {
-            Line_paint.setColor(Color.rgb(100,100,100))          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(7f)
-            line_who_do_move.color = Color.RED
-        }
-        else if(Design == "Japan") {
-            Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(7f)
-            line_who_do_move.color = Color.RED
-        }
-        else if(Design == "Noir") {
-            Line_paint.setColor(Color.rgb(100,100,100))          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(7f)
-            line_who_do_move.color = Color.RED
+        when (Design) {
+            "Normal" ->{
+                line_who_do_move.color = Color.GREEN
+            }
+            "Egypt" -> {
+                Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
+                Line_paint.setStrokeWidth(7f)
+                line_who_do_move.color = Color.RED
+            }
+            "Casino" -> {
+                Line_paint.setColor(Color.WHITE)          //ресур для линий (ширина и цвет)
+                Line_paint.setStrokeWidth(7f)
+                line_who_do_move.color = Color.YELLOW
+            }
+            "Rome" -> {
+                Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
+                Line_paint.setStrokeWidth(7f)
+                line_who_do_move.color = Color.rgb(193, 150, 63)
+            }
+            "Gothic" -> {
+                Line_paint.setColor(Color.rgb(100,100,100))          //ресур для линий (ширина и цвет)
+                Line_paint.setStrokeWidth(7f)
+                line_who_do_move.color = Color.WHITE
+            }
+            "Japan" -> {
+                Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
+                Line_paint.setStrokeWidth(7f)
+                line_who_do_move.color = Color.RED
+            }
+            "Noir" -> {
+                Line_paint.setColor(Color.rgb(100,100,100))          //ресур для линий (ширина и цвет)
+                Line_paint.setStrokeWidth(7f)
+                line_who_do_move.color = Color.RED
+            }
         }
 
 
@@ -683,8 +685,8 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
 
 
 
-    var black_chip_normal : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip1_normal);       //картинки фишек и подсветки
-    var grey_chip_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip2_normal);
+    var black_chip_normal : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip2_normal);       //картинки фишек и подсветки
+    var grey_chip_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip1_normal);
 
     var black_chip_egypt:Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip1_egypt);
     var grey_chip_egypt:Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip2_egypt);
@@ -766,43 +768,43 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
         right_illumination = Bitmap.createScaledBitmap(illumination,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
         right_green  = Bitmap.createScaledBitmap(green,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
 
-        if(Design == "Egypt")
-        {
-            right_black_chip  = Bitmap.createScaledBitmap(black_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
-            right_grey_chip  = Bitmap.createScaledBitmap(grey_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-            right_illumination = Bitmap.createScaledBitmap(illumination,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-            right_green = Bitmap.createScaledBitmap(romb3,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-        }
-        else if(Design == "Casino")
-        {
-            right_black_chip  = Bitmap.createScaledBitmap(black_chip_casino,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
-            right_grey_chip  = Bitmap.createScaledBitmap(grey_chip_casino,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-            right_illumination = Bitmap.createScaledBitmap(illumination,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-            right_green = Bitmap.createScaledBitmap(romb2,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-        }
-        else if (Design == "Rome")
-        {
-            right_black_chip = Bitmap.createScaledBitmap(black_chip_rome,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
-            right_grey_chip = Bitmap.createScaledBitmap(grey_chip_rome,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-            right_green = Bitmap.createScaledBitmap(romb2,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-        }
-        else if (Design == "Gothic")
-        {
-            right_black_chip = Bitmap.createScaledBitmap(black_chip_gothic,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
-            right_grey_chip = Bitmap.createScaledBitmap(grey_chip_gothic,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-            right_green = Bitmap.createScaledBitmap(romb1,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-        }
-        else if (Design == "Japan")
-        {
-            right_black_chip = Bitmap.createScaledBitmap(black_chip_japan,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
-            right_grey_chip = Bitmap.createScaledBitmap(grey_chip_japan,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-            right_green = Bitmap.createScaledBitmap(romb3,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-        }
-        else if (Design == "Noir")
-        {
-            right_black_chip = Bitmap.createScaledBitmap(black_chip_noir,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
-            right_grey_chip = Bitmap.createScaledBitmap(grey_chip_noir,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-            right_green = Bitmap.createScaledBitmap(romb1,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+
+        when (Design) {
+            "Normal" ->{
+
+            }
+            "Egypt" -> {
+                right_black_chip  = Bitmap.createScaledBitmap(black_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+                right_grey_chip  = Bitmap.createScaledBitmap(grey_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+                right_illumination = Bitmap.createScaledBitmap(illumination,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+                right_green = Bitmap.createScaledBitmap(romb3,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            }
+            "Casino" -> {
+                right_black_chip  = Bitmap.createScaledBitmap(black_chip_casino,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+                right_grey_chip  = Bitmap.createScaledBitmap(grey_chip_casino,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+                right_illumination = Bitmap.createScaledBitmap(illumination,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+                right_green = Bitmap.createScaledBitmap(romb2,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            }
+            "Rome" -> {
+                right_black_chip = Bitmap.createScaledBitmap(black_chip_rome,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+                right_grey_chip = Bitmap.createScaledBitmap(grey_chip_rome,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+                right_green = Bitmap.createScaledBitmap(romb2,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            }
+            "Gothic" -> {
+                right_black_chip = Bitmap.createScaledBitmap(black_chip_gothic,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+                right_grey_chip = Bitmap.createScaledBitmap(grey_chip_gothic,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+                right_green = Bitmap.createScaledBitmap(romb1,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            }
+            "Japan" -> {
+                right_black_chip = Bitmap.createScaledBitmap(black_chip_japan,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+                right_grey_chip = Bitmap.createScaledBitmap(grey_chip_japan,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+                right_green = Bitmap.createScaledBitmap(romb3,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            }
+            "Noir" -> {
+                right_black_chip = Bitmap.createScaledBitmap(black_chip_noir,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+                right_grey_chip = Bitmap.createScaledBitmap(grey_chip_noir,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+                right_green = Bitmap.createScaledBitmap(romb1,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            }
         }
 
 

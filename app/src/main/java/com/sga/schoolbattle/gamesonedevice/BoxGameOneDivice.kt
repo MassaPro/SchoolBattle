@@ -109,6 +109,9 @@ class BoxGameOneDivice : AppCompatActivity() {
         mSound2.load(this, R.raw.win, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
+        name_player1_one_divice.setTextColor(Color.RED)
+        name_player2_one_divice.setTextColor(Color.BLUE)
+
         when (Design) {
             "Egypt" -> {
                 name_player1_one_divice.setTextColor(Color.BLACK)
@@ -637,7 +640,7 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
                 paint_circle.setColor(Color.WHITE)     //цвета для точек
                 paint_rib_2.setColor(Color.RED)          //цвета для ребер  и их ширина
                 paint_rib_1.setColor(Color.BLUE)
-                line_who_do_move.color = Color.RED
+                line_who_do_move.color = Color.WHITE
             }
             "Japan" -> {
                 paint_circle.setColor(Color.BLACK)     //цвета для точек
