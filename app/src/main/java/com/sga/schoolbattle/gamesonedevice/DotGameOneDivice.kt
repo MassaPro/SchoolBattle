@@ -755,7 +755,7 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
 
 
         step = if(getWidth()/(size_field_x+1) < height/(size_field_y+1)) {
-            getWidth().toFloat()/(size_field_x+2)
+            getWidth().toFloat()/(size_field_x+1)
         } else {
             height/(size_field_y.toFloat()+1/2) - 2
         }

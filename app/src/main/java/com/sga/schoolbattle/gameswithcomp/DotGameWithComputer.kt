@@ -611,42 +611,44 @@ class CanvasView_Dots_with_computer(context: Context, attrs: AttributeSet?) : Vi
         shading_2.setStrokeWidth(2f)
 
 
-        if(Design == "Egypt") {
-            Line_paint.setColor(Color.rgb(100, 100, 100))      //ресур для линий (ширина и цвет)
-            paint_circle.setColor(Color.rgb(100, 100, 100))
-            paint_rib_1.setColor(Color.BLACK) //цвета для ребер  и их ширина
-            paint_rib_1.setStrokeWidth(5f)
-            paint_rib_2.setColor(Color.WHITE)
-            paint_rib_2.setStrokeWidth(5f)
+        when (Design) {
+            "Egypt" -> {
+                Line_paint.setColor(Color.rgb(100, 100, 100))      //ресур для линий (ширина и цвет)
+                paint_circle.setColor(Color.rgb(100, 100, 100))
+                paint_rib_1.setColor(Color.BLACK) //цвета для ребер  и их ширина
+                paint_rib_1.setStrokeWidth(5f)
+                paint_rib_2.setColor(Color.WHITE)
+                paint_rib_2.setStrokeWidth(5f)
 
-            shading_1.setColor(Color.BLACK)
-            shading_2.setColor(Color.WHITE)
-            shading_1.setStrokeWidth(2f)
-            shading_2.setStrokeWidth(2f)
-        }
-        else if(Design == "Casino") {
-            paint_rib_1.setColor(Color.BLACK) //цвета для ребер  и их ширина
-            paint_rib_1.setStrokeWidth(5f)
-            paint_rib_2.setColor(Color.RED)
-            paint_rib_2.setStrokeWidth(5f)
+                shading_1.setColor(Color.BLACK)
+                shading_2.setColor(Color.WHITE)
+                shading_1.setStrokeWidth(2f)
+                shading_2.setStrokeWidth(2f)
+            }
+            "Casino" -> {
+                paint_rib_1.setColor(Color.BLACK) //цвета для ребер  и их ширина
+                paint_rib_1.setStrokeWidth(5f)
+                paint_rib_2.setColor(Color.RED)
+                paint_rib_2.setStrokeWidth(5f)
 
-            shading_1.setColor(Color.BLACK)
-            shading_2.setColor(Color.RED)
-            shading_1.setStrokeWidth(2f)
-            shading_2.setStrokeWidth(2f)
-        }
-        else if(Design == "Rome") {
-            Line_paint.setColor(Color.rgb(180, 180, 180))      //ресур для линий (ширина и цвет)
-            paint_circle.setColor(Color.rgb(180, 180, 180))
-            paint_rib_1.setColor(Color.BLACK) //цвета для ребер  и их ширина
-            paint_rib_1.setStrokeWidth(5f)
-            paint_rib_2.setColor(Color.rgb(193,150,63))
-            paint_rib_2.setStrokeWidth(5f)
+                shading_1.setColor(Color.BLACK)
+                shading_2.setColor(Color.RED)
+                shading_1.setStrokeWidth(2f)
+                shading_2.setStrokeWidth(2f)
+            }
+            "Rome" -> {
+                Line_paint.setColor(Color.rgb(180, 180, 180))      //ресур для линий (ширина и цвет)
+                paint_circle.setColor(Color.rgb(180, 180, 180))
+                paint_rib_1.setColor(Color.BLACK) //цвета для ребер  и их ширина
+                paint_rib_1.setStrokeWidth(5f)
+                paint_rib_2.setColor(Color.rgb(193,150,63))
+                paint_rib_2.setStrokeWidth(5f)
 
-            shading_1.setColor(Color.BLACK)
-            shading_2.setColor(Color.rgb(193,150,63))
-            shading_1.setStrokeWidth(2f)
-            shading_2.setStrokeWidth(2f)
+                shading_1.setColor(Color.BLACK)
+                shading_2.setColor(Color.rgb(193,150,63))
+                shading_1.setStrokeWidth(2f)
+                shading_2.setStrokeWidth(2f)
+            }
         }
 
         for(i in 0 until FIELD.size)
@@ -678,37 +680,41 @@ class CanvasView_Dots_with_computer(context: Context, attrs: AttributeSet?) : Vi
 
         check_win()
         if (DotGameMode == 1) {
-            t1.text = "Игрок 1: $global_cnt1"         //TODO right check for win
-            t2.text = "Игрок 2: $global_cnt2"
+        //    t1.text = "Игрок 1: $global_cnt1"         //TODO right check for win потом уже в следующих релизах мб норм сделаем,
+     //       t2.text = "Игрок 2: $global_cnt2"
+                t1.text = "Игрок 1"         //TODO right check for win потом уже в следующих релизах мб норм сделаем,
+                t2.text = "Игрок 2"
         } else {
-            t1.text = "Игрок 1: $global_cnt2"
-            t2.text = "Игрок 2: $global_cnt1"
+  //          t1.text = "Игрок 1: $global_cnt2"
+  //          t2.text = "Игрок 2: $global_cnt1"
+            t1.text = "Игрок 1"
+            t2.text = "Игрок 2"
         }
 
 
         radius_of_point = 8f
         size_field_x  = 10
         size_field_y  = 15
-        indent = (getWidth().toFloat()/(size_field_x.toFloat()+1f))/2f //оступ, чтобы можно было тыкнуть в границу
-        width = getWidth().toFloat() - 2*indent
+        //indent = (getWidth().toFloat()/(size_field_x.toFloat()+1f))/2f //оступ, чтобы можно было тыкнуть в границу
+
         height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)
-        advertising_line =(height - width/size_field_x*size_field_y)/2         //полоска для рекламы
 
-        step = width/size_field_x
-        k = height-width*(size_field_y.toFloat()/size_field_x.toFloat())-advertising_line
 
-        if(Design == "Normal")
-        {
-            canvas?.drawColor(Color.WHITE)
+        step = if(getWidth()/(size_field_x+1) < height/(size_field_y+1)) {
+            getWidth().toFloat()/(size_field_x+1)
+        } else {
+            height/(size_field_y.toFloat()+1/2) - 2
         }
-        else if(Design == "Egypt")
-        {
 
-        }
-        else if(Design == "Casino")
-        {
+        // step = getWidth().toFloat()/(size_field_x+1)
 
-        }
+        indent = (getWidth().toFloat() - size_field_x*step)/2
+        width = getWidth().toFloat() - 2*indent
+        advertising_line = (getHeight() - step*size_field_y)/2
+        k = advertising_line
+
+
+
 
         Log.d("Para",p.toString())
 

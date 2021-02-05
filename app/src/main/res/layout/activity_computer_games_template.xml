@@ -10,10 +10,8 @@
 
     <FrameLayout
         android:id="@+id/frameLayout3"
-        android:layout_width="362dp"
-        android:layout_height="577dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/toolbar2_with_computer_template"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,14 +43,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="#FFFFFF"
-            android:visibility="gone"  />
+            android:visibility="gone" />
 
         <com.sga.schoolbattle.gameswithcomp.CanvasView_Dots_with_computer
             android:id="@+id/signature_canvas_dots_with_computer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="#FFFFFF"
-            android:visibility="gone"  />
+            android:visibility="gone" />
 
 
         <com.sga.schoolbattle.gameswithcomp.CanvasView_virus_with_computer
@@ -60,15 +58,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="#FFFFFF"
-            android:visibility="gone"  />
+            android:visibility="gone" />
+
         <com.sga.schoolbattle.gameswithcomp.CanvasView_SNAKE_COMPUTER
             android:id="@+id/signature_canvas_snake_with_computer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="#FFFFFF"
-            android:visibility="gone"  />
-
-
+            android:visibility="gone" />
 
 
     </FrameLayout>
