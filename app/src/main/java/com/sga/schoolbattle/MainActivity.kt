@@ -286,7 +286,7 @@ class MainActivity : Fragment() {
                 searchButton.setTextSize(17f)
                 searchButton.setBackgroundColor(argb(0,0,0,0))
 
-    //            money.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                money.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
                 money.setTextColor(Color.BLACK)
 
             }

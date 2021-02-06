@@ -35,8 +35,6 @@ class NewGameActivity : AppCompatActivity() {
         CONTEXT = this
 
 
-
-
         when (Design) {
             "Normal" -> {
                 back_button.setBackgroundResource(R.drawable.back_arrow_normal)
@@ -45,7 +43,7 @@ class NewGameActivity : AppCompatActivity() {
                 back_button.setBackgroundResource(R.drawable.back_arrow_normal)
                 game_list_menu.setBackgroundResource(R.drawable.background_egypt);
                 my_toolbar2.setBackgroundColor(rgb(255, 230, 163))
-                text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.s)
+                text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
                 text.setTextColor(Color.BLACK)
             }
             "Casino" -> {

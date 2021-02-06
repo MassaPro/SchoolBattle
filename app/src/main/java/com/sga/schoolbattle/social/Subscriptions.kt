@@ -27,7 +27,6 @@ class Subscriptions : Fragment() {
         super.onActivityCreated(savedInstanceState)
         locale_context = activity as AppCompatActivity
 
-
         val prefs = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         var username = prefs?.getString("username", "")
         if (locale_context!!.intent.getStringExtra("curName") != null) {

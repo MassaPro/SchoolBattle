@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.sga.schoolbattle.*
 import com.google.android.material.tabs.TabLayout
+import com.sga.schoolbattle.social.SocialActivity
 import kotlinx.android.synthetic.main.activity_settings_fragment.*
 import kotlinx.android.synthetic.main.activity_shop_fragment.*
 
@@ -63,6 +64,7 @@ class ShopFragmentActivity : Fragment (){
              //       button_shop_name.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
                     button_shop_name.textSize = 25f
                    // money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                    tabLayout!!.setSelectedTabIndicatorColor (Color.BLACK)
 
                 }
                 "Casino" -> {
@@ -77,6 +79,7 @@ class ShopFragmentActivity : Fragment (){
                     button_shop_name.textSize = 25f
                     money_shop_toolbar.setTextColor(Color.YELLOW)
                 //    money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                    tabLayout!!.setSelectedTabIndicatorColor (Color.YELLOW)
                 }
                 "Rome" -> {
       //              tv?.textSize = 20f       //так задаешь размер
@@ -91,6 +94,7 @@ class ShopFragmentActivity : Fragment (){
                     money_shop_toolbar.setTextColor(rgb(193, 150, 63))
             //        money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                     money_shop_toolbar.textSize = 25f
+                    tabLayout!!.setSelectedTabIndicatorColor (rgb(193, 150, 63))
                 }
                 "Gothic" -> {
     //                tv?.textSize = 21f        //так задаешь размер
@@ -104,6 +108,7 @@ class ShopFragmentActivity : Fragment (){
                     button_shop_name.textSize = 25f
                     money_shop_toolbar.setTextColor(Color.WHITE)
          //           money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                    tabLayout!!.setSelectedTabIndicatorColor (Color.WHITE)
                 }
                 "Japan" -> {
            //         tv?.textSize = 21f        //так задаешь размер
@@ -115,6 +120,7 @@ class ShopFragmentActivity : Fragment (){
           //          button_shop_name.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
                     button_shop_name.textSize = 25f
                 //    money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                    tabLayout!!.setSelectedTabIndicatorColor (Color.BLACK)
                 }
                 "Noir" -> {
       //              tv?.textSize = 18f        //так задаешь размер
@@ -128,6 +134,7 @@ class ShopFragmentActivity : Fragment (){
                     button_shop_name.textSize = 25f
                     money_shop_toolbar.setTextColor(Color.WHITE)
          //           money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                    tabLayout!!.setSelectedTabIndicatorColor (Color.WHITE)
                 }
             }
         }

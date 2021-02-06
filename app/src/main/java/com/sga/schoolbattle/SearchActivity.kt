@@ -1,6 +1,8 @@
 package com.sga.schoolbattle
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Color.rgb
 import android.os.Bundle
 import android.view.*
 import android.widget.*
@@ -33,6 +35,39 @@ class SearchActivity : AppCompatActivity() {
         rec?.adapter?.notifyDataSetChanged()
 
         var blocked = false
+
+        when (Design) {
+            "Normal" -> {
+
+            }
+            "Egypt" -> {
+                recyclerViewSearch.setBackgroundResource(R.drawable.background_egypt)
+                search_field.setBackgroundColor(rgb(255, 230, 163))
+                //textViewSearch.setTextColor(Color.WHITE)
+                //search_field.setty(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                //search_field.setTextColor(rgb(255, 230, 163))
+            }
+            "Casino" -> {
+                recyclerViewSearch.setBackgroundResource(R.drawable.background2_casino)
+                search_field.setBackgroundResource(R.drawable.bottom_navigation_casino)
+            }
+            "Rome" -> {
+                recyclerViewSearch.setBackgroundResource(R.drawable.background_rome)
+                search_field.setBackgroundResource(R.drawable.bottom_navigation_rome)
+            }
+            "Gothic" -> {
+                recyclerViewSearch.setBackgroundResource(R.drawable.background_gothic)
+                search_field.setBackgroundResource(R.drawable.bottom_navigation_gothic)
+            }
+            "Japan" -> {
+                recyclerViewSearch.setBackgroundResource(R.drawable.background_japan)
+                search_field.setBackgroundColor(Color.WHITE)
+            }
+            "Noir" -> {
+                recyclerViewSearch.setBackgroundResource(R.drawable.background_noir)
+                search_field.setBackgroundColor(Color.BLACK)
+            }
+        }
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(query: String?): Boolean {
