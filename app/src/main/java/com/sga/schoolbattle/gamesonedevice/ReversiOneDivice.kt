@@ -953,6 +953,8 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
         Line_paint.setColor(Color.rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
         Line_paint.setStrokeWidth(7f)
 
+        line_who_do_move.strokeWidth = 7f
+
         when (Design) {
             "Normal" ->{
                 line_who_do_move.color =  Color.GREEN
@@ -1056,7 +1058,7 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
 
 
 
-        if(Black_or_grey_chip == "black")
+        if(Black_or_grey_chip != "black")
         {
             canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
         }
@@ -1066,15 +1068,6 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
         }
 
 
-
-        if(Design == "Normal")
-        {
-            canvas?.drawColor(Color.WHITE)
-        }
-        else
-        {
-
-        }
 
 
 
