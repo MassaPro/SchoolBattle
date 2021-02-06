@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.*
 import android.graphics.Color.argb
+import android.graphics.Color.rgb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Vibrator
@@ -16,6 +17,7 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.sga.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_computer_games_template.*
+import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
 
 var DotGameMode = 0
@@ -119,54 +121,112 @@ class DotGameWithComputer : AppCompatActivity() {
         signature_canvas_dots_with_computer.t1 = findViewById(R.id.name_player1_with_computer_template) as TextView
         signature_canvas_dots_with_computer.t2 = findViewById(R.id.name_player2_with_computer_template) as TextView
 
-        if(Design == "Egypt" ) {
-            name_player1_with_computer_template.setTextColor(Color.BLACK)
-            name_player2_with_computer_template.setTextColor(Color.BLACK)
-            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-            name_player2_with_computer_template.setTextSize(20f)
-            name_player1_with_computer_template.setTextSize(20f)
-            button_player_1_with_computer_template.setBackgroundResource(R.drawable.player1_egypt);
-            button_player_2_with_computer_template.setBackgroundResource(R.drawable.player2_egypt);
-            player_1_icon_template_with_computer.setBackgroundResource(R.drawable.cross_egypt);
-            player_2_icon_template_with_computer.setBackgroundResource(R.drawable.cross_egypt)
-            label_with_computer.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_with_computer_template.setBackgroundColor(Color.rgb(255, 230, 163))
-            to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
-        }
-        else if(Design == "Casino" ) {
-            name_player1_with_computer_template.setTextColor(Color.YELLOW)
-            name_player2_with_computer_template.setTextColor(Color.YELLOW)
-            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_with_computer_template.setTextSize(20f)
-            name_player1_with_computer_template.setTextSize(20f)
-            button_player_1_with_computer_template.setBackgroundResource(R.drawable.tower1_casino);
-            button_player_2_with_computer_template.setBackgroundResource(R.drawable.tower2_casino);
-            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-            label_with_computer.setBackgroundResource(R.drawable.background_casino);
-            bottom_navigation_with_computer_template.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-        }
-        else if(Design == "Rome" ) {
-            name_player1_with_computer_template.setTextColor(Color.rgb(193, 150, 63))
-            name_player2_with_computer_template.setTextColor(Color.rgb(193, 150, 63))
-            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-            name_player2_with_computer_template.setTextSize(20f)
-            name_player1_with_computer_template.setTextSize(20f)
-            //button_player_1_one_divice.setBackgroundResource(R.drawable.cross_rome);
-            //button_player_2_one_divice.setBackgroundResource(R.drawable.null_rome);
-            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-            label_with_computer.setBackgroundResource(R.drawable.background_rome);
-            bottom_navigation_with_computer_template.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+        when (Design) {
+            "Normal" ->{
+                name_player1_with_computer_template.setTextColor(Color.BLUE)
+                name_player2_with_computer_template.setTextColor(Color.RED)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.virus1_normal);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.virus2_normal);
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_normal)
+            }
+            "Egypt" -> {
+                name_player1_with_computer_template.setTextColor(Color.BLACK)
+                name_player2_with_computer_template.setTextColor(Color.BLACK)
+                name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                name_player2_with_computer_template.setTextSize(20f)
+                name_player1_with_computer_template.setTextSize(20f)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.player1_egypt);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.player2_egypt);
+                player_1_icon_one_divice.setBackgroundResource(R.drawable.cross_egypt);
+                player_2_icon_one_divice.setBackgroundResource(R.drawable.circle_egypt);
+                label_with_computer.setBackgroundResource(R.drawable.background_egypt);
+                bottom_navigation_with_computer_template.setBackgroundColor(Color.rgb(255, 230, 163))
+                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_with_computer_template.setBackgroundColor(argb(0,0,0,0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0,0,0,0))
+            }
+            "Casino" -> {
+                name_player1_with_computer_template.setTextColor(Color.BLACK)
+                name_player2_with_computer_template.setTextColor(Color.RED)
+                name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                name_player2_with_computer_template.setTextSize(20f)
+                name_player1_with_computer_template.setTextSize(20f)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.cross_casino);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.null_casino);
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                label_with_computer.setBackgroundResource(R.drawable.background2_casino);
+                bottom_navigation_with_computer_template.setBackgroundColor(argb(0,224, 164, 103))
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_casino)
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                bottom_navigation_with_computer_template.setBackgroundResource(R.drawable.bottom_navigation_casino)
+            }
+            "Rome" -> {
+                name_player1_with_computer_template.setTextColor(Color.rgb(193, 150, 63))
+                name_player2_with_computer_template.setTextColor(Color.BLACK)
+                name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                name_player2_with_computer_template.setTextSize(20f)
+                name_player1_with_computer_template.setTextSize(20f)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.cross_rome);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.null_rome);
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                label_with_computer.setBackgroundResource(R.drawable.background_rome);
+                bottom_navigation_with_computer_template.setBackgroundResource(R.drawable.bottom_navigation_rome)
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_rome)
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            }
+            "Gothic" -> {
+                name_player1_with_computer_template.setTextColor(Color.WHITE)
+                name_player2_with_computer_template.setTextColor(Color.YELLOW)
+                name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                name_player2_with_computer_template.setTextSize(20f)
+                name_player1_with_computer_template.setTextSize(20f)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.cross_gothic);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.null_gothic);
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                label_with_computer.setBackgroundResource(R.drawable.background_gothic);
+                bottom_navigation_with_computer_template.setBackgroundColor(Color.BLACK)
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_gothic)
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            }
+            "Japan" -> {
+                name_player1_with_computer_template.setTextColor(Color.RED)
+                name_player2_with_computer_template.setTextColor(rgb(37, 103, 28))
+                name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                name_player2_with_computer_template.setTextSize(20f)
+                name_player1_with_computer_template.setTextSize(20f)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.cross_japan);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.null_japan);
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                label_with_computer.setBackgroundResource(R.drawable.background_japan);
+                bottom_navigation_with_computer_template.setBackgroundColor(Color.WHITE)
+                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            }
+            "Noir" -> {
+                name_player1_with_computer_template.setTextColor(Color.WHITE)
+                name_player2_with_computer_template.setTextColor(Color.RED)
+                name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                name_player2_with_computer_template.setTextSize(20f)
+                name_player1_with_computer_template.setTextSize(20f)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.cross_noir);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.null_noir);
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                label_with_computer.setBackgroundResource(R.drawable.background_noir);
+                bottom_navigation_with_computer_template.setBackgroundColor(argb(0,0,0,0))
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_gothic)
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            }
         }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
@@ -612,9 +672,13 @@ class CanvasView_Dots_with_computer(context: Context, attrs: AttributeSet?) : Vi
 
 
         when (Design) {
+            "Normal" -> {
+                //line_who_do_move.strokeWidth = 14f
+                //line_who_do_move.color = Color.GREEN
+            }
             "Egypt" -> {
-                Line_paint.setColor(Color.rgb(100, 100, 100))      //ресур для линий (ширина и цвет)
-                paint_circle.setColor(Color.rgb(100, 100, 100))
+                Line_paint.setColor(Color.rgb(120, 120, 120))      //ресур для линий (ширина и цвет)
+                paint_circle.setColor(Color.rgb(120, 120, 120))
                 paint_rib_1.setColor(Color.BLACK) //цвета для ребер  и их ширина
                 paint_rib_1.setStrokeWidth(5f)
                 paint_rib_2.setColor(Color.WHITE)
@@ -624,17 +688,20 @@ class CanvasView_Dots_with_computer(context: Context, attrs: AttributeSet?) : Vi
                 shading_2.setColor(Color.WHITE)
                 shading_1.setStrokeWidth(2f)
                 shading_2.setStrokeWidth(2f)
+
+                //line_who_do_move.color = Color.RED
             }
             "Casino" -> {
-                paint_rib_1.setColor(Color.BLACK) //цвета для ребер  и их ширина
-                paint_rib_1.setStrokeWidth(5f)
-                paint_rib_2.setColor(Color.RED)
+                paint_rib_2.setColor(Color.BLACK) //цвета для ребер  и их ширина
                 paint_rib_2.setStrokeWidth(5f)
+                paint_rib_1.setColor(Color.RED)
+                paint_rib_1.setStrokeWidth(5f)
 
-                shading_1.setColor(Color.BLACK)
-                shading_2.setColor(Color.RED)
+                shading_2.setColor(Color.BLACK)
+                shading_1.setColor(Color.RED)
                 shading_1.setStrokeWidth(2f)
                 shading_2.setStrokeWidth(2f)
+                //line_who_do_move.color = Color.YELLOW
             }
             "Rome" -> {
                 Line_paint.setColor(Color.rgb(180, 180, 180))      //ресур для линий (ширина и цвет)
@@ -648,6 +715,49 @@ class CanvasView_Dots_with_computer(context: Context, attrs: AttributeSet?) : Vi
                 shading_2.setColor(Color.rgb(193,150,63))
                 shading_1.setStrokeWidth(2f)
                 shading_2.setStrokeWidth(2f)
+                //line_who_do_move.color = Color.BLACK
+            }
+            "Gothic" -> {
+                Line_paint.setColor(Color.rgb(100,100,100))      //ресур для линий (ширина и цвет)
+                paint_circle.setColor(Color.rgb(100,100,100))
+                paint_rib_1.setColor(Color.WHITE) //цвета для ребер  и их ширина
+                paint_rib_1.setStrokeWidth(5f)
+                paint_rib_2.setColor(Color.YELLOW)
+                paint_rib_2.setStrokeWidth(5f)
+
+                shading_1.setColor(Color.WHITE)
+                shading_2.setColor(Color.YELLOW)
+                shading_1.setStrokeWidth(2f)
+                shading_2.setStrokeWidth(2f)
+                //line_who_do_move.color = Color.WHITE
+            }
+            "Japan" -> {
+                Line_paint.setColor(Color.rgb(160,160,160))      //ресур для линий (ширина и цвет)
+                paint_circle.setColor(Color.rgb(160,160,160))
+                paint_rib_1.setColor(Color.rgb(37,103,28)) //зелёный
+                paint_rib_1.setStrokeWidth(5f)
+                paint_rib_2.setColor(Color.RED)
+                paint_rib_2.setStrokeWidth(5f)
+
+                shading_1.setColor(Color.rgb(37,103,28))
+                shading_2.setColor(Color.RED)
+                shading_1.setStrokeWidth(2f)
+                shading_2.setStrokeWidth(2f)
+                //line_who_do_move.color = Color.RED
+            }
+            "Noir" -> {
+                Line_paint.setColor(Color.rgb(100,100,100))      //ресур для линий (ширина и цвет)
+                paint_circle.setColor(Color.rgb(100,100,100))
+                paint_rib_1.setColor(Color.RED) //цвета для ребер  и их ширина
+                paint_rib_1.setStrokeWidth(5f)
+                paint_rib_2.setColor(Color.WHITE)
+                paint_rib_2.setStrokeWidth(5f)
+
+                shading_1.setColor(Color.RED)
+                shading_2.setColor(Color.WHITE)
+                shading_1.setStrokeWidth(2f)
+                shading_2.setStrokeWidth(2f)
+                //line_who_do_move.color = Color.RED
             }
         }
 

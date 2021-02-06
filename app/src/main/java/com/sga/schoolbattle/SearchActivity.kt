@@ -73,7 +73,6 @@ class SearchActivity : AppCompatActivity() {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(query: String?): Boolean {
-                textViewSearch.setTextColor(Color.YELLOW)
                 if (query == null || query.isEmpty()) {
                     blocked = true
                     USERS.clear()

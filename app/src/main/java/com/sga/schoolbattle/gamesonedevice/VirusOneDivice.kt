@@ -108,8 +108,11 @@ class VirusOneDivice : AppCompatActivity() {
 
         when (Design) {
             "Normal" ->{
+                name_player1_one_divice.setTextColor(Color.BLACK)
+                name_player2_one_divice.setTextColor(Color.BLACK)
                 button_player_1_one_divice.setBackgroundResource(R.drawable.virus1_normal);
                 button_player_2_one_divice.setBackgroundResource(R.drawable.virus2_normal);
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_normal)
             }
             "Egypt" -> {
                 name_player1_one_divice.setTextColor(Color.BLACK)
@@ -129,8 +132,8 @@ class VirusOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0,0,0,0))
             }
             "Casino" -> {
-                name_player1_one_divice.setTextColor(Color.YELLOW)
-                name_player2_one_divice.setTextColor(Color.YELLOW)
+                name_player1_one_divice.setTextColor(Color.RED)
+                name_player2_one_divice.setTextColor(Color.BLACK)
                 name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 name_player2_one_divice.setTextSize(20f)
@@ -141,12 +144,12 @@ class VirusOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background2_casino);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_casino)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Rome" -> {
-                name_player1_one_divice.setTextColor(rgb(193,150,63))
-                name_player2_one_divice.setTextColor(rgb(193,150,63))
+                name_player1_one_divice.setTextColor(Color.RED)
+                name_player2_one_divice.setTextColor(Color.BLUE)
                 name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                 name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                 name_player2_one_divice.setTextSize(20f)
@@ -157,7 +160,7 @@ class VirusOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_rome);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_rome)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Gothic" -> {
@@ -173,7 +176,7 @@ class VirusOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_gothic);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_gothic)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Japan" -> {
@@ -205,7 +208,7 @@ class VirusOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_noir);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_gothic)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
         }
@@ -807,7 +810,7 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
         paint_rib_2.setColor(Color.BLUE)
         paint_rib_2.setStrokeWidth(5f)
 
-        line_who_do_move.strokeWidth = 7f
+        line_who_do_move.strokeWidth = 14f
 
         when (Design) {
             "Normal" -> {
@@ -825,7 +828,7 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
             }
             "Rome" -> {
                 Line_paint.setColor(rgb(193,150,63))          //ресур для линий (ширина и цвет)
-                line_who_do_move.color = rgb(193,150,63)
+                line_who_do_move.color = Color.BLACK
             }
             "Gothic" -> {
                 Line_paint.setColor(rgb(100,100,100))          //ресур для линий (ширина и цвет)

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.graphics.*
+import android.graphics.Color.argb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Vibrator
@@ -138,8 +139,8 @@ class ReversiGameActivity : AppCompatActivity() {
                 timer_xog_online.setTextColor(Color.GREEN)
                 timer2_xog_online.setTextColor(Color.GREEN)
                 bottom_navigation_xog_online.setBackgroundColor(Color.rgb(255, 230, 163))
-                toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_xog_online.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_xog_online.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Casino" -> {
                 label_online.setBackgroundResource(R.drawable.background2_casino)
@@ -150,8 +151,8 @@ class ReversiGameActivity : AppCompatActivity() {
                 timer_xog_online.setTextColor(Color.GREEN)
                 timer2_xog_online.setTextColor(Color.GREEN)
                 bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_casino)
-                toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_xog_online.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_xog_online.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Rome" -> {
                 label_online.setBackgroundResource(R.drawable.background_rome)
@@ -162,8 +163,8 @@ class ReversiGameActivity : AppCompatActivity() {
                 timer_xog_online.setTextColor(Color.GREEN)
                 timer2_xog_online.setTextColor(Color.GREEN)
                 bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_rome)
-                toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_xog_online.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_xog_online.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Japan" -> {
                 label_online.setBackgroundResource(R.drawable.background_japan)
@@ -174,8 +175,8 @@ class ReversiGameActivity : AppCompatActivity() {
                 timer_xog_online.setTextColor(Color.GREEN)
                 timer2_xog_online.setTextColor(Color.GREEN)
                 bottom_navigation_xog_online.setBackgroundColor(Color.WHITE)
-                toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_xog_online.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_xog_online.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Gothic" -> {
                 label_online.setBackgroundResource(R.drawable.background_gothic)
@@ -186,8 +187,8 @@ class ReversiGameActivity : AppCompatActivity() {
                 timer_xog_online.setTextColor(Color.GREEN)
                 timer2_xog_online.setTextColor(Color.GREEN)
                 bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
-                toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_xog_online.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_xog_online.setBackgroundColor(argb(0, 0, 0, 0))
                 button_player_1_online_xog.textSize = 16.5f
                 button_player_2_online_xog.textSize = 16.5f
             }
@@ -200,8 +201,8 @@ class ReversiGameActivity : AppCompatActivity() {
                 timer_xog_online.setTextColor(Color.GREEN)
                 timer2_xog_online.setTextColor(Color.GREEN)
                 bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
-                toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_xog_online.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_xog_online.setBackgroundColor(argb(0, 0, 0, 0))
             }
         }
 

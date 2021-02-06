@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.*
+import android.graphics.Color.argb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Vibrator
@@ -212,13 +213,13 @@ class SnakeGameWithComputer : AppCompatActivity() {
                 button_player_2_with_computer_template.setBackgroundResource(R.drawable.player2_egypt);
                 player_1_icon_template_with_computer.setBackgroundResource(R.drawable.chip1_egypt);
                 player_2_icon_template_with_computer.setBackgroundResource(R.drawable.chip2_egypt)
-                toolbar_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
 
                 label_with_computer.setBackgroundResource(R.drawable.background_egypt);
                 bottom_navigation_with_computer_template.setBackgroundColor(Color.rgb(255, 230, 163))
                 to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
-                toolbar_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Casino" -> {
                 name_player1_with_computer_template.setTextColor(Color.YELLOW)
@@ -229,12 +230,12 @@ class SnakeGameWithComputer : AppCompatActivity() {
                 name_player1_with_computer_template.setTextSize(20f)
                 button_player_1_with_computer_template.setBackgroundResource(R.drawable.chip2_casino);
                 button_player_2_with_computer_template.setBackgroundResource(R.drawable.chip1_casino);
-                toolbar_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 label_with_computer.setBackgroundResource(R.drawable.background_casino);
-                bottom_navigation_with_computer_template.setBackgroundColor(Color.argb(0, 224, 164, 103))
+                bottom_navigation_with_computer_template.setBackgroundColor(argb(0, 224, 164, 103))
                 to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
-                toolbar_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Rome" -> {
                 name_player1_with_computer_template.setTextColor(Color.rgb(193, 150, 63))
@@ -245,12 +246,12 @@ class SnakeGameWithComputer : AppCompatActivity() {
                 name_player1_with_computer_template.setTextSize(20f)
                 button_player_1_with_computer_template.setBackgroundResource(R.drawable.chip1_rome);
                 button_player_2_with_computer_template.setBackgroundResource(R.drawable.chip2_rome);
-                toolbar_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 label_with_computer.setBackgroundResource(R.drawable.background_rome);
-                bottom_navigation_with_computer_template.setBackgroundColor(Color.argb(0, 224, 164, 103))
+                bottom_navigation_with_computer_template.setBackgroundColor(argb(0, 224, 164, 103))
                 to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
-                toolbar_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Gothic" -> {
                 name_player1_with_computer_template.setTextColor(Color.WHITE)
@@ -261,12 +262,12 @@ class SnakeGameWithComputer : AppCompatActivity() {
                 name_player1_with_computer_template.setTextSize(20f)
                 //button_player_1_with_computer_template.setBackgroundResource(R.drawable.cross_gothic);
                 //button_player_2_with_computer_template.setBackgroundResource(R.drawable.null_gothic);
-                toolbar_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 label_with_computer.setBackgroundResource(R.drawable.background_gothic);
-                bottom_navigation_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                bottom_navigation_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
-                toolbar_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Japan" -> {
                 name_player1_with_computer_template.setTextColor(Color.BLACK)
@@ -277,12 +278,12 @@ class SnakeGameWithComputer : AppCompatActivity() {
                 name_player1_with_computer_template.setTextSize(20f)
                 //button_player_1_with_computer_template.setBackgroundResource(R.drawable.chip1_japan);
                 //button_player_2_with_computer_template.setBackgroundResource(R.drawable.chip2_japan);
-                toolbar_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 label_with_computer.setBackgroundResource(R.drawable.background_japan);
-                bottom_navigation_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                bottom_navigation_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
-                toolbar_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Noir" -> {
                 name_player1_with_computer_template.setTextColor(Color.WHITE)
@@ -293,12 +294,12 @@ class SnakeGameWithComputer : AppCompatActivity() {
                 name_player1_with_computer_template.setTextSize(20f)
                 //button_player_1_with_computer_template.setBackgroundResource(R.drawable.cross_gothic);
                 //button_player_2_with_computer_template.setBackgroundResource(R.drawable.null_gothic);
-                toolbar_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 label_with_computer.setBackgroundResource(R.drawable.background_noir);
-                bottom_navigation_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                bottom_navigation_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
-                toolbar_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             }
         }
     }
