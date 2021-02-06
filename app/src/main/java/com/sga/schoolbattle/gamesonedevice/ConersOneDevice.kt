@@ -103,6 +103,10 @@ class ConersOneDevice : AppCompatActivity() {
         mSound2.load(this, R.raw.win, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
+
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+
         signature_canvas_corners_one_device.t1 = findViewById(R.id.name_player1_one_divice) as TextView
         signature_canvas_corners_one_device.t2 = findViewById(R.id.name_player2_one_divice) as TextView
 

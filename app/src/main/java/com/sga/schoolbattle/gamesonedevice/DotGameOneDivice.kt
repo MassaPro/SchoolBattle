@@ -103,7 +103,8 @@ class DotGameOneDivice : AppCompatActivity() {
         signature_canvas_dots_one_divice.t1 = findViewById(R.id.name_player1_one_divice) as TextView
         signature_canvas_dots_one_divice.t2 = findViewById(R.id.name_player2_one_divice) as TextView
 
-
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
 
         when (Design) {
             "Normal" ->{

@@ -103,6 +103,10 @@ class BoxGameOneDivice : AppCompatActivity() {
         signature_canvas_box_one_device.t1 = findViewById(R.id.name_player1_one_divice) as TextView
         signature_canvas_box_one_device.t2 = findViewById(R.id.name_player2_one_divice) as TextView
 
+
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+        
         CONTEXT = this
 
         mSound.load(this, R.raw.xlup, 1)

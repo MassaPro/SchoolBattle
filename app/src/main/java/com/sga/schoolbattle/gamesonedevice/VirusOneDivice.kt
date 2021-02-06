@@ -100,6 +100,9 @@ class VirusOneDivice : AppCompatActivity() {
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
         setContentView(R.layout.activity_one_device_games_template)
+
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
         signature_canvas_virus_one_device.visibility = View.VISIBLE
         signature_canvas_virus_one_device.activity = this
 

@@ -96,6 +96,9 @@ class ReversiOneDivice : AppCompatActivity() {
         signature_canvas_reversi_one_device.activity = this
         CONTEXT = this
 
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+
         mSound.load(this, R.raw.xlup, 1);
         mSound2.load(this, R.raw.win, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator

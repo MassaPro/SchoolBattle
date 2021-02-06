@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">SchoolBattle</string>
     <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
-    <string name="title_home">Домой</string>
+    <string name="title_home">Меню</string>
     <string name="title_dashboard">Игры</string>
     <string name="title_notifications">Настройки</string>
     <string name="title_activity_social">SocialActivity</string>
