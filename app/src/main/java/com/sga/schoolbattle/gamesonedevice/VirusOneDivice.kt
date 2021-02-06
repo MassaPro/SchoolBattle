@@ -792,6 +792,7 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
     var size_field_y: Int = 0
     var step: Float = 0f
 
+    var line_who_do_move : Paint = Paint()
 
     init {
 
@@ -806,26 +807,39 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
         paint_rib_2.setColor(Color.BLUE)
         paint_rib_2.setStrokeWidth(5f)
 
-        if (Design == "Casino"){
-            Line_paint.setColor(Color.WHITE)          //ресур для линий (ширина и цвет)
+        line_who_do_move.strokeWidth = 7f
 
-        }
-        if (Design == "Egypt"){
-            Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
+        when (Design) {
+            "Normal" -> {
+                line_who_do_move.color =  Color.GREEN
+                line_who_do_move.strokeWidth = 14f
+            }
+            "Casino" -> {
+                Line_paint.setColor(Color.WHITE)          //ресур для линий (ширина и цвет)
+                line_who_do_move.color = Color.YELLOW
+            }
+            "Egypt" -> {
+                line_who_do_move.color = Color.RED
+                Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
 
-        }
-        if (Design == "Rome"){
-            Line_paint.setColor(rgb(193,150,63))          //ресур для линий (ширина и цвет)
-        }
-        if (Design == "Gothic"){
-            Line_paint.setColor(rgb(100,100,100))          //ресур для линий (ширина и цвет)
-        }
-        if (Design == "Japan"){
-            Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
-        }
-        if (Design == "Noir"){
-            Line_paint.setColor(rgb(100,100,100))          //ресур для линий (ширина и цвет)
+            }
+            "Rome" -> {
+                Line_paint.setColor(rgb(193,150,63))          //ресур для линий (ширина и цвет)
+                line_who_do_move.color = rgb(193,150,63)
+            }
+            "Gothic" -> {
+                Line_paint.setColor(rgb(100,100,100))          //ресур для линий (ширина и цвет)
+                line_who_do_move.color = Color.WHITE
+            }
+            "Japan" -> {
+                Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
+                line_who_do_move.color = Color.RED
+            }
+            "Noir" -> {
+                Line_paint.setColor(rgb(100,100,100))          //ресур для линий (ширина и цвет)
+                line_who_do_move.color = Color.RED
 
+            }
         }
 
 
@@ -986,6 +1000,15 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
             }
             X1 += step
             Y1 = height - advertising_line -  width
+        }
+
+        if(red_or_blue <3)
+        {
+            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+        }
+        else
+        {
+            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
         }
 
 
