@@ -2,6 +2,7 @@ package com.sga.schoolbattle.social
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.sga.schoolbattle.*
@@ -92,6 +94,35 @@ class ItemRecyclerViewAdapter(private val ITEMS: MutableList<String>):
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.idView.text = ITEMS[position]
+        when (Design) {
+            "Normal" -> {
+                holder.idView.setTextColor(Color.BLACK)
+            }
+            "Egypt" -> {
+                holder.idView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                holder.idView.setTextColor(Color.BLACK)
+            }
+            "Casino" -> {
+                holder.idView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                holder.idView.setTextColor(Color.YELLOW)
+            }
+            "Rome" -> {
+                holder.idView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                holder.idView.setTextColor(Color.rgb(193, 150, 63))
+            }
+            "Gothic" -> {
+                holder.idView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                holder.idView.setTextColor(Color.WHITE)
+            }
+            "Japan" -> {
+                holder.idView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                holder.idView.setTextColor(Color.BLACK)
+            }
+            "Noir" -> {
+                holder.idView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                holder.idView.setTextColor(Color.WHITE)
+            }
+        }
         with(holder.itemView) {
             tag = ITEMS[position]
             setOnClickListener(onClickListener)

@@ -8,12 +8,14 @@ import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.sga.schoolbattle.social.ProfileUserActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_search.*
+import kotlinx.android.synthetic.main.activity_search_item.*
 import kotlinx.android.synthetic.main.activity_search_item.view.*
 
 
@@ -34,7 +36,9 @@ class SearchActivity : AppCompatActivity() {
         rec = recyclerViewSearch
         rec?.adapter?.notifyDataSetChanged()
 
+
         var blocked = false
+
 
         when (Design) {
             "Normal" -> {
@@ -43,9 +47,6 @@ class SearchActivity : AppCompatActivity() {
             "Egypt" -> {
                 recyclerViewSearch.setBackgroundResource(R.drawable.background_egypt)
                 search_field.setBackgroundColor(rgb(255, 230, 163))
-                //textViewSearch.setTextColor(Color.WHITE)
-                //search_field.setty(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-                //search_field.setTextColor(rgb(255, 230, 163))
             }
             "Casino" -> {
                 recyclerViewSearch.setBackgroundResource(R.drawable.background2_casino)
@@ -69,8 +70,10 @@ class SearchActivity : AppCompatActivity() {
             }
         }
 
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(query: String?): Boolean {
+                textViewSearch.setTextColor(Color.YELLOW)
                 if (query == null || query.isEmpty()) {
                     blocked = true
                     USERS.clear()
@@ -78,6 +81,8 @@ class SearchActivity : AppCompatActivity() {
                     return false
                 }
                 blocked = false
+
+
                 //USERS.clear()
                 //rec?.adapter?.notifyDataSetChanged()
                 //Toast.makeText(this@SearchActivity, query, Toast.LENGTH_LONG).show()
@@ -132,11 +137,42 @@ class SearchActivity : AppCompatActivity() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.activity_search_item, parent, false)
+
             return ViewHolder(view)
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.idView.text = ITEMS[position]
+
+            when (Design) {
+                "Normal" -> {
+                    holder.idView.setTextColor(Color.BLACK)
+                }
+                "Egypt" -> {
+                    holder.idView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                    holder.idView.setTextColor(Color.BLACK)
+                }
+                "Casino" -> {
+                    holder.idView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                    holder.idView.setTextColor(Color.YELLOW)
+                }
+                "Rome" -> {
+                    holder.idView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                    holder.idView.setTextColor(rgb(193,150,63))
+                }
+                "Gothic" -> {
+                    holder.idView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                    holder.idView.setTextColor(Color.WHITE)
+                }
+                "Japan" -> {
+                    holder.idView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                    holder.idView.setTextColor(Color.BLACK)
+                }
+                "Noir" -> {
+                    holder.idView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                    holder.idView.setTextColor(Color.WHITE)
+                }
+            }
             with(holder.itemView) {
                 tag = ITEMS[position]
                 setOnClickListener(onClickListener)
