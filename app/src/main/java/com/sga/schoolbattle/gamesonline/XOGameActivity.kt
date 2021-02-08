@@ -27,6 +27,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 import kotlinx.android.synthetic.main.activity_online_games_temlate.*
 import kotlinx.android.synthetic.main.activity_x_o_game.bottom_navigation_xog_online
 import kotlinx.android.synthetic.main.activity_x_o_game.button_player_1_online_xog
@@ -135,6 +136,7 @@ class XOGameActivity : AppCompatActivity() {
         button_player_1_online_xog.textSize = 20f
         button_player_2_online_xog.textSize = 20f
         //                    Toast.makeText(applicationContext,"${signature_canvas.FIELD[checkList[1]][checkList[2]]}", Toast.LENGTH_LONG).show()
+
         when (Design) {
             "Normal" -> {
 
@@ -724,15 +726,15 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
 
             }
             "Casino" -> {
-                Line_paint.color = Color.YELLOW          //ресур для линий (ширина и цвет)
+                Line_paint.color = Color.WHITE          //ресур для линий (ширина и цвет)
                 Line_paint.strokeWidth = 7f
-                line_who_do_move.color = Color.RED              //
+                line_who_do_move.color = Color.WHITE             //
 
             }
             "Rome" -> {
                 Line_paint.color = Color.rgb(193, 150, 63)    //ресур для линий (ширина и цвет)
                 Line_paint.strokeWidth = 7f
-                line_who_do_move.color = Color.rgb(193, 150, 63)             //
+                line_who_do_move.color = Color.BLACK         //
 
             }
             "Gothic" -> {
@@ -813,7 +815,7 @@ class CanvasView(context: Context, attrs: AttributeSet?) : View(context, attrs) 
 
     // var BackgroundColor_Egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.background_egypt)
     var icon_green : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.illumination)
-    var icon_grenn_Egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ram_egypt_xog)
+    var icon_grenn_Egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.illumination)
 
 
 

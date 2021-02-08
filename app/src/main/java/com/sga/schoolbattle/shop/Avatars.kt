@@ -190,6 +190,8 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
         when (Design) {
             "Normal" -> {
                 holder.button.setBackgroundResource(R.drawable.button)
+                holder.price.textSize = 20f        //так задаешь размер
+                holder.price.setTextColor(Color.BLACK)   //цвет
             }
             "Egypt" -> {
 
@@ -200,7 +202,7 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
                 holder.button.setBackgroundColor(argb(0,0,0,0))
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.egypt)
 
-                holder.price.textSize = 20f        //так задаешь размер
+                holder.price.textSize = 16f        //так задаешь размер
                 holder.price.setTextColor(Color.BLACK)   //цвет
                 holder.price.typeface = ResourcesCompat.getFont(locale_context!!, R.font.egypt)
 
@@ -259,7 +261,7 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
                 holder.button.setTextColor(Color.BLACK)   //цвет
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.japan)
 
-                holder.price.textSize = 18f        //так задаешь размер
+                holder.price.textSize = 15f        //так задаешь размер
                 holder.price.setTextColor(Color.BLACK)   //цвет
                 holder.price.typeface = ResourcesCompat.getFont(locale_context!!, R.font.japan)
 
@@ -515,7 +517,7 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
                             //TODO ARRAY_OF_EMOTION передать в базу ------- сделано в строках 256 - 262
                             holder.price.text = ""
                             holder.icon.setImageResource(R.drawable.nulevoe)
-                            holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                            holder.button.setBackgroundColor(argb(0, 0, 0, 0))
                             holder.button.text = "(КУПЛЕНО)"
                             locale_context!!.findViewById<TextView>(R.id.money_shop_toolbar).text =
                                 MONEY.toString()

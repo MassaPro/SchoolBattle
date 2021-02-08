@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.*
+import android.graphics.Color.argb
 import android.graphics.Color.rgb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -109,8 +110,11 @@ class SnakeGameOneDivice : AppCompatActivity() {
         signature_canvas_snake_one_device.t2 = findViewById(R.id.name_player2_one_divice) as TextView
         when (Design) {
             "Normal" -> {
+                name_player1_one_divice.setTextColor(Color.BLACK)
+                name_player2_one_divice.setTextColor(Color.BLACK)
                 signature_canvas_snake_one_device.t1.setTextColor(Color.RED)
                 signature_canvas_snake_one_device.t2.setTextColor(Color.BLUE)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_normal)
             }
             "Egypt" -> {
 
@@ -124,45 +128,45 @@ class SnakeGameOneDivice : AppCompatActivity() {
                 button_player_2_one_divice.setBackgroundResource(R.drawable.player2_egypt);
                 player_1_icon_one_divice.setBackgroundResource(R.drawable.chip1_egypt);
                 player_2_icon_one_divice.setBackgroundResource(R.drawable.chip2_egypt)
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
 
                 label_one_device.setBackgroundResource(R.drawable.background_egypt);
-                bottom_navigation_one_divice.setBackgroundColor(Color.rgb(255, 230, 163))
+                bottom_navigation_one_divice.setBackgroundColor(rgb(255, 230, 163))
                 to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Casino" -> {
-                name_player1_one_divice.setTextColor(Color.YELLOW)
-                name_player2_one_divice.setTextColor(Color.YELLOW)
+                name_player1_one_divice.setTextColor(Color.BLACK)
+                name_player2_one_divice.setTextColor(Color.RED)
                 name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 name_player2_one_divice.setTextSize(20f)
                 name_player1_one_divice.setTextSize(20f)
                 button_player_1_one_divice.setBackgroundResource(R.drawable.chip2_casino);
                 button_player_2_one_divice.setBackgroundResource(R.drawable.chip1_casino);
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background2_casino);
-                bottom_navigation_one_divice.setBackgroundColor(Color.argb(0, 224, 164, 103))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                bottom_navigation_one_divice.setBackgroundColor(argb(0, 224, 164, 103))
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_casino)
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Rome" -> {
-                name_player1_one_divice.setTextColor(Color.rgb(193, 150, 63))
-                name_player2_one_divice.setTextColor(Color.rgb(193, 150, 63))
+                name_player1_one_divice.setTextColor(rgb(193, 150, 63))
+                name_player2_one_divice.setTextColor(Color.BLACK)
                 name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                 name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                 name_player2_one_divice.setTextSize(20f)
                 name_player1_one_divice.setTextSize(20f)
                 button_player_1_one_divice.setBackgroundResource(R.drawable.chip1_rome);
                 button_player_2_one_divice.setBackgroundResource(R.drawable.chip2_rome);
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_rome);
-                bottom_navigation_one_divice.setBackgroundColor(Color.argb(0, 224, 164, 103))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                bottom_navigation_one_divice.setBackgroundColor(argb(0, 224, 164, 103))
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_rome)
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Gothic" -> {
                 name_player1_one_divice.setTextColor(Color.WHITE)
@@ -173,28 +177,28 @@ class SnakeGameOneDivice : AppCompatActivity() {
                 name_player1_one_divice.setTextSize(20f)
                 //button_player_1_one_divice.setBackgroundResource(R.drawable.cross_gothic);
                 //button_player_2_one_divice.setBackgroundResource(R.drawable.null_gothic);
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_gothic);
-                bottom_navigation_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                bottom_navigation_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_gothic)
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Japan" -> {
-                name_player1_one_divice.setTextColor(Color.BLACK)
-                name_player2_one_divice.setTextColor(Color.BLACK)
+                name_player1_one_divice.setTextColor(rgb(37,103,28))
+                name_player2_one_divice.setTextColor(Color.RED)
                 name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
                 name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
                 name_player2_one_divice.setTextSize(20f)
                 name_player1_one_divice.setTextSize(20f)
                 //button_player_1_one_divice.setBackgroundResource(R.drawable.chip1_japan);
                 //button_player_2_one_divice.setBackgroundResource(R.drawable.chip2_japan);
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_japan);
-                bottom_navigation_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                bottom_navigation_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Noir" -> {
                 name_player1_one_divice.setTextColor(Color.WHITE)
@@ -205,12 +209,12 @@ class SnakeGameOneDivice : AppCompatActivity() {
                 name_player1_one_divice.setTextSize(20f)
                 //button_player_1_one_divice.setBackgroundResource(R.drawable.cross_gothic);
                 //button_player_2_one_divice.setBackgroundResource(R.drawable.null_gothic);
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_noir);
-                bottom_navigation_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                bottom_navigation_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_gothic)
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
         }
 
@@ -586,13 +590,13 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
 
 
     init{
-        line_who_do_move.strokeWidth = 7f
+        line_who_do_move.strokeWidth = 14f
 
         red_or_blue = "red"
-        Line_paint.setColor(Color.rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
+        Line_paint.setColor(rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
         Line_paint.setStrokeWidth(7f)
 
-        paint_circle.setColor(Color.rgb(217, 217, 217))     //цвета для точек
+        paint_circle.setColor(rgb(217, 217, 217))     //цвета для точек
 
         paint_rib_1.setColor(Color.RED)          //цвета для ребер  и их ширина
         paint_rib_1.setStrokeWidth(10f)
@@ -604,7 +608,6 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
         border_2.setColor(Color.GRAY)
         border_2.setStrokeWidth(20f)
 
-        line_who_do_move.strokeWidth  =  7f
         when (Design) {
             "Normal" -> {
                 line_who_do_move.color = Color.GREEN
@@ -612,17 +615,17 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
             "Egypt" -> {
 
                 Line_paint.setColor(
-                    Color.rgb(
+                    rgb(
                         100,
                         100,
                         100
                     )
                 )          //ресур для линий (ширина и цвет)
-                paint_circle.setColor(Color.rgb(100, 100, 100))
+                paint_circle.setColor(rgb(100, 100, 100))
                 paint_rib_1.setColor(Color.WHITE)          //цвета для ребер  и их ширина
                 paint_rib_2.setColor(Color.BLACK)
 
-                border_1.setColor(Color.rgb(100, 100, 100))
+                border_1.setColor(rgb(100, 100, 100))
                 line_who_do_move.color = Color.RED
             }
             "Casino" -> {
@@ -637,32 +640,21 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
 
             "Rome" -> {
 
-                Line_paint.setColor(
-                    Color.rgb(
-                        180,
-                        180,
-                        180
-                    )
-                )          //ресур для линий (ширина и цвет)
-                paint_circle.setColor(Color.rgb(180, 180, 180))     //цвета для точек
+                Line_paint.setColor(rgb(180, 180, 180))          //ресур для линий (ширина и цвет)
+                paint_circle.setColor(rgb(180, 180, 180))     //цвета для точек
                 paint_rib_2.setColor(Color.BLACK)          //цвета для ребер  и их ширина
-                paint_rib_1.setColor(Color.rgb(193, 150, 63))
-                border_1.setColor(Color.rgb(180, 180, 180))
-                line_who_do_move.color = Color.rgb(193, 150, 63)
+                paint_rib_1.setColor(rgb(193, 150, 63))
+                border_1.setColor(rgb(180, 180, 180))
+                line_who_do_move.color = Color.BLACK
             }
             "Gothic" -> {
 
                 Line_paint.setColor(
-                    Color.rgb(
-                        100,
-                        100,
-                        100
-                    )
-                )          //ресур для линий (ширина и цвет)
-                paint_circle.setColor(Color.rgb(180, 180, 180))     //цвета для точек
+                    rgb(100, 100, 100))          //ресур для линий (ширина и цвет)
+                paint_circle.setColor(rgb(180, 180, 180))     //цвета для точек
                 paint_rib_2.setColor(Color.WHITE)          //цвета для ребер  и их ширина
                 paint_rib_1.setColor(Color.YELLOW)
-                border_1.setColor(Color.rgb(100, 100, 100))
+                border_1.setColor(rgb(100, 100, 100))
                 line_who_do_move.color = Color.WHITE
             }
             "Japan" -> {
@@ -670,24 +662,18 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
                 Line_paint.setColor(rgb(160, 160, 160))          //ресур для линий (ширина и цвет)
                 paint_circle.setColor(rgb(160, 160, 160))     //цвета для точек
                 paint_rib_2.setColor(Color.RED)          //цвета для ребер  и их ширина
-                paint_rib_1.setColor(Color.rgb(37, 103, 28))
+                paint_rib_1.setColor(rgb(37, 103, 28))
                 border_1.setColor(rgb(160, 160, 160))
                 line_who_do_move.color = Color.RED
 
             }
             "Noir" -> {
 
-                Line_paint.setColor(
-                    Color.rgb(
-                        100,
-                        100,
-                        100
-                    )
-                )          //ресур для линий (ширина и цвет)
-                paint_circle.setColor(Color.rgb(180, 180, 180))     //цвета для точек
+                Line_paint.setColor(rgb(100, 100, 100))          //ресур для линий (ширина и цвет)
+                paint_circle.setColor(rgb(180, 180, 180))     //цвета для точек
                 paint_rib_2.setColor(Color.RED)          //цвета для ребер  и их ширина
                 paint_rib_1.setColor(Color.WHITE)
-                border_1.setColor(Color.rgb(100, 100, 100))
+                border_1.setColor(rgb(100, 100, 100))
                 line_who_do_move.color = Color.RED
             }
         }
@@ -736,7 +722,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
 
         if(red_or_blue == "red")
         {
-            t1.text = "Игрок 1 думает"
+            t1.text = "Игрок 1 думает..."
             t2.text = "Игрок 2"
             canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
 
@@ -744,7 +730,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
         else
         {
             t1.text = "Игрок 1"
-            t2.text = "Игрок 2 думает"
+            t2.text = "Игрок 2 думает..."
             canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
         }
         for(i in 0 until size_field_y+1)          //вырисовка горизонтальных линий

@@ -40,7 +40,7 @@ class NewGameActivity : AppCompatActivity() {
                 back_button.setBackgroundResource(R.drawable.back_arrow_normal)
             }
             "Egypt" -> {
-                back_button.setBackgroundResource(R.drawable.back_arrow_normal)
+                back_button.setBackgroundResource(R.drawable.arrow_back)
                 game_list_menu.setBackgroundResource(R.drawable.background_egypt);
                 my_toolbar2.setBackgroundColor(rgb(255, 230, 163))
                 text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
@@ -61,21 +61,21 @@ class NewGameActivity : AppCompatActivity() {
                 text.setTextColor(rgb(193,150,63))
             }
             "Gothic" -> {
-                back_button.setBackgroundResource(R.drawable.back_button_gothic)
+                back_button.setBackgroundResource(R.drawable.back_arrow_gothic)
                 game_list_menu.setBackgroundResource(R.drawable.background_gothic);
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
                 text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
                 text.setTextColor(Color.WHITE)
             }
             "Japan" -> {
-                back_button.setBackgroundResource(R.drawable.back_arrow_normal)
+                back_button.setBackgroundResource(R.drawable.arrow_back)
                 game_list_menu.setBackgroundResource(R.drawable.background_japan);
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
                 text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
                 text.setTextColor(Color.BLACK)
             }
             "Noir" -> {
-                back_button.setBackgroundResource(R.drawable.back_button_gothic)
+                back_button.setBackgroundResource(R.drawable.back_arrow_gothic)
                 game_list_menu.setBackgroundColor(rgb(20,20,20));
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
                 text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))

@@ -107,8 +107,11 @@ class ReversiOneDivice : AppCompatActivity() {
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
         when (Design) {
             "Normal" -> {
+                name_player1_one_divice.setTextColor(Color.BLACK)
+                name_player2_one_divice.setTextColor(Color.BLACK)
                 button_player_1_one_divice.setBackgroundResource(R.drawable.chip2_normal);
                 button_player_2_one_divice.setBackgroundResource(R.drawable.chip1_normal);
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_normal)
             }
             "Egypt" -> {
                 name_player1_one_divice.setTextColor(Color.BLACK)
@@ -121,16 +124,16 @@ class ReversiOneDivice : AppCompatActivity() {
                 button_player_2_one_divice.setBackgroundResource(R.drawable.player2_egypt);
                 player_1_icon_one_divice.setBackgroundResource(R.drawable.chip1_egypt);
                 player_2_icon_one_divice.setBackgroundResource(R.drawable.chip2_egypt)
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_egypt);
                 bottom_navigation_one_divice.setBackgroundColor(Color.rgb(255, 230, 163))
                 to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Casino" -> {
-                name_player1_one_divice.setTextColor(Color.YELLOW)
-                name_player2_one_divice.setTextColor(Color.YELLOW)
+                name_player1_one_divice.setTextColor(Color.RED)
+                name_player2_one_divice.setTextColor(Color.BLACK)
                 name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 name_player2_one_divice.setTextSize(20f)
@@ -141,12 +144,12 @@ class ReversiOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background2_casino);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0, 224, 164, 103))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_casino)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Rome" -> {
                 name_player1_one_divice.setTextColor(Color.rgb(193, 150, 63))
-                name_player2_one_divice.setTextColor(Color.rgb(193, 150, 63))
+                name_player2_one_divice.setTextColor(Color.BLACK)
                 name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                 name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                 name_player2_one_divice.setTextSize(20f)
@@ -157,7 +160,7 @@ class ReversiOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_rome);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0, 224, 164, 103))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_rome)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Gothic" -> {
@@ -173,7 +176,7 @@ class ReversiOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_gothic);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_gothic)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Japan" -> {
@@ -205,7 +208,7 @@ class ReversiOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_noir);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_gothic)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
         }
@@ -956,43 +959,36 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
         Line_paint.setColor(Color.rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
         Line_paint.setStrokeWidth(7f)
 
-        line_who_do_move.strokeWidth = 7f
+        line_who_do_move.strokeWidth = 14f
 
         when (Design) {
             "Normal" ->{
                 line_who_do_move.color =  Color.GREEN
                 line_who_do_move.strokeWidth = 14f
                 Line_paint.setColor(Color.rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
-                Line_paint.setStrokeWidth(7f)
             }
             "Egypt" -> {
                 Line_paint.color = Color.BLACK          //ресур для линий (ширина и цвет)
-                Line_paint.strokeWidth = 7f
                 line_who_do_move.color = Color.RED
             }
             "Casino" -> {
                 Line_paint.color = Color.WHITE          //ресур для линий (ширина и цвет)
-                Line_paint.strokeWidth = 7f
                 line_who_do_move.color = Color.YELLOW            //
             }
             "Rome" -> {
                 Line_paint.color = Color.BLACK  //ресур для линий (ширина и цвет)
-                Line_paint.strokeWidth = 7f
-                line_who_do_move.color = Color.rgb(193, 150, 63)
+                line_who_do_move.color = Color.BLACK
             }
             "Gothic" -> {
                 Line_paint.color = Color.rgb(100, 100, 100)   //ресур для линий (ширина и цвет)
-                Line_paint.strokeWidth = 7f
                 line_who_do_move.color = Color.WHITE
             }
             "Japan" -> {
                 Line_paint.color = Color.BLACK   //ресур для линий (ширина и цвет)
-                Line_paint.strokeWidth = 7f
                 line_who_do_move.color = Color.RED              //
             }
             "Noir" -> {
                 Line_paint.color = Color.rgb(100, 100, 100)   //ресур для линий (ширина и цвет)
-                Line_paint.strokeWidth = 7f
                 line_who_do_move.color = Color.RED              //
             }
         }
@@ -1107,7 +1103,7 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
             "Casino" -> {
                 right_black_chip = Bitmap.createScaledBitmap(black_chip_casino,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
                 right_grey_chip = Bitmap.createScaledBitmap(grey_chip_casino,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-                right_green = Bitmap.createScaledBitmap(romb2,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+                right_green = Bitmap.createScaledBitmap(romb1,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
             }
             "Rome" -> {
                 right_black_chip = Bitmap.createScaledBitmap(black_chip_rome,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона

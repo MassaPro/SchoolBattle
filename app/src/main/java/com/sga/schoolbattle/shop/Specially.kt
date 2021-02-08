@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.graphics.Color.argb
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -433,7 +434,7 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
 
                 holder.button.textSize = 20f        //так задаешь размер
                 holder.button.setTextColor(Color.BLACK)   //цвет
-                holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                holder.button.setBackgroundColor(argb(0, 0, 0, 0))
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.egypt)
 
                 holder.price.textSize = 12f        //так задаешь размер
@@ -451,7 +452,7 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
                 holder.background_item.setBackgroundResource(R.drawable.table)
                 holder.button.textSize = 20f        //так задаешь размер
                 holder.button.setTextColor(Color.YELLOW)   //цвет
-                holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                holder.button.setBackgroundColor(argb(0, 0, 0, 0))
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.casino)
 
                 holder.price.textSize = 13f        //так задаешь размер
@@ -468,7 +469,7 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
             "Rome" -> {
                 holder.background_item.setBackgroundResource(R.drawable.bottom_navigation_rome)
                 holder.button.textSize = 20f        //так задаешь размер
-                holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                holder.button.setBackgroundColor(argb(0, 0, 0, 0))
                 holder.button.setTextColor(Color.rgb(193, 150, 63))   //цвет
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.rome)
 

@@ -129,12 +129,12 @@ class ReversiWithComputer : AppCompatActivity() {
             button_player_2_with_computer_template.setBackgroundResource(R.drawable.player2_egypt)
             player_1_icon_template_with_computer.setBackgroundResource(R.drawable.chip1_egypt)
             player_2_icon_template_with_computer.setBackgroundResource(R.drawable.chip2_egypt)
-            toolbar_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             label_with_computer.setBackgroundResource(R.drawable.background_egypt)
             bottom_navigation_with_computer_template.setBackgroundColor(Color.rgb(255, 230, 163))
             to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
         }
         else if(Design == "Casino" ) {
             name_player1_with_computer_template.setTextColor(Color.YELLOW)

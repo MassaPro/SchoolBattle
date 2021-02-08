@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.*
 import android.graphics.Color.argb
+import android.graphics.Color.rgb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Vibrator
@@ -111,11 +112,13 @@ class DotGameOneDivice : AppCompatActivity() {
 
         when (Design) {
             "Normal" ->{
+
                 name_player1_one_divice.setTextColor(Color.BLUE)
                 name_player2_one_divice.setTextColor(Color.RED)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_normal)
             }
             "Egypt" -> {
-                name_player1_one_divice.setTextColor(Color.WHITE)
+                name_player1_one_divice.setTextColor(Color.BLACK)
                 name_player2_one_divice.setTextColor(Color.BLACK)
                 name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
                 name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
@@ -144,11 +147,11 @@ class DotGameOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background2_casino);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_casino)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Rome" -> {
-                name_player1_one_divice.setTextColor(Color.rgb(193, 150, 63))
+                name_player1_one_divice.setTextColor(rgb(193, 150, 63))
                 name_player2_one_divice.setTextColor(Color.BLACK)
                 name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                 name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
@@ -160,7 +163,7 @@ class DotGameOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_rome);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_rome)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Gothic" -> {
@@ -176,12 +179,12 @@ class DotGameOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_gothic);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_gothic)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Japan" -> {
-                name_player1_one_divice.setTextColor(Color.BLACK)
-                name_player2_one_divice.setTextColor(Color.BLACK)
+                name_player1_one_divice.setTextColor(Color.RED)
+                name_player2_one_divice.setTextColor(Color.rgb(37, 103, 28))
                 name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
                 name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
                 name_player2_one_divice.setTextSize(20f)
@@ -208,7 +211,7 @@ class DotGameOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_noir);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_gothic)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
         }
@@ -598,7 +601,7 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
 
     init{
 
-        line_who_do_move.strokeWidth = 7f
+        line_who_do_move.strokeWidth = 14f
         for (i in 0 until 16) {
             a.add(mutableListOf())
         }
@@ -667,7 +670,7 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
                 shading_2.setColor(Color.rgb(193,150,63))
                 shading_1.setStrokeWidth(2f)
                 shading_2.setStrokeWidth(2f)
-                line_who_do_move.color = Color.RED
+                line_who_do_move.color = Color.BLACK
             }
             "Gothic" -> {
                 Line_paint.setColor(Color.rgb(100,100,100))      //ресур для линий (ширина и цвет)
@@ -741,15 +744,15 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
 
         if(red_or_blue%2 == 0)
         {
-            t1.text ="игрок 1 думает..."
-            t2.text  = "игрок 2"
+            t1.text ="Игрок 1 думает..."
+            t2.text  = "Игрок 2"
             //      line_who_do_move.color = Color.RED ЗДЕСБ ПИШИ ЕСЛИ ХОСЧЕШЬ ПОМЕНЯТЬ ЦВЕТ ЭТОЙ ПОЛОСКИУ
             canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
         }
         else
         {
-            t1.text ="игрок 1"
-            t2.text  = "игрок 2 думает..."
+            t1.text ="Игрок 1"
+            t2.text  = "Игрок 2 думает..."
             canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
         }
 

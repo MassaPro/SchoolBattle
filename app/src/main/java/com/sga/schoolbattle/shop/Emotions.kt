@@ -5,6 +5,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Color.argb
 import android.graphics.Color.rgb
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -195,7 +196,7 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
 
                 holder.button.textSize = 20f        //так задаешь размер
                 holder.button.setTextColor(Color.BLACK)   //цвет
-                holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                holder.button.setBackgroundColor(argb(0, 0, 0, 0))
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.egypt)
 
                 holder.price.textSize = 20f        //так задаешь размер
@@ -210,7 +211,7 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
                 holder.background_item.setBackgroundResource(R.drawable.table)
                 holder.button.textSize = 20f        //так задаешь размер
                 holder.button.setTextColor(Color.YELLOW)   //цвет
-                holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                holder.button.setBackgroundColor(argb(0, 0, 0, 0))
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.casino)
 
                 holder.price.textSize = 20f        //так задаешь размер
@@ -224,7 +225,7 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
             "Rome" -> {
                 holder.background_item.setBackgroundResource(R.drawable.bottom_navigation_rome)
                 holder.button.textSize = 20f        //так задаешь размер
-                holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                holder.button.setBackgroundColor(argb(0, 0, 0, 0))
                 holder.button.setTextColor(rgb(193, 150, 63))   //цвет
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.rome)
 
@@ -321,7 +322,7 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
                     when (Design) {
                         "Normal" -> {
                             dialog_shop.button_close_shop_dialog.setTextColor(
-                                Color.argb(
+                                argb(
                                     0,
                                     0,
                                     0,
@@ -336,7 +337,7 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
                         "Egypt" -> {
                             dialog_shop.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_egypt)
                             dialog_shop.button_close_shop_dialog.setTextColor(
-                                Color.argb(
+                                argb(
                                     0,
                                     0,
                                     0,
@@ -344,17 +345,17 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
                                 )
                             )
                             dialog_shop.button_close_shop_dialog.setBackgroundResource(R.drawable.close_cross)
-                            dialog_shop.description.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                            dialog_shop.description.setBackgroundColor(argb(0, 0, 0, 0))
                             dialog_shop.description.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
                             dialog_shop.description.setTextSize(20f)
-                            dialog_shop.price_shop.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                            dialog_shop.price_shop.setBackgroundColor(argb(0, 0, 0, 0))
                             dialog_shop.price_shop.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
                             dialog_shop.price_shop.setTextSize(30f)
-                            dialog_shop.buy_shop_dialog.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                            dialog_shop.buy_shop_dialog.setBackgroundColor(argb(0, 0, 0, 0))
                             dialog_shop.buy_shop_dialog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
                             dialog_shop.buy_shop_dialog.setTextSize(20f)
                             dialog_shop.button_close_2_shop_dialog.setBackgroundColor(
-                                Color.argb(
+                                argb(
                                     0,
                                     0,
                                     0,
@@ -371,7 +372,7 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
                         "Casino" -> {
                             dialog_shop.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.table)
                             dialog_shop.button_close_shop_dialog.setTextColor(
-                                Color.argb(
+                                argb(
                                     0,
                                     0,
                                     0,
@@ -379,20 +380,20 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
                                 )
                             )
                             dialog_shop.button_close_shop_dialog.setBackgroundResource(R.drawable.close_cross4)
-                            dialog_shop.description.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                            dialog_shop.description.setBackgroundColor(argb(0, 0, 0, 0))
                             dialog_shop.description.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                             dialog_shop.description.setTextSize(20f)
                             dialog_shop.description.setTextColor(Color.YELLOW)
-                            dialog_shop.price_shop.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                            dialog_shop.price_shop.setBackgroundColor(argb(0, 0, 0, 0))
                             dialog_shop.price_shop.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                             dialog_shop.price_shop.setTextColor(Color.YELLOW)
                             dialog_shop.price_shop.setTextSize(35f)
-                            dialog_shop.buy_shop_dialog.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                            dialog_shop.buy_shop_dialog.setBackgroundColor(argb(0, 0, 0, 0))
                             dialog_shop.buy_shop_dialog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                             dialog_shop.buy_shop_dialog.setTextSize(25f)
                             dialog_shop.buy_shop_dialog.setTextColor(Color.YELLOW)
                             dialog_shop.button_close_2_shop_dialog.setBackgroundColor(
-                                Color.argb(
+                                argb(
                                     0,
                                     0,
                                     0,
@@ -410,7 +411,7 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
                         "Rome" -> {
                             dialog_shop.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_rome)
                             dialog_shop.button_close_shop_dialog.setTextColor(
-                                Color.argb(
+                                argb(
                                     0,
                                     0,
                                     0,
@@ -418,20 +419,20 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
                                 )
                             )
                             dialog_shop.button_close_shop_dialog.setBackgroundResource(R.drawable.close_cross3)
-                            dialog_shop.description.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                            dialog_shop.description.setBackgroundColor(argb(0, 0, 0, 0))
                             dialog_shop.description.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                             dialog_shop.description.setTextSize(25f)
                             dialog_shop.description.setTextColor(rgb(193,150,63))
-                            dialog_shop.price_shop.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                            dialog_shop.price_shop.setBackgroundColor(argb(0, 0, 0, 0))
                             dialog_shop.price_shop.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                             dialog_shop.price_shop.setTextColor(rgb(193,150,63))
                             dialog_shop.price_shop.setTextSize(40f)
-                            dialog_shop.buy_shop_dialog.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                            dialog_shop.buy_shop_dialog.setBackgroundColor(argb(0, 0, 0, 0))
                             dialog_shop.buy_shop_dialog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                             dialog_shop.buy_shop_dialog.setTextSize(25f)
                             dialog_shop.buy_shop_dialog.setTextColor(rgb(193,150,63))
                             dialog_shop.button_close_2_shop_dialog.setBackgroundColor(
-                                Color.argb(
+                                argb(
                                     0,
                                     0,
                                     0,
@@ -449,7 +450,7 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
                         "Gothic" -> {
                             dialog_shop.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_gothic)
                             dialog_shop.button_close_shop_dialog.setTextColor(
-                                Color.argb(
+                                argb(
                                     0,
                                     0,
                                     0,
@@ -457,20 +458,20 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
                                 )
                             )
                             dialog_shop.button_close_shop_dialog.setBackgroundResource(R.drawable.close_cross2)
-                            dialog_shop.description.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                            dialog_shop.description.setBackgroundColor(argb(0, 0, 0, 0))
                             dialog_shop.description.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
                             dialog_shop.description.setTextSize(25f)
                             dialog_shop.description.setTextColor(Color.WHITE)
-                            dialog_shop.price_shop.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                            dialog_shop.price_shop.setBackgroundColor(argb(0, 0, 0, 0))
                             dialog_shop.price_shop.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
                             dialog_shop.price_shop.setTextColor(Color.WHITE)
                             dialog_shop.price_shop.setTextSize(40f)
-                            dialog_shop.buy_shop_dialog.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                            dialog_shop.buy_shop_dialog.setBackgroundColor(argb(0, 0, 0, 0))
                             dialog_shop.buy_shop_dialog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
                             dialog_shop.buy_shop_dialog.setTextSize(25f)
                             dialog_shop.buy_shop_dialog.setTextColor(Color.WHITE)
                             dialog_shop.button_close_2_shop_dialog.setBackgroundColor(
-                                Color.argb(
+                                argb(
                                     0,
                                     0,
                                     0,
@@ -491,7 +492,7 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
                         "Japan" -> {
                             dialog_shop.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_japan)
                             dialog_shop.button_close_shop_dialog.setTextColor(
-                                Color.argb(
+                                argb(
                                     0,
                                     0,
                                     0,
@@ -499,17 +500,17 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
                                 )
                             )
                             dialog_shop.button_close_shop_dialog.setBackgroundResource(R.drawable.close_cross)
-                            dialog_shop.description.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                            dialog_shop.description.setBackgroundColor(argb(0, 0, 0, 0))
                             dialog_shop.description.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
                             dialog_shop.description.setTextSize(20f)
-                            dialog_shop.price_shop.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                            dialog_shop.price_shop.setBackgroundColor(argb(0, 0, 0, 0))
                             dialog_shop.price_shop.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
                             dialog_shop.price_shop.setTextSize(25f)
-                            dialog_shop.buy_shop_dialog.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                            dialog_shop.buy_shop_dialog.setBackgroundColor(argb(0, 0, 0, 0))
                             dialog_shop.buy_shop_dialog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
                             dialog_shop.buy_shop_dialog.setTextSize(20f)
                             dialog_shop.button_close_2_shop_dialog.setBackgroundColor(
-                                Color.argb(
+                                argb(
                                     0,
                                     0,
                                     0,
@@ -529,7 +530,7 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
                         "Noir" -> {
                             dialog_shop.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_noir)
                             dialog_shop.button_close_shop_dialog.setTextColor(
-                                Color.argb(
+                                argb(
                                     0,
                                     0,
                                     0,
@@ -537,20 +538,20 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
                                 )
                             )
                             dialog_shop.button_close_shop_dialog.setBackgroundResource(R.drawable.close_cross2)
-                            dialog_shop.description.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                            dialog_shop.description.setBackgroundColor(argb(0, 0, 0, 0))
                             dialog_shop.description.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
                             dialog_shop.description.setTextSize(20f)
                             dialog_shop.description.setTextColor(Color.WHITE)
-                            dialog_shop.price_shop.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                            dialog_shop.price_shop.setBackgroundColor(argb(0, 0, 0, 0))
                             dialog_shop.price_shop.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
                             dialog_shop.price_shop.setTextColor(Color.WHITE)
                             dialog_shop.price_shop.setTextSize(30f)
-                            dialog_shop.buy_shop_dialog.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                            dialog_shop.buy_shop_dialog.setBackgroundColor(argb(0, 0, 0, 0))
                             dialog_shop.buy_shop_dialog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
                             dialog_shop.buy_shop_dialog.setTextSize(20f)
                             dialog_shop.buy_shop_dialog.setTextColor(Color.WHITE)
                             dialog_shop.button_close_2_shop_dialog.setBackgroundColor(
-                                Color.argb(
+                                argb(
                                     0,
                                     0,
                                     0,
@@ -590,7 +591,7 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
                             //TODO ARRAY_OF_EMOTION передать в базу ------- сделано
                             holder.price.text = ""
                             holder.icon.setImageResource(R.drawable.nulevoe)
-                            holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                            holder.button.setBackgroundColor(argb(0, 0, 0, 0))
                             holder.button.text = "(КУПЛЕНО)"
                             locale_context!!.findViewById<TextView>(R.id.money_shop_toolbar).text =
                                 MONEY.toString()

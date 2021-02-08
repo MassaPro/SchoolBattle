@@ -625,7 +625,7 @@ class CanvasView_Boxs_with_computer(context: Context, attrs: AttributeSet?) : Vi
         paint_rib_2.setStrokeWidth(5f)
 
         if (Design == "Casino"){
-            Line_paint.setColor(Color.argb(0, 217, 217,217))          //ресур для линий (ширина и цвет)
+            Line_paint.setColor(argb(0, 217, 217,217))          //ресур для линий (ширина и цвет)
 
             paint_circle.setColor(Color.WHITE)     //цвета для точек
 
@@ -633,7 +633,7 @@ class CanvasView_Boxs_with_computer(context: Context, attrs: AttributeSet?) : Vi
             paint_rib_2.setColor(Color.BLACK)
         }
         if (Design == "Egypt"){
-            Line_paint.setColor(Color.argb(0, 217, 217,217))          //ресур для линий (ширина и цвет)
+            Line_paint.setColor(argb(0, 217, 217,217))          //ресур для линий (ширина и цвет)
 
         }
 
