@@ -92,8 +92,11 @@ class XOGame_oneDivice : AppCompatActivity() {
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
 
+        if(!PREMIUM)
+        {
+            mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+        }
 
-        mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
 
         mSound.load(this, R.raw.xlup, 1);
         mSound2.load(this, R.raw.win, 1);
@@ -264,7 +267,7 @@ class XOGame_oneDivice : AppCompatActivity() {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 2)
-            if(mInterstitialAd_in_offline_games.isLoaded)
+            if(mInterstitialAd_in_offline_games.isLoaded && !PREMIUM)
             {
                 Intent_for_offline_games = intent
                 mInterstitialAd_in_offline_games.show()
@@ -337,7 +340,7 @@ class XOGame_oneDivice : AppCompatActivity() {
         this.finish()
         var intent = Intent(this, NewGameActivity::class.java)
         intent.putExtra("playType", 2)
-        if(mInterstitialAd_in_offline_games.isLoaded)
+        if(mInterstitialAd_in_offline_games.isLoaded && !PREMIUM)
         {
             Intent_for_offline_games = intent
             mInterstitialAd_in_offline_games.show()

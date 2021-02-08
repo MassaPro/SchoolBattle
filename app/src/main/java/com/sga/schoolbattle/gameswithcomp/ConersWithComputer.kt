@@ -15,8 +15,10 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
+import com.google.android.gms.ads.AdRequest
 import com.sga.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_computer_games_template.*
+import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
 var AngleGameMode = 0
 
@@ -103,7 +105,10 @@ class ConersWithComputer : AppCompatActivity() {
         signature_canvas_corners_with_computer.activity = this
         CONTEXT = this
 
-      //  mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+        if(!PREMIUM)
+        {
+            mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+        }
 
         mSound.load(this, R.raw.xlup, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
@@ -483,10 +488,36 @@ class ConersWithComputer : AppCompatActivity() {
         }
 
         to_back_with_computer_template.setOnClickListener {
+            to_back_one_divice.setOnClickListener {
+                this.finish()
+                val intent = Intent(this, NewGameActivity::class.java)
+                intent.putExtra("playType", 3)
+                if(mInterstitialAd_in_offline_games.isLoaded && !PREMIUM)
+                {
+                    Intent_for_offline_games = intent
+                    mInterstitialAd_in_offline_games.show()
+                }
+                else
+                {
+                    this.startActivity(intent)
+                }
+            }
+        }
+    }
+    override fun onBackPressed()
+    {
+        super.onBackPressed()
+        var intent = Intent(this, NewGameActivity::class.java)
+        intent.putExtra("playType", 3)
+        if(mInterstitialAd_in_offline_games.isLoaded && !PREMIUM)
+        {
+            Intent_for_offline_games = intent
+            mInterstitialAd_in_offline_games.show()
+        }
+        else
+        {
+            this.startActivity(intent)
             this.finish()
-            val intent = Intent(this, NewGameActivity::class.java)
-            intent.putExtra("playType", 3)
-            startActivity(intent)
         }
     }
 }

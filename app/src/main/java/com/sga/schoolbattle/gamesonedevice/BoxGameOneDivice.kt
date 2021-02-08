@@ -15,6 +15,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
+import com.google.android.gms.ads.AdRequest
 import com.sga.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
@@ -100,6 +101,10 @@ class BoxGameOneDivice : AppCompatActivity() {
         signature_canvas_box_one_device.activity = this
 
 
+        if(!PREMIUM)
+        {
+            mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+        }
         signature_canvas_box_one_device.t1 = findViewById(R.id.name_player1_one_divice) as TextView
         signature_canvas_box_one_device.t2 = findViewById(R.id.name_player2_one_divice) as TextView
 
@@ -221,7 +226,7 @@ class BoxGameOneDivice : AppCompatActivity() {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 2)
-            if(mInterstitialAd_in_offline_games.isLoaded)
+            if(mInterstitialAd_in_offline_games.isLoaded && !PREMIUM)
             {
                 Intent_for_offline_games = intent
                 mInterstitialAd_in_offline_games.show()
@@ -435,7 +440,7 @@ class BoxGameOneDivice : AppCompatActivity() {
         super.onBackPressed()
         var intent = Intent(this, NewGameActivity::class.java)
         intent.putExtra("playType", 2)
-        if(mInterstitialAd_in_offline_games.isLoaded)
+        if(mInterstitialAd_in_offline_games.isLoaded && !PREMIUM)
         {
             Intent_for_offline_games = intent
             mInterstitialAd_in_offline_games.show()
@@ -446,6 +451,8 @@ class BoxGameOneDivice : AppCompatActivity() {
             this.finish()
         }
     }
+
+
 }
 
 

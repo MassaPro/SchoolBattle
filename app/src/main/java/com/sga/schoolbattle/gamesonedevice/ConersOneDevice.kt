@@ -14,6 +14,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
+import com.google.android.gms.ads.AdRequest
 import com.sga.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_list_of_current_games.*
 import kotlinx.android.synthetic.main.activity_one_device_games_template.*
@@ -103,7 +104,10 @@ class ConersOneDevice : AppCompatActivity() {
         mSound2.load(this, R.raw.win, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
-
+        if(!PREMIUM)
+        {
+            mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+        }
         bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
         bottom_navigation_one_divice.itemTextColor = generateColorStateList()
 
@@ -345,7 +349,7 @@ class ConersOneDevice : AppCompatActivity() {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 2)
-            if(mInterstitialAd_in_offline_games.isLoaded)
+            if(mInterstitialAd_in_offline_games.isLoaded && !PREMIUM)
             {
                 Intent_for_offline_games = intent
                 mInterstitialAd_in_offline_games.show()
@@ -361,7 +365,7 @@ class ConersOneDevice : AppCompatActivity() {
         super.onBackPressed()
         var intent = Intent(this, NewGameActivity::class.java)
         intent.putExtra("playType", 2)
-        if(mInterstitialAd_in_offline_games.isLoaded)
+        if(mInterstitialAd_in_offline_games.isLoaded && !PREMIUM)
         {
             Intent_for_offline_games = intent
             mInterstitialAd_in_offline_games.show()

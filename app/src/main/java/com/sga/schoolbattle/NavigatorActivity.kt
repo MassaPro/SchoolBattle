@@ -82,55 +82,57 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigator)
 
-        mInterstitialAd_in_offline_games = InterstitialAd(this)
-        mInterstitialAd_in_offline_games.adUnitId = "ca-app-pub-3940256099942544/1033173712"
-        mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+        if(!PREMIUM) {
+            mInterstitialAd_in_offline_games = InterstitialAd(this)
+            mInterstitialAd_in_offline_games.adUnitId = "ca-app-pub-3940256099942544/1033173712"
+            mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
 
 
 
 
-        mInterstitialAd_in_offline_games.adListener = object: AdListener() {
-            override fun onAdLoaded() {
-                // Code to be executed when an ad finishes loading.
-                //Код, который будет выполнен после завершения загрузки объявления.
+            mInterstitialAd_in_offline_games.adListener = object : AdListener() {
+                override fun onAdLoaded() {
+                    // Code to be executed when an ad finishes loading.
+                    //Код, который будет выполнен после завершения загрузки объявления.
+                }
+
+                override fun onAdFailedToLoad(errorCode: Int) {
+                    // Code to be executed when an ad request fails.
+                    //Код, который будет выполняться при сбое рекламного запроса..
+                    startActivity(Intent_for_offline_games)
+                }
+
+                override fun onAdOpened() {
+                    // Code to be executed when the ad is displayed.
+                    //Код, который будет выполнен при показе объявления
+                }
+
+                override fun onAdClicked() {        //для норм пацанов функция
+                    // Code to be executed when the user clicks on an ad.
+                    //Код, который будет выполняться, когда пользователь нажимает на объявление.
+                }
+
+                override fun onAdLeftApplication() {
+                    // Code to be executed when the user has left the app.
+                    //Код, который будет выполнен, когда пользователь покинет приложение
+                }
+
+                override fun onAdClosed() {
+                    // Code to be executed when the interstitial ad is closed.
+                    //Код, который будет выполняться при закрытии интерстициального объявления.
+
+                    startActivity(Intent_for_offline_games)
+                    mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+                }
             }
 
-            override fun onAdFailedToLoad(errorCode: Int) {
-                // Code to be executed when an ad request fails.
-                //Код, который будет выполняться при сбое рекламного запроса..
-                startActivity(Intent_for_offline_games)
-            }
 
-            override fun onAdOpened() {
-                // Code to be executed when the ad is displayed.
-                //Код, который будет выполнен при показе объявления
-            }
 
-            override fun onAdClicked() {        //для норм пацанов функция
-                // Code to be executed when the user clicks on an ad.
-                //Код, который будет выполняться, когда пользователь нажимает на объявление.
-            }
+            mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this)
+            mRewardedVideoAd.rewardedVideoAdListener = this
+            loadRewardedVideoAd()
 
-            override fun onAdLeftApplication() {
-                // Code to be executed when the user has left the app.
-                //Код, который будет выполнен, когда пользователь покинет приложение
-            }
-
-            override fun onAdClosed() {
-                // Code to be executed when the interstitial ad is closed.
-                //Код, который будет выполняться при закрытии интерстициального объявления.
-
-                startActivity(Intent_for_offline_games)
-                mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
-            }
         }
-
-
-
-        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this)
-        mRewardedVideoAd.rewardedVideoAdListener = this
-        loadRewardedVideoAd()
-
         Log.d("VISIT","121212121")
         CONTEXT = this
 
@@ -293,7 +295,10 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
     }
 
     override fun onRewardedVideoAdClosed() {
-        loadRewardedVideoAd()
+        if(!PREMIUM)
+        {
+            loadRewardedVideoAd()
+        }
     }
 
     override fun onRewardedVideoAdFailedToLoad(errorCode: Int) {
@@ -329,8 +334,10 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
     }
 
     fun loadRewardedVideoAd() {
-        mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917",          //TODO зменить на настоящий идентификатор
-            AdRequest.Builder().build())
+        if(!PREMIUM)
+        {
+            mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917",          //TODO зменить на настоящий идентификатор
+                AdRequest.Builder().build())
+        }
     }
-
 }

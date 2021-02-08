@@ -248,7 +248,7 @@ class Specially : Fragment(), RewardedVideoAdListener, PurchasesUpdatedListener 
         for (purchase in purchases) {
             //if item is purchased
             if (PRODUCT_ID == purchase.sku && purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
-                if (!verifyValidSignature(purchase.originalJson, purchase.signature) || PRODUCT_ID!= "android.test.purchased") {
+                if (!verifyValidSignature(purchase.originalJson, purchase.signature)) {
                     // Invalid purchase
                     // show error to user
                     Toast.makeText(locale_context, "Error : Invalid Purchase", Toast.LENGTH_SHORT).show()
@@ -256,12 +256,36 @@ class Specially : Fragment(), RewardedVideoAdListener, PurchasesUpdatedListener 
                 }
                 else
                 {
-                    Toast.makeText(locale_context, PRODUCT_ID, Toast.LENGTH_SHORT).show()
+                    when (PRODUCT_ID) {
+                        "premium" -> {
+                            PREMIUM = true
+                            val editor = locale_context?.getSharedPreferences("UserData", Context.MODE_PRIVATE)?.edit()
+                            editor?.putString("premium", "1")
+                            editor?.apply()
+                            locale_context?.item_design_shop?.adapter?.notifyItemChanged(1)
+                        }
+                        "b1" -> {
+
+                        }
+                        "b2" -> {
+
+                        }
+                        "b3" -> {
+
+                        }
+                        "b4" -> {
+
+                        }
+                        "b5" -> {
+
+                        }
+                        "b6" -> {
+
+                        }
+                    }
                 }
 
                 // else purchase is valid
-
-
                 //if item is purchased and not consumed
                 if (!purchase.isAcknowledged) {
                     val consumeParams = ConsumeParams.newBuilder()
@@ -283,10 +307,11 @@ class Specially : Fragment(), RewardedVideoAdListener, PurchasesUpdatedListener 
         if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
             val consumeCountValue = purchaseCountValueFromPref + 1
             savePurchaseCountValueToPref(consumeCountValue)
-            Toast.makeText(locale_context, "Item Consumed", Toast.LENGTH_SHORT).show()
-
+            Toast.makeText(locale_context,"Item Consumed", Toast.LENGTH_SHORT).show()
+        //    consumeCount!!.text = "Item Consumed $purchaseCountValueFromPref Time(s)"
         }
     }
+
 
     /**
      * Verifies that the purchase was signed correctly for this developer's public key.
@@ -535,18 +560,22 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
                 if (billingClient!!.isReady) {
                     initiatePurchase()
                 } else {
-                    billingClient = BillingClient.newBuilder(locale_context!!).enablePendingPurchases().setListener(p1!!).build()
-                    billingClient!!.startConnection(object : BillingClientStateListener {
-                        override fun onBillingSetupFinished(billingResult: BillingResult) {
-                            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                                initiatePurchase()
-                            } else {
-                                Toast.makeText(locale_context, "Error " + billingResult.debugMessage, Toast.LENGTH_SHORT).show()
+                    if( !(PRODUCT_ID == "premium" && PREMIUM))
+                    {
+                        billingClient = BillingClient.newBuilder(locale_context!!).enablePendingPurchases().setListener(p1!!).build()
+                        billingClient!!.startConnection(object : BillingClientStateListener {
+                            override fun onBillingSetupFinished(billingResult: BillingResult) {
+                                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+                                    initiatePurchase()
+                                } else {
+                                    Toast.makeText(locale_context, "Error " + billingResult.debugMessage, Toast.LENGTH_SHORT).show()
+                                }
                             }
-                        }
 
-                        override fun onBillingServiceDisconnected() {}
-                    })
+                            override fun onBillingServiceDisconnected() {}
+                        })
+                    }
+
                 }
             }
 

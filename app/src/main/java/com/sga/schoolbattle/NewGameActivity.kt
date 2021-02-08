@@ -225,14 +225,14 @@ class NewGameActivity : AppCompatActivity() {
         CONTEXT = this
     }
 
-    //TODO РАЗОБРАТЬСЯ С ВЫХОДОМ
-    /*override fun onBackPressed()
+    //TODO РАЗОБРАТЬСЯ С ВЫХОДОМ      - (я так и не понял, чем этот варик плох @альф)
+    override fun onBackPressed()
     {
         super.onBackPressed()
         var intent = Intent(this,NavigatorActivity::class.java)
         this.startActivity(intent)
         this.finish()
-    }*/
+    }
 }
 
 
