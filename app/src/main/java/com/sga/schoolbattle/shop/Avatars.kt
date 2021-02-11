@@ -135,17 +135,13 @@ class Avatars : Fragment() , RewardedVideoAdListener {
 
     override fun onRewardedVideoCompleted() {
         loadRewardedVideoAd()
-        var dialog_reward : Dialog = locale_context!!.let { Dialog(it) }
-        dialog_reward.setContentView(R.layout.reward_dialog)
-        dialog_reward.price_reward.text = updateEconomyParams(requireActivity(), "award").toString() //TODO ОБЯЗАТЕЛЬНО НЕ ЗАБЫТЬ ПОМЕНЯТЬ ЗДЕСЬ ЦЕНУ
-        dialog_reward.close_reward.setOnClickListener {
-            dialog_reward.dismiss()
+        var reward  = locale_context?.let {
+            RewardDialog(
+                it,
+                PRODUCT_ID
+            )
         }
-        dialog_reward.ok_reward.setOnClickListener {
-            dialog_reward.dismiss()
-        }
-        dialog_reward.show()
-        locale_context?.findViewById<TextView>(R.id.money_shop_toolbar)?.text = MONEY.toString()
+        reward?.show()
     }
 
 

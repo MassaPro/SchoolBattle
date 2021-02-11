@@ -1,7 +1,6 @@
 package com.sga.schoolbattle.shop
 
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
@@ -27,10 +26,8 @@ import com.google.android.gms.ads.reward.RewardItem
 import com.google.android.gms.ads.reward.RewardedVideoAd
 import com.google.android.gms.ads.reward.RewardedVideoAdListener
 import com.sga.schoolbattle.*
-import com.sga.schoolbattle.engine.updateEconomyParams
 import kotlinx.android.synthetic.main.activity_designs.*
 import kotlinx.android.synthetic.main.design_shop_item.view.*
-import kotlinx.android.synthetic.main.reward_dialog.*
 import java.io.IOException
 import java.util.ArrayList
 import kotlin.math.min
@@ -41,6 +38,7 @@ var p1 : PurchasesUpdatedListener? = null
 
 lateinit var mRewardedVideoAd: RewardedVideoAd
 
+var reward : RewardDialog? = null
 class Specially : Fragment(), RewardedVideoAdListener, PurchasesUpdatedListener {
 
 
@@ -186,22 +184,14 @@ class Specially : Fragment(), RewardedVideoAdListener, PurchasesUpdatedListener 
 
         loadRewardedVideoAd()
 
-        var dialog_reward : Dialog = Dialog(locale_context!!)
-        dialog_reward.setContentView(R.layout.reward_dialog)
-        dialog_reward.price_reward.text = updateEconomyParams(requireActivity(), "award").toString() //TODO ОБЯЗАТЕЛЬНО НЕ ЗАБЫТЬ ПОМЕНЯТЬ ЗДЕСЬ ЦЕНУ
-        dialog_reward.close_reward.setOnClickListener {
-            dialog_reward.dismiss()
+        var reward  = locale_context?.let {
+            RewardDialog(
+                it,
+                PRODUCT_ID
+            )
         }
-        dialog_reward.ok_reward.setOnClickListener {
-            dialog_reward.dismiss()
-        }
+        reward?.show()
 
-        dialog_reward.show()
-
-        if(SOUND)
-        {
-            mSound1.play(1, 1F, 1F, 1, 0, 1F)
-        }
 
 
         Toast.makeText(requireContext(), "FAIL", Toast.LENGTH_LONG).show()
@@ -255,34 +245,23 @@ class Specially : Fragment(), RewardedVideoAdListener, PurchasesUpdatedListener 
                     Toast.makeText(locale_context, "Error : Invalid Purchase", Toast.LENGTH_SHORT).show()
                     return
                 }
-                else
-                {
-                    when (PRODUCT_ID) {
-                        "premium" -> {
-                            PREMIUM = true
-                            val editor = locale_context?.getSharedPreferences("UserData", Context.MODE_PRIVATE)?.edit()
-                            editor?.putString("premium", "1")
-                            editor?.apply()
-                            locale_context?.item_design_shop?.adapter?.notifyItemChanged(1)
+                else {
+                    if (PRODUCT_ID == "premium") {
+                        PREMIUM = true
+                        val editor =
+                            locale_context?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                                ?.edit()
+                        editor?.putString("premium", "1")
+                        editor?.apply()
+                        locale_context?.item_design_shop?.adapter?.notifyItemChanged(1)
+                    } else {
+                        var reward  = locale_context?.let {
+                            RewardDialog(
+                                it,
+                                PRODUCT_ID
+                            )
                         }
-                        "b1" -> {
-
-                        }
-                        "b2" -> {
-
-                        }
-                        "b3" -> {
-
-                        }
-                        "b4" -> {
-
-                        }
-                        "b5" -> {
-
-                        }
-                        "b6" -> {
-
-                        }
+                        reward?.show()
                     }
                 }
 
