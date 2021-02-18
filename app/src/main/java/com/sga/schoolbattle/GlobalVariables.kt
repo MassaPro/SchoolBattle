@@ -37,6 +37,7 @@ var vibratorService : Vibrator? = null
 //______________________________________________________________________
 var SOUND: Boolean = false
 var VIBRATION: Boolean = false
+var LANGUAGE = "Russian"
 //____________________________________________________________________________________________________________________________
 var Design: String = "Normal"               //дизайн
 val PICTURE_STYLES = mapOf(0 to R.drawable.game_menu_normal, 1 to R.drawable.game_menu_noir, 2 to R.drawable.game_menu_rome,3 to R.drawable.game_menu_casino,4 to R.drawable.game_menu_egypt,
@@ -251,3 +252,6 @@ fun right_recording(s : String): String
     }
    return s
 }
+
+//ar TRANSLATE_MAP  = mapOf("КУПИТЬ" to "BUY","КУПЛЕНО" to "PURCHASED",)
+

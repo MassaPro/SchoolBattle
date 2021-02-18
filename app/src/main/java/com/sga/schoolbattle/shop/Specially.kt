@@ -345,16 +345,9 @@ private fun initiatePurchase() {
                     .build()
                 billingClient!!.launchBillingFlow(locale_context!!, flowParams)
             }
-            else {
-                //try to add item/product id "consumable" inside managed product in google play console
-                Toast.makeText(locale_context, "Purchase Item not Found", Toast.LENGTH_SHORT).show()
-            }
+
         }
-        else {
-            Toast.makeText(
-                locale_context,
-                " Error " + billingResult.debugMessage, Toast.LENGTH_SHORT).show()
-        }
+
     }
 }
 
@@ -382,7 +375,7 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
+        initiatePurchase()
         PICTURE_SPECIALLY[ARRAY_OF_SPECIALLY_SHOP[position]]?.let { holder.img.setBackgroundResource(
             it
         ) }     //картинка для стиля

@@ -79,6 +79,10 @@ class MainActivity : Fragment() {
         {
             PREMIUM = true;
         }
+        if(prfs?.getString("language","russian")=="english")
+        {
+            LANGUAGE = "English"
+        }
 
 
         AVATAR = prfs?.getString("avatar_number", 0.toString()).toString().toInt()

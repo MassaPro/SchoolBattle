@@ -14,14 +14,15 @@ import android.widget.Button
 import android.widget.CompoundButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sga.schoolbattle.engine.colorByRating
 import com.sga.schoolbattle.shop.locale_context
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_settings_fragment.*
 import kotlinx.android.synthetic.main.design_item.view.*
 
@@ -65,6 +66,7 @@ class SettingsFragmentActivity : Fragment() {
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE);
                 toolbarNameSettings.setTextColor(Color.BLACK)
                 toolbarNameSettings.textSize = 25f
+                language_button.setTextColor(Color.BLACK)
             }
             "Egypt" -> {
 
@@ -258,6 +260,12 @@ class SettingsFragmentActivity : Fragment() {
             editor?.apply()
         })
 
+        language_button.setOnClickListener {
+            showDialog()
+        }
+        language_button1.setOnClickListener {
+            showDialog()
+        }
 
         DesignsetupRecyclerView(item_design)
         gamesRecycler = item_design
@@ -266,6 +274,58 @@ class SettingsFragmentActivity : Fragment() {
 
     }
 
+    private fun showDialog(){
+        // Late initialize an alert dialog object
+        lateinit var dialog: AlertDialog
+
+        // Initialize an array of colors
+        val array = arrayOf("Русский","English")
+
+        // Initialize a new instance of alert dialog builder object
+        val builder = AlertDialog.Builder(locale_context!!)
+
+        // Set a title for alert dialog
+
+
+        var checkedItem = 0
+        if(LANGUAGE == "Russian")
+        {
+            builder.setTitle("Choose a language")
+            checkedItem = 0
+        }
+        else
+        {
+            builder.setTitle("Выбор языка")
+            checkedItem =1
+        }
+        builder.setSingleChoiceItems(array,checkedItem) { _, which->
+            if(which==0)
+            {
+                LANGUAGE = "Russian"
+                val editor =  locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("language","russian")
+                editor.apply()
+            }
+            else
+            {
+                LANGUAGE = "English"
+                val editor =  locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("language","english")
+                editor.apply()
+            }
+        }
+        builder.setPositiveButton(
+           "OK"
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        // Initialize the AlertDialog using builder object
+        dialog = builder.create()
+
+        // Finally, display the alert dialog
+        dialog.show()
+    }
 }
 
 private fun DesignsetupRecyclerView(recyclerView: RecyclerView) {
