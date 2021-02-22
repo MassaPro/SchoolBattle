@@ -70,6 +70,8 @@ class Designs  : Fragment(), RewardedVideoAdListener {
 
         //item_design_shop.setBackgroundResource(R.drawable.new_game_item_casino)
 
+        choose_design_shop.text = translate("Купленные дизайны можно применить в настройках")
+
         when (Design) {
             "Egypt" -> {
                 choose_design_shop.typeface =  locale_context?.let { ResourcesCompat.getFont(it, R.font.egypt) }
@@ -182,7 +184,8 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
 
         PICTURE_STYLES[ARRAY_OF_DESIGN_SHOP[position]]?.let { holder.img.setBackgroundResource(it) }     //картинка для стиля
         holder.price.text = right_recording(PRICE_OD_DESIGN[ARRAY_OF_DESIGN_SHOP[position]].toString()  )           //цена стиля
-        holder.contentView.text = PICTURE_TEXT[ARRAY_OF_DESIGN_SHOP[position]]          //название стиля
+        holder.contentView.text =
+            PICTURE_TEXT[ARRAY_OF_DESIGN_SHOP[position]]?.let { translate_design(it) }         //название стиля
 
         when (Design) {
             "Normal" -> {
@@ -280,9 +283,12 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
                 holder.contentView.typeface = ResourcesCompat.getFont(locale_context!!, R.font.noir)
             }
         }
+
+        holder.button.text = translate("КУПИТЬ")
+
         if(ARRAY_OF_DESIGN_SHOP[position] in  ARRAY_OF_DESIGN)         //если дизайн уже куплен
         {
-            holder.button.text = "(КУПЛЕНО)"
+            holder.button.text = "(" + translate("КУПЛЕНО")+ ")"
             holder.button.background = null
             holder.price.text = ""
         }
@@ -313,7 +319,7 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
                 {
                     val dialog_shop = Dialog(HELPED_CONTEXT!!)
                     dialog_shop.setContentView(R.layout.few_money_dialog)
-                    dialog_shop.text_few_money.text = "Недостаточно средств"
+                    dialog_shop.text_few_money.text =translate("Недостаточно средств")
                     dialog_shop.show()
                     dialog_shop.few_money_ok.setOnClickListener {
                         dialog_shop.dismiss()

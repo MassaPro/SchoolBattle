@@ -50,7 +50,7 @@ class Emotions : Fragment(), RewardedVideoAdListener {
         super.onActivityCreated(savedInstanceState)
         //     vasa = activity.setContentView(R.layout.activity_shop_fragment)
 
-        choose_design_shop.text = "Купленные эмоции вы сможете использовать во время игры"
+        choose_design_shop.text = translate("Купленные эмоции вы сможете использовать во время игры")
         HELPED_CONTEXT = activity
 
         locale_context = activity as AppCompatActivity
@@ -179,7 +179,8 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
 
         PICTURE_EMOTION[ARRAY_OF_EMOTION_SHOP[position]]?.let { holder.img.setBackgroundResource(it) }     //картинка для стиля
         holder.price.text = right_recording(PRICE_OD_EMOTION[ARRAY_OF_EMOTION_SHOP[position]].toString()   )          //цена стиля
-        holder.contentView.text = EMOTION_TEXT[ARRAY_OF_EMOTION_SHOP[position]]         //название стиля
+        holder.contentView.text =
+            EMOTION_TEXT[ARRAY_OF_EMOTION_SHOP[position]]?.let { translate_emotion(it) }         //название стиля
 
 
 
@@ -280,9 +281,10 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
             }
         }
 
+        holder.button.text = translate("КУПИТЬ")
         if(ARRAY_OF_EMOTION_SHOP[position] in  ARRAY_OF_EMOTION)         //если дизайн уже куплен
         {
-            holder.button.text = "(КУПЛЕНО)"
+            holder.button.text = "(" + translate("КУПЛЕНО")+ ")"
             holder.button.background = null
             holder.price.text = ""
         }
@@ -311,7 +313,7 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
                 {
                     val dialog_shop = Dialog(HELPED_CONTEXT!!)
                     dialog_shop.setContentView(R.layout.few_money_dialog)
-                    dialog_shop.text_few_money.text = "Недостаточно средств"
+                    dialog_shop.text_few_money.text = translate("Недостаточно средств")
                     dialog_shop.show()
                     dialog_shop.few_money_ok.setOnClickListener {
                         dialog_shop.dismiss()

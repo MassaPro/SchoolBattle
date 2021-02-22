@@ -390,7 +390,21 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
             holder.price.text  = "ПОЛУЧИ " +  right_recording(min(capital / 100 * 4, 5000).toString())
             holder.button.text  =  "смотреть"
         }
-        holder.icon.setImageResource(R.drawable.money)
+
+        if(position == 0)
+        {
+            holder.icon.setImageResource(R.drawable.money)
+        }
+        else{
+            if(LANGUAGE =="Russian" )
+            {
+                holder.icon.setImageResource(R.drawable.rub1)
+            }
+            else
+            {
+                holder.icon.setImageResource(R.drawable.rub2)
+            }
+        }
         with(holder.itemView) {
             tag = ARRAY_OF_SPECIALLY_SHOP[position]
         }
@@ -529,6 +543,7 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
             }
             else          // если это премиум
             {
+
                 PRODUCT_ID = ARRAY_OF_PRODUCT_ID[position].toString()
                 if (billingClient!!.isReady) {
                     initiatePurchase()

@@ -38,6 +38,10 @@ class ShopFragmentActivity : Fragment (){
 
 
 
+        helped_text1.text = translate("Аватары")
+        helped_text2.text = translate("Эмоции")
+        helped_text3.text = translate("Дизайны")
+        helped_text4.text = translate("Премиум")
 
         for (i in 0 until tabLayout!!.tabCount) {
             var tv : TextView? = null
@@ -49,6 +53,7 @@ class ShopFragmentActivity : Fragment (){
             {tv  = helped_text3}
             if(i == 3)
             {tv = helped_text4}
+
             when (Design) {
                 "Normal" -> {
                     tv?.setTextColor(Color.BLACK)
@@ -244,16 +249,16 @@ class ShopFragmentActivity : Fragment (){
         override fun getPageTitle(position: Int): CharSequence? {
             when (position) {
                 0 -> {
-                    return "Аватар"
+                    return translate("Аватары")
                 }
                 1 -> {
-                    return "Эмоции"
+                    return translate("Эмоции")
                 }
                 2 -> {
-                    return "Дизайн"
+                    return translate("Дизайн")
                 }
                 3 -> {
-                    return "ПРЕМИУМ"
+                    return translate("Премиум")
                 }
             }
             return null

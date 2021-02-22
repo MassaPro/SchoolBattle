@@ -8,9 +8,11 @@ import android.graphics.Color.argb
 import android.graphics.Color.rgb
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.google.firebase.database.*
+import com.sga.schoolbattle.shop.locale_context
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
@@ -28,6 +30,7 @@ class SignInActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_in)
 
         CONTEXT = this
+        locale_context = this
 
         when (Design) {
             "Normal" -> {
@@ -198,6 +201,8 @@ class SignInActivity : AppCompatActivity() {
                 }
             })
         }
+
+        showDialog()
     }
 
     override fun onPause() {
@@ -208,6 +213,60 @@ class SignInActivity : AppCompatActivity() {
         if (username != "") {
             finish()
         }
+
+    }
+
+    private fun showDialog(){
+        // Late initialize an alert dialog object
+        lateinit var dialog: AlertDialog
+
+        // Initialize an array of colors
+        val array = arrayOf("Русский","English")
+
+        // Initialize a new instance of alert dialog builder object
+        val builder = AlertDialog.Builder(locale_context!!)
+
+        // Set a title for alert dialog
+
+
+        var checkedItem = 0
+        if(LANGUAGE == "Russian")
+        {
+            builder.setTitle("Choose a language")
+            checkedItem = 0
+        }
+        else
+        {
+            builder.setTitle("Выбор языка")
+            checkedItem =1
+        }
+        builder.setSingleChoiceItems(array,checkedItem) { _, which->
+            if(which==0)
+            {
+                LANGUAGE = "Russian"
+                val editor =  locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("language","russian")
+                editor.apply()
+            }
+            else
+            {
+                LANGUAGE = "English"
+                val editor =  locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("language","english")
+                editor.apply()
+            }
+        }
+        builder.setPositiveButton(
+            "OK"
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        // Initialize the AlertDialog using builder object
+        dialog = builder.create()
+
+        // Finally, display the alert dialog
+        dialog.show()
     }
 
     override fun onResume() {

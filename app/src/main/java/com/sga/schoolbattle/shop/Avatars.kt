@@ -51,7 +51,7 @@ class Avatars : Fragment() , RewardedVideoAdListener {
         super.onActivityCreated(savedInstanceState)
         //     vasa = activity.setContentView(R.layout.activity_shop_fragment)
         mSound1.load(locale_context, R.raw.money, 1);
-        choose_design_shop.text = "Купленные аватары можно применить в профиле"
+        choose_design_shop.text = translate("Купленные аватары можно применить в профиле")
         HELPED_CONTEXT = activity
 
         locale_context = activity as AppCompatActivity
@@ -181,7 +181,11 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
 
         PICTURE_AVATAR[ARRAY_OF_AVATAR_SHOP[position]]?.let { holder.img.setBackgroundResource(it) }     //картинка для стиля
         holder.price.text = right_recording(PRICE_OD_AVATAR[ARRAY_OF_AVATAR_SHOP[position]].toString()  )           //цена стиля
-        holder.contentView.text = AVATAR_TEXT[ARRAY_OF_AVATAR_SHOP[position]]          //название стиля
+        holder.contentView.text = AVATAR_TEXT[ARRAY_OF_AVATAR_SHOP[position]]?.let {
+            translate_avatar(
+                it
+            )
+        }
 
 
         when (Design) {
@@ -284,9 +288,11 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
             }
         }
 
+        holder.button.text = translate("КУПИТЬ")
+
         if(ARRAY_OF_AVATAR_SHOP[position] in  ARRAY_OF_AVATAR)         //если дизайн уже куплен
         {
-            holder.button.text = "(КУПЛЕНО)"
+            holder.button.text = "(" + translate("КУПЛЕНО")+ ")"
             holder.button.background = null
             holder.price.text = ""
         }
@@ -331,7 +337,7 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
                 {
                     val dialog_shop = Dialog(HELPED_CONTEXT!!)
                     dialog_shop.setContentView(R.layout.few_money_dialog)
-                    dialog_shop.text_few_money.text = "Недостаточно средств"
+                    dialog_shop.text_few_money.text = translate("Недостаточно средств")
                     dialog_shop.show()
                     dialog_shop.few_money_ok.setOnClickListener {
                         dialog_shop.dismiss()

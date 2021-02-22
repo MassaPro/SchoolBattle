@@ -76,7 +76,7 @@ var AUXILIARY_MAP_OF_AVATAR = mapOf(0 to "ava1", 1 to "ava2", 2 to "ava3",3 to "
 var EMOTION: Int =  -1               //ЭМОЦИИ
 val PICTURE_EMOTION = mapOf(0 to R.drawable.e0, 1 to R.drawable.e1, 2 to R.drawable.e2,3 to R.drawable.e3,4 to R.drawable.e4,
    5 to R.drawable.e5,6 to R.drawable.e6,7 to R.drawable.e7,8 to R.drawable.e8,9 to R.drawable.e9)
-val EMOTION_TEXT = mapOf(0 to "Скукота", 1 to "Хохот", 2 to "Злость")
+val EMOTION_TEXT = mapOf(0 to "Скукота", 1 to "Хохот", 2 to "Злость",3 to "Удачка",4 to "Времечко",5 to "Грязно",6 to "ГГ ВП", 7 to "Хорош", 8 to "Не забудь", 9 to "Нуль сигма")
 val PRICE_OD_EMOTION = mapOf(0 to 100,1 to 200,2 to 400,3 to 0,4 to 3000,5 to 1000,6 to 5000,7 to 7500,8 to 8000,9 to 10000)
 var ARRAY_OF_EMOTION_SHOP: MutableList<Int>  = mutableListOf(0,1,2,3,4,5,6,7,8,9)             //номера  дизайнов в магазине
 var ARRAY_OF_EMOTION: MutableList<Int>  = mutableListOf(0,1)             //номера открытых эмоций
@@ -86,7 +86,7 @@ var AUXILIARY_MAP_OF_EMOTION = mapOf(0 to "e0", 1 to "e1", 2 to "e2",3 to "e3",4
 
 //____________________________________________________________________________________________________________________________
 var SPECIALLY: String = "ava1"               //СПЕЦИАЛЬНОЕ
-val PICTURE_SPECIALLY = mapOf(0 to R.drawable.video, 1 to R.drawable.vip, 2 to R.drawable.avatar1,3 to R.drawable.avatar1)
+val PICTURE_SPECIALLY = mapOf(0 to R.drawable.video, 1 to R.drawable.vip, 2 to R.drawable.bag1,3 to R.drawable.bag2,4 to R.drawable.bag44,5 to R.drawable.bag3,6 to  R.drawable.bag4,7 to R.drawable.bag5,8 to R.drawable.bag6)
 val SPECIALLY_TEXT = mapOf(0 to "ВИДЕО С ВОЗНАГРАЖДЕНИЕМ", 1 to "ПРЕМИУМ АККАУНТ", 2 to "КАРМАН КРИСТАЛЛОВ",3 to "ПАКЕТ КРИСТАЛЛОВ",4 to "СУМКА КРИСТАЛЛОВ",5 to "РЮКЗАК КРИСТАЛЛОВ" , 6 to "ГОРШОК КРИСТАЛЛОВ",7 to "СУНДУК КРИСТАЛЛОВ",8 to " БАНК КРИСТАЛЛОВ")
 val PRICE_OD_SPECIALLY = mapOf(0 to 10,1 to 20,2 to 30,3 to 90)
 var ARRAY_OF_SPECIALLY_SHOP: MutableList<Int>  = mutableListOf(0,1,2,3,4,5,6,7,8)
@@ -224,7 +224,7 @@ fun populateUnifiedNativeAdView(unifiedNativeAd: UnifiedNativeAd, adView: Unifie
     val mediaView = adView.findViewById<MediaView>(R.id.ad_app_icon)
     adView.mediaView = mediaView
 
-    // Call the UnifiedNativeAdView's setNativeAd method to register the
+    // Call the UnifiedNativeAdView's setNativeAd method to register the/
     // NativeAdObject.
     adView.setNativeAd(unifiedNativeAd)
 
@@ -253,5 +253,57 @@ fun right_recording(s : String): String
    return s
 }
 
-//ar TRANSLATE_MAP  = mapOf("КУПИТЬ" to "BUY","КУПЛЕНО" to "PURCHASED",)
+var TRANSLATE = mapOf("КУПИТЬ" to "BUY","КУПЛЕНО" to "PURCHASED","Аватары" to "Avatars","Эмоции" to "Emotions","Премиум" to "Premium", "Дизайны" to "Designs",
+    "Недостаточно средств" to "Insufficient funds", "Купленные аватары можно применить в профиле" to "Purchased avatars can be applied to your profile",
+    "Купленные эмоции вы сможете использовать во время игры" to "You can use the purchased emotions during the game",
+    "Купленные дизайны можно применить в настройках" to "The purchased designs can be applied in the settings")
+fun translate(s: String): String
+{
+    if(LANGUAGE == "Russian")
+    {
+        return s
+    }
+    return TRANSLATE[s].toString()
+}
 
+var TRANSLATE_MAP_AVATAR  = mapOf("Мир" to "Peace","Солнце" to "Sun","Меркурий" to "Mercury","Венера" to "Venus","Земля" to "Eath", "Луна" to "Moon",
+    "Марс" to "Mars", "Юпитер" to "Jupiter","Сатурн" to "Saturn","Уран" to "Uranus","Нептун" to "Neptune","Плутон" to "Pluto","Пентакль" to "Pentacle",
+    "Треугольник" to "Triangle","Крест" to "Cross","Звдезда" to "Star","Пентаграмма" to "Pentagram","Змея" to "Snake","Тигр" to "Tiger","Маска" to "Mask","Топоры" to "Axes","Череп" to "Skull",
+    "Инь-Янь" to "Yin-Yang","Сердце" to "Heart","Орхидея" to "Orchid","Фиалка" to  "Violet","Роза" to "Rose","Лилия" to "Lily","Звезда 2" to "Star 2","Золото" to "Gold","Корона" to "Crown","Шут" to "Fool")
+
+fun translate_avatar(s: String): String
+{
+    if(LANGUAGE == "Russian")
+    {
+        return s;
+    }
+    return TRANSLATE_MAP_AVATAR[s].toString()
+
+}
+
+var TRANSLATE_MAP_EMOTION  = mapOf("Скукота" to "Boredom","Хохот" to "Laughter","Злость" to  "Anger","Удачка" to "Luck","Времечко" to "Time",
+    "Грязно" to "Dirty" ,"Не забудь" to "Don't forget",
+    "Нуль сигма" to " Zero Sigma", "Хорош" to "Nice" , "ГГ ВП" to "GG WP")
+
+fun translate_emotion(s: String): String
+{
+    if(LANGUAGE == "Russian")
+    {
+        return s;
+    }
+    return TRANSLATE_MAP_EMOTION[s].toString()
+
+}
+
+var TRANSLATE_MAP_DESIGN  = mapOf("Деловой стиль" to "Business style","Египетский стиль" to "Egyptian style","Римский стиль" to "Roman style",
+    "Казино стиль" to  "Casino style","Нуар стиль" to "Noir style","Готический стиль" to "Gothic style","Японский стиль" to "Japanese style")
+
+fun translate_design(s: String): String
+{
+    if(LANGUAGE == "Russian")
+    {
+        return s;
+    }
+    return TRANSLATE_MAP_DESIGN[s].toString()
+
+}
