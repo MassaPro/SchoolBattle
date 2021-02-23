@@ -75,6 +75,10 @@ class MainActivity : Fragment() {
         {
             ARRAY_OF_EMOTION =  DECODE(prfs?.getString("open_emotions", 0.toString()).toString())
         }
+        if(prfs?.getString("premium","0")=="1")
+        {
+            PREMIUM = true;
+        }
 
 
         AVATAR = prfs?.getString("avatar_number", 0.toString()).toString().toInt()
@@ -129,6 +133,9 @@ class MainActivity : Fragment() {
                 blitz.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
                 money.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
                 money.setTextColor(Color.BLACK)
+
+                //id_shop_dialog.setBackgroundResource(R.drawable.game_menu_egypt)
+                //description.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             }
             "Casino" -> {
 
@@ -137,7 +144,7 @@ class MainActivity : Fragment() {
                 //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
 
-                toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+            //    toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 toolbarName2.setTextColor(Color.YELLOW)
                 toolbarName2.setTextSize(25f)
 
@@ -175,7 +182,7 @@ class MainActivity : Fragment() {
                 //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
 
-                toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+          //      toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                 toolbarName2.setTextColor(rgb(193,150,63))
                 toolbarName2.setTextSize(25f)
 
@@ -250,7 +257,7 @@ class MainActivity : Fragment() {
                 //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
 
-                toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+         //      toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
                 toolbarName2.setTextColor(Color.BLACK)
                 toolbarName2.setTextSize(25f)
 
@@ -279,7 +286,7 @@ class MainActivity : Fragment() {
                 searchButton.setTextSize(17f)
                 searchButton.setBackgroundColor(argb(0,0,0,0))
 
-                money.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+    //            money.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
                 money.setTextColor(Color.BLACK)
 
             }
@@ -288,7 +295,7 @@ class MainActivity : Fragment() {
                 //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
 
-                toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+       //         toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
                 toolbarName2.setTextColor(Color.WHITE)
                 toolbarName2.setTextSize(25f)
 
@@ -317,7 +324,7 @@ class MainActivity : Fragment() {
                 searchButton.setTextSize(17f)
                 searchButton.setBackgroundColor(argb(0,0,0,0))
 
-                money.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+               money.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
                 money.setTextColor(Color.WHITE)
             }
         }

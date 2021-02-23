@@ -55,6 +55,7 @@
                 android:gravity="center"
                 android:text="Купленные дизайны можно применить в настройках"
                 android:textSize="20dp"
+                android:textColor="#000000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.588"
                 app:layout_constraintStart_toStartOf="parent"

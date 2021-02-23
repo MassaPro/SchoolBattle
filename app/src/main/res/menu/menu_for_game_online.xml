@@ -15,7 +15,7 @@
         android:id="@+id/page_online_3"
         android:enabled="true"
         android:icon="@drawable/emodjy"
-        android:title="обзщение"/>
+        android:title="общение"/>
     <item
         android:id="@+id/page_online_4"
         android:enabled="true"

@@ -21,7 +21,7 @@ android {
         applicationId "com.sga.schoolbattle"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 1
+        versionCode 4
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -84,6 +84,10 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services-ads:19.2.0'
     implementation 'com.jjoe64:graphview:4.2.2' //NVM added
+
+    def billing_version = "3.0.1"
+
+    implementation "com.android.billingclient:billing-ktx:$billing_version"
 
 
 }

@@ -65,7 +65,7 @@ val PRICE_OD_AVATAR = mapOf(0 to 0, 1 to 80,2 to 100, 3 to 120, 4 to 140,
     5 to 160,6 to 180,7 to 200,8 to 220,9 to 240, 10 to 260, 11 to 400, 12 to 800,
     13 to 900,14 to 950,15 to 1000,16 to 1500, 17 to 2000, 18 to 3000, 19 to 5000,
     20 to 6000,21 to 10000,22 to 12500,23 to 15000, 24 to 20000, 25 to 25000,
-    26 to 30000,27 to 40000, 28 to 50000, 29 to 70000, 30 to 100000, 31 to 200000, 32 to 1000000)
+    26 to 30000,27 to 40000, 28 to 50000, 29 to 70000, 30 to 100000, 31 to 2000000, 32 to 1000000)
 var ARRAY_OF_AVATAR_SHOP: MutableList<Int>  = mutableListOf(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32)             //номера  дизайнов в магазине
 var ARRAY_OF_AVATAR: MutableList<Int>  = mutableListOf(0,1,4,18,19)             //номера открытых дизайнов
 var AUXILIARY_MAP_OF_AVATAR = mapOf(0 to "ava1", 1 to "ava2", 2 to "ava3",3 to "ava4")
@@ -86,12 +86,21 @@ var AUXILIARY_MAP_OF_EMOTION = mapOf(0 to "e0", 1 to "e1", 2 to "e2",3 to "e3",4
 //____________________________________________________________________________________________________________________________
 var SPECIALLY: String = "ava1"               //СПЕЦИАЛЬНОЕ
 val PICTURE_SPECIALLY = mapOf(0 to R.drawable.video, 1 to R.drawable.vip, 2 to R.drawable.avatar1,3 to R.drawable.avatar1)
-val SPECIALLY_TEXT = mapOf(0 to "ВИДЕО С ВОЗНАГРАЖДЕНИЕМ", 1 to "ПРЕМИУМ АККАУНТ", 2 to "ШОШОШОШО",3 to "ДЛДДЛДЛДЛ")
+val SPECIALLY_TEXT = mapOf(0 to "ВИДЕО С ВОЗНАГРАЖДЕНИЕМ", 1 to "ПРЕМИУМ АККАУНТ", 2 to "КАРМАН",3 to "МЕШОК")
 val PRICE_OD_SPECIALLY = mapOf(0 to 10,1 to 20,2 to 30,3 to 90)
-var ARRAY_OF_SPECIALLY_SHOP: MutableList<Int>  = mutableListOf(0,1)
+var ARRAY_OF_SPECIALLY_SHOP: MutableList<Int>  = mutableListOf(0,1,2,3)
 var ARRAY_OF_SPECIALLY: MutableList<Int>  = mutableListOf()
 var AUXILIARY_MAP_OF_SPECIALLY = mapOf(0 to "specially1", 1 to "specially2", 2 to "specially3",3 to "specially4")
+
+var PREMIUM : Boolean = false
+
+var PRODUCT_ID = "premium"
+var ARRAY_OF_PRODUCT_ID = mapOf(1 to "premium",2 to "android.test.purchased",3 to "android.test.purchased",4 to "android.test.purchased")           //идентификаторы в Google Play
+//var PURCHASE_KEY =      "premium"
 //__________________________________________________________________________________________________________________________________
+
+
+
 
 var INITIAL_AMOUNT: Int = 250          //начальная сумма
 var MONEY: Int = 200                  //ДЕНЬГИ
@@ -223,4 +232,22 @@ fun populateUnifiedNativeAdView(unifiedNativeAd: UnifiedNativeAd, adView: Unifie
 
     // Place the AdView into the parent.
     DDD.add_frame.addView(adView)
+}
+
+fun right_recording(s : String): String
+{
+    var answer :String   = ""
+    if(s.toInt()>=10000)
+    {
+        for(i in s.indices)
+        {
+            answer = s[s.length - i - 1] + answer
+            if( (i)%3 == 2)
+            {
+                answer = " $answer"
+            }
+        }
+        return answer
+    }
+   return s
 }

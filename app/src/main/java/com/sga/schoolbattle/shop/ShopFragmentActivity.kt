@@ -37,13 +37,6 @@ class ShopFragmentActivity : Fragment (){
 
 
 
-      /*  val display = locale_context!!.windowManager.defaultDisplay
-        val size = Point()
-        display.getSize(size)
-        val width = size.x
-        val height = size.y
-        Log.v("пихдец",width.toString())
-        var super_const = width/720*(9/10)        */
 
         for (i in 0 until tabLayout!!.tabCount) {
             var tv : TextView? = null
@@ -55,90 +48,87 @@ class ShopFragmentActivity : Fragment (){
             {tv  = helped_text3}
             if(i == 3)
             {tv = helped_text4}
-            if(Design == "Normal")
-            {
-                tv?.setTextColor(Color.BLACK)
-                tabLayout!!.getTabAt(i)?.customView = tv;
-            }
-            else if(Design == "Egypt"){
-                tv?.textSize = 14f        //так задаешь размер
-                tv?.setTextColor(Color.BLACK)   //цвет
-                tv?.typeface = locale_context?.let { ResourcesCompat.getFont(it, R.font.egypt) } //шрифт
-                tabLayout!!.getTabAt(i)?.customView = tv;
-                t_shop.setBackgroundColor(rgb(255, 230, 163))
-                fon.setBackgroundResource(R.drawable.sign_in_egypt)
-                button_shop_name.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-                button_shop_name.textSize = 25f
-                money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-            }
-            else if(Design == "Casino")
-            {
-                tv?.textSize = 18f        //так задаешь размер
-                tv?.setTextColor(Color.YELLOW)   //цвет
-                tv?.typeface = locale_context?.let { ResourcesCompat.getFont(it, R.font.casino) } //шрифт
-                tabLayout!!.getTabAt(i)?.customView = tv;
-                t_shop.setBackgroundResource(R.drawable.bottom_navigation_casino)
-                fon.setBackgroundResource(R.drawable.background2_casino)
-                button_shop_name.setTextColor(Color.YELLOW)
-                button_shop_name.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-                button_shop_name.textSize = 25f
-                money_shop_toolbar.setTextColor(Color.YELLOW)
-                money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            }
-            else if(Design == "Rome")
-            {
-                tv?.textSize = 20f       //так задаешь размер
-                tv?.setTextColor(rgb(193, 150, 63))   //цвет
-                tv?.typeface = locale_context?.let { ResourcesCompat.getFont(it, R.font.rome) } //шрифт
-                tabLayout!!.getTabAt(i)?.customView = tv;
-                t_shop.setBackgroundResource(R.drawable.bottom_navigation_rome)
-                fon.setBackgroundResource(R.drawable.background_rome)
-                button_shop_name.setTextColor(rgb(193, 150, 63))
-                button_shop_name.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-                button_shop_name.textSize = 25f
-                money_shop_toolbar.setTextColor(rgb(193, 150, 63))
-                money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-                money_shop_toolbar.textSize = 25f
-            }
-            else if(Design == "Gothic")
-            {
-                tv?.textSize = 21f        //так задаешь размер
-                tv?.setTextColor(Color.WHITE)   //цвет
-                tv?.typeface = locale_context?.let { ResourcesCompat.getFont(it, R.font.gothic) } //шрифт
-                tabLayout!!.getTabAt(i)?.customView = tv;
-                t_shop.setBackgroundColor(rgb(20,20,20))
-                fon.setBackgroundResource(R.drawable.background_gothic)
-                button_shop_name.setTextColor(Color.WHITE)
-                button_shop_name.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-                button_shop_name.textSize = 25f
-                money_shop_toolbar.setTextColor(Color.WHITE)
-                money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-            }
-            else if(Design == "Japan")
-            {
-                tv?.textSize = 21f        //так задаешь размер
-                tv?.setTextColor(Color.BLACK)   //цвет
-                tv?.typeface = locale_context?.let { ResourcesCompat.getFont(it, R.font.gothic) } //шрифт
-                tabLayout!!.getTabAt(i)?.customView = tv;
-                t_shop.setBackgroundColor(Color.WHITE)
-                fon.setBackgroundResource(R.drawable.background_japan)
-                button_shop_name.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-                button_shop_name.textSize = 25f
-                money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-            }
-            else if(Design == "Noir")
-            {
-                tv?.textSize = 18f        //так задаешь размер
-                tv?.setTextColor(Color.WHITE)   //цвет
-                tv?.typeface = locale_context?.let { ResourcesCompat.getFont(it, R.font.noir) } //шрифт
-                tabLayout!!.getTabAt(i)?.customView = tv;
-                t_shop.setBackgroundColor(rgb(20,20,20))
-                fon.setBackgroundResource(R.drawable.background_noir)
-                button_shop_name.setTextColor(Color.WHITE)
-                button_shop_name.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
-                button_shop_name.textSize = 25f
-                money_shop_toolbar.setTextColor(Color.WHITE)
-                money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+            when (Design) {
+                "Normal" -> {
+                    tv?.setTextColor(Color.BLACK)
+                    tabLayout!!.getTabAt(i)?.customView = tv;
+                }
+                "Egypt" -> {
+        //            tv?.textSize = 14f        //так задаешь размер
+                    tv?.setTextColor(Color.BLACK)   //цвет
+  //                  tv?.typeface = locale_context?.let { ResourcesCompat.getFont(it, R.font.egypt) } //шрифт
+                    tabLayout!!.getTabAt(i)?.customView = tv;
+                    t_shop.setBackgroundColor(rgb(255, 230, 163))
+                    fon.setBackgroundResource(R.drawable.sign_in_egypt)
+             //       button_shop_name.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                    button_shop_name.textSize = 25f
+                   // money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+
+                }
+                "Casino" -> {
+       //             tv?.textSize = 18f        //так задаешь размер
+                    tv?.setTextColor(Color.YELLOW)   //цвет
+       //             tv?.typeface = locale_context?.let { ResourcesCompat.getFont(it, R.font.casino) } //шрифт
+                    tabLayout!!.getTabAt(i)?.customView = tv;
+                    t_shop.setBackgroundResource(R.drawable.bottom_navigation_casino)
+                    fon.setBackgroundResource(R.drawable.background2_casino)
+                    button_shop_name.setTextColor(Color.YELLOW)
+             //       button_shop_name.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                    button_shop_name.textSize = 25f
+                    money_shop_toolbar.setTextColor(Color.YELLOW)
+                //    money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                }
+                "Rome" -> {
+      //              tv?.textSize = 20f       //так задаешь размер
+                    tv?.setTextColor(rgb(193, 150, 63))   //цвет
+             //       tv?.typeface = locale_context?.let { ResourcesCompat.getFont(it, R.font.rome) } //шрифт
+                    tabLayout!!.getTabAt(i)?.customView = tv;
+                    t_shop.setBackgroundResource(R.drawable.bottom_navigation_rome)
+                    fon.setBackgroundResource(R.drawable.background_rome)
+                    button_shop_name.setTextColor(rgb(193, 150, 63))
+             //       button_shop_name.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                    button_shop_name.textSize = 25f
+                    money_shop_toolbar.setTextColor(rgb(193, 150, 63))
+            //        money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                    money_shop_toolbar.textSize = 25f
+                }
+                "Gothic" -> {
+    //                tv?.textSize = 21f        //так задаешь размер
+                    tv?.setTextColor(Color.WHITE)   //цвет
+            //        tv?.typeface = locale_context?.let { ResourcesCompat.getFont(it, R.font.gothic) } //шрифт
+                    tabLayout!!.getTabAt(i)?.customView = tv;
+                    t_shop.setBackgroundColor(rgb(20,20,20))
+                    fon.setBackgroundResource(R.drawable.background_gothic)
+                    button_shop_name.setTextColor(Color.WHITE)
+         //           button_shop_name.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                    button_shop_name.textSize = 25f
+                    money_shop_toolbar.setTextColor(Color.WHITE)
+         //           money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                }
+                "Japan" -> {
+           //         tv?.textSize = 21f        //так задаешь размер
+                    tv?.setTextColor(Color.BLACK)   //цвет
+                  //  tv?.typeface = locale_context?.let { ResourcesCompat.getFont(it, R.font.gothic) } //шрифт
+                    tabLayout!!.getTabAt(i)?.customView = tv;
+                    t_shop.setBackgroundColor(Color.WHITE)
+                    fon.setBackgroundResource(R.drawable.background_japan)
+          //          button_shop_name.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                    button_shop_name.textSize = 25f
+                //    money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                }
+                "Noir" -> {
+      //              tv?.textSize = 18f        //так задаешь размер
+                    tv?.setTextColor(Color.WHITE)   //цвет
+                  //  tv?.typeface = locale_context?.let { ResourcesCompat.getFont(it, R.font.noir) } //шрифт
+                    tabLayout!!.getTabAt(i)?.customView = tv;
+                    t_shop.setBackgroundColor(rgb(20,20,20))
+                    fon.setBackgroundResource(R.drawable.background_noir)
+                    button_shop_name.setTextColor(Color.WHITE)
+        //            button_shop_name.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                    button_shop_name.textSize = 25f
+                    money_shop_toolbar.setTextColor(Color.WHITE)
+         //           money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                }
             }
         }
 

@@ -15,6 +15,7 @@ import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import com.sga.schoolbattle.*
 import com.google.android.gms.ads.AdRequest
+import kotlinx.android.synthetic.main.activity_list_of_current_games.*
 import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
 
@@ -98,104 +99,109 @@ class ReversiOneDivice : AppCompatActivity() {
         mSound.load(this, R.raw.xlup, 1);
         mSound2.load(this, R.raw.win, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
-
-        if(Design == "Egypt" ) {
-            name_player1_one_divice.setTextColor(Color.BLACK)
-            name_player2_one_divice.setTextColor(Color.BLACK)
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-            name_player2_one_divice.setTextSize(20f)
-            name_player1_one_divice.setTextSize(20f)
-            button_player_1_one_divice.setBackgroundResource(R.drawable.player1_egypt);
-            button_player_2_one_divice.setBackgroundResource(R.drawable.player2_egypt);
-            player_1_icon_one_divice.setBackgroundResource(R.drawable.chip1_egypt);
-            player_2_icon_one_divice.setBackgroundResource(R.drawable.chip2_egypt)
-            toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_one_divice.setBackgroundColor(Color.rgb(255, 230, 163))
-            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-        }
-        else if(Design == "Casino" ) {
-            name_player1_one_divice.setTextColor(Color.YELLOW)
-            name_player2_one_divice.setTextColor(Color.YELLOW)
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_one_divice.setTextSize(20f)
-            name_player1_one_divice.setTextSize(20f)
-            button_player_1_one_divice.setBackgroundResource(R.drawable.tower1_casino);
-            button_player_2_one_divice.setBackgroundResource(R.drawable.tower2_casino);
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background2_casino);
-            bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-        }
-        else if(Design == "Rome" ) {
-            name_player1_one_divice.setTextColor(Color.rgb(193, 150, 63))
-            name_player2_one_divice.setTextColor(Color.rgb(193, 150, 63))
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-            name_player2_one_divice.setTextSize(20f)
-            name_player1_one_divice.setTextSize(20f)
-            button_player_1_one_divice.setBackgroundResource(R.drawable.chip1_rome);
-            button_player_2_one_divice.setBackgroundResource(R.drawable.chip2_rome);
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background_rome);
-            bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-        }
-        else if(Design == "Gothic" ) {
-            name_player1_one_divice.setTextColor(Color.WHITE)
-            name_player2_one_divice.setTextColor(Color.WHITE)
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-            name_player2_one_divice.setTextSize(20f)
-            name_player1_one_divice.setTextSize(20f)
-            button_player_1_one_divice.setBackgroundResource(R.drawable.chip1_gothic);
-            button_player_2_one_divice.setBackgroundResource(R.drawable.chip2_gothic);
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background_gothic);
-            bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
-            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-        }
-        else if(Design == "Japan" ) {
-            name_player1_one_divice.setTextColor(Color.BLACK)
-            name_player2_one_divice.setTextColor(Color.BLACK)
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-            name_player2_one_divice.setTextSize(20f)
-            name_player1_one_divice.setTextSize(20f)
-            button_player_1_one_divice.setBackgroundResource(R.drawable.chip1_japan);
-            button_player_2_one_divice.setBackgroundResource(R.drawable.chip2_japan);
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background_japan);
-            bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
-            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-        }
-        else if(Design == "Noir" ) {
-            name_player1_one_divice.setTextColor(Color.WHITE)
-            name_player2_one_divice.setTextColor(Color.WHITE)
-            name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
-            name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
-            name_player2_one_divice.setTextSize(20f)
-            name_player1_one_divice.setTextSize(20f)
-            button_player_1_one_divice.setBackgroundResource(R.drawable.chip1_noir);
-            button_player_2_one_divice.setBackgroundResource(R.drawable.chip2_noir);
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-            label_one_device.setBackgroundResource(R.drawable.background_noir);
-            bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
-            to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+        when (Design) {
+            "Normal" -> {
+                button_player_1_one_divice.setBackgroundResource(R.drawable.chip2_normal);
+                button_player_2_one_divice.setBackgroundResource(R.drawable.chip1_normal);
+            }
+            "Egypt" -> {
+                name_player1_one_divice.setTextColor(Color.BLACK)
+                name_player2_one_divice.setTextColor(Color.BLACK)
+                name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                name_player2_one_divice.setTextSize(20f)
+                name_player1_one_divice.setTextSize(20f)
+                button_player_1_one_divice.setBackgroundResource(R.drawable.player1_egypt);
+                button_player_2_one_divice.setBackgroundResource(R.drawable.player2_egypt);
+                player_1_icon_one_divice.setBackgroundResource(R.drawable.chip1_egypt);
+                player_2_icon_one_divice.setBackgroundResource(R.drawable.chip2_egypt)
+                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                label_one_device.setBackgroundResource(R.drawable.background_egypt);
+                bottom_navigation_one_divice.setBackgroundColor(Color.rgb(255, 230, 163))
+                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            }
+            "Casino" -> {
+                name_player1_one_divice.setTextColor(Color.YELLOW)
+                name_player2_one_divice.setTextColor(Color.YELLOW)
+                name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                name_player2_one_divice.setTextSize(20f)
+                name_player1_one_divice.setTextSize(20f)
+                button_player_1_one_divice.setBackgroundResource(R.drawable.chip1_casino);
+                button_player_2_one_divice.setBackgroundResource(R.drawable.chip2_casino);
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                label_one_device.setBackgroundResource(R.drawable.background2_casino);
+                bottom_navigation_one_divice.setBackgroundColor(argb(0, 224, 164, 103))
+                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            }
+            "Rome" -> {
+                name_player1_one_divice.setTextColor(Color.rgb(193, 150, 63))
+                name_player2_one_divice.setTextColor(Color.rgb(193, 150, 63))
+                name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                name_player2_one_divice.setTextSize(20f)
+                name_player1_one_divice.setTextSize(20f)
+                button_player_1_one_divice.setBackgroundResource(R.drawable.chip1_rome);
+                button_player_2_one_divice.setBackgroundResource(R.drawable.chip2_rome);
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                label_one_device.setBackgroundResource(R.drawable.background_rome);
+                bottom_navigation_one_divice.setBackgroundColor(argb(0, 224, 164, 103))
+                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            }
+            "Gothic" -> {
+                name_player1_one_divice.setTextColor(Color.WHITE)
+                name_player2_one_divice.setTextColor(Color.WHITE)
+                name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                name_player2_one_divice.setTextSize(20f)
+                name_player1_one_divice.setTextSize(20f)
+                button_player_1_one_divice.setBackgroundResource(R.drawable.chip1_gothic);
+                button_player_2_one_divice.setBackgroundResource(R.drawable.chip2_gothic);
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                label_one_device.setBackgroundResource(R.drawable.background_gothic);
+                bottom_navigation_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            }
+            "Japan" -> {
+                name_player1_one_divice.setTextColor(Color.BLACK)
+                name_player2_one_divice.setTextColor(Color.BLACK)
+                name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                name_player2_one_divice.setTextSize(20f)
+                name_player1_one_divice.setTextSize(20f)
+                button_player_1_one_divice.setBackgroundResource(R.drawable.chip1_japan);
+                button_player_2_one_divice.setBackgroundResource(R.drawable.chip2_japan);
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                label_one_device.setBackgroundResource(R.drawable.background_japan);
+                bottom_navigation_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            }
+            "Noir" -> {
+                name_player1_one_divice.setTextColor(Color.WHITE)
+                name_player2_one_divice.setTextColor(Color.WHITE)
+                name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                name_player2_one_divice.setTextSize(20f)
+                name_player1_one_divice.setTextSize(20f)
+                button_player_1_one_divice.setBackgroundResource(R.drawable.chip1_noir);
+                button_player_2_one_divice.setBackgroundResource(R.drawable.chip2_noir);
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                label_one_device.setBackgroundResource(R.drawable.background_noir);
+                bottom_navigation_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+            }
         }
 
 
@@ -938,36 +944,49 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
 
     var exception: Boolean = false
 
+    var line_who_do_move : Paint = Paint()
+
     init{
         Line_paint.setColor(Color.rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
         Line_paint.setStrokeWidth(7f)
 
-        if(Design == "Egypt")
-        {
-            Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(7f)
-
-        }
-        else if(Design == "Casino") {
-            Line_paint.setColor(Color.WHITE)          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(7f)
-
-        }
-        else if(Design == "Rome") {
-            Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(7f)
-        }
-        else if(Design == "Gothic") {
-            Line_paint.setColor(Color.rgb(100,100,100))          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(7f)
-        }
-        else if(Design == "Japan") {
-            Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(7f)
-        }
-        else if(Design == "Noir") {
-            Line_paint.setColor(Color.rgb(100,100,100))          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(7f)
+        when (Design) {
+            "Normal" ->{
+                line_who_do_move.color =  Color.GREEN
+                line_who_do_move.strokeWidth = 14f
+                Line_paint.setColor(Color.rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
+                Line_paint.setStrokeWidth(7f)
+            }
+            "Egypt" -> {
+                Line_paint.color = Color.BLACK          //ресур для линий (ширина и цвет)
+                Line_paint.strokeWidth = 7f
+                line_who_do_move.color = Color.RED
+            }
+            "Casino" -> {
+                Line_paint.color = Color.WHITE          //ресур для линий (ширина и цвет)
+                Line_paint.strokeWidth = 7f
+                line_who_do_move.color = Color.YELLOW            //
+            }
+            "Rome" -> {
+                Line_paint.color = Color.BLACK  //ресур для линий (ширина и цвет)
+                Line_paint.strokeWidth = 7f
+                line_who_do_move.color = Color.rgb(193, 150, 63)
+            }
+            "Gothic" -> {
+                Line_paint.color = Color.rgb(100, 100, 100)   //ресур для линий (ширина и цвет)
+                Line_paint.strokeWidth = 7f
+                line_who_do_move.color = Color.WHITE
+            }
+            "Japan" -> {
+                Line_paint.color = Color.BLACK   //ресур для линий (ширина и цвет)
+                Line_paint.strokeWidth = 7f
+                line_who_do_move.color = Color.RED              //
+            }
+            "Noir" -> {
+                Line_paint.color = Color.rgb(100, 100, 100)   //ресур для линий (ширина и цвет)
+                Line_paint.strokeWidth = 7f
+                line_who_do_move.color = Color.RED              //
+            }
         }
 
         // TODO нужно взять из DataBase (статистика ходов)
@@ -991,8 +1010,8 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
 
 
 
-    var black_chip_normal : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip1_normal);       //картинки фишек и подсветки
-    var grey_chip_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip2_normal);
+    var black_chip_normal : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip2_normal);       //картинки фишек и подсветки
+    var grey_chip_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip1_normal);
 
     var black_chip_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip1_egypt);
     var grey_chip_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip2_egypt)
@@ -1036,11 +1055,11 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
 
         if(Black_or_grey_chip == "black")
         {
-            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,Line_paint1)
+            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
         }
         else
         {
-            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),Line_paint1)
+            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
         }
 
 
@@ -1076,41 +1095,41 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
         right_grey_chip = Bitmap.createScaledBitmap(grey_chip_normal,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
         right_green = Bitmap.createScaledBitmap(green,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
 
-        if(Design == "Egypt")
-        {
-            right_black_chip = Bitmap.createScaledBitmap(black_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
-            right_grey_chip = Bitmap.createScaledBitmap(grey_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-            right_green = Bitmap.createScaledBitmap(romb3,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-        }
-        else if (Design == "Casino")
-        {
-            right_black_chip = Bitmap.createScaledBitmap(black_chip_casino,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
-            right_grey_chip = Bitmap.createScaledBitmap(grey_chip_casino,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-            right_green = Bitmap.createScaledBitmap(romb2,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-        }
-        else if (Design == "Rome")
-        {
-            right_black_chip = Bitmap.createScaledBitmap(black_chip_rome,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
-            right_grey_chip = Bitmap.createScaledBitmap(grey_chip_rome,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-            right_green = Bitmap.createScaledBitmap(romb2,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-        }
-        else if (Design == "Gothic")
-        {
-            right_black_chip = Bitmap.createScaledBitmap(black_chip_gothic,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
-            right_grey_chip = Bitmap.createScaledBitmap(grey_chip_gothic,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-            right_green = Bitmap.createScaledBitmap(romb1,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-        }
-        else if (Design == "Japan")
-        {
-            right_black_chip = Bitmap.createScaledBitmap(black_chip_japan,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
-            right_grey_chip = Bitmap.createScaledBitmap(grey_chip_japan,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-            right_green = Bitmap.createScaledBitmap(romb3,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-        }
-        else if (Design == "Noir")
-        {
-            right_black_chip = Bitmap.createScaledBitmap(black_chip_noir,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
-            right_grey_chip = Bitmap.createScaledBitmap(grey_chip_noir,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-            right_green = Bitmap.createScaledBitmap(romb1,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+
+        when (Design) {
+            "Normal" ->{
+
+            }
+            "Egypt" -> {
+                right_black_chip = Bitmap.createScaledBitmap(black_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+                right_grey_chip = Bitmap.createScaledBitmap(grey_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+                right_green = Bitmap.createScaledBitmap(romb3,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            }
+            "Casino" -> {
+                right_black_chip = Bitmap.createScaledBitmap(black_chip_casino,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+                right_grey_chip = Bitmap.createScaledBitmap(grey_chip_casino,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+                right_green = Bitmap.createScaledBitmap(romb2,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            }
+            "Rome" -> {
+                right_black_chip = Bitmap.createScaledBitmap(black_chip_rome,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+                right_grey_chip = Bitmap.createScaledBitmap(grey_chip_rome,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+                right_green = Bitmap.createScaledBitmap(romb2,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            }
+            "Gothic" -> {
+                right_black_chip = Bitmap.createScaledBitmap(black_chip_gothic,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+                right_grey_chip = Bitmap.createScaledBitmap(grey_chip_gothic,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+                right_green = Bitmap.createScaledBitmap(romb1,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            }
+            "Japan" -> {
+                right_black_chip = Bitmap.createScaledBitmap(black_chip_japan,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+                right_grey_chip = Bitmap.createScaledBitmap(grey_chip_japan,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+                right_green = Bitmap.createScaledBitmap(romb3,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            }
+            "Noir" -> {
+                right_black_chip = Bitmap.createScaledBitmap(black_chip_noir,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+                right_grey_chip = Bitmap.createScaledBitmap(grey_chip_noir,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+                right_green = Bitmap.createScaledBitmap(romb1,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            }
         }
 
         for( i in 0..7) // расстановка фишек
