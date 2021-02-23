@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_search_item.view.*
 class SearchActivity : AppCompatActivity() {
 
     private var USERS: MutableList<String> = mutableListOf()
+    private var IMAGES: MutableList<Int> = mutableListOf()
     var rec: RecyclerView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +29,7 @@ class SearchActivity : AppCompatActivity() {
         val searchView = findViewById<SearchView>(R.id.search_field)
         searchView.onActionViewExpanded()
 
-        recyclerViewSearch.adapter = ItemRecyclerViewAdapter(USERS)
+        recyclerViewSearch.adapter = ItemRecyclerViewAdapter(USERS, IMAGES)
         rec = recyclerViewSearch
         rec?.adapter?.notifyDataSetChanged()
 
@@ -61,9 +62,12 @@ class SearchActivity : AppCompatActivity() {
                     override fun onDataChange(p0: DataSnapshot) {
                         Toast.makeText(this@SearchActivity, query + ' ' + blocked, Toast.LENGTH_LONG).show()
                         USERS.clear()
+                        IMAGES.clear()
                         for (i in p0.children) {
                             if (!blocked && i.key.toString().startsWith(query) && i.key.toString().contains(query)) {
                                 USERS.add(i.key.toString())
+                                if (i.hasChild("image")) IMAGES.add(i.child("image").value.toString().toInt())
+                                else IMAGES.add(0)
                                 //Photos.add(i.child("photo")).value
                                 rec?.adapter?.notifyDataSetChanged()
                             }
@@ -81,7 +85,9 @@ class SearchActivity : AppCompatActivity() {
         })
     }
 
-    class ItemRecyclerViewAdapter(private val ITEMS: MutableList<String>):
+    class ItemRecyclerViewAdapter(private val ITEMS: MutableList<String>,
+                                  private val IMAGES: MutableList<Int>
+    ):
         RecyclerView.Adapter<ItemRecyclerViewAdapter.ViewHolder>() {
 
         private val onClickListener: View.OnClickListener
@@ -102,6 +108,7 @@ class SearchActivity : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.idView.text = ITEMS[position]
+            PICTURE_AVATAR[IMAGES[position]]?.let { holder.imView.setBackgroundResource(it) }
             with(holder.itemView) {
                 tag = ITEMS[position]
                 setOnClickListener(onClickListener)
@@ -114,6 +121,7 @@ class SearchActivity : AppCompatActivity() {
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val idView: TextView = view.textViewSearch
+            val imView: ImageView = view.imageViewSearch
         }
     }
 

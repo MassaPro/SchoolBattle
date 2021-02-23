@@ -128,6 +128,19 @@ class SignUpActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            for (i in name) {
+                if ((i > 'z' || i < 'a') && (i > '9' || i < '0') && (i > 'Z' || i < 'A')) {
+                    Toast.makeText(this,"Name must consist of A..Z, a..z or 0..9", Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
+            }
+
+            for (i in password) {
+                if ((i > 'z' || i < 'a') && (i > '9' || i < '0') && (i > 'Z' || i < 'A')) {
+                    Toast.makeText(this,"Password must consist of A..Z, a..z or 0..9", Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
+            }
             if (password != repeatPassword) {
                 Toast.makeText(this,"Password mismatch", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
@@ -159,16 +172,18 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this,"Name $name already exists", Toast.LENGTH_LONG).show()
             }
 
-            myRef.child("Users").addListenerForSingleValueEvent(object : ValueEventListener {
+            myRef.child("Users").child("name").addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
 
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.hasChild(name)) {
+                    if (snapshot.exists()) {
                         exists()
                     } else {
                         val newUser = UserClass(name, password)
                         myRef.child("Users").child(name).setValue(newUser)
-                        nextActivity()
+                        myRef.child("Users").child(name).child("image").setValue("1").addOnCompleteListener {
+                            nextActivity()
+                        }
                     }
                 }
             })

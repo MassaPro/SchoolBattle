@@ -1,5 +1,6 @@
 package com.sga.schoolbattle.social
 
+import android.R.attr.key
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
@@ -11,25 +12,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sga.schoolbattle.*
-import com.sga.schoolbattle.shop.locale_context
-import kotlinx.android.synthetic.main.activity_ava__dialog.*
-import com.sga.schoolbattle.CONTEXT
-import com.sga.schoolbattle.Design
-import com.sga.schoolbattle.R
-import com.sga.schoolbattle.engine.RatingGraph
-import com.sga.schoolbattle.engine.colorByRating
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.activity_my_profile.image_global_ava
-import kotlinx.android.synthetic.main.activity_my_profile.profileMyName
+import com.sga.schoolbattle.*
+import com.sga.schoolbattle.engine.RatingGraph
+import com.sga.schoolbattle.engine.colorByRating
+import com.sga.schoolbattle.shop.locale_context
+import kotlinx.android.synthetic.main.activity_ava__dialog.*
+import kotlinx.android.synthetic.main.activity_my_profile.*
 import kotlinx.android.synthetic.main.ava_item_profile.view.*
+import java.util.*
 
 
 var D : Dialog? = null
@@ -108,46 +109,64 @@ class MyProfile : Fragment() {
             display.getSize(size)
             val width = size.x
             val height = size.y
-            dialog_find_ava!!.window!!.setLayout(width*20/21, height*15/16);
+            dialog_find_ava!!.window!!.setLayout(width * 20 / 21, height * 15 / 16);
             if(Design == "Egypt") {
                 dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_egypt)
                 dialog_find_ava.choose_ava_text.setBackgroundColor(Color.rgb(255, 230, 163))
-                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(
+                    CONTEXT,
+                    R.font.egypt
+                )
                 dialog_find_ava.choose_ava_text.setTextColor(Color.BLACK)
             }
             else if(Design == "Casino")
             {
                 dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_egypt)
                 dialog_find_ava.choose_ava_text.setBackgroundResource(R.drawable.bottom_navigation_casino)
-                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(
+                    CONTEXT,
+                    R.font.casino
+                )
                 dialog_find_ava.choose_ava_text.setTextColor(Color.YELLOW)
             }
             else if(Design == "Rome")
             {
                 dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_rome)
                 dialog_find_ava.choose_ava_text.setBackgroundResource(R.drawable.bottom_navigation_rome)
-                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(
+                    CONTEXT,
+                    R.font.rome
+                )
                 dialog_find_ava.choose_ava_text.setTextColor(Color.rgb(193, 150, 63))
             }
             else if(Design == "Gothic")
             {
                 dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_gothic)
                 dialog_find_ava.choose_ava_text.setBackgroundColor(Color.BLACK)
-                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(
+                    CONTEXT,
+                    R.font.gothic
+                )
                 dialog_find_ava.choose_ava_text.setTextColor(Color.WHITE)
             }
             else if(Design == "Japan")
             {
                 dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_japan)
                 dialog_find_ava.choose_ava_text.setBackgroundColor(Color.WHITE)
-                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(
+                    CONTEXT,
+                    R.font.japan
+                )
                 dialog_find_ava.choose_ava_text.setTextColor(Color.BLACK)
             }
             else if(Design == "Noir")
             {
                 dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_noir)
                 dialog_find_ava.choose_ava_text.setBackgroundColor(Color.BLACK)
-                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(
+                    CONTEXT,
+                    R.font.noir
+                )
                 dialog_find_ava.choose_ava_text.setTextColor(Color.WHITE)
             }
             dialog_find_ava.show()
@@ -177,7 +196,6 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
     init {
         onClickListener = View.OnClickListener { v ->
             var item = v.tag
-
         }
     }
 
@@ -194,16 +212,23 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
         holder.content.text = AVATAR_TEXT[ARRAY_OF_AVATAR[position]]          //название авы
 
         holder.img.setOnClickListener{
-            PICTURE_AVATAR[ARRAY_OF_AVATAR[position]]?.let { it1 -> locale_context?.findViewById<ImageView>(R.id.image_global_ava)?.setImageResource(it1)
-                AVATAR = ARRAY_OF_AVATAR[position]
-                val editor = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                editor.putString("avatar_number", ARRAY_OF_AVATAR[position].toString())
-
                 val prefs = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE)
-                var username = prefs?.getString("username", "")
+                val username = prefs?.getString("username", "")
                 if (username != null) {
-                    myRef.child("Users").child(username).child("image").setValue(ARRAY_OF_AVATAR[position].toString())
-                }
+                        AVATAR = ARRAY_OF_AVATAR[position]
+                    myRef.child("Users").child(username).child("image").setValue(ARRAY_OF_AVATAR[position].toString()).addOnSuccessListener {
+                        PICTURE_AVATAR[ARRAY_OF_AVATAR[position]]?.let { it1 -> locale_context?.findViewById<ImageView>(
+                            R.id.image_global_ava
+                        )?.setImageResource(it1)}
+                        val editor =
+                            locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                                .edit()
+                        editor.putString("avatar_number", ARRAY_OF_AVATAR[position].toString())
+                        editor.apply()
+                    }.addOnFailureListener(OnFailureListener {
+                        Toast.makeText(locale_context, "You need internet connection to change your avatar", Toast.LENGTH_LONG).show()
+                    })
+
 
                 D?.dismiss()
             }
