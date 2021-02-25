@@ -20,6 +20,8 @@ fun initCatchPlayersListenerForBlitzGame(username: String, context: Context) {
     myRef.child("Users").child(username).child("blitz").addChildEventListener(object : ChildEventListener {
         override fun onChildAdded(p0: DataSnapshot, p1: String?) {
             myRef.child("Users").child(username).child("blitz").removeValue()
+
+
             val intent = when {
                 p0.key.toString() == "XOGame" -> {
                     Intent(context, XOGameActivity::class.java)
