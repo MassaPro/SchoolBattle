@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.sga.schoolbattle.*
 import com.google.android.material.tabs.TabLayout
+import com.sga.schoolbattle.social.SocialActivity
 import kotlinx.android.synthetic.main.activity_settings_fragment.*
 import kotlinx.android.synthetic.main.activity_shop_fragment.*
 
@@ -37,6 +38,10 @@ class ShopFragmentActivity : Fragment (){
 
 
 
+        helped_text1.text = translate("Аватары")
+        helped_text2.text = translate("Эмоции")
+        helped_text3.text = translate("Дизайны")
+        helped_text4.text = translate("Премиум")
 
         for (i in 0 until tabLayout!!.tabCount) {
             var tv : TextView? = null
@@ -48,6 +53,7 @@ class ShopFragmentActivity : Fragment (){
             {tv  = helped_text3}
             if(i == 3)
             {tv = helped_text4}
+
             when (Design) {
                 "Normal" -> {
                     tv?.setTextColor(Color.BLACK)
@@ -63,6 +69,7 @@ class ShopFragmentActivity : Fragment (){
              //       button_shop_name.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
                     button_shop_name.textSize = 25f
                    // money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                    tabLayout!!.setSelectedTabIndicatorColor (Color.BLACK)
 
                 }
                 "Casino" -> {
@@ -77,6 +84,7 @@ class ShopFragmentActivity : Fragment (){
                     button_shop_name.textSize = 25f
                     money_shop_toolbar.setTextColor(Color.YELLOW)
                 //    money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                    tabLayout!!.setSelectedTabIndicatorColor (Color.YELLOW)
                 }
                 "Rome" -> {
       //              tv?.textSize = 20f       //так задаешь размер
@@ -91,6 +99,7 @@ class ShopFragmentActivity : Fragment (){
                     money_shop_toolbar.setTextColor(rgb(193, 150, 63))
             //        money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                     money_shop_toolbar.textSize = 25f
+                    tabLayout!!.setSelectedTabIndicatorColor (rgb(193, 150, 63))
                 }
                 "Gothic" -> {
     //                tv?.textSize = 21f        //так задаешь размер
@@ -104,6 +113,7 @@ class ShopFragmentActivity : Fragment (){
                     button_shop_name.textSize = 25f
                     money_shop_toolbar.setTextColor(Color.WHITE)
          //           money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                    tabLayout!!.setSelectedTabIndicatorColor (Color.WHITE)
                 }
                 "Japan" -> {
            //         tv?.textSize = 21f        //так задаешь размер
@@ -115,6 +125,7 @@ class ShopFragmentActivity : Fragment (){
           //          button_shop_name.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
                     button_shop_name.textSize = 25f
                 //    money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                    tabLayout!!.setSelectedTabIndicatorColor (Color.BLACK)
                 }
                 "Noir" -> {
       //              tv?.textSize = 18f        //так задаешь размер
@@ -128,6 +139,7 @@ class ShopFragmentActivity : Fragment (){
                     button_shop_name.textSize = 25f
                     money_shop_toolbar.setTextColor(Color.WHITE)
          //           money_shop_toolbar.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                    tabLayout!!.setSelectedTabIndicatorColor (Color.WHITE)
                 }
             }
         }
@@ -237,16 +249,16 @@ class ShopFragmentActivity : Fragment (){
         override fun getPageTitle(position: Int): CharSequence? {
             when (position) {
                 0 -> {
-                    return "Аватар"
+                    return translate("Аватары")
                 }
                 1 -> {
-                    return "Эмоции"
+                    return translate("Эмоции")
                 }
                 2 -> {
-                    return "Дизайн"
+                    return translate("Дизайн")
                 }
                 3 -> {
-                    return "ПРЕМИУМ"
+                    return translate("Премиум")
                 }
             }
             return null

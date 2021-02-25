@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +35,6 @@
                 android:id="@+id/item_design"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 app:layoutManager="LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -47,33 +46,32 @@
                 android:id="@+id/choose_design"
                 android:layout_width="294dp"
                 android:layout_height="58dp"
-                android:layout_marginTop="44dp"
                 android:gravity="center"
                 android:text="Выбор дизайна"
+                android:textColor="#000000"
                 android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.427"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/vibrationSwitch" />
+                app:layout_constraintTop_toBottomOf="@+id/language_button1" />
 
             <Switch
                 android:id="@+id/vibrationSwitch"
-                android:layout_width="293dp"
-                android:layout_height="54dp"
-                android:layout_marginTop="12dp"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
                 android:text="Вибрация"
                 android:textSize="20sp"
                 android:typeface="normal"
-                app:layout_constraintEnd_toEndOf="@+id/choose_design"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintEnd_toEndOf="@+id/language_button1"
                 app:layout_constraintStart_toStartOf="@+id/choose_design"
                 app:layout_constraintTop_toBottomOf="@+id/soundSwitch" />
 
             <Switch
                 android:id="@+id/soundSwitch"
-                android:layout_width="293dp"
-                android:layout_height="54dp"
-                android:layout_marginTop="24dp"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
                 android:text="Звук"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="@+id/choose_design"
@@ -91,6 +89,32 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/language_button"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                android:gravity="center|left"
+                android:text="Язык"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/language_button1"
+                app:layout_constraintEnd_toStartOf="@+id/language_button1"
+                app:layout_constraintStart_toStartOf="@+id/choose_design"
+                app:layout_constraintTop_toTopOf="@+id/language_button1" />
+
+            <Button
+                android:id="@+id/language_button1"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:gravity="center|right"
+                android:text="RU"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/choose_design"
+                app:layout_constraintTop_toBottomOf="@+id/vibrationSwitch" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

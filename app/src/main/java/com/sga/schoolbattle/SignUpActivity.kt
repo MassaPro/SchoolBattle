@@ -3,6 +3,7 @@ package com.sga.schoolbattle
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Color.argb
 import android.graphics.Color.rgb
 import android.os.Bundle
 import android.text.Editable
@@ -12,7 +13,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.sga.schoolbattle.engine.initEconomyParams
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_sign_in.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import kotlinx.android.synthetic.main.activity_sign_up.signUpButton
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -23,48 +26,69 @@ class SignUpActivity : AppCompatActivity() {
 
 
         when (Design) {
+            "Normal" -> {
+                sign_up_menu.setBackgroundResource(R.drawable.game_menu_normal);
+                signUpButton.setBackgroundResource(R.drawable.button)
+                nameTextInit.setTextColor(Color.BLACK)
+                passwordTextInit.setTextColor(Color.BLACK)
+                repeatPassword.setTextColor(Color.BLACK)
+
+
+            }
             "Egypt" -> {
                 sign_up_menu.setBackgroundResource(R.drawable.sign_up_egypt);
                 signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-                signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                signUpButton.setBackgroundColor(argb(0, 0, 0, 0))
+                nameTextInit.setTextColor(Color.BLACK)
+                passwordTextInit.setTextColor(Color.BLACK)
+                repeatPassword.setTextColor(Color.BLACK)
+                signUpRegistrationText.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                signUpRegistrationText.setTextColor(Color.BLACK)
             }
             "Casino" -> {
                 sign_up_menu.setBackgroundResource(R.drawable.game_menu_casino);
                 signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-                signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                signUpButton.setBackgroundColor(argb(0, 0, 0, 0))
                 signUpButton.setTextColor(Color.YELLOW)
                 nameTextInit.setTextColor(Color.YELLOW)
                 passwordTextInit.setTextColor(Color.YELLOW)
                 repeatPassword.setTextColor(Color.YELLOW)
+                signUpRegistrationText.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                signUpRegistrationText.setTextColor(Color.YELLOW)
             }
             "Rome" -> {
                 sign_up_menu.setBackgroundResource(R.drawable.sign_in_rome);
                 signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-                signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                signUpButton.setBackgroundColor(argb(0, 0, 0, 0))
                 signUpButton.setTextColor(rgb(193, 150, 63))
                 nameTextInit.setTextColor(rgb(193, 150, 63))
                 passwordTextInit.setTextColor(rgb(193, 150, 63))
                 repeatPassword.setTextColor(rgb(193, 150, 63))
+                signUpRegistrationText.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                signUpRegistrationText.setTextColor(rgb(193, 150, 63))
             }
             "Gothic" -> {
                 sign_up_menu.setBackgroundResource(R.drawable.sign_in_gothic);
                 signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-                signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                signUpButton.setBackgroundColor(argb(0, 0, 0, 0))
                 signUpButton.setTextColor(Color.WHITE)
 
                 nameTextInit.setTextColor(Color.WHITE)
-                nameTextInit.setBackgroundColor(Color.rgb(30, 30, 30))
+                nameTextInit.setBackgroundColor(rgb(30, 30, 30))
 
                 passwordTextInit.setTextColor(Color.WHITE)
-                passwordTextInit.setBackgroundColor(Color.rgb(30, 30, 30))
+                passwordTextInit.setBackgroundColor(rgb(30, 30, 30))
 
                 repeatPassword.setTextColor(Color.WHITE)
-                repeatPassword.setBackgroundColor(Color.rgb(30, 30, 30))
+                repeatPassword.setBackgroundColor(rgb(30, 30, 30))
+
+                signUpRegistrationText.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                signUpRegistrationText.setTextColor(Color.WHITE)
             }
             "Japan" -> {
                 sign_up_menu.setBackgroundResource(R.drawable.sign_in_japan);
                 signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-                signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                signUpButton.setBackgroundColor(argb(0, 0, 0, 0))
                 signUpButton.setTextColor(Color.BLACK)
 
                 nameTextInit.setTextColor(Color.BLACK)
@@ -75,21 +99,25 @@ class SignUpActivity : AppCompatActivity() {
 
                 repeatPassword.setTextColor(Color.BLACK)
                 repeatPassword.setBackgroundColor(Color.WHITE)
+                signUpRegistrationText.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                signUpRegistrationText.setTextColor(Color.BLACK)
             }
             "Noir" -> {
                 sign_up_menu.setBackgroundResource(R.drawable.sign_in_noir);
                 signUpButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
-                signUpButton.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                signUpButton.setBackgroundColor(argb(0, 0, 0, 0))
                 signUpButton.setTextColor(Color.WHITE)
 
                 nameTextInit.setTextColor(Color.WHITE)
-                nameTextInit.setBackgroundColor(Color.rgb(30, 30, 30))
+                nameTextInit.setBackgroundColor(rgb(30, 30, 30))
 
                 passwordTextInit.setTextColor(Color.WHITE)
-                passwordTextInit.setBackgroundColor(Color.rgb(30, 30, 30))
+                passwordTextInit.setBackgroundColor(rgb(30, 30, 30))
 
                 repeatPassword.setTextColor(Color.WHITE)
-                repeatPassword.setBackgroundColor(Color.rgb(30, 30, 30))
+                repeatPassword.setBackgroundColor(rgb(30, 30, 30))
+                signUpRegistrationText.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                signUpRegistrationText.setTextColor(Color.WHITE)
             }
         }
 

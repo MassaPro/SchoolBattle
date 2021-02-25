@@ -13,8 +13,10 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
+import com.google.android.gms.ads.AdRequest
 import com.sga.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_computer_games_template.*
+import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
 
 var ReversiMode = 0
@@ -92,7 +94,11 @@ class ReversiWithComputer : AppCompatActivity() {
         signature_canvas_reversi_with_computer.activity = this
         CONTEXT = this
 
-  //      mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+        if(!PREMIUM)
+        {
+            mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+        }
+
         mSound.load(this, R.raw.xlup, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
@@ -123,12 +129,12 @@ class ReversiWithComputer : AppCompatActivity() {
             button_player_2_with_computer_template.setBackgroundResource(R.drawable.player2_egypt)
             player_1_icon_template_with_computer.setBackgroundResource(R.drawable.chip1_egypt)
             player_2_icon_template_with_computer.setBackgroundResource(R.drawable.chip2_egypt)
-            toolbar_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             label_with_computer.setBackgroundResource(R.drawable.background_egypt)
             bottom_navigation_with_computer_template.setBackgroundColor(Color.rgb(255, 230, 163))
             to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_with_computer_template.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
         }
         else if(Design == "Casino" ) {
             name_player1_with_computer_template.setTextColor(Color.YELLOW)
@@ -402,10 +408,20 @@ class ReversiWithComputer : AppCompatActivity() {
 
 
         to_back_with_computer_template.setOnClickListener {
-            this.finish()
-            val intent = Intent(this, NewGameActivity::class.java)
-            intent.putExtra("playType", 3)
-            startActivity(intent)
+            to_back_one_divice.setOnClickListener {
+                this.finish()
+                val intent = Intent(this, NewGameActivity::class.java)
+                intent.putExtra("playType", 3)
+                if(mInterstitialAd_in_offline_games.isLoaded && !PREMIUM)
+                {
+                    Intent_for_offline_games = intent
+                    mInterstitialAd_in_offline_games.show()
+                }
+                else
+                {
+                    this.startActivity(intent)
+                }
+            }
         }
 
         bottom_navigation_with_computer_template.setOnNavigationItemSelectedListener { item ->
@@ -501,6 +517,22 @@ class ReversiWithComputer : AppCompatActivity() {
             true
         }
 
+    }
+    override fun onBackPressed()
+    {
+        super.onBackPressed()
+        var intent = Intent(this, NewGameActivity::class.java)
+        intent.putExtra("playType", 3)
+        if(mInterstitialAd_in_offline_games.isLoaded && !PREMIUM)
+        {
+            Intent_for_offline_games = intent
+            mInterstitialAd_in_offline_games.show()
+        }
+        else
+        {
+            this.startActivity(intent)
+            this.finish()
+        }
     }
 
 }

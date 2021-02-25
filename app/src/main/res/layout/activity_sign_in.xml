@@ -55,11 +55,13 @@
         app:layout_constraintVertical_bias="0.061" />
 
     <TextView
-        android:id="@+id/signUpRegistrationText"
+        android:id="@+id/signIpRegistrationText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to..."
+        android:gravity="center"
+        android:text="Welcome to&#10; Smart Games Arena"
         android:textSize="30sp"
+        android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/nameTextInit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

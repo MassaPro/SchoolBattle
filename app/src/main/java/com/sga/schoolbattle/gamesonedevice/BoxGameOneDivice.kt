@@ -15,6 +15,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
+import com.google.android.gms.ads.AdRequest
 import com.sga.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
@@ -100,19 +101,32 @@ class BoxGameOneDivice : AppCompatActivity() {
         signature_canvas_box_one_device.activity = this
 
 
+        if(!PREMIUM)
+        {
+            mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+        }
         signature_canvas_box_one_device.t1 = findViewById(R.id.name_player1_one_divice) as TextView
         signature_canvas_box_one_device.t2 = findViewById(R.id.name_player2_one_divice) as TextView
 
+
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+        
         CONTEXT = this
 
         mSound.load(this, R.raw.xlup, 1)
         mSound2.load(this, R.raw.win, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
-        name_player1_one_divice.setTextColor(Color.RED)
-        name_player2_one_divice.setTextColor(Color.BLUE)
 
         when (Design) {
+            "Normal" ->{
+                name_player1_one_divice.setTextColor(Color.RED)
+                name_player2_one_divice.setTextColor(Color.BLUE)
+                button_player_1_one_divice.setBackgroundResource(R.drawable.box1_normal);
+                button_player_2_one_divice.setBackgroundResource(R.drawable.box2_normal);
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_normal)
+            }
             "Egypt" -> {
                 name_player1_one_divice.setTextColor(Color.BLACK)
                 name_player2_one_divice.setTextColor(Color.BLACK)
@@ -132,8 +146,8 @@ class BoxGameOneDivice : AppCompatActivity() {
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Casino" -> {
-                name_player1_one_divice.setTextColor(Color.YELLOW)
-                name_player2_one_divice.setTextColor(Color.YELLOW)
+                name_player1_one_divice.setTextColor(Color.RED)
+                name_player2_one_divice.setTextColor(Color.BLACK)
                 name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 name_player2_one_divice.setTextSize(20f)
@@ -144,11 +158,11 @@ class BoxGameOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background2_casino);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_casino)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Rome" -> {
-                name_player1_one_divice.setTextColor(Color.rgb(193, 150, 63))
+                name_player1_one_divice.setTextColor(Color.BLACK)
                 name_player2_one_divice.setTextColor(Color.rgb(193, 150, 63))
                 name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                 name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
@@ -160,7 +174,7 @@ class BoxGameOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_rome);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_rome)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Gothic" -> {
@@ -176,12 +190,12 @@ class BoxGameOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_gothic);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_gothic)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Japan" -> {
-                name_player1_one_divice.setTextColor(Color.BLACK)
-                name_player2_one_divice.setTextColor(Color.BLACK)
+                name_player1_one_divice.setTextColor(Color.RED)
+                name_player2_one_divice.setTextColor(rgb(37,103,28))
                 name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
                 name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
                 name_player2_one_divice.setTextSize(20f)
@@ -208,7 +222,7 @@ class BoxGameOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_noir);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_gothic)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
         }
@@ -217,7 +231,7 @@ class BoxGameOneDivice : AppCompatActivity() {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 2)
-            if(mInterstitialAd_in_offline_games.isLoaded)
+            if(mInterstitialAd_in_offline_games.isLoaded && !PREMIUM)
             {
                 Intent_for_offline_games = intent
                 mInterstitialAd_in_offline_games.show()
@@ -431,7 +445,7 @@ class BoxGameOneDivice : AppCompatActivity() {
         super.onBackPressed()
         var intent = Intent(this, NewGameActivity::class.java)
         intent.putExtra("playType", 2)
-        if(mInterstitialAd_in_offline_games.isLoaded)
+        if(mInterstitialAd_in_offline_games.isLoaded && !PREMIUM)
         {
             Intent_for_offline_games = intent
             mInterstitialAd_in_offline_games.show()
@@ -442,6 +456,8 @@ class BoxGameOneDivice : AppCompatActivity() {
             this.finish()
         }
     }
+
+
 }
 
 
@@ -610,7 +626,7 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
         paint_rib_2.setColor(Color.BLUE)
         paint_rib_2.setStrokeWidth(7f)
 
-        line_who_do_move.strokeWidth = 7f
+        line_who_do_move.strokeWidth = 14f
 
         when (Design) {
             "Normal" -> {
@@ -625,7 +641,7 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
                 line_who_do_move.color = Color.YELLOW
             }
             "Egypt" -> {
-                Line_paint.setColor(Color.argb(0, 0,0,0))          //ресур для линий (ширина и цвет)
+                Line_paint.setColor(argb(0, 0,0,0))          //ресур для линий (ширина и цвет)
                 line_who_do_move.color = Color.RED
             }
             "Rome" -> {
@@ -633,10 +649,10 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
                 paint_circle.setColor(Color.BLACK)     //цвета для точек
                 paint_rib_2.setColor(Color.rgb(193,150,63))          //цвета для ребер  и их ширина
                 paint_rib_1.setColor(Color.BLACK)
-                line_who_do_move.color = rgb(193,150,63)
+                line_who_do_move.color = Color.BLACK
             }
             "Gothic" -> {
-
+                Line_paint.setColor(argb(0,0,0,0))          //ресур для линий (ширина и цвет)
                 paint_circle.setColor(Color.WHITE)     //цвета для точек
                 paint_rib_2.setColor(Color.RED)          //цвета для ребер  и их ширина
                 paint_rib_1.setColor(Color.BLUE)
@@ -644,12 +660,12 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
             }
             "Japan" -> {
                 paint_circle.setColor(Color.BLACK)     //цвета для точек
-                paint_rib_2.setColor(Color.RED)          //цвета для ребер  и их ширина
-                paint_rib_1.setColor(Color.rgb(37,103,28))
+                paint_rib_1.setColor(Color.RED)          //цвета для ребер  и их ширина
+                paint_rib_2.setColor(rgb(37,103,28))
                 line_who_do_move.color = Color.RED
             }
             "Noir" -> {
-
+                Line_paint.setColor(argb(0,0,0,0))          //ресур для линий (ширина и цвет)
                 paint_circle.setColor(rgb(100,100,100))     //цвета для точек
                 paint_rib_2.setColor(rgb(193, 150, 63))          //цвета для ребер  и их ширина
                 paint_rib_1.setColor(Color.WHITE)
@@ -701,8 +717,6 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
     var box1_noir : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_noir);
     var box2_noir : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_noir);
 
-
-
     var illumination: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.illumination);
     var green: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.green);
 
@@ -713,14 +727,14 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
 
         if(red_or_blue == "red")
         {
-            t1.text ="игрок 1 думает..."
-            t2.text  = "игрок 2"
+            t1.text ="Игрок 1 думает..."
+            t2.text  = "Игрок 2"
             canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
         }
         else
         {
-            t1.text ="игрок 1"
-            t2.text  = "игрок 2 думает..."
+            t1.text ="Игрок 1"
+            t2.text  = "Игрок 2 думает..."
             canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
         }
 

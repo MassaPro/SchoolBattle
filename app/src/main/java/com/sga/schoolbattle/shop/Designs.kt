@@ -70,6 +70,8 @@ class Designs  : Fragment(), RewardedVideoAdListener {
 
         //item_design_shop.setBackgroundResource(R.drawable.new_game_item_casino)
 
+        choose_design_shop.text = translate("Купленные дизайны можно применить в настройках")
+
         when (Design) {
             "Egypt" -> {
                 choose_design_shop.typeface =  locale_context?.let { ResourcesCompat.getFont(it, R.font.egypt) }
@@ -139,17 +141,13 @@ class Designs  : Fragment(), RewardedVideoAdListener {
 
     override fun onRewardedVideoCompleted() {
         loadRewardedVideoAd()
-        var dialog_reward : Dialog = locale_context!!.let { Dialog(it) }
-        dialog_reward.setContentView(R.layout.reward_dialog)
-        dialog_reward.price_reward.text = updateEconomyParams(requireActivity(), "award").toString() //TODO ОБЯЗАТЕЛЬНО НЕ ЗАБЫТЬ ПОМЕНЯТЬ ЗДЕСЬ ЦЕНУ
-        dialog_reward.close_reward.setOnClickListener {
-            dialog_reward.dismiss()
+        var reward  = locale_context?.let {
+            RewardDialog(
+                it,
+                PRODUCT_ID
+            )
         }
-        dialog_reward.ok_reward.setOnClickListener {
-            dialog_reward.dismiss()
-        }
-        dialog_reward.show()
-        locale_context?.findViewById<TextView>(R.id.money_shop_toolbar)?.text = MONEY.toString()
+        reward?.show()
     }
 
 }
@@ -186,7 +184,8 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
 
         PICTURE_STYLES[ARRAY_OF_DESIGN_SHOP[position]]?.let { holder.img.setBackgroundResource(it) }     //картинка для стиля
         holder.price.text = right_recording(PRICE_OD_DESIGN[ARRAY_OF_DESIGN_SHOP[position]].toString()  )           //цена стиля
-        holder.contentView.text = PICTURE_TEXT[ARRAY_OF_DESIGN_SHOP[position]]          //название стиля
+        holder.contentView.text =
+            PICTURE_TEXT[ARRAY_OF_DESIGN_SHOP[position]]?.let { translate_design(it) }         //название стиля
 
         when (Design) {
             "Normal" -> {
@@ -284,9 +283,12 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
                 holder.contentView.typeface = ResourcesCompat.getFont(locale_context!!, R.font.noir)
             }
         }
+
+        holder.button.text = translate("КУПИТЬ")
+
         if(ARRAY_OF_DESIGN_SHOP[position] in  ARRAY_OF_DESIGN)         //если дизайн уже куплен
         {
-            holder.button.text = "(КУПЛЕНО)"
+            holder.button.text = "(" + translate("КУПЛЕНО")+ ")"
             holder.button.background = null
             holder.price.text = ""
         }
@@ -310,226 +312,14 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
                 //TODO ARRAY_OF_DESIGN = ARRAY_OF_DESIGN from firebase
                 if(ARRAY_OF_DESIGN_SHOP[position] !in ARRAY_OF_DESIGN && MONEY>= PRICE_OD_DESIGN[ARRAY_OF_DESIGN_SHOP[position]]!!)          //если дизайн не куплен
                 {
-
-                    val dialog_shop = Dialog(HELPED_CONTEXT!!)
-                    dialog_shop.setContentView(R.layout.shop_dialog)
-
-                    dialog_shop.price_shop.text = holder.price.text
-                    dialog_shop.description.text = "Купить <" + PICTURE_TEXT[ARRAY_OF_DESIGN_SHOP[position]] + "> за"
-
-                    dialog_shop.show()
-
-                    when (Design) {
-                        "Normal" -> {
-                            dialog_shop.button_close_shop_dialog.setTextColor(argb(0,0,0,0))
-                            dialog_shop.button_close_shop_dialog.setBackgroundResource(R.drawable.cross_normal)
-
-                            dialog_shop.buy_shop_dialog.setBackgroundResource(R.drawable.button)
-                            dialog_shop.button_close_2_shop_dialog.setBackgroundResource(R.drawable.button)
-                        }
-                        "Egypt" -> {
-                            dialog_shop.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_egypt)
-                            dialog_shop.button_close_shop_dialog.setTextColor(argb(0,0,0,0))
-                            dialog_shop.button_close_shop_dialog.setBackgroundResource(R.drawable.close_cross)
-                            dialog_shop.description.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.description.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-                            dialog_shop.description.setTextSize(20f)
-                            dialog_shop.price_shop.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.price_shop.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-                            dialog_shop.price_shop.setTextSize(30f)
-                            dialog_shop.buy_shop_dialog.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.buy_shop_dialog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-                            dialog_shop.buy_shop_dialog.setTextSize(20f)
-                            dialog_shop.button_close_2_shop_dialog.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.button_close_2_shop_dialog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-                            dialog_shop.button_close_2_shop_dialog.setTextSize(20f)
-
-                            dialog_shop.buy_shop_dialog.setTranslationY(50f)
-                            dialog_shop.button_close_2_shop_dialog.setTranslationY(50f)
-
-                        }
-                        "Casino" -> {
-                            dialog_shop.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.table)
-                            dialog_shop.button_close_shop_dialog.setTextColor(argb(0,0,0,0))
-                            dialog_shop.button_close_shop_dialog.setBackgroundResource(R.drawable.close_cross4)
-                            dialog_shop.description.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.description.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-                            dialog_shop.description.setTextSize(20f)
-                            dialog_shop.description.setTextColor(Color.YELLOW)
-                            dialog_shop.price_shop.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.price_shop.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-                            dialog_shop.price_shop.setTextColor(Color.YELLOW)
-                            dialog_shop.price_shop.setTextSize(35f)
-                            dialog_shop.buy_shop_dialog.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.buy_shop_dialog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-                            dialog_shop.buy_shop_dialog.setTextSize(25f)
-                            dialog_shop.buy_shop_dialog.setTextColor(Color.YELLOW)
-                            dialog_shop.button_close_2_shop_dialog.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.button_close_2_shop_dialog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-                            dialog_shop.button_close_2_shop_dialog.setTextSize(25f)
-                            dialog_shop.button_close_2_shop_dialog.setTextColor(Color.YELLOW)
-
-                            dialog_shop.buy_shop_dialog.setTranslationY(80f)
-                            dialog_shop.button_close_2_shop_dialog.setTranslationY(80f)
-
-                        }
-                        "Rome" -> {
-                            dialog_shop.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_rome)
-                            dialog_shop.button_close_shop_dialog.setTextColor(argb(0,0,0,0))
-                            dialog_shop.button_close_shop_dialog.setBackgroundResource(R.drawable.close_cross3)
-                            dialog_shop.description.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.description.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-                            dialog_shop.description.setTextSize(25f)
-                            dialog_shop.description.setTextColor(rgb(193,150,63))
-                            dialog_shop.price_shop.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.price_shop.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-                            dialog_shop.price_shop.setTextColor(rgb(193,150,63))
-                            dialog_shop.price_shop.setTextSize(40f)
-                            dialog_shop.buy_shop_dialog.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.buy_shop_dialog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-                            dialog_shop.buy_shop_dialog.setTextSize(25f)
-                            dialog_shop.buy_shop_dialog.setTextColor(rgb(193,150,63))
-                            dialog_shop.button_close_2_shop_dialog.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.button_close_2_shop_dialog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-                            dialog_shop.button_close_2_shop_dialog.setTextSize(25f)
-                            dialog_shop.button_close_2_shop_dialog.setTextColor(rgb(193,150,63))
-
-                            dialog_shop.buy_shop_dialog.setTranslationY(60f)
-                            dialog_shop.button_close_2_shop_dialog.setTranslationY(60f)
-
-                        }
-                        "Gothic" -> {
-                            dialog_shop.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_gothic)
-                            dialog_shop.button_close_shop_dialog.setTextColor(argb(0,0,0,0))
-                            dialog_shop.button_close_shop_dialog.setBackgroundResource(R.drawable.close_cross2)
-                            dialog_shop.description.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.description.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-                            dialog_shop.description.setTextSize(25f)
-                            dialog_shop.description.setTextColor(Color.WHITE)
-                            dialog_shop.price_shop.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.price_shop.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-                            dialog_shop.price_shop.setTextColor(Color.WHITE)
-                            dialog_shop.price_shop.setTextSize(40f)
-                            dialog_shop.buy_shop_dialog.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.buy_shop_dialog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-                            dialog_shop.buy_shop_dialog.setTextSize(25f)
-                            dialog_shop.buy_shop_dialog.setTextColor(Color.WHITE)
-                            dialog_shop.button_close_2_shop_dialog.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.button_close_2_shop_dialog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-                            dialog_shop.button_close_2_shop_dialog.setTextSize(25f)
-                            dialog_shop.button_close_2_shop_dialog.setTextColor(Color.WHITE)
-
-                            dialog_shop.price_shop.setTranslationY(-80f)
-                            dialog_shop.imageView2.setTranslationY(-80f)
-                            dialog_shop.description.setTranslationY(-80f)
-                            dialog_shop.buy_shop_dialog.setTranslationY(-80f)
-                            dialog_shop.button_close_2_shop_dialog.setTranslationY(-80f)
-
-                        }
-                        "Japan" -> {
-                            dialog_shop.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_japan)
-                            dialog_shop.button_close_shop_dialog.setTextColor(argb(0,0,0,0))
-                            dialog_shop.button_close_shop_dialog.setBackgroundResource(R.drawable.close_cross)
-                            dialog_shop.description.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.description.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-                            dialog_shop.description.setTextSize(20f)
-                            dialog_shop.price_shop.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.price_shop.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-                            dialog_shop.price_shop.setTextSize(25f)
-                            dialog_shop.buy_shop_dialog.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.buy_shop_dialog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-                            dialog_shop.buy_shop_dialog.setTextSize(20f)
-                            dialog_shop.button_close_2_shop_dialog.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.button_close_2_shop_dialog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-                            dialog_shop.button_close_2_shop_dialog.setTextSize(20f)
-
-                            dialog_shop.buy_shop_dialog.setBackgroundResource(R.drawable.button)
-                            dialog_shop.button_close_2_shop_dialog.setBackgroundResource(R.drawable.button)
-
-                            dialog_shop.buy_shop_dialog.setTranslationY(100f)
-                            dialog_shop.button_close_2_shop_dialog.setTranslationY(100f)
-
-                        }
-                        "Noir" -> {
-                            dialog_shop.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_noir)
-                            dialog_shop.button_close_shop_dialog.setTextColor(argb(0,0,0,0))
-                            dialog_shop.button_close_shop_dialog.setBackgroundResource(R.drawable.close_cross2)
-                            dialog_shop.description.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.description.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
-                            dialog_shop.description.setTextSize(20f)
-                            dialog_shop.description.setTextColor(Color.WHITE)
-                            dialog_shop.price_shop.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.price_shop.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
-                            dialog_shop.price_shop.setTextColor(Color.WHITE)
-                            dialog_shop.price_shop.setTextSize(30f)
-                            dialog_shop.buy_shop_dialog.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.buy_shop_dialog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
-                            dialog_shop.buy_shop_dialog.setTextSize(20f)
-                            dialog_shop.buy_shop_dialog.setTextColor(Color.WHITE)
-                            dialog_shop.button_close_2_shop_dialog.setBackgroundColor(argb(0,0,0,0))
-                            dialog_shop.button_close_2_shop_dialog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
-                            dialog_shop.button_close_2_shop_dialog.setTextSize(20f)
-                            dialog_shop.button_close_2_shop_dialog.setTextColor(Color.WHITE)
-
-                            dialog_shop.buy_shop_dialog.setTranslationY(100f)
-                            dialog_shop.button_close_2_shop_dialog.setTranslationY(100f)
-
-                        }
-                    }
-
-
-                    dialog_shop.buy_shop_dialog.setOnClickListener {
-                        if(SOUND)
-                        {
-                            mSound1.play(1, 1F, 1F, 1, 0, 1F)
-                        }
-                        MONEY -= holder.price.text.toString().replace(" ","").toInt()
-
-                        val ARRAY_OF_DESIGN_COPY = ARRAY_OF_DESIGN.toMutableList()
-                        ARRAY_OF_DESIGN_COPY.add(ARRAY_OF_DESIGN_SHOP[position])
-                        dialog_shop.buy_shop_dialog.isClickable = false
-                        val username = activity.getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "").toString()
-                        //TODO MONEY передать в базу
-                        //TODO ARRAY_OF_DESIGN передать в базу
-                        val pushMap = mapOf(
-                            "Users/$username/money" to MONEY,
-                            "Users/$username/array_of_designs" to CODE(ARRAY_OF_DESIGN_COPY)
-                        )
-                        myRef.updateChildren(pushMap).addOnSuccessListener {
-                            ARRAY_OF_DESIGN.add(ARRAY_OF_DESIGN_SHOP[position])
-                            holder.price.text = ""
-                            holder.icon.setImageResource(R.drawable.nulevoe)
-                            holder.button.setBackgroundColor(argb(0, 0, 0, 0))
-                            holder.button.text = "(КУПЛЕНО)"
-                            locale_context!!.findViewById<TextView>(R.id.money_shop_toolbar).text =
-                                MONEY.toString()
-
-                            val editor =
-                                locale_context!!.getSharedPreferences(
-                                    "UserData",
-                                    Context.MODE_PRIVATE
-                                )
-                                    .edit()
-                            editor.putString("money", MONEY.toString())
-                            editor.putString("open_design", CODE(ARRAY_OF_DESIGN))
-                            editor.apply()
-
-                            dialog_shop.dismiss()
-                        }
-                    }
-                    dialog_shop.button_close_2_shop_dialog.setOnClickListener {
-                        dialog_shop.dismiss()
-                    }
-                    dialog_shop.button_close_shop_dialog.setOnClickListener {
-                        dialog_shop.dismiss()
-                    }
-
+                    dshop = ShopDialog(locale_context!!)
+                    dshop?.show2(holder,position)
                 }
                 if(ARRAY_OF_DESIGN_SHOP[position] !in ARRAY_OF_DESIGN && MONEY < PRICE_OD_DESIGN[ARRAY_OF_DESIGN_SHOP[position]]!!)
                 {
                     val dialog_shop = Dialog(HELPED_CONTEXT!!)
                     dialog_shop.setContentView(R.layout.few_money_dialog)
-                    dialog_shop.text_few_money.text = "Недостаточно средств"
+                    dialog_shop.text_few_money.text =translate("Недостаточно средств")
                     dialog_shop.show()
                     dialog_shop.few_money_ok.setOnClickListener {
                         dialog_shop.dismiss()

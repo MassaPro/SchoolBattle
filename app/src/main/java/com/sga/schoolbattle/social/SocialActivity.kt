@@ -99,6 +99,8 @@ class SocialActivity : Fragment() {
                     tabLayout!!.getTabAt(i)?.customView = tv;
                     v.textView5.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
                     v.textView5.setTextColor(Color.BLACK)
+                    tabLayout!!.setSelectedTabIndicatorColor (Color.BLACK)
+
                 }
                 "Casino" -> {
                     fon.setBackgroundResource(R.drawable.background2_casino)
@@ -110,6 +112,7 @@ class SocialActivity : Fragment() {
                     v.search_social.setBackgroundResource(R.drawable.search_3)
                     v.textView5.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
                     v.textView5.setTextColor(Color.YELLOW)
+                    tabLayout!!.setSelectedTabIndicatorColor (Color.YELLOW)
                 }
                 "Rome" -> {
                     fon.setBackgroundResource(R.drawable.background_rome)
@@ -121,6 +124,7 @@ class SocialActivity : Fragment() {
                     v.search_social.setBackgroundResource(R.drawable.search_2)
                     v.textView5.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
                     v.textView5.setTextColor(rgb(193, 150, 63))
+                    tabLayout!!.setSelectedTabIndicatorColor (rgb(193, 150, 63))
                 }
                 "Gothic" -> {
                     fon.setBackgroundResource(R.drawable.background_gothic)
@@ -132,6 +136,7 @@ class SocialActivity : Fragment() {
                     v.search_social.setBackgroundResource(R.drawable.search_1)
                     v.textView5.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
                     v.textView5.setTextColor(Color.WHITE)
+                    tabLayout!!.setSelectedTabIndicatorColor (Color.WHITE)
                 }
                 "Japan" -> {
                     fon.setBackgroundResource(R.drawable.background_japan)
@@ -142,6 +147,7 @@ class SocialActivity : Fragment() {
                     tabLayout!!.getTabAt(i)?.customView = tv;
                     v.textView5.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
                     v.textView5.setTextColor(Color.BLACK)
+                    tabLayout!!.setSelectedTabIndicatorColor (Color.BLACK)
                 }
                 "Noir" -> {
                     fon.setBackgroundResource(R.drawable.background_noir)
@@ -153,6 +159,7 @@ class SocialActivity : Fragment() {
                     v.search_social.setBackgroundResource(R.drawable.search_1)
                     v.textView5.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
                     v.textView5.setTextColor(Color.WHITE)
+                    tabLayout!!.setSelectedTabIndicatorColor (Color.WHITE)
                 }
             }
 

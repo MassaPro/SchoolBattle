@@ -14,8 +14,10 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
+import com.google.android.gms.ads.AdRequest
 import com.sga.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_computer_games_template.*
+import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
 var VirusGameMode = 0
 
@@ -92,7 +94,10 @@ class VirusWithComputer : AppCompatActivity() {
         signature_canvas_virus_with_computer.visibility = View.VISIBLE
         signature_canvas_virus_with_computer.activity = this
 
-        //mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+        if(!PREMIUM)
+        {
+            mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+        }
 
         Log.d("VISIT","121212121")
         CONTEXT = this
@@ -120,8 +125,8 @@ class VirusWithComputer : AppCompatActivity() {
         if(Design == "Egypt" ) {
             name_player1_with_computer_template.setTextColor(Color.BLACK)
             name_player2_with_computer_template.setTextColor(Color.BLACK)
-            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
-            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
+            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             name_player2_with_computer_template.setTextSize(20f)
             name_player1_with_computer_template.setTextSize(20f)
             button_player_1_with_computer_template.setBackgroundResource(R.drawable.player1_egypt);
@@ -281,15 +286,15 @@ class VirusWithComputer : AppCompatActivity() {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 3)
-            /*if(mInterstitialAd_in_offline_games.isLoaded)
+            if(mInterstitialAd_in_offline_games.isLoaded && !PREMIUM)
             {
                 Intent_for_offline_games = intent
                 mInterstitialAd_in_offline_games.show()
             }
             else
-            {*/
+            {
                 this.startActivity(intent)
-            //}
+            }
         }
 
 
@@ -299,15 +304,16 @@ class VirusWithComputer : AppCompatActivity() {
         super.onBackPressed()
         var intent = Intent(this, NewGameActivity::class.java)
         intent.putExtra("playType", 3)
-        /*if(mInterstitialAd_in_offline_games.isLoaded)
+        if(mInterstitialAd_in_offline_games.isLoaded && !PREMIUM)
         {
             Intent_for_offline_games = intent
             mInterstitialAd_in_offline_games.show()
         }
         else
-        {*/
+        {
             this.startActivity(intent)
-        //}
+            this.finish()
+        }
     }
 }
 

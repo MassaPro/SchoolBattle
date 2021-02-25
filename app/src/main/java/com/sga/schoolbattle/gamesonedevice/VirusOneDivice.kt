@@ -90,7 +90,11 @@ class VirusOneDivice : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+        if(!PREMIUM)
+        {
+            mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+        }
+
 
         Log.d("VISIT","121212121")
         CONTEXT = this
@@ -100,13 +104,19 @@ class VirusOneDivice : AppCompatActivity() {
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
         setContentView(R.layout.activity_one_device_games_template)
+
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
         signature_canvas_virus_one_device.visibility = View.VISIBLE
         signature_canvas_virus_one_device.activity = this
 
         when (Design) {
             "Normal" ->{
+                name_player1_one_divice.setTextColor(Color.BLACK)
+                name_player2_one_divice.setTextColor(Color.BLACK)
                 button_player_1_one_divice.setBackgroundResource(R.drawable.virus1_normal);
                 button_player_2_one_divice.setBackgroundResource(R.drawable.virus2_normal);
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_normal)
             }
             "Egypt" -> {
                 name_player1_one_divice.setTextColor(Color.BLACK)
@@ -126,8 +136,8 @@ class VirusOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0,0,0,0))
             }
             "Casino" -> {
-                name_player1_one_divice.setTextColor(Color.YELLOW)
-                name_player2_one_divice.setTextColor(Color.YELLOW)
+                name_player1_one_divice.setTextColor(Color.RED)
+                name_player2_one_divice.setTextColor(Color.BLACK)
                 name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 name_player2_one_divice.setTextSize(20f)
@@ -138,12 +148,12 @@ class VirusOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background2_casino);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_casino)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Rome" -> {
-                name_player1_one_divice.setTextColor(rgb(193,150,63))
-                name_player2_one_divice.setTextColor(rgb(193,150,63))
+                name_player1_one_divice.setTextColor(Color.RED)
+                name_player2_one_divice.setTextColor(Color.BLUE)
                 name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                 name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                 name_player2_one_divice.setTextSize(20f)
@@ -154,7 +164,7 @@ class VirusOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_rome);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_rome)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Gothic" -> {
@@ -170,7 +180,7 @@ class VirusOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_gothic);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_gothic)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Japan" -> {
@@ -202,7 +212,7 @@ class VirusOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_noir);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_gothic)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
         }
@@ -305,7 +315,7 @@ class VirusOneDivice : AppCompatActivity() {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 2)
-            if(mInterstitialAd_in_offline_games.isLoaded)
+            if(mInterstitialAd_in_offline_games.isLoaded && !PREMIUM)
             {
                 Intent_for_offline_games = intent
                 mInterstitialAd_in_offline_games.show()
@@ -323,7 +333,7 @@ class VirusOneDivice : AppCompatActivity() {
         super.onBackPressed()
         var intent = Intent(this, NewGameActivity::class.java)
         intent.putExtra("playType", 2)
-        if(mInterstitialAd_in_offline_games.isLoaded)
+        if(mInterstitialAd_in_offline_games.isLoaded && !PREMIUM)
         {
             Intent_for_offline_games = intent
             mInterstitialAd_in_offline_games.show()
@@ -789,6 +799,7 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
     var size_field_y: Int = 0
     var step: Float = 0f
 
+    var line_who_do_move : Paint = Paint()
 
     init {
 
@@ -803,26 +814,39 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
         paint_rib_2.setColor(Color.BLUE)
         paint_rib_2.setStrokeWidth(5f)
 
-        if (Design == "Casino"){
-            Line_paint.setColor(Color.WHITE)          //ресур для линий (ширина и цвет)
+        line_who_do_move.strokeWidth = 14f
 
-        }
-        if (Design == "Egypt"){
-            Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
+        when (Design) {
+            "Normal" -> {
+                line_who_do_move.color =  Color.GREEN
+                line_who_do_move.strokeWidth = 14f
+            }
+            "Casino" -> {
+                Line_paint.setColor(Color.WHITE)          //ресур для линий (ширина и цвет)
+                line_who_do_move.color = Color.YELLOW
+            }
+            "Egypt" -> {
+                line_who_do_move.color = Color.RED
+                Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
 
-        }
-        if (Design == "Rome"){
-            Line_paint.setColor(rgb(193,150,63))          //ресур для линий (ширина и цвет)
-        }
-        if (Design == "Gothic"){
-            Line_paint.setColor(rgb(100,100,100))          //ресур для линий (ширина и цвет)
-        }
-        if (Design == "Japan"){
-            Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
-        }
-        if (Design == "Noir"){
-            Line_paint.setColor(rgb(100,100,100))          //ресур для линий (ширина и цвет)
+            }
+            "Rome" -> {
+                Line_paint.setColor(rgb(193,150,63))          //ресур для линий (ширина и цвет)
+                line_who_do_move.color = Color.BLACK
+            }
+            "Gothic" -> {
+                Line_paint.setColor(rgb(100,100,100))          //ресур для линий (ширина и цвет)
+                line_who_do_move.color = Color.WHITE
+            }
+            "Japan" -> {
+                Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
+                line_who_do_move.color = Color.RED
+            }
+            "Noir" -> {
+                Line_paint.setColor(rgb(100,100,100))          //ресур для линий (ширина и цвет)
+                line_who_do_move.color = Color.RED
 
+            }
         }
 
 
@@ -983,6 +1007,15 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
             }
             X1 += step
             Y1 = height - advertising_line -  width
+        }
+
+        if(red_or_blue <3)
+        {
+            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+        }
+        else
+        {
+            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
         }
 
 

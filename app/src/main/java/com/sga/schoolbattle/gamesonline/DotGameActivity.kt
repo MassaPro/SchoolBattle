@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Color.argb
+import android.graphics.Color.rgb
 import android.graphics.Paint
 import android.os.Bundle
 import android.util.AttributeSet
@@ -36,6 +38,7 @@ import kotlinx.android.synthetic.main.activity_online_games_temlate.timer2_xog_o
 import kotlinx.android.synthetic.main.activity_online_games_temlate.timer_xog_online
 import kotlinx.android.synthetic.main.activity_online_games_temlate.toolbar2_xog_online
 import kotlinx.android.synthetic.main.activity_online_games_temlate.toolbar_xog_online
+import kotlinx.android.synthetic.main.activity_x_o_game.*
 import java.util.*
 
 
@@ -218,79 +221,74 @@ class DotGameActivity: AppCompatActivity() {
         PICTURE_AVATAR[AVATAR]?.let { avatar_of_protivnic.setImageResource(it) } //TODO заменить это на значения его аватарки
         bottom_navigation_xog_online.itemIconTintList = generateColorStateList()
         bottom_navigation_xog_online.itemTextColor = generateColorStateList()
-        if(Design == "Egypt" ) {
-            label_online.setBackgroundResource(R.drawable.background_egypt)
-            button_player_1_online_xog.setTextColor(Color.BLACK)
-            button_player_2_online_xog.setTextColor(Color.BLACK)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundColor(Color.rgb(255, 230, 163))
-            toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-        }
-        else if(Design == "Casino" ) {
-            label_online.setBackgroundResource(R.drawable.background2_casino)
-            button_player_1_online_xog.setTextColor(Color.YELLOW)
-            button_player_2_online_xog.setTextColor(Color.YELLOW)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_casino)
-            toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-        }
-        else if(Design == "Rome" ) {
-            label_online.setBackgroundResource(R.drawable.background_rome)
-            button_player_1_online_xog.setTextColor(Color.rgb(224, 164, 103))
-            button_player_2_online_xog.setTextColor(Color.rgb(224, 164, 103))
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_rome)
-            toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-        }
-        else if(Design == "Japan" ) {
-            label_online.setBackgroundResource(R.drawable.background_japan)
-            button_player_1_online_xog.setTextColor(Color.BLACK)
-            button_player_2_online_xog.setTextColor(Color.BLACK)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundColor(Color.WHITE)
-            toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-        }
-        else if(Design == "Gothic" ) {
-            label_online.setBackgroundResource(R.drawable.background_gothic)
-            button_player_1_online_xog.setTextColor(Color.WHITE)
-            button_player_2_online_xog.setTextColor(Color.WHITE)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
-            toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            button_player_1_online_xog.textSize = 16.5f
-            button_player_2_online_xog.textSize = 16.5f
-        }
-        else if(Design == "Noir") {
-            label_online.setBackgroundResource(R.drawable.background_noir)
-            button_player_1_online_xog.setTextColor(Color.WHITE)
-            button_player_2_online_xog.setTextColor(Color.WHITE)
-            button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
-            button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
-            timer_xog_online.setTextColor(Color.GREEN)
-            timer2_xog_online.setTextColor(Color.GREEN)
-            bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
-            toolbar_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
-            toolbar2_xog_online.setBackgroundColor(Color.argb(0, 0, 0, 0))
+
+        when (Design) {
+            "Normal" -> {
+                button_player_1_online_xog.setTextColor(Color.BLUE)
+                button_player_2_online_xog.setTextColor(Color.RED)
+
+            }
+            "Egypt" -> {
+                label_online.setBackgroundResource(R.drawable.background_egypt)
+                toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                button_player_1_online_xog.setTextColor(Color.BLACK)
+                button_player_2_online_xog.setTextColor(Color.BLACK)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                bottom_navigation_xog_online.setBackgroundColor(Color.rgb(255, 230, 163))
+            }
+            "Casino" -> {
+                label_online.setBackgroundResource(R.drawable.background2_casino)
+                toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                button_player_1_online_xog.setTextColor(Color.BLACK)
+                button_player_2_online_xog.setTextColor(Color.RED)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_casino)
+            }
+            "Rome" -> {
+                label_online.setBackgroundResource(R.drawable.background_rome)
+                toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                button_player_1_online_xog.setTextColor(Color.rgb(193, 150, 63))
+                button_player_2_online_xog.setTextColor(Color.BLACK)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_rome)
+            }
+            "Gothic" -> {
+                label_online.setBackgroundResource(R.drawable.background_gothic)
+                toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                button_player_1_online_xog.setTextColor(Color.WHITE)
+                button_player_2_online_xog.setTextColor(Color.YELLOW)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
+                button_player_1_online_xog.textSize = 16.5f
+                button_player_2_online_xog.textSize = 16.5f
+            }
+            "Japan" -> {
+                label_online.setBackgroundResource(R.drawable.background_japan)
+                toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                button_player_1_online_xog.setTextColor(Color.RED)
+                button_player_2_online_xog.setTextColor(rgb(37, 103, 28))
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                bottom_navigation_xog_online.setBackgroundColor(Color.WHITE)
+            }
+            "Noir" -> {
+                label_online.setBackgroundResource(R.drawable.background_noir)
+                toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                button_player_1_online_xog.setTextColor(Color.WHITE)
+                button_player_2_online_xog.setTextColor(Color.RED)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+            }
         }
 
         val initialMove = intent.getStringExtra("move") == "1"
@@ -701,27 +699,94 @@ class CanvasViewDot(context: Context, attrs: AttributeSet?) : View(context, attr
 
         paint_circle.setColor(Color.rgb(217, 217, 217))     //цвета для точек
 
-        if(Design == "Egypt") {
-            paint_rib_1.setColor(Color.BLACK) //цвета для ребер  и их ширина
-            paint_rib_1.setStrokeWidth(5f)
-            paint_rib_2.setColor(Color.WHITE)
-            paint_rib_2.setStrokeWidth(5f)
+        when (Design) {
+            "Normal" -> {
+                //line_who_do_move.strokeWidth = 14f
+                //line_who_do_move.color = Color.GREEN
+            }
+            "Egypt" -> {
+                Line_paint.setColor(Color.rgb(120, 120, 120))      //ресур для линий (ширина и цвет)
+                paint_circle.setColor(Color.rgb(120, 120, 120))
+                paint_rib_1.setColor(Color.BLACK) //цвета для ребер  и их ширина
+                paint_rib_1.setStrokeWidth(5f)
+                paint_rib_2.setColor(Color.WHITE)
+                paint_rib_2.setStrokeWidth(5f)
 
-            shading_1.setColor(Color.BLACK)
-            shading_2.setColor(Color.WHITE)
-            shading_1.setStrokeWidth(2f)
-            shading_2.setStrokeWidth(2f)
-        }
-        else {
-            paint_rib_1.setColor(Color.RED) //цвета для ребер  и их ширина
-            paint_rib_1.setStrokeWidth(5f)
-            paint_rib_2.setColor(Color.BLUE)
-            paint_rib_2.setStrokeWidth(5f)
+                shading_1.setColor(Color.BLACK)
+                shading_2.setColor(Color.WHITE)
+                shading_1.setStrokeWidth(2f)
+                shading_2.setStrokeWidth(2f)
 
-            shading_1.setColor(Color.RED)
-            shading_2.setColor(Color.BLUE)
-            shading_1.setStrokeWidth(2f)
-            shading_2.setStrokeWidth(2f)
+                //line_who_do_move.color = Color.RED
+            }
+            "Casino" -> {
+                paint_rib_2.setColor(Color.BLACK) //цвета для ребер  и их ширина
+                paint_rib_2.setStrokeWidth(5f)
+                paint_rib_1.setColor(Color.RED)
+                paint_rib_1.setStrokeWidth(5f)
+
+                shading_2.setColor(Color.BLACK)
+                shading_1.setColor(Color.RED)
+                shading_1.setStrokeWidth(2f)
+                shading_2.setStrokeWidth(2f)
+                //line_who_do_move.color = Color.YELLOW
+            }
+            "Rome" -> {
+                Line_paint.setColor(Color.rgb(180, 180, 180))      //ресур для линий (ширина и цвет)
+                paint_circle.setColor(Color.rgb(180, 180, 180))
+                paint_rib_1.setColor(Color.BLACK) //цвета для ребер  и их ширина
+                paint_rib_1.setStrokeWidth(5f)
+                paint_rib_2.setColor(Color.rgb(193,150,63))
+                paint_rib_2.setStrokeWidth(5f)
+
+                shading_1.setColor(Color.BLACK)
+                shading_2.setColor(Color.rgb(193,150,63))
+                shading_1.setStrokeWidth(2f)
+                shading_2.setStrokeWidth(2f)
+                //line_who_do_move.color = Color.BLACK
+            }
+            "Gothic" -> {
+                Line_paint.setColor(Color.rgb(100,100,100))      //ресур для линий (ширина и цвет)
+                paint_circle.setColor(Color.rgb(100,100,100))
+                paint_rib_1.setColor(Color.WHITE) //цвета для ребер  и их ширина
+                paint_rib_1.setStrokeWidth(5f)
+                paint_rib_2.setColor(Color.YELLOW)
+                paint_rib_2.setStrokeWidth(5f)
+
+                shading_1.setColor(Color.WHITE)
+                shading_2.setColor(Color.YELLOW)
+                shading_1.setStrokeWidth(2f)
+                shading_2.setStrokeWidth(2f)
+                //line_who_do_move.color = Color.WHITE
+            }
+            "Japan" -> {
+                Line_paint.setColor(Color.rgb(160,160,160))      //ресур для линий (ширина и цвет)
+                paint_circle.setColor(Color.rgb(160,160,160))
+                paint_rib_1.setColor(Color.rgb(37,103,28)) //зелёный
+                paint_rib_1.setStrokeWidth(5f)
+                paint_rib_2.setColor(Color.RED)
+                paint_rib_2.setStrokeWidth(5f)
+
+                shading_1.setColor(Color.rgb(37,103,28))
+                shading_2.setColor(Color.RED)
+                shading_1.setStrokeWidth(2f)
+                shading_2.setStrokeWidth(2f)
+                //line_who_do_move.color = Color.RED
+            }
+            "Noir" -> {
+                Line_paint.setColor(Color.rgb(100,100,100))      //ресур для линий (ширина и цвет)
+                paint_circle.setColor(Color.rgb(100,100,100))
+                paint_rib_1.setColor(Color.RED) //цвета для ребер  и их ширина
+                paint_rib_1.setStrokeWidth(5f)
+                paint_rib_2.setColor(Color.WHITE)
+                paint_rib_2.setStrokeWidth(5f)
+
+                shading_1.setColor(Color.RED)
+                shading_2.setColor(Color.WHITE)
+                shading_1.setStrokeWidth(2f)
+                shading_2.setStrokeWidth(2f)
+                //line_who_do_move.color = Color.RED
+            }
         }
 
         for(i in 0 until FIELD.size)

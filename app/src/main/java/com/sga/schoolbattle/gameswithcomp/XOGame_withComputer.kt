@@ -15,8 +15,10 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import com.google.android.gms.ads.AdRequest
 import com.sga.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_computer_games_template.*
+import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
 var XOGameMode = 0
 
@@ -91,7 +93,11 @@ class XOGame_withComputer : AppCompatActivity() {
         signature_canvas_xog_with_computer.activ = this
         CONTEXT = this
 
-     //   mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+        if(!PREMIUM)
+        {
+            mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+        }
+
         mSound.load(this, R.raw.xlup, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
@@ -120,38 +126,112 @@ class XOGame_withComputer : AppCompatActivity() {
         signature_canvas_xog_with_computer.t2.text = "Игрок 2"
         //signature_canvas_xog_with_computer.t1.set
 
-        if(Design == "Egypt" ) {
-            name_player1_with_computer_template.setTextColor(Color.BLACK)
-            name_player2_with_computer_template.setTextColor(Color.BLACK)
-            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-            name_player2_with_computer_template.setTextSize(20f)
-            name_player1_with_computer_template.setTextSize(20f)
-            button_player_1_with_computer_template.setBackgroundResource(R.drawable.player1_egypt);
-            button_player_2_with_computer_template.setBackgroundResource(R.drawable.player2_egypt);
-            player_1_icon_template_with_computer.setBackgroundResource(R.drawable.cross_egypt);
-            player_2_icon_template_with_computer.setBackgroundResource(R.drawable.circle_egypt);
-            label_with_computer.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_with_computer_template.setBackgroundColor(rgb(255, 230, 163))
-            to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_with_computer_template.setBackgroundColor(argb(0,0,0,0))
-            toolbar2_with_computer_template.setBackgroundColor(argb(0,0,0,0))
-        }
-        else if(Design == "Casino" ) {
-            name_player1_with_computer_template.setTextColor(Color.YELLOW)
-            name_player2_with_computer_template.setTextColor(Color.YELLOW)
-            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_with_computer_template.setTextSize(20f)
-            name_player1_with_computer_template.setTextSize(20f)
-            button_player_1_with_computer_template.setBackgroundResource(R.drawable.tower1_casino);
-            button_player_2_with_computer_template.setBackgroundResource(R.drawable.tower2_casino);
-            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-            label_with_computer.setBackgroundResource(R.drawable.background_casino);
-            bottom_navigation_with_computer_template.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+        when (Design) {
+            "Normal" ->{
+                name_player1_with_computer_template.setTextColor(Color.BLACK)
+                name_player2_with_computer_template.setTextColor(Color.BLACK)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.virus1_normal);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.virus2_normal);
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_normal)
+            }
+            "Egypt" -> {
+                name_player1_with_computer_template.setTextColor(Color.BLACK)
+                name_player2_with_computer_template.setTextColor(Color.BLACK)
+                name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                name_player2_with_computer_template.setTextSize(20f)
+                name_player1_with_computer_template.setTextSize(20f)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.player1_egypt);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.player2_egypt);
+                player_1_icon_one_divice.setBackgroundResource(R.drawable.cross_egypt);
+                player_2_icon_one_divice.setBackgroundResource(R.drawable.circle_egypt);
+                label_with_computer.setBackgroundResource(R.drawable.background_egypt);
+                bottom_navigation_with_computer_template.setBackgroundColor(rgb(255, 230, 163))
+                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_with_computer_template.setBackgroundColor(argb(0,0,0,0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0,0,0,0))
+            }
+            "Casino" -> {
+                name_player1_with_computer_template.setTextColor(Color.BLACK)
+                name_player2_with_computer_template.setTextColor(Color.RED)
+                name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                name_player2_with_computer_template.setTextSize(20f)
+                name_player1_with_computer_template.setTextSize(20f)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.cross_casino);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.null_casino);
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                label_with_computer.setBackgroundResource(R.drawable.background2_casino);
+                bottom_navigation_with_computer_template.setBackgroundColor(argb(0,224, 164, 103))
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_casino)
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                bottom_navigation_with_computer_template.setBackgroundResource(R.drawable.bottom_navigation_casino)
+            }
+            "Rome" -> {
+                name_player1_with_computer_template.setTextColor(rgb(193,150,63))
+                name_player2_with_computer_template.setTextColor(rgb(193,150,63))
+                name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                name_player2_with_computer_template.setTextSize(20f)
+                name_player1_with_computer_template.setTextSize(20f)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.cross_rome);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.null_rome);
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                label_with_computer.setBackgroundResource(R.drawable.background_rome);
+                bottom_navigation_with_computer_template.setBackgroundResource(R.drawable.bottom_navigation_rome)
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_rome)
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            }
+            "Gothic" -> {
+                name_player1_with_computer_template.setTextColor(Color.WHITE)
+                name_player2_with_computer_template.setTextColor(Color.WHITE)
+                name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                name_player2_with_computer_template.setTextSize(20f)
+                name_player1_with_computer_template.setTextSize(20f)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.cross_gothic);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.null_gothic);
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                label_with_computer.setBackgroundResource(R.drawable.background_gothic);
+                bottom_navigation_with_computer_template.setBackgroundColor(Color.BLACK)
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_gothic)
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            }
+            "Japan" -> {
+                name_player1_with_computer_template.setTextColor(Color.BLACK)
+                name_player2_with_computer_template.setTextColor(Color.BLACK)
+                name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                name_player2_with_computer_template.setTextSize(20f)
+                name_player1_with_computer_template.setTextSize(20f)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.cross_japan);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.null_japan);
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                label_with_computer.setBackgroundResource(R.drawable.background_japan);
+                bottom_navigation_with_computer_template.setBackgroundColor(Color.WHITE)
+                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            }
+            "Noir" -> {
+                name_player1_with_computer_template.setTextColor(Color.WHITE)
+                name_player2_with_computer_template.setTextColor(Color.WHITE)
+                name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                name_player2_with_computer_template.setTextSize(20f)
+                name_player1_with_computer_template.setTextSize(20f)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.cross_noir);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.null_noir);
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                label_with_computer.setBackgroundResource(R.drawable.background_noir);
+                bottom_navigation_with_computer_template.setBackgroundColor(argb(0,0,0,0))
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_gothic)
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            }
         }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
@@ -416,7 +496,36 @@ class XOGame_withComputer : AppCompatActivity() {
             true
         }
 
-
+        to_back_with_computer_template.setOnClickListener {
+            this.finish()
+            val intent = Intent(this, NewGameActivity::class.java)
+            intent.putExtra("playType", 3)
+            if(mInterstitialAd_in_offline_games.isLoaded && !PREMIUM)
+            {
+                Intent_for_offline_games = intent
+                mInterstitialAd_in_offline_games.show()
+            }
+            else
+            {
+                this.startActivity(intent)
+            }
+        }
+    }
+    override fun onBackPressed()
+    {
+        super.onBackPressed()
+        var intent = Intent(this, NewGameActivity::class.java)
+        intent.putExtra("playType", 3)
+        if(mInterstitialAd_in_offline_games.isLoaded && !PREMIUM)
+        {
+            Intent_for_offline_games = intent
+            mInterstitialAd_in_offline_games.show()
+        }
+        else
+        {
+            this.startActivity(intent)
+            this.finish()
+        }
     }
 }
 
@@ -611,26 +720,41 @@ class CanvasView_xog_with_computer(context: Context, attrs: AttributeSet?) : Vie
 
     init {
         Line_paint.color = Color.RED          //ресур для линий (ширина и цвет)
-        Line_paint.strokeWidth = 10f
+        Line_paint.strokeWidth = 7f
 
         Line_paint_1.color = Color.RED          //ресур для линий (ширина и цвет)
         Line_paint_1.strokeWidth = 20f
 
-        if(Design == "Egypt")
-        {
-            Line_paint.color = Color.BLACK          //ресур для линий (ширина и цвет)
-            Line_paint.strokeWidth = 7f
-
-            Line_paint_1.color = Color.BLACK          //ресур для линий (ширина и цвет)
-            Line_paint_1.strokeWidth = 20f
-        }
-        else if (Design == "Casino")
-        {
-            Line_paint.color = Color.WHITE          //ресур для линий (ширина и цвет)
-            Line_paint.strokeWidth = 7f
-
-            Line_paint_1.color = Color.RED          //ресур для линий (ширина и цвет)
-            Line_paint_1.strokeWidth = 20f
+        when (Design) {
+            "Normal" ->{
+                //line_who_do_move.color =  Color.GREEN
+                //line_who_do_move.strokeWidth = 14f
+                Line_paint.setColor(rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
+            }
+            "Egypt" -> {
+                Line_paint.color = Color.BLACK          //ресур для линий (ширина и цвет)
+                //line_who_do_move.color = Color.RED
+            }
+            "Casino" -> {
+                Line_paint.color = Color.WHITE         //ресур для линий (ширина и цвет)
+                //line_who_do_move.color = Color.WHITE           //
+            }
+            "Rome" -> {
+                Line_paint.color = rgb(193,150,63)    //ресур для линий (ширина и цвет)
+                //line_who_do_move.color = Color.BLACK
+            }
+            "Gothic" -> {
+                Line_paint.color = rgb(100,100,100)   //ресур для линий (ширина и цвет)
+                //line_who_do_move.color = Color.WHITE
+            }
+            "Japan" -> {
+                Line_paint.color = Color.BLACK   //ресур для линий (ширина и цвет)
+                //line_who_do_move.color = Color.RED              //
+            }
+            "Noir" -> {
+                Line_paint.color = rgb(100,100,100)   //ресур для линий (ширина и цвет)
+                //line_who_do_move.color = Color.RED              //
+            }
         }
 
 
@@ -652,9 +776,21 @@ class CanvasView_xog_with_computer(context: Context, attrs: AttributeSet?) : Vie
     var cross_casino : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cross_casino)       //картинки крестиков и нулей
     var null_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.null_casino)
 
+    var cross_rome : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cross_rome)       //картинки крестиков и нулей
+    var null_rome: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.null_rome)
+
+    var cross_gothic : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cross_gothic)       //картинки крестиков и нулей
+    var null_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.null_gothic)
+
+    var cross_japan : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cross_japan)       //картинки крестиков и нулей
+    var null_japan: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.null_japan)
+
+    var cross_noir : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cross_noir)       //картинки крестиков и нулей
+    var null_noir: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.null_noir)
+
     // var BackgroundColor_Egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.background_egypt)
     var icon_green : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.illumination)
-    var icon_grenn_Egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ram_egypt_xog)
+    var icon_grenn_Egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.illumination)
 
 
 
@@ -691,15 +827,32 @@ class CanvasView_xog_with_computer(context: Context, attrs: AttributeSet?) : Vie
         right_cross = Bitmap.createScaledBitmap(cross_normal,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
         right_null = Bitmap.createScaledBitmap(null_normal,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
         right_green = Bitmap.createScaledBitmap(icon_green, (width.toInt() - 2 * indent.toInt()) / size_field_x, (width.toInt() - 2 * indent.toInt()) / size_field_x, true)
-        if(Design == "Egypt")
-        {
-            right_cross = Bitmap.createScaledBitmap(cross_egypt,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
-            right_null = Bitmap.createScaledBitmap(null_egypt,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
-            right_green = Bitmap.createScaledBitmap(icon_grenn_Egypt, (width.toInt() - 2 * indent.toInt()) / size_field_x, (width.toInt() - 2 * indent.toInt()) / size_field_x, true)
-        }
-        else if(Design == "Casino") {
-            right_cross = Bitmap.createScaledBitmap(cross_casino,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
-            right_null = Bitmap.createScaledBitmap(null_casino,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+        when (Design) {
+            "Egypt" -> {
+                right_cross = Bitmap.createScaledBitmap(cross_egypt,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+                right_null = Bitmap.createScaledBitmap(null_egypt,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+                right_green = Bitmap.createScaledBitmap(icon_grenn_Egypt, (width.toInt() - 2 * indent.toInt()) / size_field_x, (width.toInt() - 2 * indent.toInt()) / size_field_x, true)
+            }
+            "Casino" -> {
+                right_cross = Bitmap.createScaledBitmap(cross_casino,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+                right_null = Bitmap.createScaledBitmap(null_casino,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+            }
+            "Rome" -> {
+                right_cross = Bitmap.createScaledBitmap(cross_rome,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+                right_null = Bitmap.createScaledBitmap(null_rome,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+            }
+            "Gothic" -> {
+                right_cross = Bitmap.createScaledBitmap(cross_gothic,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+                right_null = Bitmap.createScaledBitmap(null_gothic,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+            }
+            "Japan" -> {
+                right_cross = Bitmap.createScaledBitmap(cross_japan,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+                right_null = Bitmap.createScaledBitmap(null_japan,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+            }
+            "Noir" -> {
+                right_cross = Bitmap.createScaledBitmap(cross_noir,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+                right_null = Bitmap.createScaledBitmap(null_noir,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+            }
         }
 
 

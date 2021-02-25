@@ -35,40 +35,47 @@ class NewGameActivity : AppCompatActivity() {
         CONTEXT = this
 
 
-
-
         when (Design) {
+            "Normal" -> {
+                back_button.setBackgroundResource(R.drawable.back_arrow_normal)
+            }
             "Egypt" -> {
+                back_button.setBackgroundResource(R.drawable.arrow_back)
                 game_list_menu.setBackgroundResource(R.drawable.background_egypt);
                 my_toolbar2.setBackgroundColor(rgb(255, 230, 163))
-                text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.s)
+                text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
                 text.setTextColor(Color.BLACK)
             }
             "Casino" -> {
+                back_button.setBackgroundResource(R.drawable.back_arrow_casino)
                 game_list_menu.setBackgroundResource(R.drawable.background2_casino);
                 my_toolbar2.setBackgroundColor(argb(0,224,164,103))
                 text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 text.setTextColor(Color.YELLOW)
             }
             "Rome" -> {
+                back_button.setBackgroundResource(R.drawable.back_arrow_rome)
                 game_list_menu.setBackgroundResource(R.drawable.background_rome);
                 my_toolbar2.setBackgroundColor(argb(0,224,164,103))
                 text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                 text.setTextColor(rgb(193,150,63))
             }
             "Gothic" -> {
+                back_button.setBackgroundResource(R.drawable.back_arrow_gothic)
                 game_list_menu.setBackgroundResource(R.drawable.background_gothic);
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
                 text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
                 text.setTextColor(Color.WHITE)
             }
             "Japan" -> {
+                back_button.setBackgroundResource(R.drawable.arrow_back)
                 game_list_menu.setBackgroundResource(R.drawable.background_japan);
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
                 text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
                 text.setTextColor(Color.BLACK)
             }
             "Noir" -> {
+                back_button.setBackgroundResource(R.drawable.back_arrow_gothic)
                 game_list_menu.setBackgroundColor(rgb(20,20,20));
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
                 text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
@@ -82,7 +89,11 @@ class NewGameActivity : AppCompatActivity() {
         setupRecyclerView(game_list, intent.getIntExtra("playType", -1), this, opponent)
 
 
-
+        back_button.setOnClickListener {
+            var intent = Intent(this,NavigatorActivity::class.java)
+            this.startActivity(intent)
+            this.finish()
+        }
 
         //val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         //val globalName = prefs.getString("username", "")
@@ -214,14 +225,14 @@ class NewGameActivity : AppCompatActivity() {
         CONTEXT = this
     }
 
-    //TODO РАЗОБРАТЬСЯ С ВЫХОДОМ
-    /*override fun onBackPressed()
+    //TODO РАЗОБРАТЬСЯ С ВЫХОДОМ      - (я так и не понял, чем этот варик плох @альф)
+    override fun onBackPressed()
     {
         super.onBackPressed()
         var intent = Intent(this,NavigatorActivity::class.java)
         this.startActivity(intent)
         this.finish()
-    }*/
+    }
 }
 
 

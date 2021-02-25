@@ -20,8 +20,11 @@ class NullActivity : AppCompatActivity() {
         window.statusBarColor = Color.RED
         supportActionBar?.setBackgroundDrawable(getDrawable(R.drawable.nulevoe))
 
-        MobileAds.initialize(this) {}           //для рекламы
 
+        if(!PREMIUM)
+        {
+            MobileAds.initialize(this) {}
+        }
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val username = prefs.getString("username", "")
         val inflatedView: View = layoutInflater.inflate(R.layout.activity_list_of_current_games, null)

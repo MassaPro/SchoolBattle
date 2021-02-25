@@ -92,8 +92,11 @@ class XOGame_oneDivice : AppCompatActivity() {
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
 
+        if(!PREMIUM)
+        {
+            mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+        }
 
-        mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
 
         mSound.load(this, R.raw.xlup, 1);
         mSound2.load(this, R.raw.win, 1);
@@ -118,8 +121,11 @@ class XOGame_oneDivice : AppCompatActivity() {
         // тип игры
         when (Design) {
             "Normal" ->{
+                name_player1_one_divice.setTextColor(Color.BLACK)
+                name_player2_one_divice.setTextColor(Color.BLACK)
                 button_player_1_one_divice.setBackgroundResource(R.drawable.virus1_normal);
                 button_player_2_one_divice.setBackgroundResource(R.drawable.virus2_normal);
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_normal)
             }
             "Egypt" -> {
                 name_player1_one_divice.setTextColor(Color.BLACK)
@@ -139,8 +145,8 @@ class XOGame_oneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0,0,0,0))
             }
             "Casino" -> {
-                name_player1_one_divice.setTextColor(Color.YELLOW)
-                name_player2_one_divice.setTextColor(Color.YELLOW)
+                name_player1_one_divice.setTextColor(Color.BLACK)
+                name_player2_one_divice.setTextColor(Color.RED)
                 name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 name_player2_one_divice.setTextSize(20f)
@@ -151,7 +157,7 @@ class XOGame_oneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background2_casino);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_casino)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 bottom_navigation_one_divice.setBackgroundResource(R.drawable.bottom_navigation_casino)
             }
@@ -168,7 +174,7 @@ class XOGame_oneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_rome);
                 bottom_navigation_one_divice.setBackgroundResource(R.drawable.bottom_navigation_rome)
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_rome)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Gothic" -> {
@@ -184,7 +190,7 @@ class XOGame_oneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_gothic);
                 bottom_navigation_one_divice.setBackgroundColor(Color.BLACK)
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_gothic)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Japan" -> {
@@ -216,7 +222,7 @@ class XOGame_oneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_noir);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_gothic)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
         }
@@ -264,7 +270,7 @@ class XOGame_oneDivice : AppCompatActivity() {
             this.finish()
             val intent = Intent(this, NewGameActivity::class.java)
             intent.putExtra("playType", 2)
-            if(mInterstitialAd_in_offline_games.isLoaded)
+            if(mInterstitialAd_in_offline_games.isLoaded && !PREMIUM)
             {
                 Intent_for_offline_games = intent
                 mInterstitialAd_in_offline_games.show()
@@ -337,7 +343,7 @@ class XOGame_oneDivice : AppCompatActivity() {
         this.finish()
         var intent = Intent(this, NewGameActivity::class.java)
         intent.putExtra("playType", 2)
-        if(mInterstitialAd_in_offline_games.isLoaded)
+        if(mInterstitialAd_in_offline_games.isLoaded && !PREMIUM)
         {
             Intent_for_offline_games = intent
             mInterstitialAd_in_offline_games.show()
@@ -546,43 +552,36 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
 
         Line_paint_1.color = Color.BLACK          //ресур для линий (ширина и цвет)
         Line_paint_1.strokeWidth = 20f
-        line_who_do_move.strokeWidth = 7f
+        line_who_do_move.strokeWidth = 14f
 
         when (Design) {
             "Normal" ->{
                 line_who_do_move.color =  Color.GREEN
                 line_who_do_move.strokeWidth = 14f
                 Line_paint.setColor(rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
-                Line_paint.setStrokeWidth(7f)
             }
             "Egypt" -> {
                 Line_paint.color = Color.BLACK          //ресур для линий (ширина и цвет)
-                Line_paint.strokeWidth = 7f
                 line_who_do_move.color = Color.RED
             }
             "Casino" -> {
-                Line_paint.color = Color.YELLOW          //ресур для линий (ширина и цвет)
-                Line_paint.strokeWidth = 7f
-                line_who_do_move.color = Color.YELLOW            //
+                Line_paint.color = Color.WHITE         //ресур для линий (ширина и цвет)
+                line_who_do_move.color = Color.WHITE           //
             }
             "Rome" -> {
                 Line_paint.color = rgb(193,150,63)    //ресур для линий (ширина и цвет)
-                Line_paint.strokeWidth = 7f
-                line_who_do_move.color = rgb(193,150,63)
+                line_who_do_move.color = Color.BLACK
             }
             "Gothic" -> {
                 Line_paint.color = rgb(100,100,100)   //ресур для линий (ширина и цвет)
-                Line_paint.strokeWidth = 7f
                 line_who_do_move.color = Color.WHITE
             }
             "Japan" -> {
                 Line_paint.color = Color.BLACK   //ресур для линий (ширина и цвет)
-                Line_paint.strokeWidth = 7f
                 line_who_do_move.color = Color.RED              //
             }
             "Noir" -> {
                 Line_paint.color = rgb(100,100,100)   //ресур для линий (ширина и цвет)
-                Line_paint.strokeWidth = 7f
                 line_who_do_move.color = Color.RED              //
             }
         }
@@ -620,7 +619,7 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
 
    // var BackgroundColor_Egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.background_egypt)
     var icon_green : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.illumination)
-    var icon_grenn_Egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ram_egypt_xog)
+    var icon_grenn_Egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.illumination)
 
 
 
@@ -631,13 +630,13 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
 
         if(cross_or_nul == "cross")
         {
-            t1.text ="игрок 1 думает..."
-            t2.text  = "игрок 2"
+            t1.text ="Игрок 1 думает..."
+            t2.text  = "Игрок 2"
         }
         else
         {
-            t1.text ="игрок 1"
-            t2.text  = "игрок 2 думает..."
+            t1.text ="Игрок 1"
+            t2.text  = "Игрок 2 думает..."
         }
         indent = 20f
         width = getWidth().toFloat()
@@ -659,31 +658,32 @@ class CanvasView_xog_one_device(context: Context, attrs: AttributeSet?) : View(c
         right_cross = Bitmap.createScaledBitmap(cross_normal,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
         right_null = Bitmap.createScaledBitmap(null_normal,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
         right_green = Bitmap.createScaledBitmap(icon_green, (width.toInt() - 2 * indent.toInt()) / size_field_x, (width.toInt() - 2 * indent.toInt()) / size_field_x, true)
-        if(Design == "Egypt")
-        {
-            right_cross = Bitmap.createScaledBitmap(cross_egypt,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
-            right_null = Bitmap.createScaledBitmap(null_egypt,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
-            right_green = Bitmap.createScaledBitmap(icon_grenn_Egypt, (width.toInt() - 2 * indent.toInt()) / size_field_x, (width.toInt() - 2 * indent.toInt()) / size_field_x, true)
-        }
-        else if(Design == "Casino") {
-            right_cross = Bitmap.createScaledBitmap(cross_casino,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
-            right_null = Bitmap.createScaledBitmap(null_casino,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
-        }
-        else if(Design == "Rome") {
-            right_cross = Bitmap.createScaledBitmap(cross_rome,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
-            right_null = Bitmap.createScaledBitmap(null_rome,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
-        }
-        else if(Design == "Gothic") {
-            right_cross = Bitmap.createScaledBitmap(cross_gothic,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
-            right_null = Bitmap.createScaledBitmap(null_gothic,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
-        }
-        else if(Design == "Japan") {
-            right_cross = Bitmap.createScaledBitmap(cross_japan,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
-            right_null = Bitmap.createScaledBitmap(null_japan,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
-        }
-        else if(Design == "Noir") {
-            right_cross = Bitmap.createScaledBitmap(cross_noir,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
-            right_null = Bitmap.createScaledBitmap(null_noir,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+        when (Design) {
+            "Egypt" -> {
+                right_cross = Bitmap.createScaledBitmap(cross_egypt,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+                right_null = Bitmap.createScaledBitmap(null_egypt,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+                right_green = Bitmap.createScaledBitmap(icon_grenn_Egypt, (width.toInt() - 2 * indent.toInt()) / size_field_x, (width.toInt() - 2 * indent.toInt()) / size_field_x, true)
+            }
+            "Casino" -> {
+                right_cross = Bitmap.createScaledBitmap(cross_casino,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+                right_null = Bitmap.createScaledBitmap(null_casino,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+            }
+            "Rome" -> {
+                right_cross = Bitmap.createScaledBitmap(cross_rome,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+                right_null = Bitmap.createScaledBitmap(null_rome,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+            }
+            "Gothic" -> {
+                right_cross = Bitmap.createScaledBitmap(cross_gothic,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+                right_null = Bitmap.createScaledBitmap(null_gothic,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+            }
+            "Japan" -> {
+                right_cross = Bitmap.createScaledBitmap(cross_japan,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+                right_null = Bitmap.createScaledBitmap(null_japan,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+            }
+            "Noir" -> {
+                right_cross = Bitmap.createScaledBitmap(cross_noir,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+                right_null = Bitmap.createScaledBitmap(null_noir,(width.toInt()-2*indent.toInt())/size_field_x, (width.toInt()-2*indent.toInt())/size_field_x, true);
+            }
         }
 
 

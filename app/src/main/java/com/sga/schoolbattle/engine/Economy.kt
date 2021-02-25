@@ -3,6 +3,7 @@ package com.sga.schoolbattle.engine
 import android.app.Activity
 import android.content.Context
 import android.util.Log
+import com.sga.schoolbattle.ARRAY_OF_PRODUCT_ID
 import com.sga.schoolbattle.BuildConfig
 import com.sga.schoolbattle.MONEY
 import com.sga.schoolbattle.myRef
@@ -94,6 +95,41 @@ fun updateEconomyParams(activity: Activity, type: String, res: String = "winner"
             capital += add
         }
         "increase" -> {
+            MONEY += add
+            capital += add
+        }
+        "b1" -> {
+            add = 200                  //TODO не оч круто здесь хранить эт но лан
+            MONEY += add
+            capital += add
+        }
+        "b2" -> {
+            add = 500                 //TODO не оч круто здесь хранить эт но лан
+            MONEY += add
+            capital += add
+        }
+        "b3" -> {
+            add = 2000                  //TODO не оч круто здесь хранить эт но лан
+            MONEY += add
+            capital += add
+        }
+        "b4" -> {
+            add = 10000                 //TODO не оч круто здесь хранить эт но лан
+            MONEY += add
+            capital += add
+        }
+        "b5" -> {
+            add = 50000                //TODO не оч круто здесь хранить эт но лан
+            MONEY += add
+            capital += add
+        }
+        "b6" -> {
+            add = 500000                 //TODO не оч круто здесь хранить эт но лан
+            MONEY += add
+            capital += add
+        }
+        "b7" -> {
+            add = 2000000                //TODO не оч круто здесь хранить эт но лан
             MONEY += add
             capital += add
         }

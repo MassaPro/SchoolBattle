@@ -1,10 +1,10 @@
 package com.sga.schoolbattle.shop
 
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.graphics.Color.argb
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,10 +26,8 @@ import com.google.android.gms.ads.reward.RewardItem
 import com.google.android.gms.ads.reward.RewardedVideoAd
 import com.google.android.gms.ads.reward.RewardedVideoAdListener
 import com.sga.schoolbattle.*
-import com.sga.schoolbattle.engine.updateEconomyParams
 import kotlinx.android.synthetic.main.activity_designs.*
 import kotlinx.android.synthetic.main.design_shop_item.view.*
-import kotlinx.android.synthetic.main.reward_dialog.*
 import java.io.IOException
 import java.util.ArrayList
 import kotlin.math.min
@@ -40,6 +38,7 @@ var p1 : PurchasesUpdatedListener? = null
 
 lateinit var mRewardedVideoAd: RewardedVideoAd
 
+var reward : RewardDialog? = null
 class Specially : Fragment(), RewardedVideoAdListener, PurchasesUpdatedListener {
 
 
@@ -185,22 +184,14 @@ class Specially : Fragment(), RewardedVideoAdListener, PurchasesUpdatedListener 
 
         loadRewardedVideoAd()
 
-        var dialog_reward : Dialog = Dialog(locale_context!!)
-        dialog_reward.setContentView(R.layout.reward_dialog)
-        dialog_reward.price_reward.text = updateEconomyParams(requireActivity(), "award").toString() //TODO ОБЯЗАТЕЛЬНО НЕ ЗАБЫТЬ ПОМЕНЯТЬ ЗДЕСЬ ЦЕНУ
-        dialog_reward.close_reward.setOnClickListener {
-            dialog_reward.dismiss()
+        var reward  = locale_context?.let {
+            RewardDialog(
+                it,
+                PRODUCT_ID
+            )
         }
-        dialog_reward.ok_reward.setOnClickListener {
-            dialog_reward.dismiss()
-        }
+        reward?.show()
 
-        dialog_reward.show()
-
-        if(SOUND)
-        {
-            mSound1.play(1, 1F, 1F, 1, 0, 1F)
-        }
 
 
         Toast.makeText(requireContext(), "FAIL", Toast.LENGTH_LONG).show()
@@ -248,20 +239,33 @@ class Specially : Fragment(), RewardedVideoAdListener, PurchasesUpdatedListener 
         for (purchase in purchases) {
             //if item is purchased
             if (PRODUCT_ID == purchase.sku && purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
-                if (!verifyValidSignature(purchase.originalJson, purchase.signature) || PRODUCT_ID!= "android.test.purchased") {
+                if (!verifyValidSignature(purchase.originalJson, purchase.signature)) {
                     // Invalid purchase
                     // show error to user
                     Toast.makeText(locale_context, "Error : Invalid Purchase", Toast.LENGTH_SHORT).show()
                     return
                 }
-                else
-                {
-                    Toast.makeText(locale_context, PRODUCT_ID, Toast.LENGTH_SHORT).show()
+                else {
+                    if (PRODUCT_ID == "premium") {
+                        PREMIUM = true
+                        val editor =
+                            locale_context?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                                ?.edit()
+                        editor?.putString("premium", "1")
+                        editor?.apply()
+                        locale_context?.item_design_shop?.adapter?.notifyItemChanged(1)
+                    } else {
+                        var reward  = locale_context?.let {
+                            RewardDialog(
+                                it,
+                                PRODUCT_ID
+                            )
+                        }
+                        reward?.show()
+                    }
                 }
 
                 // else purchase is valid
-
-
                 //if item is purchased and not consumed
                 if (!purchase.isAcknowledged) {
                     val consumeParams = ConsumeParams.newBuilder()
@@ -283,10 +287,11 @@ class Specially : Fragment(), RewardedVideoAdListener, PurchasesUpdatedListener 
         if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
             val consumeCountValue = purchaseCountValueFromPref + 1
             savePurchaseCountValueToPref(consumeCountValue)
-            Toast.makeText(locale_context, "Item Consumed", Toast.LENGTH_SHORT).show()
-
+            Toast.makeText(locale_context,"Item Consumed", Toast.LENGTH_SHORT).show()
+        //    consumeCount!!.text = "Item Consumed $purchaseCountValueFromPref Time(s)"
         }
     }
+
 
     /**
      * Verifies that the purchase was signed correctly for this developer's public key.
@@ -340,16 +345,9 @@ private fun initiatePurchase() {
                     .build()
                 billingClient!!.launchBillingFlow(locale_context!!, flowParams)
             }
-            else {
-                //try to add item/product id "consumable" inside managed product in google play console
-                Toast.makeText(locale_context, "Purchase Item not Found", Toast.LENGTH_SHORT).show()
-            }
+
         }
-        else {
-            Toast.makeText(
-                locale_context,
-                " Error " + billingResult.debugMessage, Toast.LENGTH_SHORT).show()
-        }
+
     }
 }
 
@@ -377,7 +375,7 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
+        initiatePurchase()
         PICTURE_SPECIALLY[ARRAY_OF_SPECIALLY_SHOP[position]]?.let { holder.img.setBackgroundResource(
             it
         ) }     //картинка для стиля
@@ -392,7 +390,21 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
             holder.price.text  = "ПОЛУЧИ " +  right_recording(min(capital / 100 * 4, 5000).toString())
             holder.button.text  =  "смотреть"
         }
-        holder.icon.setImageResource(R.drawable.money)
+
+        if(position == 0)
+        {
+            holder.icon.setImageResource(R.drawable.money)
+        }
+        else{
+            if(LANGUAGE =="Russian" )
+            {
+                holder.icon.setImageResource(R.drawable.rub1)
+            }
+            else
+            {
+                holder.icon.setImageResource(R.drawable.rub2)
+            }
+        }
         with(holder.itemView) {
             tag = ARRAY_OF_SPECIALLY_SHOP[position]
         }
@@ -408,7 +420,7 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
 
                 holder.button.textSize = 20f        //так задаешь размер
                 holder.button.setTextColor(Color.BLACK)   //цвет
-                holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                holder.button.setBackgroundColor(argb(0, 0, 0, 0))
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.egypt)
 
                 holder.price.textSize = 12f        //так задаешь размер
@@ -426,7 +438,7 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
                 holder.background_item.setBackgroundResource(R.drawable.table)
                 holder.button.textSize = 20f        //так задаешь размер
                 holder.button.setTextColor(Color.YELLOW)   //цвет
-                holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                holder.button.setBackgroundColor(argb(0, 0, 0, 0))
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.casino)
 
                 holder.price.textSize = 13f        //так задаешь размер
@@ -443,7 +455,7 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
             "Rome" -> {
                 holder.background_item.setBackgroundResource(R.drawable.bottom_navigation_rome)
                 holder.button.textSize = 20f        //так задаешь размер
-                holder.button.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                holder.button.setBackgroundColor(argb(0, 0, 0, 0))
                 holder.button.setTextColor(Color.rgb(193, 150, 63))   //цвет
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.rome)
 
@@ -531,22 +543,27 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
             }
             else          // если это премиум
             {
+
                 PRODUCT_ID = ARRAY_OF_PRODUCT_ID[position].toString()
                 if (billingClient!!.isReady) {
                     initiatePurchase()
                 } else {
-                    billingClient = BillingClient.newBuilder(locale_context!!).enablePendingPurchases().setListener(p1!!).build()
-                    billingClient!!.startConnection(object : BillingClientStateListener {
-                        override fun onBillingSetupFinished(billingResult: BillingResult) {
-                            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                                initiatePurchase()
-                            } else {
-                                Toast.makeText(locale_context, "Error " + billingResult.debugMessage, Toast.LENGTH_SHORT).show()
+                    if( !(PRODUCT_ID == "premium" && PREMIUM))
+                    {
+                        billingClient = BillingClient.newBuilder(locale_context!!).enablePendingPurchases().setListener(p1!!).build()
+                        billingClient!!.startConnection(object : BillingClientStateListener {
+                            override fun onBillingSetupFinished(billingResult: BillingResult) {
+                                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+                                    initiatePurchase()
+                                } else {
+                                    Toast.makeText(locale_context, "Error " + billingResult.debugMessage, Toast.LENGTH_SHORT).show()
+                                }
                             }
-                        }
 
-                        override fun onBillingServiceDisconnected() {}
-                    })
+                            override fun onBillingServiceDisconnected() {}
+                        })
+                    }
+
                 }
             }
 
