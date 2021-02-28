@@ -9,13 +9,15 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.sga.schoolbattle.engine.initEconomyParams
-import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_sign_in.*
+import com.sga.schoolbattle.shop.locale_context
 import kotlinx.android.synthetic.main.activity_sign_up.*
-import kotlinx.android.synthetic.main.activity_sign_up.signUpButton
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -23,6 +25,22 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
         CONTEXT = this
+        locale_context = this
+
+
+        val prfs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        if(prfs?.getString("language","russian")=="english")
+        {
+            LANGUAGE = "English"
+        }
+
+        signUpRegistrationText.text = translate("Регистрация")
+        nameTextInit.hint= translate("Имя")
+        passwordTextInit.hint = translate("Пароль")
+        repeatPassword.hint = translate("Повторите пароль")
+        button_chose_language.text = translate("Язык")
+        button_chose_language_2.text = translate("RU")
+        signUpButton.text = translate("Зарегистрироваться")
 
 
         when (Design) {
@@ -32,8 +50,7 @@ class SignUpActivity : AppCompatActivity() {
                 nameTextInit.setTextColor(Color.BLACK)
                 passwordTextInit.setTextColor(Color.BLACK)
                 repeatPassword.setTextColor(Color.BLACK)
-
-
+           //     button_chose_language_2.setBackgroundResource(R.drawable.button)
             }
             "Egypt" -> {
                 sign_up_menu.setBackgroundResource(R.drawable.sign_up_egypt);
@@ -44,6 +61,10 @@ class SignUpActivity : AppCompatActivity() {
                 repeatPassword.setTextColor(Color.BLACK)
                 signUpRegistrationText.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
                 signUpRegistrationText.setTextColor(Color.BLACK)
+                button_chose_language.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                button_chose_language.setTextColor(Color.BLACK)
+                button_chose_language_2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                button_chose_language_2.setTextColor(Color.BLACK)
             }
             "Casino" -> {
                 sign_up_menu.setBackgroundResource(R.drawable.game_menu_casino);
@@ -55,6 +76,10 @@ class SignUpActivity : AppCompatActivity() {
                 repeatPassword.setTextColor(Color.YELLOW)
                 signUpRegistrationText.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 signUpRegistrationText.setTextColor(Color.YELLOW)
+                button_chose_language.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                button_chose_language.setTextColor(Color.YELLOW)
+                button_chose_language_2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                button_chose_language_2.setTextColor(Color.YELLOW)
             }
             "Rome" -> {
                 sign_up_menu.setBackgroundResource(R.drawable.sign_in_rome);
@@ -66,6 +91,10 @@ class SignUpActivity : AppCompatActivity() {
                 repeatPassword.setTextColor(rgb(193, 150, 63))
                 signUpRegistrationText.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                 signUpRegistrationText.setTextColor(rgb(193, 150, 63))
+                button_chose_language.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                button_chose_language.setTextColor(rgb(193, 150, 63))
+                button_chose_language_2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                button_chose_language_2.setTextColor(rgb(193, 150, 63))
             }
             "Gothic" -> {
                 sign_up_menu.setBackgroundResource(R.drawable.sign_in_gothic);
@@ -84,6 +113,12 @@ class SignUpActivity : AppCompatActivity() {
 
                 signUpRegistrationText.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
                 signUpRegistrationText.setTextColor(Color.WHITE)
+
+                button_chose_language.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                button_chose_language.setTextColor(Color.WHITE)
+                button_chose_language_2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                button_chose_language_2.setTextColor(Color.WHITE)
+
             }
             "Japan" -> {
                 sign_up_menu.setBackgroundResource(R.drawable.sign_in_japan);
@@ -101,6 +136,11 @@ class SignUpActivity : AppCompatActivity() {
                 repeatPassword.setBackgroundColor(Color.WHITE)
                 signUpRegistrationText.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
                 signUpRegistrationText.setTextColor(Color.BLACK)
+
+                button_chose_language.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                button_chose_language.setTextColor(Color.BLACK)
+                button_chose_language_2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                button_chose_language_2.setTextColor(Color.BLACK)
             }
             "Noir" -> {
                 sign_up_menu.setBackgroundResource(R.drawable.sign_in_noir);
@@ -118,6 +158,11 @@ class SignUpActivity : AppCompatActivity() {
                 repeatPassword.setBackgroundColor(rgb(30, 30, 30))
                 signUpRegistrationText.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
                 signUpRegistrationText.setTextColor(Color.WHITE)
+
+                button_chose_language.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                button_chose_language.setTextColor(Color.WHITE)
+                button_chose_language_2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                button_chose_language_2.setTextColor(Color.WHITE)
             }
         }
 
@@ -216,6 +261,16 @@ class SignUpActivity : AppCompatActivity() {
                 }
             })
         }
+
+        button_chose_language.setOnClickListener{
+            showDialog()
+
+        }
+        button_chose_language_2.setOnClickListener{
+            showDialog()
+
+        }
+
     }
 
     override fun onResume() {
@@ -223,5 +278,67 @@ class SignUpActivity : AppCompatActivity() {
         CONTEXT = this
 
 
+    }
+
+    private fun showDialog(){
+        // Late initialize an alert dialog object
+        lateinit var dialog: AlertDialog
+
+        // Initialize an array of colors
+        val array = arrayOf("Русский","English")
+
+        // Initialize a new instance of alert dialog builder object
+        val builder =
+            AlertDialog.Builder(
+                this
+            )
+        // Set a title for alert dialog
+
+
+        var checkedItem = 0
+        if(LANGUAGE == "Russian")
+        {
+            builder.setTitle("Choose a language")
+            checkedItem = 0
+        }
+        else
+        {
+            builder.setTitle("Выбор языка")
+            checkedItem =1
+        }
+        builder.setSingleChoiceItems(array,checkedItem) { _, which->
+            if(which==0)
+            {
+                LANGUAGE = "Russian"
+                val editor =  locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("language","russian")
+                editor.apply()
+            }
+            else
+            {
+                LANGUAGE = "English"
+                val editor =  locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                editor.putString("language","english")
+                editor.apply()
+            }
+        }
+        builder.setPositiveButton(
+            "OK"
+        ) { dialog, _ ->
+            signUpRegistrationText.text = translate("Регистрация")
+            nameTextInit.hint= translate("Имя")
+            passwordTextInit.hint = translate("Пароль")
+            repeatPassword.hint = translate("Повторите пароль")
+            button_chose_language.text = translate("Язык")
+            button_chose_language_2.text = translate("RU")
+            signUpButton.text = translate("Зарегистрироваться")
+            dialog.dismiss()
+        }
+
+        // Initialize the AlertDialog using builder object
+        dialog = builder.create()
+
+        // Finally, display the alert dialog
+        dialog.show()
     }
 }

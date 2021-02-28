@@ -86,7 +86,7 @@ var AUXILIARY_MAP_OF_EMOTION = mapOf(0 to "e0", 1 to "e1", 2 to "e2",3 to "e3",4
 
 //____________________________________________________________________________________________________________________________
 var SPECIALLY: String = "ava1"               //СПЕЦИАЛЬНОЕ
-val PICTURE_SPECIALLY = mapOf(0 to R.drawable.video, 1 to R.drawable.vip, 2 to R.drawable.bag1,3 to R.drawable.bag2,4 to R.drawable.bag44,5 to R.drawable.bag3,6 to  R.drawable.bag4,7 to R.drawable.bag5,8 to R.drawable.bag6)
+val PICTURE_SPECIALLY = mapOf(0 to R.drawable.video, 1 to R.drawable.vip, 2 to R.drawable.bag1,3 to R.drawable.bag2,4 to R.drawable.bag3,5 to R.drawable.bag4,6 to  R.drawable.bag5,7 to R.drawable.bag6,8 to R.drawable.bag7)
 val SPECIALLY_TEXT = mapOf(0 to "ВИДЕО С ВОЗНАГРАЖДЕНИЕМ", 1 to "ПРЕМИУМ АККАУНТ", 2 to "КАРМАН КРИСТАЛЛОВ",3 to "ПАКЕТ КРИСТАЛЛОВ",4 to "СУМКА КРИСТАЛЛОВ",5 to "РЮКЗАК КРИСТАЛЛОВ" , 6 to "ГОРШОК КРИСТАЛЛОВ",7 to "СУНДУК КРИСТАЛЛОВ",8 to " БАНК КРИСТАЛЛОВ")
 val PRICE_OD_SPECIALLY = mapOf(0 to 10,1 to 20,2 to 30,3 to 90)
 var ARRAY_OF_SPECIALLY_SHOP: MutableList<Int>  = mutableListOf(0,1,2,3,4,5,6,7,8)
@@ -256,7 +256,9 @@ fun right_recording(s : String): String
 var TRANSLATE = mapOf("КУПИТЬ" to "BUY","КУПЛЕНО" to "PURCHASED","Аватары" to "Avatars","Эмоции" to "Emotions","Премиум" to "Premium", "Дизайны" to "Designs",
     "Недостаточно средств" to "Insufficient funds", "Купленные аватары можно применить в профиле" to "Purchased avatars can be applied to your profile",
     "Купленные эмоции вы сможете использовать во время игры" to "You can use the purchased emotions during the game",
-    "Купленные дизайны можно применить в настройках" to "The purchased designs can be applied in the settings")
+    "Купленные дизайны можно применить в настройках" to "The purchased designs can be applied in the settings", "Имя" to "Name",
+    "Пароль" to "Password","Повторите пароль" to "Repeat password","Язык" to "Language",
+    "Регистрация" to "Registration","Зарегистрироваться" to "SIGN UP","Войти" to "SIGN IN","RU" to "EN")
 fun translate(s: String): String
 {
     if(LANGUAGE == "Russian")

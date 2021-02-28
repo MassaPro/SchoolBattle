@@ -32,6 +32,17 @@ class SignInActivity : AppCompatActivity() {
         CONTEXT = this
         locale_context = this
 
+        val prfs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        if(prfs?.getString("language","russian")=="english")
+        {
+            LANGUAGE = "English"
+        }
+
+        nameText.hint = translate("Имя")
+        passwordText.hint = translate("Пароль")
+        signInButton.text = translate("Войти")
+        signUpButton.text = translate("Зарегистрироваться")
+
         when (Design) {
             "Normal" -> {
                 sign_in_menu.setBackgroundResource(R.drawable.game_menu_normal);
@@ -202,7 +213,7 @@ class SignInActivity : AppCompatActivity() {
             })
         }
 
-        showDialog()
+
     }
 
     override fun onPause() {
@@ -216,58 +227,7 @@ class SignInActivity : AppCompatActivity() {
 
     }
 
-    private fun showDialog(){
-        // Late initialize an alert dialog object
-        lateinit var dialog: AlertDialog
 
-        // Initialize an array of colors
-        val array = arrayOf("Русский","English")
-
-        // Initialize a new instance of alert dialog builder object
-        val builder = AlertDialog.Builder(locale_context!!)
-
-        // Set a title for alert dialog
-
-
-        var checkedItem = 0
-        if(LANGUAGE == "Russian")
-        {
-            builder.setTitle("Choose a language")
-            checkedItem = 0
-        }
-        else
-        {
-            builder.setTitle("Выбор языка")
-            checkedItem =1
-        }
-        builder.setSingleChoiceItems(array,checkedItem) { _, which->
-            if(which==0)
-            {
-                LANGUAGE = "Russian"
-                val editor =  locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                editor.putString("language","russian")
-                editor.apply()
-            }
-            else
-            {
-                LANGUAGE = "English"
-                val editor =  locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                editor.putString("language","english")
-                editor.apply()
-            }
-        }
-        builder.setPositiveButton(
-            "OK"
-        ) { dialog, _ ->
-            dialog.dismiss()
-        }
-
-        // Initialize the AlertDialog using builder object
-        dialog = builder.create()
-
-        // Finally, display the alert dialog
-        dialog.show()
-    }
 
     override fun onResume() {
         super.onResume()

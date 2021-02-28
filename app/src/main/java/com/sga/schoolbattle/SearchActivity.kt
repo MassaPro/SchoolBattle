@@ -33,7 +33,7 @@ class SearchActivity : AppCompatActivity() {
         val searchView = findViewById<SearchView>(R.id.search_field)
         searchView.onActionViewExpanded()
 
-        recyclerViewSearch.adapter = ItemRecyclerViewAdapter(USERS)
+        recyclerViewSearch.adapter = ItemRecyclerViewAdapter(USERS,IMAGES)
         rec = recyclerViewSearch
         rec?.adapter?.notifyDataSetChanged()
 
