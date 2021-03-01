@@ -321,10 +321,6 @@ class SignUpActivity : AppCompatActivity() {
                 editor.putString("language","english")
                 editor.apply()
             }
-        }
-        builder.setPositiveButton(
-            "OK"
-        ) { dialog, _ ->
             signUpRegistrationText.text = translate("Регистрация")
             nameTextInit.hint= translate("Имя")
             passwordTextInit.hint = translate("Пароль")
@@ -332,6 +328,11 @@ class SignUpActivity : AppCompatActivity() {
             button_chose_language.text = translate("Язык")
             button_chose_language_2.text = translate("RU")
             signUpButton.text = translate("Зарегистрироваться")
+        }
+        builder.setPositiveButton(
+            "OK"
+        ) { dialog, _ ->
+
             dialog.dismiss()
         }
 

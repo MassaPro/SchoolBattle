@@ -23,6 +23,7 @@ import com.sga.schoolbattle.engine.RecyclerSet
 import com.sga.schoolbattle.engine.RecyclerSetBlitz
 import com.google.firebase.database.ChildEventListener
 import kotlinx.android.synthetic.main.activity_game_over.*
+import java.util.Collections.min
 
 var handler_for_emotion : Handler = Handler()
 
@@ -66,7 +67,7 @@ val PRICE_OD_AVATAR = mapOf(0 to 0, 1 to 80,2 to 100, 3 to 120, 4 to 140,
     5 to 160,6 to 180,7 to 200,8 to 220,9 to 240, 10 to 260, 11 to 400, 12 to 800,
     13 to 900,14 to 950,15 to 1000,16 to 1500, 17 to 2000, 18 to 3000, 19 to 5000,
     20 to 6000,21 to 10000,22 to 12500,23 to 15000, 24 to 20000, 25 to 25000,
-    26 to 30000,27 to 40000, 28 to 50000, 29 to 70000, 30 to 100000, 31 to 2000000, 32 to 1000000)
+    26 to 30000,27 to 40000, 28 to 50000, 29 to 70000, 30 to 100000, 31 to 500000, 32 to 1000000)
 var ARRAY_OF_AVATAR_SHOP: MutableList<Int>  = mutableListOf(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32)             //номера  дизайнов в магазине
 var ARRAY_OF_AVATAR: MutableList<Int>  = mutableListOf(0,1,4,18,19)             //номера открытых дизайнов
 var AUXILIARY_MAP_OF_AVATAR = mapOf(0 to "ava1", 1 to "ava2", 2 to "ava3",3 to "ava4")
@@ -253,12 +254,17 @@ fun right_recording(s : String): String
    return s
 }
 
-var TRANSLATE = mapOf("КУПИТЬ" to "BUY","КУПЛЕНО" to "PURCHASED","Аватары" to "Avatars","Эмоции" to "Emotions","Премиум" to "Premium", "Дизайны" to "Designs",
-    "Недостаточно средств" to "Insufficient funds", "Купленные аватары можно применить в профиле" to "Purchased avatars can be applied to your profile",
+var TRANSLATE = mapOf("КУПИТЬ" to "BUY","КУПЛЕНО" to "PURCHASED","Аватары" to "Avatars","Эмоции" to "Emotions","Премиум" to "Premium",
+    "Дизайны" to "Designs", "Недостаточно средств" to "Insufficient funds",
+    "Купленные аватары можно применить в профиле" to "Purchased avatars can be applied to your profile",
     "Купленные эмоции вы сможете использовать во время игры" to "You can use the purchased emotions during the game",
     "Купленные дизайны можно применить в настройках" to "The purchased designs can be applied in the settings", "Имя" to "Name",
     "Пароль" to "Password","Повторите пароль" to "Repeat password","Язык" to "Language",
-    "Регистрация" to "Registration","Зарегистрироваться" to "SIGN UP","Войти" to "SIGN IN","RU" to "EN")
+    "Регистрация" to "Registration","Зарегистрироваться" to "SIGN UP","Войти" to "SIGN IN","RU" to "EN",
+    "блиц онлайн" to "blitz online","долгая онлайн" to "long online","Игра на одном устройстве" to "Play one device",
+    "игра с компьютером" to "play with computer","Поиск Соперника" to "Search","Вибрация" to "Vibration","Выбор дизайна" to "Choose design",
+    "Звук" to "Sounds","ПРИМЕНИТЬ" to "APPLY","УСТАНОВЛЕНО" to "FIXED","Выход" to "Log out",
+    "Найти" to "Search","Профиль" to "Profile","Подписки" to "Following","Подписчики" to "Followers")
 fun translate(s: String): String
 {
     if(LANGUAGE == "Russian")
@@ -297,7 +303,7 @@ fun translate_emotion(s: String): String
 
 }
 
-var TRANSLATE_MAP_DESIGN  = mapOf("Деловой стиль" to "Business style","Египетский стиль" to "Egyptian style","Римский стиль" to "Roman style",
+var TRANSLATE_MAP_DESIGN  = mapOf("Деловой стиль" to "Business style","Eгипетский стиль" to "Egyptian style","Римский стиль" to "Roman style",
     "Казино стиль" to  "Casino style","Нуар стиль" to "Noir style","Готический стиль" to "Gothic style","Японский стиль" to "Japanese style")
 
 fun translate_design(s: String): String

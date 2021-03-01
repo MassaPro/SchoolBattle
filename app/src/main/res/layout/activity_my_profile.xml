@@ -9,12 +9,14 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="675dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="50dp"
         android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,12 +28,10 @@
                 android:layout_width="133dp"
                 android:layout_height="142dp"
                 android:layout_marginStart="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0"
                 app:srcCompat="@android:drawable/ic_menu_camera" />
 
             <TextView
@@ -43,8 +43,8 @@
                 android:foregroundGravity="left"
                 android:gravity="start"
                 android:text="Name"
-                android:textSize="24sp"
                 android:textColor="#000000"
+                android:textSize="24sp"
                 app:layout_constraintBottom_toTopOf="@+id/profileMyStatus"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -53,7 +53,7 @@
 
             <TextView
                 android:id="@+id/profileMyStatus"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="32dp"
@@ -68,19 +68,31 @@
 
             <FrameLayout
                 android:id="@+id/frame"
-                android:layout_width="0dp"
-                android:layout_height="300dp"
-                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_global_ava">
+                app:layout_constraintTop_toBottomOf="@+id/textView9">
 
                 <com.jjoe64.graphview.GraphView
                     android:id="@+id/graph"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="310dp"
                     android:rotationX="0" />
             </FrameLayout>
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Рейтинг"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_global_ava" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

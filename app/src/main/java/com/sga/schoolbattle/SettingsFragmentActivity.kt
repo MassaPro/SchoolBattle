@@ -88,7 +88,10 @@ class SettingsFragmentActivity : Fragment() {
                 //soundSwitch.setBackgroundColor(Color.YELLOW)
                 soundSwitch.setTextSize(24f)
                 vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-                vibrationSwitch.setTextSize(24f)
+                vibrationSwitch.textSize = 24f
+                language_button.textSize = 24f
+                language_button.setTextColor(Color.BLACK)
+                language_button.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
             }
             "Casino" -> {
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_casino)
@@ -110,6 +113,8 @@ class SettingsFragmentActivity : Fragment() {
                 vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 vibrationSwitch.setTextSize(24f)
                 vibrationSwitch.setTextColor(Color.YELLOW)
+                language_button.setTextColor(Color.YELLOW)
+                language_button.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
             }
             "Rome" -> {
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_rome)
@@ -131,6 +136,9 @@ class SettingsFragmentActivity : Fragment() {
                 vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                 vibrationSwitch.setTextSize(24f)
                 vibrationSwitch.setTextColor(rgb(193,150,63))
+                language_button.setTextColor(rgb(193,150,63))
+                language_button.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                language_button.setTextSize(24f)
             }
             "Gothic" -> {
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.BLACK)
@@ -152,6 +160,9 @@ class SettingsFragmentActivity : Fragment() {
                 vibrationSwitch.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
                 vibrationSwitch.textSize = 24f
                 vibrationSwitch.setTextColor(Color.WHITE)
+                language_button.setTextColor(Color.WHITE)
+                language_button.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                language_button1.setTextColor(Color.WHITE)
             }
             "Japan" -> {
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE)
@@ -174,6 +185,8 @@ class SettingsFragmentActivity : Fragment() {
                 vibrationSwitch.setTextColor(Color.BLACK)
                 //  tb1.setBackgroundColor(Color.WHITE)
                 tb1.setBackgroundColor(Color.WHITE)
+                language_button.setTextColor(Color.BLACK)
+                language_button.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
             }
             "Noir" -> {
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.BLACK)
@@ -198,9 +211,11 @@ class SettingsFragmentActivity : Fragment() {
 
                 tb1.setBackgroundColor(Color.BLACK)
 
+                language_button.setTextColor(Color.WHITE)
+                language_button.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                language_button1.setTextColor(Color.WHITE)
             }
-            //настройка свитчера звука
-            //настройка свитчера звука
+
         }
 
         locale_context = activity as AppCompatActivity
@@ -272,6 +287,13 @@ class SettingsFragmentActivity : Fragment() {
         gamesRecycler.isNestedScrollingEnabled = false;
         item_design.adapter?.notifyDataSetChanged()
 
+
+        soundSwitch.text = translate("Звук")
+        vibrationSwitch.text = translate("Вибрация")
+        language_button.text = translate("Язык")
+        choose_design.text = translate("Выбор дизайна")
+        language_button1.text = translate("RU")
+        logOutSettings.text = translate("Выход")
     }
 
     private fun showDialog(){
@@ -305,6 +327,13 @@ class SettingsFragmentActivity : Fragment() {
                 val editor =  locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
                 editor.putString("language","russian")
                 editor.apply()
+                val navView: BottomNavigationView = locale_context!!.findViewById(R.id.nav_view)
+                navView.menu.getItem(0).title = "Меню"
+                navView.menu.getItem(1).title = "Игры"
+                navView.menu.getItem(2).title = "Профиль"
+                navView.menu.getItem(3).title = "Магазин"
+                navView.menu.getItem(4).title = "Настройки"
+
             }
             else
             {
@@ -312,7 +341,22 @@ class SettingsFragmentActivity : Fragment() {
                 val editor =  locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
                 editor.putString("language","english")
                 editor.apply()
+
+                    val navView: BottomNavigationView = locale_context!!.findViewById(R.id.nav_view)
+                    navView.menu.getItem(0).title = "Menu"
+                    navView.menu.getItem(1).title = "Games"
+                    navView.menu.getItem(2).title = "Profile"
+                    navView.menu.getItem(3).title = "Shop"
+                    navView.menu.getItem(4).title = "Settings"
+
             }
+            soundSwitch.text = translate("Звук")
+            vibrationSwitch.text = translate("Вибрация")
+            language_button.text = translate("Язык")
+            choose_design.text = translate("Выбор дизайна")
+            language_button1.text = translate("RU")
+            logOutSettings.text = translate("Выход")
+            item_design.adapter?.notifyDataSetChanged()
         }
         builder.setPositiveButton(
            "OK"
@@ -439,15 +483,16 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
         if(AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == Design)
         {
             holder.button_prem.setBackgroundColor(Color.TRANSPARENT)
-            holder.button_prem.text = "(УСТАНОВЛЕНО)"
+            holder.button_prem.text = '(' + translate("УСТАНОВЛЕНО") +  ')'
             holder.button_prem.isClickable = false
         }
         else
         {
-            holder.button_prem.text = "ПРИМЕНИТЬ"
+            holder.button_prem.text = translate("ПРИМЕНИТЬ")
             holder.button_prem.isClickable = false
         }
-        holder.contentView.text = PICTURE_TEXT[ARRAY_OF_DESIGN[position]] //название стиля
+        holder.contentView.text =
+            PICTURE_TEXT[ARRAY_OF_DESIGN[position]]?.let { translate_design(it) } //название стиля
         with(holder.itemView) {
             tag = ARRAY_OF_DESIGN[position]
         }
@@ -516,6 +561,10 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                     fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE);
                     fragment_activity!!.toolbarNameSettings.setTextColor(Color.BLACK)
                     fragment_activity!!.toolbarNameSettings.textSize = 25f
+
+                    fragment_activity!!.language_button.setTextColor(Color.BLACK)
+                    fragment_activity!!.language_button.typeface = ResourcesCompat.getFont(CONTEXT, R.font.normal)
+                    fragment_activity!!.language_button1.setTextColor(Color.BLACK)
                 }
                 "Egypt" -> {
 
@@ -527,15 +576,20 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                     fragment_activity!!.settings_menu.setBackgroundResource(R.drawable.background_egypt)
                     fragment_activity!!.tb1.setBackgroundColor(rgb(255, 230, 163));
 
-                    fragment_activity!!.choose_design.setBackgroundColor(argb(0,0,0,0))
+                    fragment_activity!!.choose_design.setTextColor(Color.BLACK)
                     fragment_activity!!.choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
                     fragment_activity!!.choose_design.setTextSize(24f)
-
+                    fragment_activity!!.soundSwitch.setTextColor(Color.BLACK)
                     fragment_activity!!.soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-
+                    fragment_activity!!.vibrationSwitch.setTextColor(Color.BLACK)
                     fragment_activity!!.soundSwitch.setTextSize(24f)
                     fragment_activity!!.vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
                     fragment_activity!!.vibrationSwitch.setTextSize(24f)
+                    fragment_activity!!.vibrationSwitch.setTextColor(Color.BLACK)
+
+                    fragment_activity!!.language_button.setTextColor(Color.BLACK)
+                    fragment_activity!!.language_button.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                    fragment_activity!!.language_button1.setTextColor(Color.BLACK)
                 }
                 "Casino" -> {
                     fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_casino)
@@ -545,7 +599,7 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                     fragment_activity!!.settings_menu.setBackgroundResource(R.drawable.background2_casino)
                     fragment_activity!!.tb1.setBackgroundResource(R.drawable.bottom_navigation_casino)
 
-                    fragment_activity!!.choose_design.setBackgroundColor(argb(0,0,0,0))
+
                     fragment_activity!!.choose_design.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                     fragment_activity!!.choose_design.setTextColor(Color.YELLOW)
                     fragment_activity!!.choose_design.setTextSize(24f)
@@ -557,6 +611,9 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                     fragment_activity!!.vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                     fragment_activity!!.vibrationSwitch.setTextSize(24f)
                     fragment_activity!!.vibrationSwitch.setTextColor(Color.YELLOW)
+                    fragment_activity!!.language_button.setTextColor(Color.YELLOW)
+                    fragment_activity!!.language_button.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                    fragment_activity!!.language_button1.setTextColor(Color.BLACK)
                 }
                 "Rome" -> {
                     fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_rome)
@@ -578,6 +635,9 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                     fragment_activity!!.vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                     fragment_activity!!.vibrationSwitch.setTextSize(24f)
                     fragment_activity!!.vibrationSwitch.setTextColor(rgb(193,150,63))
+                    fragment_activity!!.language_button.setTextColor(rgb(193,150,63))
+                    fragment_activity!!.language_button.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                    fragment_activity!!.language_button1.setTextColor(Color.BLACK)
                 }
                 "Gothic" -> {
                     fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.BLACK)
@@ -599,6 +659,10 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                     fragment_activity!!.vibrationSwitch.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
                     fragment_activity!!.vibrationSwitch.textSize = 24f
                     fragment_activity!!.vibrationSwitch.setTextColor(Color.WHITE)
+                    fragment_activity!!.language_button.setTextColor(Color.WHITE)
+                    fragment_activity!!.language_button.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                    fragment_activity!!.language_button1.setTextColor(Color.WHITE)
+
                 }
                 "Japan" -> {
                     fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE)
@@ -621,6 +685,11 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                     fragment_activity!!.vibrationSwitch.setTextSize(24f)
                     fragment_activity!!.vibrationSwitch.setTextColor(Color.BLACK)
                     fragment_activity!!.tb1.setBackgroundColor(Color.WHITE)
+
+                    fragment_activity!!.language_button.setTextColor(Color.BLACK)
+                    fragment_activity!!.language_button.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                    fragment_activity!!.language_button1.setTextColor(Color.BLACK)
+
                 }
                 "Noir" -> {
                     fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.BLACK)
@@ -642,6 +711,10 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                     fragment_activity!!.vibrationSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
                     fragment_activity!!.vibrationSwitch.setTextSize(24f)
                     fragment_activity!!.vibrationSwitch.setTextColor(Color.WHITE)
+
+                    fragment_activity!!.language_button.setTextColor(Color.WHITE)
+                    fragment_activity!!.language_button.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                    fragment_activity!!.language_button1.setTextColor(Color.WHITE)
                 }
             }
             this.notifyDataSetChanged()

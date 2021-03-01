@@ -1,5 +1,6 @@
 package com.sga.schoolbattle
 
+
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
@@ -9,6 +10,7 @@ import android.graphics.Color.rgb
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
+import android.view.Menu
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
@@ -17,12 +19,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.sga.schoolbattle.engine.*
-import kotlinx.android.synthetic.main.activity_navigator.*
-
-
-import com.sga.schoolbattle.shop.locale_context
-import com.sga.schoolbattle.shop.mRewardedVideoAd
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
@@ -33,7 +29,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.sga.schoolbattle.engine.*
+import com.sga.schoolbattle.shop.locale_context
+import com.sga.schoolbattle.shop.mRewardedVideoAd
 import kotlinx.android.synthetic.main.activity_game_menu.*
+import kotlinx.android.synthetic.main.activity_navigator.*
 import kotlinx.android.synthetic.main.activity_profile_user.*
 import kotlinx.android.synthetic.main.activity_settings_fragment.*
 import kotlinx.android.synthetic.main.reward_dialog.*
@@ -78,10 +78,11 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
 
 
 
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigator)
-
+        locale_context = this
         if(!PREMIUM) {
             mInterstitialAd_in_offline_games = InterstitialAd(this)
             mInterstitialAd_in_offline_games.adUnitId = "ca-app-pub-3940256099942544/1033173712"
@@ -139,6 +140,24 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
 
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
+
+
+        val prfs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        if(prfs?.getString("language","russian")=="english")
+        {
+            LANGUAGE = "English"
+        }
+        if(LANGUAGE == "English")
+        {
+            val navView: BottomNavigationView = findViewById(R.id.nav_view)
+            navView.menu.getItem(0).title = "Menu"
+            navView.menu.getItem(1).title = "Games"
+            navView.menu.getItem(2).title = "Profile"
+            navView.menu.getItem(3).title = "Shop"
+            navView.menu.getItem(4).title = "Settings"
+        }
+
+
         now = this
         val navController = findNavController(R.id.nav_host_fragment)
 
@@ -340,4 +359,6 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
                 AdRequest.Builder().build())
         }
     }
+
+
 }

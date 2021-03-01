@@ -191,7 +191,7 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
             "Egypt" -> {
                 holder.background_item.setBackgroundColor(Color.rgb(255, 230, 163))
 
-                holder.button.textSize = 20f        //так задаешь размер
+                holder.button.textSize = 15f        //так задаешь размер
                 holder.button.setTextColor(Color.BLACK)   //цвет
                 holder.button.setBackgroundColor(argb(0, 0, 0, 0))
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.egypt)

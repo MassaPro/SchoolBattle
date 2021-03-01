@@ -75,12 +75,15 @@ class SocialActivity : Fragment() {
             var tv: TextView =v.findViewById(R.id.helped_text_social_1)
             if (i == 0) {
                 tv = v.helped_text_social_1
+                tv.text = translate("Профиль")
             }
             if (i == 1) {
                 tv =v.helped_text_social_2
+                tv.text = translate("Подписки")
             }
             if (i == 2) {
                 tv =v.helped_text_social_3
+                tv.text = translate("Подписчики")
             }
 
             when (Design) {
@@ -190,13 +193,13 @@ class SocialActivity : Fragment() {
         override fun getPageTitle(position: Int): CharSequence? {
             when (position) {
                 0 -> {
-                    return "Профиль"
+                    return translate("Профиль")
                 }
                 2 -> {
-                    return "Подписки"
+                    return translate_design("Подписки")
                 }
                 1 -> {
-                    return "Подписчики"
+                    return translate("Подписчики")
                 }
 
             }

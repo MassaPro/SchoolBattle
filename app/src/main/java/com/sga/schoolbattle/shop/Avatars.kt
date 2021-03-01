@@ -198,7 +198,7 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
 
                 holder.background_item.setBackgroundColor(rgb(255, 230, 163))
 
-                holder.button.textSize = 20f        //так задаешь размер
+                holder.button.textSize = 15f        //так задаешь размер
                 holder.button.setTextColor(Color.BLACK)   //цвет
                 holder.button.setBackgroundColor(argb(0,0,0,0))
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.egypt)
@@ -213,7 +213,7 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
             }
             "Casino" -> {
                 holder.background_item.setBackgroundResource(R.drawable.table)
-                holder.button.textSize = 20f        //так задаешь размер
+                holder.button.textSize = 15f        //так задаешь размер
                 holder.button.setTextColor(Color.YELLOW)   //цвет
                 holder.button.setBackgroundColor(argb(0,0,0,0))
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.casino)
@@ -228,7 +228,7 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
             }
             "Rome" -> {
                 holder.background_item.setBackgroundResource(R.drawable.bottom_navigation_rome)
-                holder.button.textSize = 20f        //так задаешь размер
+                holder.button.textSize = 15f        //так задаешь размер
                 holder.button.setBackgroundColor(argb(0,0,0,0))
                 holder.button.setTextColor(rgb(193, 150, 63))   //цвет
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.rome)
@@ -243,7 +243,7 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
             }
             "Gothic" -> {
                 holder.background_item.setBackgroundColor(rgb(20,20,20))
-                holder.button.textSize = 16f        //так задаешь размер
+                holder.button.textSize = 15f        //так задаешь размер
                 holder.button.setBackgroundColor(rgb(30,30,30))
                 holder.button.setTextColor(Color.WHITE)   //цвет
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.gothic)
@@ -258,7 +258,7 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
             }
             "Japan" -> {
                 holder.background_item.setBackgroundColor(Color.WHITE)
-                holder.button.textSize = 20f        //так задаешь размер
+                holder.button.textSize = 15f        //так задаешь размер
                 holder.button.setTextColor(Color.BLACK)   //цвет
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.japan)
 
@@ -273,7 +273,7 @@ class ProfileAvatarsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
             }
             "Noir" -> {
                 holder.background_item.setBackgroundColor(rgb(20,20,20))
-                holder.button.textSize = 20f        //так задаешь размер
+                holder.button.textSize = 15f        //так задаешь размер
                 holder.button.setBackgroundColor(rgb(30,30,30))
                 holder.button.setTextColor(Color.WHITE)   //цвет
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.noir)

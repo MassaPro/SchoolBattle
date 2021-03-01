@@ -194,7 +194,7 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
             "Egypt" -> {
                 holder.background_item.setBackgroundColor(Color.rgb(255, 230, 163))
 
-                holder.button.textSize = 20f        //так задаешь размер
+                holder.button.textSize = 15f        //так задаешь размер
                 holder.button.setTextColor(Color.BLACK)   //цвет
                 holder.button.setBackgroundColor(argb(0,0,0,0))
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.egypt)
@@ -209,12 +209,12 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
             }
             "Casino" -> {
                 holder.background_item.setBackgroundResource(R.drawable.table)
-                holder.button.textSize = 20f        //так задаешь размер
+                holder.button.textSize = 15f        //так задаешь размер
                 holder.button.setTextColor(Color.YELLOW)   //цвет
                 holder.button.setBackgroundColor(argb(0,0,0,0))
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.casino)
 
-                holder.price.textSize = 20f        //так задаешь размер
+                holder.price.textSize = 15f        //так задаешь размер
                 holder.price.setTextColor(Color.YELLOW)   //цвет
                 holder.price.typeface = ResourcesCompat.getFont(locale_context!!, R.font.casino)
 
@@ -224,7 +224,7 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
             }
             "Rome" -> {
                 holder.background_item.setBackgroundResource(R.drawable.bottom_navigation_rome)
-                holder.button.textSize = 20f        //так задаешь размер
+                holder.button.textSize = 15f        //так задаешь размер
                 holder.button.setBackgroundColor(argb(0,0,0,0))
                 holder.button.setTextColor(rgb(193, 150, 63))   //цвет
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.rome)
@@ -239,7 +239,7 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
             }
             "Gothic" -> {
                 holder.background_item.setBackgroundColor(Color.rgb(20, 20, 20))
-                holder.button.textSize = 16f        //так задаешь размер
+                holder.button.textSize = 15f        //так задаешь размер
                 holder.button.setBackgroundColor(Color.rgb(30, 30, 30))
                 holder.button.setTextColor(Color.WHITE)   //цвет
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.gothic)
@@ -254,7 +254,7 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
             }
             "Japan" -> {
                 holder.background_item.setBackgroundColor(Color.WHITE)
-                holder.button.textSize = 20f        //так задаешь размер
+                holder.button.textSize = 15f        //так задаешь размер
                 holder.button.setTextColor(Color.BLACK)   //цвет
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.japan)
 
@@ -269,7 +269,7 @@ class ShopDesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<In
             }
             "Noir" -> {
                 holder.background_item.setBackgroundColor(Color.rgb(20, 20, 20))
-                holder.button.textSize = 20f        //так задаешь размер
+                holder.button.textSize = 15f        //так задаешь размер
                 holder.button.setBackgroundColor(Color.rgb(30, 30, 30))
                 holder.button.setTextColor(Color.WHITE)   //цвет
                 holder.button.typeface = ResourcesCompat.getFont(locale_context!!, R.font.noir)
