@@ -111,6 +111,8 @@ var MONEY: Int = 200                  //ДЕНЬГИ
 var GAMES: MutableList<Game> = mutableListOf()
 var FRIENDS: MutableList<String> = mutableListOf()
 var CHOOSE_GAMES: MutableList<String> = mutableListOf("XOGame", "DotGame", "SnakeGame", "BoxGame", "AngleGame", "VirusGame","Reversi")
+var LIGTH_GAMES_ICONS = mapOf("XOGame" to R.drawable.xo_icon,"DotGame" to R.drawable.dots_icon, "SnakeGame" to R.drawable.sn_icon, "BoxGame" to R.drawable.box_icon,
+    "AngleGame" to R.drawable.cor_icon, "VirusGame" to R.drawable.vir_icon,"Reversi" to R.drawable.rev_icon)
 var currentContext: Context? = null
 lateinit var listener: ChildEventListener
 var recyclerSet: RecyclerSet = RecyclerSet()
@@ -314,4 +316,16 @@ fun translate_design(s: String): String
     }
     return TRANSLATE_MAP_DESIGN[s].toString()
 
+}
+
+
+var TRANSLATE_GAMES = mapOf("XOGame" to "Крестики-Нолики", "DotGame" to "Точки", "SnakeGame" to "Змейка", "BoxGame" to "Коробки",
+    "AngleGame" to "Уголки", "VirusGame" to "Вирусы","Reversi" to "Реверси","Choose game" to "Выбор игры")
+fun translate_games(s:String): String?
+{
+    if(LANGUAGE == "English")
+    {
+        return s
+    }
+    return TRANSLATE_GAMES[s]
 }

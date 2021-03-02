@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
@@ -33,7 +34,7 @@ class NewGameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_game)
         CONTEXT = this
-
+        text.text = translate_games("Choose game")
 
         when (Design) {
             "Normal" -> {
@@ -204,7 +205,8 @@ class NewGameActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.idView.text = ITEMS[position]
+            holder.idView.text = translate_games(ITEMS[position])
+            LIGTH_GAMES_ICONS[ITEMS[position]]?.let { holder.icon.setImageResource(it) }
             with(holder.itemView) {
                 tag = ITEMS[position]
                 setOnClickListener(onClickListener)
@@ -217,6 +219,7 @@ class NewGameActivity : AppCompatActivity() {
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val idView: TextView = view.textView2
+            val icon: ImageView = view.imageView9
         }
     }
 
