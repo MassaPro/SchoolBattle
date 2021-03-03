@@ -79,11 +79,11 @@ class SocialActivity : Fragment() {
             }
             if (i == 1) {
                 tv =v.helped_text_social_2
-                tv.text = translate("Подписки")
+                tv.text = translate("Подписчики")
             }
             if (i == 2) {
                 tv =v.helped_text_social_3
-                tv.text = translate("Подписчики")
+                tv.text = translate("Подписки")
             }
 
             when (Design) {

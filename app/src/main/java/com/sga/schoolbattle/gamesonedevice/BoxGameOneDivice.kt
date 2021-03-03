@@ -16,6 +16,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.gms.ads.AdRequest
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sga.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
@@ -111,6 +112,13 @@ class BoxGameOneDivice : AppCompatActivity() {
 
         bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
         bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+        if(LANGUAGE == "English")
+        {
+           bottom_navigation_one_divice.menu.getItem(0).title = "Rules"
+           bottom_navigation_one_divice.menu.getItem(1).title = "Settings"
+           bottom_navigation_one_divice.menu.getItem(2).title = "Return"
+           bottom_navigation_one_divice.menu.getItem(3).title = "Back"
+        }
         
         CONTEXT = this
 

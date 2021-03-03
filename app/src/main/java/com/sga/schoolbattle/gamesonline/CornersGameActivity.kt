@@ -1,11 +1,10 @@
-package com.sga.schoolbattle.gamesonedevice
+/*
+package com.sga.schoolbattle.gamesonline
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.*
-import android.graphics.Color.argb
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Vibrator
 import android.util.AttributeSet
@@ -13,13 +12,16 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.gms.ads.AdRequest
+import com.google.firebase.database.DatabaseReference
 import com.sga.schoolbattle.*
-import kotlinx.android.synthetic.main.activity_list_of_current_games.*
+import com.sga.schoolbattle.engine.BlitzGameEngine
+import com.sga.schoolbattle.engine.LongGameEngine
 import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
-class ConersOneDevice : AppCompatActivity() {
+class ConersGameActivity : AppCompatActivity() {
     fun encode(h: MutableList<MutableList<Int>>):String
     {
         var answer: String = ""
@@ -89,9 +91,26 @@ class ConersOneDevice : AppCompatActivity() {
         }
         return answer
     }
-    private var dialog: Show_Result_one_Device? = null
-    private var dialog_parametrs: Show_parametr_one_divice_one_Device? = null
-    private var dialog_rules: Show_rules? = null
+
+
+    private var isRun = false
+    private var engine: BlitzGameEngine? = null
+    private var engineLong: LongGameEngine? = null
+
+    var yourName = ""
+    var opponentsName = ""
+    var type = ""
+    lateinit var gameData: DatabaseReference
+
+
+    override fun onResume() {
+        super.onResume()
+        currentContext = this
+        isRun = true
+        CONTEXT = this
+    }
+
+
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -132,13 +151,13 @@ class ConersOneDevice : AppCompatActivity() {
                 button_player_2_one_divice.setBackgroundResource(R.drawable.player2_egypt);
                 player_1_icon_one_divice.setBackgroundResource(R.drawable.chip1_egypt);
                 player_2_icon_one_divice.setBackgroundResource(R.drawable.chip2_egypt)
-                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
 
                 label_one_device.setBackgroundResource(R.drawable.background_egypt);
                 bottom_navigation_one_divice.setBackgroundColor(Color.rgb(255, 230, 163))
                 to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             }
             "Casino" -> {
                 name_player1_one_divice.setTextColor(Color.RED)
@@ -149,12 +168,12 @@ class ConersOneDevice : AppCompatActivity() {
                 name_player1_one_divice.setTextSize(20f)
                 button_player_1_one_divice.setBackgroundResource(R.drawable.tower1_casino);
                 button_player_2_one_divice.setBackgroundResource(R.drawable.tower2_casino);
-                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background2_casino);
-                bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
+                bottom_navigation_one_divice.setBackgroundColor(Color.argb(0, 224, 164, 103))
                 to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_casino)
-                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             }
             "Rome" -> {
                 name_player1_one_divice.setTextColor(Color.rgb(193, 150, 63))
@@ -165,12 +184,12 @@ class ConersOneDevice : AppCompatActivity() {
                 name_player1_one_divice.setTextSize(20f)
                 button_player_1_one_divice.setBackgroundResource(R.drawable.chip1_rome);
                 button_player_2_one_divice.setBackgroundResource(R.drawable.chip2_rome);
-                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_rome);
-                bottom_navigation_one_divice.setBackgroundColor(argb(0,224, 164, 103))
+                bottom_navigation_one_divice.setBackgroundColor(Color.argb(0, 224, 164, 103))
                 to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_rome)
-                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             }
             "Gothic" -> {
                 name_player1_one_divice.setTextColor(Color.WHITE)
@@ -181,12 +200,12 @@ class ConersOneDevice : AppCompatActivity() {
                 name_player1_one_divice.setTextSize(20f)
                 button_player_1_one_divice.setBackgroundResource(R.drawable.chip1_gothic);
                 button_player_2_one_divice.setBackgroundResource(R.drawable.chip2_gothic);
-                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_gothic);
-                bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
+                bottom_navigation_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
                 to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_gothic)
-                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             }
             "Japan" -> {
                 name_player1_one_divice.setTextColor(Color.BLACK)
@@ -197,12 +216,12 @@ class ConersOneDevice : AppCompatActivity() {
                 name_player1_one_divice.setTextSize(20f)
                 button_player_1_one_divice.setBackgroundResource(R.drawable.chip1_japan);
                 button_player_2_one_divice.setBackgroundResource(R.drawable.chip2_japan);
-                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_japan);
-                bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
+                bottom_navigation_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
                 to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             }
             "Noir" -> {
                 name_player1_one_divice.setTextColor(Color.WHITE)
@@ -213,12 +232,12 @@ class ConersOneDevice : AppCompatActivity() {
                 name_player1_one_divice.setTextSize(20f)
                 button_player_1_one_divice.setBackgroundResource(R.drawable.chip1_noir);
                 button_player_2_one_divice.setBackgroundResource(R.drawable.chip2_noir);
-                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-                toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_noir);
-                bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
+                bottom_navigation_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
                 to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_gothic)
-                toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
             }
         }
 
@@ -601,7 +620,7 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
     lateinit var t1: TextView
     lateinit var t2: TextView
 
-    
+
     var History: MutableList<MutableList<Int>> = mutableListOf()
     var EXODUS : Int = 0
     var indent : Float = 0f
@@ -701,11 +720,11 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
     var black_chip_normal : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip2_normal);       //картинки фишек и подсветки
     var grey_chip_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip1_normal);
 
-    var black_chip_egypt:Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip1_egypt);
-    var grey_chip_egypt:Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip2_egypt);
+    var black_chip_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip1_egypt);
+    var grey_chip_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip2_egypt);
 
-    var black_chip_casino:Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip1_casino);
-    var grey_chip_casino:Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip2_casino);
+    var black_chip_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip1_casino);
+    var grey_chip_casino: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip2_casino);
 
     var black_chip_rome: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip1_rome);
     var grey_chip_rome: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip2_rome);
@@ -773,8 +792,8 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
 
         var right_black_chip: Bitmap
         var right_grey_chip: Bitmap
-        var right_illumination:Bitmap
-        var right_green:Bitmap
+        var right_illumination: Bitmap
+        var right_green: Bitmap
 
         right_black_chip  = Bitmap.createScaledBitmap(black_chip_normal,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
         right_grey_chip  = Bitmap.createScaledBitmap(grey_chip_normal,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
@@ -1055,3 +1074,4 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
     }
 
 }
+*/

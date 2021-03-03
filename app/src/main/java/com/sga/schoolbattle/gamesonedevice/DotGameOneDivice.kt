@@ -107,8 +107,7 @@ class DotGameOneDivice : AppCompatActivity() {
         signature_canvas_dots_one_divice.t1 = findViewById(R.id.name_player1_one_divice) as TextView
         signature_canvas_dots_one_divice.t2 = findViewById(R.id.name_player2_one_divice) as TextView
 
-        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
-        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+
 
         when (Design) {
             "Normal" ->{
@@ -255,6 +254,18 @@ class DotGameOneDivice : AppCompatActivity() {
             signature_canvas_dots_one_divice.invalidate()
         }
         //comback_dots_one_divice.setVisibility(View.GONE);
+
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+        if(LANGUAGE == "English")
+        {
+            bottom_navigation_one_divice.menu.getItem(0).title = "Rules"
+            bottom_navigation_one_divice.menu.getItem(1).title = "Settings"
+            bottom_navigation_one_divice.menu.getItem(2).title = "Return"
+            bottom_navigation_one_divice.menu.getItem(3).title = "Back"
+        }
         bottom_navigation_one_divice.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{

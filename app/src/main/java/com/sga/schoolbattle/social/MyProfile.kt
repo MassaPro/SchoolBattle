@@ -154,6 +154,7 @@ class MyProfile : Fragment() {
         }
 
         image_global_ava.setOnClickListener {
+            Toast.makeText(locale_context,"Wrong name", Toast.LENGTH_LONG).show()
             D = dialog_find_ava
             dialog_find_ava.setContentView(R.layout.activity_ava__dialog)
 
@@ -216,65 +217,14 @@ class MyProfile : Fragment() {
                 dialog_find_ava.choose_ava_text.setTextColor(Color.WHITE)
                 dialog_find_ava!!.window!!.setLayout(width * 20 / 21, height * 15 / 16);
 
-                when (Design) {
-                    "Normal" -> {
-
-                    }
-                    "Egypt" -> {
-
-                        dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_egypt)
-                        dialog_find_ava.choose_ava_text.setBackgroundColor(Color.rgb(255, 230, 163))
-                        dialog_find_ava.choose_ava_text.typeface =
-                            ResourcesCompat.getFont(CONTEXT, R.font.egypt)
-                        dialog_find_ava.choose_ava_text.setTextColor(Color.BLACK)
-                    }
-                    "Casino" -> {
-                        dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_egypt)
-                        dialog_find_ava.choose_ava_text.setBackgroundResource(R.drawable.bottom_navigation_casino)
-                        dialog_find_ava.choose_ava_text.typeface =
-                            ResourcesCompat.getFont(CONTEXT, R.font.casino)
-                        dialog_find_ava.choose_ava_text.setTextColor(Color.YELLOW)
-                    }
-                    "Rome" -> {
-                        dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_rome)
-                        dialog_find_ava.choose_ava_text.setBackgroundResource(R.drawable.bottom_navigation_rome)
-                        dialog_find_ava.choose_ava_text.typeface =
-                            ResourcesCompat.getFont(CONTEXT, R.font.rome)
-                        dialog_find_ava.choose_ava_text.setTextColor(Color.rgb(193, 150, 63))
-                    }
-                    "Gothic" -> {
-                        dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_gothic)
-                        dialog_find_ava.choose_ava_text.setBackgroundColor(Color.BLACK)
-                        dialog_find_ava.choose_ava_text.typeface =
-                            ResourcesCompat.getFont(CONTEXT, R.font.gothic)
-                        dialog_find_ava.choose_ava_text.setTextColor(Color.WHITE)
-                    }
-                    "Japan" -> {
-                        dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_japan)
-                        dialog_find_ava.choose_ava_text.setBackgroundColor(Color.WHITE)
-                        dialog_find_ava.choose_ava_text.typeface =
-                            ResourcesCompat.getFont(CONTEXT, R.font.japan)
-                        dialog_find_ava.choose_ava_text.setTextColor(Color.BLACK)
-                    }
-                    "Noir" -> {
-                        dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_noir)
-                        dialog_find_ava.choose_ava_text.setBackgroundColor(Color.BLACK)
-                        dialog_find_ava.choose_ava_text.typeface =
-                            ResourcesCompat.getFont(CONTEXT, R.font.noir)
-                        dialog_find_ava.choose_ava_text.setTextColor(Color.WHITE)
-
-                    }
-                }
-
-                dialog_find_ava.show()
-                ProfileAvatarsetupRecyclerView(dialog_find_ava.item_profile_ava)
-                gamesRecycler = dialog_find_ava.item_profile_ava
-                gamesRecycler.isNestedScrollingEnabled = false;
-
-                gamesRecycler.layoutManager = GridLayoutManager(locale_context, 3)
-                dialog_find_ava.item_profile_ava.adapter?.notifyDataSetChanged()
             }
+            ProfileAvatarsetupRecyclerView(dialog_find_ava.item_profile_ava)
+            gamesRecycler = dialog_find_ava.item_profile_ava
+            gamesRecycler.isNestedScrollingEnabled = false;
 
+            gamesRecycler.layoutManager = GridLayoutManager(locale_context, 3)
+            dialog_find_ava.item_profile_ava.adapter?.notifyDataSetChanged()
+            dialog_find_ava.show()
 
         }
     }

@@ -103,8 +103,7 @@ class SnakeGameOneDivice : AppCompatActivity() {
 
         signature_canvas_snake_one_device.activity = this
 
-        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
-        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+
 
         signature_canvas_snake_one_device.t1 = findViewById(R.id.name_player1_one_divice) as TextView
         signature_canvas_snake_one_device.t2 = findViewById(R.id.name_player2_one_divice) as TextView
@@ -249,6 +248,22 @@ class SnakeGameOneDivice : AppCompatActivity() {
                 }
             }
             signature_canvas_snake_one_device.invalidate()
+        }
+
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+        if(LANGUAGE == "English")
+        {
+            bottom_navigation_one_divice.menu.getItem(0).title = "Rules"
+            bottom_navigation_one_divice.menu.getItem(1).title = "Settings"
+            bottom_navigation_one_divice.menu.getItem(2).title = "Return"
+            bottom_navigation_one_divice.menu.getItem(3).title = "Back"
         }
 
         bottom_navigation_one_divice.setOnNavigationItemSelectedListener { item ->

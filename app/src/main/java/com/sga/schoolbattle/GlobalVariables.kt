@@ -111,8 +111,20 @@ var MONEY: Int = 200                  //ДЕНЬГИ
 var GAMES: MutableList<Game> = mutableListOf()
 var FRIENDS: MutableList<String> = mutableListOf()
 var CHOOSE_GAMES: MutableList<String> = mutableListOf("XOGame", "DotGame", "SnakeGame", "BoxGame", "AngleGame", "VirusGame","Reversi")
-var LIGTH_GAMES_ICONS = mapOf("XOGame" to R.drawable.xo_icon,"DotGame" to R.drawable.dots_icon, "SnakeGame" to R.drawable.sn_icon, "BoxGame" to R.drawable.box_icon,
-    "AngleGame" to R.drawable.cor_icon, "VirusGame" to R.drawable.vir_icon,"Reversi" to R.drawable.rev_icon)
+var LIGTH_GAMES_ICONS = mapOf("XOGame" to R.drawable.xo_icon0,"DotGame" to R.drawable.dots_icon0, "SnakeGame" to R.drawable.sn_icon0, "BoxGame" to R.drawable.box_icon0,
+    "AngleGame" to R.drawable.cor_icon0, "VirusGame" to R.drawable.vir_icon0,"Reversi" to R.drawable.rev_icon0)
+
+var DARK_GAMES_ICONS = mapOf("XOGame" to R.drawable.xo_icon1,"DotGame" to R.drawable.dots_icon1, "SnakeGame" to R.drawable.sn_icon1, "BoxGame" to R.drawable.box_icon1,
+    "AngleGame" to R.drawable.cor_icon1, "VirusGame" to R.drawable.vir_icon1,"Reversi" to R.drawable.rev_icon1)
+
+var YELLOW_GAMES_ICONS = mapOf("XOGame" to R.drawable.xo_icon2,"DotGame" to R.drawable.dots_icon2, "SnakeGame" to R.drawable.sn_icon2,
+    "BoxGame" to R.drawable.box_icon2,
+    "AngleGame" to R.drawable.cor_icon2, "VirusGame" to R.drawable.vir_icon2,"Reversi" to R.drawable.rev_icon2)
+
+var BROWN_GAMES_ICONS = mapOf("XOGame" to R.drawable.xo_icon3,"DotGame" to R.drawable.dots_icon3, "SnakeGame" to R.drawable.sn_icon3,
+    "BoxGame" to R.drawable.box_icon3,
+    "AngleGame" to R.drawable.cor_icon3, "VirusGame" to R.drawable.vir_icon3,"Reversi" to R.drawable.rev_icon3)
+
 var currentContext: Context? = null
 lateinit var listener: ChildEventListener
 var recyclerSet: RecyclerSet = RecyclerSet()

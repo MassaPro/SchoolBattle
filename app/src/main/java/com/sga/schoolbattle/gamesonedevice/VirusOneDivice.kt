@@ -105,8 +105,8 @@ class VirusOneDivice : AppCompatActivity() {
 
         setContentView(R.layout.activity_one_device_games_template)
 
-        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
-        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+
+
         signature_canvas_virus_one_device.visibility = View.VISIBLE
         signature_canvas_virus_one_device.activity = this
 
@@ -249,7 +249,23 @@ class VirusOneDivice : AppCompatActivity() {
         }
 
 
-
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+        if(LANGUAGE == "English")
+        {
+            bottom_navigation_one_divice.menu.getItem(0).title = "Rules"
+            bottom_navigation_one_divice.menu.getItem(1).title = "Settings"
+            bottom_navigation_one_divice.menu.getItem(2).title = "Return"
+            bottom_navigation_one_divice.menu.getItem(3).title = "Back"
+        }
 
         bottom_navigation_one_divice.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {

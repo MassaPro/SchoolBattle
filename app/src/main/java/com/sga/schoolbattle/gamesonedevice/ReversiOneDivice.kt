@@ -99,8 +99,7 @@ class ReversiOneDivice : AppCompatActivity() {
         signature_canvas_reversi_one_device.activity = this
         CONTEXT = this
 
-        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
-        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+
 
         mSound.load(this, R.raw.xlup, 1);
         mSound2.load(this, R.raw.win, 1);
@@ -292,6 +291,20 @@ class ReversiOneDivice : AppCompatActivity() {
             {
                 this.startActivity(intent)
             }
+        }
+
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+        if(LANGUAGE == "English")
+        {
+            bottom_navigation_one_divice.menu.getItem(0).title = "Rules"
+            bottom_navigation_one_divice.menu.getItem(1).title = "Settings"
+            bottom_navigation_one_divice.menu.getItem(2).title = "Return"
+            bottom_navigation_one_divice.menu.getItem(3).title = "Back"
         }
 
         bottom_navigation_one_divice.setOnNavigationItemSelectedListener { item ->

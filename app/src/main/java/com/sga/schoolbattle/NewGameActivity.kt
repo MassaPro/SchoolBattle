@@ -206,7 +206,23 @@ class NewGameActivity : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.idView.text = translate_games(ITEMS[position])
-            LIGTH_GAMES_ICONS[ITEMS[position]]?.let { holder.icon.setImageResource(it) }
+            if(Design == "Normal" || Design == "Egypt" || Design == "Japan")
+            {
+                LIGTH_GAMES_ICONS[ITEMS[position]]?.let { holder.icon.setImageResource(it) }
+            }
+            else if(Design == "Gothic" || Design == "Noir")
+            {
+                DARK_GAMES_ICONS[ITEMS[position]]?.let { holder.icon.setImageResource(it) }
+            }
+            else if(Design == "Casino")
+            {
+                BROWN_GAMES_ICONS[ITEMS[position]]?.let { holder.icon.setImageResource(it) }
+            }
+            else if(Design == "Rome")
+            {
+                YELLOW_GAMES_ICONS[ITEMS[position]]?.let { holder.icon.setImageResource(it) }
+            }
+
             with(holder.itemView) {
                 tag = ITEMS[position]
                 setOnClickListener(onClickListener)

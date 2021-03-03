@@ -108,8 +108,7 @@ class XOGame_oneDivice : AppCompatActivity() {
         setContentView(R.layout.activity_one_device_games_template)
 
 
-        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
-        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+
 
         signature_canvas_xog_one_device.visibility = View.VISIBLE
         signature_canvas_xog_one_device.t1 = findViewById(R.id.name_player1_one_divice) as TextView
@@ -281,6 +280,25 @@ class XOGame_oneDivice : AppCompatActivity() {
             }
         }
 
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
+        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
+        if(LANGUAGE == "English")
+        {
+            bottom_navigation_one_divice.menu.getItem(0).title = "Rules"
+            bottom_navigation_one_divice.menu.getItem(1).title = "Settings"
+            bottom_navigation_one_divice.menu.getItem(2).title = "Return"
+            bottom_navigation_one_divice.menu.getItem(3).title = "Back"
+        }
         bottom_navigation_one_divice.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{
