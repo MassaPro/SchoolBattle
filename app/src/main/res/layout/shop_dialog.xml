@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout_parametrs_one_device"
-        android:layout_width="343dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#ffffff"
         android:orientation="vertical"
@@ -36,15 +36,14 @@
             android:id="@+id/price_shop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="256dp"
             android:gravity="right"
             android:text="цена"
             android:textColor="#000000"
             android:textSize="40dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.383"
+            app:layout_constraintHorizontal_bias="0.381"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -64,23 +63,24 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="30dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:text="Купить"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/price_shop"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/price_shop" />
 
         <Button
             android:id="@+id/button_close_2_shop_dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="5dp"
             android:text="отмена"
-            app:layout_constraintBottom_toBottomOf="@+id/buy_shop_dialog"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/buy_shop_dialog"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/price_shop" />
 
         <Button
             android:id="@+id/button_close_shop_dialog"
@@ -96,14 +96,12 @@
 
         <ImageView
             android:id="@+id/imageView8"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="30dp"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:padding="40dp"
             android:src="@drawable/green_icon"
-            app:layout_constraintBottom_toTopOf="@+id/price_shop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/description" />

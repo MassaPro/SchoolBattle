@@ -114,6 +114,16 @@ class SnakeGameWithComputer : AppCompatActivity() {
         }
         val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         signature_canvas_snake_with_computer.History = decode(prefs.getString("snake_with_computer_template", "").toString())
+
+        bottom_navigation_with_computer_template.itemIconTintList = generateColorStateList()
+        bottom_navigation_with_computer_template.itemTextColor = generateColorStateList()
+        if(LANGUAGE == "English")
+        {
+            bottom_navigation_with_computer_template.menu.getItem(0).title = "Rules"
+            bottom_navigation_with_computer_template.menu.getItem(1).title = "Settings"
+            bottom_navigation_with_computer_template.menu.getItem(2).title = "Return"
+            bottom_navigation_with_computer_template.menu.getItem(3).title = "Back"
+        }
         bottom_navigation_with_computer_template.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{

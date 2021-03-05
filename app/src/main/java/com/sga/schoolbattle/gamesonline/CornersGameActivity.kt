@@ -2,6 +2,7 @@
 package com.sga.schoolbattle.gamesonline
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.*
@@ -12,14 +13,35 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdLoader
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.formats.NativeAdOptions
+import com.google.android.gms.ads.formats.UnifiedNativeAd
+import com.google.android.gms.ads.formats.UnifiedNativeAdView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import com.sga.schoolbattle.*
 import com.sga.schoolbattle.engine.BlitzGameEngine
 import com.sga.schoolbattle.engine.LongGameEngine
+import com.sga.schoolbattle.engine.StupidGame
 import kotlinx.android.synthetic.main.activity_one_device_games_template.*
+import kotlinx.android.synthetic.main.activity_online_games_temlate.*
+import kotlinx.android.synthetic.main.activity_x_o_game.*
+import kotlinx.android.synthetic.main.activity_x_o_game.bottom_navigation_xog_online
+import kotlinx.android.synthetic.main.activity_x_o_game.button_player_1_online_xog
+import kotlinx.android.synthetic.main.activity_x_o_game.button_player_2_online_xog
+import kotlinx.android.synthetic.main.activity_x_o_game.signature_canvas
+import kotlinx.android.synthetic.main.activity_x_o_game.toolbar2_xog_online
+import kotlinx.android.synthetic.main.activity_x_o_game.toolbar_xog_online
+import kotlinx.android.synthetic.main.activity_x_o_game.timer2_xog_online
+import kotlinx.android.synthetic.main.activity_x_o_game.timer_xog_online
+import java.util.*
 
 class ConersGameActivity : AppCompatActivity() {
     fun encode(h: MutableList<MutableList<Int>>):String
@@ -114,296 +136,318 @@ class ConersGameActivity : AppCompatActivity() {
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_one_device_games_template)
-        signature_canvas_corners_one_device.visibility = View.VISIBLE
-        signature_canvas_corners_one_device.activity = this
-        CONTEXT = this
 
+
+        var helpend_var = 0
         mSound.load(this, R.raw.xlup, 1);
-        mSound2.load(this, R.raw.win, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
-        if(!PREMIUM)
-        {
-            mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
-        }
+        setContentView(R.layout.activity_online_games_temlate)
+        signature_canvas.visibility = View.VISIBLE
+        PICTURE_AVATAR[AVATAR]?.let { your_avatar_in_game.setImageResource(it) }
+        PICTURE_AVATAR[AVATAR]?.let { avatar_of_protivnic.setImageResource(it) } //TODO заменить это на значения его аватарки
 
+        bottom_navigation_xog_online.itemIconTintList = generateColorStateList()
+        bottom_navigation_xog_online.itemTextColor = generateColorStateList()
 
-        signature_canvas_corners_one_device.t1 = findViewById(R.id.name_player1_one_divice) as TextView
-        signature_canvas_corners_one_device.t2 = findViewById(R.id.name_player2_one_divice) as TextView
+        button_player_1_online_xog.textSize = 20f
+        button_player_2_online_xog.textSize = 20f
+        //                    Toast.makeText(applicationContext,"${signature_canvas.FIELD[checkList[1]][checkList[2]]}", Toast.LENGTH_LONG).show()
 
         when (Design) {
-            "Normal" ->{
-                name_player1_one_divice.setTextColor(Color.BLACK)
-                name_player2_one_divice.setTextColor(Color.BLACK)
-                button_player_1_one_divice.setBackgroundResource(R.drawable.chip2_normal);
-                button_player_2_one_divice.setBackgroundResource(R.drawable.chip1_normal);
-                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_normal)
+            "Normal" -> {
+
             }
             "Egypt" -> {
-                name_player1_one_divice.setTextColor(Color.BLACK)
-                name_player2_one_divice.setTextColor(Color.BLACK)
-                name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-                name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-                name_player2_one_divice.setTextSize(20f)
-                name_player1_one_divice.setTextSize(20f)
-                button_player_1_one_divice.setBackgroundResource(R.drawable.player1_egypt);
-                button_player_2_one_divice.setBackgroundResource(R.drawable.player2_egypt);
-                player_1_icon_one_divice.setBackgroundResource(R.drawable.chip1_egypt);
-                player_2_icon_one_divice.setBackgroundResource(R.drawable.chip2_egypt)
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-
-                label_one_device.setBackgroundResource(R.drawable.background_egypt);
-                bottom_navigation_one_divice.setBackgroundColor(Color.rgb(255, 230, 163))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                label_online.setBackgroundResource(R.drawable.background_egypt)
+                toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                button_player_1_online_xog.setTextColor(Color.BLACK)
+                button_player_2_online_xog.setTextColor(Color.BLACK)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                bottom_navigation_xog_online.setBackgroundColor(Color.rgb(255, 230, 163))
             }
             "Casino" -> {
-                name_player1_one_divice.setTextColor(Color.RED)
-                name_player2_one_divice.setTextColor(Color.BLACK)
-                name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-                name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-                name_player2_one_divice.setTextSize(20f)
-                name_player1_one_divice.setTextSize(20f)
-                button_player_1_one_divice.setBackgroundResource(R.drawable.tower1_casino);
-                button_player_2_one_divice.setBackgroundResource(R.drawable.tower2_casino);
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                label_one_device.setBackgroundResource(R.drawable.background2_casino);
-                bottom_navigation_one_divice.setBackgroundColor(Color.argb(0, 224, 164, 103))
-                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_casino)
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                label_online.setBackgroundResource(R.drawable.background2_casino)
+                toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                button_player_1_online_xog.setTextColor(Color.YELLOW)
+                button_player_2_online_xog.setTextColor(Color.YELLOW)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_casino)
             }
             "Rome" -> {
-                name_player1_one_divice.setTextColor(Color.rgb(193, 150, 63))
-                name_player2_one_divice.setTextColor(Color.BLACK)
-                name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-                name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-                name_player2_one_divice.setTextSize(20f)
-                name_player1_one_divice.setTextSize(20f)
-                button_player_1_one_divice.setBackgroundResource(R.drawable.chip1_rome);
-                button_player_2_one_divice.setBackgroundResource(R.drawable.chip2_rome);
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                label_one_device.setBackgroundResource(R.drawable.background_rome);
-                bottom_navigation_one_divice.setBackgroundColor(Color.argb(0, 224, 164, 103))
-                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_rome)
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                label_online.setBackgroundResource(R.drawable.background_rome)
+                toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                button_player_1_online_xog.setTextColor(Color.rgb(224, 164, 103))
+                button_player_2_online_xog.setTextColor(Color.rgb(224, 164, 103))
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                bottom_navigation_xog_online.setBackgroundResource(R.drawable.bottom_navigation_rome)
             }
             "Gothic" -> {
-                name_player1_one_divice.setTextColor(Color.WHITE)
-                name_player2_one_divice.setTextColor(Color.WHITE)
-                name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-                name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-                name_player2_one_divice.setTextSize(20f)
-                name_player1_one_divice.setTextSize(20f)
-                button_player_1_one_divice.setBackgroundResource(R.drawable.chip1_gothic);
-                button_player_2_one_divice.setBackgroundResource(R.drawable.chip2_gothic);
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                label_one_device.setBackgroundResource(R.drawable.background_gothic);
-                bottom_navigation_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_gothic)
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                label_online.setBackgroundResource(R.drawable.background_gothic)
+                toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                button_player_1_online_xog.setTextColor(Color.WHITE)
+                button_player_2_online_xog.setTextColor(Color.WHITE)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
+                button_player_1_online_xog.textSize = 16.5f
+                button_player_2_online_xog.textSize = 16.5f
             }
             "Japan" -> {
-                name_player1_one_divice.setTextColor(Color.BLACK)
-                name_player2_one_divice.setTextColor(Color.BLACK)
-                name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-                name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-                name_player2_one_divice.setTextSize(20f)
-                name_player1_one_divice.setTextSize(20f)
-                button_player_1_one_divice.setBackgroundResource(R.drawable.chip1_japan);
-                button_player_2_one_divice.setBackgroundResource(R.drawable.chip2_japan);
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                label_one_device.setBackgroundResource(R.drawable.background_japan);
-                bottom_navigation_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                label_online.setBackgroundResource(R.drawable.background_japan)
+                toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                button_player_1_online_xog.setTextColor(Color.BLACK)
+                button_player_2_online_xog.setTextColor(Color.BLACK)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                bottom_navigation_xog_online.setBackgroundColor(Color.WHITE)
             }
             "Noir" -> {
-                name_player1_one_divice.setTextColor(Color.WHITE)
-                name_player2_one_divice.setTextColor(Color.WHITE)
-                name_player1_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
-                name_player2_one_divice.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
-                name_player2_one_divice.setTextSize(20f)
-                name_player1_one_divice.setTextSize(20f)
-                button_player_1_one_divice.setBackgroundResource(R.drawable.chip1_noir);
-                button_player_2_one_divice.setBackgroundResource(R.drawable.chip2_noir);
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                toolbar2_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                label_one_device.setBackgroundResource(R.drawable.background_noir);
-                bottom_navigation_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
-                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_gothic)
-                toolbar_one_divice.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                label_online.setBackgroundResource(R.drawable.background_noir)
+                toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
+                button_player_1_online_xog.setTextColor(Color.WHITE)
+                button_player_2_online_xog.setTextColor(Color.WHITE)
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
             }
+            //Emotions начало--------------------------------------------------------------------------------------------
+            //Emotion конец-----------------------------------------------------------------------------------------------
+
+
+            // gameData.child("FIELDD").child("result").onDisconnect().setValue(yourName)
+            // gameData.onDisconnect().removeValue()
+        }
+        currentContext = this
+        CONTEXT = this
+        isRun = true
+
+        if (StupidGame != Activity()) StupidGame.finish()
+        if (NewGame != Activity()) NewGame.finish()
+        yourName =
+            getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "")
+                .toString()
+
+        var type = intent.getStringExtra("type")
+        if (type == null) type = ""
+        val opponentsName_: String = intent?.getStringExtra("opponent").toString()
+        for (i in opponentsName_) {
+            if (i == ' ') break
+            opponentsName += i
+        }
+        val yu = if (opponentsName < yourName) '1' else '0'
+        val op = if (opponentsName < yourName) '0' else '1'
+        gameData = if (intent.getStringExtra("key") != null) {
+            myRef.child(type).child("AngleGame").child(
+                (if (opponentsName < yourName)
+                    opponentsName + '_' + yourName + intent.getStringExtra("key")!!  else yourName + '_' + opponentsName + intent.getStringExtra("key")!!)
+            )
+        } else {
+            myRef.child(type).child("AngleGame").child(
+                (if (opponentsName < yourName)
+                    opponentsName + '_' + yourName  else yourName + '_' + opponentsName)
+            )
         }
 
-        val usedToClear = intent.getStringExtra("usedToClear") // тип игры
-        if (usedToClear == "clear") {
-            val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-            editor.putString("corner_one_divice", "")
-            editor.apply()
-        }
-        val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
-        signature_canvas_corners_one_device.History = decode(prefs.getString("corner_one_divice", "").toString())
-        if (signature_canvas_corners_one_device.History.size > 0)
-        {
+        initMenuFunctions(this, bottom_navigation_xog_online, intent, yourName, opponentsName, gameData)
 
-            for(i in 0 until signature_canvas_corners_one_device.FIELD.size)
-            {
-                for(j in 0 until signature_canvas_corners_one_device.FIELD[0].size)
-                {
-                    signature_canvas_corners_one_device.FIELD[i][j] = 0
-                }
+        signature_canvas.blocked = true
+        signature_canvas.positionData = gameData
+        button_player_1_online_xog.text = yourName
+        button_player_2_online_xog.text = opponentsName
+
+
+        if (type == "blitz") {
+            engine = object : BlitzGameEngine {
+                override var timer = Timer(true)
+                override var cntUser = 0
+                override var cntOpponent = 0
+                override val userT = timer2_xog_online
+                override val opponentT = timer_xog_online
+                override val user = yourName
+                override val opponent = opponentsName
+                override var move = intent.getStringExtra("move") == "1"
+                override var positionData = gameData
+                override var activity: Activity = this@ConersGameActivity
+                override var cnt = 0
+                override var type = "AngleGame"
+                override var isFinished = false
+                override var userRating = RATING
+                override var opponentRating = intent.getStringExtra("rating")!!.toInt()
             }
-            signature_canvas_corners_one_device.FIELD[0][5] = 1;signature_canvas_corners_one_device.FIELD[1][5] = 1;signature_canvas_corners_one_device.FIELD[2][5] = 1;
-            signature_canvas_corners_one_device.FIELD[0][6] = 1;signature_canvas_corners_one_device.FIELD[1][6] = 1;signature_canvas_corners_one_device.FIELD[2][6] = 1;
-            signature_canvas_corners_one_device.FIELD[0][7] = 1;signature_canvas_corners_one_device.FIELD[1][7] = 1;signature_canvas_corners_one_device.FIELD[2][7] = 1;
-
-
-            signature_canvas_corners_one_device.FIELD[5][0] = 2;signature_canvas_corners_one_device.FIELD[5][1] = 2;signature_canvas_corners_one_device.FIELD[5][2] = 2;
-            signature_canvas_corners_one_device.FIELD[6][0] = 2;signature_canvas_corners_one_device.FIELD[6][1] = 2;signature_canvas_corners_one_device.FIELD[6][2] = 2;
-            signature_canvas_corners_one_device.FIELD[7][0] = 2;signature_canvas_corners_one_device.FIELD[7][1] = 2;signature_canvas_corners_one_device.FIELD[7][2] = 2;
-
-            signature_canvas_corners_one_device.Black_or_grey_chip = "black"
-            for (i in signature_canvas_corners_one_device.History) {
-                signature_canvas_corners_one_device.FIELD[i[2]][i[3]] = signature_canvas_corners_one_device.FIELD[i[0]][i[1]]
-                signature_canvas_corners_one_device.FIELD[i[0]][i[1]] = 0
-                if(signature_canvas_corners_one_device.Black_or_grey_chip == "black")
-                {
-                    signature_canvas_corners_one_device.Black_or_grey_chip =  "grey"
-                }
-                else
-                {
-                    signature_canvas_corners_one_device.Black_or_grey_chip =  "black"
-                }
+            Toast.makeText(this, engine?.opponentRating.toString(), Toast.LENGTH_LONG).show()
+            button_player_1_online_xog.text = "$yourName (${engine?.userRating})"
+            button_player_2_online_xog.text = "$opponentsName (${engine?.opponentRating})"
+            engine?.init()
+            signature_canvas.engine = engine
+            signature_canvas.username = yourName
+        } else {
+            engineLong = object : LongGameEngine {
+                override val userT = timer2_xog_online
+                override val opponentT = timer_xog_online
+                override val user = yourName
+                override val opponent = opponentsName
+                override var move = intent.getStringExtra("move") == "1"
+                override var positionData = gameData
+                override var activity: Activity = this@ConersGameActivity
+                override var type = "AngleGame"
+                override var key = intent.getStringExtra("key")
             }
-            signature_canvas_corners_one_device.PHASE = true
-            for(i in  0 until signature_canvas_corners_one_device.Array_of_illumination.size)
-            {
-                for(j in 0 until signature_canvas_corners_one_device.Array_of_illumination[0].size)
-                {
-                    signature_canvas_corners_one_device.Array_of_illumination[i][j] =0
-                }
-            }
-            signature_canvas_corners_one_device.invalidate()
+            Toast.makeText(this, engineLong?.key.toString(), Toast.LENGTH_LONG).show()
+            engineLong?.init()
         }
+        var initialMove = intent.getStringExtra("move") == "1"
+        signature_canvas.username = yourName
+        signature_canvas.isFirstMove = intent.getStringExtra("move") == "1"
+        gameData.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
 
-        bottom_navigation_one_divice.itemIconTintList = generateColorStateList()
-        bottom_navigation_one_divice.itemTextColor = generateColorStateList()
-        if(LANGUAGE == "English")
-        {
-            bottom_navigation_one_divice.menu.getItem(0).title = "Rules"
-            bottom_navigation_one_divice.menu.getItem(1).title = "Settings"
-            bottom_navigation_one_divice.menu.getItem(2).title = "Return"
-            bottom_navigation_one_divice.menu.getItem(3).title = "Back"
-        }
-        bottom_navigation_one_divice.setOnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.page_1 ->{
-                    dialog_rules =
-                        Show_rules(
-                            this@ConersOneDevice
-                        )
-                    dialog_rules?.show("AngleGame")
+            override fun onDataChange(p0: DataSnapshot) {
+                var cnt = 0
+                if (p0.childrenCount >= 2) {
+                    engine?.changeMoveAndSyncTimer(p0)
                 }
-                R.id.page_2 ->{
-                    dialog_parametrs =
-                        Show_parametr_one_divice_one_Device(
-                            this@ConersOneDevice
-                        )
-                    dialog_parametrs?.showResult_one_device()
-                }
-                R.id.page_3 ->{
-                    this.finish()
-                    val intent = Intent(this, ConersOneDevice::class.java).apply {
-                        putExtra("usedToClear", "clear")}
-                    startActivity(intent)
-                }
-                R.id.page_4 ->{
-                    if (signature_canvas_corners_one_device.History.size > 0)
-                    {
-                        signature_canvas_corners_one_device.History.removeLast()
-                        var data_from_memory = encode(signature_canvas_corners_one_device.History)
-                        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
-                        editor.putString("corner_one_divice", data_from_memory)
-                        editor.apply()
-                        for(i in 0 until signature_canvas_corners_one_device.FIELD.size)
-                        {
-                            for(j in 0 until signature_canvas_corners_one_device.FIELD[0].size)
-                            {
-                                signature_canvas_corners_one_device.FIELD[i][j] = 0
+
+                fun checkForWin(): MutableList<Int> {
+                    val field = signature_canvas.FIELD
+                    val list_x = mutableListOf(1, 1, 0, -1)
+                    val list_y = mutableListOf(0, 1, 1, 1)
+
+                    val ans = mutableListOf(0)
+                    for (i in 0..6) {
+                        for (j in 0..5) {
+                            if (field[i][j] != 0) {
+                                for (k in 0..3) {
+                                    var fl = 0
+                                    for (pos in 0..2) {
+                                        Log.w("TAG", "$i ${list_x[k]} $pos")
+                                        if (field[(i + list_x[k] * pos + 7) % 7][(j + list_y[k] * pos + 6) % 6] != field[(i + list_x[k] * (pos + 1) + 7) % 7][(j + list_y[k] * (pos + 1) + 6) % 6]) {
+                                            fl = 1
+
+                                        }
+                                    }
+                                    if (fl == 0) {
+                                        for (pos in 0..3) {
+                                            ans.add((i + list_x[k] * pos + 7) % 7)
+                                            ans.add((j + list_y[k] * pos + 6) % 6)
+                                        }
+                                        return ans
+                                    }
+                                }
                             }
                         }
-                        signature_canvas_corners_one_device.FIELD[0][5] = 1;signature_canvas_corners_one_device.FIELD[1][5] = 1;signature_canvas_corners_one_device.FIELD[2][5] = 1;
-                        signature_canvas_corners_one_device.FIELD[0][6] = 1;signature_canvas_corners_one_device.FIELD[1][6] = 1;signature_canvas_corners_one_device.FIELD[2][6] = 1;
-                        signature_canvas_corners_one_device.FIELD[0][7] = 1;signature_canvas_corners_one_device.FIELD[1][7] = 1;signature_canvas_corners_one_device.FIELD[2][7] = 1;
-
-
-                        signature_canvas_corners_one_device.FIELD[5][0] = 2;signature_canvas_corners_one_device.FIELD[5][1] = 2;signature_canvas_corners_one_device.FIELD[5][2] = 2;
-                        signature_canvas_corners_one_device.FIELD[6][0] = 2;signature_canvas_corners_one_device.FIELD[6][1] = 2;signature_canvas_corners_one_device.FIELD[6][2] = 2;
-                        signature_canvas_corners_one_device.FIELD[7][0] = 2;signature_canvas_corners_one_device.FIELD[7][1] = 2;signature_canvas_corners_one_device.FIELD[7][2] = 2;
-
-                        signature_canvas_corners_one_device.Black_or_grey_chip = "black"
-                        for (i in signature_canvas_corners_one_device.History) {
-                            signature_canvas_corners_one_device.FIELD[i[2]][i[3]] = signature_canvas_corners_one_device.FIELD[i[0]][i[1]]
-                            signature_canvas_corners_one_device.FIELD[i[0]][i[1]] = 0
-                            if(signature_canvas_corners_one_device.Black_or_grey_chip == "black")
-                            {
-                                signature_canvas_corners_one_device.Black_or_grey_chip =  "grey"
-                            }
-                            else
-                            {
-                                signature_canvas_corners_one_device.Black_or_grey_chip =  "black"
-                            }
-                        }
-                        signature_canvas_corners_one_device.PHASE = true
-                        for(i in  0 until signature_canvas_corners_one_device.Array_of_illumination.size)
-                        {
-                            for(j in 0 until signature_canvas_corners_one_device.Array_of_illumination[0].size)
-                            {
-                                signature_canvas_corners_one_device.Array_of_illumination[i][j] =0
-                            }
-                        }
-                        signature_canvas_corners_one_device.invalidate()
                     }
+                    return ans
+                }
+                if (signature_canvas.isFirstMove == (cnt % 2 == 0)) signature_canvas.blocked = false
+                signature_canvas.invalidate()
+                val checkList = checkForWin()
+                Toast.makeText(this@XOGameActivity, engine?.move.toString(), Toast.LENGTH_LONG).show()
+                if (p0.hasChild("winner") || checkList.size > 1 || (checkList.size == 1 && cnt == 42)) {
+                    gameData.child("FIELD").child("result").onDisconnect().cancel()
+                    engine?.stopTimer()
+                    signature_canvas.blocked = true
+                    var whoWins = 0
+                    if (!p0.child("FIELD").hasChild("result")) {
+//                    Toast.makeText(applicationContext,"${signature_canvas.FIELD[checkList[1]][checkList[2]]}", Toast.LENGTH_LONG).show()
+                        if (checkList.size > 1) {
+                            for (i2 in 0..8) {
+                                if (i2 % 2 == 1) {
+                                    whoWins =
+                                        signature_canvas.FIELD[checkList.get(i2)][checkList.get(i2 + 1)]
+                                    signature_canvas.invalidate()
+                                }
+                            }
+                        }
+                    }
+                    var res: String
+                    if (checkList.size == 1) {
+                        res = "Ничья"
+                    } else {
+                        if (initialMove == (yourName < opponentsName_)) {
+                            res = if (yu == '0') {
+                                if (whoWins == 1) {
+                                    "Победа"
+                                } else {
+                                    "Поражение"
+                                }
+                            } else {
+                                if (whoWins == 2) {
+                                    "Победа"
+                                } else {
+                                    "Поражение"
+                                }
+                            }
+                        } else {
+                            res = if (yu == '1') {
+                                if (whoWins == 1) {
+                                    "Победа"
+                                } else {
+                                    "Поражение"
+                                }
+                            } else {
+                                if (whoWins == 2) {
+                                    "Победа"
+                                } else {
+                                    "Поражение"
+                                }
+                            }
+                        }
+                    }
+                    if (p0.hasChild("winner") && p0.child("winner").value.toString() == yourName) {
+                        res = "Победа"
+                    }
+                    if (p0.hasChild("winner") && p0.child("winner").value.toString() == opponentsName) {
+                        res = "Поражение"
+                    }
+                    engine?.finish(res, this@CornersGameActivity, isRun)
+                    engineLong?.finish(res, this@CornersGameActivity, isRun)
+                    gameData.removeEventListener(this)
+                }
+            }
+        })
+        if(Design == "Noir" ) {
+            label_online.setBackgroundResource(R.drawable.background_noir);
+        }
+
+
+        DDD = Dialog(this)
+        DDD.setContentView(R.layout.activity_game_over)
+        adLoader = AdLoader.Builder(this, "ca-app-pub-3940256099942544/2247696110")
+            .forUnifiedNativeAd { unifiedNativeAd : UnifiedNativeAd ->
+                // Show the ad.
+
+                val adView = this.layoutInflater
+                    .inflate(R.layout.natative_ads, null) as UnifiedNativeAdView
+                populateUnifiedNativeAdView(unifiedNativeAd, adView)
+                if (this.isDestroyed) {
+                    unifiedNativeAd.destroy()
+                    return@forUnifiedNativeAd
                 }
 
             }
-            true
-        }
-        to_back_one_divice.setOnClickListener {
-            this.finish()
-            val intent = Intent(this, NewGameActivity::class.java)
-            intent.putExtra("playType", 2)
-            if(mInterstitialAd_in_offline_games.isLoaded && !PREMIUM)
-            {
-                Intent_for_offline_games = intent
-                mInterstitialAd_in_offline_games.show()
-            }
-            else
-            {
-                this.startActivity(intent)
-            }
-        }
-    }
-    override fun onBackPressed()
-    {
-        super.onBackPressed()
-        var intent = Intent(this, NewGameActivity::class.java)
-        intent.putExtra("playType", 2)
-        if(mInterstitialAd_in_offline_games.isLoaded && !PREMIUM)
-        {
-            Intent_for_offline_games = intent
-            mInterstitialAd_in_offline_games.show()
-        }
-        else
-        {
-            this.startActivity(intent)
-        }
+            .withAdListener(object : AdListener() {
+                override fun onAdFailedToLoad(errorCode: Int) {
+                    // Handle the failure by logging, altering the UI, and so on.
+                }
+            })
+            .withNativeAdOptions(
+                NativeAdOptions.Builder()
+                    // Methods in the NativeAdOptions.Builder class can be
+                    // used here to specify individual options settings.
+                    .build())
+            .build()
+
+        adLoader.loadAd(AdRequest.Builder().build())
+
     }
 }
 

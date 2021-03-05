@@ -278,7 +278,8 @@ var TRANSLATE = mapOf("КУПИТЬ" to "BUY","КУПЛЕНО" to "PURCHASED","�
     "блиц онлайн" to "blitz online","долгая онлайн" to "long online","Игра на одном устройстве" to "Play one device",
     "игра с компьютером" to "play with computer","Поиск Соперника" to "Search","Вибрация" to "Vibration","Выбор дизайна" to "Choose design",
     "Звук" to "Sounds","ПРИМЕНИТЬ" to "APPLY","УСТАНОВЛЕНО" to "FIXED","Выход" to "Log out",
-    "Найти" to "Search","Профиль" to "Profile","Подписки" to "Following","Подписчики" to "Followers")
+    "Найти" to "Search","Профиль" to "Profile","Подписки" to "Following","Подписчики" to "Followers","ОТМЕНА" to "CANCEL",
+    "Подождите,видео еще загружается/Проверьте подключение к интернету" to "Wait, the video is still loading/Check your internet connection")
 fun translate(s: String): String
 {
     if(LANGUAGE == "Russian")

@@ -132,6 +132,14 @@ class XOGameActivity : AppCompatActivity() {
 
         bottom_navigation_xog_online.itemIconTintList = generateColorStateList()
         bottom_navigation_xog_online.itemTextColor = generateColorStateList()
+        if(LANGUAGE == "English")
+        {
+            bottom_navigation_xog_online.menu.getItem(0).title = "Rules"
+            bottom_navigation_xog_online.menu.getItem(1).title = "Settings"
+            bottom_navigation_xog_online.menu.getItem(2).title = "Emotions"
+            bottom_navigation_xog_online.menu.getItem(3).title = "Back"
+            bottom_navigation_xog_online.menu.getItem(4).title = "Next"
+        }
 
         button_player_1_online_xog.textSize = 20f
         button_player_2_online_xog.textSize = 20f

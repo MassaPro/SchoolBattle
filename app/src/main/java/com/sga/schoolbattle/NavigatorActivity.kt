@@ -10,7 +10,6 @@ import android.graphics.Color.rgb
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
-import android.view.Menu
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
@@ -36,6 +35,8 @@ import kotlinx.android.synthetic.main.activity_game_menu.*
 import kotlinx.android.synthetic.main.activity_navigator.*
 import kotlinx.android.synthetic.main.activity_profile_user.*
 import kotlinx.android.synthetic.main.activity_settings_fragment.*
+import kotlinx.android.synthetic.main.activity_shop_fragment.*
+import kotlinx.android.synthetic.main.activity_social.*
 import kotlinx.android.synthetic.main.reward_dialog.*
 
 var now: Context? = null
@@ -87,6 +88,34 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
             mInterstitialAd_in_offline_games = InterstitialAd(this)
             mInterstitialAd_in_offline_games.adUnitId = "ca-app-pub-3940256099942544/1033173712"
             mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
+
+            val prfs = this.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+            val username = prfs?.getString("username", "")
+            if(ARRAY_OF_DESIGN.size < DECODE(prfs?.getString("open_design", "0").toString()).size)
+            {
+                ARRAY_OF_DESIGN =  DECODE(prfs?.getString("open_design", 0.toString()).toString())
+            }
+            if(ARRAY_OF_AVATAR.size < DECODE(prfs?.getString("open_avatars", 0.toString()).toString()).size)
+            {
+                ARRAY_OF_AVATAR =  DECODE(prfs?.getString("open_avatars", 0.toString()).toString())
+            }
+            if(ARRAY_OF_EMOTION.size < DECODE(prfs?.getString("open_emotions", 0.toString()).toString()).size)
+            {
+                ARRAY_OF_EMOTION =  DECODE(prfs?.getString("open_emotions", 0.toString()).toString())
+            }
+            if(prfs?.getString("premium","0")=="1")
+            {
+                PREMIUM = true;
+            }
+            if(prfs?.getString("language","russian")=="english")
+            {
+                LANGUAGE = "English"
+            }
+            Design = prfs?.getString("design", "Normal").toString()                 //дизайн
+            SOUND = prfs?.getString("sound", "").toString() == "true"
+            VIBRATION = prfs?.getString("vibration", "").toString() == "true"       //получаем из памяти звук
+            AVATAR = prfs?.getString("avatar_number", 0.toString()).toString().toInt()
+            MONEY = prfs?.getString("money", INITIAL_AMOUNT.toString()).toString().toInt()         //не забыть положить другую сумму если идет вход в аккаунт
 
 
 
@@ -186,16 +215,55 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
                     RATING = p0.value.toString().toInt()
                     if (CONTEXT.toolbarName2 != null) {
                         Toast.makeText(CONTEXT, "DUB", Toast.LENGTH_LONG).show()
-                        CONTEXT.toolbarName2.text = "$username ($RATING)"
+                        CONTEXT.toolbarName2.text = "$username\n($RATING)"
                         CONTEXT.toolbarName2.setTextColor(colorByRating(RATING))
                     }
                     if (CONTEXT.profileMyName != null) {
-                        CONTEXT.profileMyName.text = "$username ($RATING)"
+                        if (RATING != -1)
+                        {
+                            CONTEXT.profileMyName.text = "$username\n($RATING)"
+                        }
+                        else
+                        {
+                            CONTEXT.profileMyName.text = "$username\n"
+                        }
+
                         CONTEXT.profileMyName.setTextColor(colorByRating(RATING))
                     }
                     if (CONTEXT.toolbarNameSettings != null) {
-                        CONTEXT.toolbarNameSettings.text = "$username ($RATING)"
+                        if (RATING != -1)
+                        {
+                            CONTEXT.toolbarNameSettings.text = "$username\n($RATING)"
+                        }
+                        else
+                        {
+                            CONTEXT.toolbarNameSettings.text = "$username\n"
+                        }
                         CONTEXT.toolbarNameSettings.setTextColor(colorByRating(RATING))
+                    }
+                    if(CONTEXT.toolbarNameSettings != null)
+                    {
+                        if (RATING != -1)
+                        {
+                            CONTEXT.toolbarNameSettings.text = "$username\n($RATING)"
+                        }
+                        else
+                        {
+                            CONTEXT.toolbarNameSettings.text = "$username\n"
+                        }
+                        CONTEXT.toolbarNameSettings.setTextColor(colorByRating(RATING))
+                    }
+                    if(CONTEXT.button_shop_name != null)
+                    {
+                        if (RATING != -1)
+                        {
+                            CONTEXT.button_shop_name.text = "$username\n($RATING)"
+                        }
+                        else
+                        {
+                            CONTEXT.button_shop_name.text = "$username\n"
+                        }
+                        CONTEXT.button_shop_name.setTextColor(colorByRating(RATING))
                     }
                 }
             }

@@ -30,6 +30,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_box_game.signature_canvas_box
+import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 import kotlinx.android.synthetic.main.activity_online_games_temlate.*
 import kotlinx.android.synthetic.main.activity_online_games_temlate.button_player_1_online_xog
 import kotlinx.android.synthetic.main.activity_online_games_temlate.button_player_2_online_xog
@@ -290,6 +291,14 @@ class BoxGameActivity : AppCompatActivity() {
 
         var initialMove = intent.getStringExtra("move") == "1"
         initMenuFunctions(this, bottom_navigation_xog_online, intent, yourName, opponentsName, gameData)
+        if(LANGUAGE == "English")
+        {
+            bottom_navigation_xog_online.menu.getItem(0).title = "Rules"
+            bottom_navigation_xog_online.menu.getItem(1).title = "Settings"
+            bottom_navigation_xog_online.menu.getItem(2).title = "Emotions"
+            bottom_navigation_xog_online.menu.getItem(3).title = "Back"
+            bottom_navigation_xog_online.menu.getItem(4).title = "Next"
+        }
         gameData.addValueEventListener(object : ValueEventListener {
 
             override fun onCancelled(p0: DatabaseError) {}

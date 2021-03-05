@@ -325,7 +325,7 @@ class ShopEMOTIONsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<
                         }
                         else
                         {
-                            Toast.makeText(locale_context, "Подождите,видео еще загружается/Проверьте подключение к интернету", Toast.LENGTH_LONG).show()
+                            Toast.makeText(locale_context, translate("Подождите,видео еще загружается/Проверьте подключение к интернету"), Toast.LENGTH_LONG).show()
                         }
                     }
                 }

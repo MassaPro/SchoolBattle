@@ -1,6 +1,7 @@
 package com.sga.schoolbattle.social
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Color.rgb
@@ -18,16 +19,19 @@ import androidx.viewpager.widget.ViewPager
 import com.sga.schoolbattle.*
 import com.sga.schoolbattle.shop.locale_context
 import com.google.android.material.tabs.TabLayout
+import com.sga.schoolbattle.engine.colorByRating
+import kotlinx.android.synthetic.main.activity_social.*
 import kotlinx.android.synthetic.main.activity_social.view.*
-import kotlinx.android.synthetic.main.activity_social.view.helped_text_social_1
-import kotlinx.android.synthetic.main.activity_social.view.helped_text_social_2
-import kotlinx.android.synthetic.main.activity_social.view.helped_text_social_3
+
 
 class SocialActivity : Fragment() {
 
     override fun onResume() {
         super.onResume()
         CONTEXT = requireActivity()
+        val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        val username = prefs?.getString("username", "")
+
     }
 
     @SuppressLint("WrongViewCast")
@@ -39,6 +43,9 @@ class SocialActivity : Fragment() {
         /**
          * Inflate tab_layout and setup Views.
          */
+        CONTEXT = requireActivity()
+        val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        val username = prefs?.getString("username", "")
 
 
         val v: View = inflater.inflate(R.layout.activity_social, container, false)

@@ -20,6 +20,8 @@ class ShopDialog(activity: Activity)
     fun do_desing(position: Int)
     {
         dialog_shop.setContentView(R.layout.shop_dialog)
+        dialog_shop.button_close_2_shop_dialog.text = translate("ОТМЕНА")
+        dialog_shop.buy_shop_dialog.text  = translate("КУПИТЬ")
 
         dialog_shop.show()
         dialog_shop.button_close_2_shop_dialog.setOnClickListener {
@@ -53,8 +55,8 @@ class ShopDialog(activity: Activity)
                 dialog_shop.button_close_2_shop_dialog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
                 dialog_shop.button_close_2_shop_dialog.setTextSize(20f)
 
-                dialog_shop.buy_shop_dialog.setTranslationY(50f)
-                dialog_shop.button_close_2_shop_dialog.setTranslationY(50f)
+//                dialog_shop.buy_shop_dialog.setTranslationY(50f)
+              //  dialog_shop.button_close_2_shop_dialog.setTranslationY(50f)
 
             }
             "Casino" -> {
@@ -78,8 +80,8 @@ class ShopDialog(activity: Activity)
                 dialog_shop.button_close_2_shop_dialog.setTextSize(25f)
                 dialog_shop.button_close_2_shop_dialog.setTextColor(Color.YELLOW)
 
-                dialog_shop.buy_shop_dialog.setTranslationY(80f)
-                dialog_shop.button_close_2_shop_dialog.setTranslationY(80f)
+       //         dialog_shop.buy_shop_dialog.setTranslationY(80f)
+         //       dialog_shop.button_close_2_shop_dialog.setTranslationY(80f)
 
             }
             "Rome" -> {
@@ -103,8 +105,8 @@ class ShopDialog(activity: Activity)
                 dialog_shop.button_close_2_shop_dialog.setTextSize(25f)
                 dialog_shop.button_close_2_shop_dialog.setTextColor(Color.rgb(193, 150, 63))
 
-                dialog_shop.buy_shop_dialog.setTranslationY(60f)
-                dialog_shop.button_close_2_shop_dialog.setTranslationY(60f)
+         //       dialog_shop.buy_shop_dialog.setTranslationY(60f)
+    //            dialog_shop.button_close_2_shop_dialog.setTranslationY(60f)
 
             }
             "Gothic" -> {
@@ -128,11 +130,11 @@ class ShopDialog(activity: Activity)
                 dialog_shop.button_close_2_shop_dialog.setTextSize(25f)
                 dialog_shop.button_close_2_shop_dialog.setTextColor(Color.WHITE)
 
-                dialog_shop.price_shop.setTranslationY(-80f)
-                dialog_shop.imageView2.setTranslationY(-80f)
-                dialog_shop.description.setTranslationY(-80f)
-                dialog_shop.buy_shop_dialog.setTranslationY(-80f)
-                dialog_shop.button_close_2_shop_dialog.setTranslationY(-80f)
+          //      dialog_shop.price_shop.setTranslationY(-80f)
+        //        dialog_shop.imageView2.setTranslationY(-80f)
+       //         dialog_shop.description.setTranslationY(-80f)
+        //        dialog_shop.buy_shop_dialog.setTranslationY(-80f)
+      //          dialog_shop.button_close_2_shop_dialog.setTranslationY(-80f)
 
             }
             "Japan" -> {
@@ -155,8 +157,8 @@ class ShopDialog(activity: Activity)
                 dialog_shop.buy_shop_dialog.setBackgroundResource(R.drawable.button)
                 dialog_shop.button_close_2_shop_dialog.setBackgroundResource(R.drawable.button)
 
-                dialog_shop.buy_shop_dialog.setTranslationY(100f)
-                dialog_shop.button_close_2_shop_dialog.setTranslationY(100f)
+   //             dialog_shop.buy_shop_dialog.setTranslationY(100f)
+      //          dialog_shop.button_close_2_shop_dialog.setTranslationY(100f)
 
             }
             "Noir" -> {
@@ -180,8 +182,8 @@ class ShopDialog(activity: Activity)
                 dialog_shop.button_close_2_shop_dialog.setTextSize(20f)
                 dialog_shop.button_close_2_shop_dialog.setTextColor(Color.WHITE)
 
-                dialog_shop.buy_shop_dialog.setTranslationY(100f)
-                dialog_shop.button_close_2_shop_dialog.setTranslationY(100f)
+         //       dialog_shop.buy_shop_dialog.setTranslationY(100f)
+      //          dialog_shop.button_close_2_shop_dialog.setTranslationY(100f)
 
             }
         }
@@ -189,7 +191,11 @@ class ShopDialog(activity: Activity)
     fun show1(holder: ProfileAvatarsItemRecyclerViewAdapter.ViewHolder,position : Int)
     {
         do_desing(position)
-        dialog_shop.description.text = AVATAR_TEXT[ARRAY_OF_AVATAR_SHOP[position]]
+        dialog_shop.description.text = AVATAR_TEXT[ARRAY_OF_AVATAR_SHOP[position]]?.let {
+            translate_avatar(
+                it
+            )
+        }
         dialog_shop.price_shop.text = holder.price.text
         dialog_shop.buy_shop_dialog.setOnClickListener {
             if(SOUND)
@@ -263,7 +269,7 @@ class ShopDialog(activity: Activity)
                 holder.price.text = ""
                 holder.icon.setImageResource(R.drawable.nulevoe)
                 holder.button.setBackgroundColor(argb(0, 0, 0, 0))
-                holder.button.text = "(КУПЛЕНО)"
+                holder.button.text = "(" + translate("КУПЛЕНО") +")"
                 locale_context!!.findViewById<TextView>(R.id.money_shop_toolbar).text =
                     MONEY.toString()
 
@@ -309,7 +315,7 @@ class ShopDialog(activity: Activity)
                 holder.price.text = ""
                 holder.icon.setImageResource(R.drawable.nulevoe)
                 holder.button.setBackgroundColor(argb(0, 0, 0, 0))
-                holder.button.text = "(КУПЛЕНО)"
+                holder.button.text = "(" + translate("КУПЛЕНО")+")"
                 locale_context!!.findViewById<TextView>(R.id.money_shop_toolbar).text =
                     MONEY.toString()
 

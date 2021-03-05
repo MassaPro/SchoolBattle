@@ -24,6 +24,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sga.schoolbattle.engine.colorByRating
 import com.sga.schoolbattle.shop.locale_context
 import kotlinx.android.synthetic.main.activity_settings_fragment.*
+import kotlinx.android.synthetic.main.activity_social.view.*
 import kotlinx.android.synthetic.main.design_item.view.*
 
 
@@ -43,11 +44,19 @@ class SettingsFragmentActivity : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onResume() {
         super.onResume()
-        if (RATING != -1) {
-            val prfs = fragment_activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
-            val username = prfs?.getString("username", "")
-            toolbarNameSettings.text = "$username ($RATING)"
-            toolbarNameSettings.setTextColor(colorByRating(RATING))
+        val prfs = fragment_activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        val username = prfs?.getString("username", "")
+        if(CONTEXT.toolbarNameSettings != null)
+        {
+            if (RATING != -1)
+            {
+                CONTEXT.toolbarNameSettings.text = "$username\n($RATING)"
+            }
+            else
+            {
+                CONTEXT.toolbarNameSettings.text = "$username\n"
+            }
+            CONTEXT.toolbarNameSettings.setTextColor(colorByRating(RATING))
         }
     }
 
@@ -58,14 +67,23 @@ class SettingsFragmentActivity : Fragment() {
 
         val prfs = fragment_activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val username = prfs?.getString("username", "")
-        toolbarNameSettings.text = username
+
+            if (RATING != -1)
+            {
+                toolbarNameSettings.text = "$username\n($RATING)"
+            }
+            else
+            {
+                toolbarNameSettings.text = "$username\n"
+            }
+            toolbarNameSettings.setTextColor(colorByRating(RATING))
+
 
         when (Design) {
             "Normal" -> {
                 settings_menu.setBackgroundColor(Color.WHITE)
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE);
                 toolbarNameSettings.setTextColor(Color.BLACK)
-                toolbarNameSettings.textSize = 25f
                 language_button.setTextColor(Color.BLACK)
             }
             "Egypt" -> {
@@ -73,7 +91,6 @@ class SettingsFragmentActivity : Fragment() {
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(rgb(255, 230, 163))
                 toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
                 toolbarNameSettings.setTextColor(Color.BLACK)
-                toolbarNameSettings.textSize = 25f
 
                 settings_menu.setBackgroundResource(R.drawable.background_egypt)
                 tb1.setBackgroundColor(rgb(255, 230, 163));
@@ -97,7 +114,6 @@ class SettingsFragmentActivity : Fragment() {
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_casino)
                 toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
                 toolbarNameSettings.setTextColor(Color.YELLOW)
-                toolbarNameSettings.textSize = 25f
                 settings_menu.setBackgroundResource(R.drawable.background2_casino)
                 tb1.setBackgroundResource(R.drawable.bottom_navigation_casino)
 
@@ -120,7 +136,7 @@ class SettingsFragmentActivity : Fragment() {
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_rome)
                 toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
                 toolbarNameSettings.setTextColor(rgb(193,150,63))
-                toolbarNameSettings.textSize = 25f
+
 
                 settings_menu.setBackgroundResource(R.drawable.background_rome)
                 tb1.setBackgroundResource(R.drawable.bottom_navigation_rome)
@@ -144,7 +160,7 @@ class SettingsFragmentActivity : Fragment() {
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.BLACK)
                 toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
                 toolbarNameSettings.setTextColor(Color.WHITE)
-                toolbarNameSettings.textSize = 25f
+
                 settings_menu.setBackgroundResource(R.drawable.background_gothic)
                 tb1.setBackgroundColor(Color.BLACK)
 
@@ -168,7 +184,6 @@ class SettingsFragmentActivity : Fragment() {
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE)
                 toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
                 toolbarNameSettings.setTextColor(Color.BLACK)
-                toolbarNameSettings.textSize = 25f
                 settings_menu.setBackgroundResource(R.drawable.background_japan)
 
                 choose_design.setBackgroundColor(argb(0,0,0,0))
@@ -192,7 +207,6 @@ class SettingsFragmentActivity : Fragment() {
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.BLACK)
                 toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
                 toolbarNameSettings.setTextColor(Color.WHITE)
-                toolbarNameSettings.textSize = 25f
                 settings_menu.setBackgroundResource(R.drawable.background_noir)
 
 
@@ -223,7 +237,7 @@ class SettingsFragmentActivity : Fragment() {
         (activity as AppCompatActivity?)!!.findViewById<BottomNavigationView>(R.id.nav_view).itemIconTintList = generateColorStateList()
         (activity as AppCompatActivity?)!!.findViewById<BottomNavigationView>(R.id.nav_view).itemTextColor = generateColorStateList()
 
-
+        PICTURE_AVATAR[AVATAR]?.let { button_icon_settings.setBackgroundResource(it) }
 
         logOutSettings.setOnClickListener {
             val editor = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)?.edit()

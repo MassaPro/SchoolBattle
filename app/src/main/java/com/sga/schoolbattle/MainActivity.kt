@@ -34,11 +34,15 @@ class MainActivity : Fragment() {
     override fun onResume() {
         super.onResume()
         CONTEXT = requireActivity()
+        val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        val username = prefs?.getString("username", "")
         if (RATING != -1) {
-            val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
-            val username = prefs?.getString("username", "")
-            toolbarName2.text = "$username ($RATING)"
-            toolbarName2.setTextColor(colorByRating(RATING))
+            toolbarName2.text = "$username\n($RATING)"
+           toolbarName2.setTextColor(colorByRating(RATING))
+        }
+        else
+        {
+            toolbarName2.text = "$username"
         }
         //val navView: BottomNavigationView = findViewById(R.id.nav_view)
         //navView.selectedItemId = R.id.navigation_home
@@ -57,34 +61,15 @@ class MainActivity : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val prfs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
-        val username = prfs?.getString("username", "")
-        CONTEXT = requireActivity()
+
+
 
         mSound1.load(activity, R.raw.money, 1);
 
+        PICTURE_AVATAR[AVATAR]?.let { my_ava.setBackgroundResource(it) }
 
-
-        if(ARRAY_OF_DESIGN.size < DECODE(prfs?.getString("open_design", "0").toString()).size)
-        {
-            ARRAY_OF_DESIGN =  DECODE(prfs?.getString("open_design", 0.toString()).toString())
-        }
-        if(ARRAY_OF_AVATAR.size < DECODE(prfs?.getString("open_avatars", 0.toString()).toString()).size)
-        {
-            ARRAY_OF_AVATAR =  DECODE(prfs?.getString("open_avatars", 0.toString()).toString())
-        }
-        if(ARRAY_OF_EMOTION.size < DECODE(prfs?.getString("open_emotions", 0.toString()).toString()).size)
-        {
-            ARRAY_OF_EMOTION =  DECODE(prfs?.getString("open_emotions", 0.toString()).toString())
-        }
-        if(prfs?.getString("premium","0")=="1")
-        {
-            PREMIUM = true;
-        }
-        if(prfs?.getString("language","russian")=="english")
-        {
-            LANGUAGE = "English"
-        }
+        val prfs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        val username = prfs?.getString("username", "")
 
 
         blitz.text = translate("блиц онлайн")
@@ -93,8 +78,7 @@ class MainActivity : Fragment() {
         playWithComp.text = translate("игра с компьютером")
         searchButton.text = translate("Поиск Соперника")
 
-        AVATAR = prfs?.getString("avatar_number", 0.toString()).toString().toInt()
-        MONEY = prfs?.getString("money", INITIAL_AMOUNT.toString()).toString().toInt()         //не забыть положить другую сумму если идет вход в аккаунт
+
         money.text = MONEY.toString()
         myRef.child("Users").child(username!!).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
@@ -110,9 +94,7 @@ class MainActivity : Fragment() {
         })
         money_icon.setBackgroundResource(R.drawable.money)
 
-        Design = prfs?.getString("design", "Normal").toString()                 //дизайн
-        SOUND = prfs?.getString("sound", "").toString() == "true"
-        VIBRATION = prfs?.getString("vibration", "").toString() == "true"       //получаем из памяти звук
+
 
         when (Design) {
             "Normal" -> {
@@ -147,7 +129,8 @@ class MainActivity : Fragment() {
                 money.setTextColor(Color.BLACK)
 
                 //id_shop_dialog.setBackgroundResource(R.drawable.game_menu_egypt)
-                //description.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                    //description.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
             }
             "Casino" -> {
 
@@ -156,9 +139,9 @@ class MainActivity : Fragment() {
                 //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
 
-            //    toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 toolbarName2.setTextColor(Color.YELLOW)
-                toolbarName2.setTextSize(25f)
+
 
                 newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 newGameButton.setTextColor(Color.YELLOW)
@@ -194,9 +177,8 @@ class MainActivity : Fragment() {
                 //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
 
-          //      toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                 toolbarName2.setTextColor(rgb(193,150,63))
-                toolbarName2.setTextSize(25f)
 
                 newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                 newGameButton.setTextColor(rgb(193,150,63))
@@ -233,7 +215,7 @@ class MainActivity : Fragment() {
 
                 toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
                 toolbarName2.setTextColor(Color.WHITE)
-                toolbarName2.setTextSize(25f)
+
 
                 newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
                 newGameButton.setTextColor(Color.WHITE)
@@ -269,9 +251,9 @@ class MainActivity : Fragment() {
                 //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
 
-         //      toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+               toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
                 toolbarName2.setTextColor(Color.BLACK)
-                toolbarName2.setTextSize(25f)
+
 
                 newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
                 newGameButton.setTextColor(Color.BLACK)
@@ -307,9 +289,9 @@ class MainActivity : Fragment() {
                 //nav_view.setBackgroundResource(R.drawable.bottom_navigation_casino)
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
 
-       //         toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
                 toolbarName2.setTextColor(Color.WHITE)
-                toolbarName2.setTextSize(25f)
+
 
                 newGameButton.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
                 newGameButton.setTextColor(Color.WHITE)
@@ -354,9 +336,6 @@ class MainActivity : Fragment() {
 
         (activity as AppCompatActivity?)!!.setSupportActionBar(my_toolbar2)
 
-        val prefs = activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
-        val globalName = prefs?.getString("username", "")
-        toolbarName2.text = globalName
 
 
         newGameButton.setOnClickListener {

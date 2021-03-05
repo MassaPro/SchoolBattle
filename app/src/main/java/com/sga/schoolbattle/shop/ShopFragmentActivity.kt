@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.sga.schoolbattle.*
 import com.google.android.material.tabs.TabLayout
+import com.sga.schoolbattle.engine.colorByRating
 import com.sga.schoolbattle.social.SocialActivity
 import kotlinx.android.synthetic.main.activity_settings_fragment.*
 import kotlinx.android.synthetic.main.activity_shop_fragment.*
@@ -26,12 +27,46 @@ import kotlinx.android.synthetic.main.activity_shop_fragment.*
 
 class ShopFragmentActivity : Fragment (){
 
+    override fun onResume() {
+        super.onResume()
+        val prfs = fragment_activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        val username = prfs?.getString("username", "")
+        if(CONTEXT.button_shop_name != null)
+        {
+            if (RATING != -1)
+            {
+                CONTEXT.button_shop_name.text = "$username\n($RATING)"
+            }
+            else
+            {
+                CONTEXT.button_shop_name.text = "$username\n"
+            }
+            CONTEXT.button_shop_name.setTextColor(colorByRating(RATING))
+        }
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         (activity as AppCompatActivity?)!!.setSupportActionBar(tb1)
 
         locale_context = activity as AppCompatActivity?
+
+
+        PICTURE_AVATAR[AVATAR]?.let { ava_shop.setBackgroundResource(it) }
+
+
+        val prfs = fragment_activity?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        val username = prfs?.getString("username", "")
+        if (RATING != -1)
+        {
+            button_shop_name.text = "$username\n($RATING)"
+        }
+        else
+        {
+            button_shop_name.text = "$username\n"
+        }
+        button_shop_name.setTextColor(colorByRating(RATING))
+
 
         var fon = locale_context!!.findViewById<View>(R.id.shop_menu)
         var t_shop = locale_context!!.findViewById<View>(R.id.toolbar_shop)
@@ -168,7 +203,7 @@ class ShopFragmentActivity : Fragment (){
         viewPager = v.findViewById<View>(R.id.viewpager_shop) as ViewPager
 
 
-        var name  = v.findViewById<View>(R.id.button_shop_name) as Button
+        var name  = v.findViewById<View>(R.id.button_shop_name) as TextView
         var money = v.findViewById<View>(R.id.money_shop_toolbar) as TextView
         var fon = v.findViewById<View>(R.id.shop_menu)
         var t_shop = v.findViewById<View>(R.id.toolbar_shop)

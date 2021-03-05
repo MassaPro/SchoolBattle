@@ -134,58 +134,70 @@ class ConersWithComputer : AppCompatActivity() {
 
 
         signature_canvas_corners_with_computer.t1 = findViewById(R.id.name_player1_with_computer_template) as TextView
-        signature_canvas_corners_with_computer.t2 = findViewById(R.id.name_player2_with_computer_template) as TextView
+        signature_canvas_corners_with_computer.t2 = findViewById(R.id.name_player2_with_computer_template) as TextView//обнуляем массива подсветки, чтобы он не оображался
+        //смена игроков, чтобы нельзя было сделать ходы подряд одному игроку
+        //перемещение фишки
+        //если подсвечена область
+        //смена игроков, чтобы нельзя было сделать ходы подряд одному игроку
+        //перемещение фишки
+        //если подсвечена область
+        //смена игроков, чтобы нельзя было сделать ходы подряд одному игроку
+        //перемещение фишки
+        //если подсвечена область
 
-        if(Design == "Egypt" ) {
-            name_player1_with_computer_template.setTextColor(Color.BLACK)
-            name_player2_with_computer_template.setTextColor(Color.BLACK)
-            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-            name_player2_with_computer_template.setTextSize(20f)
-            name_player1_with_computer_template.setTextSize(20f)
-            button_player_1_with_computer_template.setBackgroundResource(R.drawable.player1_egypt);
-            button_player_2_with_computer_template.setBackgroundResource(R.drawable.player2_egypt);
-            player_1_icon_template_with_computer.setBackgroundResource(R.drawable.black_chip_egypt);
-            player_2_icon_template_with_computer.setBackgroundResource(R.drawable.white_chip_egypt)
-            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+        // тип игры
+        when (Design) {
+            "Egypt" -> {
+                name_player1_with_computer_template.setTextColor(Color.BLACK)
+                name_player2_with_computer_template.setTextColor(Color.BLACK)
+                name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                name_player2_with_computer_template.setTextSize(20f)
+                name_player1_with_computer_template.setTextSize(20f)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.player1_egypt);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.player2_egypt);
+                player_1_icon_template_with_computer.setBackgroundResource(R.drawable.black_chip_egypt);
+                player_2_icon_template_with_computer.setBackgroundResource(R.drawable.white_chip_egypt)
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
 
-            label_with_computer.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_with_computer_template.setBackgroundColor(Color.rgb(255, 230, 163))
-            to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-        }
-        else if(Design == "Casino" ) {
-            name_player1_with_computer_template.setTextColor(Color.YELLOW)
-            name_player2_with_computer_template.setTextColor(Color.YELLOW)
-            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_with_computer_template.setTextSize(20f)
-            name_player1_with_computer_template.setTextSize(20f)
-            button_player_1_with_computer_template.setBackgroundResource(R.drawable.tower1_casino);
-            button_player_2_with_computer_template.setBackgroundResource(R.drawable.tower2_casino);
-            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-            label_with_computer.setBackgroundResource(R.drawable.background_casino);
-            bottom_navigation_with_computer_template.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-        }
-        else if(Design == "Rome" ) {
-            name_player1_with_computer_template.setTextColor(Color.rgb(193, 150, 63))
-            name_player2_with_computer_template.setTextColor(Color.rgb(193, 150, 63))
-            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-            name_player2_with_computer_template.setTextSize(20f)
-            name_player1_with_computer_template.setTextSize(20f)
-            button_player_1_with_computer_template.setBackgroundResource(R.drawable.white_chip_rome);
-            button_player_2_with_computer_template.setBackgroundResource(R.drawable.black_chip_rome);
-            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-            label_with_computer.setBackgroundResource(R.drawable.background_rome);
-            bottom_navigation_with_computer_template.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                label_with_computer.setBackgroundResource(R.drawable.background_egypt);
+                bottom_navigation_with_computer_template.setBackgroundColor(Color.rgb(255, 230, 163))
+                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            }
+            "Casino" -> {
+                name_player1_with_computer_template.setTextColor(Color.YELLOW)
+                name_player2_with_computer_template.setTextColor(Color.YELLOW)
+                name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                name_player2_with_computer_template.setTextSize(20f)
+                name_player1_with_computer_template.setTextSize(20f)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.tower1_casino);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.tower2_casino);
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                label_with_computer.setBackgroundResource(R.drawable.background_casino);
+                bottom_navigation_with_computer_template.setBackgroundColor(argb(0,224, 164, 103))
+                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            }
+            "Rome" -> {
+                name_player1_with_computer_template.setTextColor(Color.rgb(193, 150, 63))
+                name_player2_with_computer_template.setTextColor(Color.rgb(193, 150, 63))
+                name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                name_player2_with_computer_template.setTextSize(20f)
+                name_player1_with_computer_template.setTextSize(20f)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.white_chip_rome);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.black_chip_rome);
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                label_with_computer.setBackgroundResource(R.drawable.background_rome);
+                bottom_navigation_with_computer_template.setBackgroundColor(argb(0,224, 164, 103))
+                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            }
         }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
@@ -412,6 +424,15 @@ class ConersWithComputer : AppCompatActivity() {
         }
 
 
+        bottom_navigation_with_computer_template.itemIconTintList = generateColorStateList()
+        bottom_navigation_with_computer_template.itemTextColor = generateColorStateList()
+        if(LANGUAGE == "English")
+        {
+            bottom_navigation_with_computer_template.menu.getItem(0).title = "Rules"
+            bottom_navigation_with_computer_template.menu.getItem(1).title = "Settings"
+            bottom_navigation_with_computer_template.menu.getItem(2).title = "Return"
+            bottom_navigation_with_computer_template.menu.getItem(3).title = "Back"
+        }
         bottom_navigation_with_computer_template.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 ->{

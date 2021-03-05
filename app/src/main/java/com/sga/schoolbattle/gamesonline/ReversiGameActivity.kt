@@ -129,6 +129,14 @@ class ReversiGameActivity : AppCompatActivity() {
         PICTURE_AVATAR[AVATAR]?.let { avatar_of_protivnic.setImageResource(it) } //TODO заменить это на значения его аватарки
         bottom_navigation_xog_online.itemIconTintList = generateColorStateList()
         bottom_navigation_xog_online.itemTextColor = generateColorStateList()
+        if(LANGUAGE == "English")
+        {
+            bottom_navigation_xog_online.menu.getItem(0).title = "Rules"
+            bottom_navigation_xog_online.menu.getItem(1).title = "Settings"
+            bottom_navigation_xog_online.menu.getItem(2).title = "Emotions"
+            bottom_navigation_xog_online.menu.getItem(3).title = "Back"
+            bottom_navigation_xog_online.menu.getItem(4).title = "Next"
+        }
         when (Design) {
             "Egypt" -> {
                 label_online.setBackgroundResource(R.drawable.background_egypt)
