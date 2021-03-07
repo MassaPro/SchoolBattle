@@ -127,9 +127,6 @@ class XOGameActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_online_games_temlate)
         signature_canvas.visibility = View.VISIBLE
-        PICTURE_AVATAR[AVATAR]?.let { your_avatar_in_game.setImageResource(it) }
-        PICTURE_AVATAR[AVATAR]?.let { avatar_of_protivnic.setImageResource(it) } //TODO заменить это на значения его аватарки
-
         bottom_navigation_xog_online.itemIconTintList = generateColorStateList()
         bottom_navigation_xog_online.itemTextColor = generateColorStateList()
         if(LANGUAGE == "English")
@@ -234,6 +231,27 @@ class XOGameActivity : AppCompatActivity() {
             if (i == ' ') break
             opponentsName += i
         }
+        myRef.child("Users").child(yourName).child("image").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.exists()) {
+                    PICTURE_AVATAR[p0.value.toString().toInt()]?.let {your_avatar_in_game.setBackgroundResource(it) }
+                } else {
+                    PICTURE_AVATAR[0]?.let {your_avatar_in_game.setBackgroundResource(it) }
+                }
+            }
+        })
+
+        myRef.child("Users").child(opponentsName).child("image").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.exists()) {
+                    PICTURE_AVATAR[p0.value.toString().toInt()]?.let { avatar_of_protivnic.setBackgroundResource(it) }
+                } else {
+                    PICTURE_AVATAR[0]?.let { avatar_of_protivnic.setBackgroundResource(it) }
+                }
+            }
+        })
         val yu = if (opponentsName < yourName) '1' else '0'
         val op = if (opponentsName < yourName) '0' else '1'
         gameData = if (intent.getStringExtra("key") != null) {
@@ -460,6 +478,7 @@ class XOGameActivity : AppCompatActivity() {
                 }
             }
         })
+        //engine?.finish("Победа", this@XOGameActivity, isRun)
         if(Design == "Noir" ) {
             label_online.setBackgroundResource(R.drawable.background_noir);
         }

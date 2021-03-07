@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,8 +19,11 @@ import com.sga.schoolbattle.shop.locale_context
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_friends_and_followers.*
 import kotlinx.android.synthetic.main.activity_friends_and_followers_item.view.*
+import kotlinx.android.synthetic.main.activity_profile_user.*
+import kotlinx.android.synthetic.main.profile_dialog.view.*
 
 
 class FriendsList : Fragment() {
@@ -94,6 +98,26 @@ class ItemRecyclerViewAdapter(private val ITEMS: MutableList<String>):
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.idView.text = ITEMS[position]
+        myRef.child("Users").child(ITEMS[position]).child("image").addListenerForSingleValueEvent(object :
+            ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onDataChange(p0: DataSnapshot) {
+                //Toast.makeText(this@ProfileUserActivity, username + p0.toString(), Toast.LENGTH_LONG).show()
+                if (p0.exists()) {
+                    PICTURE_AVATAR[p0.value.toString().toInt()]?.let {
+                        holder.imView.setBackgroundResource(
+                            it
+                        )
+                    }
+                } else {
+                    PICTURE_AVATAR[0]?.let {
+                        holder.imView.setBackgroundResource(
+                            it
+                        )
+                    }
+                }
+            }
+        })
         when (Design) {
             "Normal" -> {
                 holder.idView.setTextColor(Color.BLACK)
@@ -135,6 +159,7 @@ class ItemRecyclerViewAdapter(private val ITEMS: MutableList<String>):
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val idView: TextView = view.textViewFriendsAndFollowers
+        val imView: ImageView = view.imageViewFriendsAndFollowers
     }
 }
 

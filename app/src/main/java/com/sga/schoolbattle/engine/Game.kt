@@ -1,8 +1,12 @@
 package com.sga.schoolbattle.engine
 
 import android.app.Activity
+import android.content.Intent
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.sga.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_game_over.*
@@ -33,8 +37,42 @@ class ShowResult(activity: Activity) {
         now = con
 
 
-  //      PICTURE_AVATAR[picture1]?.let { dialog.icon_for_you.setBackgroundResource(it) } TODO заменить
-  //      PICTURE_AVATAR[picture1]?.let { dialog.icon_for_you.setBackgroundResource(it) } TODO заменить
+        myRef.child("Users").child(globalName).child("image").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.exists()) {
+                    PICTURE_AVATAR[p0.value.toString().toInt()]?.let { dialog.icon_for_you.setBackgroundResource(it) }
+                } else {
+                    PICTURE_AVATAR[0]?.let { dialog.icon_for_you.setBackgroundResource(it) }
+                }
+            }
+        })
+
+        myRef.child("Users").child(oppName).child("image").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.exists()) {
+                    PICTURE_AVATAR[p0.value.toString().toInt()]?.let { dialog.icon_for_two.setBackgroundResource(it) }
+                } else {
+                    PICTURE_AVATAR[0]?.let { dialog.icon_for_two.setBackgroundResource(it) }
+                }
+            }
+        })
+
+        myRef.child("Users").child(oppName).child("rating").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.exists()) {
+                    dialog.opponent_rating_win_dialog.text = oppName.toString() + p0.value.toString()
+                } else {
+                    dialog.opponent_rating_win_dialog.text = oppName.toString() + "1000"
+                }
+            }
+        })
+
+        dialog.user_rating_win_dialog.text = globalName.toString() + newRating.toString().toString()
+
+
 
         when (Design) {
             "Normal" -> {
@@ -71,11 +109,25 @@ class ShowResult(activity: Activity) {
         is_pressed = true
 
         rv.setOnClickListener {
-
+            con.finish()
         }
 
         ng.setOnClickListener {
-
+            Toast.makeText(con, "kdslkj", Toast.LENGTH_LONG).show()
+            myRef.child("Users/$globalName/rating").addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {}
+                override fun onDataChange(p0: DataSnapshot) {
+                    if (p0.exists()) {
+                        RATING = p0.value.toString().toInt()
+                    } else {
+                        RATING = 1000
+                    }
+                    val intent = Intent(con, NewGameActivity::class.java)
+                    //activity?.overridePendingTransition(0, 0)
+                    intent.putExtra("playType", 0)
+                    con.startActivity(intent)
+                }
+            })
         }
 
         dialog.setOnDismissListener {
