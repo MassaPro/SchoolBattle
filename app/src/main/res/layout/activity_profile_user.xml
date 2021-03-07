@@ -45,8 +45,7 @@
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0"
-                app:srcCompat="@android:drawable/ic_menu_camera" />
+                app:layout_constraintVertical_bias="0" />
 
             <TextView
                 android:id="@+id/profileMyName"
@@ -92,34 +91,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/image_global_ava"
                 app:layout_constraintVertical_bias="0.062" />
 
-            <Button
-                android:id="@+id/profileMyFriendsIn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:text="Подписчики"
-                android:textAllCaps="false"
-                app:layout_constraintBottom_toBottomOf="@+id/profileFriendship"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.215"
-                app:layout_constraintStart_toEndOf="@+id/profileFriendship"
-                app:layout_constraintTop_toTopOf="@+id/profileFriendship"
-                app:layout_constraintVertical_bias="0.454" />
-
-            <Button
-                android:id="@+id/profileMyFriendsOut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:text="Подписки"
-                android:textAllCaps="false"
-                app:layout_constraintBottom_toBottomOf="@+id/profileMyFriendsIn"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.926"
-                app:layout_constraintStart_toEndOf="@+id/profileMyFriendsIn"
-                app:layout_constraintTop_toTopOf="@+id/profileMyFriendsIn"
-                app:layout_constraintVertical_bias="0.0" />
-
             <View
                 android:id="@+id/divider"
                 android:layout_width="409dp"
@@ -127,20 +98,16 @@
                 android:background="?android:attr/listDivider"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profileMyFriendsIn"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <View
                 android:id="@+id/divider3"
                 android:layout_width="409dp"
                 android:layout_height="1dp"
                 android:background="?android:attr/listDivider"
-                app:layout_constraintBottom_toTopOf="@+id/profileMyFriendsIn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_global_ava"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintTop_toBottomOf="@+id/image_global_ava" />
 
             <Button
                 android:id="@+id/profileSendCall"

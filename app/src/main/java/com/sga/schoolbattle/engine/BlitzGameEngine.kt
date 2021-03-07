@@ -3,9 +3,11 @@ package com.sga.schoolbattle.engine
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.view.MotionEvent
 import android.widget.TextView
 import com.sga.schoolbattle.myRef
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_online_games_temlate.*
 import java.util.*
 
 interface BlitzGameEngine {
@@ -113,8 +115,12 @@ interface BlitzGameEngine {
                 myRef.child("Users/$user/rating_history").push().setValue(updateRating(userRating, opponentRating, 0.5).first)
             }
             if (isActivityRunning) {
-                val dialog = ShowResult(activity)
+                var dialog = ShowResult(activity)
                 dialog.showResult(res, type, user, opponent, userRating, newRating)
+                activity.frameLayout4.setOnClickListener {
+                    dialog = ShowResult(activity)
+                    dialog.showResult(res, type, user, opponent, userRating, newRating)
+                }
             }
             isFinished = true
         }

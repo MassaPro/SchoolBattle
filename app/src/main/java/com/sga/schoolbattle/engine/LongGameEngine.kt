@@ -5,6 +5,7 @@ import android.content.Context
 import android.widget.TextView
 import com.sga.schoolbattle.myRef
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_online_games_temlate.*
 
 interface LongGameEngine {
     val userT: TextView
@@ -38,8 +39,12 @@ interface LongGameEngine {
             positionData.child("winner").setValue("0")
         }
         if (isActivityRunning) {
-            val dialog = ShowResult(activity)
+            var dialog = ShowResult(activity)
             dialog.showResult(res, type, user, opponent, -100000, -100000)
+            activity.frameLayout4.setOnClickListener {
+                dialog = ShowResult(activity)
+                dialog.showResult(res, type, user, opponent, -100000, -100000)
+            }
         }
     }
 }

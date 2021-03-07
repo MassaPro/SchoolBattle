@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:background="#FFC107"
-            android:text="закрыть"
+            android:text="новая игра"
             app:layout_constraintBottom_toBottomOf="@+id/revanche"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/revanche"
@@ -66,10 +66,9 @@
 
         <Button
             android:id="@+id/icon_for_you"
-            android:layout_width="115dp"
-            android:layout_height="115dp"
+            android:layout_width="65dp"
+            android:layout_height="59dp"
             android:layout_marginStart="16dp"
-            android:text="Button"
             app:layout_constraintBottom_toBottomOf="@+id/icon_for_two"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/icon_for_two" />
@@ -88,11 +87,10 @@
 
         <Button
             android:id="@+id/icon_for_two"
-            android:layout_width="115dp"
-            android:layout_height="115dp"
+            android:layout_width="60dp"
+            android:layout_height="61dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="15dp"
-            android:text="Button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/close_button_online" />
 
@@ -150,6 +148,30 @@
             app:layout_constraintStart_toEndOf="@+id/textView8"
             app:layout_constraintTop_toTopOf="@+id/textView8"
             app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/user_rating_win_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/icon_for_you"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.523" />
+
+        <TextView
+            android:id="@+id/opponent_rating_win_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="148dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/icon_for_two"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/user_rating_win_dialog"
+            app:layout_constraintTop_toTopOf="@+id/close_button_online"
+            app:layout_constraintVertical_bias="0.1" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

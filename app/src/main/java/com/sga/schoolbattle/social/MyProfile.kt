@@ -134,7 +134,7 @@ class MyProfile : Fragment() {
         val username = prefs?.getString("username", "")
         profileMyName.text = (username + if (RATING != -1) " ($RATING)" else "")
         if (buildRating.isEmpty()) {
-            myRef.child("Users/$username/rating_history")
+            myRef.child("Users/$username/rating_history").limitToLast(20)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {}
                     override fun onDataChange(p0: DataSnapshot) {
@@ -145,6 +145,7 @@ class MyProfile : Fragment() {
                                 ratingGraph?.updateRating(buildRating)
                             }
                         }
+                        myRef.child("Users/$username/rating_history").setValue(buildRating)
                     }
                 })
         } else {
@@ -152,6 +153,7 @@ class MyProfile : Fragment() {
                 ratingGraph?.updateRating(buildRating)
             }
         }
+
 
         image_global_ava.setOnClickListener {
             Toast.makeText(locale_context,"Wrong name", Toast.LENGTH_LONG).show()

@@ -125,8 +125,6 @@ class ReversiGameActivity : AppCompatActivity() {
         button_player_2_online_xog.textSize = 20f
         timer2_xog_online.textSize = 15f
         timer_xog_online.textSize = 15f
-        PICTURE_AVATAR[AVATAR]?.let { your_avatar_in_game.setImageResource(it) }
-        PICTURE_AVATAR[AVATAR]?.let { avatar_of_protivnic.setImageResource(it) } //TODO заменить это на значения его аватарки
         bottom_navigation_xog_online.itemIconTintList = generateColorStateList()
         bottom_navigation_xog_online.itemTextColor = generateColorStateList()
         if(LANGUAGE == "English")
@@ -239,6 +237,27 @@ class ReversiGameActivity : AppCompatActivity() {
         button_player_2_online_xog.text = opponent
         val yu = if (opponent < user) '1' else '0'
         val op = if (opponent < user) '0' else '1'
+        myRef.child("Users").child(user).child("image").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.exists()) {
+                    PICTURE_AVATAR[p0.value.toString().toInt()]?.let {your_avatar_in_game.setBackgroundResource(it) }
+                } else {
+                    PICTURE_AVATAR[0]?.let {your_avatar_in_game.setBackgroundResource(it) }
+                }
+            }
+        })
+
+        myRef.child("Users").child(opponent).child("image").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.exists()) {
+                    PICTURE_AVATAR[p0.value.toString().toInt()]?.let { avatar_of_protivnic.setBackgroundResource(it) }
+                } else {
+                    PICTURE_AVATAR[0]?.let { avatar_of_protivnic.setBackgroundResource(it) }
+                }
+            }
+        })
 
         if (type == "blitz") {
             engine = object : BlitzGameEngine {
