@@ -31,19 +31,22 @@ interface LongGameEngine {
         )
         myRef.updateChildren(upd)
         positionData.child("winner").onDisconnect().cancel()
+        var moneyChange = 0
         if (res == "Победа") {
             positionData.child("winner").setValue(user)
+            moneyChange = updateEconomyParams(activity, "long", "winner")
         } else if (res == "Поражение") {
             positionData.child("winner").setValue(opponent)
+            moneyChange = updateEconomyParams(activity, "long", "lose", -100000)
         } else {
             positionData.child("winner").setValue("0")
         }
         if (isActivityRunning) {
             var dialog = ShowResult(activity)
-            dialog.showResult(res, type, user, opponent, -100000, -100000)
+            dialog.showResult(res, type, user, opponent, -100000, -100000, moneyChange)
             activity.frameLayout4.setOnClickListener {
                 dialog = ShowResult(activity)
-                dialog.showResult(res, type, user, opponent, -100000, -100000)
+                dialog.showResult(res, type, user, opponent, -100000, -100000, moneyChange)
             }
         }
     }

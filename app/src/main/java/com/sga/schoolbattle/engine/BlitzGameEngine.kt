@@ -102,13 +102,18 @@ interface BlitzGameEngine {
             var newRating = 0
             timer.cancel()
             positionData.onDisconnect().cancel()
+            var moneyChange = 0
             if (res == "Победа") {
+                //TODO CHECK update money
                 positionData.updateChildren(winUpd)
                 newRating = updateRating(userRating, opponentRating, 1.0).first
+                moneyChange = updateEconomyParams(activity, "blitz", "winner", newRating - userRating)
                 myRef.child("Users/$user/rating_history").push().setValue(updateRating(userRating, opponentRating, 1.0).first)
             } else if (res == "Поражение") {
+                //TODO update money
                 positionData.updateChildren(loseUpd)
                 newRating = updateRating(opponentRating, userRating, 1.0).second
+                moneyChange = updateEconomyParams(activity, "blitz", "lose", newRating - userRating)
                 myRef.child("Users/$user/rating_history").push().setValue(updateRating(userRating, opponentRating, 0.0).first)
             } else {
                 positionData.child("winner").setValue("0")
@@ -116,10 +121,10 @@ interface BlitzGameEngine {
             }
             if (isActivityRunning) {
                 var dialog = ShowResult(activity)
-                dialog.showResult(res, type, user, opponent, userRating, newRating)
+                dialog.showResult(res, type, user, opponent, userRating, newRating, moneyChange)
                 activity.frameLayout4.setOnClickListener {
                     dialog = ShowResult(activity)
-                    dialog.showResult(res, type, user, opponent, userRating, newRating)
+                    dialog.showResult(res, type, user, opponent, userRating, newRating, moneyChange)
                 }
             }
             isFinished = true
