@@ -100,7 +100,7 @@ class SocialActivity : Fragment() {
 
                 }
                 "Egypt" -> {
-                    fon.setBackgroundResource(R.drawable.sign_up_egypt)
+                    fon.setBackgroundResource(R.drawable.background_egypt)
                     //tabLayout!!.setBackgroundResource(R.drawable.background_egypt)     //фон табов
                     v.toolbar_social.setBackgroundColor(rgb(255, 230, 163))// панель поиска
               //      tv.textSize = 14.3f        //так задаешь размер

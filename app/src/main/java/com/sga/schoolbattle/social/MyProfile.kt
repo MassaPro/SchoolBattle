@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Color.argb
 import android.graphics.Point
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -28,7 +30,10 @@ import com.google.firebase.database.ValueEventListener
 import com.sga.schoolbattle.shop.locale_context
 import kotlinx.android.synthetic.main.activity_ava__dialog.*
 import kotlinx.android.synthetic.main.activity_my_profile.*
+import kotlinx.android.synthetic.main.activity_social.view.*
+import kotlinx.android.synthetic.main.ava_item_profile.*
 import kotlinx.android.synthetic.main.ava_item_profile.view.*
+import kotlinx.android.synthetic.main.design_shop_item.view.*
 import java.util.*
 
 
@@ -78,6 +83,7 @@ class MyProfile : Fragment() {
                 profileMyStatus.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
                 profileMyStatus.setTextColor(Color.BLACK)
                 profileMyStatus.setTextSize(20f)
+
             }
             "Casino" -> {
                 profileMyName.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
@@ -169,57 +175,56 @@ class MyProfile : Fragment() {
             val width = size.x
             val height = size.y
             dialog_find_ava!!.window!!.setLayout(width * 20 / 21, height * 15 / 16);
-            if (Design == "Egypt") {
-                dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_egypt)
-                dialog_find_ava.choose_ava_text.setBackgroundColor(Color.rgb(255, 230, 163))
-                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(
-                    CONTEXT,
-                    R.font.egypt
-                )
-                dialog_find_ava.choose_ava_text.setTextColor(Color.BLACK)
-            } else if (Design == "Casino") {
-                dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_egypt)
-                dialog_find_ava.choose_ava_text.setBackgroundResource(R.drawable.bottom_navigation_casino)
-                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(
-                    CONTEXT,
-                    R.font.casino
-                )
-                dialog_find_ava.choose_ava_text.setTextColor(Color.YELLOW)
-            } else if (Design == "Rome") {
-                dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_rome)
-                dialog_find_ava.choose_ava_text.setBackgroundResource(R.drawable.bottom_navigation_rome)
-                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(
-                    CONTEXT,
-                    R.font.rome
-                )
-                dialog_find_ava.choose_ava_text.setTextColor(Color.rgb(193, 150, 63))
-            } else if (Design == "Gothic") {
-                dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_gothic)
-                dialog_find_ava.choose_ava_text.setBackgroundColor(Color.BLACK)
-                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(
-                    CONTEXT,
-                    R.font.gothic
-                )
-                dialog_find_ava.choose_ava_text.setTextColor(Color.WHITE)
-            } else if (Design == "Japan") {
-                dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_japan)
-                dialog_find_ava.choose_ava_text.setBackgroundColor(Color.WHITE)
-                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(
-                    CONTEXT,
-                    R.font.japan
-                )
-                dialog_find_ava.choose_ava_text.setTextColor(Color.BLACK)
-            } else if (Design == "Noir") {
-                dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_noir)
-                dialog_find_ava.choose_ava_text.setBackgroundColor(Color.BLACK)
-                dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(
-                    CONTEXT,
-                    R.font.noir
-                )
-                dialog_find_ava.choose_ava_text.setTextColor(Color.WHITE)
-                dialog_find_ava!!.window!!.setLayout(width * 20 / 21, height * 15 / 16);
-
+            when (Design) {
+                "Normal" -> {
+                    dialog_find_ava.choose_ava_text.setTextColor(Color.BLACK)
+                    dialog_find_ava.close_find_ava.setBackgroundResource(R.drawable.close_cross)
+                }
+                "Egypt" -> {
+                    dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_egypt)
+                    dialog_find_ava.choose_ava_text.setBackgroundColor(Color.rgb(255, 230, 163))
+                    dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                    dialog_find_ava.choose_ava_text.setTextColor(Color.BLACK)
+                    dialog_find_ava.close_find_ava.setBackgroundResource(R.drawable.close_cross)
+                    //dialog_find_ava.card_design_ava.setBackgroundColor(argb(0,0,0,0))
+                }
+                "Casino" -> {
+                    dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background2_casino)
+                    dialog_find_ava.choose_ava_text.setBackgroundResource(R.drawable.bottom_navigation_casino)
+                    dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                    dialog_find_ava.choose_ava_text.setTextColor(Color.YELLOW)
+                    dialog_find_ava.close_find_ava.setBackgroundResource(R.drawable.close_cross4)
+                }
+                "Rome" -> {
+                    dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_rome)
+                    dialog_find_ava.choose_ava_text.setBackgroundResource(R.drawable.bottom_navigation_rome)
+                    dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                    dialog_find_ava.choose_ava_text.setTextColor(Color.rgb(193, 150, 63))
+                    dialog_find_ava.close_find_ava.setBackgroundResource(R.drawable.close_cross3)
+                }
+                "Gothic" -> {
+                    dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_gothic)
+                    dialog_find_ava.choose_ava_text.setBackgroundColor(Color.BLACK)
+                    dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                    dialog_find_ava.choose_ava_text.setTextColor(Color.WHITE)
+                    dialog_find_ava.close_find_ava.setBackgroundResource(R.drawable.close_cross2)
+                }
+                "Japan" -> {
+                    dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_japan)
+                    dialog_find_ava.choose_ava_text.setBackgroundColor(Color.WHITE)
+                    dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                    dialog_find_ava.choose_ava_text.setTextColor(Color.BLACK)
+                    dialog_find_ava.close_find_ava.setBackgroundResource(R.drawable.close_cross)
+                }
+                "Noir" -> {
+                    dialog_find_ava.constraintLayout_find_emotion_dialog.setBackgroundResource(R.drawable.background_noir)
+                    dialog_find_ava.choose_ava_text.setBackgroundColor(Color.BLACK)
+                    dialog_find_ava.choose_ava_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                    dialog_find_ava.choose_ava_text.setTextColor(Color.WHITE)
+                    dialog_find_ava.close_find_ava.setBackgroundResource(R.drawable.close_cross2)
+                }
             }
+
             ProfileAvatarsetupRecyclerView(dialog_find_ava.item_profile_ava)
             gamesRecycler = dialog_find_ava.item_profile_ava
             gamesRecycler.isNestedScrollingEnabled = false;
@@ -259,6 +264,51 @@ class MyProfile : Fragment() {
 
             PICTURE_AVATAR[ARRAY_OF_AVATAR[position]]?.let { holder.img.setBackgroundResource(it) }     //картинка для авы
             holder.content.text = AVATAR_TEXT[ARRAY_OF_AVATAR[position]]          //название авы
+
+            when (Design) {
+                "Normal" -> {
+                    holder.background_item.setBackgroundColor(argb(0,0,0,0))
+                    holder.content.setTextColor(Color.BLACK)
+                    holder.content.typeface = ResourcesCompat.getFont(CONTEXT, R.font.normal)
+
+                }
+                "Egypt" -> {
+                    //holder.img.setBackgroundColor(argb(0,0,0,0))
+                    holder.background_item.setBackgroundColor(argb(0,0,0,0))
+                    holder.content.setTextColor(Color.BLACK)
+                    holder.content.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                }
+                "Casino" -> {
+                    holder.background_item.setBackgroundColor(argb(0,0,0,0))
+                    holder.content.setTextColor(Color.YELLOW)
+                    holder.content.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+
+                }
+                "Rome" -> {
+                    holder.background_item.setBackgroundColor(argb(0,0,0,0))
+                    holder.content.setTextColor(Color.rgb(193, 150, 63))
+                    holder.content.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+
+                }
+                "Gothic" -> {
+                    holder.background_item.setBackgroundColor(argb(0,0,0,0))
+                    holder.content.setTextColor(Color.WHITE)
+                    holder.content.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+
+                }
+                "Japan" -> {
+                    holder.background_item.setBackgroundColor(argb(0,0,0,0))
+                    holder.content.setTextColor(Color.BLACK)
+                    holder.content.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+
+                }
+                "Noir" -> {
+                    holder.background_item.setBackgroundColor(argb(0,0,0,0))
+                    holder.content.setTextColor(Color.WHITE)
+                    holder.content.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+
+                }
+            }
 
             holder.img.setOnClickListener {
                 val prefs = locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE)
@@ -305,6 +355,7 @@ class MyProfile : Fragment() {
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             var img: ImageView = view.img_ava_profile
             var content: TextView = view.text_ava
+            var background_item: CardView = view.card_design_ava
         }
     }
 }

@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +21,7 @@ import com.sga.schoolbattle.gamesonline.*
 import kotlinx.android.synthetic.main.activity_game_item.*
 import kotlinx.android.synthetic.main.activity_game_item.view.*
 import kotlinx.android.synthetic.main.activity_list_of_current_games.*
+import kotlinx.android.synthetic.main.ava_item_profile.view.*
 
 class GameListActivity : Fragment() {
 
@@ -177,6 +179,58 @@ class GameListActivity : Fragment() {
             holder.type.text = ITEMS[position].type
             holder.name.text = ITEMS[position].opponent
 
+            when (Design) {
+                "Normal" ->{
+                    holder.type.setTextColor(Color.BLACK)
+                    holder.name.setTextColor(Color.BLACK)
+                }
+                "Egypt" -> {
+
+                    holder.background_item.setBackgroundColor(rgb(255, 230, 163))
+                    holder.type.setTextColor(Color.BLACK)
+                    holder.type.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                    holder.name.setTextColor(Color.BLACK)
+                    holder.name.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                }
+                "Casino" -> {
+                    holder.background_item.setBackgroundResource(R.drawable.table)
+                    holder.type.setTextColor(Color.YELLOW)
+                    holder.type.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                    holder.name.setTextColor(Color.YELLOW)
+                    holder.name.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                }
+                "Rome" -> {
+                    holder.background_item.setBackgroundResource(R.drawable.bottom_navigation_rome)
+                    holder.type.setTextColor(rgb(193, 150, 63))
+                    holder.type.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                    holder.name.setTextColor(rgb(193, 150, 63))
+                    holder.name.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                }
+                "Gothic" -> {
+                    holder.background_item.setBackgroundColor(rgb(20,20,20))
+                    holder.type.setTextColor(Color.WHITE)
+                    //holder.type.setTextSize(35f)
+                    holder.type.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                    holder.name.setTextColor(Color.WHITE)
+                    //holder.name.setTextSize(35f)
+                    holder.name.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                }
+                "Japan" -> {
+                    holder.background_item.setBackgroundColor(Color.WHITE)
+                    holder.type.setTextColor(Color.BLACK)
+                    holder.type.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                    holder.name.setTextColor(Color.BLACK)
+                    holder.name.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                }
+                "Noir" -> {
+                    holder.background_item.setBackgroundColor(rgb(20,20,20))
+                    holder.type.setTextColor(Color.WHITE)
+                    holder.type.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                    holder.name.setTextColor(Color.WHITE)
+                    holder.name.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                }
+            }
+
 
             if (USERAVAS[ITEMS[position].opponent] == null) USERAVAS[ITEMS[position].opponent] = 0
             PICTURE_AVATAR[ARRAY_OF_AVATAR_SHOP[USERAVAS[ITEMS[position].opponent].toString().toInt()]]?.let {
@@ -198,6 +252,7 @@ class GameListActivity : Fragment() {
             val type: TextView = view.type
             val name: TextView = view.name
             val avatar: Button = view.avatar_in_gamelist
+            var background_item: CardView = view.game_list_card
         }
     }
 }
