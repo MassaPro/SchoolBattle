@@ -34,11 +34,11 @@ fun initEconomyParams(activity: Activity) { //разрешено выполня�
 
 //эта функция тупо считает новое число денег в зависимости от дельты рейтинга и числа игр
 fun calculateMoneyChange(numberOfGames: Int, ratingChange: Int, result: String): Int {//x - количество игр, // d - разница рейтинга, result - исход игры
-    if (result != "winner" || //вызывается ошибка компиляции при неправильных параметрах функции
-            result != "draw" ||
+    if (result != "winner" && //вызывается ошибка компиляции при неправильных параметрах функции
+            result != "draw" &&
             result != "lose") {
         if (BuildConfig.DEBUG) {
-            error("Assertion failed")
+            error("Assertion failed$result")
         }
     }
     val x = numberOfGames.toDouble()

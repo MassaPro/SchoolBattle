@@ -32,7 +32,8 @@ class ShowResult(activity: Activity) {
         globalName: String,
         oppName: String,
         userRating: Int,
-        newRating: Int
+        newRating: Int,
+        moneyChange: Int = 0
     ) {
         now = con
 
@@ -71,6 +72,7 @@ class ShowResult(activity: Activity) {
         })
 
         dialog.user_rating_win_dialog.text = globalName.toString() + newRating.toString().toString()
+        dialog.moneyChange.text = moneyChange.toString()
 
 
 

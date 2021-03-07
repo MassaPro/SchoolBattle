@@ -80,7 +80,7 @@ class MainActivity : Fragment() {
 
 
         money.text = MONEY.toString()
-        myRef.child("Users").child(username!!).addListenerForSingleValueEvent(object : ValueEventListener {
+        myRef.child("Users").child(username!!).addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.hasChild("money")) MONEY = snapshot.child("money").value.toString().toInt()
