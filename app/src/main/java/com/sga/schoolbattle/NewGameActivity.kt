@@ -41,7 +41,7 @@ class NewGameActivity : AppCompatActivity() {
                 back_button.setBackgroundResource(R.drawable.back_arrow_normal)
             }
             "Egypt" -> {
-                back_button.setBackgroundResource(R.drawable.arrow_back)
+                back_button.setBackgroundResource(R.drawable.back_arrow_normal)
                 game_list_menu.setBackgroundResource(R.drawable.background_egypt);
                 my_toolbar2.setBackgroundColor(rgb(255, 230, 163))
                 text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
@@ -69,7 +69,7 @@ class NewGameActivity : AppCompatActivity() {
                 text.setTextColor(Color.WHITE)
             }
             "Japan" -> {
-                back_button.setBackgroundResource(R.drawable.arrow_back)
+                back_button.setBackgroundResource(R.drawable.back_arrow_normal)
                 game_list_menu.setBackgroundResource(R.drawable.background_japan);
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
                 text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))

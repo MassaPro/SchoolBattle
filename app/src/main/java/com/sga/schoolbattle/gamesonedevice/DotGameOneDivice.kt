@@ -129,7 +129,7 @@ class DotGameOneDivice : AppCompatActivity() {
                 player_2_icon_one_divice.setBackgroundResource(R.drawable.chip2_egypt);
                 label_one_device.setBackgroundResource(R.drawable.background_egypt);
                 bottom_navigation_one_divice.setBackgroundColor(Color.rgb(255, 230, 163))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_normal)
                 toolbar_one_divice.setBackgroundColor(argb(0,0,0,0))
                 toolbar2_one_divice.setBackgroundColor(argb(0,0,0,0))
             }
@@ -194,7 +194,7 @@ class DotGameOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_japan);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_normal)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Noir" -> {
@@ -686,13 +686,13 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
             "Gothic" -> {
                 Line_paint.setColor(Color.rgb(100,100,100))      //ресур для линий (ширина и цвет)
                 paint_circle.setColor(Color.rgb(100,100,100))
-                paint_rib_1.setColor(Color.WHITE) //цвета для ребер  и их ширина
+                paint_rib_1.setColor(Color.YELLOW) //цвета для ребер  и их ширина
                 paint_rib_1.setStrokeWidth(5f)
-                paint_rib_2.setColor(Color.YELLOW)
+                paint_rib_2.setColor(Color.WHITE)
                 paint_rib_2.setStrokeWidth(5f)
 
-                shading_1.setColor(Color.WHITE)
-                shading_2.setColor(Color.YELLOW)
+                shading_1.setColor(Color.YELLOW)
+                shading_2.setColor(Color.WHITE)
                 shading_1.setStrokeWidth(2f)
                 shading_2.setStrokeWidth(2f)
                 line_who_do_move.color = Color.WHITE

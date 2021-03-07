@@ -61,26 +61,28 @@
             android:id="@+id/buy_shop_dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
             android:text="Купить"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/price_shop" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/price_shop"
+            app:layout_constraintVertical_bias="1.0" />
 
         <Button
             android:id="@+id/button_close_2_shop_dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
             android:padding="5dp"
             android:text="отмена"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/price_shop" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/price_shop"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/button_close_shop_dialog"

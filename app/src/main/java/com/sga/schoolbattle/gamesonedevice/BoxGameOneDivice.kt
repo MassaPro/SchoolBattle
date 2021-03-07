@@ -150,7 +150,7 @@ class BoxGameOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_egypt);
                 bottom_navigation_one_divice.setBackgroundColor(Color.rgb(255, 230, 163))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_normal)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Casino" -> {
@@ -214,7 +214,7 @@ class BoxGameOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_japan);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_normal)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Noir" -> {
@@ -643,7 +643,7 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
             }
             "Casino" -> {
 
-                paint_circle.setColor(Color.WHITE)     //цвета для точек
+                paint_circle.setColor(rgb(217,217,217))     //цвета для точек
                 paint_rib_1.setColor(Color.RED)          //цвета для ребер  и их ширина
                 paint_rib_2.setColor(Color.BLACK)
                 line_who_do_move.color = Color.YELLOW
@@ -662,8 +662,8 @@ class CanvasView_Boxs(context: Context, attrs: AttributeSet?) : View(context, at
             "Gothic" -> {
                 Line_paint.setColor(argb(0,0,0,0))          //ресур для линий (ширина и цвет)
                 paint_circle.setColor(Color.WHITE)     //цвета для точек
-                paint_rib_2.setColor(Color.RED)          //цвета для ребер  и их ширина
-                paint_rib_1.setColor(Color.BLUE)
+                paint_rib_2.setColor(Color.BLUE)          //цвета для ребер  и их ширина
+                paint_rib_1.setColor(Color.RED)
                 line_who_do_move.color = Color.WHITE
             }
             "Japan" -> {

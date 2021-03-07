@@ -132,7 +132,7 @@ class SnakeGameOneDivice : AppCompatActivity() {
 
                 label_one_device.setBackgroundResource(R.drawable.background_egypt);
                 bottom_navigation_one_divice.setBackgroundColor(rgb(255, 230, 163))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_normal)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Casino" -> {
@@ -196,7 +196,7 @@ class SnakeGameOneDivice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_japan);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_normal)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Noir" -> {
@@ -645,8 +645,8 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
             }
             "Casino" -> {
 
-                Line_paint.setColor(Color.WHITE)          //ресур для линий (ширина и цвет)
-                paint_circle.setColor(Color.WHITE)     //цвета для точек
+                Line_paint.setColor(rgb(217,217,217))          //ресур для линий (ширина и цвет)
+                paint_circle.setColor(rgb(217,217,217))     //цвета для точек
                 paint_rib_1.setColor(Color.BLACK)          //цвета для ребер  и их ширина
                 paint_rib_2.setColor(Color.RED)
                 border_1.setColor(Color.WHITE)
@@ -667,8 +667,8 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
                 Line_paint.setColor(
                     rgb(100, 100, 100))          //ресур для линий (ширина и цвет)
                 paint_circle.setColor(rgb(180, 180, 180))     //цвета для точек
-                paint_rib_2.setColor(Color.WHITE)          //цвета для ребер  и их ширина
-                paint_rib_1.setColor(Color.YELLOW)
+                paint_rib_2.setColor(Color.YELLOW)          //цвета для ребер  и их ширина
+                paint_rib_1.setColor(Color.WHITE)
                 border_1.setColor(rgb(100, 100, 100))
                 line_who_do_move.color = Color.WHITE
             }

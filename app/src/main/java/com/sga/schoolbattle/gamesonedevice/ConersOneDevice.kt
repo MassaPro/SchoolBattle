@@ -137,7 +137,7 @@ class ConersOneDevice : AppCompatActivity() {
 
                 label_one_device.setBackgroundResource(R.drawable.background_egypt);
                 bottom_navigation_one_divice.setBackgroundColor(Color.rgb(255, 230, 163))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_normal)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Casino" -> {
@@ -201,7 +201,7 @@ class ConersOneDevice : AppCompatActivity() {
                 toolbar2_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
                 label_one_device.setBackgroundResource(R.drawable.background_japan);
                 bottom_navigation_one_divice.setBackgroundColor(argb(0,0,0,0))
-                to_back_one_divice.setBackgroundResource(R.drawable.arrow_back)
+                to_back_one_divice.setBackgroundResource(R.drawable.back_arrow_normal)
                 toolbar_one_divice.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Noir" -> {
@@ -650,7 +650,7 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
                 line_who_do_move.color = Color.RED
             }
             "Casino" -> {
-                Line_paint.setColor(Color.WHITE)          //ресур для линий (ширина и цвет)
+                Line_paint.setColor(Color.rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
                 line_who_do_move.color = Color.YELLOW
             }
             "Rome" -> {

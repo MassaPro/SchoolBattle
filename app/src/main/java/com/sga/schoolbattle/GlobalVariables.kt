@@ -88,7 +88,7 @@ var AUXILIARY_MAP_OF_EMOTION = mapOf(0 to "e0", 1 to "e1", 2 to "e2",3 to "e3",4
 //____________________________________________________________________________________________________________________________
 var SPECIALLY: String = "ava1"               //СПЕЦИАЛЬНОЕ
 val PICTURE_SPECIALLY = mapOf(0 to R.drawable.video, 1 to R.drawable.vip, 2 to R.drawable.bag1,3 to R.drawable.bag2,4 to R.drawable.bag3,5 to R.drawable.bag4,6 to  R.drawable.bag5,7 to R.drawable.bag6,8 to R.drawable.bag7)
-val SPECIALLY_TEXT = mapOf(0 to "ВИДЕО С ВОЗНАГРАЖДЕНИЕМ", 1 to "ПРЕМИУМ АККАУНТ", 2 to "КАРМАН КРИСТАЛЛОВ",3 to "ПАКЕТ КРИСТАЛЛОВ",4 to "СУМКА КРИСТАЛЛОВ",5 to "РЮКЗАК КРИСТАЛЛОВ" , 6 to "ГОРШОК КРИСТАЛЛОВ",7 to "СУНДУК КРИСТАЛЛОВ",8 to " БАНК КРИСТАЛЛОВ")
+val SPECIALLY_TEXT = mapOf(0 to "ВИДЕО С ВОЗНАГРАЖДЕНИЕМ", 1 to "ПРЕМИУМ АККАУНТ", 2 to "ГОРШОК КРИСТАЛЛОВ",3 to "СУМКА КРИСТАЛЛОВ",4 to "РЮКЗАК КРИСТАЛЛОВ",5 to "ПОРТФЕЛЬ КРИСТАЛЛОВ" , 6 to "МЕШОК КРИСТАЛЛОВ",7 to "ЧЕМОДАН КРИСТАЛЛОВ",8 to " БАНК КРИСТАЛЛОВ")
 val PRICE_OD_SPECIALLY = mapOf(0 to 10,1 to 20,2 to 30,3 to 90)
 var ARRAY_OF_SPECIALLY_SHOP: MutableList<Int>  = mutableListOf(0,1,2,3,4,5,6,7,8)
 var ARRAY_OF_SPECIALLY: MutableList<Int>  = mutableListOf()

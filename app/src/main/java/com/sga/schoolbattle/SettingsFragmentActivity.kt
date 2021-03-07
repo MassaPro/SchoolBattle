@@ -83,14 +83,23 @@ class SettingsFragmentActivity : Fragment() {
             "Normal" -> {
                 settings_menu.setBackgroundColor(Color.WHITE)
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE);
-                toolbarNameSettings.setTextColor(Color.BLACK)
+                toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.normal)
+                //toolbarNameSettings.setTextColor(Color.BLACK)
                 language_button.setTextColor(Color.BLACK)
+                language_button.typeface = ResourcesCompat.getFont(CONTEXT, R.font.normal)
+                choose_design.typeface = ResourcesCompat.getFont(CONTEXT, R.font.normal)
+                vibrationSwitch.typeface = ResourcesCompat.getFont(CONTEXT, R.font.normal)
+                soundSwitch.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.normal))
+                vibrationSwitch.textSize = 24f
+                language_button.textSize = 24f
+                soundSwitch.textSize = 24f
+                choose_design.textSize = 24f
             }
             "Egypt" -> {
 
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(rgb(255, 230, 163))
                 toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
-                toolbarNameSettings.setTextColor(Color.BLACK)
+                //toolbarNameSettings.setTextColor(Color.BLACK)
 
                 settings_menu.setBackgroundResource(R.drawable.background_egypt)
                 tb1.setBackgroundColor(rgb(255, 230, 163));
@@ -113,7 +122,7 @@ class SettingsFragmentActivity : Fragment() {
             "Casino" -> {
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_casino)
                 toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
-                toolbarNameSettings.setTextColor(Color.YELLOW)
+                //toolbarNameSettings.setTextColor(Color.YELLOW)
                 settings_menu.setBackgroundResource(R.drawable.background2_casino)
                 tb1.setBackgroundResource(R.drawable.bottom_navigation_casino)
 
@@ -135,7 +144,7 @@ class SettingsFragmentActivity : Fragment() {
             "Rome" -> {
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_rome)
                 toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
-                toolbarNameSettings.setTextColor(rgb(193,150,63))
+                //toolbarNameSettings.setTextColor(rgb(193,150,63))
 
 
                 settings_menu.setBackgroundResource(R.drawable.background_rome)
@@ -159,7 +168,7 @@ class SettingsFragmentActivity : Fragment() {
             "Gothic" -> {
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.BLACK)
                 toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
-                toolbarNameSettings.setTextColor(Color.WHITE)
+               // toolbarNameSettings.setTextColor(Color.WHITE)
 
                 settings_menu.setBackgroundResource(R.drawable.background_gothic)
                 tb1.setBackgroundColor(Color.BLACK)
@@ -183,7 +192,7 @@ class SettingsFragmentActivity : Fragment() {
             "Japan" -> {
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE)
                 toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
-                toolbarNameSettings.setTextColor(Color.BLACK)
+                //toolbarNameSettings.setTextColor(Color.BLACK)
                 settings_menu.setBackgroundResource(R.drawable.background_japan)
 
                 choose_design.setBackgroundColor(argb(0,0,0,0))
@@ -206,7 +215,7 @@ class SettingsFragmentActivity : Fragment() {
             "Noir" -> {
                 fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.BLACK)
                 toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
-                toolbarNameSettings.setTextColor(Color.WHITE)
+                //toolbarNameSettings.setTextColor(Color.WHITE)
                 settings_menu.setBackgroundResource(R.drawable.background_noir)
 
 
@@ -409,13 +418,15 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
         when {
             AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == "Normal" -> {
                 holder.background_item.setBackgroundColor(Color.WHITE)
-                holder.button_prem.textSize = 15f        //так задаешь размер
+                holder.button_prem.textSize = 16f        //так задаешь размер
                 holder.button_prem.setTextColor(Color.BLACK)   //цвет
                 holder.button_prem.setBackgroundResource(R.drawable.button)
+                holder.button_prem.typeface = ResourcesCompat.getFont(CONTEXT, R.font.normal)
 
                 holder.contentView.textSize = 20f        //так задаешь размер
                 holder.contentView.setTextColor(Color.BLACK)   //цвет
                 holder.contentView.setBackgroundColor(argb(0,0,0,0))
+                holder.contentView.typeface = ResourcesCompat.getFont(CONTEXT, R.font.normal)
 
             }
             AUXILIARY_MAP_OF_DESIGNS[ARRAY_OF_DESIGN[position]] == "Egypt" -> {
@@ -568,12 +579,12 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                     fragment_activity!!.choose_design.typeface = ResourcesCompat.getFont(CONTEXT, R.font.normal)
 
                     fragment_activity!!.tb1.setBackgroundColor(rgb(245,245,245))
-                    fragment_activity!!.toolbarNameSettings.setTextColor(Color.BLACK)
+                    //fragment_activity!!.toolbarNameSettings.setTextColor(Color.BLACK)
                     fragment_activity!!.toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.normal)
 
                     fragment_activity!!.settings_menu.setBackgroundColor(Color.WHITE)
                     fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE);
-                    fragment_activity!!.toolbarNameSettings.setTextColor(Color.BLACK)
+                    //fragment_activity!!.toolbarNameSettings.setTextColor(Color.BLACK)
                     fragment_activity!!.toolbarNameSettings.textSize = 25f
 
                     fragment_activity!!.language_button.setTextColor(Color.BLACK)
@@ -584,7 +595,7 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
 
                     fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(rgb(255, 230, 163))
                     fragment_activity!!.toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
-                    fragment_activity!!.toolbarNameSettings.setTextColor(Color.BLACK)
+                    //fragment_activity!!.toolbarNameSettings.setTextColor(Color.BLACK)
                     fragment_activity!!.toolbarNameSettings.textSize = 25f
 
                     fragment_activity!!.settings_menu.setBackgroundResource(R.drawable.background_egypt)
@@ -608,7 +619,7 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                 "Casino" -> {
                     fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_casino)
                     fragment_activity!!.toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
-                    fragment_activity!!.toolbarNameSettings.setTextColor(Color.YELLOW)
+                    //fragment_activity!!.toolbarNameSettings.setTextColor(Color.YELLOW)
                     fragment_activity!!.toolbarNameSettings.textSize = 25f
                     fragment_activity!!.settings_menu.setBackgroundResource(R.drawable.background2_casino)
                     fragment_activity!!.tb1.setBackgroundResource(R.drawable.bottom_navigation_casino)
@@ -632,7 +643,7 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                 "Rome" -> {
                     fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundResource(R.drawable.bottom_navigation_rome)
                     fragment_activity!!.toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
-                    fragment_activity!!.toolbarNameSettings.setTextColor(rgb(193,150,63))
+                    //fragment_activity!!.toolbarNameSettings.setTextColor(rgb(193,150,63))
                     fragment_activity!!.toolbarNameSettings.textSize = 25f
 
                     fragment_activity!!.settings_menu.setBackgroundResource(R.drawable.background_rome)
@@ -656,7 +667,7 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                 "Gothic" -> {
                     fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.BLACK)
                     fragment_activity!!.toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
-                    fragment_activity!!.toolbarNameSettings.setTextColor(Color.WHITE)
+                    //fragment_activity!!.toolbarNameSettings.setTextColor(Color.WHITE)
                     fragment_activity!!.toolbarNameSettings.textSize = 25f
                     fragment_activity!!.settings_menu.setBackgroundResource(R.drawable.background_gothic)
                     fragment_activity!!.tb1.setBackgroundColor(Color.BLACK)
@@ -681,7 +692,7 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                 "Japan" -> {
                     fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.WHITE)
                     fragment_activity!!.toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
-                    fragment_activity!!.toolbarNameSettings.setTextColor(Color.BLACK)
+                    //fragment_activity!!.toolbarNameSettings.setTextColor(Color.BLACK)
                     fragment_activity!!.toolbarNameSettings.textSize = 25f
                     fragment_activity!!.settings_menu.setBackgroundResource(R.drawable.background_japan)
                     fragment_activity!!.tb1.setBackgroundColor(argb(0,0,0,0))
@@ -708,7 +719,7 @@ class DesignItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableList<Int>):
                 "Noir" -> {
                     fragment_activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.setBackgroundColor(Color.BLACK)
                     fragment_activity!!.toolbarNameSettings.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
-                    fragment_activity!!.toolbarNameSettings.setTextColor(Color.WHITE)
+                    //fragment_activity!!.toolbarNameSettings.setTextColor(Color.WHITE)
                     fragment_activity!!.toolbarNameSettings.textSize = 25f
                     fragment_activity!!.settings_menu.setBackgroundResource(R.drawable.background_noir)
                     fragment_activity!!.tb1.setBackgroundColor(Color.BLACK)
