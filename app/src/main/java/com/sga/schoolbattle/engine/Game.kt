@@ -2,13 +2,16 @@ package com.sga.schoolbattle.engine
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.sga.schoolbattle.*
+import kotlinx.android.synthetic.main.activity_game_menu.*
 import kotlinx.android.synthetic.main.activity_game_over.*
 
 
@@ -63,38 +66,113 @@ class ShowResult(activity: Activity) {
             override fun onCancelled(p0: DatabaseError) {}
             override fun onDataChange(p0: DataSnapshot) {
                 if (p0.exists()) {
-                    dialog.opponent_rating_win_dialog.text = oppName.toString() + p0.value.toString()
+                    dialog.opponent_rating_win_dialog.text = oppName.toString() + '\n'+ p0.value.toString()
                 } else {
-                    dialog.opponent_rating_win_dialog.text = oppName.toString() + "1000"
+                    dialog.opponent_rating_win_dialog.text = oppName.toString() + '\n'+"1000"
                 }
             }
         })
 
-        dialog.user_rating_win_dialog.text = globalName.toString() + newRating.toString().toString()
+        dialog.user_rating_win_dialog.text = globalName.toString() +'\n'+ newRating.toString().toString()
 
 
 
         when (Design) {
             "Normal" -> {
                 dialog.close_button_online.setBackgroundResource(R.drawable.close_cross)
+                dialog.revanche.setBackgroundResource(R.drawable.button)
+                dialog.restart.setBackgroundResource(R.drawable.button)
             }
             "Egypt" -> {
                 dialog.close_button_online.setBackgroundResource(R.drawable.close_cross)
+                dialog.linearLayout.setBackgroundResource(R.drawable.background_egypt)
+                dialog.user_rating_win_dialog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                dialog.opponent_rating_win_dialog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                dialog.revanche.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                dialog.restart.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                dialog.resultText.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                dialog.textView8.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+
+
             }
             "Casino" -> {
                 dialog.close_button_online.setBackgroundResource(R.drawable.close_cross2)
+                dialog.linearLayout.setBackgroundResource(R.drawable.background2_casino)
+                dialog.user_rating_win_dialog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                dialog.opponent_rating_win_dialog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                dialog.revanche.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                dialog.restart.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                dialog.resultText.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                dialog.textView8.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.casino)
+
+                dialog.user_rating_win_dialog.setTextColor(Color.YELLOW)
+                dialog.opponent_rating_win_dialog.setTextColor(Color.YELLOW)
+                dialog.revanche.setTextColor(Color.YELLOW)
+                dialog.restart.setTextColor(Color.YELLOW)
+                dialog.resultText.setTextColor(Color.WHITE)
+                dialog.textView8.setTextColor(Color.WHITE)
             }
             "Rome" -> {
                 dialog.close_button_online.setBackgroundResource(R.drawable.close_cross3)
+                dialog.linearLayout.setBackgroundResource(R.drawable.background_rome)
+                dialog.user_rating_win_dialog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                dialog.opponent_rating_win_dialog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                dialog.revanche.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                dialog.restart.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                dialog.resultText.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                dialog.textView8.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.rome)
+
+                dialog.user_rating_win_dialog.setTextColor(Color.rgb(193, 150, 63))
+                dialog.opponent_rating_win_dialog.setTextColor(Color.rgb(193, 150, 63))
+                dialog.revanche.setTextColor(Color.rgb(193, 150, 63))
+                dialog.restart.setTextColor(Color.rgb(193, 150, 63))
+                dialog.resultText.setTextColor(Color.GRAY)
+                dialog.textView8.setTextColor(Color.GRAY)
+
             }
             "Gothic" -> {
                 dialog.close_button_online.setBackgroundResource(R.drawable.close_cross2)
+                dialog.linearLayout.setBackgroundResource(R.drawable.background_gothic)
+                dialog.user_rating_win_dialog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                dialog.opponent_rating_win_dialog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                dialog.revanche.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                dialog.restart.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                dialog.resultText.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                dialog.textView8.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+
+                dialog.user_rating_win_dialog.setTextColor(Color.WHITE)
+                dialog.opponent_rating_win_dialog.setTextColor(Color.WHITE)
+                dialog.revanche.setTextColor(Color.WHITE)
+                dialog.restart.setTextColor(Color.WHITE)
+                dialog.resultText.setTextColor(Color.WHITE)
+                dialog.textView8.setTextColor(Color.WHITE)
             }
             "Japan" -> {
                 dialog.close_button_online.setBackgroundResource(R.drawable.close_cross)
+                dialog.linearLayout.setBackgroundResource(R.drawable.background_japan)
+                dialog.user_rating_win_dialog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                dialog.opponent_rating_win_dialog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                dialog.revanche.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                dialog.restart.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                dialog.resultText.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                dialog.textView8.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.japan)
             }
             "Noir" -> {
                 dialog.close_button_online.setBackgroundResource(R.drawable.close_cross2)
+                dialog.linearLayout.setBackgroundResource(R.drawable.background_noir)
+
+                dialog.user_rating_win_dialog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                dialog.opponent_rating_win_dialog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                dialog.revanche.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                dialog.restart.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                dialog.resultText.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                dialog.textView8.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.noir)
+
+                dialog.user_rating_win_dialog.setTextColor(Color.WHITE)
+                dialog.opponent_rating_win_dialog.setTextColor(Color.WHITE)
+                dialog.revanche.setTextColor(Color.WHITE)
+                dialog.restart.setTextColor(Color.WHITE)
+                dialog.resultText.setTextColor(Color.WHITE)
             }
         }
 
@@ -137,7 +215,7 @@ class ShowResult(activity: Activity) {
             myRef.child(gameType + "Users").child(globalName).removeValue()
         }
         val body = dialog.findViewById(R.id.resultText) as TextView
-        body.text = result
+        body.text = translate(result)
         if (userRating != -100000) {
             val changeRating = dialog.findViewById(R.id.ratingChange) as TextView
             changeRating.text = (if (newRating > userRating) "+" else "") + (newRating - userRating).toString()
@@ -146,14 +224,6 @@ class ShowResult(activity: Activity) {
 
 
 
-        if(Design == "Normal")
-        {
-            dialog.close_button_online.setBackgroundResource(R.drawable.close_cross)
-        }
-        if(Design == "")
-        {
-            dialog.close_button_online.setBackgroundResource(R.drawable.close_cross)
-        }
     }
 
     fun delete() {
