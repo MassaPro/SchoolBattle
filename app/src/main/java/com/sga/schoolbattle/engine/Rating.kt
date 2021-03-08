@@ -3,13 +3,18 @@ package com.sga.schoolbattle.engine
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Color
+import android.graphics.Color.rgb
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import com.sga.schoolbattle.R
 import com.sga.schoolbattle.RATING
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import com.jjoe64.graphview.series.PointsGraphSeries
+import com.sga.schoolbattle.CONTEXT
+import com.sga.schoolbattle.Design
+import kotlinx.android.synthetic.main.activity_online_games_temlate.*
 import kotlin.math.max
 import kotlin.math.pow
 import kotlin.math.roundToInt
@@ -117,6 +122,43 @@ class RatingGraph(val activity: Activity?) {
         graph?.addSeries(series)
         graph?.getGridLabelRenderer()?.setVerticalLabelsColor(Color.WHITE);
         graph?.getGridLabelRenderer()?.setHorizontalLabelsColor(Color.WHITE);
+
+        when (Design) {
+            "Normal" -> {
+                graph?.getGridLabelRenderer()?.setVerticalLabelsColor(Color.BLACK);
+                graph?.getGridLabelRenderer()?.setHorizontalLabelsColor(Color.BLACK);
+            }
+            "Egypt" -> {
+                graph?.getGridLabelRenderer()?.setVerticalLabelsColor(Color.BLACK);
+                graph?.getGridLabelRenderer()?.setHorizontalLabelsColor(Color.BLACK);
+
+            }
+            "Casino" -> {
+                graph?.getGridLabelRenderer()?.setVerticalLabelsColor(Color.YELLOW);
+                graph?.getGridLabelRenderer()?.setHorizontalLabelsColor(Color.YELLOW);
+
+            }
+            "Rome" -> {
+                graph?.getGridLabelRenderer()?.setVerticalLabelsColor(rgb(193, 150, 63));
+                graph?.getGridLabelRenderer()?.setHorizontalLabelsColor(rgb(193, 150, 63));
+
+            }
+            "Gothic" -> {
+                graph?.getGridLabelRenderer()?.setVerticalLabelsColor(Color.WHITE);
+                graph?.getGridLabelRenderer()?.setHorizontalLabelsColor(Color.WHITE);
+
+            }
+            "Japan" -> {
+                graph?.getGridLabelRenderer()?.setVerticalLabelsColor(Color.BLACK);
+                graph?.getGridLabelRenderer()?.setHorizontalLabelsColor(Color.BLACK);
+
+            }
+            "Noir" -> {
+                graph?.getGridLabelRenderer()?.setVerticalLabelsColor(Color.WHITE);
+                graph?.getGridLabelRenderer()?.setHorizontalLabelsColor(Color.WHITE);
+
+            }
+        }
 
     }
 

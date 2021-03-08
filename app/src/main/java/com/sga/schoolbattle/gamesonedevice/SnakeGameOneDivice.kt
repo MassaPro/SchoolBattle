@@ -630,12 +630,7 @@ class CanvasView_SNAKE(context: Context, attrs: AttributeSet?) : View(context, a
             "Egypt" -> {
 
                 Line_paint.setColor(
-                    rgb(
-                        100,
-                        100,
-                        100
-                    )
-                )          //ресур для линий (ширина и цвет)
+                    rgb(100, 100, 100))          //ресур для линий (ширина и цвет)
                 paint_circle.setColor(rgb(100, 100, 100))
                 paint_rib_1.setColor(Color.WHITE)          //цвета для ребер  и их ширина
                 paint_rib_2.setColor(Color.BLACK)

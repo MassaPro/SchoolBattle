@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.*
 import android.graphics.Color.argb
+import android.graphics.Color.rgb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Vibrator
@@ -136,9 +137,13 @@ class ReversiGameActivity : AppCompatActivity() {
             bottom_navigation_xog_online.menu.getItem(4).title = "Next"
         }
         when (Design) {
+            "Normal" -> {
+                button_player_1_online_xog.setTextColor(Color.BLACK)
+                button_player_2_online_xog.setTextColor(Color.BLACK)
+            }
             "Egypt" -> {
                 label_online.setBackgroundResource(R.drawable.background_egypt)
-                button_player_1_online_xog.setTextColor(Color.BLACK)
+                button_player_1_online_xog.setTextColor(Color.WHITE)
                 button_player_2_online_xog.setTextColor(Color.BLACK)
                 button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
                 button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
@@ -150,8 +155,8 @@ class ReversiGameActivity : AppCompatActivity() {
             }
             "Casino" -> {
                 label_online.setBackgroundResource(R.drawable.background2_casino)
-                button_player_1_online_xog.setTextColor(Color.YELLOW)
-                button_player_2_online_xog.setTextColor(Color.YELLOW)
+                button_player_1_online_xog.setTextColor(Color.RED)
+                button_player_2_online_xog.setTextColor(Color.BLACK)
                 button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
                 button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
                 timer_xog_online.setTextColor(Color.GREEN)
@@ -163,7 +168,7 @@ class ReversiGameActivity : AppCompatActivity() {
             "Rome" -> {
                 label_online.setBackgroundResource(R.drawable.background_rome)
                 button_player_1_online_xog.setTextColor(Color.rgb(224, 164, 103))
-                button_player_2_online_xog.setTextColor(Color.rgb(224, 164, 103))
+                button_player_2_online_xog.setTextColor(Color.BLACK)
                 button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
                 button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
                 timer_xog_online.setTextColor(Color.GREEN)
@@ -172,22 +177,10 @@ class ReversiGameActivity : AppCompatActivity() {
                 toolbar_xog_online.setBackgroundColor(argb(0, 0, 0, 0))
                 toolbar2_xog_online.setBackgroundColor(argb(0, 0, 0, 0))
             }
-            "Japan" -> {
-                label_online.setBackgroundResource(R.drawable.background_japan)
-                button_player_1_online_xog.setTextColor(Color.BLACK)
-                button_player_2_online_xog.setTextColor(Color.BLACK)
-                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
-                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
-                timer_xog_online.setTextColor(Color.GREEN)
-                timer2_xog_online.setTextColor(Color.GREEN)
-                bottom_navigation_xog_online.setBackgroundColor(Color.WHITE)
-                toolbar_xog_online.setBackgroundColor(argb(0, 0, 0, 0))
-                toolbar2_xog_online.setBackgroundColor(argb(0, 0, 0, 0))
-            }
             "Gothic" -> {
                 label_online.setBackgroundResource(R.drawable.background_gothic)
-                button_player_1_online_xog.setTextColor(Color.WHITE)
-                button_player_2_online_xog.setTextColor(Color.WHITE)
+                button_player_1_online_xog.setTextColor(Color.RED)
+                button_player_2_online_xog.setTextColor(Color.BLUE)
                 button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
                 button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
                 timer_xog_online.setTextColor(Color.GREEN)
@@ -198,10 +191,23 @@ class ReversiGameActivity : AppCompatActivity() {
                 button_player_1_online_xog.textSize = 16.5f
                 button_player_2_online_xog.textSize = 16.5f
             }
+            "Japan" -> {
+                label_online.setBackgroundResource(R.drawable.background_japan)
+                button_player_1_online_xog.setTextColor(Color.RED)
+                button_player_2_online_xog.setTextColor(rgb(37, 103, 28))
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
+                bottom_navigation_xog_online.setBackgroundColor(Color.WHITE)
+                toolbar_xog_online.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_xog_online.setBackgroundColor(argb(0, 0, 0, 0))
+            }
+
             "Noir" -> {
                 label_online.setBackgroundResource(R.drawable.background_noir)
                 button_player_1_online_xog.setTextColor(Color.WHITE)
-                button_player_2_online_xog.setTextColor(Color.WHITE)
+                button_player_2_online_xog.setTextColor(Color.RED)
                 button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
                 button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
                 timer_xog_online.setTextColor(Color.GREEN)
@@ -1193,35 +1199,44 @@ class CanvasViewReversi(context: Context, attrs: AttributeSet?) : View(context, 
     var exception: Boolean = false
 
     init{
-        Line_paint.setColor(Color.RED)          //ресур для линий (ширина и цвет)
-        Line_paint.setStrokeWidth(5f)
-        Line_paint1.setColor(Color.RED)          //ресур для линий (ширина и цвет)
+
+        //Line_paint1.setColor(Color.RED)          //ресур для линий (ширина и цвет)
         Line_paint1.setStrokeWidth(5f)
 
-        if(Design == "Egypt")
-        {
-            Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(7f)
-            Line_paint1.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
-            Line_paint1.setStrokeWidth(10f)
-        }
-        else if(Design == "Casino") {
-            Line_paint.setColor(Color.WHITE)          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(10f)
-            Line_paint1.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
-            Line_paint1.setStrokeWidth(10f)
-        }
-        else if(Design == "Rome") {
-            Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(5f)
-        }
-        else if(Design == "Gothic") {
-            Line_paint.setColor(Color.rgb(100,100,100))          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(5f)
-        }
-        else if(Design == "Japan") {
-            Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
-            Line_paint.setStrokeWidth(5f)
+        Line_paint.setStrokeWidth(7f)
+
+        //line_who_do_move.strokeWidth = 14f
+
+        when (Design) {
+            "Normal" ->{
+                //line_who_do_move.color =  Color.GREEN
+                //line_who_do_move.strokeWidth = 14f
+                Line_paint.setColor(Color.rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
+            }
+            "Egypt" -> {
+                Line_paint.color = Color.BLACK          //ресур для линий (ширина и цвет)
+                //line_who_do_move.color = Color.RED
+            }
+            "Casino" -> {
+                Line_paint.color = Color.rgb(217, 217, 217)          //ресур для линий (ширина и цвет)
+                //line_who_do_move.color = Color.YELLOW            //
+            }
+            "Rome" -> {
+                Line_paint.color = Color.BLACK  //ресур для линий (ширина и цвет)
+                //line_who_do_move.color = Color.BLACK
+            }
+            "Gothic" -> {
+                Line_paint.color = Color.rgb(100, 100, 100)   //ресур для линий (ширина и цвет)
+                //line_who_do_move.color = Color.WHITE
+            }
+            "Japan" -> {
+                Line_paint.color = Color.BLACK   //ресур для линий (ширина и цвет)
+                //line_who_do_move.color = Color.RED              //
+            }
+            "Noir" -> {
+                Line_paint.color = Color.rgb(100, 100, 100)   //ресур для линий (ширина и цвет)
+                //line_who_do_move.color = Color.RED              //
+            }
         }
 
         // TODO нужно взять из DataBase (статистика ходов)
@@ -1245,8 +1260,8 @@ class CanvasViewReversi(context: Context, attrs: AttributeSet?) : View(context, 
 
 
 
-    var black_chip_normal : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip1_normal);       //картинки фишек и подсветки
-    var grey_chip_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip2_normal);
+    var black_chip_normal : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip2_normal);       //картинки фишек и подсветки
+    var grey_chip_normal: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip1_normal);
 
     var black_chip_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip1_egypt);
     var grey_chip_egypt: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip2_egypt)
@@ -1262,6 +1277,9 @@ class CanvasViewReversi(context: Context, attrs: AttributeSet?) : View(context, 
 
     var black_chip_japan: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip1_japan);
     var grey_chip_japan: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip2_japan);
+
+    var black_chip_noir: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip1_noir);
+    var grey_chip_noir: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chip2_noir);
 
 
     var green: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.green);
@@ -1314,27 +1332,26 @@ class CanvasViewReversi(context: Context, attrs: AttributeSet?) : View(context, 
 
         var right_black_chip: Bitmap
         var right_grey_chip: Bitmap
-        var right_green: Bitmap
+        var right_green:Bitmap
 
         right_black_chip = Bitmap.createScaledBitmap(black_chip_normal,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
         right_grey_chip = Bitmap.createScaledBitmap(grey_chip_normal,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
-        right_green = Bitmap.createScaledBitmap(green,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);//крестик
-        // расстановка фишек
-        //нолик
-        //крестик
+        right_green = Bitmap.createScaledBitmap(green,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
 
-        // расстановка фишек
+
         when (Design) {
-            "Normal" -> {
-                canvas?.drawColor(Color.WHITE)
+            "Normal" ->{
+
             }
             "Egypt" -> {
                 right_black_chip = Bitmap.createScaledBitmap(black_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
                 right_grey_chip = Bitmap.createScaledBitmap(grey_chip_egypt,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+                right_green = Bitmap.createScaledBitmap(romb3,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
             }
             "Casino" -> {
                 right_black_chip = Bitmap.createScaledBitmap(black_chip_casino,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
                 right_grey_chip = Bitmap.createScaledBitmap(grey_chip_casino,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+                right_green = Bitmap.createScaledBitmap(romb1,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
             }
             "Rome" -> {
                 right_black_chip = Bitmap.createScaledBitmap(black_chip_rome,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
@@ -1350,6 +1367,11 @@ class CanvasViewReversi(context: Context, attrs: AttributeSet?) : View(context, 
                 right_black_chip = Bitmap.createScaledBitmap(black_chip_japan,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
                 right_grey_chip = Bitmap.createScaledBitmap(grey_chip_japan,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
                 right_green = Bitmap.createScaledBitmap(romb3,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+            }
+            "Noir" -> {
+                right_black_chip = Bitmap.createScaledBitmap(black_chip_noir,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true); //подгоняем картинки под размеры экрана телефона
+                right_grey_chip = Bitmap.createScaledBitmap(grey_chip_noir,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
+                right_green = Bitmap.createScaledBitmap(romb1,(width-2*indent).toInt()/size_field_x, (width-2*indent).toInt()/size_field_x, true);
             }
         }
 

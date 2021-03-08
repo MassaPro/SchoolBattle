@@ -31,6 +31,7 @@ class SearchActivity : AppCompatActivity() {
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         val searchView = findViewById<SearchView>(R.id.search_field)
+        //val searchEdittext = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text)
         searchView.onActionViewExpanded()
 
         recyclerViewSearch.adapter = ItemRecyclerViewAdapter(USERS,IMAGES)
@@ -60,6 +61,7 @@ class SearchActivity : AppCompatActivity() {
             "Gothic" -> {
                 recyclerViewSearch.setBackgroundResource(R.drawable.background_gothic)
                 search_field.setBackgroundResource(R.drawable.bottom_navigation_gothic)
+                //search_field.
             }
             "Japan" -> {
                 recyclerViewSearch.setBackgroundResource(R.drawable.background_japan)

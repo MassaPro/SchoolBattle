@@ -55,6 +55,7 @@ class Show_rules(activity: Activity) {
                 dialog_one_device.rules_image.setBackgroundResource(R.drawable.cross_normal)
                 dialog_one_device.text_rules.setTextColor(Color.BLACK)
                 dialog_one_device.header_rules.setTextColor(Color.BLACK)
+                button_close.setBackgroundResource(R.drawable.close_cross)
             }
             "Egypt" -> {
                 dialog_one_device.rules.setBackgroundResource(R.drawable.background_egypt);

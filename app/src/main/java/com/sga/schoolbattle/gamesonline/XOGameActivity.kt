@@ -206,7 +206,9 @@ class XOGameActivity : AppCompatActivity() {
                 button_player_2_online_xog.setTextColor(Color.WHITE)
                 button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
                 button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
             }
+
             //Emotions начало--------------------------------------------------------------------------------------------
             //Emotion конец-----------------------------------------------------------------------------------------------
 

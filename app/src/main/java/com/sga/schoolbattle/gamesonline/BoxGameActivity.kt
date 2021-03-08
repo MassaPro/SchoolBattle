@@ -233,10 +233,14 @@ class BoxGameActivity : AppCompatActivity() {
         bottom_navigation_xog_online.itemIconTintList = generateColorStateList()
         bottom_navigation_xog_online.itemTextColor = generateColorStateList()
         when (Design) {
+            "Normal" -> {
+                button_player_1_online_xog.setTextColor(Color.RED)
+                button_player_2_online_xog.setTextColor(Color.BLUE)
+            }
             "Egypt" -> {
                 label_online.setBackgroundResource(R.drawable.background_egypt)
-                button_player_1_online_xog.setTextColor(Color.BLACK)
-                button_player_2_online_xog.setTextColor(Color.BLACK)
+                button_player_1_online_xog.setTextColor(Color.RED)
+                button_player_2_online_xog.setTextColor(Color.BLUE)
                 button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
                 button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
                 timer_xog_online.setTextColor(Color.GREEN)
@@ -247,8 +251,8 @@ class BoxGameActivity : AppCompatActivity() {
             }
             "Casino" -> {
                 label_online.setBackgroundResource(R.drawable.background2_casino)
-                button_player_1_online_xog.setTextColor(Color.YELLOW)
-                button_player_2_online_xog.setTextColor(Color.YELLOW)
+                button_player_1_online_xog.setTextColor(Color.RED)
+                button_player_2_online_xog.setTextColor(Color.BLACK)
                 button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
                 button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
                 timer_xog_online.setTextColor(Color.GREEN)
@@ -259,7 +263,7 @@ class BoxGameActivity : AppCompatActivity() {
             }
             "Rome" -> {
                 label_online.setBackgroundResource(R.drawable.background_rome)
-                button_player_1_online_xog.setTextColor(Color.rgb(224, 164, 103))
+                button_player_1_online_xog.setTextColor(Color.BLACK)
                 button_player_2_online_xog.setTextColor(Color.rgb(224, 164, 103))
                 button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
                 button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
@@ -269,22 +273,10 @@ class BoxGameActivity : AppCompatActivity() {
                 toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
                 toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
             }
-            "Japan" -> {
-                label_online.setBackgroundResource(R.drawable.background_japan)
-                button_player_1_online_xog.setTextColor(Color.BLACK)
-                button_player_2_online_xog.setTextColor(Color.BLACK)
-                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
-                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
-                timer_xog_online.setTextColor(Color.GREEN)
-                timer2_xog_online.setTextColor(Color.GREEN)
-                bottom_navigation_xog_online.setBackgroundColor(Color.WHITE)
-                toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
-                toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
-            }
             "Gothic" -> {
                 label_online.setBackgroundResource(R.drawable.background_gothic)
-                button_player_1_online_xog.setTextColor(Color.WHITE)
-                button_player_2_online_xog.setTextColor(Color.WHITE)
+                button_player_1_online_xog.setTextColor(Color.RED)
+                button_player_2_online_xog.setTextColor(Color.BLUE)
                 button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
                 button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
                 timer_xog_online.setTextColor(Color.GREEN)
@@ -295,10 +287,22 @@ class BoxGameActivity : AppCompatActivity() {
                 button_player_1_online_xog.textSize = 16.5f
                 button_player_2_online_xog.textSize = 16.5f
             }
+            "Japan" -> {
+                label_online.setBackgroundResource(R.drawable.background_japan)
+                button_player_1_online_xog.setTextColor(Color.RED)
+                button_player_2_online_xog.setTextColor(rgb(37,103,28))
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
+                bottom_navigation_xog_online.setBackgroundColor(Color.WHITE)
+                toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
+                toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+            }
             "Noir" -> {
                 label_online.setBackgroundResource(R.drawable.background_noir)
                 button_player_1_online_xog.setTextColor(Color.WHITE)
-                button_player_2_online_xog.setTextColor(Color.WHITE)
+                button_player_2_online_xog.setTextColor(rgb(193, 150, 63))
                 button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
                 button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
                 timer_xog_online.setTextColor(Color.GREEN)
@@ -660,7 +664,6 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
 
 
     init{
-
         red_or_blue = "red"
         Line_paint.setColor(Color.rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
         Line_paint.setStrokeWidth(5f)
@@ -668,9 +671,56 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
         paint_circle.setColor(Color.BLACK)     //цвета для точек
 
         paint_rib_1.setColor(Color.RED)          //цвета для ребер  и их ширина
-        paint_rib_1.setStrokeWidth(5f)
+        paint_rib_1.setStrokeWidth(7f)
         paint_rib_2.setColor(Color.BLUE)
-        paint_rib_2.setStrokeWidth(5f)
+        paint_rib_2.setStrokeWidth(7f)
+
+        //line_who_do_move.strokeWidth = 14f
+
+        when (Design) {
+            "Normal" -> {
+                //line_who_do_move.strokeWidth = 14f
+                //line_who_do_move.color = Color.GREEN
+            }
+            "Casino" -> {
+
+                paint_circle.setColor(rgb(217,217,217))     //цвета для точек
+                paint_rib_1.setColor(Color.RED)          //цвета для ребер  и их ширина
+                paint_rib_2.setColor(Color.BLACK)
+                //line_who_do_move.color = Color.YELLOW
+            }
+            "Egypt" -> {
+                Line_paint.setColor(argb(0, 0,0,0))          //ресур для линий (ширина и цвет)
+                //line_who_do_move.color = Color.RED
+            }
+            "Rome" -> {
+
+                paint_circle.setColor(Color.BLACK)     //цвета для точек
+                paint_rib_2.setColor(Color.rgb(193,150,63))          //цвета для ребер  и их ширина
+                paint_rib_1.setColor(Color.BLACK)
+                //line_who_do_move.color = Color.BLACK
+            }
+            "Gothic" -> {
+                Line_paint.setColor(argb(0,0,0,0))          //ресур для линий (ширина и цвет)
+                paint_circle.setColor(Color.WHITE)     //цвета для точек
+                paint_rib_2.setColor(Color.BLUE)          //цвета для ребер  и их ширина
+                paint_rib_1.setColor(Color.RED)
+                //line_who_do_move.color = Color.WHITE
+            }
+            "Japan" -> {
+                paint_circle.setColor(Color.BLACK)     //цвета для точек
+                paint_rib_1.setColor(Color.RED)          //цвета для ребер  и их ширина
+                paint_rib_2.setColor(rgb(37,103,28))
+                //line_who_do_move.color = Color.RED
+            }
+            "Noir" -> {
+                Line_paint.setColor(argb(0,0,0,0))          //ресур для линий (ширина и цвет)
+                paint_circle.setColor(rgb(100,100,100))     //цвета для точек
+                paint_rib_2.setColor(rgb(193, 150, 63))          //цвета для ребер  и их ширина
+                paint_rib_1.setColor(Color.WHITE)
+                //line_who_do_move.color = Color.RED
+            }
+        }
 
         // TODO нужно взять из DataBase (статистика ходов)
         for( i in 0..6) {
@@ -698,21 +748,29 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
 
 
 
-    var red : Bitmap = BitmapFactory.decodeResource(context.getResources(),
-        R.drawable.red
-    );       //картинки фишек и подсветки
-    var blue: Bitmap = BitmapFactory.decodeResource(context.getResources(),
-        R.drawable.blue
-    );
-    var box1_egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_egypt);
-    var box2_egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_egypt);
+    var red : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_normal);       //картинки фишек и подсветки
+    var blue: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_normal);
 
-    var illumination: Bitmap = BitmapFactory.decodeResource(context.getResources(),
-        R.drawable.illumination
-    );
-    var green: Bitmap = BitmapFactory.decodeResource(context.getResources(),
-        R.drawable.green
-    );
+    var box1_egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_egypt);
+    var box2_egypt : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_egypt);
+
+    var box1_casino : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_casino);
+    var box2_casino : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_casino);
+
+    var box1_rome : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_rome);
+    var box2_rome : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_rome);
+
+    var box1_gothic : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_gothic);
+    var box2_gothic : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_gothic);
+
+    var box1_japan : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_japan);
+    var box2_japan : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_japan);
+
+    var box1_noir : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_noir);
+    var box2_noir : Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_noir);
+
+    var illumination: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.illumination);
+    var green: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.green);
 
 
     override fun draw(canvas: Canvas?) {
@@ -731,18 +789,38 @@ class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(cont
         k = height-width-advertising_line
 
 
-        val right_red: Bitmap 
-        val right_blue: Bitmap
+        var right_red: Bitmap
+        var right_blue: Bitmap
 
-        if(Design == "Egypt")
-        {
-            right_red = Bitmap.createScaledBitmap(box1_egypt,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
-            right_blue = Bitmap.createScaledBitmap(box2_egypt,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
-        }
-        else
-        {
-            right_red = Bitmap.createScaledBitmap(red,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
-            right_blue = Bitmap.createScaledBitmap(blue,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+
+        right_red = Bitmap.createScaledBitmap(red,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+        right_blue = Bitmap.createScaledBitmap(blue,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+
+        when (Design) {
+            "Egypt" -> {
+                right_red = Bitmap.createScaledBitmap(box1_egypt,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+                right_blue = Bitmap.createScaledBitmap(box2_egypt,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+            }
+            "Casino" -> {
+                right_red = Bitmap.createScaledBitmap(box1_casino,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+                right_blue = Bitmap.createScaledBitmap(box2_casino,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+            }
+            "Rome" -> {
+                right_red = Bitmap.createScaledBitmap(box1_rome,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+                right_blue = Bitmap.createScaledBitmap(box2_rome,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+            }
+            "Gothic" -> {
+                right_red = Bitmap.createScaledBitmap(box1_gothic,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+                right_blue = Bitmap.createScaledBitmap(box2_gothic,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+            }
+            "Japan" -> {
+                right_red = Bitmap.createScaledBitmap(box1_japan,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+                right_blue = Bitmap.createScaledBitmap(box2_japan,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+            }
+            "Noir" -> {
+                right_red = Bitmap.createScaledBitmap(box1_noir,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+                right_blue = Bitmap.createScaledBitmap(box2_noir,width.toInt()/size_field_x, width.toInt()/size_field_x, true);
+            }
         }
         
         for(i in 0 until size_field_x+1)          //вырисовка горизонтальных линий
