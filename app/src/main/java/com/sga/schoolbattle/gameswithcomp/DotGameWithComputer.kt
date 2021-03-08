@@ -129,8 +129,8 @@ class DotGameWithComputer : AppCompatActivity() {
             "Normal" ->{
                 name_player1_with_computer_template.setTextColor(Color.BLUE)
                 name_player2_with_computer_template.setTextColor(Color.RED)
-                button_player_1_with_computer_template.setBackgroundResource(R.drawable.virus1_normal);
-                button_player_2_with_computer_template.setBackgroundResource(R.drawable.virus2_normal);
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.box2_normal);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.box1_normal);
                 to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_normal)
             }
             "Egypt" -> {
@@ -756,13 +756,13 @@ class CanvasView_Dots_with_computer(context: Context, attrs: AttributeSet?) : Vi
             "Gothic" -> {
                 Line_paint.setColor(Color.rgb(100,100,100))      //ресур для линий (ширина и цвет)
                 paint_circle.setColor(Color.rgb(100,100,100))
-                paint_rib_1.setColor(Color.WHITE) //цвета для ребер  и их ширина
+                paint_rib_1.setColor(Color.YELLOW) //цвета для ребер  и их ширина
                 paint_rib_1.setStrokeWidth(5f)
-                paint_rib_2.setColor(Color.YELLOW)
+                paint_rib_2.setColor(Color.WHITE)
                 paint_rib_2.setStrokeWidth(5f)
 
-                shading_1.setColor(Color.WHITE)
-                shading_2.setColor(Color.YELLOW)
+                shading_1.setColor(Color.YELLOW)
+                shading_2.setColor(Color.WHITE)
                 shading_1.setStrokeWidth(2f)
                 shading_2.setStrokeWidth(2f)
                 //line_who_do_move.color = Color.WHITE
