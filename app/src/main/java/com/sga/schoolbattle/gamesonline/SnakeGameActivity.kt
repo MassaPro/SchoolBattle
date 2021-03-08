@@ -237,10 +237,14 @@ class SnakeGameActivity : AppCompatActivity() {
             bottom_navigation_xog_online.menu.getItem(4).title = "Next"
         }
         when (Design) {
+            "Normal" -> {
+                button_player_1_online_xog.setTextColor(Color.RED)
+                button_player_2_online_xog.setTextColor(Color.BLUE)
+            }
             "Egypt" -> {
                 label_online.setBackgroundResource(R.drawable.background_egypt)
                 button_player_1_online_xog.setTextColor(Color.BLACK)
-                button_player_2_online_xog.setTextColor(Color.BLACK)
+                button_player_2_online_xog.setTextColor(Color.WHITE)
                 button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
                 button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
                 timer_xog_online.setTextColor(Color.GREEN)
@@ -251,8 +255,8 @@ class SnakeGameActivity : AppCompatActivity() {
             }
             "Casino" -> {
                 label_online.setBackgroundResource(R.drawable.background2_casino)
-                button_player_1_online_xog.setTextColor(Color.YELLOW)
-                button_player_2_online_xog.setTextColor(Color.YELLOW)
+                button_player_1_online_xog.setTextColor(Color.BLACK)
+                button_player_2_online_xog.setTextColor(Color.RED)
                 button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
                 button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
                 timer_xog_online.setTextColor(Color.GREEN)
@@ -264,7 +268,7 @@ class SnakeGameActivity : AppCompatActivity() {
             "Rome" -> {
                 label_online.setBackgroundResource(R.drawable.background_rome)
                 button_player_1_online_xog.setTextColor(Color.rgb(224, 164, 103))
-                button_player_2_online_xog.setTextColor(Color.rgb(224, 164, 103))
+                button_player_2_online_xog.setTextColor(Color.BLACK)
                 button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
                 button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
                 timer_xog_online.setTextColor(Color.GREEN)
@@ -273,22 +277,10 @@ class SnakeGameActivity : AppCompatActivity() {
                 toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
                 toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
             }
-            "Japan" -> {
-                label_online.setBackgroundResource(R.drawable.background_japan)
-                button_player_1_online_xog.setTextColor(Color.BLACK)
-                button_player_2_online_xog.setTextColor(Color.BLACK)
-                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
-                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
-                timer_xog_online.setTextColor(Color.GREEN)
-                timer2_xog_online.setTextColor(Color.GREEN)
-                bottom_navigation_xog_online.setBackgroundColor(Color.WHITE)
-                toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
-                toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
-            }
             "Gothic" -> {
                 label_online.setBackgroundResource(R.drawable.background_gothic)
                 button_player_1_online_xog.setTextColor(Color.WHITE)
-                button_player_2_online_xog.setTextColor(Color.WHITE)
+                button_player_2_online_xog.setTextColor(Color.YELLOW)
                 button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
                 button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
                 timer_xog_online.setTextColor(Color.GREEN)
@@ -299,9 +291,21 @@ class SnakeGameActivity : AppCompatActivity() {
                 button_player_1_online_xog.textSize = 16.5f
                 button_player_2_online_xog.textSize = 16.5f
             }
+            "Japan" -> {
+                label_online.setBackgroundResource(R.drawable.background_japan)
+                button_player_1_online_xog.setTextColor(Color.RED)
+                button_player_2_online_xog.setTextColor(rgb(37,103,28))
+                button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
+                bottom_navigation_xog_online.setBackgroundColor(Color.WHITE)
+                toolbar_xog_online.setBackgroundColor(argb(0,0,0,0))
+                toolbar2_xog_online.setBackgroundColor(argb(0,0,0,0))
+            }
             "Noir" -> {
                 label_online.setBackgroundResource(R.drawable.background_noir)
-                button_player_1_online_xog.setTextColor(Color.WHITE)
+                button_player_1_online_xog.setTextColor(Color.RED)
                 button_player_2_online_xog.setTextColor(Color.WHITE)
                 button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
                 button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
@@ -755,73 +759,60 @@ class CanvasView_SNAKE_online(context: Context, attrs: AttributeSet?) : View(con
             "Egypt" -> {
 
                 Line_paint.setColor(Color.rgb(100, 100, 100))          //ресур для линий (ширина и цвет)
-                Line_paint.setStrokeWidth(5f)
-
                 paint_circle.setColor(Color.rgb(100, 100, 100))     //цвета для точек
 
                 paint_rib_1.setColor(Color.BLACK)          //цвета для ребер  и их ширина
-                paint_rib_1.setStrokeWidth(10f)
                 paint_rib_2.setColor(Color.WHITE)
-                paint_rib_2.setStrokeWidth(10f)
 
                 border_1.setColor(Color.rgb(100, 100, 100))
-                border_1.setStrokeWidth(10f)
             }
             "Casino" -> {
 
                 Line_paint.setColor(Color.WHITE)          //ресур для линий (ширина и цвет)
-                Line_paint.setStrokeWidth(5f)
-
                 paint_circle.setColor(Color.WHITE)     //цвета для точек
 
                 paint_rib_1.setColor(Color.BLACK)          //цвета для ребер  и их ширина
-                paint_rib_1.setStrokeWidth(10f)
                 paint_rib_2.setColor(Color.RED)
-                paint_rib_2.setStrokeWidth(10f)
 
                 border_1.setColor(Color.WHITE)
-                border_1.setStrokeWidth(10f)
             }
             "Rome" -> {
 
                 Line_paint.setColor(Color.rgb(180, 180, 180))          //ресур для линий (ширина и цвет)
-                Line_paint.setStrokeWidth(5f)
-
                 paint_circle.setColor(Color.rgb(180, 180, 180))     //цвета для точек
 
                 paint_rib_2.setColor(Color.BLACK)          //цвета для ребер  и их ширина
-                paint_rib_1.setStrokeWidth(10f)
                 paint_rib_1.setColor(Color.rgb(193,150,63))
-                paint_rib_2.setStrokeWidth(10f)
 
                 border_1.setColor(Color.rgb(180, 180, 180))
-                border_1.setStrokeWidth(10f)
             }
             "Gothic" -> {
 
                 Line_paint.setColor(Color.rgb(100, 100, 100))          //ресур для линий (ширина и цвет)
-                Line_paint.setStrokeWidth(5f)
-
                 paint_circle.setColor(Color.rgb(180, 180, 180))     //цвета для точек
 
-                paint_rib_2.setColor(Color.WHITE)          //цвета для ребер  и их ширина
-                paint_rib_1.setStrokeWidth(10f)
-                paint_rib_1.setColor(Color.YELLOW)
-                paint_rib_2.setStrokeWidth(10f)
+                paint_rib_1.setColor(Color.WHITE)          //цвета для ребер  и их ширина
+                paint_rib_2.setColor(Color.YELLOW)
 
             }
             "Japan" -> {
 
                 Line_paint.setColor(Color.rgb(160,160,160))          //ресур для линий (ширина и цвет)
-                Line_paint.setStrokeWidth(5f)
-
                 paint_circle.setColor(Color.rgb(160,160,160))     //цвета для точек
 
-                paint_rib_2.setColor(Color.RED)          //цвета для ребер  и их ширина
-                paint_rib_1.setStrokeWidth(10f)
-                paint_rib_1.setColor(Color.rgb(37,103,28))
-                paint_rib_2.setStrokeWidth(10f)
+                paint_rib_1.setColor(Color.RED)          //цвета для ребер  и их ширина
+                paint_rib_2.setColor(Color.rgb(37,103,28))
 
+            }
+            "Noir" -> {
+
+                Line_paint.setColor(Color.rgb(100, 100, 100))          //ресур для линий (ширина и цвет)
+                paint_circle.setColor(Color.rgb(100, 100, 100))     //цвета для точек
+
+                paint_rib_1.setColor(Color.RED)          //цвета для ребер  и их ширина
+                paint_rib_2.setColor(Color.WHITE)
+
+                border_1.setColor(Color.rgb(100, 100, 100))
             }
         }
 

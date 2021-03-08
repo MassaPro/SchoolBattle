@@ -69,7 +69,7 @@ val PRICE_OD_AVATAR = mapOf(0 to 0, 1 to 80,2 to 100, 3 to 120, 4 to 140,
     20 to 6000,21 to 10000,22 to 12500,23 to 15000, 24 to 20000, 25 to 25000,
     26 to 30000,27 to 40000, 28 to 50000, 29 to 70000, 30 to 100000, 31 to 500000, 32 to 1000000)
 var ARRAY_OF_AVATAR_SHOP: MutableList<Int>  = mutableListOf(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32)             //номера  дизайнов в магазине
-var ARRAY_OF_AVATAR: MutableList<Int>  = mutableListOf(0,1,4,18,19)             //номера открытых дизайнов
+var ARRAY_OF_AVATAR: MutableList<Int>  = mutableListOf(0)             //номера открытых дизайнов
 var AUXILIARY_MAP_OF_AVATAR = mapOf(0 to "ava1", 1 to "ava2", 2 to "ava3",3 to "ava4")
 //__________________________________________________________________________________________________________________________________
 

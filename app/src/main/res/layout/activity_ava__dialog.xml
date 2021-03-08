@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
-        android:text="Выбери аватар"
+        android:text="ВЫБЕРИ АВАТАР"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +23,7 @@
         android:id="@+id/close_find_ava"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:text="X"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="@+id/choose_ava_text"
         app:layout_constraintEnd_toEndOf="@+id/choose_ava_text"
         app:layout_constraintTop_toTopOf="@+id/choose_ava_text" />

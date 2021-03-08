@@ -259,7 +259,7 @@ class DotGameActivity: AppCompatActivity() {
                 label_online.setBackgroundResource(R.drawable.background_egypt)
                 toolbar_xog_online.setBackgroundColor(Color.TRANSPARENT)
                 toolbar2_xog_online.setBackgroundColor(Color.TRANSPARENT)
-                button_player_1_online_xog.setTextColor(Color.BLACK)
+                button_player_1_online_xog.setTextColor(Color.WHITE)
                 button_player_2_online_xog.setTextColor(Color.BLACK)
                 button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
                 button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
@@ -315,6 +315,7 @@ class DotGameActivity: AppCompatActivity() {
                 button_player_2_online_xog.setTextColor(Color.RED)
                 button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
                 button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
             }
         }
 
@@ -728,6 +729,15 @@ class CanvasViewDot(context: Context, attrs: AttributeSet?) : View(context, attr
 
         when (Design) {
             "Normal" -> {
+                paint_rib_1.setColor(Color.RED) //цвета для ребер  и их ширина
+                paint_rib_1.setStrokeWidth(5f)
+                paint_rib_2.setColor(Color.BLUE)
+                paint_rib_2.setStrokeWidth(5f)
+
+                shading_1.setColor(Color.RED)
+                shading_2.setColor(Color.BLUE)
+                shading_1.setStrokeWidth(2f)
+                shading_2.setStrokeWidth(2f)
                 //line_who_do_move.strokeWidth = 14f
                 //line_who_do_move.color = Color.GREEN
             }
@@ -775,13 +785,13 @@ class CanvasViewDot(context: Context, attrs: AttributeSet?) : View(context, attr
             "Gothic" -> {
                 Line_paint.setColor(Color.rgb(100,100,100))      //ресур для линий (ширина и цвет)
                 paint_circle.setColor(Color.rgb(100,100,100))
-                paint_rib_1.setColor(Color.WHITE) //цвета для ребер  и их ширина
+                paint_rib_1.setColor(Color.YELLOW) //цвета для ребер  и их ширина
                 paint_rib_1.setStrokeWidth(5f)
-                paint_rib_2.setColor(Color.YELLOW)
+                paint_rib_2.setColor(Color.WHITE)
                 paint_rib_2.setStrokeWidth(5f)
 
-                shading_1.setColor(Color.WHITE)
-                shading_2.setColor(Color.YELLOW)
+                shading_1.setColor(Color.YELLOW)
+                shading_2.setColor(Color.WHITE)
                 shading_1.setStrokeWidth(2f)
                 shading_2.setStrokeWidth(2f)
                 //line_who_do_move.color = Color.WHITE
