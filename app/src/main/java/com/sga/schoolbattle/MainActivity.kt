@@ -42,7 +42,7 @@ class MainActivity : Fragment() {
         }
         else
         {
-            toolbarName2.text = "$username"
+            toolbarName2.text = "$username\n"
         }
         //val navView: BottomNavigationView = findViewById(R.id.nav_view)
         //navView.selectedItemId = R.id.navigation_home
@@ -80,18 +80,7 @@ class MainActivity : Fragment() {
 
 
         money.text = MONEY.toString()
-        myRef.child("Users").child(username!!).addValueEventListener(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {}
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.hasChild("money")) MONEY = snapshot.child("money").value.toString().toInt()
-                if (snapshot.hasChild("array_of_emotions")) ARRAY_OF_EMOTION = DECODE(snapshot.child("array_of_emotions").value.toString())
-                if (snapshot.hasChild("array_of_avatars")) ARRAY_OF_AVATAR = DECODE(snapshot.child("array_of_avatars").value.toString())
-                if (snapshot.hasChild("array_of_designs")) ARRAY_OF_DESIGN = DECODE(snapshot.child("array_of_designs").value.toString())
-                if (money != null) {
-                    money.text = MONEY.toString()
-                }
-            }
-        })
+
         money_icon.setBackgroundResource(R.drawable.money)
 
 

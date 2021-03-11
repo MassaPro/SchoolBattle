@@ -91,6 +91,49 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
 
             val prfs = this.getSharedPreferences("UserData", Context.MODE_PRIVATE)
             val username = prfs?.getString("username", "")
+
+            Design = prfs?.getString("design", "Normal").toString()                 //дизайн
+            SOUND = prfs?.getString("sound", "").toString() == "true"
+            VIBRATION = prfs?.getString("vibration", "").toString() == "true"       //получаем из памяти звук
+            AVATAR = prfs?.getString("avatar_number", 0.toString()).toString().toInt()
+            MONEY = prfs?.getString("money", INITIAL_AMOUNT.toString()).toString().toInt()         //не забыть положить другую сумму если идет вход в аккаунт
+
+
+            myRef.child("Users").child(username!!).addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {}
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.hasChild("money"))
+                    {
+                        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                        MONEY = snapshot.child("money").value.toString().toInt()
+                        editor.putString("money", MONEY.toString())
+                        editor.apply()
+                    }
+                    if (snapshot.hasChild("array_of_emotions")){
+                        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                        ARRAY_OF_EMOTION = DECODE(snapshot.child("array_of_emotions").value.toString())
+                        editor.putString("open_emotions", CODE(ARRAY_OF_EMOTION))
+                        editor.apply()
+                    }
+                    if (snapshot.hasChild("array_of_avatars")) {
+                        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                        ARRAY_OF_AVATAR = DECODE(snapshot.child("array_of_avatars").value.toString())
+                        editor.putString("open_avatars", CODE(ARRAY_OF_AVATAR))
+                        editor.apply()
+                    }
+                    if (snapshot.hasChild("array_of_designs")){
+                        val editor = getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+                        ARRAY_OF_DESIGN = DECODE(snapshot.child("array_of_designs").value.toString())
+                        editor.putString("open_design", CODE(ARRAY_OF_DESIGN))
+                        editor.apply()
+                    }
+                    if (money != null) {
+                        money.text = MONEY.toString()
+                    }
+                }
+            })
+
+
             if(ARRAY_OF_DESIGN.size < DECODE(prfs?.getString("open_design", "0").toString()).size)
             {
                 ARRAY_OF_DESIGN =  DECODE(prfs?.getString("open_design", 0.toString()).toString())
@@ -111,13 +154,6 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
             {
                 LANGUAGE = "English"
             }
-            Design = prfs?.getString("design", "Normal").toString()                 //дизайн
-            SOUND = prfs?.getString("sound", "").toString() == "true"
-            VIBRATION = prfs?.getString("vibration", "").toString() == "true"       //получаем из памяти звук
-            AVATAR = prfs?.getString("avatar_number", 0.toString()).toString().toInt()
-            MONEY = prfs?.getString("money", INITIAL_AMOUNT.toString()).toString().toInt()         //не забыть положить другую сумму если идет вход в аккаунт
-
-
 
 
             mInterstitialAd_in_offline_games.adListener = object : AdListener() {
@@ -214,8 +250,15 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
                 if (p0.exists()) {
                     RATING = p0.value.toString().toInt()
                     if (CONTEXT.toolbarName2 != null) {
-                        Toast.makeText(CONTEXT, "DUB", Toast.LENGTH_LONG).show()
-                        CONTEXT.toolbarName2.text = "$username\n($RATING)"
+                        if (RATING != -1)
+                        {
+                            CONTEXT.toolbarName2.text = "$username\n($RATING)"
+                        }
+                        else
+                        {
+                            CONTEXT.toolbarName2.text = "$username\n"
+                        }
+
                         CONTEXT.toolbarName2.setTextColor(colorByRating(RATING))
                     }
                     if (CONTEXT.profileMyName != null) {

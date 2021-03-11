@@ -280,7 +280,8 @@ var TRANSLATE = mapOf("КУПИТЬ" to "BUY","КУПЛЕНО" to "PURCHASED","�
     "Звук" to "Sounds","ПРИМЕНИТЬ" to "APPLY","УСТАНОВЛЕНО" to "FIXED","Выход" to "Log out",
     "Найти" to "Search","Профиль" to "Profile","Подписки" to "Following","Подписчики" to "Followers","ОТМЕНА" to "CANCEL",
     "Подождите,видео еще загружается/Проверьте подключение к интернету" to "Wait, the video is still loading/Check your internet connection",
-    "в меню" to "menu","новая игра" to "new game","Победа" to "Victory","Поражение" to "Defeat")
+    "в меню" to "menu","новая игра" to "new game","Победа" to "Victory","Поражение" to "Defeat",
+    "ТЕКУЩИЕ ИГРЫ" to "CURRENT GAMES")
 fun translate(s: String): String
 {
     if(LANGUAGE == "Russian")
@@ -293,7 +294,7 @@ fun translate(s: String): String
 var TRANSLATE_MAP_AVATAR  = mapOf("Мир" to "Peace","Солнце" to "Sun","Меркурий" to "Mercury","Венера" to "Venus","Земля" to "Eath", "Луна" to "Moon",
     "Марс" to "Mars", "Юпитер" to "Jupiter","Сатурн" to "Saturn","Уран" to "Uranus","Нептун" to "Neptune","Плутон" to "Pluto","Пентакль" to "Pentacle",
     "Треугольник" to "Triangle","Крест" to "Cross","Звдезда" to "Star","Пентаграмма" to "Pentagram","Змея" to "Snake","Тигр" to "Tiger","Маска" to "Mask","Топоры" to "Axes","Череп" to "Skull",
-    "Инь-Янь" to "Yin-Yang","Сердце" to "Heart","Орхидея" to "Orchid","Фиалка" to  "Violet","Роза" to "Rose","Лилия" to "Lily","Звезда 2" to "Star 2","Золото" to "Gold","Корона" to "Crown","Шут" to "Fool")
+    "Инь-Янь" to "Yin-Yang","Сердце" to "Heart","Орхидея" to "Orchid","Фиалка" to  "Violet","Роза" to "Rose","Лилия" to "Lily","Звезда 2" to "Star 2","Звезда" to "Star2<","Золото" to "Gold","Корона" to "Crown","Шут" to "Fool")
 
 fun translate_avatar(s: String): String
 {
@@ -334,7 +335,7 @@ fun translate_design(s: String): String
 
 
 var TRANSLATE_GAMES = mapOf("XOGame" to "Крестики-Нолики", "DotGame" to "Точки", "SnakeGame" to "Змейка", "BoxGame" to "Коробки",
-    "AngleGame" to "Уголки", "VirusGame" to "Вирусы","Reversi" to "Реверси","Choose game" to "Выбор игры")
+    "AngleGame" to "Уголки", "VirusGame" to "Вирусы","Reversi" to "Реверси","Choose game" to "Выбери игру")
 fun translate_games(s:String): String?
 {
     if(LANGUAGE == "English")

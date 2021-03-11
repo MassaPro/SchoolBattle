@@ -263,7 +263,8 @@ class MyProfile : Fragment() {
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
             PICTURE_AVATAR[ARRAY_OF_AVATAR[position]]?.let { holder.img.setBackgroundResource(it) }     //картинка для авы
-            holder.content.text = AVATAR_TEXT[ARRAY_OF_AVATAR[position]]          //название авы
+            holder.content.text =
+                AVATAR_TEXT[ARRAY_OF_AVATAR[position]]?.let { translate_avatar(it) }    //название авы
 
             when (Design) {
                 "Normal" -> {
@@ -315,26 +316,17 @@ class MyProfile : Fragment() {
                 val username = prefs?.getString("username", "")
                 if (username != null) {
                     AVATAR = ARRAY_OF_AVATAR[position]
-                    myRef.child("Users").child(username).child("image")
-                        .setValue(ARRAY_OF_AVATAR[position].toString()).addOnSuccessListener {
-                        PICTURE_AVATAR[ARRAY_OF_AVATAR[position]]?.let { it1 ->
-                            locale_context?.findViewById<ImageView>(
-                                R.id.image_global_ava
-                            )?.setImageResource(it1)
-                        }
-                        val editor =
-                            locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE)
-                                .edit()
-                        editor.putString("avatar_number", ARRAY_OF_AVATAR[position].toString())
-                        editor.apply()
-                    }.addOnFailureListener(OnFailureListener {
-                        Toast.makeText(
-                            locale_context,
-                            "You need internet connection to change your avatar",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    })
-
+                    myRef.child("Users").child(username).child("image").setValue(ARRAY_OF_AVATAR[position].toString())
+                    PICTURE_AVATAR[ARRAY_OF_AVATAR[position]]?.let { it1 ->
+                        locale_context?.findViewById<ImageView>(
+                            R.id.image_global_ava
+                        )?.setImageResource(it1)
+                    }
+                    val editor =
+                        locale_context!!.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                            .edit()
+                    editor.putString("avatar_number", ARRAY_OF_AVATAR[position].toString())
+                    editor.apply()
 
                     D?.dismiss()
                 }
