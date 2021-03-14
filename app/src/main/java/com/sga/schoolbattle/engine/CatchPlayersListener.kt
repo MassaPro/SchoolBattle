@@ -174,6 +174,8 @@ fun initCatchPlayersListenerForLongGame(username: String, context: Context) {
                 }
             })
 
+            var controlEqualCalls = mutableSetOf<String?>()
+
             myRef.child("Users").child(username).child("calls").addChildEventListener(object: ChildEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
                 override fun onChildRemoved(p0: DataSnapshot) {}
@@ -207,7 +209,12 @@ fun initCatchPlayersListenerForLongGame(username: String, context: Context) {
                             val callDialogPlay = callDialog.findViewById(R.id.call_dialog_play) as Button
                             val callDialogText = callDialog.findViewById(R.id.call_dialog_text) as TextView
                             callDialogText.text = "${data?.opponent} хочет поиграть в ${data?.type}"
+                            if (data?.key in controlEqualCalls) {
+                                myRef.child("Users").child(username).child("calls").child(p0.key.toString()).removeValue()
+                                return
+                            }
                             callDialog.show()
+                            controlEqualCalls.add(data?.key)
                             callDialogReject.setOnClickListener {
                                 myRef.child("Users").child(username).child("calls").child(p0.key.toString()).removeValue()
                                 callDialog.dismiss()

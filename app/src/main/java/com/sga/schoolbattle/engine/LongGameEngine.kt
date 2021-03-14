@@ -17,7 +17,6 @@ interface LongGameEngine {
     var activity: Activity
     var type: String
     var key: String
-
     fun init() {
         userT.text = ""
         opponentT.text = ""

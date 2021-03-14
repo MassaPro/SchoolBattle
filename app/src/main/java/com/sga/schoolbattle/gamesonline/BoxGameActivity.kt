@@ -162,8 +162,17 @@ class BoxGameActivity : AppCompatActivity() {
         signature_canvas_box.blocked = true
         signature_canvas_box.username = yourName
         signature_canvas_box.isFirstMove = intent.getStringExtra("move") == "1"
-        button_player_1_online_xog.text = yourName
-        button_player_2_online_xog.text = opponentsName
+        button_player_1_online_xog.text = "$yourName ($RATING)"
+        myRef.child("Users").child(opponentsName).child("rating").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.exists()) {
+                    button_player_2_online_xog.text = opponentsName + " (${p0.value.toString()}}"
+                } else {
+                    button_player_2_online_xog.text = "$opponentsName (1000)"
+                }
+            }
+        })
 
         if (type == "blitz") {
 

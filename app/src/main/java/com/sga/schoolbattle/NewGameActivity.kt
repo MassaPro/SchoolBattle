@@ -35,6 +35,7 @@ class NewGameActivity : AppCompatActivity() {
         setContentView(R.layout.activity_new_game)
         CONTEXT = this
         text.text = translate_games("Choose game")
+        var numberOfCurrentCalls = 0
 
         when (Design) {
             "Normal" -> {
@@ -87,7 +88,7 @@ class NewGameActivity : AppCompatActivity() {
         NewGame = this
         val opponent: String? = intent.getStringExtra("opponent")
         game_list.layoutManager = GridLayoutManager(this, 2)
-        setupRecyclerView(game_list, intent.getIntExtra("playType", -1), this, opponent)
+        setupRecyclerView(game_list, intent.getIntExtra("playType", -1), this, opponent, numberOfCurrentCalls)
 
 
         back_button.setOnClickListener {
@@ -107,12 +108,13 @@ class NewGameActivity : AppCompatActivity() {
         recyclerView: RecyclerView,
         type: Int,
         activity: Activity,
-        opponent: String?
+        opponent: String?,
+        numberOfCurrentCalls: Int
     ) {
-        recyclerView.adapter = NewGameActivity.SimpleItemRecyclerViewAdapter(CHOOSE_GAMES, type, activity, opponent)
+        recyclerView.adapter = NewGameActivity.SimpleItemRecyclerViewAdapter(CHOOSE_GAMES, type, activity, opponent, numberOfCurrentCalls)
     }
 
-    class SimpleItemRecyclerViewAdapter(private val ITEMS: MutableList<String>, type: Int, activity: Activity, opponent: String?):
+    class SimpleItemRecyclerViewAdapter(private val ITEMS: MutableList<String>, type: Int, activity: Activity, opponent: String?, var numberOfCurrentCalls: Int):
         RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
         private val onClickListener: View.OnClickListener
@@ -152,6 +154,10 @@ class NewGameActivity : AppCompatActivity() {
                         activity.overridePendingTransition(0 , 0)
                     }
                     5 -> {
+                        if (numberOfCurrentCalls > 1) {
+                            activity.finish()
+                            return@OnClickListener
+                        }
                         val systemTime = System.currentTimeMillis()
                         val username = v.context.getSharedPreferences("UserData", Context.MODE_PRIVATE).getString("username", "")!!
                         myRef.child("Users").child(opponent!!).child("calls")
@@ -159,6 +165,8 @@ class NewGameActivity : AppCompatActivity() {
                             .child(username).setValue(systemTime % 2).addOnSuccessListener {
                                 Toast.makeText(v.context, "Вызов отправлен!", Toast.LENGTH_LONG).show()
                             }
+                        numberOfCurrentCalls++
+                        activity.finish()
                     }
                 }
             }

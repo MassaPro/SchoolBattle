@@ -75,6 +75,10 @@ class ShowResult(activity: Activity) {
         })
 
         dialog.user_rating_win_dialog.text = globalName.toString() +'\n'+ newRating.toString().toString()
+        if (newRating < 0) {
+            if (RATING < 0) RATING = 1000
+            dialog.user_rating_win_dialog.text = globalName.toString() +'\n'+ RATING.toString().toString()
+        }
         dialog.textView8.text = moneyChange.toString()
 
         when (Design) {

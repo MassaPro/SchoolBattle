@@ -239,8 +239,17 @@ class ReversiGameActivity : AppCompatActivity() {
         signature_canvas_reversi.blocked = true
         signature_canvas_reversi.user = user
         signature_canvas_reversi.isFirstMove = intent.getStringExtra("move") == "1"
-        button_player_1_online_xog.text = user
-        button_player_2_online_xog.text = opponent
+        button_player_1_online_xog.text = "$user ($RATING)"
+        myRef.child("Users").child(opponent).child("rating").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.exists()) {
+                    button_player_2_online_xog.text = opponent + " (${p0.value.toString()}}"
+                } else {
+                    button_player_2_online_xog.text = "$opponent (1000)"
+                }
+            }
+        })
         val yu = if (opponent < user) '1' else '0'
         val op = if (opponent < user) '0' else '1'
         myRef.child("Users").child(user).child("image").addListenerForSingleValueEvent(object : ValueEventListener {

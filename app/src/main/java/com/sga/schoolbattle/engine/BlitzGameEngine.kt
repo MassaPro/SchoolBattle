@@ -42,6 +42,8 @@ interface BlitzGameEngine {
         )
         positionData.onDisconnect().updateChildren(loseUpd)
         //positionData.onDisconnect().removeValue()
+
+        var numberOfSecondsBeforeEnd = 100L
         timer.scheduleAtFixedRate(object : TimerTask() {
             @SuppressLint("SetTextI18n")
             override fun run() {
@@ -57,11 +59,11 @@ interface BlitzGameEngine {
                     if (cntOpponent % 10 == 0) {
                         opponentT.text = (100 - cntOpponent / 10).toString()
                     }
-                    if (cntUser >= 1000L) {
+                    if (cntUser >= 10L * numberOfSecondsBeforeEnd) {
                         positionData.setValue(loseUpd)
                         this.cancel()
                     }
-                    if (cntOpponent >= 1000L) {
+                    if (cntOpponent >= 10 * numberOfSecondsBeforeEnd) {
                         positionData.setValue(winUpd)
                         this.cancel()
                     }
