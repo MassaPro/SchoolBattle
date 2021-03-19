@@ -61,7 +61,7 @@ class Specially : Fragment(), RewardedVideoAdListener, PurchasesUpdatedListener 
         Vidos = mRewardedVideoAd
 
 
-        choose_design_shop.text = "Разное    "
+        choose_design_shop.text = translate_special("Интересненько..")
 
         ShopSPECIALLYsetupRecyclerView(item_design_shop)
         gamesRecycler = item_design_shop
@@ -253,7 +253,7 @@ class Specially : Fragment(), RewardedVideoAdListener, PurchasesUpdatedListener 
                                 ?.edit()
                         editor?.putString("premium", "1")
                         editor?.apply()
-                        locale_context?.item_design_shop?.adapter?.notifyItemChanged(1)
+                        locale_context?.item_design_shop?.adapter?.notifyItemChanged(2)
                     } else {
                         var reward  = locale_context?.let {
                             RewardDialog(
@@ -380,15 +380,16 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
             it
         ) }     //картинка для стиля
         holder.price.text = PRICE_OD_SPECIALLY[ARRAY_OF_SPECIALLY_SHOP[position]].toString()             //цена стиля
-        holder.contentView.text = SPECIALLY_TEXT[ARRAY_OF_SPECIALLY_SHOP[position]]          //название стиля
-
+        holder.contentView.text =
+            SPECIALLY_TEXT[ARRAY_OF_SPECIALLY_SHOP[position]]?.let { translate_special(it) }      //название стиля
+        holder.button.text = translate("КУПИТЬ")
         if(ARRAY_OF_SPECIALLY_SHOP[position] == 0)
         {
             holder.icon.setImageResource(R.drawable.money)
             val getter = locale_context?.getSharedPreferences("UserData", Context.MODE_PRIVATE)
             val capital = getter?.getString("number_capital", "500").toString().toInt()
-            holder.price.text  = "ПОЛУЧИ " +  right_recording(min(capital / 100 * 4, 5000).toString())
-            holder.button.text  =  "смотреть"
+            holder.price.text  = translate_special("ПОЛУЧИ") + " " +  right_recording(min(capital / 100 * 4, 5000).toString())
+            holder.button.text  =  translate_special("СМОТРЕТЬ")
         }
 
         if(position == 0)
@@ -396,14 +397,7 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
             holder.icon.setImageResource(R.drawable.money)
         }
         else{
-            if(LANGUAGE =="Russian" )
-            {
-                holder.icon.setImageResource(R.drawable.rub1)
-            }
-            else
-            {
-                holder.icon.setImageResource(R.drawable.rub2)
-            }
+            holder.icon.setImageResource(R.drawable.rub1)
         }
         with(holder.itemView) {
             tag = ARRAY_OF_SPECIALLY_SHOP[position]
@@ -519,10 +513,10 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
                 holder.contentView.typeface = ResourcesCompat.getFont(locale_context!!, R.font.noir)
             }
         }
-        if(PREMIUM && position==1)
+        if(PREMIUM && position==2)
         {
             holder.button.background = null
-            holder.button.text = "(КУПЛЕНО)"
+            holder.button.text = translate("(КУПЛЕНО)")
         }
         holder.button.setOnClickListener {
             if(ARRAY_OF_SPECIALLY_SHOP[position] == 0)           // если это видос
@@ -548,7 +542,7 @@ class ShopSPECIALLYsItemRecyclerViewAdapter(private val DESIGN_ITEMS: MutableLis
                 if (billingClient!!.isReady) {
                     initiatePurchase()
                 } else {
-                    if( !(PRODUCT_ID == "premium" && PREMIUM))
+                    if( PRODUCT_ID == "premium" && !PREMIUM)
                     {
                         billingClient = BillingClient.newBuilder(locale_context!!).enablePendingPurchases().setListener(p1!!).build()
                         billingClient!!.startConnection(object : BillingClientStateListener {

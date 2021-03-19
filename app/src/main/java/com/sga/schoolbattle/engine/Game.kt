@@ -86,6 +86,8 @@ class ShowResult(activity: Activity) {
                 dialog.close_button_online.setBackgroundResource(R.drawable.close_cross)
                 dialog.revanche.setBackgroundResource(R.drawable.button)
                 dialog.restart.setBackgroundResource(R.drawable.button)
+
+                dialog.imageView6.setImageResource(R.drawable.duelpic_normal)
             }
             "Egypt" -> {
                 dialog.close_button_online.setBackgroundResource(R.drawable.close_cross)
@@ -96,7 +98,17 @@ class ShowResult(activity: Activity) {
                 dialog.restart.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
                 dialog.resultText.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.egypt)
                 dialog.textView8.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                dialog.ratingChange.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.egypt)
 
+                dialog.user_rating_win_dialog.setTextColor(Color.BLACK)
+                dialog.opponent_rating_win_dialog.setTextColor(Color.BLACK)
+                dialog.revanche.setTextColor(Color.BLACK)
+                dialog.restart.setTextColor(Color.BLACK)
+                dialog.resultText.setTextColor(Color.BLACK)
+                dialog.textView8.setTextColor(Color.BLACK)
+                dialog.ratingChange.setTextColor(Color.BLACK)
+
+                dialog.imageView6.setImageResource(R.drawable.duelpic_egypt)
 
             }
             "Casino" -> {
@@ -108,6 +120,7 @@ class ShowResult(activity: Activity) {
                 dialog.restart.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
                 dialog.resultText.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.casino)
                 dialog.textView8.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                dialog.ratingChange.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.casino)
 
                 dialog.user_rating_win_dialog.setTextColor(Color.YELLOW)
                 dialog.opponent_rating_win_dialog.setTextColor(Color.YELLOW)
@@ -115,6 +128,8 @@ class ShowResult(activity: Activity) {
                 dialog.restart.setTextColor(Color.YELLOW)
                 dialog.resultText.setTextColor(Color.WHITE)
                 dialog.textView8.setTextColor(Color.WHITE)
+                dialog.ratingChange.setTextColor(Color.WHITE)
+                dialog.imageView6.setImageResource(R.drawable.duelpic_casino)
             }
             "Rome" -> {
                 dialog.close_button_online.setBackgroundResource(R.drawable.close_cross3)
@@ -125,6 +140,7 @@ class ShowResult(activity: Activity) {
                 dialog.restart.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
                 dialog.resultText.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.rome)
                 dialog.textView8.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                dialog.ratingChange.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.rome)
 
                 dialog.user_rating_win_dialog.setTextColor(Color.rgb(193, 150, 63))
                 dialog.opponent_rating_win_dialog.setTextColor(Color.rgb(193, 150, 63))
@@ -132,6 +148,9 @@ class ShowResult(activity: Activity) {
                 dialog.restart.setTextColor(Color.rgb(193, 150, 63))
                 dialog.resultText.setTextColor(Color.GRAY)
                 dialog.textView8.setTextColor(Color.GRAY)
+                dialog.ratingChange.setTextColor(Color.GRAY)
+
+                dialog.imageView6.setImageResource(R.drawable.duelpic_rome2)
 
             }
             "Gothic" -> {
@@ -143,6 +162,7 @@ class ShowResult(activity: Activity) {
                 dialog.restart.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
                 dialog.resultText.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.gothic)
                 dialog.textView8.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                dialog.ratingChange.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.gothic)
 
                 dialog.user_rating_win_dialog.setTextColor(Color.WHITE)
                 dialog.opponent_rating_win_dialog.setTextColor(Color.WHITE)
@@ -150,6 +170,9 @@ class ShowResult(activity: Activity) {
                 dialog.restart.setTextColor(Color.WHITE)
                 dialog.resultText.setTextColor(Color.WHITE)
                 dialog.textView8.setTextColor(Color.WHITE)
+                dialog.ratingChange.setTextColor(Color.WHITE)
+
+                dialog.imageView6.setImageResource(R.drawable.duelpic_gothic)
             }
             "Japan" -> {
                 dialog.close_button_online.setBackgroundResource(R.drawable.close_cross)
@@ -160,6 +183,9 @@ class ShowResult(activity: Activity) {
                 dialog.restart.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
                 dialog.resultText.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.japan)
                 dialog.textView8.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.japan)
+
+                dialog.imageView6.setImageResource(R.drawable.duelpic_japan)
+
             }
             "Noir" -> {
                 dialog.close_button_online.setBackgroundResource(R.drawable.close_cross2)
@@ -171,12 +197,16 @@ class ShowResult(activity: Activity) {
                 dialog.restart.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
                 dialog.resultText.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.noir)
                 dialog.textView8.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                dialog.ratingChange.typeface =  ResourcesCompat.getFont(CONTEXT, R.font.noir)
 
                 dialog.user_rating_win_dialog.setTextColor(Color.WHITE)
                 dialog.opponent_rating_win_dialog.setTextColor(Color.WHITE)
                 dialog.revanche.setTextColor(Color.WHITE)
                 dialog.restart.setTextColor(Color.WHITE)
                 dialog.resultText.setTextColor(Color.WHITE)
+                dialog.ratingChange.setTextColor(Color.WHITE)
+
+                dialog.imageView6.setImageResource(R.drawable.duelpic_noir)
             }
         }
 

@@ -87,9 +87,9 @@ var AUXILIARY_MAP_OF_EMOTION = mapOf(0 to "e0", 1 to "e1", 2 to "e2",3 to "e3",4
 
 //____________________________________________________________________________________________________________________________
 var SPECIALLY: String = "ava1"               //СПЕЦИАЛЬНОЕ
-val PICTURE_SPECIALLY = mapOf(0 to R.drawable.video, 1 to R.drawable.vip, 2 to R.drawable.bag1,3 to R.drawable.bag2,4 to R.drawable.bag3,5 to R.drawable.bag4,6 to  R.drawable.bag5,7 to R.drawable.bag6,8 to R.drawable.bag7)
-val SPECIALLY_TEXT = mapOf(0 to "ВИДЕО С ВОЗНАГРАЖДЕНИЕМ", 1 to "ПРЕМИУМ АККАУНТ", 2 to "ГОРШОК КРИСТАЛЛОВ",3 to "СУМКА КРИСТАЛЛОВ",4 to "РЮКЗАК КРИСТАЛЛОВ",5 to "ПОРТФЕЛЬ КРИСТАЛЛОВ" , 6 to "МЕШОК КРИСТАЛЛОВ",7 to "ЧЕМОДАН КРИСТАЛЛОВ",8 to " БАНК КРИСТАЛЛОВ")
-val PRICE_OD_SPECIALLY = mapOf(0 to 10,1 to 20,2 to 30,3 to 90)
+val PICTURE_SPECIALLY = mapOf(0 to R.drawable.video, 2 to R.drawable.vip, 1 to R.drawable.bag1,3 to R.drawable.bag2,4 to R.drawable.bag3,5 to R.drawable.bag4,6 to  R.drawable.bag5,7 to R.drawable.bag6,8 to R.drawable.bag7)
+val SPECIALLY_TEXT = mapOf(0 to "ВИДЕО С ВОЗНАГРАЖДЕНИЕМ", 1 to "ГОРШОК КРИСТАЛЛОВ", 2 to "ПРЕМИУМ АККАУНТ",3 to "СУМКА КРИСТАЛЛОВ",4 to "РЮКЗАК КРИСТАЛЛОВ",5 to "ПОРТФЕЛЬ КРИСТАЛЛОВ" , 6 to "МЕШОК КРИСТАЛЛОВ",7 to "ЧЕМОДАН КРИСТАЛЛОВ",8 to "БАНК КРИСТАЛЛОВ")
+val PRICE_OD_SPECIALLY = mapOf(1 to 15,2 to 99,3 to 30,4 to 99,5 to 399,6 to 999,7 to 2999,8 to 4999)
 var ARRAY_OF_SPECIALLY_SHOP: MutableList<Int>  = mutableListOf(0,1,2,3,4,5,6,7,8)
 var ARRAY_OF_SPECIALLY: MutableList<Int>  = mutableListOf()
 var AUXILIARY_MAP_OF_SPECIALLY = mapOf(0 to "specially1", 1 to "specially2", 2 to "specially3",3 to "specially4")
@@ -97,7 +97,7 @@ var AUXILIARY_MAP_OF_SPECIALLY = mapOf(0 to "specially1", 1 to "specially2", 2 t
 var PREMIUM : Boolean = false
 
 var PRODUCT_ID = "premium"
-var ARRAY_OF_PRODUCT_ID = mapOf(1 to "premium",2 to "b1",3 to "b2",4 to "b3",5 to "b4",6 to "b7",7 to "b5",8 to "b6")           //идентификаторы в Google Play
+var ARRAY_OF_PRODUCT_ID = mapOf(2 to "premium",1 to "b1",3 to "b2",4 to "b3",5 to "b4",6 to "b5",7 to "b6",8 to "b7")           //идентификаторы в Google Play
 //var PURCHASE_KEY =      "premium"
 //__________________________________________________________________________________________________________________________________
 
@@ -235,7 +235,6 @@ fun populateUnifiedNativeAdView(unifiedNativeAd: UnifiedNativeAd, adView: Unifie
     val headlineView = adView.findViewById<TextView>(R.id.ad_headline)
     headlineView.text = unifiedNativeAd.headline
     adView.headlineView = headlineView
-
     val mediaView = adView.findViewById<MediaView>(R.id.ad_app_icon)
     adView.mediaView = mediaView
 
@@ -344,3 +343,18 @@ fun translate_games(s:String): String?
     }
     return TRANSLATE_GAMES[s]
 }
+
+var TRANSLATE_SPECIAL = mapOf("Интересненько.." to "Interesting...","ВИДЕО С ВОЗНАГРАЖДЕНИЕМ" to "REWARDED VIDEO", "ГОРШОК КРИСТАЛЛОВ" to "POT OF CRYSTALS",
+     "ПРЕМИУМ АККАУНТ" to "PREMIUM ACCOUNT", "СУМКА КРИСТАЛЛОВ" to "BAG OF CRYSTALS","РЮКЗАК КРИСТАЛЛОВ" to "BACKPACK OF CRYSTALS",
+     "ПОРТФЕЛЬ КРИСТАЛЛОВ"  to "MINI-CASE OF CRYSTAL", "МЕШОК КРИСТАЛЛОВ" to "SACK OF CRYSTAL","ЧЕМОДАН КРИСТАЛЛОВ" to "CASE OF CRYSTAL","БАНК КРИСТАЛЛОВ" to "BANK OF CRYSTAL",
+"ПОЛУЧИ" to "GET","СМОТРЕТЬ" to "WATCH")
+
+fun translate_special(s: String):String?
+{
+    if(LANGUAGE == "Russian")
+    {
+        return s;
+    }
+    return TRANSLATE_SPECIAL[s]
+}
+

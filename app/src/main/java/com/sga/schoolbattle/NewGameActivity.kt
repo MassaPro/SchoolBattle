@@ -123,6 +123,12 @@ class NewGameActivity : AppCompatActivity() {
             onClickListener = View.OnClickListener { v ->
                 val item = v.tag as String
 
+                if( (item == "VirusGame" || item =="AngleGame") &&(type==1 || type == 0))
+                {
+                    val d = Development(activity)
+                    d.show()
+                    return@OnClickListener
+                }
                 when (type) {
                     1 -> {
                         val intent = Intent(v.context, LongActivity::class.java).apply {
