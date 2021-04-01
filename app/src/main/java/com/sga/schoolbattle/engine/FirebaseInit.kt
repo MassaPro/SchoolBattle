@@ -19,8 +19,8 @@ class RecyclerSet {
             Log.w("FFF", el.toString())
             //Toast.makeText(CONTEXT,  "od" + CONTEXT.toSv bbtring(), Toast.LENGTH_LONG).show()
             if (!isOld) {
-                Toast.makeText(CONTEXT, StupidGameActivity::getApplicationContext.toString(), Toast.LENGTH_LONG).show()
-                Toast.makeText(CONTEXT, CONTEXT.applicationContext.toString(), Toast.LENGTH_LONG).show()
+             //   Toast.makeText(CONTEXT, StupidGameActivity::getApplicationContext.toString(), Toast.LENGTH_LONG).show()
+        //        Toast.makeText(CONTEXT, CONTEXT.applicationContext.toString(), Toast.LENGTH_LONG).show()
                 val intent = if (el.name.contains(" StupidGame")) {
                     Intent(CONTEXT, StupidGameActivityTwoPlayers::class.java)
                 } else if (el.name.contains(" XOGame")) {

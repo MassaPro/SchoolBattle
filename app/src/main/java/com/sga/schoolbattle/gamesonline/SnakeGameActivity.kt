@@ -224,7 +224,7 @@ class SnakeGameActivity : AppCompatActivity() {
                 override var type = "XOGame"
                 override var key = intent.getStringExtra("key")
             }
-            Toast.makeText(this, engineLong?.key.toString(), Toast.LENGTH_LONG).show()
+    //        Toast.makeText(this, engineLong?.key.toString(), Toast.LENGTH_LONG).show()
             engineLong?.init()
         }
         val initialMove = intent.getStringExtra("move") == "1"
@@ -453,7 +453,8 @@ class SnakeGameActivity : AppCompatActivity() {
         })
         DDD = Dialog(this)
         DDD.setContentView(R.layout.activity_game_over)
-        adLoader = AdLoader.Builder(this, "ca-app-pub-3940256099942544/2247696110")
+        adLoader = AdLoader.Builder(this, "\n" +
+                "ca-app-pub-8137188857901546/5619400215")
             .forUnifiedNativeAd { unifiedNativeAd : UnifiedNativeAd ->
                 // Show the ad.
 

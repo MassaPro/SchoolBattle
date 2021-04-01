@@ -187,14 +187,14 @@ class Specially : Fragment(), RewardedVideoAdListener, PurchasesUpdatedListener 
         var reward  = locale_context?.let {
             RewardDialog(
                 it,
-                PRODUCT_ID
+                "award"
             )
         }
         reward?.show()
 
 
 
-        Toast.makeText(requireContext(), "FAIL", Toast.LENGTH_LONG).show()
+      //  Toast.makeText(requireContext(), "FAIL", Toast.LENGTH_LONG).show()
         locale_context?.findViewById<TextView>(R.id.money_shop_toolbar)?.text = MONEY.toString()
     }
     //________________

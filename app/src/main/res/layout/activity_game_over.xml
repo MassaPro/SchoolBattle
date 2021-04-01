@@ -138,7 +138,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="64dp"
                 android:layout_marginTop="4dp"
-                android:gravity="right"
+                android:gravity="right|center"
                 android:text="+200"
                 android:autoSizeTextType="uniform"
                 android:padding="5dp"

@@ -27,6 +27,7 @@ interface BlitzGameEngine {
     var userRating: Int
     var opponentRating: Int
 
+
     fun init() {
         val loseUpd = mapOf(
             "winner" to opponent,
@@ -43,7 +44,12 @@ interface BlitzGameEngine {
         positionData.onDisconnect().updateChildren(loseUpd)
         //positionData.onDisconnect().removeValue()
 
-        var numberOfSecondsBeforeEnd = 100L
+        var numberOfSecondsBeforeEnd = 60*5L
+        if(activity.toString().contains("DotGameActivity"))
+        {
+            numberOfSecondsBeforeEnd = 60*10L
+        }
+
         timer.scheduleAtFixedRate(object : TimerTask() {
             @SuppressLint("SetTextI18n")
             override fun run() {
@@ -54,10 +60,10 @@ interface BlitzGameEngine {
                         cntOpponent++
                     }
                     if (cntUser % 10 == 0) {
-                        userT.text = (100 - cntUser / 10).toString()
+                        userT.text = convert_to_right_time( numberOfSecondsBeforeEnd.toInt() - cntUser / 10)
                     }
                     if (cntOpponent % 10 == 0) {
-                        opponentT.text = (100 - cntOpponent / 10).toString()
+                        opponentT.text = convert_to_right_time( numberOfSecondsBeforeEnd.toInt() - cntOpponent / 10)
                     }
                     if (cntUser >= 10L * numberOfSecondsBeforeEnd) {
                         positionData.setValue(loseUpd)
@@ -132,4 +138,22 @@ interface BlitzGameEngine {
             isFinished = true
         }
     }
+}
+
+fun convert_to_right_time(time:Int): String
+{
+
+    val seconds = time%60
+    val minutes = (time - seconds)/60
+    return ckop(minutes)+':'+ ckop(seconds)
+}
+
+fun ckop(n:Int):String
+{
+    val s = n.toString()
+    if(s.length==1)
+    {
+        return "0$s"
+    }
+    return s
 }

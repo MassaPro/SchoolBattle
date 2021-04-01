@@ -162,7 +162,7 @@ class MyProfile : Fragment() {
 
 
         image_global_ava.setOnClickListener {
-            Toast.makeText(locale_context,"Wrong name", Toast.LENGTH_LONG).show()
+        //    Toast.makeText(locale_context,"Wrong name", Toast.LENGTH_LONG).show()
             D = dialog_find_ava
             dialog_find_ava.setContentView(R.layout.activity_ava__dialog)
 

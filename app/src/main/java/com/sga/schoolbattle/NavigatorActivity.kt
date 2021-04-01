@@ -86,7 +86,7 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
         locale_context = this
         if(!PREMIUM) {
             mInterstitialAd_in_offline_games = InterstitialAd(this)
-            mInterstitialAd_in_offline_games.adUnitId = "ca-app-pub-3940256099942544/1033173712"
+            mInterstitialAd_in_offline_games.adUnitId = "ca-app-pub-8137188857901546/1455766259"
             mInterstitialAd_in_offline_games.loadAd(AdRequest.Builder().build())
 
             val prfs = this.getSharedPreferences("UserData", Context.MODE_PRIVATE)
@@ -458,7 +458,7 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
         dialog_reward.ok_reward.setOnClickListener {
             dialog_reward.dismiss()
         }
-        Toast.makeText(this, "NIK", Toast.LENGTH_LONG).show()
+      //  Toast.makeText(this, "NIK", Toast.LENGTH_LONG).show()
         dialog_reward.show()
         locale_context?.findViewById<TextView>(R.id.money_shop_toolbar)?.text = MONEY.toString()
     }
@@ -466,7 +466,7 @@ class NavigatorActivity : AppCompatActivity() ,RewardedVideoAdListener{
     fun loadRewardedVideoAd() {
         if(!PREMIUM)
         {
-            mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917",          //TODO зменить на настоящий идентификатор
+            mRewardedVideoAd.loadAd("ca-app-pub-8137188857901546/4769691002",          //TODO зменить на настоящий идентификатор
                 AdRequest.Builder().build())
         }
     }

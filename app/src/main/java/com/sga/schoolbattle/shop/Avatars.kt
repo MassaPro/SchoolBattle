@@ -139,7 +139,7 @@ class Avatars : Fragment() , RewardedVideoAdListener {
         var reward  = locale_context?.let {
             RewardDialog(
                 it,
-                PRODUCT_ID
+                "award"
             )
         }
         reward?.show()

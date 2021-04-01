@@ -39,7 +39,7 @@ class StupidGameActivity : AppCompatActivity() {
         is_pressed = true
         //button.setOnClickListener {
           //  button.isEnabled = false
-            Toast.makeText(this, "onCreate", Toast.LENGTH_LONG).show()
+      //      Toast.makeText(this, "onCreate", Toast.LENGTH_LONG).show()
 
             /*eventListener = myRef.addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}

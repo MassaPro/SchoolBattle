@@ -1,5 +1,6 @@
 package com.sga.schoolbattle
 
+
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
@@ -110,7 +111,7 @@ var MONEY: Int = 200                  //ДЕНЬГИ
 
 var GAMES: MutableList<Game> = mutableListOf()
 var FRIENDS: MutableList<String> = mutableListOf()
-var CHOOSE_GAMES: MutableList<String> = mutableListOf("XOGame", "DotGame", "SnakeGame", "BoxGame", "AngleGame", "VirusGame","Reversi")
+var CHOOSE_GAMES: MutableList<String> = mutableListOf("XOGame", "DotGame", "Reversi","SnakeGame", "BoxGame", "AngleGame", "VirusGame")
 var LIGTH_GAMES_ICONS = mapOf("XOGame" to R.drawable.xo_icon0,"DotGame" to R.drawable.dots_icon0, "SnakeGame" to R.drawable.sn_icon0, "BoxGame" to R.drawable.box_icon0,
     "AngleGame" to R.drawable.cor_icon0, "VirusGame" to R.drawable.vir_icon0,"Reversi" to R.drawable.rev_icon0)
 
@@ -246,7 +247,11 @@ fun populateUnifiedNativeAdView(unifiedNativeAd: UnifiedNativeAd, adView: Unifie
     DDD.add_frame.removeAllViews()
 
     // Place the AdView into the parent.
-    DDD.add_frame.addView(adView)
+    if(!PREMIUM)
+    {
+        DDD.add_frame.addView(adView)
+    }
+
 }
 
 fun right_recording(s : String): String

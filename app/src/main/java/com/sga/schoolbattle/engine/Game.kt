@@ -225,7 +225,7 @@ class ShowResult(activity: Activity) {
         }
 
         ng.setOnClickListener {
-            Toast.makeText(con, "kdslkj", Toast.LENGTH_LONG).show()
+         //   Toast.makeText(con, "kdslkj", Toast.LENGTH_LONG).show()
             myRef.child("Users/$globalName/rating").addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
                 override fun onDataChange(p0: DataSnapshot) {

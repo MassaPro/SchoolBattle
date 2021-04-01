@@ -50,7 +50,7 @@ class GameListActivity : Fragment() {
         CONTEXT = requireActivity()
         currentGamesRecycler = item_list
         setupRecyclerView(item_list)
-        Toast.makeText(requireContext(), CURRENTGAMES.size.toString(), Toast.LENGTH_LONG).show()
+   //     Toast.makeText(requireContext(), CURRENTGAMES.size.toString(), Toast.LENGTH_LONG).show()
 
         toolbarName2.text = translate("ТЕКУЩИЕ ИГРЫ")
         when (Design) {

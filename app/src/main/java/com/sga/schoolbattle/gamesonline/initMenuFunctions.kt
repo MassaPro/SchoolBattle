@@ -60,7 +60,7 @@ fun initMenuFunctions(activity: Activity,
                 }
             }
             R.id.page_online_2 ->{
-                Toast.makeText(activity, positionData.toString(), Toast.LENGTH_LONG).show()
+           //     Toast.makeText(activity, positionData.toString(), Toast.LENGTH_LONG).show()
                 loseDialog.setContentView(R.layout.dialog_for_losers)
                 loseDialog.dialog_for_losers_lose.setOnClickListener {
                     var gameId: Long = 0
@@ -74,7 +74,7 @@ fun initMenuFunctions(activity: Activity,
                             break
                         }
                     }
-                    Toast.makeText(activity, "gameId=$gameId", Toast.LENGTH_LONG).show()
+        //            Toast.makeText(activity, "gameId=$gameId", Toast.LENGTH_LONG).show()
                     myRef.child("Users").child(user).child("long").child(gameId.toString()).removeValue()
                     positionData.child("winner").setValue(opponent)
                     loseDialog.dismiss()

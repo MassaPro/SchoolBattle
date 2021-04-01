@@ -102,7 +102,7 @@ class SearchActivity : AppCompatActivity() {
                 sorted.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {}
                     override fun onDataChange(p0: DataSnapshot) {
-                        Toast.makeText(this@SearchActivity, query + ' ' + blocked, Toast.LENGTH_LONG).show()
+                    //    Toast.makeText(this@SearchActivity, query + ' ' + blocked, Toast.LENGTH_LONG).show()
                         USERS.clear()
                         IMAGES.clear()
                         for (i in p0.children) {

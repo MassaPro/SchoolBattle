@@ -32,7 +32,7 @@ class Subscriptions : Fragment() {
         if (locale_context!!.intent.getStringExtra("curName") != null) {
             username = locale_context!!.intent.getStringExtra("curName")
         }
-        Toast.makeText(locale_context, username, Toast.LENGTH_LONG).show()
+      //  Toast.makeText(locale_context, username, Toast.LENGTH_LONG).show()
         val friendsOut = mutableListOf<String>()
 
         recyclerViewFriendsAndFollowers.adapter =

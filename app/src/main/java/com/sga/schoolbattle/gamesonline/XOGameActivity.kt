@@ -306,7 +306,7 @@ class XOGameActivity : AppCompatActivity() {
                 override var userRating = RATING
                 override var opponentRating = intent.getStringExtra("rating")!!.toInt()
             }
-            Toast.makeText(this, engine?.opponentRating.toString(), Toast.LENGTH_LONG).show()
+       //     Toast.makeText(this, engine?.opponentRating.toString(), Toast.LENGTH_LONG).show()
             button_player_1_online_xog.text = "$yourName (${engine?.userRating})"
             button_player_2_online_xog.text = "$opponentsName (${engine?.opponentRating})"
             engine?.init()
@@ -324,7 +324,7 @@ class XOGameActivity : AppCompatActivity() {
                 override var type = "XOGame"
                 override var key = intent.getStringExtra("key")
             }
-            Toast.makeText(this, engineLong?.key.toString(), Toast.LENGTH_LONG).show()
+    //        Toast.makeText(this, engineLong?.key.toString(), Toast.LENGTH_LONG).show()
             engineLong?.init()
         }
         var initialMove = intent.getStringExtra("move") == "1"
@@ -424,7 +424,7 @@ class XOGameActivity : AppCompatActivity() {
                 if (signature_canvas.isFirstMove == (cnt % 2 == 0)) signature_canvas.blocked = false
                 signature_canvas.invalidate()
                 val checkList = checkForWin()
-                Toast.makeText(this@XOGameActivity, engine?.move.toString(), Toast.LENGTH_LONG).show()
+       //         Toast.makeText(this@XOGameActivity, engine?.move.toString(), Toast.LENGTH_LONG).show()
                 if (p0.hasChild("winner") || checkList.size > 1 || (checkList.size == 1 && cnt == 42)) {
                     gameData.child("FIELD").child("result").onDisconnect().cancel()
                     engine?.stopTimer()
@@ -496,7 +496,8 @@ class XOGameActivity : AppCompatActivity() {
 
         DDD = Dialog(this)
         DDD.setContentView(R.layout.activity_game_over)
-        adLoader = AdLoader.Builder(this, "ca-app-pub-3940256099942544/2247696110")
+        adLoader = AdLoader.Builder(this, "\n" +
+                "ca-app-pub-8137188857901546/5619400215")
             .forUnifiedNativeAd { unifiedNativeAd : UnifiedNativeAd ->
                 // Show the ad.
 

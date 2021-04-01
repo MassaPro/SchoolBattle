@@ -343,3 +343,4 @@ class SignUpActivity : AppCompatActivity() {
         dialog.show()
     }
 }
+

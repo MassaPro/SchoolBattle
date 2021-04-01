@@ -214,7 +214,10 @@ class ShopDialog(activity: Activity)
                 "Users/$username/array_of_avatars" to CODE(ARRAY_OF_AVATAR_COPY)
             )
             myRef.updateChildren(pushMap).addOnSuccessListener {
-                ARRAY_OF_AVATAR.add(ARRAY_OF_AVATAR_SHOP[position])
+                if( ARRAY_OF_AVATAR_SHOP[position] !in ARRAY_OF_AVATAR )
+                {
+                    ARRAY_OF_AVATAR.add(ARRAY_OF_AVATAR_SHOP[position])
+                }
                 Toast.makeText(activity, "Success to do operation", Toast.LENGTH_LONG)
                     .show()
                 //TODO MONEY передать в базу ------- сделано в строках 256 - 262
@@ -265,7 +268,11 @@ class ShopDialog(activity: Activity)
                 "Users/$username/array_of_designs" to CODE(ARRAY_OF_DESIGN_COPY)
             )
             myRef.updateChildren(pushMap).addOnSuccessListener {
-                ARRAY_OF_DESIGN.add(ARRAY_OF_DESIGN_SHOP[position])
+                if( ARRAY_OF_DESIGN_SHOP[position] !in ARRAY_OF_DESIGN)
+                {
+                    ARRAY_OF_DESIGN.add(ARRAY_OF_DESIGN_SHOP[position])
+                }
+
                 holder.price.text = ""
                 holder.icon.setImageResource(R.drawable.nulevoe)
                 holder.button.setBackgroundColor(argb(0, 0, 0, 0))
@@ -308,7 +315,10 @@ class ShopDialog(activity: Activity)
                 "Users/$username/array_of_emotions" to CODE(ARRAY_OF_EMOTION_COPY)
             )
             myRef.updateChildren(pushMap).addOnSuccessListener {
-                ARRAY_OF_EMOTION.add(ARRAY_OF_EMOTION_SHOP[position])
+                if(ARRAY_OF_EMOTION_SHOP[position] !in ARRAY_OF_EMOTION)
+                {
+                    ARRAY_OF_EMOTION.add(ARRAY_OF_EMOTION_SHOP[position])
+                }
                 Toast.makeText(activity, "Success to do operation", Toast.LENGTH_LONG).show()
                 //TODO MONEY передать в базу ------- сделано
                 //TODO ARRAY_OF_EMOTION передать в базу ------- сделано

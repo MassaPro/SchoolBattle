@@ -24,7 +24,6 @@
                 android:id="@+id/img_design"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:background="@drawable/icon_normal_design"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"></ImageView>

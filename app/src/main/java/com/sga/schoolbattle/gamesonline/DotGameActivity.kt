@@ -42,7 +42,6 @@ import kotlinx.android.synthetic.main.activity_x_o_game.*
 import java.util.*
 
 
-//TODO , рисовать ребра только один раз до этого узнав, также можно не включать в цепочки вершины которые окружены 6 такими же вершинами
 
 class DotGameActivity: AppCompatActivity() {
 
@@ -338,12 +337,12 @@ class DotGameActivity: AppCompatActivity() {
                     engine?.changeMoveAndSyncTimer(p0)
                     Log.w("HHHHHH", "HI")
                 }
-                var cnt = 0
+
                 signature_canvas3.blocked = true
                 for (i in 0..signature_canvas3.FIELD.size - 1) {
                     for (j in 0..signature_canvas3.FIELD[i].size - 1) {
                         if (p0.child("FIELD").child("$i").hasChild("$j")) {
-                            cnt++
+
                             if(signature_canvas3.FIELD[i][j]==0)
                             {
                                 val prfs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
@@ -371,6 +370,17 @@ class DotGameActivity: AppCompatActivity() {
                             }
                             signature_canvas3.FIELD[i][j] =
                                 p0.child("FIELD").child("$i").child("$j").value.toString().toInt()
+                        }
+                    }
+                }
+                var cnt = 0
+                for (i in 0..signature_canvas3.FIELD.size-1)
+                {
+                    for(j in 0..signature_canvas3.FIELD[0].size-1)
+                    {
+                        if(signature_canvas3.FIELD[i][j]!=0)
+                        {
+                            cnt++
                         }
                     }
                 }
@@ -498,7 +508,8 @@ class DotGameActivity: AppCompatActivity() {
 
         DDD = Dialog(this)
         DDD.setContentView(R.layout.activity_game_over)
-        adLoader = AdLoader.Builder(this, "ca-app-pub-3940256099942544/2247696110")
+        adLoader = AdLoader.Builder(this, "\n" +
+                "ca-app-pub-8137188857901546/5619400215")
             .forUnifiedNativeAd { unifiedNativeAd : UnifiedNativeAd ->
                 // Show the ad.
 
@@ -1817,9 +1828,9 @@ class CanvasViewDot(context: Context, attrs: AttributeSet?) : View(context, attr
     override fun onTouchEvent(event: MotionEvent?): Boolean {
 
 
-        if (blocked) {
-            return true
-        }
+       if (blocked) {
+           return true
+       }
         if(CONDITION_DOT!=0)
         {
             return true
@@ -1846,16 +1857,36 @@ class CanvasViewDot(context: Context, attrs: AttributeSet?) : View(context, attr
                             if (red_or_blue == 1) {
                                 FIELD[i][j] = 1
                                 a[j][i] = 1
-                                upd["a/$j/$i"] = a[j][i]
-                                upd["FIELD/$i/$j"] = FIELD[i][j]
+
                                 p = find(1, a, 16, 11)
+                                for(index1 in 0 until FIELD.size)
+                                {
+                                    for(index2 in 0 until FIELD[0].size)
+                                    {
+                                        upd["a/$index2/$index1"] = a[index2][index1]
+                                        upd["FIELD/$index1/$index2"] = FIELD[index1][index2]
+                                    }
+                                }
+
+
+                            //    upd["a/$j/$i"] = a[j][i]
+                          //      upd["FIELD/$i/$j"] = FIELD[i][j]
                             //    History.add()
                             } else {
                                 FIELD[i][j] = 2
                                 a[j][i] = 2
-                                upd["a/$j/$i"] = a[j][i]
-                                upd["FIELD/$i/$j"] = FIELD[i][j]
                                 p = find(2, a, 16, 11)
+                                 for(index1 in 0 until FIELD.size)
+                                {
+                                    for(index2 in 0 until FIELD[0].size)
+                                    {
+                                        upd["a/$index2/$index1"] = a[index2][index1]
+                                        upd["FIELD/$index1/$index2"] = FIELD[index1][index2]
+                                    }
+                                }
+
+                             //   upd["a/$j/$i"] = a[j][i]
+                              //  upd["FIELD/$i/$j"] = FIELD[i][j]
                             }
                             fl = true
                             upd["time/$username/"] = engine?.cntUser.toString()
