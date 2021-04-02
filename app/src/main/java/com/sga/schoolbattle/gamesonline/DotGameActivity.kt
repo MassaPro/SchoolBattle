@@ -304,6 +304,9 @@ class DotGameActivity: AppCompatActivity() {
                 bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
                 button_player_1_online_xog.textSize = 16.5f
                 button_player_2_online_xog.textSize = 16.5f
+
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
             }
             "Japan" -> {
                 label_online.setBackgroundResource(R.drawable.background_japan)
@@ -314,6 +317,9 @@ class DotGameActivity: AppCompatActivity() {
                 button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
                 button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
                 bottom_navigation_xog_online.setBackgroundColor(Color.WHITE)
+
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
             }
             "Noir" -> {
                 label_online.setBackgroundResource(R.drawable.background_noir)
@@ -324,6 +330,9 @@ class DotGameActivity: AppCompatActivity() {
                 button_player_1_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
                 button_player_2_online_xog.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
                 bottom_navigation_xog_online.setBackgroundColor(Color.BLACK)
+
+                timer_xog_online.setTextColor(Color.GREEN)
+                timer2_xog_online.setTextColor(Color.GREEN)
             }
         }
 
