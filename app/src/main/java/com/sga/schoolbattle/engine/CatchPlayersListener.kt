@@ -4,17 +4,20 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.util.Log
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import com.sga.schoolbattle.*
 import com.sga.schoolbattle.gamesonline.*
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.call_dialog.*
 
 fun initCatchPlayersListenerForBlitzGame(username: String, context: Context) {
     myRef.child("Users").child(username).child("blitz").addChildEventListener(object : ChildEventListener {
@@ -204,6 +207,85 @@ fun initCatchPlayersListenerForLongGame(username: String, context: Context) {
                             callDialog.setCancelable(false)
                             callDialog.setCanceledOnTouchOutside(true)
                             callDialog.setContentView(R.layout.call_dialog)
+
+                            when (Design) {
+                                "Normal" -> {
+                                    callDialog.call_dialog_add.setBackgroundResource(R.drawable.button)
+                                    callDialog.call_dialog_play.setBackgroundResource(R.drawable.button)
+                                    callDialog.call_dialog_reject.setBackgroundResource(R.drawable.button)
+                                    callDialog.call_dialog_text.setTextColor(Color.BLACK)
+                                }
+                                "Egypt" -> {
+                                    callDialog.fon.setBackgroundColor(Color.rgb(255, 230, 163))
+                                    callDialog.call_dialog_add.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                                    callDialog.call_dialog_play.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                                    callDialog.call_dialog_reject.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                                    callDialog.call_dialog_text.setTextColor(Color.BLACK)
+                                    callDialog.call_dialog_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                                }
+                                "Casino" -> {
+                                    callDialog.fon.setBackgroundResource(R.drawable.table)
+                                    callDialog.call_dialog_add.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                                    callDialog.call_dialog_play.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                                    callDialog.call_dialog_reject.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+
+                                    callDialog.call_dialog_add.setTextColor(Color.YELLOW)
+                                    callDialog.call_dialog_play.setTextColor(Color.YELLOW)
+                                    callDialog.call_dialog_reject.setTextColor(Color.YELLOW)
+
+                                    callDialog.call_dialog_text.setTextColor(Color.YELLOW)
+                                    callDialog.call_dialog_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                                }
+                                "Rome" -> {
+                                    callDialog.fon.setBackgroundResource(R.drawable.bottom_navigation_rome)
+                                    callDialog.call_dialog_add.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                                    callDialog.call_dialog_play.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                                    callDialog.call_dialog_reject.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+
+                                    callDialog.call_dialog_add.setTextColor(Color.rgb(193, 150, 63))
+                                    callDialog.call_dialog_play.setTextColor((Color.rgb(193, 150, 63)) )
+                                    callDialog.call_dialog_reject.setTextColor((Color.rgb(193, 150, 63)))
+                                    callDialog.call_dialog_text.setTextColor(Color.rgb(193, 150, 63))
+                                    callDialog.call_dialog_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                                }
+                                "Gothic" -> {
+                                    callDialog.fon.setBackgroundColor(Color.BLACK)
+                                    callDialog.call_dialog_add.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                                    callDialog.call_dialog_play.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                                    callDialog.call_dialog_reject.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+
+                                    callDialog.call_dialog_add.setTextColor(Color.WHITE)
+                                    callDialog.call_dialog_play.setTextColor(Color.WHITE)
+                                    callDialog.call_dialog_reject.setTextColor(Color.WHITE)
+
+                                    callDialog.call_dialog_text.setTextColor(Color.WHITE)
+                                    callDialog.call_dialog_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                                }
+                                "Japan" -> {
+                                    callDialog.call_dialog_add.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                                    callDialog.call_dialog_play.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                                    callDialog.call_dialog_reject.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+
+                                    callDialog.call_dialog_add.setBackgroundResource(R.drawable.button)
+                                    callDialog.call_dialog_play.setBackgroundResource(R.drawable.button)
+                                    callDialog.call_dialog_reject.setBackgroundResource(R.drawable.button)
+                                    callDialog.call_dialog_text.setTextColor(Color.BLACK)
+                                    callDialog.call_dialog_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                                }
+                                "Noir" -> {
+                                    callDialog.fon.setBackgroundColor(Color.BLACK)
+                                    callDialog.call_dialog_add.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                                    callDialog.call_dialog_play.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                                    callDialog.call_dialog_reject.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+
+                                    callDialog.call_dialog_add.setTextColor(Color.WHITE)
+                                    callDialog.call_dialog_play.setTextColor(Color.WHITE)
+                                    callDialog.call_dialog_reject.setTextColor(Color.WHITE)
+
+                                    callDialog.call_dialog_text.setTextColor(Color.WHITE)
+                                    callDialog.call_dialog_text.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                                }
+                            }
                             val callDialogAdd = callDialog.findViewById(R.id.call_dialog_add) as Button
                             val callDialogReject = callDialog.findViewById(R.id.call_dialog_reject) as Button
                             val callDialogPlay = callDialog.findViewById(R.id.call_dialog_play) as Button

@@ -3,6 +3,7 @@ package com.sga.schoolbattle.gamesonline
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.*
 import android.graphics.Color.argb
 import android.graphics.Color.rgb
@@ -308,7 +309,7 @@ class ReversiGameActivity : AppCompatActivity() {
                 override var type = "ReversiGame"
                 override var key = intent.getStringExtra("key")
             }
-            Toast.makeText(this, engineLong?.key.toString(), Toast.LENGTH_LONG).show()
+        //    Toast.makeText(this, engineLong?.key.toString(), Toast.LENGTH_LONG).show()
             engineLong?.init()
         }
         val initialMove = intent.getStringExtra("move") == "1"
@@ -478,8 +479,7 @@ class ReversiGameActivity : AppCompatActivity() {
 
         DDD = Dialog(this)
         DDD.setContentView(R.layout.activity_game_over)
-        adLoader = AdLoader.Builder(this, "\n" +
-                "ca-app-pub-8137188857901546/5619400215")
+        adLoader = AdLoader.Builder(this, "ca-app-pub-8137188857901546/5619400215")
             .forUnifiedNativeAd { unifiedNativeAd : UnifiedNativeAd ->
                 // Show the ad.
 
@@ -525,6 +525,9 @@ class ReversiGameActivity : AppCompatActivity() {
         editor.apply()
         super.onDestroy()
     }
+
+
+
 }
 
 class CanvasViewReversi(context: Context, attrs: AttributeSet?) : View(context, attrs) {

@@ -143,8 +143,6 @@ class XOGame_withComputer : AppCompatActivity() {
                 name_player1_with_computer_template.setTextSize(20f)
                 button_player_1_with_computer_template.setBackgroundResource(R.drawable.player1_egypt);
                 button_player_2_with_computer_template.setBackgroundResource(R.drawable.player2_egypt);
-                player_1_icon_one_divice.setBackgroundResource(R.drawable.cross_egypt);
-                player_2_icon_one_divice.setBackgroundResource(R.drawable.circle_egypt);
                 label_with_computer.setBackgroundResource(R.drawable.background_egypt);
                 bottom_navigation_with_computer_template.setBackgroundColor(rgb(255, 230, 163))
                 to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)

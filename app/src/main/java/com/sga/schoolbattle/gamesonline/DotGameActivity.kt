@@ -3,6 +3,7 @@ package com.sga.schoolbattle.gamesonline
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Color
@@ -517,8 +518,7 @@ class DotGameActivity: AppCompatActivity() {
 
         DDD = Dialog(this)
         DDD.setContentView(R.layout.activity_game_over)
-        adLoader = AdLoader.Builder(this, "\n" +
-                "ca-app-pub-8137188857901546/5619400215")
+        adLoader = AdLoader.Builder(this, "ca-app-pub-8137188857901546/5619400215")
             .forUnifiedNativeAd { unifiedNativeAd : UnifiedNativeAd ->
                 // Show the ad.
 
@@ -565,6 +565,9 @@ class DotGameActivity: AppCompatActivity() {
         editor.apply()
         super.onDestroy()
     }
+
+
+
 }
 
 class CanvasViewDot(context: Context, attrs: AttributeSet?) : View(context, attrs) {

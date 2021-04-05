@@ -19,32 +19,92 @@ class Show_rules(activity: Activity) {
 
         when (Gametype) {
             "XOGame" ->{
-                dialog_one_device.header_rules.setText("Крестики-Нолики на торе")
-                dialog_one_device.text_rules.setText(R.string.rules_xog_Russia)
+
+                if(LANGUAGE == "Russian")
+                {
+                    dialog_one_device.header_rules.setText("Крестики-Нолики на торе")
+                    dialog_one_device.text_rules.setText(R.string.rules_xog_Russia)
+                }
+                else{
+                    dialog_one_device.header_rules.setText("XO Game")
+                    dialog_one_device.text_rules.setText(R.string.rules_xog_Eng)
+                }
+
             }
             "AngleGame" -> {
-                dialog_one_device.header_rules.setText("Уголки")
-                dialog_one_device.text_rules.setText(R.string.rules_corner_Russia)
+
+                if(LANGUAGE == "Russian")
+                {
+                    dialog_one_device.header_rules.setText("Уголки")
+                    dialog_one_device.text_rules.setText(R.string.rules_corner_Russia)
+                }
+                else{
+                    dialog_one_device.header_rules.setText("Corners")
+                    dialog_one_device.text_rules.setText(R.string.rules_corner_Eng)
+                }
             }
             "SnakeGame" -> {
-                dialog_one_device.header_rules.setText("Змейка")
-                dialog_one_device.text_rules.setText(R.string.rules_snake_Russia)
+                if(LANGUAGE == "Russian")
+                {
+                    dialog_one_device.text_rules.setText(R.string.rules_snake_Russia)
+                    dialog_one_device.header_rules.setText("Змейка")
+                }
+                else{
+                    dialog_one_device.text_rules.setText(R.string.rules_snake_Eng)
+                    dialog_one_device.header_rules.setText("Snakes")
+                }
+
             }
             "BoxGame" -> {
-                dialog_one_device.header_rules.setText("КОРОБКИ")
-                dialog_one_device.text_rules.setText(R.string.rules_box_Russia)
+
+                if(LANGUAGE == "Russian")
+                {
+                    dialog_one_device.header_rules.setText("Коробки")
+                    dialog_one_device.text_rules.setText(R.string.rules_box_Russia)
+                }
+                else{
+                    dialog_one_device.header_rules.setText("Boxes")
+                    dialog_one_device.text_rules.setText(R.string.rules_box_Eng)
+                }
+
             }
             "VirusGame" -> {
-                dialog_one_device.header_rules.setText("ВОЙНА ВИРУСОВ")
-                dialog_one_device.text_rules.setText(R.string.rules_virus_Russia)
+
+                if(LANGUAGE == "Russian")
+                {
+                    dialog_one_device.text_rules.setText(R.string.rules_virus_Russia)
+                    dialog_one_device.header_rules.setText("Война вирусов")
+                }
+                else{
+                    dialog_one_device.text_rules.setText(R.string.rules_virus_Eng)
+                    dialog_one_device.header_rules.setText("war of viruses")
+                }
+
             }
             "ReversiGame" -> {
-                dialog_one_device.header_rules.setText("РЕВЕРСИ")
-                dialog_one_device.text_rules.setText(R.string.rules_reversi_Russia)
+
+                if(LANGUAGE == "Russian")
+                {
+                    dialog_one_device.text_rules.setText(R.string.rules_reversi_Russia)
+                    dialog_one_device.header_rules.setText("Реверси")
+                }
+                else{
+                    dialog_one_device.text_rules.setText(R.string.rules_reversi_Eng)
+                    dialog_one_device.header_rules.setText("Reversi")
+                }
+
             }
             "DotGame" -> {
-                dialog_one_device.header_rules.setText("ТОЧКИ")
-                dialog_one_device.text_rules.setText(R.string.rules_dot_Russia)
+                if(LANGUAGE == "Russian")
+                {
+                    dialog_one_device.text_rules.setText(R.string.rules_dot_Russia)
+                    dialog_one_device.header_rules.setText("Точки")
+                }
+                else{
+                    dialog_one_device.text_rules.setText(R.string.rules_dot_Eng)
+                    dialog_one_device.header_rules.setText("Dots")
+                }
+
             }
         }
 

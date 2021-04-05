@@ -122,70 +122,103 @@ class VirusWithComputer : AppCompatActivity() {
             signature_canvas_virus_with_computer.blockedOnTouch = true         // TODO check
         }
 
-        if(Design == "Egypt" ) {
-            name_player1_with_computer_template.setTextColor(Color.BLACK)
-            name_player2_with_computer_template.setTextColor(Color.BLACK)
-            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-            name_player2_with_computer_template.setTextSize(20f)
-            name_player1_with_computer_template.setTextSize(20f)
-            button_player_1_with_computer_template.setBackgroundResource(R.drawable.player1_egypt);
-            button_player_2_with_computer_template.setBackgroundResource(R.drawable.player2_egypt);
-            player_1_icon_template_with_computer.setBackgroundResource(R.drawable.virus1_egypt);
-            player_2_icon_template_with_computer.setBackgroundResource(R.drawable.virus2_egypt);
-            label_with_computer.setBackgroundResource(R.drawable.background_egypt);
-            bottom_navigation_with_computer_template.setBackgroundColor(rgb(255, 230, 163))
-            to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_with_computer_template.setBackgroundColor(argb(0,0,0,0))
-            toolbar2_with_computer_template.setBackgroundColor(argb(0,0,0,0))
-        }
-        else if(Design == "Casino" ) {
-            name_player1_with_computer_template.setTextColor(Color.YELLOW)
-            name_player2_with_computer_template.setTextColor(Color.YELLOW)
-            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            name_player2_with_computer_template.setTextSize(20f)
-            name_player1_with_computer_template.setTextSize(20f)
-            button_player_1_with_computer_template.setBackgroundResource(R.drawable.tower1_casino);
-            button_player_2_with_computer_template.setBackgroundResource(R.drawable.tower2_casino);
-            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-            label_with_computer.setBackgroundResource(R.drawable.background_casino);
-            bottom_navigation_with_computer_template.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-        }
-        else if(Design == "Rome" ) {
-            name_player1_with_computer_template.setTextColor(rgb(193,150,63))
-            name_player2_with_computer_template.setTextColor(rgb(193,150,63))
-            name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-            name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-            name_player2_with_computer_template.setTextSize(20f)
-            name_player1_with_computer_template.setTextSize(20f)
-            button_player_1_with_computer_template.setBackgroundResource(R.drawable.tower1_rome);
-            button_player_2_with_computer_template.setBackgroundResource(R.drawable.tower2_rome);
-            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-            label_with_computer.setBackgroundResource(R.drawable.background_rome);
-            bottom_navigation_with_computer_template.setBackgroundColor(argb(0,224, 164, 103))
-            to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-        }
-        else if(Design == "Gothic" ) {
-            name_player1_with_computer_template.setTextColor(Color.WHITE)
-            name_player2_with_computer_template.setTextColor(Color.WHITE)
-            //name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-            //name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-            name_player2_with_computer_template.setTextSize(20f)
-            name_player1_with_computer_template.setTextSize(20f)
-            //button_player_1_template_with_computer.setBackgroundResource(R.drawable.tower1_gothic);
-            //button_player_2_template_with_computer.setBackgroundResource(R.drawable.tower2_gothic);
-            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-            toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-            //label_with_computer.setBackgroundResource(R.drawable.background_gothic);
-            bottom_navigation_with_computer_template.setBackgroundColor(argb(0,0,0,0))
-            to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
-            toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+        // тип игры
+        when (Design) {
+            "Egypt" -> {
+                name_player1_with_computer_template.setTextColor(Color.BLACK)
+                name_player2_with_computer_template.setTextColor(Color.BLACK)
+                name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                name_player2_with_computer_template.setTextSize(20f)
+                name_player1_with_computer_template.setTextSize(20f)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.player1_egypt);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.player2_egypt);
+                player_1_icon_template_with_computer.setBackgroundResource(R.drawable.virus1_egypt);
+                player_2_icon_template_with_computer.setBackgroundResource(R.drawable.virus2_egypt);
+                label_with_computer.setBackgroundResource(R.drawable.background_egypt);
+                bottom_navigation_with_computer_template.setBackgroundColor(rgb(255, 230, 163))
+                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_with_computer_template.setBackgroundColor(argb(0,0,0,0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0,0,0,0))
+            }
+            "Casino" -> {
+                name_player1_with_computer_template.setTextColor(Color.YELLOW)
+                name_player2_with_computer_template.setTextColor(Color.YELLOW)
+                name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                name_player2_with_computer_template.setTextSize(20f)
+                name_player1_with_computer_template.setTextSize(20f)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.tower1_casino);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.tower2_casino);
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                label_with_computer.setBackgroundResource(R.drawable.background2_casino);
+                bottom_navigation_with_computer_template.setBackgroundColor(argb(0,224, 164, 103))
+                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            }
+            "Rome" -> {
+                name_player1_with_computer_template.setTextColor(rgb(193,150,63))
+                name_player2_with_computer_template.setTextColor(rgb(193,150,63))
+                name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                name_player2_with_computer_template.setTextSize(20f)
+                name_player1_with_computer_template.setTextSize(20f)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.tower1_rome);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.tower2_rome);
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                label_with_computer.setBackgroundResource(R.drawable.background_rome);
+                bottom_navigation_with_computer_template.setBackgroundColor(argb(0,224, 164, 103))
+                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            }
+            "Gothic" -> {
+                name_player1_with_computer_template.setTextColor(Color.WHITE)
+                name_player2_with_computer_template.setTextColor(Color.WHITE)
+                name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                name_player2_with_computer_template.setTextSize(20f)
+                name_player1_with_computer_template.setTextSize(20f)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.tower1_gothic);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.tower2_gothic);
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                label_with_computer.setBackgroundResource(R.drawable.background_gothic);
+                bottom_navigation_with_computer_template.setBackgroundColor(argb(0,0,0,0))
+                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            }
+            "Japan" -> {
+                name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                name_player2_with_computer_template.setTextSize(20f)
+                name_player1_with_computer_template.setTextSize(20f)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.tower1_japan);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.tower2_japan);
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                label_with_computer.setBackgroundResource(R.drawable.background_japan);
+                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            }
+
+            "Noir" -> {
+                name_player1_with_computer_template.setTextColor(Color.WHITE)
+                name_player2_with_computer_template.setTextColor(Color.WHITE)
+                name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                name_player2_with_computer_template.setTextSize(20f)
+                name_player1_with_computer_template.setTextSize(20f)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.tower1_noir);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.tower2_noir);
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+                label_with_computer.setBackgroundResource(R.drawable.background_noir);
+                bottom_navigation_with_computer_template.setBackgroundColor(argb(0,0,0,0))
+                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
+            }
         }
 
         val usedToClear = intent.getStringExtra("usedToClear") // тип игры
@@ -795,19 +828,29 @@ class CanvasView_virus_with_computer (context: Context, attrs: AttributeSet?) : 
         paint_rib_2.setColor(Color.BLUE)
         paint_rib_2.setStrokeWidth(5f)
 
-        if (Design == "Casino"){
-            Line_paint.setColor(Color.WHITE)          //ресур для линий (ширина и цвет)
+        when (Design) {
 
-        }
-        if (Design == "Egypt"){
-            Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
+            "Egypt" -> {
 
-        }
-        if (Design == "Rome"){
-            Line_paint.setColor(rgb(193,150,63))          //ресур для линий (ширина и цвет)
-        }
-        if (Design == "Gothic"){
-            Line_paint.setColor(rgb(100,100,100))          //ресур для линий (ширина и цвет)
+                Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
+
+            }
+            "Rome" -> {
+                Line_paint.setColor(rgb(193,150,63))          //ресур для линий (ширина и цвет)
+
+            }
+            "Gothic" -> {
+                Line_paint.setColor(rgb(100,100,100))          //ресур для линий (ширина и цвет)
+
+            }
+            "Japan" -> {
+                Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
+
+            }
+            "Noir" -> {
+                Line_paint.setColor(rgb(100,100,100))          //ресур для линий (ширина и цвет)
+
+            }
         }
 
 
@@ -839,10 +882,20 @@ class CanvasView_virus_with_computer (context: Context, attrs: AttributeSet?) : 
     var tower1_rome: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower1_rome);
     var tower2_rome: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_rome);
 
-    //var virus1_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_gothic);     // TODO
-    //var virus2_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_gothic);
-    //var tower1_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower1_gothic);
-    //var tower2_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_gothic);
+    var virus1_japan: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.virus1_japan);
+    var virus2_japan: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.virus2_japan);
+    var tower1_japan: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower1_japan);
+    var tower2_japan: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_japan);
+
+    var virus1_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_gothic);     // TODO
+    var virus2_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_gothic);
+    var tower1_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower1_gothic);
+    var tower2_gothic: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_gothic);
+
+    var virus1_noir: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box1_noir);     // TODO
+    var virus2_noir: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.box2_noir);
+    var tower1_noir: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower1_noir);
+    var tower2_noir: Bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tower2_noir);
 
 
     override fun draw(canvas: Canvas?) {
@@ -865,35 +918,47 @@ class CanvasView_virus_with_computer (context: Context, attrs: AttributeSet?) : 
         right_virus1 = Bitmap.createScaledBitmap(virus1_normal,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
         right_virus2 = Bitmap.createScaledBitmap(virus2_normal,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
         right_tower1 = Bitmap.createScaledBitmap(tower1_normal,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-        right_tower2 = Bitmap.createScaledBitmap(tower2_normal,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+        right_tower2 = Bitmap.createScaledBitmap(tower2_normal,width.toInt()/size_field_x, width.toInt()/size_field_y, true);//вырисовка вертикальных линий
 
-        if(Design == "Egypt")
-        {
-            right_virus1 = Bitmap.createScaledBitmap(virus1_egypt,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-            right_virus2 = Bitmap.createScaledBitmap(virus2_egypt,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-            right_tower1 = Bitmap.createScaledBitmap(tower1_egypt,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-            right_tower2 = Bitmap.createScaledBitmap(tower2_egypt,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-        }
-        else if (Design == "Casino")
-        {
-            right_virus1 = Bitmap.createScaledBitmap(virus1_casino,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-            right_virus2 = Bitmap.createScaledBitmap(virus2_casino,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-            right_tower1 = Bitmap.createScaledBitmap(tower1_casino,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-            right_tower2 = Bitmap.createScaledBitmap(tower2_casino,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-        }
-        else if (Design == "Rome")
-        {
-            right_virus1 = Bitmap.createScaledBitmap(virus1_rome,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-            right_virus2 = Bitmap.createScaledBitmap(virus2_rome,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-            right_tower1 = Bitmap.createScaledBitmap(tower1_rome,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-            right_tower2 = Bitmap.createScaledBitmap(tower2_rome,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-        }
-        else if (Design == "Gothic")
-        {       // TODO
-            //right_virus1 = Bitmap.createScaledBitmap(virus1_gothic,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-            //right_virus2 = Bitmap.createScaledBitmap(virus2_gothic,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-            //right_tower1 = Bitmap.createScaledBitmap(tower1_gothic,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
-            //right_tower2 = Bitmap.createScaledBitmap(tower2_gothic,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+        //вырисовка горизонтальных линий
+        when (Design) {
+            "Egypt" -> {
+                right_virus1 = Bitmap.createScaledBitmap(virus1_egypt,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+                right_virus2 = Bitmap.createScaledBitmap(virus2_egypt,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+                right_tower1 = Bitmap.createScaledBitmap(tower1_egypt,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+                right_tower2 = Bitmap.createScaledBitmap(tower2_egypt,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            }
+            "Casino" -> {
+                right_virus1 = Bitmap.createScaledBitmap(virus1_casino,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+                right_virus2 = Bitmap.createScaledBitmap(virus2_casino,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+                right_tower1 = Bitmap.createScaledBitmap(tower1_casino,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+                right_tower2 = Bitmap.createScaledBitmap(tower2_casino,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            }
+            "Rome" -> {
+                right_virus1 = Bitmap.createScaledBitmap(virus1_rome,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+                right_virus2 = Bitmap.createScaledBitmap(virus2_rome,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+                right_tower1 = Bitmap.createScaledBitmap(tower1_rome,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+                right_tower2 = Bitmap.createScaledBitmap(tower2_rome,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            }
+            "Gothic" -> {
+                right_virus1 = Bitmap.createScaledBitmap(virus1_gothic,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+                right_virus2 = Bitmap.createScaledBitmap(virus2_gothic,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+                right_tower1 = Bitmap.createScaledBitmap(tower1_gothic,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+                right_tower2 = Bitmap.createScaledBitmap(tower2_gothic,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            }
+            "Noir" ->{
+                right_virus1 = Bitmap.createScaledBitmap(virus1_noir,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+                right_virus2 = Bitmap.createScaledBitmap(virus2_noir,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+                right_tower1 = Bitmap.createScaledBitmap(tower1_noir,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+                right_tower2 = Bitmap.createScaledBitmap(tower2_noir,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            }
+            "Japan" ->
+            {
+                right_virus1 = Bitmap.createScaledBitmap(virus1_japan,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+                right_virus2 = Bitmap.createScaledBitmap(virus2_japan,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+                right_tower1 = Bitmap.createScaledBitmap(tower1_japan,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+                right_tower2 = Bitmap.createScaledBitmap(tower2_japan,width.toInt()/size_field_x, width.toInt()/size_field_y, true);
+            }
         }
 
         var k: Float = height - width  - advertising_line

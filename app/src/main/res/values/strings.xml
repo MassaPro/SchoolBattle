@@ -54,5 +54,59 @@
         3. Если игрок ставит вирус в клетку, в которой уже стоит вирус соперника, то такая клетка становится башней первого игрока. Повторно захватить башню нельзя. Игрок, владеющий башней, может ставить в соседние по стороне/углу клетки свои вирусы, в случае если рядом с башней стоит его вирус. Также рядом с башней можно поставить вирус в том случае, если между этой башней и каким-либо другим вирусом игрока есть непрерывная цепочка из башен игрока, соседствующих по стороне/углу клеток.\n\n
         4. Игрок, у которого были уничтожены все вирусы, считается проигравшим. Если оба игрока имеют изолированные (окруженные башнями) группы вирусов, то объявляется ничья.\n
     </string>
+
+
+
+
+
+
+
+    <string name="rules_box_Eng">
+        1. Players take turns (1 turn - one segment).Moves can be on any free segment with vertices in two adjacent nodes of the field.\n\n
+        2. Box is a square of 4 segments of side 1. If the player creates a box, that is, puts the fourth side of the square(it does not matter what color the other 3 sides are), then the box iscolored in the players color. \n\n
+        3. If the players turn completes the box (or 2), then he moves again.\n\n
+        4. The game ends at the end of the free segments or when one of the players passes.\n\n
+        5. The player who has completed the most boxes wins.\n\n
+    </string>
+
+
+    <string name="rules_corner_Eng">
+        1. There are 2 options for moving the chips. First: you can move any of your chips to the next empty square. Second: jump over your own or someone elses chip, if there is an empty cell behind it. With a chip, you can go to any cell that can be reached by a series of such jumps.All possible moves for the chip are highlighted in green.\n\n
+        2. The cells initially occupied by chips of the same color are called "house". If one player has removed all the chips from his house,then the other player can only make moves with his chips that are still left in his house to withdraw them from there.\n\n
+        3. On blacks 80th move, the game ends and the player with the most chips in the opponents house wins. If both players have the same number, a draw is declared.\n\n
+    </string>
+    <string name="rules_snake_Eng">
+        1. Players take turns. The first move is to select the point from which the snake crawls. You can select any node of the game grid as a start.\n\n
+        2. Each turn, the player moves the snakes head to a neighboring node of the game grid, while the body does not move anywhere. A snake can pass through the boundaries of the field, but it cannot cross its own body or the body of another snake.\n\n
+        3.The player who does not have a move loses.\n\n
+    </string>
+    <string name="rules_dot_Eng">
+        1. Players take turns (1 turn - one point). The moves can be to any node (the intersection of the field lines), unless it is in the surrounded area. There is no possibility to skip a move. The fact of encirclement does not entitle you to an additional move.\n\n
+        2. When creating a continuous closed line, an area is formed that is considered surrounded. In this area, it is further forbidden to put a point to any of the players.\n\n
+        3. Points placed on the edge of the field cannot be surrounded.\n\n
+        4. The game ends at the end of the free nodes or when one of the players passes.\n\n
+        5. The player who has surrounded the most points of the opponent wins.\n\n
+    </string>
+
+    <string name="rules_reversi_Eng">
+        1. When making a move, the player must place his chip on one of the squares of the board in such a way that between this placed chip and one of the chips already on the board of his color there is a continuous row of opponents chips, horizontal, vertical or diagonal. All the opponents chips that are included in the" closed " row on this turn change color and go to the player who moved.\n\n
+        2. If, as a result of one move, more than one row of the opponents chips is "closed" at the same time, then all the chips that are on all the "closed" rows change color.\n\n
+        3. The players possible moves are highlighted in green. If a player has possible moves, he cannot refuse a move. If the player has no possible moves, then the move is passed to the opponent.\n\n
+        4. The game ends when all the chips are placed on the board or when none of the players can make a move.\n\n
+        5. The player with the most chips on the board wins. If the number of chips is equal, a draw is declared.\n\n
+    </string>
+    <string name="rules_xog_Eng">
+       The game follows different rules from the standard 3x3 version.\n\n
+        1. To win, you need to make 4 of your pieces in a line(horizontally, vertically or diagonally).\n\n
+        2. Lines of shapes can be drawn with a border crossing (or there may be several borders).\n\n
+        3. You can only put shapes on the lower border/other shapes.\n\n
+    </string>
+
+    <string name="rules_virus_Eng">
+        1. Players take turns. The player puts 3 of his viruses on the field per turn. The first move must start from the corner of the board.\n\n
+        2. Each virus can only be placed in a cell adjacent to the one on the side/corner with the one in which the virus or tower is already standing (check ¹3) of the player (except for the first move - the virus is placed in the corner cell).\n\n
+        3. If a player puts a virus in a cell that already contains the opponents virus, then this cell becomes the tower of the first player. You cant re-capture the tower. The player who owns the tower can put his viruses in the neighboring cells on the side/corner, if his virus is next to the tower. You can also put a virus next to a tower if there is a continuous chain of player towers adjacent to the side/corner of the cells between this tower and any other player virus.\n\n
+        4. The player who has all the viruses destroyed is considered a loser. If both players have isolated (tower-surrounded) virus groups, then a draw is declared.\n\n
+    </string>
     <string name="action_settings">Settings</string>
 </resources>

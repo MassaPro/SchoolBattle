@@ -3,6 +3,7 @@ package com.sga.schoolbattle
 import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Color.rgb
 import android.view.Window
@@ -29,7 +30,7 @@ class Show_Result_one_Device(activity: Activity) {
                 val intent = Intent(type_activity, XOGame_oneDivice::class.java).apply {
                     putExtra("usedToClear", "clear")}
                 type_activity.finish()
-                if(mInterstitialAd_in_offline_games.isLoaded)
+                if(mInterstitialAd_in_offline_games.isLoaded  && !PREMIUM)
                 {
                     Intent_for_offline_games = intent
                     mInterstitialAd_in_offline_games.show()
@@ -46,7 +47,7 @@ class Show_Result_one_Device(activity: Activity) {
                     ConersOneDevice::class.java).apply {
                     putExtra("usedToClear", "clear")}
                 type_activity.finish()
-                if(mInterstitialAd_in_offline_games.isLoaded)
+                if(mInterstitialAd_in_offline_games.isLoaded  && !PREMIUM)
                 {
                     Intent_for_offline_games = intent
                     mInterstitialAd_in_offline_games.show()
@@ -62,7 +63,7 @@ class Show_Result_one_Device(activity: Activity) {
                     DotGameOneDivice::class.java).apply {
                     putExtra("usedToClear", "clear")}
                 type_activity.finish()
-                if(mInterstitialAd_in_offline_games.isLoaded)
+                if(mInterstitialAd_in_offline_games.isLoaded  && !PREMIUM)
                 {
                     Intent_for_offline_games = intent
                     mInterstitialAd_in_offline_games.show()
@@ -77,7 +78,7 @@ class Show_Result_one_Device(activity: Activity) {
                 val intent = Intent(type_activity,
                     SnakeGameOneDivice::class.java).apply {
                     putExtra("usedToClear", "clear")}
-                if(mInterstitialAd_in_offline_games.isLoaded)
+                if(mInterstitialAd_in_offline_games.isLoaded  && !PREMIUM)
                 {
                     Intent_for_offline_games = intent
                     mInterstitialAd_in_offline_games.show()
@@ -93,7 +94,7 @@ class Show_Result_one_Device(activity: Activity) {
                     BoxGameOneDivice::class.java).apply {
                     putExtra("usedToClear", "clear")}
                 type_activity.finish()
-                if(mInterstitialAd_in_offline_games.isLoaded)
+                if(mInterstitialAd_in_offline_games.isLoaded  && !PREMIUM)
                 {
                     Intent_for_offline_games = intent
                     mInterstitialAd_in_offline_games.show()
@@ -109,7 +110,7 @@ class Show_Result_one_Device(activity: Activity) {
                     VirusOneDivice::class.java).apply {
                     putExtra("usedToClear", "clear")}
                 type_activity.finish()
-                if(mInterstitialAd_in_offline_games.isLoaded)
+                if(mInterstitialAd_in_offline_games.isLoaded  && !PREMIUM)
                 {
                     Intent_for_offline_games = intent
                     mInterstitialAd_in_offline_games.show()
@@ -124,7 +125,7 @@ class Show_Result_one_Device(activity: Activity) {
                 val intent = Intent(type_activity,ReversiOneDivice::class.java).apply {
                     putExtra("usedToClear", "clear")}
                 type_activity.finish()
-                if(mInterstitialAd_in_offline_games.isLoaded)
+                if(mInterstitialAd_in_offline_games.isLoaded  && !PREMIUM)
                 {
                     Intent_for_offline_games = intent
                     mInterstitialAd_in_offline_games.show()
@@ -139,44 +140,61 @@ class Show_Result_one_Device(activity: Activity) {
 
         val button_close =  dialog_one_device.findViewById(R.id.button_close_game_over_one_device) as Button
 
-
-        if (Design == "Egypt"){
-            dialog_one_device.linearLayout_one_device.setBackgroundResource(R.drawable.win_egypt);
-            dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
-            //dialog_one_device.resultText_one_device.setTextColor(Color.WHITE)
-            button_close.setBackgroundResource(R.drawable.close_cross)
-        }
-        else if (Design == "Casino"){
-            dialog_one_device.linearLayout_one_device.setBackgroundResource(R.drawable.win_casino);
-            dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
-            dialog_one_device.resultText_one_device.setTextColor(Color.YELLOW)
-            button_close.setBackgroundResource(R.drawable.close_cross3)
-        }
-        else if (Design == "Rome"){
-            dialog_one_device.linearLayout_one_device.setBackgroundResource(R.drawable.win_rome);
-            dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
-            dialog_one_device.resultText_one_device.setTextColor(rgb(193, 150, 63))
-            button_close.setBackgroundResource(R.drawable.close_cross3)
+        if(LANGUAGE == "Russian")
+        {
+            dialog_one_device.restart_one_device.text = "Играть снова"
         }
 
-        else if (Design == "Gothic"){
-            dialog_one_device.linearLayout_one_device.setBackgroundResource(R.drawable.background_gothic);
-            dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
-            dialog_one_device.resultText_one_device.setTextColor(Color.WHITE)
-            button_close.setBackgroundResource(R.drawable.close_cross2)
-        }
+        when (Design) {
+            "Normal" -> {
+                dialog_one_device.restart_one_device.setBackgroundResource(R.drawable.button)
+                button_close.setBackgroundResource(R.drawable.close_cross)
+            }
+            "Egypt" -> {
+                dialog_one_device.linearLayout_one_device.setBackgroundResource(R.drawable.win_egypt);
+                dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
+                //dialog_one_device.resultText_one_device.setTextColor(Color.WHITE)
+                button_close.setBackgroundResource(R.drawable.close_cross)
+            }
+            "Casino" -> {
+                dialog_one_device.linearLayout_one_device.setBackgroundResource(R.drawable.background2_casino);
+                dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                dialog_one_device.resultText_one_device.setTextColor(Color.YELLOW)
+                dialog_one_device.restart_one_device.setTextColor(Color.YELLOW)
+                dialog_one_device.restart_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
+                button_close.setBackgroundResource(R.drawable.close_cross2)
+            }
+            "Rome" -> {
+                dialog_one_device.linearLayout_one_device.setBackgroundResource(R.drawable.win_rome);
+                dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                dialog_one_device.resultText_one_device.setTextColor(rgb(193, 150, 63))
+                dialog_one_device.restart_one_device.setTextColor(rgb(193, 150, 63))
+                dialog_one_device.restart_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
+                button_close.setBackgroundResource(R.drawable.close_cross3)
+            }
+            "Gothic" -> {
+                dialog_one_device.linearLayout_one_device.setBackgroundResource(R.drawable.background_gothic);
+                dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                dialog_one_device.resultText_one_device.setTextColor(Color.WHITE)
 
-        else if (Design == "Japan"){
-            dialog_one_device.linearLayout_one_device.setBackgroundResource(R.drawable.background_japan);
-            dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
-            //dialog_one_device.resultText_one_device.setTextColor(rgb(193, 150, 63))
-            button_close.setBackgroundResource(R.drawable.close_cross)
-        }
-        else if (Design == "Noir"){
-            dialog_one_device.linearLayout_one_device.setBackgroundResource(R.drawable.background_noir);
-            dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
-            dialog_one_device.resultText_one_device.setTextColor(Color.WHITE)
-            button_close.setBackgroundResource(R.drawable.close_cross2)
+                dialog_one_device.restart_one_device.setTextColor(Color.WHITE)
+                dialog_one_device.restart_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
+                button_close.setBackgroundResource(R.drawable.close_cross2)
+            }
+            "Japan" -> {
+                dialog_one_device.linearLayout_one_device.setBackgroundResource(R.drawable.background_japan);
+                dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+                dialog_one_device.restart_one_device.setBackgroundResource(R.drawable.button)
+                button_close.setBackgroundResource(R.drawable.close_cross)
+                dialog_one_device.restart_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
+            }
+            "Noir" -> {
+                dialog_one_device.linearLayout_one_device.setBackgroundResource(R.drawable.background_noir);
+                dialog_one_device.resultText_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                dialog_one_device.resultText_one_device.setTextColor(Color.WHITE)
+                dialog_one_device.restart_one_device.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
+                button_close.setBackgroundResource(R.drawable.close_cross2)
+            }
         }
         
         button_close.setOnClickListener {

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.*
 import android.graphics.Color.argb
 import android.graphics.Color.rgb
@@ -508,8 +509,7 @@ class BoxGameActivity : AppCompatActivity() {
 
         DDD = Dialog(this)
         DDD.setContentView(R.layout.activity_game_over)
-        adLoader = AdLoader.Builder(this, "\n" +
-                "ca-app-pub-8137188857901546/5619400215")
+        adLoader = AdLoader.Builder(this, "ca-app-pub-8137188857901546/5619400215")
             .forUnifiedNativeAd { unifiedNativeAd : UnifiedNativeAd ->
                 // Show the ad.
 
@@ -556,6 +556,9 @@ class BoxGameActivity : AppCompatActivity() {
         editor.apply()
         super.onDestroy()
     }
+
+
+
 }
 
 class CanvasView_Boxs_online(context: Context, attrs: AttributeSet?) : View(context, attrs) {

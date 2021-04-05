@@ -5,6 +5,8 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Color.argb
+import android.graphics.Color.rgb
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -12,6 +14,7 @@ import android.util.Log
 import android.view.View
 import android.widget.CompoundButton
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.sga.schoolbattle.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -113,11 +116,84 @@ fun initMenuFunctions(activity: Activity,
                 }
                 loseDialog.show()
 
-                if(Design =="Normal")
-                {
-                    loseDialog.dialog_for_losers_lose.setBackgroundResource(R.drawable.button)
-                    loseDialog.parametrs_online_configuring.setBackgroundResource(R.drawable.button)
-                    loseDialog.close_parametrs_online.setBackgroundResource(R.drawable.close_cross)
+                when (Design) {
+                    "Normal" -> {
+                        loseDialog.close_parametrs_online.setBackgroundResource(R.drawable.cross_normal)
+                        loseDialog.dialog_for_losers_lose.setBackgroundResource(R.drawable.button)
+                        loseDialog.parametrs_online_configuring.setBackgroundResource(R.drawable.button)
+
+                    }
+                    "Egypt" -> {
+                        loseDialog.close_parametrs_online.setBackgroundResource(R.drawable.close_cross)
+                        loseDialog.linearLayout_parametrs_online.setBackgroundResource(R.drawable.background_egypt)
+                        loseDialog.dialog_for_losers_lose.typeface = ResourcesCompat.getFont(activity, R.font.egypt)
+                        loseDialog.parametrs_online_configuring.typeface = ResourcesCompat.getFont(activity, R.font.egypt)
+                        loseDialog.switch_parametrs_online_2.typeface = ResourcesCompat.getFont(activity, R.font.egypt)
+                        loseDialog.switch_parametrs_online_1.typeface = ResourcesCompat.getFont(activity, R.font.egypt)
+                    }
+                    "Noir"-> {
+                        loseDialog.close_parametrs_online.setBackgroundResource(R.drawable.close_cross2)
+                        loseDialog.linearLayout_parametrs_online.setBackgroundResource(R.drawable.background_noir)
+                        loseDialog.dialog_for_losers_lose.typeface = ResourcesCompat.getFont(activity, R.font.noir)
+                        loseDialog.parametrs_online_configuring.typeface = ResourcesCompat.getFont(activity, R.font.noir)
+                        loseDialog.switch_parametrs_online_2.typeface = ResourcesCompat.getFont(activity, R.font.noir)
+                        loseDialog.switch_parametrs_online_1.typeface = ResourcesCompat.getFont(activity, R.font.noir)
+
+                        loseDialog.dialog_for_losers_lose.setTextColor(Color.WHITE)
+                        loseDialog.parametrs_online_configuring.setTextColor(Color.WHITE)
+                        loseDialog.switch_parametrs_online_2.setTextColor(Color.WHITE)
+                        loseDialog.switch_parametrs_online_1.setTextColor(Color.WHITE)
+                    }
+                    "Rome"-> {
+                        loseDialog.close_parametrs_online.setBackgroundResource(R.drawable.close_cross3)
+                        loseDialog.linearLayout_parametrs_online.setBackgroundResource(R.drawable.background_rome)
+                        loseDialog.dialog_for_losers_lose.typeface = ResourcesCompat.getFont(activity, R.font.rome)
+                        loseDialog.parametrs_online_configuring.typeface = ResourcesCompat.getFont(activity, R.font.rome)
+                        loseDialog.switch_parametrs_online_2.typeface = ResourcesCompat.getFont(activity, R.font.rome)
+                        loseDialog.switch_parametrs_online_1.typeface = ResourcesCompat.getFont(activity, R.font.rome)
+
+                        loseDialog.dialog_for_losers_lose.setTextColor(Color.rgb(193, 150, 63))
+                        loseDialog.parametrs_online_configuring.setTextColor(rgb(193,150,63))
+                        loseDialog.switch_parametrs_online_2.setTextColor(rgb(193,150,63))
+                        loseDialog.switch_parametrs_online_1.setTextColor(Color.rgb(193, 150, 63))
+                    }
+                    "Gothic"-> {
+                        loseDialog.close_parametrs_online.setBackgroundResource(R.drawable.close_cross2)
+                        loseDialog.linearLayout_parametrs_online.setBackgroundResource(R.drawable.background_gothic)
+                        loseDialog.dialog_for_losers_lose.typeface = ResourcesCompat.getFont(activity, R.font.gothic)
+                        loseDialog.parametrs_online_configuring.typeface = ResourcesCompat.getFont(activity, R.font.gothic)
+                        loseDialog.switch_parametrs_online_2.typeface = ResourcesCompat.getFont(activity, R.font.gothic)
+                        loseDialog.switch_parametrs_online_1.typeface = ResourcesCompat.getFont(activity, R.font.gothic)
+
+                        loseDialog.dialog_for_losers_lose.setTextColor(Color.WHITE)
+                        loseDialog.parametrs_online_configuring.setTextColor(Color.WHITE)
+                        loseDialog.switch_parametrs_online_2.setTextColor(Color.WHITE)
+                        loseDialog.switch_parametrs_online_1.setTextColor(Color.WHITE)
+                    }
+                    "Japan"-> {
+                        loseDialog.dialog_for_losers_lose.setBackgroundResource(R.drawable.button)
+                        loseDialog.parametrs_online_configuring.setBackgroundResource(R.drawable.button)
+
+                        loseDialog.close_parametrs_online.setBackgroundResource(R.drawable.close_cross2)
+                        loseDialog.linearLayout_parametrs_online.setBackgroundResource(R.drawable.background_japan)
+                        loseDialog.dialog_for_losers_lose.typeface = ResourcesCompat.getFont(activity, R.font.japan)
+                        loseDialog.parametrs_online_configuring.typeface = ResourcesCompat.getFont(activity, R.font.japan)
+                        loseDialog.switch_parametrs_online_2.typeface = ResourcesCompat.getFont(activity, R.font.japan)
+                        loseDialog.switch_parametrs_online_1.typeface = ResourcesCompat.getFont(activity, R.font.japan)
+                    }
+                    "Casino"-> {
+                        loseDialog.close_parametrs_online.setBackgroundResource(R.drawable.close_cross3)
+                        loseDialog.linearLayout_parametrs_online.setBackgroundResource(R.drawable.background2_casino)
+                        loseDialog.dialog_for_losers_lose.typeface = ResourcesCompat.getFont(activity, R.font.casino)
+                        loseDialog.parametrs_online_configuring.typeface = ResourcesCompat.getFont(activity, R.font.casino)
+                        loseDialog.switch_parametrs_online_2.typeface = ResourcesCompat.getFont(activity, R.font.casino)
+                        loseDialog.switch_parametrs_online_1.typeface = ResourcesCompat.getFont(activity, R.font.casino)
+
+                        loseDialog.dialog_for_losers_lose.setTextColor(Color.YELLOW)
+                        loseDialog.parametrs_online_configuring.setTextColor(Color.YELLOW)
+                        loseDialog.switch_parametrs_online_2.setTextColor(Color.YELLOW)
+                        loseDialog.switch_parametrs_online_1.setTextColor(Color.YELLOW)
+                    }
                 }
             }
             R.id.page_online_3 ->{

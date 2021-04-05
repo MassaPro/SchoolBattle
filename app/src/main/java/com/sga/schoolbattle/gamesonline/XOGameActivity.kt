@@ -3,6 +3,7 @@ package com.sga.schoolbattle.gamesonline
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.*
 import android.os.Bundle
 import android.os.Vibrator
@@ -496,8 +497,7 @@ class XOGameActivity : AppCompatActivity() {
 
         DDD = Dialog(this)
         DDD.setContentView(R.layout.activity_game_over)
-        adLoader = AdLoader.Builder(this, "\n" +
-                "ca-app-pub-8137188857901546/5619400215")
+        adLoader = AdLoader.Builder(this, "ca-app-pub-8137188857901546/5619400215")
             .forUnifiedNativeAd { unifiedNativeAd : UnifiedNativeAd ->
                 // Show the ad.
 
@@ -544,6 +544,8 @@ class XOGameActivity : AppCompatActivity() {
         editor.apply()
         super.onDestroy()
     }
+
+
 
 
 }
