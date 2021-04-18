@@ -13,6 +13,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.gms.ads.AdRequest
 import com.sga.schoolbattle.*
@@ -121,6 +122,9 @@ class VirusWithComputer : AppCompatActivity() {
         if (VirusGameMode == 2 && signature_canvas_virus_with_computer.History.size == 0) {
             signature_canvas_virus_with_computer.blockedOnTouch = true         // TODO check
         }
+
+        signature_canvas_virus_with_computer.t1 = findViewById(R.id.name_player1_with_computer_template) as TextView
+        signature_canvas_virus_with_computer.t2 = findViewById(R.id.name_player2_with_computer_template) as TextView
 
         // тип игры
         when (Design) {
@@ -782,6 +786,8 @@ class CanvasView_virus_with_computer (context: Context, attrs: AttributeSet?) : 
     }
 
 
+    lateinit var t1: TextView
+    lateinit var t2: TextView
 
     lateinit var activity: Activity
 
@@ -814,8 +820,10 @@ class CanvasView_virus_with_computer (context: Context, attrs: AttributeSet?) : 
     var size_field_y: Int = 0
     var step: Float = 0f
 
+    var line_who_do_move : Paint = Paint()
 
     init {
+        line_who_do_move.strokeWidth = 7f
 
         red_or_blue = 0
         Line_paint.setColor(Color.rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
@@ -833,22 +841,29 @@ class CanvasView_virus_with_computer (context: Context, attrs: AttributeSet?) : 
             "Egypt" -> {
 
                 Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
-
+                line_who_do_move.color = Color.RED
+            }
+            "Casino" -> {
+                Line_paint.setColor(rgb(217,217,217))          //ресур для линий (ширина и цвет)
+                line_who_do_move.color = Color.YELLOW
             }
             "Rome" -> {
                 Line_paint.setColor(rgb(193,150,63))          //ресур для линий (ширина и цвет)
+                line_who_do_move.color = Color.BLACK
 
             }
             "Gothic" -> {
                 Line_paint.setColor(rgb(100,100,100))          //ресур для линий (ширина и цвет)
+                line_who_do_move.color = Color.WHITE
 
             }
             "Japan" -> {
                 Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
-
+                line_who_do_move.color = Color.RED
             }
             "Noir" -> {
                 Line_paint.setColor(rgb(100,100,100))          //ресур для линий (ширина и цвет)
+                line_who_do_move.color = Color.RED
 
             }
         }
@@ -900,6 +915,19 @@ class CanvasView_virus_with_computer (context: Context, attrs: AttributeSet?) : 
 
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
+
+        if(red_or_blue == 1)
+        {
+            t1.text = "Игрок думает..."
+            t2.text = "Компьютер"
+            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+        }
+        else
+        {
+            t1.text = "Игрок"
+            t2.text = "Компьютер думает..."
+            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+        }
 
         size_field_x = 10
         size_field_y = 10

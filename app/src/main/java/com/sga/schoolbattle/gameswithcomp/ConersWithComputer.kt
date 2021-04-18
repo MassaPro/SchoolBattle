@@ -840,6 +840,8 @@ class CanvasView_corners_with_computer (context: Context, attrs: AttributeSet?) 
 
     var exception: Boolean = false
 
+    var line_who_do_move : Paint = Paint()
+
     init{
 
 
@@ -849,37 +851,36 @@ class CanvasView_corners_with_computer (context: Context, attrs: AttributeSet?) 
         Line_paint.setColor(Color.rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
         Line_paint.setStrokeWidth(7f)
 
-        //line_who_do_move.strokeWidth = 14f
+        line_who_do_move.strokeWidth = 7f
 
         when (Design) {
             "Normal" ->{
-                //line_who_do_move.color =  Color.GREEN
-                //line_who_do_move.strokeWidth = 14f
+                line_who_do_move.color =  Color.GREEN
                 Line_paint.setColor(Color.rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
             }
             "Egypt" -> {
                 Line_paint.color = Color.BLACK          //ресур для линий (ширина и цвет)
-                //line_who_do_move.color = Color.RED
+                line_who_do_move.color = Color.RED
             }
             "Casino" -> {
                 Line_paint.color = Color.rgb(217, 217, 217)          //ресур для линий (ширина и цвет)
-                //line_who_do_move.color = Color.YELLOW            //
+                line_who_do_move.color = Color.YELLOW            //
             }
             "Rome" -> {
                 Line_paint.color = Color.BLACK  //ресур для линий (ширина и цвет)
-                //line_who_do_move.color = Color.BLACK
+                line_who_do_move.color = Color.BLACK
             }
             "Gothic" -> {
                 Line_paint.color = Color.rgb(100, 100, 100)   //ресур для линий (ширина и цвет)
-                //line_who_do_move.color = Color.WHITE
+                line_who_do_move.color = Color.WHITE
             }
             "Japan" -> {
                 Line_paint.color = Color.BLACK   //ресур для линий (ширина и цвет)
-                //line_who_do_move.color = Color.RED              //
+                line_who_do_move.color = Color.RED              //
             }
             "Noir" -> {
                 Line_paint.color = Color.rgb(100, 100, 100)   //ресур для линий (ширина и цвет)
-                //line_who_do_move.color = Color.RED              //
+                line_who_do_move.color = Color.RED              //
             }
         }
 
@@ -954,13 +955,15 @@ class CanvasView_corners_with_computer (context: Context, attrs: AttributeSet?) 
 
         if(Black_or_grey_chip == "black")
         {
-            t1.text ="игрок 1 думает..."
-            t2.text  = "игрок 2"
+            t1.text ="Игрок думает..."
+            t2.text  = "Компьютер"
+            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
         }
         else
         {
-            t1.text ="игрок 1"
-            t2.text  = "игрок 2 думает..."
+            t1.text ="Игрок"
+            t2.text  = "Компьютер думает..."
+            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
         }
         //TODO() take field from database
 

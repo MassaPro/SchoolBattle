@@ -12,6 +12,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.gms.ads.AdRequest
 import com.sga.schoolbattle.*
@@ -117,6 +118,9 @@ class ReversiWithComputer : AppCompatActivity() {
         if (ReversiMode == 2 && signature_canvas_reversi_with_computer.History.size == 0) {
             signature_canvas_reversi_with_computer.blockedOnTouch = true         // TODO check
         }
+
+        signature_canvas_reversi_with_computer.t1 = findViewById(R.id.name_player1_with_computer_template) as TextView
+        signature_canvas_reversi_with_computer.t2 = findViewById(R.id.name_player2_with_computer_template) as TextView
 
         when (Design) {
             "Normal" -> {
@@ -1135,6 +1139,8 @@ class CanvasView_reversi_with_computer(context: Context, attrs: AttributeSet?) :
         }
     }
 
+    lateinit var t1: TextView
+    lateinit var t2: TextView
 
     lateinit var activity: Activity
 
@@ -1165,41 +1171,43 @@ class CanvasView_reversi_with_computer(context: Context, attrs: AttributeSet?) :
 
     var exception: Boolean = false
 
+    var line_who_do_move : Paint = Paint()
+
     init{
         Line_paint.setColor(Color.rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
         Line_paint.setStrokeWidth(7f)
 
-        //line_who_do_move.strokeWidth = 14f
+        line_who_do_move.strokeWidth = 7f
 
         when (Design) {
             "Normal" ->{
-                //line_who_do_move.color =  Color.GREEN
+                line_who_do_move.color =  Color.GREEN
                 //line_who_do_move.strokeWidth = 14f
                 Line_paint.setColor(Color.rgb(217, 217, 217))          //ресур для линий (ширина и цвет)
             }
             "Egypt" -> {
                 Line_paint.color = Color.BLACK          //ресур для линий (ширина и цвет)
-                //line_who_do_move.color = Color.RED
+                line_who_do_move.color = Color.RED
             }
             "Casino" -> {
                 Line_paint.color = Color.rgb(217, 217, 217)          //ресур для линий (ширина и цвет)
-                //line_who_do_move.color = Color.YELLOW            //
+                line_who_do_move.color = Color.YELLOW            //
             }
             "Rome" -> {
                 Line_paint.color = Color.BLACK  //ресур для линий (ширина и цвет)
-                //line_who_do_move.color = Color.BLACK
+                line_who_do_move.color = Color.BLACK
             }
             "Gothic" -> {
                 Line_paint.color = Color.rgb(100, 100, 100)   //ресур для линий (ширина и цвет)
-                //line_who_do_move.color = Color.WHITE
+                line_who_do_move.color = Color.WHITE
             }
             "Japan" -> {
                 Line_paint.color = Color.BLACK   //ресур для линий (ширина и цвет)
-                //line_who_do_move.color = Color.RED              //
+                line_who_do_move.color = Color.RED              //
             }
             "Noir" -> {
                 Line_paint.color = Color.rgb(100, 100, 100)   //ресур для линий (ширина и цвет)
-                //line_who_do_move.color = Color.RED              //
+                line_who_do_move.color = Color.RED              //
             }
         }
         // TODO нужно взять из DataBase (статистика ходов)
@@ -1268,11 +1276,15 @@ class CanvasView_reversi_with_computer(context: Context, attrs: AttributeSet?) :
 
         if(Black_or_grey_chip == "black")
         {
-            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,Line_paint1)
+            t1.text = "Игрок думает..."
+            t2.text = "Компьютер"
+            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
         }
         else
         {
-            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),Line_paint1)
+            t1.text = "Игрок"
+            t2.text = "Компьютер думает..."
+            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
         }
 
 

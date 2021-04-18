@@ -1210,14 +1210,14 @@ class CanvasView_SNAKE_COMPUTER(context: Context, attrs: AttributeSet?) : View(c
 
         if(red_or_blue == "red")
         {
-            t1.text = "Игрок 1 думает..."
+            t1.text = "Игрок думает..."
             t2.text = "Компьютер"
             canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
 
         }
         else
         {
-            t1.text = "Игрок 1"
+            t1.text = "Игрок"
             t2.text = "Компьютер думает..."
             canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
         }

@@ -12,6 +12,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.gms.ads.AdRequest
@@ -127,6 +128,8 @@ class BoxGameWithComputer : AppCompatActivity() {
             signature_canvas_box_with_computer.blockedOnTouch = true
         }
 
+        signature_canvas_box_with_computer.t1 = findViewById(R.id.name_player1_with_computer_template) as TextView
+        signature_canvas_box_with_computer.t2 = findViewById(R.id.name_player2_with_computer_template) as TextView
 
         when (Design) {
             "Normal" ->{
@@ -662,6 +665,9 @@ class CanvasView_Boxs_with_computer(context: Context, attrs: AttributeSet?) : Vi
         }
     }
 
+    lateinit var t1: TextView
+    lateinit var t2: TextView
+
     lateinit var activity: Activity
 
     var History: MutableList<MutableList<Int>> = mutableListOf()
@@ -694,7 +700,7 @@ class CanvasView_Boxs_with_computer(context: Context, attrs: AttributeSet?) : Vi
 
 
 
-
+    var line_who_do_move : Paint = Paint()
 
     init{
         red_or_blue = "red"
@@ -708,50 +714,49 @@ class CanvasView_Boxs_with_computer(context: Context, attrs: AttributeSet?) : Vi
         paint_rib_2.setColor(Color.BLUE)
         paint_rib_2.setStrokeWidth(7f)
 
-        //line_who_do_move.strokeWidth = 14f
+        line_who_do_move.strokeWidth = 7f
 
         when (Design) {
             "Normal" -> {
-                //line_who_do_move.strokeWidth = 14f
-                //line_who_do_move.color = Color.GREEN
+                line_who_do_move.color =  Color.GREEN
             }
             "Casino" -> {
 
                 paint_circle.setColor(rgb(217,217,217))     //цвета для точек
                 paint_rib_1.setColor(Color.RED)          //цвета для ребер  и их ширина
                 paint_rib_2.setColor(Color.BLACK)
-                //line_who_do_move.color = Color.YELLOW
+                line_who_do_move.color = Color.YELLOW
             }
             "Egypt" -> {
                 Line_paint.setColor(argb(0, 0,0,0))          //ресур для линий (ширина и цвет)
-                //line_who_do_move.color = Color.RED
+                line_who_do_move.color = Color.RED
             }
             "Rome" -> {
 
                 paint_circle.setColor(Color.BLACK)     //цвета для точек
                 paint_rib_2.setColor(Color.rgb(193,150,63))          //цвета для ребер  и их ширина
                 paint_rib_1.setColor(Color.BLACK)
-                //line_who_do_move.color = Color.BLACK
+                line_who_do_move.color = Color.BLACK
             }
             "Gothic" -> {
                 Line_paint.setColor(argb(0,0,0,0))          //ресур для линий (ширина и цвет)
                 paint_circle.setColor(Color.WHITE)     //цвета для точек
                 paint_rib_2.setColor(Color.BLUE)          //цвета для ребер  и их ширина
                 paint_rib_1.setColor(Color.RED)
-                //line_who_do_move.color = Color.WHITE
+                line_who_do_move.color = Color.WHITE
             }
             "Japan" -> {
                 paint_circle.setColor(Color.BLACK)     //цвета для точек
                 paint_rib_1.setColor(Color.RED)          //цвета для ребер  и их ширина
                 paint_rib_2.setColor(rgb(37,103,28))
-                //line_who_do_move.color = Color.RED
+                line_who_do_move.color = Color.RED
             }
             "Noir" -> {
                 Line_paint.setColor(argb(0,0,0,0))          //ресур для линий (ширина и цвет)
                 paint_circle.setColor(rgb(100,100,100))     //цвета для точек
                 paint_rib_2.setColor(rgb(193, 150, 63))          //цвета для ребер  и их ширина
                 paint_rib_1.setColor(Color.WHITE)
-                //line_who_do_move.color = Color.RED
+                line_who_do_move.color = Color.RED
             }
         }
 
@@ -808,6 +813,19 @@ class CanvasView_Boxs_with_computer(context: Context, attrs: AttributeSet?) : Vi
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
 
+        if(red_or_blue == "red")
+        {
+            t1.text = "Игрок думает..."
+            t2.text = "Компьютер"
+            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+
+        }
+        else
+        {
+            t1.text = "Игрок"
+            t2.text = "Компьютер думает..."
+            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+        }
 
         radius_of_point = 10f
         size_field_x  = 7

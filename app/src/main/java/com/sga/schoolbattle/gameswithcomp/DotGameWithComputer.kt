@@ -677,7 +677,7 @@ class CanvasView_Dots_with_computer(context: Context, attrs: AttributeSet?) : Vi
 
 
 
-
+    var line_who_do_move : Paint = Paint()
 
     var Is_defined_TREE_OF_WAYS : Boolean = false
     init{
@@ -706,94 +706,73 @@ class CanvasView_Dots_with_computer(context: Context, attrs: AttributeSet?) : Vi
         shading_1.setStrokeWidth(2f)
         shading_2.setStrokeWidth(2f)
 
+        line_who_do_move.strokeWidth = 7f
 
         when (Design) {
             "Normal" -> {
-                //line_who_do_move.strokeWidth = 14f
-                //line_who_do_move.color = Color.GREEN
+                //
+                line_who_do_move.color = Color.GREEN
             }
             "Egypt" -> {
                 Line_paint.setColor(Color.rgb(120, 120, 120))      //ресур для линий (ширина и цвет)
                 paint_circle.setColor(Color.rgb(120, 120, 120))
                 paint_rib_1.setColor(Color.BLACK) //цвета для ребер  и их ширина
-                paint_rib_1.setStrokeWidth(5f)
                 paint_rib_2.setColor(Color.WHITE)
-                paint_rib_2.setStrokeWidth(5f)
 
                 shading_1.setColor(Color.BLACK)
                 shading_2.setColor(Color.WHITE)
-                shading_1.setStrokeWidth(2f)
-                shading_2.setStrokeWidth(2f)
 
-                //line_who_do_move.color = Color.RED
+                line_who_do_move.color = Color.RED
             }
             "Casino" -> {
                 paint_rib_2.setColor(Color.BLACK) //цвета для ребер  и их ширина
-                paint_rib_2.setStrokeWidth(5f)
                 paint_rib_1.setColor(Color.RED)
-                paint_rib_1.setStrokeWidth(5f)
 
                 shading_2.setColor(Color.BLACK)
                 shading_1.setColor(Color.RED)
-                shading_1.setStrokeWidth(2f)
-                shading_2.setStrokeWidth(2f)
-                //line_who_do_move.color = Color.YELLOW
+                line_who_do_move.color = Color.YELLOW
             }
             "Rome" -> {
                 Line_paint.setColor(Color.rgb(180, 180, 180))      //ресур для линий (ширина и цвет)
                 paint_circle.setColor(Color.rgb(180, 180, 180))
                 paint_rib_1.setColor(Color.BLACK) //цвета для ребер  и их ширина
-                paint_rib_1.setStrokeWidth(5f)
                 paint_rib_2.setColor(Color.rgb(193,150,63))
-                paint_rib_2.setStrokeWidth(5f)
 
                 shading_1.setColor(Color.BLACK)
                 shading_2.setColor(Color.rgb(193,150,63))
-                shading_1.setStrokeWidth(2f)
-                shading_2.setStrokeWidth(2f)
-                //line_who_do_move.color = Color.BLACK
+
+                line_who_do_move.color = Color.BLACK
             }
             "Gothic" -> {
                 Line_paint.setColor(Color.rgb(100,100,100))      //ресур для линий (ширина и цвет)
                 paint_circle.setColor(Color.rgb(100,100,100))
                 paint_rib_1.setColor(Color.YELLOW) //цвета для ребер  и их ширина
-                paint_rib_1.setStrokeWidth(5f)
                 paint_rib_2.setColor(Color.WHITE)
-                paint_rib_2.setStrokeWidth(5f)
 
                 shading_1.setColor(Color.YELLOW)
                 shading_2.setColor(Color.WHITE)
-                shading_1.setStrokeWidth(2f)
-                shading_2.setStrokeWidth(2f)
-                //line_who_do_move.color = Color.WHITE
+
+                line_who_do_move.color = Color.WHITE
             }
             "Japan" -> {
                 Line_paint.setColor(Color.rgb(160,160,160))      //ресур для линий (ширина и цвет)
                 paint_circle.setColor(Color.rgb(160,160,160))
                 paint_rib_1.setColor(Color.rgb(37,103,28)) //зелёный
-                paint_rib_1.setStrokeWidth(5f)
                 paint_rib_2.setColor(Color.RED)
-                paint_rib_2.setStrokeWidth(5f)
 
                 shading_1.setColor(Color.rgb(37,103,28))
                 shading_2.setColor(Color.RED)
-                shading_1.setStrokeWidth(2f)
-                shading_2.setStrokeWidth(2f)
-                //line_who_do_move.color = Color.RED
+                line_who_do_move.color = Color.RED
             }
             "Noir" -> {
                 Line_paint.setColor(Color.rgb(100,100,100))      //ресур для линий (ширина и цвет)
                 paint_circle.setColor(Color.rgb(100,100,100))
                 paint_rib_1.setColor(Color.RED) //цвета для ребер  и их ширина
-                paint_rib_1.setStrokeWidth(5f)
                 paint_rib_2.setColor(Color.WHITE)
-                paint_rib_2.setStrokeWidth(5f)
 
                 shading_1.setColor(Color.RED)
                 shading_2.setColor(Color.WHITE)
-                shading_1.setStrokeWidth(2f)
-                shading_2.setStrokeWidth(2f)
-                //line_who_do_move.color = Color.RED
+                line_who_do_move.color = Color.RED
             }
         }
 
@@ -822,6 +801,19 @@ class CanvasView_Dots_with_computer(context: Context, attrs: AttributeSet?) : Vi
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
 
+        if(red_or_blue == "red")
+        {
+            t1.text = "Игрок думает..."
+            t2.text = "Компьютер"
+            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+
+        }
+        else
+        {
+            t1.text = "Игрок"
+            t2.text = "Компьютер думает..."
+            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+        }
 
 
         check_win()
