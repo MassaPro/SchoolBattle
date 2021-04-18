@@ -90,7 +90,7 @@ class Show_Result_with_Computer(activity: Activity) {
                 dialog_with_computer.close_button.setBackgroundResource(R.drawable.close_cross)
             }
             "Casino" -> {
-                dialog_with_computer.linearLayout_with_computer.setBackgroundResource(R.drawable.background2_casino);
+                dialog_with_computer.linearLayout_with_computer.setBackgroundResource(R.drawable.new_game_item_casino);
                 dialog_with_computer.resultText_with_computer.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 dialog_with_computer.resultText_with_computer.setTextColor(Color.YELLOW)
                 dialog_with_computer.restart_with_computer.setTextColor(Color.YELLOW)

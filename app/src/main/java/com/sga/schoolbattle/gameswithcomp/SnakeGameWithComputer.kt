@@ -215,6 +215,7 @@ class SnakeGameWithComputer : AppCompatActivity() {
             "Normal" -> {
                 signature_canvas_snake_with_computer.t1.setTextColor(Color.RED)
                 signature_canvas_snake_with_computer.t2.setTextColor(Color.BLUE)
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_normal)
             }
             "Egypt" -> {
 
@@ -233,7 +234,7 @@ class SnakeGameWithComputer : AppCompatActivity() {
 
                 label_with_computer.setBackgroundResource(R.drawable.background_egypt);
                 bottom_navigation_with_computer_template.setBackgroundColor(Color.rgb(255, 230, 163))
-                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_normal)
                 toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Casino" -> {
@@ -247,9 +248,9 @@ class SnakeGameWithComputer : AppCompatActivity() {
                 button_player_2_with_computer_template.setBackgroundResource(R.drawable.chip1_casino);
                 toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-                label_with_computer.setBackgroundResource(R.drawable.background_casino);
+                label_with_computer.setBackgroundResource(R.drawable.background2_casino);
                 bottom_navigation_with_computer_template.setBackgroundColor(argb(0, 224, 164, 103))
-                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_casino)
                 toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Rome" -> {
@@ -265,7 +266,7 @@ class SnakeGameWithComputer : AppCompatActivity() {
                 toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 label_with_computer.setBackgroundResource(R.drawable.background_rome);
                 bottom_navigation_with_computer_template.setBackgroundColor(argb(0, 224, 164, 103))
-                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_rome)
                 toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Gothic" -> {
@@ -281,7 +282,7 @@ class SnakeGameWithComputer : AppCompatActivity() {
                 toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 label_with_computer.setBackgroundResource(R.drawable.background_gothic);
                 bottom_navigation_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_gothic)
                 toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Japan" -> {
@@ -297,7 +298,7 @@ class SnakeGameWithComputer : AppCompatActivity() {
                 toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 label_with_computer.setBackgroundResource(R.drawable.background_japan);
                 bottom_navigation_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_normal)
                 toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Noir" -> {
@@ -313,7 +314,7 @@ class SnakeGameWithComputer : AppCompatActivity() {
                 toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 label_with_computer.setBackgroundResource(R.drawable.background_noir);
                 bottom_navigation_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
-                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_gothic)
                 toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             }
         }
@@ -1139,8 +1140,8 @@ class CanvasView_SNAKE_COMPUTER(context: Context, attrs: AttributeSet?) : View(c
 
                 Line_paint.setColor(Color.rgb(100, 100, 100))          //ресур для линий (ширина и цвет)
                 paint_circle.setColor(Color.rgb(180, 180, 180))     //цвета для точек
-                paint_rib_2.setColor(Color.WHITE)          //цвета для ребер  и их ширина
-                paint_rib_1.setColor(Color.YELLOW)
+                paint_rib_2.setColor(Color.YELLOW)          //цвета для ребер  и их ширина
+                paint_rib_1.setColor(Color.WHITE)
                 border_1.setColor(Color.rgb(100, 100, 100))
                 line_who_do_move.color = Color.RED
             }

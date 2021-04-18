@@ -146,7 +146,7 @@ class DotGameWithComputer : AppCompatActivity() {
                 player_2_icon_one_divice.setBackgroundResource(R.drawable.circle_egypt);
                 label_with_computer.setBackgroundResource(R.drawable.background_egypt);
                 bottom_navigation_with_computer_template.setBackgroundColor(Color.rgb(255, 230, 163))
-                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_normal)
                 toolbar_with_computer_template.setBackgroundColor(argb(0,0,0,0))
                 toolbar2_with_computer_template.setBackgroundColor(argb(0,0,0,0))
             }
@@ -801,18 +801,19 @@ class CanvasView_Dots_with_computer(context: Context, attrs: AttributeSet?) : Vi
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
 
-        if(red_or_blue == "red")
+        if(red_or_blue == 1)
         {
             t1.text = "Игрок думает..."
             t2.text = "Компьютер"
-            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
 
         }
         else
         {
             t1.text = "Игрок"
             t2.text = "Компьютер думает..."
-            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+
         }
 
 

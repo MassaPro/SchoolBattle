@@ -128,6 +128,13 @@ class VirusWithComputer : AppCompatActivity() {
 
         // тип игры
         when (Design) {
+            "Normal" -> {
+                name_player1_with_computer_template.setTextColor(Color.BLACK)
+                name_player2_with_computer_template.setTextColor(Color.BLACK)
+                //button_player_1_with_computer_template.setBackgroundResource(R.drawable.chip1_normal)
+                //button_player_2_with_computer_template.setBackgroundResource(R.drawable.chip2_normal)
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_normal)
+            }
             "Egypt" -> {
                 name_player1_with_computer_template.setTextColor(Color.BLACK)
                 name_player2_with_computer_template.setTextColor(Color.BLACK)
@@ -141,7 +148,7 @@ class VirusWithComputer : AppCompatActivity() {
                 player_2_icon_template_with_computer.setBackgroundResource(R.drawable.virus2_egypt);
                 label_with_computer.setBackgroundResource(R.drawable.background_egypt);
                 bottom_navigation_with_computer_template.setBackgroundColor(rgb(255, 230, 163))
-                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_normal)
                 toolbar_with_computer_template.setBackgroundColor(argb(0,0,0,0))
                 toolbar2_with_computer_template.setBackgroundColor(argb(0,0,0,0))
             }
@@ -158,7 +165,7 @@ class VirusWithComputer : AppCompatActivity() {
                 toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 label_with_computer.setBackgroundResource(R.drawable.background2_casino);
                 bottom_navigation_with_computer_template.setBackgroundColor(argb(0,224, 164, 103))
-                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_casino)
                 toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Rome" -> {
@@ -174,7 +181,7 @@ class VirusWithComputer : AppCompatActivity() {
                 toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 label_with_computer.setBackgroundResource(R.drawable.background_rome);
                 bottom_navigation_with_computer_template.setBackgroundColor(argb(0,224, 164, 103))
-                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_rome)
                 toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Gothic" -> {
@@ -190,7 +197,7 @@ class VirusWithComputer : AppCompatActivity() {
                 toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 label_with_computer.setBackgroundResource(R.drawable.background_gothic);
                 bottom_navigation_with_computer_template.setBackgroundColor(argb(0,0,0,0))
-                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_gothic)
                 toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Japan" -> {
@@ -203,7 +210,7 @@ class VirusWithComputer : AppCompatActivity() {
                 toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 label_with_computer.setBackgroundResource(R.drawable.background_japan);
-                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_normal)
                 toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             }
 
@@ -220,7 +227,7 @@ class VirusWithComputer : AppCompatActivity() {
                 toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 label_with_computer.setBackgroundResource(R.drawable.background_noir);
                 bottom_navigation_with_computer_template.setBackgroundColor(argb(0,0,0,0))
-                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_gothic)
                 toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             }
         }
@@ -837,6 +844,11 @@ class CanvasView_virus_with_computer (context: Context, attrs: AttributeSet?) : 
         paint_rib_2.setStrokeWidth(5f)
 
         when (Design) {
+            "Normal" -> {
+
+                //Line_paint.setColor(Color.BLACK)          //ресур для линий (ширина и цвет)
+                line_who_do_move.color = Color.GREEN
+            }
 
             "Egypt" -> {
 
@@ -916,18 +928,7 @@ class CanvasView_virus_with_computer (context: Context, attrs: AttributeSet?) : 
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
 
-        if(red_or_blue == 1)
-        {
-            t1.text = "Игрок думает..."
-            t2.text = "Компьютер"
-            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
-        }
-        else
-        {
-            t1.text = "Игрок"
-            t2.text = "Компьютер думает..."
-            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
-        }
+
 
         size_field_x = 10
         size_field_y = 10
@@ -1204,7 +1205,18 @@ class CanvasView_virus_with_computer (context: Context, attrs: AttributeSet?) : 
             }, delayTime)
         }
 
-
+        if(red_or_blue < 3)
+        {
+            t1.text = "Игрок думает..."
+            t2.text = "Компьютер"
+            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+        }
+        else
+        {
+            t1.text = "Игрок"
+            t2.text = "Компьютер думает..."
+            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+        }
     }
 
 

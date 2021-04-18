@@ -74,6 +74,9 @@ class MyProfile : Fragment() {
 
         when (Design) {
             "Normal" -> {
+                profileMyName.setTextColor(Color.BLACK)
+                profileMyStatus.setTextColor(Color.BLACK)
+                textView9.setTextColor(Color.BLACK)
 
             }
             "Egypt" -> {
@@ -84,6 +87,10 @@ class MyProfile : Fragment() {
                 profileMyStatus.setTextColor(Color.BLACK)
                 profileMyStatus.setTextSize(20f)
 
+                textView9.typeface = ResourcesCompat.getFont(CONTEXT, R.font.egypt)
+                textView9.setTextColor(Color.BLACK)
+                textView9.setTextSize(20f)
+
             }
             "Casino" -> {
                 profileMyName.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
@@ -92,6 +99,11 @@ class MyProfile : Fragment() {
                 profileMyStatus.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
                 profileMyStatus.setTextColor(Color.YELLOW)
                 profileMyStatus.setTextSize(20f)
+
+                textView9.typeface = ResourcesCompat.getFont(CONTEXT, R.font.casino)
+                textView9.setTextColor(Color.YELLOW)
+                textView9.setTextSize(20f)
+
             }
             "Rome" -> {
                 profileMyName.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
@@ -100,6 +112,9 @@ class MyProfile : Fragment() {
                 profileMyStatus.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
                 profileMyStatus.setTextColor(Color.rgb(193, 150, 63))
                 profileMyStatus.setTextSize(20f)
+                textView9.typeface = ResourcesCompat.getFont(CONTEXT, R.font.rome)
+                textView9.setTextColor(Color.rgb(193, 150, 63))
+                textView9.setTextSize(20f)
             }
             "Gothic" -> {
                 profileMyName.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
@@ -108,6 +123,9 @@ class MyProfile : Fragment() {
                 profileMyStatus.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
                 profileMyStatus.setTextColor(Color.WHITE)
                 profileMyStatus.setTextSize(20f)
+                textView9.typeface = ResourcesCompat.getFont(CONTEXT, R.font.gothic)
+                textView9.setTextColor(Color.WHITE)
+                textView9.setTextSize(20f)
             }
             "Japan" -> {
                 profileMyName.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
@@ -116,6 +134,9 @@ class MyProfile : Fragment() {
                 profileMyStatus.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
                 profileMyStatus.setTextColor(Color.BLACK)
                 profileMyStatus.setTextSize(20f)
+                textView9.typeface = ResourcesCompat.getFont(CONTEXT, R.font.japan)
+                textView9.setTextColor(Color.BLACK)
+                textView9.setTextSize(20f)
             }
             "Noir" -> {
                 profileMyName.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
@@ -124,6 +145,9 @@ class MyProfile : Fragment() {
                 profileMyStatus.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
                 profileMyStatus.setTextColor(Color.WHITE)
                 profileMyStatus.setTextSize(20f)
+                textView9.typeface = ResourcesCompat.getFont(CONTEXT, R.font.noir)
+                textView9.setTextColor(Color.WHITE)
+                textView9.setTextSize(20f)
 
             }
         }

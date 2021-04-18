@@ -1278,13 +1278,13 @@ class CanvasView_reversi_with_computer(context: Context, attrs: AttributeSet?) :
         {
             t1.text = "Игрок думает..."
             t2.text = "Компьютер"
-            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
         }
         else
         {
             t1.text = "Игрок"
             t2.text = "Компьютер думает..."
-            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
         }
 
 

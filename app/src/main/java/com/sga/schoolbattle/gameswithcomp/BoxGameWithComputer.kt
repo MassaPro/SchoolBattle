@@ -148,8 +148,8 @@ class BoxGameWithComputer : AppCompatActivity() {
                 name_player1_with_computer_template.setTextSize(20f)
                 button_player_1_with_computer_template.setBackgroundResource(R.drawable.player1_egypt);
                 button_player_2_with_computer_template.setBackgroundResource(R.drawable.player2_egypt);
-                //player_1_icon_template_with_computer.setBackgroundResource(R.drawable.template2_egypt);
-                //player_2_icon_template_with_computer.setBackgroundResource(R.drawable.template1_egypt)
+                player_1_icon_template_with_computer.setBackgroundResource(R.drawable.box2_egypt);
+                player_2_icon_template_with_computer.setBackgroundResource(R.drawable.box1_egypt)
                 toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 label_with_computer.setBackgroundResource(R.drawable.background_egypt);

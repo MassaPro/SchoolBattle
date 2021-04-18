@@ -55,8 +55,6 @@ class ShopDialog(activity: Activity)
                 dialog_shop.button_close_2_shop_dialog.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
                 dialog_shop.button_close_2_shop_dialog.setTextSize(20f)
 
-//                dialog_shop.buy_shop_dialog.setTranslationY(50f)
-              //  dialog_shop.button_close_2_shop_dialog.setTranslationY(50f)
 
             }
             "Casino" -> {

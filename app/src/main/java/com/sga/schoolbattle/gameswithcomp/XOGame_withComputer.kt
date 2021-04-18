@@ -143,9 +143,11 @@ class XOGame_withComputer : AppCompatActivity() {
                 name_player1_with_computer_template.setTextSize(20f)
                 button_player_1_with_computer_template.setBackgroundResource(R.drawable.player1_egypt);
                 button_player_2_with_computer_template.setBackgroundResource(R.drawable.player2_egypt);
+                player_1_icon_template_with_computer.setBackgroundResource(R.drawable.cross_egypt);
+                player_2_icon_template_with_computer.setBackgroundResource(R.drawable.circle_egypt)
                 label_with_computer.setBackgroundResource(R.drawable.background_egypt);
                 bottom_navigation_with_computer_template.setBackgroundColor(rgb(255, 230, 163))
-                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_normal)
                 toolbar_with_computer_template.setBackgroundColor(argb(0,0,0,0))
                 toolbar2_with_computer_template.setBackgroundColor(argb(0,0,0,0))
             }
@@ -211,7 +213,7 @@ class XOGame_withComputer : AppCompatActivity() {
                 toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 label_with_computer.setBackgroundResource(R.drawable.background_japan);
                 bottom_navigation_with_computer_template.setBackgroundColor(Color.WHITE)
-                to_back_with_computer_template.setBackgroundResource(R.drawable.arrow_back)
+                to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_normal)
                 toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Noir" -> {
@@ -820,7 +822,7 @@ class CanvasView_xog_with_computer(context: Context, attrs: AttributeSet?) : Vie
         {
             t1.text ="Игрок"
             t2.text  = "Компьютер думает..."
-            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
         }
         indent = 20f
         width = getWidth().toFloat()

@@ -80,7 +80,7 @@ class GameListActivity : Fragment() {
                 //id_text.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.s))
             }
             "Gothic" -> {
-                game_list_playing.setBackgroundResource(R.drawable.background_gothic);
+                game_list_playing.setBackgroundResource(R.drawable.sign_in_gothic);
                 my_toolbar2.setBackgroundColor(argb(0,0,0,0))
                 toolbarName2.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
                 toolbarName2.setTextColor(Color.WHITE)

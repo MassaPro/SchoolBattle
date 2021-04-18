@@ -150,8 +150,8 @@ class ConersWithComputer : AppCompatActivity() {
             "Normal" -> {
                 name_player1_with_computer_template.setTextColor(Color.BLACK)
                 name_player2_with_computer_template.setTextColor(Color.BLACK)
-                button_player_1_with_computer_template.setBackgroundResource(R.drawable.chip1_normal)
-                button_player_2_with_computer_template.setBackgroundResource(R.drawable.chip2_normal)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.chip2_normal)
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.chip1_normal)
                 to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_normal)
             }
             "Egypt" -> {
@@ -963,7 +963,7 @@ class CanvasView_corners_with_computer (context: Context, attrs: AttributeSet?) 
         {
             t1.text ="Игрок"
             t2.text  = "Компьютер думает..."
-            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
         }
         //TODO() take field from database
 
