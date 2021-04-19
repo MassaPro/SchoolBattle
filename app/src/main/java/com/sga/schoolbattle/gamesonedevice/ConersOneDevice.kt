@@ -739,18 +739,38 @@ class CanvasView_corners_one_device (context: Context, attrs: AttributeSet?) : V
         k = height-(width-2*indent)-advertising_line
 
 
+        when(LANGUAGE) {
+            "Russian" -> {
+                if(Black_or_grey_chip == "black")
+                {
+                    t1.text ="Игрок 1 думает..."
+                    t2.text  = "Игрок 2"
+                    canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
 
-        if(Black_or_grey_chip == "black")
-        {
-            t1.text ="Игрок 1 думает..."
-            t2.text  = "Игрок 2"
-            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
-        }
-        else
-        {
-            t1.text ="Игрок 1"
-            t2.text  = "Игрок 2 думает..."
-            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+                }
+                else
+                {
+                    t1.text = "Игрок 1"
+                    t2.text = "Игрок 2 думает..."
+                    canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+                }
+            }
+            "English" -> {
+
+                if(Black_or_grey_chip == "black")
+                {
+                    t1.text = "Player 1 thinks..."
+                    t2.text = "Player 2"
+                    canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+
+                }
+                else
+                {
+                    t1.text = "Player 1"
+                    t2.text = "Player 2 thinks..."
+                    canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+                }
+            }
         }
 
 

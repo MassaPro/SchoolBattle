@@ -12,6 +12,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.sga.schoolbattle.*
 import com.google.android.gms.ads.AdRequest
@@ -104,6 +105,9 @@ class ReversiOneDivice : AppCompatActivity() {
         mSound.load(this, R.raw.xlup, 1);
         mSound2.load(this, R.raw.win, 1);
         vibratorService = getSystemService(VIBRATOR_SERVICE) as Vibrator
+
+        signature_canvas_reversi_one_device.t1 = findViewById(R.id.name_player1_one_divice) as TextView
+        signature_canvas_reversi_one_device.t2 = findViewById(R.id.name_player2_one_divice) as TextView
         when (Design) {
             "Normal" -> {
                 name_player1_one_divice.setTextColor(Color.BLACK)
@@ -936,6 +940,8 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
         }
     }
 
+    lateinit var t1: TextView
+    lateinit var t2: TextView
 
     lateinit var activity: Activity
 
@@ -1068,15 +1074,38 @@ class CanvasView_reversi_one_device(context: Context, attrs: AttributeSet?) : Vi
         advertising_line =  (height - 8*step)/2           //полоска для рекламы
         k = height-(width-2*indent)-advertising_line
 
+        when(LANGUAGE) {
+            "Russian" -> {
+                if(Black_or_grey_chip == "black")
+                {
+                    t1.text ="Игрок 1 думает..."
+                    t2.text  = "Игрок 2"
+                    canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
 
+                }
+                else
+                {
+                    t1.text = "Игрок 1"
+                    t2.text = "Игрок 2 думает..."
+                    canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+                }
+            }
+            "English" -> {
 
-        if(Black_or_grey_chip != "black")
-        {
-            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
-        }
-        else
-        {
-            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+                if(Black_or_grey_chip == "black")
+                {
+                    t1.text = "Player 1 thinks..."
+                    t2.text = "Player 2"
+                    canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+
+                }
+                else
+                {
+                    t1.text = "Player 1"
+                    t2.text = "Player 2 thinks..."
+                    canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+                }
+            }
         }
 
 

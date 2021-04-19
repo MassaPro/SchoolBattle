@@ -18,6 +18,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.google.android.gms.ads.AdRequest
 import com.sga.schoolbattle.*
 import kotlinx.android.synthetic.main.activity_computer_games_template.*
+import kotlinx.android.synthetic.main.activity_my_profile.*
 import kotlinx.android.synthetic.main.activity_one_device_games_template.*
 
 var BoxMode = 0
@@ -813,19 +814,42 @@ class CanvasView_Boxs_with_computer(context: Context, attrs: AttributeSet?) : Vi
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
 
-        if(red_or_blue == "red")
-        {
-            t1.text = "Игрок думает..."
-            t2.text = "Компьютер"
-            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+        when(LANGUAGE) {
+            "Russian" -> {
+                if(red_or_blue == "red")
+                {
+                    t1.text = "Игрок думает..."
+                    t2.text = "Компьютер"
+                    canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
 
+                }
+                else
+                {
+                    t1.text = "Игрок"
+                    t2.text = "Компьютер думает..."
+                    canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+                }
+            }
+            "English" -> {
+
+                if(red_or_blue == "red")
+                {
+                    t1.text = "Player thinks..."
+                    t2.text = "Bot"
+                    canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+
+                }
+                else
+                {
+                    t1.text = "Player"
+                    t2.text = "Bot calculates..."
+                    canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+                }
+            }
         }
-        else
-        {
-            t1.text = "Игрок"
-            t2.text = "Компьютер думает..."
-            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
-        }
+
+
+
 
         radius_of_point = 10f
         size_field_x  = 7

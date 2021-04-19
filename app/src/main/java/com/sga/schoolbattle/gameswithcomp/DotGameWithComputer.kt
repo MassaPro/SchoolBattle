@@ -127,23 +127,23 @@ class DotGameWithComputer : AppCompatActivity() {
 
         when (Design) {
             "Normal" ->{
-                name_player1_with_computer_template.setTextColor(Color.BLUE)
-                name_player2_with_computer_template.setTextColor(Color.RED)
-                button_player_1_with_computer_template.setBackgroundResource(R.drawable.box2_normal);
-                button_player_2_with_computer_template.setBackgroundResource(R.drawable.box1_normal);
+                name_player2_with_computer_template.setTextColor(Color.BLUE)
+                name_player1_with_computer_template.setTextColor(Color.RED)
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.box1_normal);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.box2_normal);
                 to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_normal)
             }
             "Egypt" -> {
-                name_player1_with_computer_template.setTextColor(Color.BLACK)
                 name_player2_with_computer_template.setTextColor(Color.BLACK)
+                name_player1_with_computer_template.setTextColor(Color.BLACK)
                 name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
                 name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.egypt))
                 name_player2_with_computer_template.setTextSize(20f)
                 name_player1_with_computer_template.setTextSize(20f)
                 button_player_1_with_computer_template.setBackgroundResource(R.drawable.player1_egypt);
                 button_player_2_with_computer_template.setBackgroundResource(R.drawable.player2_egypt);
-                player_1_icon_one_divice.setBackgroundResource(R.drawable.cross_egypt);
-                player_2_icon_one_divice.setBackgroundResource(R.drawable.circle_egypt);
+                player_1_icon_template_with_computer.setBackgroundResource(R.drawable.chip2_egypt);
+                player_2_icon_template_with_computer.setBackgroundResource(R.drawable.chip1_egypt);
                 label_with_computer.setBackgroundResource(R.drawable.background_egypt);
                 bottom_navigation_with_computer_template.setBackgroundColor(Color.rgb(255, 230, 163))
                 to_back_with_computer_template.setBackgroundResource(R.drawable.back_arrow_normal)
@@ -151,14 +151,14 @@ class DotGameWithComputer : AppCompatActivity() {
                 toolbar2_with_computer_template.setBackgroundColor(argb(0,0,0,0))
             }
             "Casino" -> {
-                name_player1_with_computer_template.setTextColor(Color.BLACK)
-                name_player2_with_computer_template.setTextColor(Color.RED)
+                name_player2_with_computer_template.setTextColor(Color.BLACK)
+                name_player1_with_computer_template.setTextColor(Color.RED)
                 name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.casino))
                 name_player2_with_computer_template.setTextSize(20f)
                 name_player1_with_computer_template.setTextSize(20f)
-                button_player_1_with_computer_template.setBackgroundResource(R.drawable.cross_casino);
-                button_player_2_with_computer_template.setBackgroundResource(R.drawable.null_casino);
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.null_casino);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.cross_casino);
                 toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 label_with_computer.setBackgroundResource(R.drawable.background2_casino);
@@ -168,8 +168,8 @@ class DotGameWithComputer : AppCompatActivity() {
                 bottom_navigation_with_computer_template.setBackgroundResource(R.drawable.bottom_navigation_casino)
             }
             "Rome" -> {
-                name_player1_with_computer_template.setTextColor(Color.rgb(193, 150, 63))
-                name_player2_with_computer_template.setTextColor(Color.BLACK)
+                name_player2_with_computer_template.setTextColor(Color.rgb(193, 150, 63))
+                name_player1_with_computer_template.setTextColor(Color.BLACK)
                 name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                 name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.rome))
                 name_player2_with_computer_template.setTextSize(20f)
@@ -184,8 +184,9 @@ class DotGameWithComputer : AppCompatActivity() {
                 toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Gothic" -> {
-                name_player1_with_computer_template.setTextColor(Color.WHITE)
-                name_player2_with_computer_template.setTextColor(Color.YELLOW)
+                name_player1_with_computer_template.setTextColor(Color.YELLOW)
+                name_player2_with_computer_template.setTextColor(Color.WHITE)
+
                 name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
                 name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.gothic))
                 name_player2_with_computer_template.setTextSize(20f)
@@ -200,14 +201,14 @@ class DotGameWithComputer : AppCompatActivity() {
                 toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Japan" -> {
-                name_player1_with_computer_template.setTextColor(Color.RED)
-                name_player2_with_computer_template.setTextColor(rgb(37, 103, 28))
+                name_player1_with_computer_template.setTextColor(rgb(37, 103, 28))
+                name_player2_with_computer_template.setTextColor(Color.RED)
                 name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
                 name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.japan))
                 name_player2_with_computer_template.setTextSize(20f)
                 name_player1_with_computer_template.setTextSize(20f)
-                button_player_1_with_computer_template.setBackgroundResource(R.drawable.cross_japan);
-                button_player_2_with_computer_template.setBackgroundResource(R.drawable.null_japan);
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.box2_japan);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.box1_japan);
                 toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 label_with_computer.setBackgroundResource(R.drawable.background_japan);
@@ -216,14 +217,14 @@ class DotGameWithComputer : AppCompatActivity() {
                 toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
             }
             "Noir" -> {
-                name_player1_with_computer_template.setTextColor(Color.WHITE)
-                name_player2_with_computer_template.setTextColor(Color.RED)
+                name_player2_with_computer_template.setTextColor(Color.WHITE)
+                name_player1_with_computer_template.setTextColor(Color.RED)
                 name_player1_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
                 name_player2_with_computer_template.setTypeface(ResourcesCompat.getFont(CONTEXT, R.font.noir))
                 name_player2_with_computer_template.setTextSize(20f)
                 name_player1_with_computer_template.setTextSize(20f)
-                button_player_1_with_computer_template.setBackgroundResource(R.drawable.cross_noir);
-                button_player_2_with_computer_template.setBackgroundResource(R.drawable.null_noir);
+                button_player_1_with_computer_template.setBackgroundResource(R.drawable.tower2_noir);
+                button_player_2_with_computer_template.setBackgroundResource(R.drawable.tower1_noir);
                 toolbar_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 toolbar2_with_computer_template.setBackgroundColor(argb(0, 0, 0, 0))
                 label_with_computer.setBackgroundResource(R.drawable.background_noir);
@@ -801,34 +802,42 @@ class CanvasView_Dots_with_computer(context: Context, attrs: AttributeSet?) : Vi
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
 
-        if(red_or_blue == 1)
-        {
-            t1.text = "Игрок думает..."
-            t2.text = "Компьютер"
-            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+        when(LANGUAGE) {
+            "Russian" -> {
+                if(red_or_blue%2 == 1)
+                {
+                    t1.text = "Игрок думает..."
+                    t2.text = "Компьютер"
+                    canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
 
-        }
-        else
-        {
-            t1.text = "Игрок"
-            t2.text = "Компьютер думает..."
-            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+                }
+                else
+                {
+                    t1.text = "Игрок"
+                    t2.text = "Компьютер думает..."
+                    canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+                }
+            }
+            "English" -> {
 
+                if(red_or_blue%2 == 1)
+                {
+                    t1.text = "Player thinks..."
+                    t2.text = "Bot"
+                    canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+
+                }
+                else
+                {
+                    t1.text = "Player"
+                    t2.text = "Bot calculates..."
+                    canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+                }
+            }
         }
 
 
         check_win()
-        if (DotGameMode == 1) {
-        //    t1.text = "Игрок 1: $global_cnt1"         //TODO right check for win потом уже в следующих релизах мб норм сделаем,
-     //       t2.text = "Игрок 2: $global_cnt2"
-                t1.text = "Игрок 1"         //TODO right check for win потом уже в следующих релизах мб норм сделаем,
-                t2.text = "Игрок 2"
-        } else {
-  //          t1.text = "Игрок 1: $global_cnt2"
-  //          t2.text = "Игрок 2: $global_cnt1"
-            t1.text = "Игрок 1"
-            t2.text = "Игрок 2"
-        }
 
 
         radius_of_point = 8f

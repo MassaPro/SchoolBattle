@@ -1208,19 +1208,38 @@ class CanvasView_SNAKE_COMPUTER(context: Context, attrs: AttributeSet?) : View(c
 
         // canvas?.drawColor(Color.WHITE)
 
+        when(LANGUAGE) {
+            "Russian" -> {
+                if(red_or_blue == "red")
+                {
+                    t1.text = "Игрок думает..."
+                    t2.text = "Компьютер"
+                    canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
 
-        if(red_or_blue == "red")
-        {
-            t1.text = "Игрок думает..."
-            t2.text = "Компьютер"
-            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+                }
+                else
+                {
+                    t1.text = "Игрок"
+                    t2.text = "Компьютер думает..."
+                    canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+                }
+            }
+            "English" -> {
 
-        }
-        else
-        {
-            t1.text = "Игрок"
-            t2.text = "Компьютер думает..."
-            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+                if(red_or_blue == "red")
+                {
+                    t1.text = "Player thinks..."
+                    t2.text = "Bot"
+                    canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+
+                }
+                else
+                {
+                    t1.text = "Player"
+                    t2.text = "Bot calculates..."
+                    canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+                }
+            }
         }
         for(i in 0 until size_field_y+1)          //вырисовка горизонтальных линий
         {

@@ -13,6 +13,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.sga.schoolbattle.*
 import com.google.android.gms.ads.AdRequest
@@ -110,6 +111,8 @@ class VirusOneDivice : AppCompatActivity() {
         signature_canvas_virus_one_device.visibility = View.VISIBLE
         signature_canvas_virus_one_device.activity = this
 
+        signature_canvas_virus_one_device.t1 = findViewById(R.id.name_player1_one_divice) as TextView
+        signature_canvas_virus_one_device.t2 = findViewById(R.id.name_player2_one_divice) as TextView
         when (Design) {
             "Normal" ->{
                 name_player1_one_divice.setTextColor(Color.BLACK)
@@ -785,6 +788,8 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
     }
 
 
+    lateinit var t1: TextView
+    lateinit var t2: TextView
 
     lateinit var activity: Activity
 
@@ -1025,13 +1030,38 @@ class CanvasView_VIRUS (context: Context, attrs: AttributeSet?) : View(context, 
             Y1 = height - advertising_line -  width
         }
 
-        if(red_or_blue <3)
-        {
-            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
-        }
-        else
-        {
-            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+        when(LANGUAGE) {
+            "Russian" -> {
+                if(red_or_blue <3)
+                {
+                    t1.text ="Игрок 1 думает..."
+                    t2.text  = "Игрок 2"
+                    canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+
+                }
+                else
+                {
+                    t1.text = "Игрок 1"
+                    t2.text = "Игрок 2 думает..."
+                    canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+                }
+            }
+            "English" -> {
+
+                if(red_or_blue <3)
+                {
+                    t1.text = "Player 1 thinks..."
+                    t2.text = "Player 2"
+                    canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+
+                }
+                else
+                {
+                    t1.text = "Player 1"
+                    t2.text = "Player 2 thinks..."
+                    canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+                }
+            }
         }
 
 

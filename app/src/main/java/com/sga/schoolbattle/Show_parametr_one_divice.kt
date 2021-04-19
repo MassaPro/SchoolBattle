@@ -22,7 +22,34 @@ class Show_parametr_one_divice_one_Device(activity: Activity) {
         dialog_one_device.setCanceledOnTouchOutside(true)
         dialog_one_device.setContentView(R.layout.parametrs_one_divice)
 
+        when(LANGUAGE) {
+            "Russian" -> {
+                dialog_one_device.switch_parametrs_one_device_2.text = " Звук";
+                dialog_one_device.switch_parametrs_one_device_1.text = " Вибрация"
+                dialog_one_device.parametrs_one_device_configuring.text = " Выход в меню "
+
+            }
+            "English" -> {
+                dialog_one_device.switch_parametrs_one_device_2.text = " Sound";
+                dialog_one_device.switch_parametrs_one_device_1.text = " Vibration"
+                dialog_one_device.parametrs_one_device_configuring.text = " Back to menu "
+
+            }
+        }
+
         when (Design) {
+            "Normal" -> {
+
+                dialog_one_device.parametrs_one_device_configuring.setBackgroundResource(R.drawable.button)
+
+
+                dialog_one_device.switch_parametrs_one_device_1.setBackgroundResource(R.drawable.button)
+
+                dialog_one_device.switch_parametrs_one_device_2.setBackgroundResource(R.drawable.button)
+
+                dialog_one_device.close_parametrs_one_device.setBackgroundResource(R.drawable.close_cross)
+
+            }
             "Egypt" -> {
                 dialog_one_device.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_egypt)
 
@@ -33,7 +60,9 @@ class Show_parametr_one_divice_one_Device(activity: Activity) {
                 dialog_one_device.switch_parametrs_one_device_1.setBackgroundColor(argb(0, 0,0,0))
 
                 dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.egypt))
-                dialog_one_device.switch_parametrs_one_device_1.setBackgroundColor(argb(0, 0,0,0))
+                dialog_one_device.switch_parametrs_one_device_2.setBackgroundColor(argb(0, 0,0,0))
+
+                dialog_one_device.close_parametrs_one_device.setBackgroundResource(R.drawable.close_cross)
             }
             "Casino" -> {
                 dialog_one_device.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background2_casino)
@@ -49,6 +78,8 @@ class Show_parametr_one_divice_one_Device(activity: Activity) {
                 dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.casino))
                 dialog_one_device.switch_parametrs_one_device_2.setBackgroundColor(argb(0, 0,0,0))
                 dialog_one_device.switch_parametrs_one_device_2.setTextColor(Color.YELLOW)
+
+                dialog_one_device.close_parametrs_one_device.setBackgroundResource(R.drawable.close_cross4)
             }
             "Rome" -> {
                 dialog_one_device.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_rome)
@@ -64,6 +95,8 @@ class Show_parametr_one_divice_one_Device(activity: Activity) {
                 dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.rome))
                 dialog_one_device.switch_parametrs_one_device_2.setBackgroundColor(argb(0, 0,0,0))
                 dialog_one_device.switch_parametrs_one_device_2.setTextColor(Color.rgb(193, 150, 63))
+
+                dialog_one_device.close_parametrs_one_device.setBackgroundResource(R.drawable.close_cross3)
             }
             "Gothic" -> {
                 dialog_one_device.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_gothic)
@@ -79,6 +112,8 @@ class Show_parametr_one_divice_one_Device(activity: Activity) {
                 dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.gothic))
                 dialog_one_device.switch_parametrs_one_device_2.setBackgroundColor(argb(0, 0,0,0))
                 dialog_one_device.switch_parametrs_one_device_2.setTextColor(Color.WHITE)
+
+                dialog_one_device.close_parametrs_one_device.setBackgroundResource(R.drawable.close_cross2)
             }
             "Japan" -> {
                 dialog_one_device.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_japan)
@@ -94,6 +129,8 @@ class Show_parametr_one_divice_one_Device(activity: Activity) {
                 dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.japan))
                 dialog_one_device.switch_parametrs_one_device_2.setBackgroundColor(argb(0, 0,0,0))
                 dialog_one_device.switch_parametrs_one_device_2.setTextColor(Color.BLACK)
+
+                dialog_one_device.close_parametrs_one_device.setBackgroundResource(R.drawable.close_cross)
             }
             "Noir" -> {
                 dialog_one_device.linearLayout_parametrs_one_device.setBackgroundResource(R.drawable.background_noir)
@@ -109,6 +146,8 @@ class Show_parametr_one_divice_one_Device(activity: Activity) {
                 dialog_one_device.switch_parametrs_one_device_2.setTypeface(ResourcesCompat.getFont(c, R.font.noir))
                 dialog_one_device.switch_parametrs_one_device_2.setBackgroundColor(argb(0, 0,0,0))
                 dialog_one_device.switch_parametrs_one_device_2.setTextColor(Color.WHITE)
+
+                dialog_one_device.close_parametrs_one_device.setBackgroundResource(R.drawable.close_cross2)
             }
             //настройка свитчера звука
             //настройка свитчера звука

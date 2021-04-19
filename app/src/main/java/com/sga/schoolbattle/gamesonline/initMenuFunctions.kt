@@ -116,9 +116,29 @@ fun initMenuFunctions(activity: Activity,
                 }
                 loseDialog.show()
 
+                when(LANGUAGE) {
+                    "Russian" -> {
+                        loseDialog.switch_parametrs_online_2.text = " Звук";
+                        loseDialog.switch_parametrs_online_1.text = " Вибрация"
+                        loseDialog.dialog_for_losers_lose.text = " Сдаться "
+                        loseDialog.parametrs_online_configuring.text = " Выход в меню "
+
+                    }
+                    "English" -> {
+                        loseDialog.switch_parametrs_online_2.text = " Sound";
+                        loseDialog.switch_parametrs_online_1.text = " Vibration"
+                        loseDialog.dialog_for_losers_lose.text = " Surrender "
+                        loseDialog.parametrs_online_configuring.text = " Back to menu "
+
+                    }
+                }
+
                 when (Design) {
                     "Normal" -> {
-                        loseDialog.close_parametrs_online.setBackgroundResource(R.drawable.cross_normal)
+
+                        loseDialog.close_parametrs_online.setBackgroundResource(R.drawable.close_cross)
+                        loseDialog.switch_parametrs_online_1.setBackgroundResource(R.drawable.button)
+                        loseDialog.switch_parametrs_online_2.setBackgroundResource(R.drawable.button)
                         loseDialog.dialog_for_losers_lose.setBackgroundResource(R.drawable.button)
                         loseDialog.parametrs_online_configuring.setBackgroundResource(R.drawable.button)
 
@@ -171,10 +191,8 @@ fun initMenuFunctions(activity: Activity,
                         loseDialog.switch_parametrs_online_1.setTextColor(Color.WHITE)
                     }
                     "Japan"-> {
-                        loseDialog.dialog_for_losers_lose.setBackgroundResource(R.drawable.button)
-                        loseDialog.parametrs_online_configuring.setBackgroundResource(R.drawable.button)
 
-                        loseDialog.close_parametrs_online.setBackgroundResource(R.drawable.close_cross2)
+                        loseDialog.close_parametrs_online.setBackgroundResource(R.drawable.close_cross)
                         loseDialog.linearLayout_parametrs_online.setBackgroundResource(R.drawable.background_japan)
                         loseDialog.dialog_for_losers_lose.typeface = ResourcesCompat.getFont(activity, R.font.japan)
                         loseDialog.parametrs_online_configuring.typeface = ResourcesCompat.getFont(activity, R.font.japan)
@@ -182,7 +200,7 @@ fun initMenuFunctions(activity: Activity,
                         loseDialog.switch_parametrs_online_1.typeface = ResourcesCompat.getFont(activity, R.font.japan)
                     }
                     "Casino"-> {
-                        loseDialog.close_parametrs_online.setBackgroundResource(R.drawable.close_cross3)
+                        loseDialog.close_parametrs_online.setBackgroundResource(R.drawable.close_cross4)
                         loseDialog.linearLayout_parametrs_online.setBackgroundResource(R.drawable.background2_casino)
                         loseDialog.dialog_for_losers_lose.typeface = ResourcesCompat.getFont(activity, R.font.casino)
                         loseDialog.parametrs_online_configuring.typeface = ResourcesCompat.getFont(activity, R.font.casino)

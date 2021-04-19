@@ -34,6 +34,7 @@ import kotlinx.android.synthetic.main.activity_social.view.*
 import kotlinx.android.synthetic.main.ava_item_profile.*
 import kotlinx.android.synthetic.main.ava_item_profile.view.*
 import kotlinx.android.synthetic.main.design_shop_item.view.*
+import kotlinx.android.synthetic.main.parametrs_one_divice.*
 import java.util.*
 
 
@@ -70,6 +71,18 @@ class MyProfile : Fragment() {
             val username = prfs?.getString("username", "")
             profileMyName.text = "$username ($RATING)"
             profileMyName.setTextColor(colorByRating(RATING))
+        }
+
+        when(LANGUAGE) {
+            "Russian" -> {
+                profileMyStatus.text = "Статус: живу в лесу"
+                textView9.text = " Рейтинг "
+
+            }
+            "English" -> {
+                profileMyStatus.text = "Status: living in forest"
+                textView9.text = " Rating "
+            }
         }
 
         when (Design) {

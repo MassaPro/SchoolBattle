@@ -4,9 +4,12 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.Window
 import android.widget.CompoundButton
+import androidx.core.content.res.ResourcesCompat
 import com.sga.schoolbattle.gameswithcomp.*
+import kotlinx.android.synthetic.main.parametrs_one_divice.*
 import kotlinx.android.synthetic.main.parametrs_with_computer.*
 
 lateinit var intent : Intent
@@ -22,6 +25,163 @@ class Show_parametr_with_computer(activity: Activity) {
 
         val prefs2 = type_activity.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val editor = type_activity.getSharedPreferences("UserData", Context.MODE_PRIVATE).edit()
+
+        when(LANGUAGE) {
+            "Russian" -> {
+                dialog_with_computer.switch_parametrs_computer_2.text = " Звук";
+                dialog_with_computer.switch_parametrs_computer_1.text = " Вибрация"
+                dialog_with_computer.changeModeWithComputer.text = "Смена очередности ходов"
+                dialog_with_computer.go_to_menu_from_comp.text = " Выход в меню "
+
+            }
+            "English" -> {
+                dialog_with_computer.switch_parametrs_computer_2.text = " Sound";
+                dialog_with_computer.switch_parametrs_computer_1.text = " Vibration"
+                dialog_with_computer.changeModeWithComputer.text = "Change of turn order"
+                dialog_with_computer.go_to_menu_from_comp.text = " Back to menu "
+
+            }
+        }
+
+        when (Design) {
+            "Normal" -> {
+
+                dialog_with_computer.go_to_menu_from_comp.setBackgroundResource(R.drawable.button)
+
+
+                dialog_with_computer.switch_parametrs_computer_1.setBackgroundResource(R.drawable.button)
+
+                dialog_with_computer.switch_parametrs_computer_2.setBackgroundResource(R.drawable.button)
+                dialog_with_computer.changeModeWithComputer.setBackgroundResource(R.drawable.button)
+
+                dialog_with_computer.close_parametrs_computer.setBackgroundResource(R.drawable.close_cross)
+
+            }
+            "Egypt" -> {
+                dialog_with_computer.linearLayout_parametrs_with_computer.setBackgroundResource(R.drawable.background_egypt)
+
+                dialog_with_computer.go_to_menu_from_comp.setTypeface(ResourcesCompat.getFont(c, R.font.egypt))
+                dialog_with_computer.go_to_menu_from_comp.setBackgroundColor(Color.argb(0, 0, 0, 0))
+
+                dialog_with_computer.switch_parametrs_computer_1.setTypeface(ResourcesCompat.getFont(c, R.font.egypt))
+                dialog_with_computer.switch_parametrs_computer_1.setBackgroundColor(Color.argb(0, 0, 0, 0))
+
+                dialog_with_computer.switch_parametrs_computer_2.setTypeface(ResourcesCompat.getFont(c, R.font.egypt))
+                dialog_with_computer.switch_parametrs_computer_2.setBackgroundColor(Color.argb(0, 0, 0, 0))
+
+                dialog_with_computer.changeModeWithComputer.setTypeface(ResourcesCompat.getFont(c, R.font.egypt))
+                dialog_with_computer.changeModeWithComputer.setBackgroundColor(Color.argb(0, 0, 0, 0))
+
+                dialog_with_computer.close_parametrs_computer.setBackgroundResource(R.drawable.close_cross)
+            }
+            "Casino" -> {
+                dialog_with_computer.linearLayout_parametrs_with_computer.setBackgroundResource(R.drawable.background2_casino)
+
+                dialog_with_computer.go_to_menu_from_comp.setTypeface(ResourcesCompat.getFont(c, R.font.casino))
+                dialog_with_computer.go_to_menu_from_comp.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                dialog_with_computer.go_to_menu_from_comp.setTextColor(Color.YELLOW)
+
+                dialog_with_computer.switch_parametrs_computer_1.setTypeface(ResourcesCompat.getFont(c, R.font.casino))
+                dialog_with_computer.switch_parametrs_computer_1.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                dialog_with_computer.switch_parametrs_computer_1.setTextColor(Color.YELLOW)
+
+                dialog_with_computer.switch_parametrs_computer_2.setTypeface(ResourcesCompat.getFont(c, R.font.casino))
+                dialog_with_computer.switch_parametrs_computer_2.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                dialog_with_computer.switch_parametrs_computer_2.setTextColor(Color.YELLOW)
+
+                dialog_with_computer.changeModeWithComputer.setTypeface(ResourcesCompat.getFont(c, R.font.casino))
+                dialog_with_computer.changeModeWithComputer.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                dialog_with_computer.changeModeWithComputer.setTextColor(Color.YELLOW)
+
+                dialog_with_computer.close_parametrs_computer.setBackgroundResource(R.drawable.close_cross4)
+            }
+            "Rome" -> {
+                dialog_with_computer.linearLayout_parametrs_with_computer.setBackgroundResource(R.drawable.background_rome)
+
+                dialog_with_computer.go_to_menu_from_comp.setTypeface(ResourcesCompat.getFont(c, R.font.rome))
+                dialog_with_computer.go_to_menu_from_comp.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                dialog_with_computer.go_to_menu_from_comp.setTextColor(Color.rgb(193, 150, 63))
+
+                dialog_with_computer.switch_parametrs_computer_1.typeface = ResourcesCompat.getFont(c, R.font.rome)
+                dialog_with_computer.switch_parametrs_computer_1.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                dialog_with_computer.switch_parametrs_computer_1.setTextColor(Color.rgb(193, 150, 63))
+
+                dialog_with_computer.switch_parametrs_computer_2.setTypeface(ResourcesCompat.getFont(c, R.font.rome))
+                dialog_with_computer.switch_parametrs_computer_2.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                dialog_with_computer.switch_parametrs_computer_2.setTextColor(Color.rgb(193, 150, 63))
+
+                dialog_with_computer.changeModeWithComputer.setTypeface(ResourcesCompat.getFont(c, R.font.rome))
+                dialog_with_computer.changeModeWithComputer.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                dialog_with_computer.changeModeWithComputer.setTextColor(Color.rgb(193, 150, 63))
+
+                dialog_with_computer.close_parametrs_computer.setBackgroundResource(R.drawable.close_cross3)
+            }
+            "Gothic" -> {
+                dialog_with_computer.linearLayout_parametrs_with_computer.setBackgroundResource(R.drawable.background_gothic)
+
+                dialog_with_computer.go_to_menu_from_comp.setTypeface(ResourcesCompat.getFont(c, R.font.gothic))
+                dialog_with_computer.go_to_menu_from_comp.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                dialog_with_computer.go_to_menu_from_comp.setTextColor(Color.WHITE)
+
+                dialog_with_computer.switch_parametrs_computer_1.setTypeface(ResourcesCompat.getFont(c, R.font.gothic))
+                dialog_with_computer.switch_parametrs_computer_1.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                dialog_with_computer.switch_parametrs_computer_1.setTextColor(Color.WHITE)
+
+                dialog_with_computer.switch_parametrs_computer_2.setTypeface(ResourcesCompat.getFont(c, R.font.gothic))
+                dialog_with_computer.switch_parametrs_computer_2.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                dialog_with_computer.switch_parametrs_computer_2.setTextColor(Color.WHITE)
+
+                dialog_with_computer.changeModeWithComputer.setTypeface(ResourcesCompat.getFont(c, R.font.gothic))
+                dialog_with_computer.changeModeWithComputer.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                dialog_with_computer.changeModeWithComputer.setTextColor(Color.WHITE)
+
+                dialog_with_computer.close_parametrs_computer.setBackgroundResource(R.drawable.close_cross2)
+            }
+            "Japan" -> {
+                dialog_with_computer.linearLayout_parametrs_with_computer.setBackgroundResource(R.drawable.background_japan)
+
+                dialog_with_computer.go_to_menu_from_comp.setTypeface(ResourcesCompat.getFont(c, R.font.japan))
+                dialog_with_computer.go_to_menu_from_comp.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                dialog_with_computer.go_to_menu_from_comp.setTextColor(Color.BLACK)
+
+                dialog_with_computer.switch_parametrs_computer_1.setTypeface(ResourcesCompat.getFont(c, R.font.japan))
+                dialog_with_computer.switch_parametrs_computer_1.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                dialog_with_computer.switch_parametrs_computer_1.setTextColor(Color.BLACK)
+
+                dialog_with_computer.switch_parametrs_computer_2.setTypeface(ResourcesCompat.getFont(c, R.font.japan))
+                dialog_with_computer.switch_parametrs_computer_2.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                dialog_with_computer.switch_parametrs_computer_2.setTextColor(Color.BLACK)
+
+                dialog_with_computer.changeModeWithComputer.setTypeface(ResourcesCompat.getFont(c, R.font.japan))
+                dialog_with_computer.changeModeWithComputer.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                dialog_with_computer.changeModeWithComputer.setTextColor(Color.BLACK)
+
+                dialog_with_computer.close_parametrs_computer.setBackgroundResource(R.drawable.close_cross)
+            }
+            "Noir" -> {
+                dialog_with_computer.linearLayout_parametrs_with_computer.setBackgroundResource(R.drawable.background_noir)
+
+                dialog_with_computer.go_to_menu_from_comp.setTypeface(ResourcesCompat.getFont(c, R.font.noir))
+                dialog_with_computer.go_to_menu_from_comp.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                dialog_with_computer.go_to_menu_from_comp.setTextColor(Color.WHITE)
+
+                dialog_with_computer.switch_parametrs_computer_1.setTypeface(ResourcesCompat.getFont(c, R.font.noir))
+                dialog_with_computer.switch_parametrs_computer_1.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                dialog_with_computer.switch_parametrs_computer_1.setTextColor(Color.WHITE)
+
+                dialog_with_computer.switch_parametrs_computer_2.setTypeface(ResourcesCompat.getFont(c, R.font.noir))
+                dialog_with_computer.switch_parametrs_computer_2.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                dialog_with_computer.switch_parametrs_computer_2.setTextColor(Color.WHITE)
+
+                dialog_with_computer.changeModeWithComputer.setTypeface(ResourcesCompat.getFont(c, R.font.noir))
+                dialog_with_computer.changeModeWithComputer.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                dialog_with_computer.changeModeWithComputer.setTextColor(Color.WHITE)
+
+                dialog_with_computer.close_parametrs_computer.setBackgroundResource(R.drawable.close_cross2)
+            }
+            //настройка свитчера звука
+            //настройка свитчера звука
+        }
 
 
         dialog_with_computer.changeModeWithComputer.setOnClickListener {

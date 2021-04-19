@@ -349,7 +349,7 @@ fun translate_games(s:String): String?
     return TRANSLATE_GAMES[s]
 }
 
-var TRANSLATE_SPECIAL = mapOf("Интересненько.." to "Interesting...","ВИДЕО С ВОЗНАГРАЖДЕНИЕМ" to "REWARDED VIDEO", "ГОРШОК КРИСТАЛЛОВ" to "POT OF CRYSTALS",
+var TRANSLATE_SPECIAL = mapOf("Интересненько.." to "Interesting...","ВИДЕО С ВОЗНАГРАЖДЕНИЕМ" to "REWARD VIDEO", "ГОРШОК КРИСТАЛЛОВ" to "POT OF CRYSTALS",
      "ПРЕМИУМ АККАУНТ" to "PREMIUM ACCOUNT", "СУМКА КРИСТАЛЛОВ" to "BAG OF CRYSTALS","РЮКЗАК КРИСТАЛЛОВ" to "BACKPACK OF CRYSTALS",
      "ПОРТФЕЛЬ КРИСТАЛЛОВ"  to "MINI-CASE OF CRYSTAL", "МЕШОК КРИСТАЛЛОВ" to "SACK OF CRYSTAL","ЧЕМОДАН КРИСТАЛЛОВ" to "CASE OF CRYSTAL","БАНК КРИСТАЛЛОВ" to "BANK OF CRYSTAL",
 "ПОЛУЧИ" to "GET","СМОТРЕТЬ" to "WATCH")

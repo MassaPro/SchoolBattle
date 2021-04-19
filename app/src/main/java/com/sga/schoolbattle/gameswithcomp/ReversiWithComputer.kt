@@ -1272,19 +1272,38 @@ class CanvasView_reversi_with_computer(context: Context, attrs: AttributeSet?) :
         advertising_line =  (height - 8*step)/2           //полоска для рекламы
         k = height-(width-2*indent)-advertising_line
 
+        when(LANGUAGE) {
+            "Russian" -> {
+                if(Black_or_grey_chip == "black")
+                {
+                    t1.text = "Игрок думает..."
+                    t2.text = "Компьютер"
+                    canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
 
+                }
+                else
+                {
+                    t1.text = "Игрок"
+                    t2.text = "Компьютер думает..."
+                    canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+                }
+            }
+            "English" -> {
 
-        if(Black_or_grey_chip == "black")
-        {
-            t1.text = "Игрок думает..."
-            t2.text = "Компьютер"
-            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
-        }
-        else
-        {
-            t1.text = "Игрок"
-            t2.text = "Компьютер думает..."
-            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+                if(Black_or_grey_chip == "black")
+                {
+                    t1.text = "Player thinks..."
+                    t2.text = "Bot"
+                    canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+
+                }
+                else
+                {
+                    t1.text = "Player"
+                    t2.text = "Bot calculates..."
+                    canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+                }
+            }
         }
 
 

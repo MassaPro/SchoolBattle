@@ -812,18 +812,40 @@ class CanvasView_xog_with_computer(context: Context, attrs: AttributeSet?) : Vie
 
         //TODO() take field from database
 
-        if(cross_or_nul == "cross")
-        {
-            t1.text ="Игрок думает..."
-            t2.text  = "Компьютер"
-            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+        when(LANGUAGE) {
+            "Russian" -> {
+                if(cross_or_nul == "cross")
+                {
+                    t1.text = "Игрок думает..."
+                    t2.text = "Компьютер"
+                    canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+
+                }
+                else
+                {
+                    t1.text = "Игрок"
+                    t2.text = "Компьютер думает..."
+                    canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+                }
+            }
+            "English" -> {
+
+                if(cross_or_nul == "cross")
+                {
+                    t1.text = "Player thinks..."
+                    t2.text = "Bot"
+                    canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+
+                }
+                else
+                {
+                    t1.text = "Player"
+                    t2.text = "Bot calculates..."
+                    canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+                }
+            }
         }
-        else
-        {
-            t1.text ="Игрок"
-            t2.text  = "Компьютер думает..."
-            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
-        }
+
         indent = 20f
         width = getWidth().toFloat()
         height = getHeight().toFloat()            //ширина и высота экрана (от ширины в основном все зависит)

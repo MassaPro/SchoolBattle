@@ -3,6 +3,7 @@ package com.sga.schoolbattle
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.Color.argb
 import android.graphics.Color.rgb
@@ -26,6 +27,7 @@ import com.sga.schoolbattle.shop.locale_context
 import kotlinx.android.synthetic.main.activity_settings_fragment.*
 import kotlinx.android.synthetic.main.activity_social.view.*
 import kotlinx.android.synthetic.main.design_item.view.*
+import kotlinx.android.synthetic.main.development_dialog.*
 
 
 var fragment_activity : AppCompatActivity? = null
@@ -77,7 +79,6 @@ class SettingsFragmentActivity : Fragment() {
                 toolbarNameSettings.text = "$username\n"
             }
             toolbarNameSettings.setTextColor(colorByRating(RATING))
-
 
         when (Design) {
             "Normal" -> {
@@ -335,14 +336,16 @@ class SettingsFragmentActivity : Fragment() {
         var checkedItem = 0
         if(LANGUAGE == "Russian")
         {
-            builder.setTitle("Choose a language")
+            builder.setTitle("Выбор языка")
             checkedItem = 0
         }
         else
         {
-            builder.setTitle("Выбор языка")
+            builder.setTitle("Choose a language")
             checkedItem =1
         }
+
+
         builder.setSingleChoiceItems(array,checkedItem) { _, which->
             if(which==0)
             {

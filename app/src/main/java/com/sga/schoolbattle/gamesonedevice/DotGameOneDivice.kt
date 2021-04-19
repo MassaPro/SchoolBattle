@@ -752,19 +752,38 @@ class CanvasView_Dots_one_divice(context: Context, attrs: AttributeSet?) : View(
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
 
+        when(LANGUAGE) {
+            "Russian" -> {
+                if(red_or_blue%2 == 0)
+                {
+                    t1.text ="Игрок 1 думает..."
+                    t2.text  = "Игрок 2"
+                    canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
 
-        if(red_or_blue%2 == 0)
-        {
-            t1.text ="Игрок 1 думает..."
-            t2.text  = "Игрок 2"
-            //      line_who_do_move.color = Color.RED ЗДЕСБ ПИШИ ЕСЛИ ХОСЧЕШЬ ПОМЕНЯТЬ ЦВЕТ ЭТОЙ ПОЛОСКИУ
-            canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
-        }
-        else
-        {
-            t1.text ="Игрок 1"
-            t2.text  = "Игрок 2 думает..."
-            canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+                }
+                else
+                {
+                    t1.text = "Игрок 1"
+                    t2.text = "Игрок 2 думает..."
+                    canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+                }
+            }
+            "English" -> {
+
+                if(red_or_blue%2 == 0)
+                {
+                    t1.text = "Player 1 thinks..."
+                    t2.text = "Player 2"
+                    canvas?.drawLine(getWidth().toFloat(),getHeight().toFloat()/2,getWidth().toFloat(),getHeight().toFloat(),line_who_do_move)
+
+                }
+                else
+                {
+                    t1.text = "Player 1"
+                    t2.text = "Player 2 thinks..."
+                    canvas?.drawLine(getWidth().toFloat(),0f,getWidth().toFloat(),getHeight().toFloat()/2,line_who_do_move)
+                }
+            }
         }
 
         radius_of_point = 8f
